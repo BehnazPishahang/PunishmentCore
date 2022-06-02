@@ -20,7 +20,9 @@ namespace PunishmentOrg.DataAccess.Repositories.Anu.BaseInfo.OrganizationChart
         {
             return await _context.Unit.Include(x => x.TheGUnitType).Where(x => x.Id == Id).ToListAsync();
 
-            _context.Set<Unit>().FromSqlRaw("select * from ");
+
+
+            //_context.Set<Unit>().FromSqlRaw("select * from ");
 
 
         }

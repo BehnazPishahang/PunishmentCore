@@ -12,7 +12,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PunishmentOrg.DataAccess.ApplicationDbContext>(
                 options =>
                 {
-                    options.UseOracle("Password=ali;Persist Security Info=True;User ID=puo;Data Source=192.168.1.11/anu");
+                    options.UseOracle("Password=ali;Persist Security Info=True;User ID=puo;Data Source=192.168.1.11/anu",(oracleOptions) => {
+                        oracleOptions.UseOracleSQLCompatibility("11");
+                    }
+                    );
                 });
 #region Repositories
 builder.Services.AddTransient(typeof(PunishmentOrg.Domain.Interface.IGenericRepository<>), typeof(PunishmentOrg.DataAccess.Repositories.GenericRepository<>));
