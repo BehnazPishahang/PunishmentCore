@@ -27,8 +27,8 @@ public class WeatherForecastController : ControllerBase
     {
         var id = "011104056";
         var result1 = _unitOfWork.Unit.GetUnitWithParentUnitList(id);
-        var resultGetById1 = _unitOfWork.Unit.GetById("2");
-        var resultGetById2 = _unitOfWork.Unit.GetById("3");
+        var resultGetById1 = _unitOfWork.Unit.GetById("3");
+        var resultGetById2 = _unitOfWork.Unit.GetById("5");
         var resultGetAll = _unitOfWork.Unit.GetAll();
         var resultFind = _unitOfWork.Unit.Find(x => x.TheGUnitType.Code.StartsWith("0"));
 
