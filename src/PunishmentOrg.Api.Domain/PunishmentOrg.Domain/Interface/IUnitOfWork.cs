@@ -1,5 +1,4 @@
-﻿using PunishmentOrg.Domain.Interface.Anu.BaseInfo.OrganizationChart;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +8,8 @@ namespace PunishmentOrg.Domain.Interface
 {
     public partial interface IUnitOfWork : IDisposable
     {
-        //IUnitRepository Unit { get; }
-        //IGUnitTypeRepository GUnitType { get; }
+        PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes.IPDiscoveryMinutesRepository PDiscoveryMinutes { get; }
+        BaseInfo.Anu.BaseInfo.SystemObject.IObjectStateRepository ObjectState { get; }
         int Complete();
     }
 }

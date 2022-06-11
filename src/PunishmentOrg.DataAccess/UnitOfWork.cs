@@ -12,40 +12,12 @@ namespace PunishmentOrg.DataAccess
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
+            PDiscoveryMinutes = new Repositories.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutesRepository(_context);
+            ObjectState = new Repositories.BaseInfo.Anu.BaseInfo.SystemObject.ObjectStateRepository(_context);
         }
+        public Domain.Interface.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes.IPDiscoveryMinutesRepository PDiscoveryMinutes { get; private set; }
 
-        #region Unit
-        private Domain.Interface.Anu.BaseInfo.OrganizationChart.IUnitRepository _Unit;
-        public Domain.Interface.Anu.BaseInfo.OrganizationChart.IUnitRepository Unit
-        {
-            get
-            {
-                if (this._Unit is not null)
-                {
-                    return this._Unit;
-                }
-                Domain.Interface.Anu.BaseInfo.OrganizationChart.IUnitRepository _Unit = new Repositories.Anu.BaseInfo.OrganizationChart.UnitRepository(_context);
-                return _Unit;
-            }
-        }
-        #endregion Unit
-
-        #region GUnitType
-        private Domain.Interface.Anu.BaseInfo.OrganizationChart.IGUnitTypeRepository _GUnitType;
-        public Domain.Interface.Anu.BaseInfo.OrganizationChart.IGUnitTypeRepository GUnitType
-        {
-            get
-            {
-                if (this._GUnitType is not null)
-                {
-                    return this._GUnitType;
-                }
-
-                Domain.Interface.Anu.BaseInfo.OrganizationChart.IGUnitTypeRepository _GUnitType = new Repositories.Anu.BaseInfo.OrganizationChart.GUnitTypeRepository(_context);
-                return _GUnitType;
-            }
-        }
-        #endregion GUnitType
+        public Domain.Interface.BaseInfo.Anu.BaseInfo.SystemObject.IObjectStateRepository ObjectState { get; private set; }
 
         public int Complete()
         {
