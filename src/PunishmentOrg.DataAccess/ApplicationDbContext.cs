@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PunishmentOrg.Domain.Entities.Anu.BaseInfo.OrganizationChart;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +12,7 @@ namespace PunishmentOrg.DataAccess
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-        public DbSet<Unit> Unit { get; set; }
-        public DbSet<GUnitType> GUnitType { get; set; }
+        public DbSet<Domain.Entities.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes> PDiscoveryMinutes { get; set; }
+        public DbSet<Domain.Entities.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState> ObjectState { get; set; }
     }
 }
