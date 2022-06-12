@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace PunishmentOrg.Domain.Interface
 {
-    public interface IUnitOfWork : IDisposable
+    public partial interface IUnitOfWork : IDisposable
     {
-        IUnitRepository Unit { get; }
-        IGUnitTypeRepository GUnitType { get; }
+        //IUnitRepository Unit { get; }
+        //IGUnitTypeRepository GUnitType { get; }
         int Complete();
     }
 }

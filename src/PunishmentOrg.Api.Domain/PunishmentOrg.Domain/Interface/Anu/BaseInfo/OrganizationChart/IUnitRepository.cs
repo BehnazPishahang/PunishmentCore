@@ -12,3 +12,11 @@ namespace PunishmentOrg.Domain.Interface.Anu.BaseInfo.OrganizationChart
         Task<IEnumerable<Unit>> GetUnitWithParentUnitList(string Id);
     }
 }
+
+namespace PunishmentOrg.Domain.Interface
+{
+    public partial interface IUnitOfWork : IDisposable
+    {
+        Anu.BaseInfo.OrganizationChart.IUnitRepository Unit { get; }
+    }
+}
