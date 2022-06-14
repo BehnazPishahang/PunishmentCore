@@ -10,6 +10,8 @@ namespace PunishmentOrg.Domain.Interface
     {
         public IEnumerable<Anu.BaseInfo.SystemObject.ObjectState> GetObjectsByUniqueNo(string uniqueNo);
 
+        public IEnumerable<Anu.BaseInfo.SystemObject.ObjectState> GetObjectsByParentCode(string parentCode);
+
     }
 }
 

@@ -20,7 +20,10 @@ namespace PunishmentOrg.DataAccess.Repositories.PunishmentOrg.Anu.PunishmentOrg.
         {
         }
 
-        
+        public async Task<IEnumerable<PDiscoveryMinutes>> GetPDiscoveryMinutesByAllReferences(string UniqueNo)
+        {
+            return await _context.Set<PDiscoveryMinutes>().Include(x => x.TheGeoLocation).ThenInclude(x => x.TheParentLocation).ToListAsync();
+        }
 
         Task<IEnumerable<PDiscoveryMinutes>> IPDiscoveryMinutesRepository.getObejectStateTitleWithUniqueNo(string UniqueNo)
         {
