@@ -1,11 +1,12 @@
-﻿using EF.DbContext.Oracle;
+﻿
 using Microsoft.EntityFrameworkCore;
+using Oracle.DbContext;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataModel
 {
-    public abstract class BaseEntity<TKey> : IEfEntity
+    public abstract class BaseEntity<TKey> : IEntity
     {
         [Key]
         [Column("ID")]
