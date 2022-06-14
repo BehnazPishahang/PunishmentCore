@@ -1,4 +1,5 @@
-﻿using PunishmentOrg.Domain.Interface.PunishmentOrg;
+﻿using PunishmentOrg.DataAccess.Repositories.PunishmentOrg;
+using PunishmentOrg.Domain.Interface.PunishmentOrg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
