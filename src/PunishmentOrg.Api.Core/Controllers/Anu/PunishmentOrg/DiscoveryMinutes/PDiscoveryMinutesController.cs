@@ -26,6 +26,7 @@ namespace PunishmentOrg.Api.Core.Controllers.PunishmentOrg.Anu.PunishmentOrg.Dis
             //string title = pDiscovery.FirstOrDefault().TheObjectState.Title.ToString();
 
             var byParentCode = _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(UniqueNo);
+            var byNO = _unitOfWork.PCaseRepository.GetTerminateCaseByNo("");
 
             _unitOfWork.Complete();
 

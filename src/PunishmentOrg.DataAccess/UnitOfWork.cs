@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PunishmentOrg.Domain.Interface.PunishmentOrg;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,10 +15,13 @@ namespace PunishmentOrg.DataAccess
             _context = context;
             PDiscoveryMinutes = new Repositories.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutesRepository(_context);
             ObjectState = new Repositories.ObjectStateRepository(_context);
+            PCaseRepository = new PCaseRepository(_context);
         }
         public Domain.Interface.PunishmentOrg.IPDiscoveryMinutesRepository PDiscoveryMinutes { get; private set; }
 
         public Domain.Interface.IObjectStateRepository ObjectState { get; private set; }
+
+        public IPCaseRepository PCaseRepository { get; private set; }
 
         public int Complete()
         {
