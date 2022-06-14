@@ -1,26 +1,19 @@
-﻿
-
-using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Anu.PunishmentOrg.DiscoveryMinutes;
 using Microsoft.EntityFrameworkCore;
-using Anu.PunishmentOrg.DiscoveryMinutes;
 using PunishmentOrg.Domain.Interface.PunishmentOrg;
 
 namespace PunishmentOrg.DataAccess.Repositories.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
-    public class PDiscoveryMinutesRepository : GenericRepository<PDiscoveryMinutes>,
-        Domain.Interface.PunishmentOrg.IPDiscoveryMinutesRepository
+    public class PDiscoveryMinutesRepository : GenericRepository<PDiscoveryMinutes>, Domain.Interface.PunishmentOrg.IPDiscoveryMinutesRepository
     {
         public PDiscoveryMinutesRepository(ApplicationDbContext context) : base(context)
         {
         }
 
-        
+        public async Task<IEnumerable<PDiscoveryMinutes>> GetPDiscoveryMinutesByGeoLocation(string geoLocationCode)
+        {
+            return await _context.Set<PDiscoveryMinutes>().Include(x => x.TheGeoLocation).ToListAsync();
+        }
 
         Task<IEnumerable<PDiscoveryMinutes>> IPDiscoveryMinutesRepository.getObejectStateTitleWithUniqueNo(string UniqueNo)
         {
