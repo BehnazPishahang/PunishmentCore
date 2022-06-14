@@ -31,6 +31,7 @@ public class WeatherForecastController : ControllerBase
         var resultGetById2 = _unitOfWork.Unit.GetById("5");
         var resultGetAll = _unitOfWork.Unit.GetAll();
         var resultFind = _unitOfWork.Unit.Find(x => x.TheGUnitType.Code.StartsWith("0"));
+        var resultFind1 = _unitOfWork.GUnitType.Find(x => x.Id == "001");
 
         _unitOfWork.Complete();
 
