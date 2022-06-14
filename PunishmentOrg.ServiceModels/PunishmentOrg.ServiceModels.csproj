@@ -7,9 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="MessagesDefinition\Helper\" />
-    <Folder Include="MessagesDefinition\Model\" />
-    <Folder Include="ServiceRequest\Anu\PunishmentOrg\" />
+    <Compile Remove="MessagesDefinition\**" />
+    <Compile Remove="ServiceRequest\**" />
+    <EmbeddedResource Remove="MessagesDefinition\**" />
+    <EmbeddedResource Remove="ServiceRequest\**" />
+    <None Remove="MessagesDefinition\**" />
+    <None Remove="ServiceRequest\**" />
   </ItemGroup>
 
 </Project>

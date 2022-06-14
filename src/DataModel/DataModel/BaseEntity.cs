@@ -1,6 +1,4 @@
 ﻿
-using Microsoft.EntityFrameworkCore;
-using Oracle.DbContext;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,13 +13,13 @@ namespace DataModel
         [Column("TIMESTAMP")]
         public long? Timestamp { get; set; }
 
-        public void Validate(EntityState state)
-        {
-            this.OnValidate(state);
-        }
-        protected virtual void OnValidate(EntityState state)
-        {
+        //public void Validate(EntityState state)
+        //{
+        //    this.OnValidate(state);
+        //}
+        //protected virtual void OnValidate(EntityState state)
+        //{
 
-        }
+        //}
     }
 }

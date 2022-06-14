@@ -14,14 +14,14 @@ namespace Oracle.DbContext
         private void OracleDbContext_SavingChanges(object? sender, SavingChangesEventArgs e)
         {
 
-            foreach (var entry in ChangeTracker.Entries())
-            {
-                if (entry.Entity is IEntity)
-                {
-                    var entity = (IEntity)entry.Entity;
-                    entity.Validate(entry.State);
-                }
-            }
+            //foreach (var entry in ChangeTracker.Entries())
+            //{
+            //    if (entry.Entity is IEntity)
+            //    {
+            //        var entity = (IEntity)entry.Entity;
+            //        entity.Validate(entry.State);
+            //    }
+            //}
 
         }
 

@@ -7,22 +7,24 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using PunishmentOrg.Domain.Entities.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes;
 using Microsoft.EntityFrameworkCore;
-using PunishmentOrg.Domain.Interface.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes;
+using Anu.PunishmentOrg.DiscoveryMinutes;
+using PunishmentOrg.Domain.Interface.PunishmentOrg;
 
 namespace PunishmentOrg.DataAccess.Repositories.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
-    public class PDiscoveryMinutesRepository : GenericRepository<Domain.Entities.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes>,
-        Domain.Interface.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes.IPDiscoveryMinutesRepository
+    public class PDiscoveryMinutesRepository : GenericRepository<PDiscoveryMinutes>,
+        Domain.Interface.PunishmentOrg.IPDiscoveryMinutesRepository
     {
         public PDiscoveryMinutesRepository(ApplicationDbContext context) : base(context)
         {
         }
 
-        public async Task<IEnumerable<PDiscoveryMinutesBase>> getObejectStateTitleWithUniqueNo(string UniqueNo)
+        
+
+        Task<IEnumerable<PDiscoveryMinutes>> IPDiscoveryMinutesRepository.getObejectStateTitleWithUniqueNo(string UniqueNo)
         {
-            return await _context.Set<PDiscoveryMinutes>().Where(x => x.UniqueNo == UniqueNo).Include(a => a.TheObjectState).ToListAsync();
+            throw new NotImplementedException();
         }
     }
 }
