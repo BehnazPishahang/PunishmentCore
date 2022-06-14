@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="D:\Receive\EFCoreTest\EFCoreTest\DataModel\BaseInfoDataModel\DataModel.BaseInfo.csproj" />
+    <ProjectReference Include="D:\Receive\EFCoreTest\EFCoreTest\DataModel\DataModel\DataModel.csproj" />
+  </ItemGroup>
+
+</Project>
