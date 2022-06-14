@@ -19,7 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataModel\DataModel.PunishmentOrg\DataModel.PunishmentOrg.csproj" />
     <ProjectReference Include="..\PunishmentOrg.Api.Domain\PunishmentOrg.Domain\PunishmentOrg.Domain.csproj" />
+    <ProjectReference Include="D:\Receive\EFCoreTest\EFCoreTest\DataModel\BaseInfoDataModel\DataModel.BaseInfo.csproj" />
+    <ProjectReference Include="D:\Receive\EFCoreTest\EFCoreTest\DataModel\EF.DbContext.Oracle\Oracle.DbContext.csproj" />
   </ItemGroup>
 
 </Project>
