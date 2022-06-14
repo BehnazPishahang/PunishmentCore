@@ -22,7 +22,7 @@ namespace PunishmentOrg.DataAccess.Repositories.PunishmentOrg.Anu.PunishmentOrg.
 
         public async Task<IEnumerable<PDiscoveryMinutesBase>> getObejectStateTitleWithUniqueNo(string UniqueNo)
         {
-            return await _context.PDiscoveryMinutes.Where(x => x.UniqueNo == UniqueNo).Include(a => a.TheObjectState).ToListAsync();
+            return await _context.Set<PDiscoveryMinutes>().Where(x => x.UniqueNo == UniqueNo).Include(a => a.TheObjectState).ToListAsync();
         }
     }
 }
