@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -20,9 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataModel\DataModel.PunishmentOrg\DataModel.PunishmentOrg.csproj" />
+    <ProjectReference Include="..\DataModel\Oracle.DbContext\Oracle.DbContext.csproj" />
     <ProjectReference Include="..\PunishmentOrg.Api.Domain\PunishmentOrg.Domain\PunishmentOrg.Domain.csproj" />
-    <ProjectReference Include="D:\Receive\EFCoreTest\EFCoreTest\DataModel\BaseInfoDataModel\DataModel.BaseInfo.csproj" />
-    <ProjectReference Include="D:\Receive\EFCoreTest\EFCoreTest\DataModel\EF.DbContext.Oracle\Oracle.DbContext.csproj" />
   </ItemGroup>
 
 </Project>

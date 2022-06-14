@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\EF.DbContext.Oracle\EF.DbContext.Oracle.csproj" />
-  </ItemGroup>
-
 </Project>

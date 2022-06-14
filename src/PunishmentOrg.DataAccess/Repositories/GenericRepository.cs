@@ -1,9 +1,8 @@
-﻿using PunishmentOrg.Domain.Interface;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace PunishmentOrg.DataAccess.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : Domain.Interface.IGenericRepository<T> where T : class
     {
         protected readonly ApplicationDbContext _context;
         public GenericRepository(ApplicationDbContext context)

@@ -13,11 +13,11 @@ namespace PunishmentOrg.DataAccess
         {
             _context = context;
             PDiscoveryMinutes = new Repositories.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutesRepository(_context);
-            ObjectState = new Repositories.BaseInfo.Anu.BaseInfo.SystemObject.ObjectStateRepository(_context);
+            ObjectState = new Repositories.ObjectStateRepository(_context);
         }
-        public Domain.Interface.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes.IPDiscoveryMinutesRepository PDiscoveryMinutes { get; private set; }
+        public Domain.Interface.PunishmentOrg.IPDiscoveryMinutesRepository PDiscoveryMinutes { get; private set; }
 
-        public Domain.Interface.BaseInfo.Anu.BaseInfo.SystemObject.IObjectStateRepository ObjectState { get; private set; }
+        public Domain.Interface.IObjectStateRepository ObjectState { get; private set; }
 
         public int Complete()
         {

@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataModel\DataModel.PunishmentOrg\DataModel.PunishmentOrg.csproj" />
     <ProjectReference Include="..\PunishmentOrg.DataAccess\PunishmentOrg.DataAccess.csproj" />
   </ItemGroup>
 

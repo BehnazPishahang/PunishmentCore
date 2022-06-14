@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataModel\DataModel.PunishmentOrg\DataModel.PunishmentOrg.csproj" />
+  </ItemGroup>
+
 </Project>
