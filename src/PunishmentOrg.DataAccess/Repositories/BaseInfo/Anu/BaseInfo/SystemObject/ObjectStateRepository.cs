@@ -17,6 +17,11 @@ namespace PunishmentOrg.DataAccess.Repositories
         {
         }
 
+        public IEnumerable<ObjectState> GetObjectsByParentCode(string parentCode)
+        {
+            return _context.Set<ObjectState>().AsNoTracking().Where(x => x.Code == parentCode);
+        }
+
         public IEnumerable<ObjectState> GetObjectsByUniqueNo(string uniqueNo)
         {
             //return _context.Set<ObjectState>().Where(x => x.Code == uniqueNo).ToList();

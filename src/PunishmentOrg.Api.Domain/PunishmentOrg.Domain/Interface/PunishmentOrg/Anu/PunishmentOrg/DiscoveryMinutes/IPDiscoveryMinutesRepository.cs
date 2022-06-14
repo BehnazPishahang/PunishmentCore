@@ -4,5 +4,7 @@
     {
         public Task<IEnumerable<Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes>> getObejectStateTitleWithUniqueNo(string UniqueNo);
         public Task<IEnumerable<Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes>> GetPDiscoveryMinutesByGeoLocation(string geoLocationCode);
+        public Task<IEnumerable<Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes>> GetPDiscoveryMinutesByAllReferences(string UniqueNo);
+
     }
 }
