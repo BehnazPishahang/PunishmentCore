@@ -5,8 +5,7 @@ namespace Oracle.DbContext
 {
     public abstract class OracleDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
-
-        public OracleDbContext()
+        public OracleDbContext(DbContextOptions options) : base(options)
         {
             SavingChanges += OracleDbContext_SavingChanges;
         }

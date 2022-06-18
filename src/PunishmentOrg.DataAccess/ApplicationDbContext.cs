@@ -11,7 +11,7 @@ namespace PunishmentOrg.DataAccess
 {
     public class ApplicationDbContext : OracleDbContext //: DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
 
