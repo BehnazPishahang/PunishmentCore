@@ -1,8 +1,11 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using PunishmentOrg.Domain.Interface;
+using ServiceModel.Commons.ServiceResponse;
 using ServiceRequest.Anu.PunishmentOrg;
 using ServiceResponse.Anu.PunishmentOrg;
+using Utility.Exceptions;
+using Utility.Guard;
 
 namespace PunishmentOrg.Api.Core.Service.Anu.PunishmentOrg
 {
@@ -29,15 +32,26 @@ namespace PunishmentOrg.Api.Core.Service.Anu.PunishmentOrg
         //    return "";
         //}
 
-        public override async Task<string> PDiscovery(string No)
+        public override async Task<Result> PDiscovery(string No)
         {
-            var pDiscovery = await _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(No);
-            string title = pDiscovery.FirstOrDefault().TheObjectState.Title.ToString();
+            try
+            {
+                No = null;
+                No.Null(ResultType.Error);
 
-            _unitOfWork.Complete();
+
+                var pDiscovery = await _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(No);
+                string title = pDiscovery.FirstOrDefault().TheObjectState.Title.ToString();
+
+                _unitOfWork.Complete();
 
 
-            return title;
+                return new Result { Code = ResultType.Successful.ToString(), Message = title };
+            }
+            catch (AnuExceptions ex)
+            {
+                return ex.result;
+            }
         }
 
         public override SendPDiscoveryMinutesStateResponse SendPDiscoveryMinutesState([FromBody] SendPDiscoveryMinutesStateRequest request)

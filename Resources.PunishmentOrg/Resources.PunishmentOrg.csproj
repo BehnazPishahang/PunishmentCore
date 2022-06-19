@@ -7,17 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Common\ResultType.Designer.cs">
+    <Compile Update="Common\Resources.ResultType.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ResultType.resx</DependentUpon>
+      <DependentUpon>Resources.ResultType.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Common\ResultType.resx">
+    <EmbeddedResource Update="Common\Resources.ResultType.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResultType.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.ResultType.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
