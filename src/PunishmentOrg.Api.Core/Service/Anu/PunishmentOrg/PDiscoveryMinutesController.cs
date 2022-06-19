@@ -13,21 +13,21 @@ namespace PunishmentOrg.Api.Core.Service.Anu.PunishmentOrg
         {
         }
 
-        [HttpGet(Name = "PDiscoveryMinutes/{UniqueNo}")]
-        public async Task<string> PDiscoveryMinutesAsync(string UniqueNo)
-        {
-            await Task.Delay(1);
-            //var pDiscovery = await _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(UniqueNo);
-            //string title = pDiscovery.FirstOrDefault().TheObjectState.Title.ToString();
+        //[HttpGet(Name = "PDiscoveryMinutes/{UniqueNo}")]
+        //public async Task<string> PDiscoveryMinutesAsync(string UniqueNo)
+        //{
+        //    await Task.Delay(1);
+        //    //var pDiscovery = await _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(UniqueNo);
+        //    //string title = pDiscovery.FirstOrDefault().TheObjectState.Title.ToString();
 
-            var byParentCode = _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(UniqueNo);
-            var byNO = _unitOfWork.PCaseRepository.GetTerminateCaseByNo("");
+        //    var byParentCode = _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(UniqueNo);
+        //    var byNO = _unitOfWork.PCaseRepository.GetTerminateCaseByNo("");
 
-            _unitOfWork.Complete();
+        //    _unitOfWork.Complete();
 
 
-            return "";
-        }
+        //    return "";
+        //}
 
         public override async Task<string> PDiscovery(string No)
         {
