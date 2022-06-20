@@ -1,8 +1,13 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using PunishmentOrg.Domain.Interface;
+using ServiceModel.Commons.ServiceResponse;
+using ServiceModel.Constants;
 using ServiceRequest.Anu.PunishmentOrg;
 using ServiceResponse.Anu.PunishmentOrg;
+using Utility.Exceptions;
+using Utility.Guard;
+using Validations.Commons;
 
 namespace PunishmentOrg.Api.Core.Service.Anu.PunishmentOrg
 {
@@ -13,36 +18,62 @@ namespace PunishmentOrg.Api.Core.Service.Anu.PunishmentOrg
         {
         }
 
-        [HttpGet(Name = "PDiscoveryMinutes/{UniqueNo}")]
-        public async Task<string> PDiscoveryMinutesAsync(string UniqueNo)
+        //[HttpGet(Name = "PDiscoveryMinutes/{UniqueNo}")]
+        //public async Task<string> PDiscoveryMinutesAsync(string UniqueNo)
+        //{
+        //    await Task.Delay(1);
+        //    //var pDiscovery = await _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(UniqueNo);
+        //    //string title = pDiscovery.FirstOrDefault().TheObjectState.Title.ToString();
+
+        //    var byParentCode = _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(UniqueNo);
+        //    var byNO = _unitOfWork.PCaseRepository.GetTerminateCaseByNo("");
+
+        //    _unitOfWork.Complete();
+
+
+        //    return "";
+        //}
+
+        public override async Task<Result> PDiscovery(string No)
         {
-            await Task.Delay(1);
-            //var pDiscovery = await _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(UniqueNo);
-            //string title = pDiscovery.FirstOrDefault().TheObjectState.Title.ToString();
-
-            var byParentCode = _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(UniqueNo);
-            var byNO = _unitOfWork.PCaseRepository.GetTerminateCaseByNo("");
-
-            _unitOfWork.Complete();
+            try
+            {
+                No = null;
+                No.Null(ResultType.Error);
 
 
-            return "";
+                var pDiscovery = await _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(No);
+                string title = pDiscovery.FirstOrDefault().TheObjectState.Title.ToString();
+
+                _unitOfWork.Complete();
+
+
+                return new Result { Code = ResultType.Successful.ToString(), Message = title };
+            }
+            catch (AnuExceptions ex)
+            {
+                return ex.result;
+            }
         }
 
-        public override async Task<string> PDiscovery(string No)
+        public override async Task<SendPDiscoveryMinutesStateResponse> SendPDiscoveryMinutesState([FromBody] SendPDiscoveryMinutesStateRequest request)
         {
-            var pDiscovery = await _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(No);
-            string title = pDiscovery.FirstOrDefault().TheObjectState.Title.ToString();
+            try
+            {
+                await Login.ValidateLoginAsync(request.Request, GFESUserAccessType.SendPDiscoveryMinute, _unitOfWork);
 
-            _unitOfWork.Complete();
+                request.UnitNo.IsDigit(ResultType.Error_UniqueNo_Is_Required);
+                request.UnitNo.NullOrWhiteSpace(ResultType.Error_UniqueNo_Is_Required);
 
 
-            return title;
-        }
 
-        public override SendPDiscoveryMinutesStateResponse SendPDiscoveryMinutesState([FromBody] SendPDiscoveryMinutesStateRequest request)
-        {
-            throw new NotImplementedException();
+                return null;
+            }
+            catch (AnuExceptions ex)
+            {
+                return new SendPDiscoveryMinutesStateResponse { Result= ex.result };
+            }
+
         }
     }
 }

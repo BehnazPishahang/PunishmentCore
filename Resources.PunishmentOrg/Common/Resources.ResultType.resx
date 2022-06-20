@@ -181,6 +181,10 @@
     <value>مکان جغرافیایی گزارش بازرسی نمی تواند خالی باشد</value>
     <comment>10015</comment>
   </data>
+  <data name="UserName_Or_PassWord_Is_Not_Entered" xml:space="preserve">
+    <value>نام کاربری و کلمه عبور را وارد کنید</value>
+    <comment>10012</comment>
+  </data>
   <data name="UserName_Or_PassWord_Is_Not_Valid" xml:space="preserve">
     <value>با نام کاربری و کلمه عبور ارسالی هیچ دسترسی برای سرویس جاری یافت نشد</value>
     <comment>10010</comment>

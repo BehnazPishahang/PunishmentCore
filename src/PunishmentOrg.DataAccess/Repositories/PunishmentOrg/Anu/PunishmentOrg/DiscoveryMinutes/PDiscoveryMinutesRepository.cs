@@ -19,9 +19,9 @@ namespace PunishmentOrg.DataAccess.Repositories.PunishmentOrg.Anu.PunishmentOrg.
             return await _context.Set<PDiscoveryMinutes>().Include(x => x.TheGeoLocation).ThenInclude(x => x.TheParentLocation).ToListAsync();
         }
 
-        Task<IEnumerable<PDiscoveryMinutes>> IPDiscoveryMinutesRepository.getObejectStateTitleWithUniqueNo(string UniqueNo)
+        public async Task<IEnumerable<PDiscoveryMinutes>> getObejectStateTitleWithUniqueNo(string UniqueNo)
         {
-            throw new NotImplementedException();
+            return await _context.Set<PDiscoveryMinutes>().Include(x => x.TheObjectState).ToListAsync();
         }
     }
 }

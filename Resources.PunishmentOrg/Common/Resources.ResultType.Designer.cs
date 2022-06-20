@@ -22,14 +22,14 @@ namespace Resources.PunishmentOrg.Common {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ResultType {
+    public class Resources_ResultType {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResultType() {
+        internal Resources_ResultType() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Resources.PunishmentOrg.Common {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Resources.PunishmentOrg.Common.ResultType", typeof(ResultType).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Resources.PunishmentOrg.Common.Resources.ResultType", typeof(Resources_ResultType).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -201,6 +201,15 @@ namespace Resources.PunishmentOrg.Common {
         public static string ThePBBillGeoLocation_Is_Required {
             get {
                 return ResourceManager.GetString("ThePBBillGeoLocation_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نام کاربری و کلمه عبور را وارد کنید.
+        /// </summary>
+        public static string UserName_Or_PassWord_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("UserName_Or_PassWord_Is_Not_Entered", resourceCulture);
             }
         }
         

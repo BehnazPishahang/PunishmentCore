@@ -17,10 +17,14 @@ namespace PunishmentOrg.DataAccess
             PDiscoveryMinutes = new Repositories.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutesRepository(_context);
             ObjectState = new Repositories.ObjectStateRepository(_context);
             PCaseRepository = new PCaseRepository(_context);
+            GFESUser = new Repositories.BaseInfo.Anu.BaseInfo.FrontEndSecurity.GFESUserRepository(_context);
+            GFESUserAccess = new Repositories.BaseInfo.Anu.BaseInfo.FrontEndSecurity.GFESUserAccessRepository(_context);
         }
         public Domain.Interface.PunishmentOrg.IPDiscoveryMinutesRepository PDiscoveryMinutes { get; private set; }
 
         public Domain.Interface.IObjectStateRepository ObjectState { get; private set; }
+        public Domain.Interface.BaseInfo.Anu.BaseInfo.FrontEndSecurity.IGFESUserRepository GFESUser { get; private set; }
+        public Domain.Interface.BaseInfo.Anu.BaseInfo.FrontEndSecurity.IGFESUserAccessRepository GFESUserAccess { get; private set; }
 
         public IPCaseRepository PCaseRepository { get; private set; }
 
