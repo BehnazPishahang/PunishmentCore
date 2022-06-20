@@ -1,6 +1,6 @@
 ﻿using Anu.BaseInfo.FrontEndSecurity;
 using Microsoft.EntityFrameworkCore;
-using Utility.DateTimeUtility;
+using Utility.CalendarHelper;
 
 namespace PunishmentOrg.DataAccess.Repositories.BaseInfo.Anu.BaseInfo.FrontEndSecurity
 {
@@ -19,10 +19,10 @@ namespace PunishmentOrg.DataAccess.Repositories.BaseInfo.Anu.BaseInfo.FrontEndSe
                 .Where(a =>
                     a.TheGFESUser.UserID == userName.Trim() &&
                     a.TheGFESUser.Password == hashedPassword &&
-                    a.TheGFESUser.EndDate.toDateTime() >= DateTimeUtility.DateTimeNow() &&
-                    a.TheGFESUser.StartDate.toDateTime() <= DateTimeUtility.DateTimeNow() &&
-                    a.ToDateTime.toDateTime() >= DateTimeUtility.DateTimeNow() &&
-                    a.FromDateTime.toDateTime() <= DateTimeUtility.DateTimeNow() &&
+                    a.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.DateTimeNow() &&
+                    a.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.DateTimeNow() &&
+                    a.ToDateTime.ToDateTime() >= CalendarHelper.DateTimeNow() &&
+                    a.FromDateTime.ToDateTime() <= CalendarHelper.DateTimeNow() &&
                     a.TheGFESUserAccessType.Id == GFESUserAccessType
                     ).ToListAsync();
         }
