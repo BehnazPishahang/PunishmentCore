@@ -5,6 +5,57 @@ namespace Utility.CalendarHelper
 {
     public static class CalendarHelper
     {
+        public static DateTime DateTimeNow()
+        {
+            return DateTime.Now.ToPersianDate();
+        }
+
+        public static string ToPersian(this DateTime dateTime)
+        {
+            PersianCalendar pc = new PersianCalendar();
+            int year = pc.GetYear(dateTime);
+            int month = pc.GetMonth(dateTime);
+            int day = pc.GetDayOfMonth(dateTime);
+            int hour = pc.GetHour(dateTime);
+            int min = pc.GetMinute(dateTime);
+
+            DateTime PersianDateTime = new DateTime(year, month, day, hour, min, 0);
+
+            return PersianDateTime.ToString("yyyy/MM/dd HH:mm");
+        }
+
+        public static DateTime ToPersianDateTime(this DateTime dateTime)
+        {
+            PersianCalendar pc = new PersianCalendar();
+            int year = pc.GetYear(dateTime);
+            int month = pc.GetMonth(dateTime);
+            int day = pc.GetDayOfMonth(dateTime);
+            int hour = pc.GetHour(dateTime);
+            int min = pc.GetMinute(dateTime);
+
+            return new DateTime(year, month, day, hour, min, 0);
+        }
+
+        public static DateTime ToPersianDate(this DateTime dateTime)
+        {
+            PersianCalendar pc = new PersianCalendar();
+            int year = pc.GetYear(dateTime);
+            int month = pc.GetMonth(dateTime);
+            int day = pc.GetDayOfMonth(dateTime);
+
+            return new DateTime(year, month, day);
+        }
+
+        public static DateTime ToMiladi(this DateTime dateTime)
+        {
+            PersianCalendar pc = new PersianCalendar();
+            return pc.ToDateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, 0, 0);
+        }
+
+        public static DateTime ToDateTime(this string dateTime)
+        {
+            return DateTime.Parse(dateTime);
+        }
 
         /// <summary>
         /// Gets current date and time like: 11/1/1111 16:18:20
