@@ -20,7 +20,7 @@ namespace PunishmentOrg.Api.Core.ServiceBase.Anu.PunishmentOrg
         public abstract Task<ServiceModel.Commons.ServiceResponse.Result> PDiscovery(string No);
 
         [HttpPost("SendPDiscoveryMinutesState")]
-        public abstract ServiceResponse.Anu.PunishmentOrg.SendPDiscoveryMinutesStateResponse SendPDiscoveryMinutesState([FromBody] ServiceRequest.Anu.PunishmentOrg.SendPDiscoveryMinutesStateRequest request);
+        public abstract Task<ServiceResponse.Anu.PunishmentOrg.SendPDiscoveryMinutesStateResponse> SendPDiscoveryMinutesState([FromBody] ServiceRequest.Anu.PunishmentOrg.SendPDiscoveryMinutesStateRequest request);
 
     }
 }

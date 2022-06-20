@@ -21,7 +21,7 @@ namespace Utility.Exceptions
             : base(message, inner) { }
         public AnuExceptions(ResultType type) 
         {
-            result = ServiceResultUtilities.getResult(type);
+            result = ResultUtility.getResult(type);
         }
     }
 }

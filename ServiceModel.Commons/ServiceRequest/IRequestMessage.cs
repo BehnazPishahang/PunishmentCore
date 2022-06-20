@@ -8,6 +8,21 @@ namespace ServiceModel.Commons.ServiceRequest
 {
     public interface IRequestMessage
     {
+        Request Request { get; set; }
+    }
+
+
+    public class RequestMessage : IRequestMessage
+    {
+        public RequestMessage()
+        {
+            this.Request = new Request();
+        }
+        public Request Request { get; set; }
+    }
+
+    public interface IRequest
+    {
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("نام کاربري")]
         string UserName { get; set; }
@@ -16,10 +31,9 @@ namespace ServiceModel.Commons.ServiceRequest
         string PassWord { get; set; }
     }
 
-
-    public class RequestMessage : IRequestMessage
+    public class Request : IRequest
     {
-        public RequestMessage()
+        public Request()
         {
             this.UserName = "";
             this.PassWord = "";

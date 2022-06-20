@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ServiceModel.Commons\ServiceModel.Commons.csproj" />
+    <ProjectReference Include="..\ServiceModel.Constants\ServiceModel.Constants.csproj" />
+    <ProjectReference Include="..\src\PunishmentOrg.Api.Domain\PunishmentOrg.Domain\PunishmentOrg.Domain.csproj" />
     <ProjectReference Include="..\Utility\Utility.csproj" />
   </ItemGroup>
 

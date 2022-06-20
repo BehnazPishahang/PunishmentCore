@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Utility
 {
-    public static class ServiceResultUtilities
+    public static class ResultUtility
     {
         public static Result getResult(ResultType type)
         {

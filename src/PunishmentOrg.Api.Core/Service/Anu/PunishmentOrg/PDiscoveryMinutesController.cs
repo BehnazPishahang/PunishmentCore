@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using PunishmentOrg.Domain.Interface;
 using ServiceModel.Commons.ServiceResponse;
+using ServiceModel.Constants;
 using ServiceRequest.Anu.PunishmentOrg;
 using ServiceResponse.Anu.PunishmentOrg;
 using Utility.Exceptions;
 using Utility.Guard;
+using Validations.Commons;
 
 namespace PunishmentOrg.Api.Core.Service.Anu.PunishmentOrg
 {
@@ -54,9 +56,24 @@ namespace PunishmentOrg.Api.Core.Service.Anu.PunishmentOrg
             }
         }
 
-        public override SendPDiscoveryMinutesStateResponse SendPDiscoveryMinutesState([FromBody] SendPDiscoveryMinutesStateRequest request)
+        public override async Task<SendPDiscoveryMinutesStateResponse> SendPDiscoveryMinutesState([FromBody] SendPDiscoveryMinutesStateRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await Login.ValidateLoginAsync(request.Request, GFESUserAccessType.SendPDiscoveryMinute, _unitOfWork);
+
+                request.UnitNo.IsDigit(ResultType.Error_UniqueNo_Is_Required);
+                request.UnitNo.NullOrWhiteSpace(ResultType.Error_UniqueNo_Is_Required);
+
+
+
+                return null;
+            }
+            catch (AnuExceptions ex)
+            {
+                return new SendPDiscoveryMinutesStateResponse { Result= ex.result };
+            }
+
         }
     }
 }

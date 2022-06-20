@@ -205,6 +205,15 @@ namespace Resources.PunishmentOrg.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to نام کاربری و کلمه عبور را وارد کنید.
+        /// </summary>
+        public static string UserName_Or_PassWord_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("UserName_Or_PassWord_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to با نام کاربری و کلمه عبور ارسالی هیچ دسترسی برای سرویس جاری یافت نشد.
         /// </summary>
         public static string UserName_Or_PassWord_Is_Not_Valid {

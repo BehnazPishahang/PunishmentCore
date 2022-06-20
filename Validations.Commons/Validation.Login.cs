@@ -1,9 +1,8 @@
-﻿using ServiceModel.Commons.ServiceResponse;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Anu.BaseInfo.FrontEndSecurity;
+using PunishmentOrg.Domain.Interface;
+using ServiceModel.Commons.ServiceResponse;
+using ServiceModel.Constants;
+using Utility;
 using Utility.Guard;
 
 namespace Validations.Commons
@@ -11,22 +10,19 @@ namespace Validations.Commons
     public static class Login
     {
 
-        public static Result ValidateLogin(ServiceModel.Commons.ServiceRequest.RequestMessage request)
+        public static async Task<GFESUserAccess> ValidateLoginAsync(ServiceModel.Commons.ServiceRequest.Request request, string GFESUserAccessType, IUnitOfWork unitOfWork)
         {
-            try
-            {
-                request.UserName.NullOrWhiteSpace(ResultType.UserName_Or_PassWord_Is_Not_Valid);
-                request.PassWord.NullOrWhiteSpace(ResultType.UserName_Or_PassWord_Is_Not_Valid);
-            }
-            catch (Utility.Exceptions.AnuExceptions ex)
-            {
-                return ex.result;
-            }
 
+            request.UserName.NullOrWhiteSpace(ResultType.UserName_Or_PassWord_Is_Not_Entered);
+            request.PassWord.NullOrWhiteSpace(ResultType.UserName_Or_PassWord_Is_Not_Entered);
 
+            string hashPass = MD5Core.GetHashString(request.PassWord);
+            var userAccess = await unitOfWork.GFESUserAccess.ValidateUserAndPassword(request.UserName, request.PassWord, GFESUserAccessType);
+            userAccess.Null(ResultType.UserName_Or_PassWord_Is_Not_Valid);
 
-            return null;
-        } 
+            return userAccess.FirstOrDefault();
+
+        }
 
     }
 }

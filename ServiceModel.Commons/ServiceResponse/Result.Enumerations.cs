@@ -11,6 +11,7 @@ namespace ServiceModel.Commons.ServiceResponse
         Successful = 10000,
         Error = 10005,
         UserName_Or_PassWord_Is_Not_Valid = 10010,
+        UserName_Or_PassWord_Is_Not_Entered = 10012,
         Error_to_Find_State = 10006,
         Error_UniqueNo_Is_Required = 10001,
         Execution = 00062601,
