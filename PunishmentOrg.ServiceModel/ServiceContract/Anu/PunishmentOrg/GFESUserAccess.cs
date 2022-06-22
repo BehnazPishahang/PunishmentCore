@@ -1,6 +1,6 @@
 ﻿
 using System.Collections.Generic;
-namespace Anu.PunishmentOrg.ServiceContract
+namespace ServiceModel.PunishmentOrg.ServiceContract.Anu.PunishmentOrg.ServiceContract
 {
     [System.ComponentModel.DisplayName("دسترسي کاربر خارج از سازمان در وب سرويس")]
     public class GFESUserAccess

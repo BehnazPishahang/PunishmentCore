@@ -1,6 +1,6 @@
 ﻿
 using System.Collections.Generic;
-namespace Anu.PunishmentOrg.ServiceContract
+namespace ServiceModel.PunishmentOrg.ServiceContract.Anu.PunishmentOrg.ServiceContract
 {
     [System.ComponentModel.DisplayName("اشياء سيستم در وب سرويس")]
     public class SystemObject

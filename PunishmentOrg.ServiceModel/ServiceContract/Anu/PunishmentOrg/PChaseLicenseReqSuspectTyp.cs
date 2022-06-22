@@ -1,6 +1,6 @@
 ﻿
 using System.Collections.Generic;
-namespace Anu.PunishmentOrg.ServiceContract
+namespace ServiceModel.PunishmentOrg.ServiceContract.Anu.PunishmentOrg.ServiceContract
 {
     [System.ComponentModel.DisplayName("نوع مجوز شخص مورد تعقيب درخواست مجوز تعقيب/بازرسي")]
     public class PChaseLicenseReqSuspectTyp

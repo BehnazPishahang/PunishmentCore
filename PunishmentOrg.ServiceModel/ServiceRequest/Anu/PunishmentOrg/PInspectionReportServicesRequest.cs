@@ -1,10 +1,9 @@
-﻿
-using Anu.PunishmentOrg.ServiceContract;
-using ServiceModel.Commons.ServiceRequest;
+﻿using ServiceModel.Commons.ServiceRequest;
+using ServiceModel.PunishmentOrg.ServiceContract.Anu.PunishmentOrg.ServiceContract;
 
 namespace ServiceRequest.Anu.PunishmentOrg
 {
-        public class ReceivePInspectionReportRequest : PInspectionReport, IRequestMessage
+    public class ReceivePInspectionReportRequest : PInspectionReport, IRequestMessage
         {
         public Request Request { get; set; }
 

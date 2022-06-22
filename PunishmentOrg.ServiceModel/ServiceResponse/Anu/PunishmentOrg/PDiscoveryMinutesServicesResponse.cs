@@ -1,10 +1,9 @@
-﻿
-using Anu.PunishmentOrg.ServiceContract;
-using ServiceModel.Commons.ServiceResponse;
+﻿using ServiceModel.Commons.ServiceResponse;
+using ServiceModel.PunishmentOrg.ServiceContract.Anu.PunishmentOrg.ServiceContract;
 
 namespace ServiceResponse.Anu.PunishmentOrg
 {
-        public class ReceiveFromOtherOrgResponse :PDiscoveryMinutesResponse ,IResponseMessage
+    public class ReceiveFromOtherOrgResponse :PDiscoveryMinutesResponse ,IResponseMessage
         {
           public Result Result { get; set; }
           public ReceiveFromOtherOrgResponse()

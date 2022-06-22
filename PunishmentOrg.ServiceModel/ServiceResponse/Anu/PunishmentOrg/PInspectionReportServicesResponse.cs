@@ -1,6 +1,5 @@
-﻿
-using Anu.PunishmentOrg.ServiceContract;
-using ServiceModel.Commons.ServiceResponse;
+﻿using ServiceModel.Commons.ServiceResponse;
+using ServiceModel.PunishmentOrg.ServiceContract.Anu.PunishmentOrg.ServiceContract;
 
 namespace ServiceResponse.Anu.PunishmentOrg
 {

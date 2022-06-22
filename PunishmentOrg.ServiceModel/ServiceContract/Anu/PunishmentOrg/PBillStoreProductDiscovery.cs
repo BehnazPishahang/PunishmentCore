@@ -1,6 +1,6 @@
 ﻿
 using System.Collections.Generic;
-namespace Anu.PunishmentOrg.ServiceContract
+namespace ServiceModel.PunishmentOrg.ServiceContract.Anu.PunishmentOrg.ServiceContract
 {
     [System.ComponentModel.DisplayName("کالا/ارز هاي قبض/رسيد صادر شده بر اساس کلا/ارز هاي صورتجلسه کشف در سرويس")]
     public class PBillStoreProductDiscovery

@@ -1,6 +1,6 @@
 ﻿
 using System.Collections.Generic;
-namespace Anu.PunishmentOrg.ServiceContract
+namespace ServiceModel.PunishmentOrg.ServiceContract.Anu.PunishmentOrg.ServiceContract
 {
     [System.ComponentModel.DisplayName("ارجاعات نامه مکانيزه در درون سازمان در وب سرويس دريافت مکاتبات")]
     public class GMechanizedLetterRefer
