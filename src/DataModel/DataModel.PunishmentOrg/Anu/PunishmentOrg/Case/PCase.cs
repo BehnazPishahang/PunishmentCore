@@ -1,14 +1,6 @@
-﻿
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Anu.PunishmentOrg.Case
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Case
 {
     public abstract class PCaseBase : PunishmentOrgEntity<string>
     {
@@ -23,13 +15,13 @@ namespace Anu.PunishmentOrg.Case
 		public virtual string? BillNoInWarehouseRN { get; set; }
 
 		[Column("CASEARCHIVESTATE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUCaseArchiveState? CaseArchiveState { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUCaseArchiveState? CaseArchiveState { get; set; }
 
 		[Column("CASEPASSWORD")]
 		public virtual string? CasePassword { get; set; }
 
 		[Column("CASESENDTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.CaseSendType? CaseSendType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.CaseSendType? CaseSendType { get; set; }
 
 		[Column("CASESTORENO")]
 		public virtual string? CaseStoreNo { get; set; }
@@ -38,10 +30,10 @@ namespace Anu.PunishmentOrg.Case
 		public virtual string? CaseTitle { get; set; }
 
 		[Column("CASETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUCaseType? CaseType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUCaseType? CaseType { get; set; }
 
 		[Column("CREATECASETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUCreateCaseType? CreateCaseType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUCreateCaseType? CreateCaseType { get; set; }
 
 		[Column("CREATEDATETIME")]
 		public virtual string? CreateDateTime { get; set; }
@@ -53,10 +45,10 @@ namespace Anu.PunishmentOrg.Case
 		public virtual string? EndDateTime { get; set; }
 
 		[Column("GUILD")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUGuild? Guild { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUGuild? Guild { get; set; }
 
 		[Column("IMPORTANCEDEGREE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUImportanceDegree? ImportanceDegree { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUImportanceDegree? ImportanceDegree { get; set; }
 
 		[Column("MANUALNO")]
 		public virtual string? ManualNo { get; set; }
@@ -86,13 +78,13 @@ namespace Anu.PunishmentOrg.Case
 		public virtual long? SubNo { get; set; }
 
 		[ForeignKey("CREATORPERSONID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheCreatorPerson { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheCreatorPerson { get; set; }
 
 		[ForeignKey("EXECUTIVEPERSONID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheExecutivePerson { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheExecutivePerson { get; set; }
 
 		[ForeignKey("HANDLERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheHandlerUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheHandlerUnit { get; set; }
 
 		[InverseProperty("TheWrapCase")]
 		public virtual List<Anu.PunishmentOrg.Case.PCaseWrap>? TheMainCasesList { get; set; }
@@ -224,7 +216,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual List<Anu.PunishmentOrg.Letter.PRevisionRequestCase>? ThePRevisionRequestCaseList { get; set; }
 
 		[ForeignKey("PRIMITIVEUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? ThePrimitiveUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? ThePrimitiveUnit { get; set; }
 
 		[InverseProperty("ThePCase")]
 		public virtual List<Anu.PunishmentOrg.ArrestSaftyWrit.PSaftyWritAccept>? ThePSaftyWritAcceptList { get; set; }

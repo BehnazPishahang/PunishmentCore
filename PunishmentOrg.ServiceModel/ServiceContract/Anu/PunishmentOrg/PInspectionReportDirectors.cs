@@ -23,7 +23,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن تاريخ تولد شخص حقيقي")]
-            public Anu.Enumerations.PunishmentOrg.Refuse BirthDateRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.Refuse BirthDateRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("توضيحات ")]
@@ -39,11 +39,11 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن نام پدر شخص حقيقي")]
-            public Anu.Enumerations.PunishmentOrg.Refuse FatherNameRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.Refuse FatherNameRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن نام و نام خانوادگي")]
-            public Anu.Enumerations.PunishmentOrg.Refuse FullNameRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.Refuse FullNameRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره شناسنامه شخص حقيقي")]
@@ -67,15 +67,15 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن شماره ملي شخص حقيقي ايراني/کد ملي شخص حقوقي ايراني")]
-            public Anu.Enumerations.PunishmentOrg.Refuse NationalCodeRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.Refuse NationalCodeRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("وضعيت تابعيت شخص حقيقي/حقوقي")]
-            public Anu.Enumerations.PunishmentOrg.PUNationality Nationality { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUNationality Nationality { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن  تابعيت شخص حقيقي/حقوقي")]
-            public Anu.Enumerations.PunishmentOrg.Refuse NationalityRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.Refuse NationalityRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ساير سمت")]
@@ -92,7 +92,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع شخص")]
-            public Anu.Enumerations.PersonType PersonType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.PersonType PersonType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تلفن ثابت شخص حقيقي/حقوقي")]

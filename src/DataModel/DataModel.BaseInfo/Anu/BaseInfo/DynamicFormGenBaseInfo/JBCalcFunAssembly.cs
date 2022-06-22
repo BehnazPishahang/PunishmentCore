@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.DynamicFormGenBaseInfo
+namespace DataModel.BaseInfo.Anu.BaseInfo.DynamicFormGenBaseInfo
 {
     public abstract class JBCalcFunAssemblyBase : BaseInfoEntity<string>
     {

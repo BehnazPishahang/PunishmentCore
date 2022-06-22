@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Gravamen
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Gravamen
 {
     public abstract class PGravamenViolationBase : PunishmentOrgEntity<string>
     {
@@ -20,7 +20,7 @@ namespace Anu.PunishmentOrg.Gravamen
 		public virtual string? SubjectTitle { get; set; }
 
 		[ForeignKey("GEOLOCATIONID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
 
 		[ForeignKey("PBVIOLATIONTYPEID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBViolationType? ThePBViolationType { get; set; }

@@ -19,7 +19,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نوع کالاي قاچاق بلحاظ قانوني")]
-            public Anu.Enumerations.PunishmentOrg.ContrabandProductType ContrabandProductType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.ContrabandProductType ContrabandProductType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کشور سازنده")]
@@ -44,7 +44,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("کالا/ارز/خدمات")]
-            public Anu.Enumerations.PunishmentOrg.PUProductCurrency ProductCurrency { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUProductCurrency ProductCurrency { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شناسه کالا")]
@@ -52,7 +52,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نوع کالاي کشف شده بلحاظ جنس کلي کالا")]
-            public Anu.Enumerations.PunishmentOrg.PProductType ProductType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PProductType ProductType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Dashboard
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Dashboard
 {
     public abstract class PDashboardUserChartsBase : PunishmentOrgEntity<string>
     {
@@ -20,7 +20,7 @@ namespace Anu.PunishmentOrg.Dashboard
 		public virtual string? ChartParameters { get; set; }
 
 		[Column("CHARTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUChartType? ChartType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUChartType? ChartType { get; set; }
 
 		[Column("ROWNO")]
 		public virtual long? RowNo { get; set; }

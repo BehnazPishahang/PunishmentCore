@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Proceeding
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Proceeding
 {
     public abstract class PEnumerationWritIssuerBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.Proceeding
 		public virtual Anu.PunishmentOrg.Proceeding.PEnumerationWrit? ThePEnumerationWrit { get; set; }
 
 		[ForeignKey("REGISTERUSERHISTORYID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
     }
     [Table("PENUMERATIONWRITISSUER")]

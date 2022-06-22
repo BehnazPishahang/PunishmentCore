@@ -10,11 +10,11 @@ namespace Anu.PunishmentOrg.ServiceContract
         }
             
             [System.ComponentModel.DisplayName("نتيجه درخواست")]
-            public Anu.Enumerations.PunishmentOrg.PUConclusion ConclusionRequest { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUConclusion ConclusionRequest { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نوع مالکيت محل")]
-            public Anu.Enumerations.PunishmentOrg.OwnershipType OwnershipType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.OwnershipType OwnershipType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نشاني محل ")]

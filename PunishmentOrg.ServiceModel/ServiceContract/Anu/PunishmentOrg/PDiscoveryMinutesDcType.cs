@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع کشف")]
-            public Anu.Enumerations.PunishmentOrg.PDiscoveryType DiscoveryType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PDiscoveryType DiscoveryType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

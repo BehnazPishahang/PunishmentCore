@@ -1,19 +1,16 @@
-﻿using Anu.PunishmentOrg.Case;
-using Anu.PunishmentOrg.DiscoveryMinutes;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace PunishmentOrg.DataAccess.Repositories.PunishmentOrg
 {
-    public class PCaseRepository : GenericRepository<PCase>, Domain.Interface.PunishmentOrg.IPCaseRepository
+    public class PCaseRepository : GenericRepository<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase>, Domain.Interface.PunishmentOrg.IPCaseRepository
     {
         public PCaseRepository(ApplicationDbContext context) : base(context)
         {
         }
 
-        public async Task<PCase> GetTerminateCaseByNo(string no)
+        public async Task<IEnumerable<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase>> GetPCaseByNo(string no)
         {
-            return await _context.Set<PCase>().FirstOrDefaultAsync(x => x.No == no);
+            return await _context.Set<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase>().Where(a=>a.No==no).ToListAsync();
         }
     }
 }

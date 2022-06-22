@@ -21,12 +21,12 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع کلي واحد")]
-            public Anu.Enumerations.MeasurementUnitType OverallType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.MeasurementUnitType OverallType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("وضعيت")]
-            public Anu.Enumerations.State State { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.State State { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

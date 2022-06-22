@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.InspectionReport
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.InspectionReport
 {
     public abstract class PInspectionReportInspectorBase : PunishmentOrgEntity<string>
     {
@@ -23,7 +23,7 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? InspectorCode { get; set; }
 
 		[Column("INSPECTORPOST")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUInspectorPost? InspectorPost { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUInspectorPost? InspectorPost { get; set; }
 
 		[Column("NAME")]
 		public virtual string? Name { get; set; }

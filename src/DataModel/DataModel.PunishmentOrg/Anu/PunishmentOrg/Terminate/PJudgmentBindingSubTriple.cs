@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Terminate
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Terminate
 {
     public abstract class PJudgmentBindingSubTripleBase : PunishmentOrgEntity<string>
     {

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Destroyed
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Destroyed
 {
     public abstract class PDestroyedMinuteBase : PunishmentOrgEntity<string>
     {
@@ -35,10 +35,10 @@ namespace Anu.PunishmentOrg.Destroyed
 		public virtual string? StartTime { get; set; }
 
 		[ForeignKey("CONFIRMERID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheConfirmer { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheConfirmer { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[InverseProperty("ThePDestroyedMinute")]
 		public virtual List<Anu.PunishmentOrg.Destroyed.PDestroyedLicenseForms4>? ThePDestroyedLicenseForms4List { get; set; }
@@ -56,10 +56,10 @@ namespace Anu.PunishmentOrg.Destroyed
 		public virtual List<Anu.PunishmentOrg.Destroyed.PDestroyedMinutePresent>? ThePDestroyedMinutePresentList { get; set; }
 
 		[ForeignKey("REGISTRARID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegistrar { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegistrar { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PDESTROYEDMINUTE")]

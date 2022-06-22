@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Gravamen
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Gravamen
 {
     public abstract class PGravamenPersonBase : PunishmentOrgEntity<string>
     {
@@ -38,16 +38,16 @@ namespace Anu.PunishmentOrg.Gravamen
 		public virtual string? NationalCode { get; set; }
 
 		[Column("NATIONALITY")]
-		public virtual Anu.Enumerations.LNationality? Nationality { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.LNationality? Nationality { get; set; }
 
 		[Column("PERSONPASSWORD")]
 		public virtual string? PersonPassword { get; set; }
 
 		[Column("PERSONSTARTPOST")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUPersonStartPost? PersonStartPost { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUPersonStartPost? PersonStartPost { get; set; }
 
 		[Column("PERSONTYPE")]
-		public virtual Anu.Enumerations.PersonType? PersonType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PersonType? PersonType { get; set; }
 
 		[Column("POSTCODE")]
 		public virtual string? PostCode { get; set; }
@@ -56,7 +56,7 @@ namespace Anu.PunishmentOrg.Gravamen
 		public virtual long? RowNumber { get; set; }
 
 		[Column("SEX")]
-		public virtual Anu.Enumerations.SexType? Sex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? Sex { get; set; }
 
 		[ForeignKey("PGRAVAMENID")]
 		public virtual Anu.PunishmentOrg.Gravamen.PGravamen? ThePGravamen { get; set; }

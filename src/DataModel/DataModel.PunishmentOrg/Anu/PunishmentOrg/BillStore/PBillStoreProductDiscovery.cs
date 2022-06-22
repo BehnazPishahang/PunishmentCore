@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.BillStore
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.BillStore
 {
     public abstract class PBillStoreProductDiscoveryBase : PunishmentOrgEntity<string>
     {

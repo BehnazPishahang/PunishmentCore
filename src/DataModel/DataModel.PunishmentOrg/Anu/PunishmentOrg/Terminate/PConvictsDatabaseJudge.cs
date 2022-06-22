@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Terminate
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Terminate
 {
     public abstract class PConvictsDatabaseJudgeBase : PunishmentOrgEntity<string>
     {
@@ -20,10 +20,10 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual string? JudgeNo { get; set; }
 
 		[ForeignKey("EXECUTIVECASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? TheExecutiveCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? TheExecutiveCase { get; set; }
 
 		[ForeignKey("EXECUTIVEUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheExecutiveUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheExecutiveUnit { get; set; }
 
 		[ForeignKey("PCONVICTSDATABASEID")]
 		public virtual Anu.PunishmentOrg.Terminate.PConvictsDatabase? ThePConvictsDatabase { get; set; }
@@ -38,7 +38,7 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual Anu.PunishmentOrg.Terminate.PJudgment? ThePJudgment { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PCONVICTSDATABASEJUDGE")]

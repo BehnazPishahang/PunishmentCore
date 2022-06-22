@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Destroyed
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Destroyed
 {
     public abstract class PForm5MinuteConfirmerBase : PunishmentOrgEntity<string>
     {
@@ -20,10 +20,10 @@ namespace Anu.PunishmentOrg.Destroyed
 		public virtual string? Name { get; set; }
 
 		[Column("PRESENTPOST")]
-		public virtual Anu.Enumerations.PunishmentOrg.DestroyedMinutePresent? PresentPost { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DestroyedMinutePresent? PresentPost { get; set; }
 
 		[Column("SEX")]
-		public virtual Anu.Enumerations.SexType? Sex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? Sex { get; set; }
 
 		[ForeignKey("PFORM5MINUTEID")]
 		public virtual Anu.PunishmentOrg.Destroyed.PForm5Minute? ThePForm5Minute { get; set; }

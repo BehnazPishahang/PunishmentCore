@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Execution
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Execution
 {
     public abstract class PPrisonerBindingSubjectBase : PunishmentOrgEntity<string>
     {

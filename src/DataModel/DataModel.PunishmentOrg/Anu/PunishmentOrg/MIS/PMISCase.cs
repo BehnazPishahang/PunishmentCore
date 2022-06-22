@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.MIS
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.MIS
 {
     public abstract class PMISCaseBase : PunishmentOrgEntity<string>
     {
@@ -23,13 +23,13 @@ namespace Anu.PunishmentOrg.MIS
 		public virtual long? AssistanceCount { get; set; }
 
 		[Column("CASEARCHIVESTATE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUCaseArchiveState? CaseArchiveState { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUCaseArchiveState? CaseArchiveState { get; set; }
 
 		[Column("CASESTORENO")]
 		public virtual string? CaseStoreNo { get; set; }
 
 		[Column("CASETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUCaseType? CaseType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUCaseType? CaseType { get; set; }
 
 		[Column("CONVICTIONISSUED")]
 		public virtual long? ConvictionIssued { get; set; }
@@ -50,7 +50,7 @@ namespace Anu.PunishmentOrg.MIS
 		public virtual long? CorrectiveJudgeCount { get; set; }
 
 		[Column("CREATECASETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUCreateCaseType? CreateCaseType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUCreateCaseType? CreateCaseType { get; set; }
 
 		[Column("CREATEDATETIME")]
 		public virtual string? CreateDateTime { get; set; }
@@ -89,7 +89,7 @@ namespace Anu.PunishmentOrg.MIS
 		public virtual long? GovernmentalOffendingCount { get; set; }
 
 		[Column("GUILD")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUGuild? Guild { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUGuild? Guild { get; set; }
 
 		[Column("HANDLETIME")]
 		public virtual long? HandleTime { get; set; }
@@ -101,7 +101,7 @@ namespace Anu.PunishmentOrg.MIS
 		public virtual long? HasTimeNot { get; set; }
 
 		[Column("IMPORTANCEDEGREE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUImportanceDegree? ImportanceDegree { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUImportanceDegree? ImportanceDegree { get; set; }
 
 		[Column("INPUTCOUNT")]
 		public virtual long? InputCount { get; set; }
@@ -245,13 +245,13 @@ namespace Anu.PunishmentOrg.MIS
 		public virtual long? TerminateOrderIssued { get; set; }
 
 		[ForeignKey("GEOLOCATIONID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
 
 		[ForeignKey("GUNITTYPEID")]
-		public virtual Anu.BaseInfo.OrganizationChart.GUnitType? TheGUnitType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.GUnitType? TheGUnitType { get; set; }
 
 		[ForeignKey("NAJAUNITID")]
-		public virtual Anu.BaseInfo.ExchangeData.NAJAUnit? TheNAJAUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.ExchangeData.NAJAUnit? TheNAJAUnit { get; set; }
 
 		[ForeignKey("PBCASESTOREID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBCaseStore? ThePBCaseStore { get; set; }
@@ -260,25 +260,25 @@ namespace Anu.PunishmentOrg.MIS
 		public virtual Anu.BaseInfo.PunishmentOrg.PBRegulatoryPlan? ThePBRegulatoryPlan { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PMISCASECITYID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? ThePMISCaseCity { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? ThePMISCaseCity { get; set; }
 
 		[ForeignKey("PMISCASECOMPLEXID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? ThePMISCaseComplex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? ThePMISCaseComplex { get; set; }
 
 		[InverseProperty("ThePMISCase")]
 		public virtual List<Anu.PunishmentOrg.MIS.PMISCaseInput>? ThePMISCaseInputList { get; set; }
 
 		[ForeignKey("PMISCASEOSTANID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? ThePMISCaseOstan { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? ThePMISCaseOstan { get; set; }
 
 		[InverseProperty("ThePMISCase")]
 		public virtual List<Anu.PunishmentOrg.MIS.PMISCasePerson>? ThePMISCasePersonList { get; set; }
 
 		[ForeignKey("PMISCASESPECIALID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? ThePMISCaseSpecial { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? ThePMISCaseSpecial { get; set; }
 
 		[InverseProperty("ThePMISCase")]
 		public virtual List<Anu.PunishmentOrg.MIS.PMISCaseTriple>? ThePMISCaseTripleList { get; set; }
@@ -287,7 +287,7 @@ namespace Anu.PunishmentOrg.MIS
 		public virtual List<Anu.PunishmentOrg.MIS.PMISCaseViolation>? ThePMISCaseViolationList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
 		[Column("TOTALVIOLATIONPRICE")]
 		public virtual long? TotalViolationPrice { get; set; }

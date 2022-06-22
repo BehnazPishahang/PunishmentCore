@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.ArrestSaftyWrit
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.ArrestSaftyWrit
 {
     public abstract class PCancelSaftyWritIssuerBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.ArrestSaftyWrit
 		public virtual Anu.PunishmentOrg.ArrestSaftyWrit.PCancelSaftyWrit? ThePCancelSaftyWrit { get; set; }
 
 		[ForeignKey("REGISTERUSERHISTORYID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
     }
     [Table("PCANCELSAFTYWRITISSUER")]

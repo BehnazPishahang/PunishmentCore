@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.DynamicFormGen
+namespace DataModel.BaseInfo.Anu.DynamicFormGen
 {
     public abstract class JTableReportFieldCalcsBase : BaseInfoEntity<string>
     {

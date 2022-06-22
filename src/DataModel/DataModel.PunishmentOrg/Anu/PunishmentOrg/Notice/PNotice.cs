@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Notice
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Notice
 {
     public abstract class PNoticeBase : PunishmentOrgEntity<string>
     {
 
 		[Column("ADDRESSTYPE")]
-		public virtual Anu.Enumerations.AddressType? AddressType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.AddressType? AddressType { get; set; }
 
 		[Column("AGENTFAMILY")]
 		public virtual string? AgentFamily { get; set; }
@@ -44,16 +44,16 @@ namespace Anu.PunishmentOrg.Notice
 		public virtual string? EMailText { get; set; }
 
 		[Column("HOWNOTIFIED")]
-		public virtual Anu.Enumerations.HowNotified? HowNotified { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.HowNotified? HowNotified { get; set; }
 
 		[Column("INPUTSTATISTIC")]
 		public virtual long? InputStatistic { get; set; }
 
 		[Column("ISPRINTED")]
-		public virtual Anu.Enumerations.YesNo? IsPrinted { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsPrinted { get; set; }
 
 		[Column("ISVIEWEDONSITE")]
-		public virtual Anu.Enumerations.YesNo? IsViewedOnSite { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsViewedOnSite { get; set; }
 
 		[Column("NO")]
 		public virtual string? No { get; set; }
@@ -65,7 +65,7 @@ namespace Anu.PunishmentOrg.Notice
 		public virtual string? NoticeDate { get; set; }
 
 		[Column("NOTICEFINALRESULT")]
-		public virtual Anu.Enumerations.NoticeFinalResult? NoticeFinalResult { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.NoticeFinalResult? NoticeFinalResult { get; set; }
 
 		[Column("NOTICEORDER")]
 		public virtual string? NoticeOrder { get; set; }
@@ -95,7 +95,7 @@ namespace Anu.PunishmentOrg.Notice
 		public virtual string? NoticePersonPostCode { get; set; }
 
 		[Column("NOTICEPERSONSEX")]
-		public virtual Anu.Enumerations.SexType? NoticePersonSex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? NoticePersonSex { get; set; }
 
 		[Column("PRESENCEDATE")]
 		public virtual string? PresenceDate { get; set; }
@@ -113,13 +113,13 @@ namespace Anu.PunishmentOrg.Notice
 		public virtual string? SMSText { get; set; }
 
 		[ForeignKey("GNOTICETYPEID")]
-		public virtual Anu.BaseInfo.Types.GNoticeType? TheGNoticeType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.GNoticeType? TheGNoticeType { get; set; }
 
 		[ForeignKey("NOTICERESULTTYPEID")]
-		public virtual Anu.BaseInfo.Types.NoticeResultType? TheNoticeResultType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.NoticeResultType? TheNoticeResultType { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PNOTICEADVERTISINGID")]
 		public virtual Anu.PunishmentOrg.Notice.PNoticeAdvertising? ThePNoticeAdvertising { get; set; }
@@ -137,7 +137,7 @@ namespace Anu.PunishmentOrg.Notice
 		public virtual List<Anu.PunishmentOrg.Notice.PNoticeUnit>? ThePNoticeUnitList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PNOTICE")]

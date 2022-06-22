@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.BillStore
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.BillStore
 {
     public abstract class PBillStoreProductBase : PunishmentOrgEntity<string>
     {
@@ -53,7 +53,7 @@ namespace Anu.PunishmentOrg.BillStore
 		public virtual string? CarGearboxType { get; set; }
 
 		[Column("CARMALFUNCTIONSTATUS")]
-		public virtual Anu.Enumerations.YesNo? CarMalfunctionStatus { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? CarMalfunctionStatus { get; set; }
 
 		[Column("CARMODEL")]
 		public virtual string? CarModel { get; set; }
@@ -101,7 +101,7 @@ namespace Anu.PunishmentOrg.BillStore
 		public virtual string? IDNumber { get; set; }
 
 		[Column("ISFIREWOOD")]
-		public virtual Anu.Enumerations.YesNo? IsFireWood { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsFireWood { get; set; }
 
 		[Column("JEWELRYCOARSE")]
 		public virtual string? JewelryCoarse { get; set; }
@@ -143,7 +143,7 @@ namespace Anu.PunishmentOrg.BillStore
 		public virtual long? ObjectLength { get; set; }
 
 		[Column("OBJECTORIGINALITY")]
-		public virtual Anu.Enumerations.PunishmentOrg.ObjectOriginality? ObjectOriginality { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.ObjectOriginality? ObjectOriginality { get; set; }
 
 		[Column("OBJECTWIDTH")]
 		public virtual long? ObjectWidth { get; set; }
@@ -164,7 +164,7 @@ namespace Anu.PunishmentOrg.BillStore
 		public virtual string? ProductNature { get; set; }
 
 		[Column("PRODUCTORCURRENCY")]
-		public virtual Anu.Enumerations.PunishmentOrg.PProductOrCurrency? ProductOrCurrency { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PProductOrCurrency? ProductOrCurrency { get; set; }
 
 		[Column("PRODUCTPRIMVALUE")]
 		public virtual decimal? ProductPrimValue { get; set; }
@@ -176,7 +176,7 @@ namespace Anu.PunishmentOrg.BillStore
 		public virtual string? ProductTitle { get; set; }
 
 		[Column("PRODUCTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PProductType? ProductType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PProductType? ProductType { get; set; }
 
 		[Column("REMINDVALUE")]
 		public virtual decimal? RemindValue { get; set; }
@@ -191,7 +191,7 @@ namespace Anu.PunishmentOrg.BillStore
 		public virtual string? StartDate { get; set; }
 
 		[ForeignKey("MEASUREMENTUNITTYPEID")]
-		public virtual Anu.BaseInfo.Types.MeasurementUnitType? TheMeasurementUnitType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.MeasurementUnitType? TheMeasurementUnitType { get; set; }
 
 		[ForeignKey("PBBILLMEASUREMENTUNITTYPEID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBBillMeasurementUnitType? ThePBBillMeasurementUnitType { get; set; }

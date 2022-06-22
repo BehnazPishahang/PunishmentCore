@@ -42,7 +42,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("پسوند فايل قلم")]
-            public Anu.Enumerations.FileExtension DocFileExtention { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.FileExtension DocFileExtention { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شرح")]
@@ -51,7 +51,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("جنس قلم")]
-            public Anu.Enumerations.ChangedFiledDataType FiledDataType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.ChangedFiledDataType FiledDataType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره راي/حکم")]

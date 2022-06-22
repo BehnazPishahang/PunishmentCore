@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
         }
             
             [System.ComponentModel.DisplayName("نوع گيرنده")]
-            public Anu.Enumerations.MechanizeRefererType ReceiverType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.MechanizeRefererType ReceiverType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -30,7 +30,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع ارسال به گيرنده")]
-            public Anu.Enumerations.MLetterSendTYpe SendType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.MLetterSendTYpe SendType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

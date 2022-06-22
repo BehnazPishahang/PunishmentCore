@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.DBLoging
+namespace DataModel.BaseInfo.Anu.DBLoging
 {
     public abstract class InboxDataBase : BaseInfoEntity<string>
     {

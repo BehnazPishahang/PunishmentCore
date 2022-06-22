@@ -1,6 +1,6 @@
 ﻿using DataModel;
 
-namespace Anu
+namespace DataModel.PunishemntOrg.Anu
 {
     public abstract partial class PunishmentOrgEntity<TKey> : BaseEntity<TKey>
     {

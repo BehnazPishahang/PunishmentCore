@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.WorkFlow.WFDefine
+namespace DataModel.BaseInfo.Anu.WorkFlow.WFDefine
 {
     public abstract class WFWorkflowBase : BaseInfoEntity<string>
     {

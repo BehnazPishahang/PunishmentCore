@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.ArrestSaftyWrit
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.ArrestSaftyWrit
 {
     public abstract class PSaftyWritAcceptTransitionBase : PunishmentOrgEntity<string>
     {
@@ -32,7 +32,7 @@ namespace Anu.PunishmentOrg.ArrestSaftyWrit
 		public virtual string? NationalCode { get; set; }
 
 		[Column("PERSONTYPE")]
-		public virtual Anu.Enumerations.PersonType? PersonType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PersonType? PersonType { get; set; }
 
 		[Column("PHONENUMBER")]
 		public virtual string? PhoneNumber { get; set; }
@@ -41,7 +41,7 @@ namespace Anu.PunishmentOrg.ArrestSaftyWrit
 		public virtual string? PostCode { get; set; }
 
 		[Column("SEX")]
-		public virtual Anu.Enumerations.SexType? Sex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? Sex { get; set; }
 
 		[ForeignKey("PSAFTYWRITACCEPTID")]
 		public virtual Anu.PunishmentOrg.ArrestSaftyWrit.PSaftyWritAccept? ThePSaftyWritAccept { get; set; }
@@ -50,7 +50,7 @@ namespace Anu.PunishmentOrg.ArrestSaftyWrit
 		public virtual Anu.PunishmentOrg.Case.PCasePerson? TheTransitionCasePerson { get; set; }
 
 		[Column("TRANSITIONPERSONTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUSaftyWritAcceptTransitionPersonType? TransitionPersonType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUSaftyWritAcceptTransitionPersonType? TransitionPersonType { get; set; }
 
     }
     [Table("PSAFTYWRITACCEPTTRANSITION")]

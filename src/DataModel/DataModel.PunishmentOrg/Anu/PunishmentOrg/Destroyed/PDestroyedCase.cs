@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Destroyed
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Destroyed
 {
     public abstract class PDestroyedCaseBase : PunishmentOrgEntity<string>
     {
@@ -38,13 +38,13 @@ namespace Anu.PunishmentOrg.Destroyed
 		public virtual long? PageNumber { get; set; }
 
 		[Column("STEPNO")]
-		public virtual Anu.Enumerations.PunishmentOrg.DestroyedCaseStep? StepNo { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DestroyedCaseStep? StepNo { get; set; }
 
 		[ForeignKey("CONFIRMERID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheConfirmer { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheConfirmer { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PBEXCHANGEUNITID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBExchangeUnit? ThePBExchangeUnit { get; set; }
@@ -53,7 +53,7 @@ namespace Anu.PunishmentOrg.Destroyed
 		public virtual Anu.PunishmentOrg.Destroyed.PBoxFile? ThePBoxFile { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[InverseProperty("ThePDestroyedCase")]
 		public virtual List<Anu.PunishmentOrg.Destroyed.PDestroyedCaseImages>? ThePDestroyedCaseImagesList { get; set; }
@@ -71,10 +71,10 @@ namespace Anu.PunishmentOrg.Destroyed
 		public virtual List<Anu.PunishmentOrg.Destroyed.PDestroyedJudge>? ThePDestroyedJudgeList { get; set; }
 
 		[ForeignKey("REGISTRARID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegistrar { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegistrar { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PDESTROYEDCASE")]

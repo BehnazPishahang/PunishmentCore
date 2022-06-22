@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("وسيله نقليه توقيف و تحويل پارکينگ شده است")]
-            public Anu.Enumerations.YesNo ArrestedVehicle { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo ArrestedVehicle { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره شاسي")]
@@ -32,7 +32,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن نام و نام خانوادگي راننده وسيله نقليه")]
-            public Anu.Enumerations.PunishmentOrg.DriverFullName DriverFullNameRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.DriverFullName DriverFullNameRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام راننده وسيله نقليه")]
@@ -44,7 +44,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("آيا قبض پارکينگ صادر شده است")]
-            public Anu.Enumerations.YesNo IssueParkBillReg { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo IssueParkBillReg { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -65,7 +65,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن ساير مشخصات")]
-            public Anu.Enumerations.PunishmentOrg.OtherInfo OtherInfoRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.OtherInfo OtherInfoRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام خانوادگي مالک وسيله نقليه")]
@@ -93,11 +93,11 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن شماره انتظامي(پلاک)")]
-            public Anu.Enumerations.PunishmentOrg.PlaqueNumber PlaqueNumberRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PlaqueNumber PlaqueNumberRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("حروف پلاک")]
-            public Anu.Enumerations.PlaqueScript PlaqueScript { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.PlaqueScript PlaqueScript { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("پلاک سه رقم")]
@@ -109,15 +109,15 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نوع پلاک")]
-            public Anu.Enumerations.PlaqueType PlaqueType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.PlaqueType PlaqueType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ثبت در سامانه بارنامه")]
-            public Anu.Enumerations.YesNo RegInWaybill { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo RegInWaybill { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن ثبت در سامانه بارنامه")]
-            public Anu.Enumerations.PunishmentOrg.RegInWaybill RegInWaybillRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.RegInWaybill RegInWaybillRN { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -132,7 +132,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع وسيله نقليه")]
-            public Anu.Enumerations.PunishmentOrg.VehicleType VehicleType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.VehicleType VehicleType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره بارنامه ")]
@@ -140,7 +140,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن شماره بارنامه ")]
-            public Anu.Enumerations.PunishmentOrg.WayBillNO WayBillNORN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.WayBillNO WayBillNORN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("سريال بارنامه")]

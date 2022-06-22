@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.MechanizedLetter
+namespace DataModel.BaseInfo.Anu.MechanizedLetter
 {
     public abstract class GMechanizedLetterRelLettersBase : BaseInfoEntity<string>
     {

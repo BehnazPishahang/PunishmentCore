@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.InspectionReport
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.InspectionReport
 {
     public abstract class PInspectionReportBase : PunishmentOrgEntity<string>
     {
@@ -41,7 +41,7 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? DirectorNationalCode { get; set; }
 
 		[Column("DIRECTORNATIONALITY")]
-		public virtual Anu.Enumerations.LNationality? DirectorNationality { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.LNationality? DirectorNationality { get; set; }
 
 		[Column("DIRECTORNONIRANIANCNT")]
 		public virtual string? DirectorNonIranianCnt { get; set; }
@@ -50,10 +50,10 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? DirectorPassportNo { get; set; }
 
 		[Column("DIRECTORPOSTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PSuspectPostType? DirectorPostType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PSuspectPostType? DirectorPostType { get; set; }
 
 		[Column("DIRECTORSEX")]
-		public virtual Anu.Enumerations.SexType? DirectorSex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? DirectorSex { get; set; }
 
 		[Column("ECONOMICCODE")]
 		public virtual string? EconomicCode { get; set; }
@@ -68,10 +68,10 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? GravamenNo { get; set; }
 
 		[Column("HASVIOLATION")]
-		public virtual Anu.Enumerations.YesNo? HasViolation { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? HasViolation { get; set; }
 
 		[Column("HOWDATATYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.HowGetDataInspectionReport? HowDataType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.HowGetDataInspectionReport? HowDataType { get; set; }
 
 		[Column("INSPECTIONDATETIME")]
 		public virtual string? InspectionDateTime { get; set; }
@@ -80,13 +80,13 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? InspectionReportNo { get; set; }
 
 		[Column("INSPECTIONREPORTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.InspectionReportType? InspectionReportType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.InspectionReportType? InspectionReportType { get; set; }
 
 		[Column("INSPECTIONRPTCOMPLETEDATE")]
 		public virtual string? InspectionRptCompleteDate { get; set; }
 
 		[Column("KEEPPLACESTATE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PURegister? KeepPlaceState { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PURegister? KeepPlaceState { get; set; }
 
 		[Column("LICENSEOWNERADDRESS")]
 		public virtual string? LicenseOwnerAddress { get; set; }
@@ -113,7 +113,7 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? LicenseOwnerNationalCode { get; set; }
 
 		[Column("LICENSEOWNERNATIONALITY")]
-		public virtual Anu.Enumerations.LNationality? LicenseOwnerNationality { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.LNationality? LicenseOwnerNationality { get; set; }
 
 		[Column("LICENSEOWNERNONIRANIACNT")]
 		public virtual string? LicenseOwnerNonIraniaCnt { get; set; }
@@ -122,16 +122,16 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? LicenseOwnerPassportNo { get; set; }
 
 		[Column("LICENSEOWNERPOSTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PSuspectPostType? LicenseOwnerPostType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PSuspectPostType? LicenseOwnerPostType { get; set; }
 
 		[Column("LICENSEOWNERRESPONSIBILITY")]
 		public virtual string? LicenseOwnerResponsibility { get; set; }
 
 		[Column("LICENSEOWNERSEX")]
-		public virtual Anu.Enumerations.SexType? LicenseOwnerSex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? LicenseOwnerSex { get; set; }
 
 		[Column("LICENSETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PULicenseType? LicenseType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PULicenseType? LicenseType { get; set; }
 
 		[Column("LICENSINGNAME")]
 		public virtual string? LicensingName { get; set; }
@@ -143,10 +143,10 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? No { get; set; }
 
 		[Column("OWNERESTATETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.OwnerEstateType? OwnerEstateType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.OwnerEstateType? OwnerEstateType { get; set; }
 
 		[Column("OWNERSHIPTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUOwnershipType? OwnershipType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUOwnershipType? OwnershipType { get; set; }
 
 		[Column("PLAQUE")]
 		public virtual string? Plaque { get; set; }
@@ -161,7 +161,7 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? RegNumber { get; set; }
 
 		[Column("REPORTBASE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUInspectionReportBase? ReportBase { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUInspectionReportBase? ReportBase { get; set; }
 
 		[Column("REPORTBASEOTHER")]
 		public virtual string? ReportBaseOther { get; set; }
@@ -170,19 +170,19 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? ReturnReasonDesc { get; set; }
 
 		[Column("SAVETYPE")]
-		public virtual Anu.Enumerations.YesNo? SaveType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? SaveType { get; set; }
 
 		[Column("SUBNO")]
 		public virtual long? SubNo { get; set; }
 
 		[ForeignKey("CITYPUOREFUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheCityPuoRefUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheCityPuoRefUnit { get; set; }
 
 		[ForeignKey("INSPECTIONUNITID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBExchangeUnit? TheInspectionUnit { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PBTRADEUNIONSID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBTradeUnions? ThePBTradeUnions { get; set; }
@@ -191,7 +191,7 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual Anu.BaseInfo.PunishmentOrg.PBTradeUnitType? ThePBTradeUnitType { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[InverseProperty("ThePInspectionReport")]
 		public virtual List<Anu.PunishmentOrg.InspectionReport.PInspectionReportAttachment>? ThePInspectionReportAttachmentList { get; set; }
@@ -215,13 +215,13 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual List<Anu.PunishmentOrg.InspectionReport.PInspectionReportViolation>? ThePInspectionReportViolationList { get; set; }
 
 		[ForeignKey("RECEIVEUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheReceiveUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheReceiveUnit { get; set; }
 
 		[ForeignKey("REFERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheReferUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheReferUnit { get; set; }
 
 		[ForeignKey("REGIONGEOLOCID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheRegionGeoLoc { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheRegionGeoLoc { get; set; }
 
 		[Column("TOTALDAMAGES")]
 		public virtual long? TotalDamages { get; set; }
@@ -230,7 +230,7 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual long? TotalViolationPrice { get; set; }
 
 		[Column("TRADELICENSE")]
-		public virtual Anu.Enumerations.PunishmentOrg.LicenseType? TradeLicense { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.LicenseType? TradeLicense { get; set; }
 
 		[Column("TRADELICENSEDATE")]
 		public virtual string? TradeLicenseDate { get; set; }

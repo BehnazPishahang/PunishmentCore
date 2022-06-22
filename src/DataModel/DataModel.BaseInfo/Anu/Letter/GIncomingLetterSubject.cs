@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.Letter
+namespace DataModel.BaseInfo.Anu.Letter
 {
     public abstract class GIncomingLetterSubjectBase : BaseInfoEntity<string>
     {

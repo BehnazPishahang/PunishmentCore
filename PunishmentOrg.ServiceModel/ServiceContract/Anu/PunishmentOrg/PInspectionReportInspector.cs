@@ -24,7 +24,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("سمت")]
-            public Anu.Enumerations.PunishmentOrg.PUInspectorPost InspectorPost { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUInspectorPost InspectorPost { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

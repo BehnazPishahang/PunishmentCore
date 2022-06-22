@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Execution
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Execution
 {
     public abstract class PInstallmentDetailBase : PunishmentOrgEntity<string>
     {
@@ -26,7 +26,7 @@ namespace Anu.PunishmentOrg.Execution
 		public virtual string? PayDate { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PINSTALLMENTID")]
 		public virtual Anu.PunishmentOrg.Execution.PInstallment? ThePInstallment { get; set; }

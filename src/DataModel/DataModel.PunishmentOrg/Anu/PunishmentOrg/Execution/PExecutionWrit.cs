@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Execution
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Execution
 {
     public abstract class PExecutionWritBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.Execution
 		public virtual string? BirthDate { get; set; }
 
 		[Column("CONFIRMERPOSTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.ConfirmerExecutionDocsType? ConfirmerPostType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.ConfirmerExecutionDocsType? ConfirmerPostType { get; set; }
 
 		[Column("CREATEDATETIME")]
 		public virtual string? CreateDateTime { get; set; }
@@ -44,7 +44,7 @@ namespace Anu.PunishmentOrg.Execution
 		public virtual string? JudNo { get; set; }
 
 		[Column("LEGALDOC4DEBT")]
-		public virtual Anu.Enumerations.PunishmentOrg.PLegalDoc4Debt? LegalDoc4Debt { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PLegalDoc4Debt? LegalDoc4Debt { get; set; }
 
 		[Column("MANUALNO")]
 		public virtual string? ManualNo { get; set; }
@@ -65,22 +65,22 @@ namespace Anu.PunishmentOrg.Execution
 		public virtual string? ProsecutorRejectReason { get; set; }
 
 		[Column("SEX")]
-		public virtual Anu.Enumerations.SexType? Sex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? Sex { get; set; }
 
 		[Column("STARTWRITDATE")]
 		public virtual string? StartWritDate { get; set; }
 
 		[ForeignKey("GEOLOCATIONID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PBFORGIVENESSTYPEID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBForgivenessType? ThePBForgivenessType { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PCASEPERSONID")]
 		public virtual Anu.PunishmentOrg.Case.PCasePerson? ThePCasePerson { get; set; }
@@ -104,19 +104,19 @@ namespace Anu.PunishmentOrg.Execution
 		public virtual List<Anu.PunishmentOrg.Execution.PExecutionWrit>? TheRecentWritsList { get; set; }
 
 		[ForeignKey("REGISTERUSERHISTORYID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
 		[Column("TRAVELBANENDTIME")]
-		public virtual Anu.Enumerations.PunishmentOrg.PTravelBanEndTime? TravelBanEndTime { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PTravelBanEndTime? TravelBanEndTime { get; set; }
 
 		[Column("WRITTEXT")]
 		public virtual string? WritText { get; set; }
 
 		[Column("WRITTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUExecutionWritType? WritType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUExecutionWritType? WritType { get; set; }
 
     }
     [Table("PEXECUTIONWRIT")]

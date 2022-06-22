@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.Attachment
+namespace DataModel.BaseInfo.Anu.Attachment
 {
     public abstract class GAttachmentRelatedObjectBase : BaseInfoEntity<string>
     {

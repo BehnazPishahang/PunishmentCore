@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Case
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Case
 {
     public abstract class PCaseAgentBase : PunishmentOrgEntity<string>
     {
@@ -20,7 +20,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual Anu.PunishmentOrg.Case.PCasePerson? TheAgented { get; set; }
 
 		[ForeignKey("AGENTTYPEID")]
-		public virtual Anu.BaseInfo.Types.AgentType? TheAgentType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.AgentType? TheAgentType { get; set; }
 
     }
     [Table("PCASEAGENT")]

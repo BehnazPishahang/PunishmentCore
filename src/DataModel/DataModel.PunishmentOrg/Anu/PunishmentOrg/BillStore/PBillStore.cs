@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.BillStore
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.BillStore
 {
     public abstract class PBillStoreBase : PunishmentOrgEntity<string>
     {
@@ -53,10 +53,10 @@ namespace Anu.PunishmentOrg.BillStore
 		public virtual string? id_shenaseResid { get; set; }
 
 		[Column("ISEQUALITY")]
-		public virtual Anu.Enumerations.YesNo? IsEquality { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsEquality { get; set; }
 
 		[Column("ISISSUEAFTERDISMIN")]
-		public virtual Anu.Enumerations.YesNo? IsIssueAfterDisMin { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsIssueAfterDisMin { get; set; }
 
 		[Column("MANUALNO")]
 		public virtual string? ManualNo { get; set; }
@@ -89,7 +89,7 @@ namespace Anu.PunishmentOrg.BillStore
 		public virtual Anu.BaseInfo.PunishmentOrg.PBExchangeUnit? TheDiscoveryOrg { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PBBILLGEOLOCATIONID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBBillGeoLocation? ThePBBillGeoLocation { get; set; }
@@ -107,16 +107,16 @@ namespace Anu.PunishmentOrg.BillStore
 		public virtual List<Anu.PunishmentOrg.BillStore.PBillStoreUnit>? ThePBillStoreUnitList { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PDISCOVERYMINUTESID")]
 		public virtual Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes? ThePDiscoveryMinutes { get; set; }
 
 		[ForeignKey("RECEIVERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheReceiverUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheReceiverUnit { get; set; }
 
 		[ForeignKey("REFERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheReferUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheReferUnit { get; set; }
 
 		[Column("TRANSFEREEFAMILY")]
 		public virtual string? TransfereeFamily { get; set; }

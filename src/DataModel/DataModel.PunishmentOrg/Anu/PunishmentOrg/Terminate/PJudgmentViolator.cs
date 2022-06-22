@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Terminate
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Terminate
 {
     public abstract class PJudgmentViolatorBase : PunishmentOrgEntity<string>
     {
 
 		[Column("PRESENTSTATE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUJudgementViolatorP? PresentState { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUJudgementViolatorP? PresentState { get; set; }
 
 		[ForeignKey("PCASEPERSONID")]
 		public virtual Anu.PunishmentOrg.Case.PCasePerson? ThePCasePerson { get; set; }

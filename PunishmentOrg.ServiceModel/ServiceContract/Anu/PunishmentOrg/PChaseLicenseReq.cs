@@ -19,7 +19,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نتيجه تعقيب/بازرسي")]
-            public Anu.Enumerations.PunishmentOrg.PChaseResult ChaseResult { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PChaseResult ChaseResult { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("موضوع مجوز")]
@@ -27,7 +27,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نتيجه درخواست")]
-            public Anu.Enumerations.PunishmentOrg.PUConclusion ConclusionRequest { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUConclusion ConclusionRequest { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -45,7 +45,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نهاد صادر کننده مجوز")]
-            public Anu.Enumerations.PunishmentOrg.DiscoveryMinutesCompetenceReference InstitutionExporter { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryMinutesCompetenceReference InstitutionExporter { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("عنوان نهاد صادرکننده مجوز")]
@@ -150,11 +150,11 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("خلاصه نظر مقام صادر کننده مجوز شفاهي در مورد درخواست صدور مجوز شفاهي از قول مقام صادر کننده مجوز")]
-            public Anu.Enumerations.PunishmentOrg.PUConclusion UnwriteReqResultByLicensor { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUConclusion UnwriteReqResultByLicensor { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("خلاصه نظر مقام صادر کننده مجوز شفاهي در مورد درخواست صدور مجوز شفاهي از قول ضابط")]
-            public Anu.Enumerations.PunishmentOrg.PUConclusion UnwriteReqResultByOfficer { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUConclusion UnwriteReqResultByOfficer { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام خانوادگي درخواست کننده شفاهي مجوز")]
@@ -175,7 +175,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("کتبي مسبوق به شفاهي/کتبي")]
-            public Anu.Enumerations.PunishmentOrg.WrittenOrOral WrittenOrOral { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.WrittenOrOral WrittenOrOral { get; set ;} 
             
 
     }

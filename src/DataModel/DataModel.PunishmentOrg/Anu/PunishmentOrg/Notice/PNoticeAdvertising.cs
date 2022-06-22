@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Notice
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Notice
 {
     public abstract class PNoticeAdvertisingBase : PunishmentOrgEntity<string>
     {
@@ -26,7 +26,7 @@ namespace Anu.PunishmentOrg.Notice
 		public virtual string? CreateDateTime { get; set; }
 
 		[Column("ISPRINTED")]
-		public virtual Anu.Enumerations.YesNo? IsPrinted { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsPrinted { get; set; }
 
 		[Column("NEWSPAPER")]
 		public virtual string? Newspaper { get; set; }
@@ -47,7 +47,7 @@ namespace Anu.PunishmentOrg.Notice
 		public virtual string? PrintDate { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[InverseProperty("ThePNoticeAdvertising")]
 		public virtual List<Anu.PunishmentOrg.Notice.PNoticeAdvertisingCase>? ThePNoticeAdvertisingCaseList { get; set; }
@@ -62,7 +62,7 @@ namespace Anu.PunishmentOrg.Notice
 		public virtual List<Anu.PunishmentOrg.Notice.PNotice>? ThePNoticeList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PNOTICEADVERTISING")]

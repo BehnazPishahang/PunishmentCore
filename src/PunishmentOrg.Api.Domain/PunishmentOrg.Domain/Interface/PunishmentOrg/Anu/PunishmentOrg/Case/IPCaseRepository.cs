@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PunishmentOrg.Domain.Interface.PunishmentOrg
+﻿namespace PunishmentOrg.Domain.Interface.PunishmentOrg
 {
-    public interface IPCaseRepository : IGenericRepository<Anu.PunishmentOrg.Case.PCase>
+    public interface IPCaseRepository : IGenericRepository<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase>
     {
-        public Task<Anu.PunishmentOrg.Case.PCase> GetTerminateCaseByNo(string no);
+        public Task<IEnumerable<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase>> GetPCaseByNo(string no);
     }
 }

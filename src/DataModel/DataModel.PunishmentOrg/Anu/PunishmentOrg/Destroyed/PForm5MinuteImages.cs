@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Destroyed
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Destroyed
 {
     public abstract class PForm5MinuteImagesBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.Destroyed
 		public virtual byte[]? DocImage { get; set; }
 
 		[Column("IMAGETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.Form5Images? ImageType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.Form5Images? ImageType { get; set; }
 
 		[ForeignKey("PFORM5MINUTEID")]
 		public virtual Anu.PunishmentOrg.Destroyed.PForm5Minute? ThePForm5Minute { get; set; }

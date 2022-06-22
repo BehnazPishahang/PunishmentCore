@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Case
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Case
 {
     public abstract class PIllicitPersonSearchLogBase : PunishmentOrgEntity<string>
     {
@@ -32,7 +32,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual string? IdentityNumber { get; set; }
 
 		[Column("ISFINDHISTORY")]
-		public virtual Anu.Enumerations.YesNo? IsFindHistory { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsFindHistory { get; set; }
 
 		[Column("JUDGENO")]
 		public virtual string? JudgeNo { get; set; }
@@ -53,7 +53,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual long? PCaseSubNo { get; set; }
 
 		[Column("PERSONTYPE")]
-		public virtual Anu.Enumerations.PersonType? PersonType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PersonType? PersonType { get; set; }
 
 		[Column("SEARCHDATETIME")]
 		public virtual string? SearchDateTime { get; set; }
@@ -62,7 +62,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual string? SearchMiliSecond { get; set; }
 
 		[ForeignKey("REGISTERUSERHISTORYID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
     }
     [Table("PILLICITPERSONSEARCHLOG")]

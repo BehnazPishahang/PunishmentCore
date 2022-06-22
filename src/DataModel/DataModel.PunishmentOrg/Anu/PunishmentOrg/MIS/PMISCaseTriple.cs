@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.MIS
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.MIS
 {
     public abstract class PMISCaseTripleBase : PunishmentOrgEntity<string>
     {
 
 		[Column("OFFENDERINVOLVEDTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.OffenderInvolvedType? OffenderInvolvedType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.OffenderInvolvedType? OffenderInvolvedType { get; set; }
 
 		[Column("SOURCEOBJECTID")]
 		public virtual string? SourceObjectId { get; set; }

@@ -15,7 +15,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نتيجه درخواست")]
-            public Anu.Enumerations.PunishmentOrg.PUConclusion ConclusionRequest { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUConclusion ConclusionRequest { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام خانوادگي راننده وسيله نقليه")]
@@ -52,7 +52,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("حروف پلاک")]
-            public Anu.Enumerations.PlaqueScript PlaqueScript { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.PlaqueScript PlaqueScript { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("پلاک سه رقم")]
@@ -64,7 +64,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نوع پلاک")]
-            public Anu.Enumerations.PlaqueType PlaqueType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.PlaqueType PlaqueType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -79,7 +79,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع وسيله نقليه")]
-            public Anu.Enumerations.PunishmentOrg.VehicleType VehicleType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.VehicleType VehicleType { get; set ;} 
             
 
     }

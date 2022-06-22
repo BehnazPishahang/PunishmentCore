@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Case
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Case
 {
     public abstract class PCaseTripleBase : PunishmentOrgEntity<string>
     {
 
 		[Column("OFFENDERINVOLVEDTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.OffenderInvolvedType? OffenderInvolvedType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.OffenderInvolvedType? OffenderInvolvedType { get; set; }
 
 		[Column("SOURCEOBJECTID")]
 		public virtual string? SourceObjectId { get; set; }
@@ -29,7 +29,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual Anu.BaseInfo.PunishmentOrg.PBIntroductionLitigation? ThePBIntroductionLitigation { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PCASEVIOLATIONID")]
 		public virtual Anu.PunishmentOrg.Case.PCaseViolation? ThePCaseViolation { get; set; }

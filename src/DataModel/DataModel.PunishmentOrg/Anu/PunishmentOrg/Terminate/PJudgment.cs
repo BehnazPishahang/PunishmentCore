@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Terminate
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Terminate
 {
     public abstract class PJudgmentBase : PunishmentOrgEntity<string>
     {
@@ -23,7 +23,7 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual string? JudgeDateTime { get; set; }
 
 		[Column("JUDGETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUJudgeType? JudgeType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUJudgeType? JudgeType { get; set; }
 
 		[Column("JUDGEWRITEDATE")]
 		public virtual string? JudgeWriteDate { get; set; }
@@ -35,16 +35,16 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual string? No { get; set; }
 
 		[Column("STATISTICSTATUS")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUStatisticStatus? StatisticStatus { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUStatisticStatus? StatisticStatus { get; set; }
 
 		[ForeignKey("ISSUERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheIssuerUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheIssuerUnit { get; set; }
 
 		[ForeignKey("MAINJUDGEID")]
 		public virtual Anu.PunishmentOrg.Terminate.PJudgment? TheMainJudge { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PBJUDGEMENTTEMPLATETYPEID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBJudgementTemplateType? ThePBJudgementTemplateType { get; set; }

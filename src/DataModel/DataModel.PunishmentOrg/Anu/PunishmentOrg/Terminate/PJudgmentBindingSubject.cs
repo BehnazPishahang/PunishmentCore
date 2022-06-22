@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Terminate
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Terminate
 {
     public abstract class PJudgmentBindingSubjectBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual decimal? PenaltyAmount { get; set; }
 
 		[Column("PENALTYGETTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PenaltyGetType? PenaltyGetType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PenaltyGetType? PenaltyGetType { get; set; }
 
 		[Column("ROWNUMBER")]
 		public virtual long? RowNumber { get; set; }
@@ -26,7 +26,7 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual string? SubjectTitle { get; set; }
 
 		[ForeignKey("MEASUREMENTUNITTYPEID")]
-		public virtual Anu.BaseInfo.Types.MeasurementUnitType? TheMeasurementUnitType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.MeasurementUnitType? TheMeasurementUnitType { get; set; }
 
 		[ForeignKey("PBBINDINGSUBJECTTYPEID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBBindingSubjectType? ThePBBindingSubjectType { get; set; }

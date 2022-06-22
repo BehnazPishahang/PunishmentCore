@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.Lawyer
+namespace DataModel.BaseInfo.Anu.BaseInfo.Lawyer
 {
     public abstract class GLawyerWorkHistoryBase : BaseInfoEntity<string>
     {

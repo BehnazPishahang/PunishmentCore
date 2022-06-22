@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Case
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Case
 {
     public abstract class PCaseInputBase : PunishmentOrgEntity<string>
     {
@@ -32,7 +32,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual long? RowNumber { get; set; }
 
 		[Column("SENDERUNITTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUSenderCaseType? SenderUnitType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUSenderCaseType? SenderUnitType { get; set; }
 
 		[Column("SOURCECASEARCHIVENO")]
 		public virtual string? SourceCaseArchiveNo { get; set; }
@@ -50,10 +50,10 @@ namespace Anu.PunishmentOrg.Case
 		public virtual List<Anu.PunishmentOrg.Case.PCaseTriple>? TheCreativeTripleList { get; set; }
 
 		[ForeignKey("NAJAUNITID")]
-		public virtual Anu.BaseInfo.ExchangeData.NAJAUnit? TheNAJAUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.ExchangeData.NAJAUnit? TheNAJAUnit { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PREVISIONREQUESTID")]
 		public virtual Anu.PunishmentOrg.Letter.PRevisionRequest? ThePRevisionRequest { get; set; }
@@ -62,7 +62,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual List<Anu.PunishmentOrg.Case.PCaseTriple>? TheRelatedTripleList { get; set; }
 
 		[ForeignKey("SENDERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheSenderUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheSenderUnit { get; set; }
 
 		[ForeignKey("TERMINATEJUDGEID")]
 		public virtual Anu.PunishmentOrg.Terminate.PJudgment? TheTerminateJudge { get; set; }

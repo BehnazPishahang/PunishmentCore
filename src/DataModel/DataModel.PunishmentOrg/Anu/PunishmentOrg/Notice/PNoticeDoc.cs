@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Notice
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Notice
 {
     public abstract class PNoticeDocBase : PunishmentOrgEntity<string>
     {
@@ -23,10 +23,10 @@ namespace Anu.PunishmentOrg.Notice
 		public virtual Anu.PunishmentOrg.Notice.PNotice? ThePNotice { get; set; }
 
 		[ForeignKey("SYSTEMFORMID")]
-		public virtual Anu.BaseInfo.SystemObject.SystemForm? TheSystemForm { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.SystemForm? TheSystemForm { get; set; }
 
 		[ForeignKey("SYSTEMOBJECTID")]
-		public virtual Anu.BaseInfo.SystemObject.SystemObject? TheSystemObject { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.SystemObject? TheSystemObject { get; set; }
 
     }
     [Table("PNOTICEDOC")]

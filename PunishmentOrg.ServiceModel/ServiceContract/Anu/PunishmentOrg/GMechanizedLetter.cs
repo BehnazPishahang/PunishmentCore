@@ -29,7 +29,7 @@ namespace Anu.PunishmentOrg.ServiceContract
 
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("آيا نامه از برون سازمان گرفته شده است؟")]
-        public Anu.Enumerations.YesNo IsSendByOuterOrg { get; set; }
+        public DataModel.BaseInfo.Anu.Enumerations.YesNo IsSendByOuterOrg { get; set; }
 
 
         [System.ComponentModel.DataAnnotations.Required]

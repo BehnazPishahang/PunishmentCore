@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.OrganizationChart
+namespace DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart
 {
     public abstract class GPostTypeBase : BaseInfoEntity<string>
     {

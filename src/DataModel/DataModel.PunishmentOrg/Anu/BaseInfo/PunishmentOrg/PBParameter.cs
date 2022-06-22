@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.PunishmentOrg
+namespace DataModel.PunishemntOrg.Anu.BaseInfo.PunishmentOrg
 {
     public abstract class PBParameterBase : PunishmentOrgEntity<string>
     {
@@ -23,7 +23,7 @@ namespace Anu.BaseInfo.PunishmentOrg
 		public virtual string? ParameterStringValue { get; set; }
 
 		[Column("PARAMETERTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUParameter? ParameterType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUParameter? ParameterType { get; set; }
 
 		[Column("PARAMETERVALUE")]
 		public virtual long? ParameterValue { get; set; }

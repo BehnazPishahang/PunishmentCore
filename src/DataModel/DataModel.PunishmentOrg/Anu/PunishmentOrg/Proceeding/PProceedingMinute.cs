@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Proceeding
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Proceeding
 {
     public abstract class PProceedingMinuteBase : PunishmentOrgEntity<string>
     {
@@ -32,7 +32,7 @@ namespace Anu.PunishmentOrg.Proceeding
 		public virtual string? StartTime { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PBJUDGEMENTTEMPLATETYPEID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBJudgementTemplateType? ThePBJudgementTemplateType { get; set; }
@@ -47,7 +47,7 @@ namespace Anu.PunishmentOrg.Proceeding
 		public virtual List<Anu.PunishmentOrg.Proceeding.PProceedingMinuteUnit>? ThePProceedingMinuteUnitList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PPROCEEDINGMINUTE")]

@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PChaseLicenseReqPlacesBase : PunishmentOrgEntity<string>
     {
 
 		[Column("OWNERSHIPTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.OwnershipType? OwnershipType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.OwnershipType? OwnershipType { get; set; }
 
 		[Column("PLACEADDRESS")]
 		public virtual string? PlaceAddress { get; set; }

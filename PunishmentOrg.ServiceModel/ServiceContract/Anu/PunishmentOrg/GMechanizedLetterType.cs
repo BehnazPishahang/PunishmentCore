@@ -15,7 +15,7 @@ namespace Anu.PunishmentOrg.ServiceContract
 
 
         [System.ComponentModel.DisplayName("نياز به پاسخ")]
-        public Anu.Enumerations.HaveNoHave NeedResult { get; set; }
+        public DataModel.BaseInfo.Anu.Enumerations.HaveNoHave NeedResult { get; set; }
 
 
         [System.ComponentModel.DisplayName("کدهاي انواع سمت اداري داراي دسترسي")]
@@ -24,17 +24,17 @@ namespace Anu.PunishmentOrg.ServiceContract
 
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("نوع گيرنده موضوع نامه")]
-        public Anu.Enumerations.MechanizedLetterOrgTypeReceiver ReceiverType { get; set; }
+        public DataModel.BaseInfo.Anu.Enumerations.MechanizedLetterOrgTypeReceiver ReceiverType { get; set; }
 
 
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("نوع فرستنده موضوع نامه")]
-        public Anu.Enumerations.MechanizedLetterOrgTypeReceiver SenderType { get; set; }
+        public DataModel.BaseInfo.Anu.Enumerations.MechanizedLetterOrgTypeReceiver SenderType { get; set; }
 
 
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("وضعيت")]
-        public Anu.Enumerations.State State { get; set; }
+        public DataModel.BaseInfo.Anu.Enumerations.State State { get; set; }
 
 
         [System.ComponentModel.DataAnnotations.Required]

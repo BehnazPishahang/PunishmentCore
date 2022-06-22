@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("شيوه ارتکاب تخلف")]
-            public Anu.Enumerations.PunishmentOrg.OffenderInvolvedType OffenderInvolvedType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.OffenderInvolvedType OffenderInvolvedType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.MIS
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.MIS
 {
     public abstract class PMISJudgmentCaseBase : PunishmentOrgEntity<string>
     {
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PMISJUDGMENTID")]
 		public virtual Anu.PunishmentOrg.MIS.PMISJudgment? ThePMISJudgment { get; set; }

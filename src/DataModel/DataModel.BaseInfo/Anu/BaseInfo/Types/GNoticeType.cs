@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.Types
+namespace DataModel.BaseInfo.Anu.BaseInfo.Types
 {
     public abstract class GNoticeTypeBase : BaseInfoEntity<string>
     {

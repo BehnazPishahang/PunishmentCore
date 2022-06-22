@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع جرم يا تخلف")]
-            public Anu.Enumerations.PunishmentOrg.PSmuggling SmugglingType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PSmuggling SmugglingType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.PunishmentOrg
+namespace DataModel.PunishemntOrg.Anu.BaseInfo.PunishmentOrg
 {
     public abstract class PBBillMeasurementUnitTypeBase : PunishmentOrgEntity<string>
     {
@@ -23,13 +23,13 @@ namespace Anu.BaseInfo.PunishmentOrg
 		public virtual long? OrgID { get; set; }
 
 		[Column("OVERALLTYPE")]
-		public virtual Anu.Enumerations.MeasurementUnitType? OverallType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.MeasurementUnitType? OverallType { get; set; }
 
 		[Column("STATE")]
-		public virtual Anu.Enumerations.State? State { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.State? State { get; set; }
 
 		[ForeignKey("GEXCHANGEUNITTITLEID")]
-		public virtual Anu.BaseInfo.ExchangeData.GExchangeUnitTitle? TheGExchangeUnitTitle { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.ExchangeData.GExchangeUnitTitle? TheGExchangeUnitTitle { get; set; }
 
 		[Column("TITLE")]
 		public virtual string? Title { get; set; }

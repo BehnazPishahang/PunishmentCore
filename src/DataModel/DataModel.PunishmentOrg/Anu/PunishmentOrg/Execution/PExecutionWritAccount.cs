@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Execution
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Execution
 {
     public abstract class PExecutionWritAccountBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.Execution
 		public virtual string? AccountNo { get; set; }
 
 		[ForeignKey("BANKID")]
-		public virtual Anu.BaseInfo.Types.Bank? TheBank { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.Bank? TheBank { get; set; }
 
 		[ForeignKey("PEXECUTIONWRITID")]
 		public virtual Anu.PunishmentOrg.Execution.PExecutionWrit? ThePExecutionWrit { get; set; }

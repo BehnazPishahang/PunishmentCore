@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.MIS
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.MIS
 {
     public abstract class PMISCasePersonBase : PunishmentOrgEntity<string>
     {
@@ -20,52 +20,52 @@ namespace Anu.PunishmentOrg.MIS
 		public virtual string? CardStewardshipDate { get; set; }
 
 		[Column("HASCARDSTEWARDSHIP")]
-		public virtual Anu.Enumerations.YesNo? HasCardStewardship { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? HasCardStewardship { get; set; }
 
 		[Column("LEGALPERSONSTATE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PULegalPersonState? LegalPersonState { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PULegalPersonState? LegalPersonState { get; set; }
 
 		[Column("LICENSEOWNERBIRTHDATE")]
 		public virtual string? LicenseOwnerBirthDate { get; set; }
 
 		[Column("LICENSEOWNERSEX")]
-		public virtual Anu.Enumerations.SexType? LicenseOwnerSex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? LicenseOwnerSex { get; set; }
 
 		[Column("LICENSETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PULicenseType? LicenseType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PULicenseType? LicenseType { get; set; }
 
 		[Column("LIFESTATE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PULifeState? LifeState { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PULifeState? LifeState { get; set; }
 
 		[Column("NATIONALITY")]
-		public virtual Anu.Enumerations.LNationality? Nationality { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.LNationality? Nationality { get; set; }
 
 		[Column("OWNERESTATETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.OwnerEstateType? OwnerEstateType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.OwnerEstateType? OwnerEstateType { get; set; }
 
 		[Column("OWNERSHIPTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUOwnershipType? OwnershipType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUOwnershipType? OwnershipType { get; set; }
 
 		[Column("PERSONSTARTPOST")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUPersonStartPost? PersonStartPost { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUPersonStartPost? PersonStartPost { get; set; }
 
 		[Column("PERSONTYPE")]
-		public virtual Anu.Enumerations.PersonType? PersonType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PersonType? PersonType { get; set; }
 
 		[Column("RELIGION")]
-		public virtual Anu.Enumerations.LReligion? Religion { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.LReligion? Religion { get; set; }
 
 		[Column("SEX")]
-		public virtual Anu.Enumerations.SexType? Sex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? Sex { get; set; }
 
 		[Column("SOURCEOBJECTID")]
 		public virtual string? SourceObjectId { get; set; }
 
 		[ForeignKey("AGENTTYPEID")]
-		public virtual Anu.BaseInfo.Types.AgentType? TheAgentType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.AgentType? TheAgentType { get; set; }
 
 		[ForeignKey("GEOLOCATIONID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
 
 		[InverseProperty("TheOffendingPerson")]
 		public virtual List<Anu.PunishmentOrg.MIS.PMISCaseTriple>? TheOffendingTripleList { get; set; }

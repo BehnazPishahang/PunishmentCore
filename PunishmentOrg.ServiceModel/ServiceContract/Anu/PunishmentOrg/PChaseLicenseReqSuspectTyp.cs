@@ -10,12 +10,12 @@ namespace Anu.PunishmentOrg.ServiceContract
         }
             
             [System.ComponentModel.DisplayName("نتيجه درخواست")]
-            public Anu.Enumerations.PunishmentOrg.PUConclusion ConclusionRequest { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUConclusion ConclusionRequest { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع مجوز در مورد شخص")]
-            public Anu.Enumerations.PunishmentOrg.LicensePersonType LicensePersonType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.LicensePersonType LicensePersonType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

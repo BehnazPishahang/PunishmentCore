@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Accounting
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Accounting
 {
     public abstract class PCashBase : PunishmentOrgEntity<string>
     {
@@ -50,16 +50,16 @@ namespace Anu.PunishmentOrg.Accounting
 		public virtual string? No { get; set; }
 
 		[Column("PAIDPERSONTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUAccountPersonType? PaidPersonType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUAccountPersonType? PaidPersonType { get; set; }
 
 		[Column("PERSONTYPE")]
-		public virtual Anu.Enumerations.PersonType? PersonType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PersonType? PersonType { get; set; }
 
 		[Column("RECEIVERNO")]
 		public virtual string? ReceiverNo { get; set; }
 
 		[Column("SEX")]
-		public virtual Anu.Enumerations.SexType? Sex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? Sex { get; set; }
 
 		[Column("SIDENOTE")]
 		public virtual string? SideNote { get; set; }
@@ -68,10 +68,10 @@ namespace Anu.PunishmentOrg.Accounting
 		public virtual string? TerminalID { get; set; }
 
 		[ForeignKey("ACCOUNTSID")]
-		public virtual Anu.BaseInfo.Types.Accounts? TheAccounts { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.Accounts? TheAccounts { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PAIDCASEPERSONID")]
 		public virtual Anu.PunishmentOrg.Case.PCasePerson? ThePaidCasePerson { get; set; }
@@ -95,7 +95,7 @@ namespace Anu.PunishmentOrg.Accounting
 		public virtual List<Anu.PunishmentOrg.Accounting.PPaidRelatedCash>? ThePPaidRelatedCashList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
 		[Column("TOTALPAIDCOST")]
 		public virtual long? TotalPaidCost { get; set; }

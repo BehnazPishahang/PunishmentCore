@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.Advertising
+namespace DataModel.BaseInfo.Anu.Advertising
 {
     public abstract class GAdvertisingBase : BaseInfoEntity<string>
     {

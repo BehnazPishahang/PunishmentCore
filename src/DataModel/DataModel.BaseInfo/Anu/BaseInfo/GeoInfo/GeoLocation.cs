@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.GeoInfo
+namespace DataModel.BaseInfo.Anu.BaseInfo.GeoInfo
 {
     public abstract class GeoLocationBase : BaseInfoEntity<string>
     {

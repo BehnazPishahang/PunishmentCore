@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.InspectionReport
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.InspectionReport
 {
     public abstract class PInspectionReportPostBase : PunishmentOrgEntity<string>
     {
 
 		[Column("POSTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PSuspectPostType? PostType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PSuspectPostType? PostType { get; set; }
 
 		[ForeignKey("PINSPECTIONREPORTDIRECTORSID")]
 		public virtual Anu.PunishmentOrg.InspectionReport.PInspectionReportDirectors? ThePInspectionReportDirectors { get; set; }

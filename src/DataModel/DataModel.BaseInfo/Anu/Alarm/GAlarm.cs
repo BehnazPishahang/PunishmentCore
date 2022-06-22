@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.Alarm
+namespace DataModel.BaseInfo.Anu.Alarm
 {
     public abstract class GAlarmBase : BaseInfoEntity<string>
     {

@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.InspectionReport
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.InspectionReport
 {
     public abstract class PInspectionReportRetReasonBase : PunishmentOrgEntity<string>
     {
 
 		[Column("RETURNREASON")]
-		public virtual Anu.Enumerations.PunishmentOrg.InspectionReportReturnReason? ReturnReason { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.InspectionReportReturnReason? ReturnReason { get; set; }
 
 		[ForeignKey("PINSPECTIONREPORTID")]
 		public virtual Anu.PunishmentOrg.InspectionReport.PInspectionReport? ThePInspectionReport { get; set; }

@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("اتهام")]
-            public Anu.Enumerations.Crimes Crimes { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.Crimes Crimes { get; set ;} 
             
 
     }

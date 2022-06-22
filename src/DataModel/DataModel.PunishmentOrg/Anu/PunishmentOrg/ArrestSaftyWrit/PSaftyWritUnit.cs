@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.ArrestSaftyWrit
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.ArrestSaftyWrit
 {
     public abstract class PSaftyWritUnitBase : PunishmentOrgEntity<string>
     {

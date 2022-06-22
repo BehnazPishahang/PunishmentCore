@@ -8,16 +8,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Notice
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Notice
 {
     public abstract class PNoticePersonBase : PunishmentOrgEntity<string>
     {
 
 		[ForeignKey("EXPERTMANID")]
-		public virtual Anu.BaseInfo.Expert.ExpertMan? TheExpertMan { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Expert.ExpertMan? TheExpertMan { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PCASEPERSONID")]
 		public virtual Anu.PunishmentOrg.Case.PCasePerson? ThePCasePerson { get; set; }

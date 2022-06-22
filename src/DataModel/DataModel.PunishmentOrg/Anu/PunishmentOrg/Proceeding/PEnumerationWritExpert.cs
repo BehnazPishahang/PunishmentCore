@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Proceeding
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Proceeding
 {
     public abstract class PEnumerationWritExpertBase : PunishmentOrgEntity<string>
     {
@@ -26,10 +26,10 @@ namespace Anu.PunishmentOrg.Proceeding
 		public virtual string? NationalityCode { get; set; }
 
 		[ForeignKey("EXPERTMAJORID")]
-		public virtual Anu.BaseInfo.Expert.ExpertMajor? TheExpertMajor { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Expert.ExpertMajor? TheExpertMajor { get; set; }
 
 		[ForeignKey("EXPERTMANID")]
-		public virtual Anu.BaseInfo.Expert.ExpertMan? TheExpertMan { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Expert.ExpertMan? TheExpertMan { get; set; }
 
 		[ForeignKey("PENUMERATIONWRITID")]
 		public virtual Anu.PunishmentOrg.Proceeding.PEnumerationWrit? ThePEnumerationWrit { get; set; }

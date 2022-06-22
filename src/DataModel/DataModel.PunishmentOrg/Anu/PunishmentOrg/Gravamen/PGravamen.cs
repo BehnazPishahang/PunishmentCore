@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Gravamen
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Gravamen
 {
     public abstract class PGravamenBase : PunishmentOrgEntity<string>
     {
@@ -20,10 +20,10 @@ namespace Anu.PunishmentOrg.Gravamen
 		public virtual string? FollowUpNo { get; set; }
 
 		[Column("GRAVAMENORREPORT")]
-		public virtual Anu.Enumerations.PunishmentOrg.GravamenOrReport? GravamenOrReport { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.GravamenOrReport? GravamenOrReport { get; set; }
 
 		[Column("HOWDATATYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PU135OrWebSite? HowDataType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PU135OrWebSite? HowDataType { get; set; }
 
 		[Column("NOTICETEXT")]
 		public virtual string? NoticeText { get; set; }
@@ -50,10 +50,10 @@ namespace Anu.PunishmentOrg.Gravamen
 		public virtual string? ReporterName { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[InverseProperty("ThePGravamen")]
 		public virtual List<Anu.PunishmentOrg.Gravamen.PGravamenAttachment>? ThePGravamenAttachmentList { get; set; }
@@ -71,10 +71,10 @@ namespace Anu.PunishmentOrg.Gravamen
 		public virtual List<Anu.PunishmentOrg.Gravamen.PGravamenViolation>? ThePGravamenViolationList { get; set; }
 
 		[ForeignKey("RECEIVEUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheReceiveUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheReceiveUnit { get; set; }
 
 		[ForeignKey("REFERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheReferUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheReferUnit { get; set; }
 
     }
     [Table("PGRAVAMEN")]

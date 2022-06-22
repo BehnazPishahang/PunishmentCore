@@ -18,7 +18,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن نام تجاري(برند)")]
-            public Anu.Enumerations.PunishmentOrg.BrandName BrandNameRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.BrandName BrandNameRN { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -31,7 +31,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن کشور سازنده")]
-            public Anu.Enumerations.PunishmentOrg.CountryCreate CountryCreateRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.CountryCreate CountryCreateRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("واحد قطعات ارز")]
@@ -52,7 +52,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن شناسه")]
-            public Anu.Enumerations.PunishmentOrg.IDNumber IDNumberRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.IDNumber IDNumberRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ساير مشخصات")]
@@ -61,11 +61,11 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("کالا/ارز کشف شده")]
-            public Anu.Enumerations.PunishmentOrg.PProductOrCurrency ProductOrCurrency { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PProductOrCurrency ProductOrCurrency { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نوع کالاي کشف شده")]
-            public Anu.Enumerations.PunishmentOrg.PProductType ProductType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PProductType ProductType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -78,7 +78,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن سريال")]
-            public Anu.Enumerations.PunishmentOrg.SerialNumber SerialNumberRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.SerialNumber SerialNumberRN { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PChaseLicenseReqVehicleBase : PunishmentOrgEntity<string>
     {
@@ -41,7 +41,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? PlaqueNumber { get; set; }
 
 		[Column("PLAQUESCRIPT")]
-		public virtual Anu.Enumerations.PlaqueScript? PlaqueScript { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PlaqueScript? PlaqueScript { get; set; }
 
 		[Column("PLAQUETHREEDIGIT")]
 		public virtual string? PlaqueThreeDigit { get; set; }
@@ -50,13 +50,13 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? PlaqueTwoDigit { get; set; }
 
 		[Column("PLAQUETYPE")]
-		public virtual Anu.Enumerations.PlaqueType? PlaqueType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PlaqueType? PlaqueType { get; set; }
 
 		[ForeignKey("PCHASELICENSEREQID")]
 		public virtual Anu.PunishmentOrg.DiscoveryMinutes.PChaseLicenseReq? ThePChaseLicenseReq { get; set; }
 
 		[Column("VEHICLETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.VehicleType? VehicleType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.VehicleType? VehicleType { get; set; }
 
     }
     [Table("PCHASELICENSEREQVEHICLE")]

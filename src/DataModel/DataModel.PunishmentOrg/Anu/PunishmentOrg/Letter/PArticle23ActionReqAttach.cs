@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Letter
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Letter
 {
     public abstract class PArticle23ActionReqAttachBase : PunishmentOrgEntity<string>
     {
@@ -26,7 +26,7 @@ namespace Anu.PunishmentOrg.Letter
 		public virtual byte[]? DocFile { get; set; }
 
 		[Column("DOCFILEEXTENTION")]
-		public virtual Anu.Enumerations.FileExtension? DocFileExtention { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.FileExtension? DocFileExtention { get; set; }
 
 		[ForeignKey("PARTICLE23ACTIONREQUESTID")]
 		public virtual Anu.PunishmentOrg.Letter.PArticle23ActionRequest? ThePArticle23ActionRequest { get; set; }

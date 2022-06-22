@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.Expert
+namespace DataModel.BaseInfo.Anu.BaseInfo.Expert
 {
     public abstract class ExpertBackgroundBase : BaseInfoEntity<string>
     {

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.MIS
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.MIS
 {
     public abstract class PMISCaseInputBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.MIS
 		public virtual string? EndDateTime { get; set; }
 
 		[Column("SENDERUNITTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUSenderCaseType? SenderUnitType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUSenderCaseType? SenderUnitType { get; set; }
 
 		[Column("SOURCECASENO")]
 		public virtual string? SourceCaseNo { get; set; }
@@ -29,7 +29,7 @@ namespace Anu.PunishmentOrg.MIS
 		public virtual List<Anu.PunishmentOrg.MIS.PMISCaseTriple>? TheCreativeTripleList { get; set; }
 
 		[ForeignKey("NAJAUNITID")]
-		public virtual Anu.BaseInfo.ExchangeData.NAJAUnit? TheNAJAUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.ExchangeData.NAJAUnit? TheNAJAUnit { get; set; }
 
 		[ForeignKey("PCASEINPUTID")]
 		public virtual Anu.PunishmentOrg.Case.PCaseInput? ThePCaseInput { get; set; }
@@ -50,7 +50,7 @@ namespace Anu.PunishmentOrg.MIS
 		public virtual List<Anu.PunishmentOrg.MIS.PMISCaseTriple>? TheRelatedTripleList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PMISCASEINPUT")]

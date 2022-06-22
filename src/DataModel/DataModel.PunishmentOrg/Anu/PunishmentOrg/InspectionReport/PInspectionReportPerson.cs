@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.InspectionReport
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.InspectionReport
 {
     public abstract class PInspectionReportPersonBase : PunishmentOrgEntity<string>
     {
@@ -41,10 +41,10 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? NationalCode { get; set; }
 
 		[Column("NATIONALITY")]
-		public virtual Anu.Enumerations.LNationality? Nationality { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.LNationality? Nationality { get; set; }
 
 		[Column("PERSONTYPE")]
-		public virtual Anu.Enumerations.PersonType? PersonType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PersonType? PersonType { get; set; }
 
 		[Column("POSTCODE")]
 		public virtual string? PostCode { get; set; }
@@ -53,10 +53,10 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual long? RowNumber { get; set; }
 
 		[Column("SEX")]
-		public virtual Anu.Enumerations.SexType? Sex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? Sex { get; set; }
 
 		[ForeignKey("NATIONALITYLOCID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheNationalityLoc { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheNationalityLoc { get; set; }
 
 		[ForeignKey("PINSPECTIONREPORTID")]
 		public virtual Anu.PunishmentOrg.InspectionReport.PInspectionReport? ThePInspectionReport { get; set; }

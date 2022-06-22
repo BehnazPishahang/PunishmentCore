@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Dashboard
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Dashboard
 {
     public abstract class PDashboardUserAccessBase : PunishmentOrgEntity<string>
     {

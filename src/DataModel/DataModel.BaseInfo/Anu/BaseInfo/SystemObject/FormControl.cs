@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.SystemObject
+namespace DataModel.BaseInfo.Anu.BaseInfo.SystemObject
 {
     public abstract class FormControlBase : BaseInfoEntity<string>
     {

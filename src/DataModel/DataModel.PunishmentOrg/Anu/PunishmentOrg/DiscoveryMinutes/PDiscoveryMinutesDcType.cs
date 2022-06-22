@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PDiscoveryMinutesDcTypeBase : PunishmentOrgEntity<string>
     {
 
 		[Column("DISCOVERYTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PDiscoveryType? DiscoveryType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PDiscoveryType? DiscoveryType { get; set; }
 
 		[ForeignKey("PDISCOVERYMINUTESID")]
 		public virtual Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes? ThePDiscoveryMinutes { get; set; }

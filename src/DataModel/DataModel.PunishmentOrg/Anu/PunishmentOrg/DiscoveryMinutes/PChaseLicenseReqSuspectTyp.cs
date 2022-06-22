@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PChaseLicenseReqSuspectTypBase : PunishmentOrgEntity<string>
     {
 
 		[Column("LICENSEPERSONTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.LicensePersonType? LicensePersonType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.LicensePersonType? LicensePersonType { get; set; }
 
 		[ForeignKey("PCHASELICENSEREQSUSPECTID")]
 		public virtual Anu.PunishmentOrg.DiscoveryMinutes.PChaseLicenseReqSuspect? ThePChaseLicenseReqSuspect { get; set; }
