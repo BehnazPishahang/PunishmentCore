@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Letter
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Letter
 {
     public abstract class POutgoingLetterTranscriptBase : PunishmentOrgEntity<string>
     {

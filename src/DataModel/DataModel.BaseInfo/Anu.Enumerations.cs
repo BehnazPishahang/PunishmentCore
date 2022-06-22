@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Anu.Enumerations
+namespace DataModel.BaseInfo.Anu.Enumerations
 {
     //بازگرداندن نسخه پایدار به ورژن
     //985 شماره tfs

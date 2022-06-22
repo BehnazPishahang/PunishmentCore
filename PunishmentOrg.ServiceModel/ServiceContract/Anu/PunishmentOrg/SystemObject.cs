@@ -35,7 +35,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع شيء")]
-            public Anu.Enumerations.SystemObjectType SystemObjectType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.SystemObjectType SystemObjectType { get; set ;} 
             
 
     }

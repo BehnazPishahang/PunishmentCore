@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("جنس قلم")]
-            public Anu.Enumerations.ChangedFiledDataType ChangedFiledDataType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.ChangedFiledDataType ChangedFiledDataType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -21,12 +21,12 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("آيا اجباري است")]
-            public Anu.Enumerations.YesNo IsMandatory { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo IsMandatory { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع کلي قلم")]
-            public Anu.Enumerations.MechanizedFieldType MechanizedFieldType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.MechanizedFieldType MechanizedFieldType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Execution
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Execution
 {
     public abstract class PExecutionRemovalWritBase : PunishmentOrgEntity<string>
     {
 
 		[Column("CONFIRMERPOSTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.ConfirmerExecutionDocsType? ConfirmerPostType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.ConfirmerExecutionDocsType? ConfirmerPostType { get; set; }
 
 		[Column("CREATEDATETIME")]
 		public virtual string? CreateDateTime { get; set; }
@@ -35,10 +35,10 @@ namespace Anu.PunishmentOrg.Execution
 		public virtual string? ProsecutorRejectReason { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PCASEPERSONID")]
 		public virtual Anu.PunishmentOrg.Case.PCasePerson? ThePCasePerson { get; set; }
@@ -47,16 +47,16 @@ namespace Anu.PunishmentOrg.Execution
 		public virtual Anu.PunishmentOrg.Execution.PExecutionWrit? ThePExecutionWrit { get; set; }
 
 		[ForeignKey("REGISTERUSERHISTORYID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
 		[Column("WRITTEXT")]
 		public virtual string? WritText { get; set; }
 
 		[Column("WRITTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUExecutionWritType? WritType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUExecutionWritType? WritType { get; set; }
 
     }
     [Table("PEXECUTIONREMOVALWRIT")]

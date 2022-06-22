@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PDiscoveryMinutesOfficerBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? Degree { get; set; }
 
 		[Column("DEGREERN")]
-		public virtual Anu.Enumerations.PunishmentOrg.DegreeOfficer? DegreeRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DegreeOfficer? DegreeRN { get; set; }
 
 		[Column("DISCOVERYUNIT")]
 		public virtual string? DiscoveryUnit { get; set; }
@@ -32,7 +32,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? InspectionCode { get; set; }
 
 		[Column("INSPECTIONCODERN")]
-		public virtual Anu.Enumerations.PunishmentOrg.InspectionCodeOfficer? InspectionCodeRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.InspectionCodeOfficer? InspectionCodeRN { get; set; }
 
 		[Column("NAME")]
 		public virtual string? Name { get; set; }

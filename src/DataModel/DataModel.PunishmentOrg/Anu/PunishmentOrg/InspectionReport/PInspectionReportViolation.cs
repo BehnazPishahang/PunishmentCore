@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.InspectionReport
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.InspectionReport
 {
     public abstract class PInspectionReportViolationBase : PunishmentOrgEntity<string>
     {
@@ -50,7 +50,7 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual long? SalesPrice { get; set; }
 
 		[ForeignKey("MEASUREMENTUNITTYPEID")]
-		public virtual Anu.BaseInfo.Types.MeasurementUnitType? TheMeasurementUnitType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.MeasurementUnitType? TheMeasurementUnitType { get; set; }
 
 		[ForeignKey("PBINSPECTIONVIOLATIONTYPEID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBInspectionViolationType? ThePBInspectionViolationType { get; set; }

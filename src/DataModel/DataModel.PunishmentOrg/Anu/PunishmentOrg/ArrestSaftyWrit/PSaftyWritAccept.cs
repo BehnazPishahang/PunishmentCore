@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.ArrestSaftyWrit
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.ArrestSaftyWrit
 {
     public abstract class PSaftyWritAcceptBase : PunishmentOrgEntity<string>
     {
@@ -38,7 +38,7 @@ namespace Anu.PunishmentOrg.ArrestSaftyWrit
 		public virtual string? PlaqueOriginal { get; set; }
 
 		[Column("PLEDGETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUPledgeType? PledgeType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUPledgeType? PledgeType { get; set; }
 
 		[Column("SECTION")]
 		public virtual string? Section { get; set; }
@@ -47,16 +47,16 @@ namespace Anu.PunishmentOrg.ArrestSaftyWrit
 		public virtual string? SidewayPlaque { get; set; }
 
 		[ForeignKey("BANKID")]
-		public virtual Anu.BaseInfo.Types.Bank? TheBank { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.Bank? TheBank { get; set; }
 
 		[ForeignKey("GEOLOCATIONID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PINCOMINGLETTERID")]
 		public virtual Anu.PunishmentOrg.Letter.PIncomingLetter? ThePIncomingLetter { get; set; }
@@ -74,7 +74,7 @@ namespace Anu.PunishmentOrg.ArrestSaftyWrit
 		public virtual List<Anu.PunishmentOrg.ArrestSaftyWrit.PSaftyWritAcceptUnit>? ThePSaftyWritAcceptUnitList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
 		[Column("WRITDATE")]
 		public virtual string? WritDate { get; set; }

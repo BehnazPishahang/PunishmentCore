@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.InspectionReport
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.InspectionReport
 {
     public abstract class PMobilePatrolsBase : PunishmentOrgEntity<string>
     {
@@ -29,7 +29,7 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? StartTime { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[InverseProperty("ThePMobilePatrols")]
 		public virtual List<Anu.PunishmentOrg.InspectionReport.PMobilePatrolsRegulatory>? ThePMobilePatrolsRegulatoryList { get; set; }
@@ -38,7 +38,7 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual List<Anu.PunishmentOrg.InspectionReport.PMobilePatrolsTradeUnit>? ThePMobilePatrolsTradeUnitList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PMOBILEPATROLS")]

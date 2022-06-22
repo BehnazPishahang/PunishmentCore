@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Accounting
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Accounting
 {
     public abstract class PBill4PaidReasonBase : PunishmentOrgEntity<string>
     {
@@ -20,7 +20,7 @@ namespace Anu.PunishmentOrg.Accounting
 		public virtual long? DebtReductionValue { get; set; }
 
 		[Column("DISCOUNTSTATE")]
-		public virtual Anu.Enumerations.HaveNoHave? DiscountState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.HaveNoHave? DiscountState { get; set; }
 
 		[Column("OLDCASEBINDINGIDS")]
 		public virtual string? OldCaseBindingIDs { get; set; }
@@ -47,7 +47,7 @@ namespace Anu.PunishmentOrg.Accounting
 		public virtual Anu.PunishmentOrg.Execution.PInstallment? ThePInstallment { get; set; }
 
 		[ForeignKey("SYSTEMFORMID")]
-		public virtual Anu.BaseInfo.SystemObject.SystemForm? TheSystemForm { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.SystemForm? TheSystemForm { get; set; }
 
     }
     [Table("PBILL4PAIDREASON")]

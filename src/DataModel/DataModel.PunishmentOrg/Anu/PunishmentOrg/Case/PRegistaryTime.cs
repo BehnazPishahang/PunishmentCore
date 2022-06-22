@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Case
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Case
 {
     public abstract class PRegistaryTimeBase : PunishmentOrgEntity<string>
     {
@@ -38,16 +38,16 @@ namespace Anu.PunishmentOrg.Case
 		public virtual Anu.PunishmentOrg.Terminate.PTerminateOrder? ThePTerminateOrder { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
 		[Column("TIMERESULT")]
 		public virtual string? TimeResult { get; set; }
 
 		[Column("TIMESTATUS")]
-		public virtual Anu.Enumerations.PunishmentOrg.PURegisterTimeStatus? TimeStatus { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PURegisterTimeStatus? TimeStatus { get; set; }
 
 		[Column("TIMETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PURegisterTimeType? TimeType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PURegisterTimeType? TimeType { get; set; }
 
     }
     [Table("PREGISTARYTIME")]

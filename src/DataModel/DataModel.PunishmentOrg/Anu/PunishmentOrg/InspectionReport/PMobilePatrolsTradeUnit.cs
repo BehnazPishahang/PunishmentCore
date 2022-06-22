@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.InspectionReport
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.InspectionReport
 {
     public abstract class PMobilePatrolsTradeUnitBase : PunishmentOrgEntity<string>
     {
@@ -41,13 +41,13 @@ namespace Anu.PunishmentOrg.InspectionReport
 		public virtual string? ReferenceTime { get; set; }
 
 		[Column("RESULT")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUMobilePatrolsResult? Result { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUMobilePatrolsResult? Result { get; set; }
 
 		[Column("ROWNUMBER")]
 		public virtual long? RowNumber { get; set; }
 
 		[Column("SEX")]
-		public virtual Anu.Enumerations.SexType? Sex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? Sex { get; set; }
 
 		[ForeignKey("PBREGULATORYPLANID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBRegulatoryPlan? ThePBRegulatoryPlan { get; set; }

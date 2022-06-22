@@ -43,7 +43,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("وضعيت")]
-            public Anu.Enumerations.State State { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.State State { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("فعاليت شروع شونده")]

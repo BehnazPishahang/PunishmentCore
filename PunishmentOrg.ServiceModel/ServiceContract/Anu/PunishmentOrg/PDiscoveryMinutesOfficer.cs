@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن درجه")]
-            public Anu.Enumerations.PunishmentOrg.DegreeOfficer DegreeRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.DegreeOfficer DegreeRN { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -36,7 +36,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن کد بازرسي")]
-            public Anu.Enumerations.PunishmentOrg.InspectionCodeOfficer InspectionCodeRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.InspectionCodeOfficer InspectionCodeRN { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

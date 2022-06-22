@@ -11,21 +11,21 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع گيرنده نامه/رونوشت از نظر درون/برون سازماني")]
-            public Anu.Enumerations.MechanizedLetterReceiverType InnerOrOutterRcvType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.MechanizedLetterReceiverType InnerOrOutterRcvType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("آيا با سازمان تعامل کننده ارتباط مکانيزه برقرار شده است؟")]
-            public Anu.Enumerations.YesNo IsMechanizeRelation { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo IsMechanizeRelation { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع گيرنده از نطر گيرنده اصل نامه/رونوشت گيرنده")]
-            public Anu.Enumerations.MechanizedLetterMainRcvOrTranscriptRcv MainRcvOrTranscriptRcv { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.MechanizedLetterMainRcvOrTranscriptRcv MainRcvOrTranscriptRcv { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع گيرنده نامه/رونوشت از نظر واحدي/سمتي/کاربري")]
-            public Anu.Enumerations.MechanizeRefererType ReceiverType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.MechanizeRefererType ReceiverType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

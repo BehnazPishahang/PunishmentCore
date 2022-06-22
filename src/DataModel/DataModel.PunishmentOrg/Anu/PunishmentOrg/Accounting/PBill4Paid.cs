@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Accounting
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Accounting
 {
     public abstract class PBill4PaidBase : PunishmentOrgEntity<string>
     {
 
 		[Column("BILLTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.Bill4PaidType? Billtype { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.Bill4PaidType? Billtype { get; set; }
 
 		[Column("CARDNO")]
 		public virtual string? CardNo { get; set; }
@@ -26,7 +26,7 @@ namespace Anu.PunishmentOrg.Accounting
 		public virtual string? CheckFicheNo { get; set; }
 
 		[Column("CLOSECASEORNO")]
-		public virtual Anu.Enumerations.YesNo? CloseCaseOrNo { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? CloseCaseOrNo { get; set; }
 
 		[Column("CREATEDATETIME")]
 		public virtual string? CreateDateTime { get; set; }
@@ -44,10 +44,10 @@ namespace Anu.PunishmentOrg.Accounting
 		public virtual string? TerminalID { get; set; }
 
 		[ForeignKey("ACCOUNTSID")]
-		public virtual Anu.BaseInfo.Types.Accounts? TheAccounts { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.Accounts? TheAccounts { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[InverseProperty("ThePBill4Paid")]
 		public virtual List<Anu.PunishmentOrg.Accounting.PBill4PaidCase>? ThePBill4PaidCaseList { get; set; }
@@ -65,7 +65,7 @@ namespace Anu.PunishmentOrg.Accounting
 		public virtual List<Anu.PunishmentOrg.Accounting.PCash>? ThePCashList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
 		[Column("TOTALPAIDCOST")]
 		public virtual long? TotalPaidCost { get; set; }

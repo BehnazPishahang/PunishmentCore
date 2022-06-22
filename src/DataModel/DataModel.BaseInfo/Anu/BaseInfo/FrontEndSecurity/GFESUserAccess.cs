@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.FrontEndSecurity
+namespace DataModel.BaseInfo.Anu.BaseInfo.FrontEndSecurity
 {
     public abstract class GFESUserAccessBase : BaseInfoEntity<string>
     {

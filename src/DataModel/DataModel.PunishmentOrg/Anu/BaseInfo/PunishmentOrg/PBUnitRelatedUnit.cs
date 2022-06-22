@@ -8,16 +8,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.PunishmentOrg
+namespace DataModel.PunishemntOrg.Anu.BaseInfo.PunishmentOrg
 {
     public abstract class PBUnitRelatedUnitBase : PunishmentOrgEntity<string>
     {
 
 		[ForeignKey("MAINUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheMainUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheMainUnit { get; set; }
 
 		[ForeignKey("RELATEDUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheRelatedUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheRelatedUnit { get; set; }
 
     }
     [Table("PBUNITRELATEDUNIT")]

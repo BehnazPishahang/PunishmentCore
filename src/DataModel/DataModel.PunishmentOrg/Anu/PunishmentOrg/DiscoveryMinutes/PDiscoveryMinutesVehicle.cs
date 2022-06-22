@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PDiscoveryMinutesVehicleBase : PunishmentOrgEntity<string>
     {
 
 		[Column("ARRESTEDVEHICLE")]
-		public virtual Anu.Enumerations.YesNo? ArrestedVehicle { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? ArrestedVehicle { get; set; }
 
 		[Column("CHASSISNUMBER")]
 		public virtual string? ChassisNumber { get; set; }
@@ -29,7 +29,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? DriverFamily { get; set; }
 
 		[Column("DRIVERFULLNAMERN")]
-		public virtual Anu.Enumerations.PunishmentOrg.DriverFullName? DriverFullNameRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DriverFullName? DriverFullNameRN { get; set; }
 
 		[Column("DRIVERNAME")]
 		public virtual string? DriverName { get; set; }
@@ -38,7 +38,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? IranNumber { get; set; }
 
 		[Column("ISSUEPARKBILLREG")]
-		public virtual Anu.Enumerations.YesNo? IssueParkBillReg { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IssueParkBillReg { get; set; }
 
 		[Column("MODEL")]
 		public virtual string? Model { get; set; }
@@ -53,7 +53,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? OtherInfo { get; set; }
 
 		[Column("OTHERINFORN")]
-		public virtual Anu.Enumerations.PunishmentOrg.OtherInfo? OtherInfoRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.OtherInfo? OtherInfoRN { get; set; }
 
 		[Column("OWNERFAMILY")]
 		public virtual string? OwnerFamily { get; set; }
@@ -74,10 +74,10 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? PlaqueNumber { get; set; }
 
 		[Column("PLAQUENUMBERRN")]
-		public virtual Anu.Enumerations.PunishmentOrg.PlaqueNumber? PlaqueNumberRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PlaqueNumber? PlaqueNumberRN { get; set; }
 
 		[Column("PLAQUESCRIPT")]
-		public virtual Anu.Enumerations.PlaqueScript? PlaqueScript { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PlaqueScript? PlaqueScript { get; set; }
 
 		[Column("PLAQUETHREEDIGIT")]
 		public virtual string? PlaqueThreeDigit { get; set; }
@@ -86,16 +86,16 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? PlaqueTwoDigit { get; set; }
 
 		[Column("PLAQUETYPE")]
-		public virtual Anu.Enumerations.PlaqueType? PlaqueType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PlaqueType? PlaqueType { get; set; }
 
 		[Column("RECIEVERPARKINGBILL")]
 		public virtual string? RecieverParkingBill { get; set; }
 
 		[Column("REGINWAYBILL")]
-		public virtual Anu.Enumerations.YesNo? RegInWaybill { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? RegInWaybill { get; set; }
 
 		[Column("REGINWAYBILLRN")]
-		public virtual Anu.Enumerations.PunishmentOrg.RegInWaybill? RegInWaybillRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.RegInWaybill? RegInWaybillRN { get; set; }
 
 		[Column("ROWNUMBER")]
 		public virtual long? RowNumber { get; set; }
@@ -104,13 +104,13 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes? ThePDiscoveryMinutes { get; set; }
 
 		[Column("VEHICLETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.VehicleType? VehicleType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.VehicleType? VehicleType { get; set; }
 
 		[Column("WAYBILLNO")]
 		public virtual string? WayBillNO { get; set; }
 
 		[Column("WAYBILLNORN")]
-		public virtual Anu.Enumerations.PunishmentOrg.WayBillNO? WayBillNORN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.WayBillNO? WayBillNORN { get; set; }
 
 		[Column("WAYBILLSERIAL")]
 		public virtual string? WayBillSerial { get; set; }

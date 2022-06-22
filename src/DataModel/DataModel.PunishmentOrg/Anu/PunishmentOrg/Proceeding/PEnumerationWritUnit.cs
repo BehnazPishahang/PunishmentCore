@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Proceeding
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Proceeding
 {
     public abstract class PEnumerationWritUnitBase : PunishmentOrgEntity<string>
     {

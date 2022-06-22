@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.Messaging
+namespace DataModel.BaseInfo.Anu.Messaging
 {
     public abstract class GMessageGroupUsersBase : BaseInfoEntity<string>
     {

@@ -52,7 +52,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("وضعيت تابعيت اداره کننده در زمان بازرسي")]
-            public Anu.Enumerations.PunishmentOrg.PUNationality DirectorNationality { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUNationality DirectorNationality { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کشور تابعيت غيرايراني اداره کننده در زمان بازرسي")]
@@ -64,11 +64,11 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("سمت اداره کننده در زمان بازرسي")]
-            public Anu.Enumerations.PunishmentOrg.PSuspectPostType DirectorPostType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PSuspectPostType DirectorPostType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("جنسيت اداره کننده در زمان بازرسي")]
-            public Anu.Enumerations.SexType DirectorSex { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.SexType DirectorSex { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کد اقتصادي")]
@@ -88,12 +88,12 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("آيا واحد صنفي سابقه تخلف دارد")]
-            public Anu.Enumerations.YesNo HasViolation { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo HasViolation { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نحوه اخذ اطلاعات")]
-            public Anu.Enumerations.PunishmentOrg.HowGetDataInspectionReport HowDataType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.HowGetDataInspectionReport HowDataType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -111,7 +111,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("وضعيت ثبت محل نگهداري کالا در سامانه جامع انبارها و مراکز نگهداري کالا")]
-            public Anu.Enumerations.PunishmentOrg.PURegister KeepPlaceState { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PURegister KeepPlaceState { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نشاني صاحب پروانه/مجوز کسب واحد صنفي")]
@@ -147,7 +147,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("وضعيت تابعيت صاحب پروانه/مجوز کسب واحد صنفي")]
-            public Anu.Enumerations.PunishmentOrg.PUNationality LicenseOwnerNationality { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUNationality LicenseOwnerNationality { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کشور تابعيت غيرايراني صاحب پروانه/مجوز کسب واحد صنفي")]
@@ -159,7 +159,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("سمت صاحب پروانه/مجوز کسب واحد صنفي")]
-            public Anu.Enumerations.PunishmentOrg.PSuspectPostType LicenseOwnerPostType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PSuspectPostType LicenseOwnerPostType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ساير سمت صاحب پروانه/مجوز کسب واحد صنفي")]
@@ -167,11 +167,11 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("جنسيت صاحب پروانه/مجوز کسب واحد صنفي")]
-            public Anu.Enumerations.SexType LicenseOwnerSex { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.SexType LicenseOwnerSex { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نوع پروانه کسب")]
-            public Anu.Enumerations.PunishmentOrg.PULicenseType LicenseType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PULicenseType LicenseType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("صادر کننده پروانه/مجوز")]
@@ -188,11 +188,11 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نوع مالکيت محل واحد صنفي")]
-            public Anu.Enumerations.PunishmentOrg.OwnerEstateType OwnerEstateType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.OwnerEstateType OwnerEstateType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نوع مالکيت")]
-            public Anu.Enumerations.PunishmentOrg.PUOwnershipType OwnershipType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUOwnershipType OwnershipType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -217,7 +217,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت بازرسي")]
-            public Anu.Enumerations.PunishmentOrg.PUInspectionReportBase ReportBase { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUInspectionReportBase ReportBase { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ساير علت بازرسي")]
@@ -226,7 +226,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("آيا گزارش بازرسي از طريق وب سرويس ايجاد شده است؟")]
-            public Anu.Enumerations.YesNo SaveType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo SaveType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -278,7 +278,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("فاقد پروانه کسب/مجوز")]
-            public Anu.Enumerations.PunishmentOrg.LicenseType TradeLicense { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.LicenseType TradeLicense { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تاريخ صدور پروانه/مجوز کسب واحد صنفي")]

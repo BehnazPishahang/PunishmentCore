@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PChaseLicenseReqDocBase : PunishmentOrgEntity<string>
     {
@@ -26,10 +26,10 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? IssuerUnit { get; set; }
 
 		[Column("ISSUETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.DocIssueType? IssueType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DocIssueType? IssueType { get; set; }
 
 		[Column("OWNERSHIPTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.OwnershipType? OwnershipType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.OwnershipType? OwnershipType { get; set; }
 
 		[ForeignKey("PCHASELICENSEREQID")]
 		public virtual Anu.PunishmentOrg.DiscoveryMinutes.PChaseLicenseReq? ThePChaseLicenseReq { get; set; }

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.Trm.SMS
+namespace DataModel.BaseInfo.Anu.Trm.SMS
 {
     public abstract class TrmReceiveSMSBase : BaseInfoEntity<string>
     {

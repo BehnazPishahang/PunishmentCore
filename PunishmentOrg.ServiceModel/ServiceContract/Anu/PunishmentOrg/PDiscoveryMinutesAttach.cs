@@ -27,7 +27,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("پسوند فايل")]
-            public Anu.Enumerations.FileExtension FileExtension { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.FileExtension FileExtension { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره ترتيب")]
@@ -47,12 +47,12 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("وضعيت پردازش پيوست")]
-            public Anu.Enumerations.AttachmentProcessState ProcessState { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.AttachmentProcessState ProcessState { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نحوه ذخيره فايل پيوست")]
-            public Anu.Enumerations.SaveAttachmentType SaveAttachmentType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.SaveAttachmentType SaveAttachmentType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ثانيه و ميلي ثانيه ثبت با فرمت SS:MS")]

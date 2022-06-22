@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PDiscoveryMinutesSuspectBase : PunishmentOrgEntity<string>
     {
@@ -23,7 +23,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? BirthDate { get; set; }
 
 		[Column("BIRTHDATERN")]
-		public virtual Anu.Enumerations.PunishmentOrg.Refuse? BirthDateRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.Refuse? BirthDateRN { get; set; }
 
 		[Column("DESCRIPTION")]
 		public virtual string? Description { get; set; }
@@ -38,10 +38,10 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? FatherName { get; set; }
 
 		[Column("FATHERNAMERN")]
-		public virtual Anu.Enumerations.PunishmentOrg.Refuse? FatherNameRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.Refuse? FatherNameRN { get; set; }
 
 		[Column("FULLNAMERN")]
-		public virtual Anu.Enumerations.PunishmentOrg.Refuse? FullNameRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.Refuse? FullNameRN { get; set; }
 
 		[Column("IDENTITYNUMBER")]
 		public virtual string? IdentityNumber { get; set; }
@@ -50,10 +50,10 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? IdentityNumberRN { get; set; }
 
 		[Column("ISDISCLAIMER")]
-		public virtual Anu.Enumerations.YesNo? IsDisclaimer { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsDisclaimer { get; set; }
 
 		[Column("ISSEARCHHISTORY")]
-		public virtual Anu.Enumerations.YesNo? IsSearchHistory { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsSearchHistory { get; set; }
 
 		[Column("MOBILNUMBER")]
 		public virtual string? MobilNumber { get; set; }
@@ -68,13 +68,13 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? NationalCode { get; set; }
 
 		[Column("NATIONALCODERN")]
-		public virtual Anu.Enumerations.PunishmentOrg.Refuse? NationalCodeRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.Refuse? NationalCodeRN { get; set; }
 
 		[Column("NATIONALITY")]
-		public virtual Anu.Enumerations.LNationality? Nationality { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.LNationality? Nationality { get; set; }
 
 		[Column("NATIONALITYRN")]
-		public virtual Anu.Enumerations.PunishmentOrg.Refuse? NationalityRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.Refuse? NationalityRN { get; set; }
 
 		[Column("NUMOFHISTORY")]
 		public virtual long? NumOfHistory { get; set; }
@@ -86,7 +86,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? PassportNoRN { get; set; }
 
 		[Column("PERSONTYPE")]
-		public virtual Anu.Enumerations.PersonType? PersonType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PersonType? PersonType { get; set; }
 
 		[Column("PHONENUMBER")]
 		public virtual string? PhoneNumber { get; set; }
@@ -98,7 +98,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual long? RowNumber { get; set; }
 
 		[ForeignKey("NONIRANIANCITIZENSHIPID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheNonIranianCitizenship { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheNonIranianCitizenship { get; set; }
 
 		[ForeignKey("PDISCOVERYMINUTESID")]
 		public virtual Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes? ThePDiscoveryMinutes { get; set; }

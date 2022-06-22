@@ -65,7 +65,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("ماشين-وضعيت اوراقي")]
-            public Anu.Enumerations.YesNo CarMalfunctionStatus { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo CarMalfunctionStatus { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-مدل")]
@@ -130,7 +130,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("آيا چوب بعنوان هيزم استفاده ميشود؟")]
-            public Anu.Enumerations.YesNo IsFireWood { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo IsFireWood { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("طلاوجواهر-درشتي")]
@@ -186,7 +186,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("اصالت شيء")]
-            public Anu.Enumerations.PunishmentOrg.ObjectOriginality ObjectOriginality { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.ObjectOriginality ObjectOriginality { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("عرض شيء/چوب به سانتيمتر")]
@@ -214,7 +214,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("کالا/ارز کشف شده")]
-            public Anu.Enumerations.PunishmentOrg.PProductOrCurrency ProductOrCurrency { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PProductOrCurrency ProductOrCurrency { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("مقدار اوليه کالا/ارز(ادعايي)")]
@@ -230,7 +230,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نوع کالاي تحويل شده")]
-            public Anu.Enumerations.PunishmentOrg.PProductType ProductType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PProductType ProductType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تعداد/مقدار کالا/ارز/شيء/چوب/مقدار فرآورده نفتي(واقعي)")]

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Tablet
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Tablet
 {
     public abstract class PAppVersionBase : PunishmentOrgEntity<string>
     {
@@ -23,7 +23,7 @@ namespace Anu.PunishmentOrg.Tablet
 		public virtual string? Description { get; set; }
 
 		[Column("FORCEDUPDATE")]
-		public virtual Anu.Enumerations.YesNo? ForcedUpdate { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? ForcedUpdate { get; set; }
 
 		[Column("SERIALNO")]
 		public virtual long? SerialNo { get; set; }

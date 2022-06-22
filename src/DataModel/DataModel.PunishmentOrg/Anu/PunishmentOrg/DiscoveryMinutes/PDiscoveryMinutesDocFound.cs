@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PDiscoveryMinutesDocFoundBase : PunishmentOrgEntity<string>
     {
@@ -20,7 +20,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? Characteristic { get; set; }
 
 		[Column("CHARACTERISTICRN")]
-		public virtual Anu.Enumerations.PunishmentOrg.CharacteristicDoc? CharacteristicRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.CharacteristicDoc? CharacteristicRN { get; set; }
 
 		[Column("COUNT")]
 		public virtual long? Count { get; set; }
@@ -29,7 +29,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? Description { get; set; }
 
 		[Column("DESCRIPTIONRN")]
-		public virtual Anu.Enumerations.PunishmentOrg.DescriptionDoc? DescriptionRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DescriptionDoc? DescriptionRN { get; set; }
 
 		[Column("EXPORTER")]
 		public virtual string? Exporter { get; set; }
@@ -38,13 +38,13 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? IssuingDate { get; set; }
 
 		[Column("ISSUINGDATERN")]
-		public virtual Anu.Enumerations.PunishmentOrg.IssuingDateDoc? IssuingDateRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.IssuingDateDoc? IssuingDateRN { get; set; }
 
 		[Column("OWNER")]
 		public virtual string? Owner { get; set; }
 
 		[Column("OWNERRN")]
-		public virtual Anu.Enumerations.PunishmentOrg.OwnerDoc? OwnerRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.OwnerDoc? OwnerRN { get; set; }
 
 		[Column("ROWNUMBER")]
 		public virtual long? RowNumber { get; set; }

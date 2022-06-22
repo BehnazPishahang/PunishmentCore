@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.SystemConfiguration
+namespace DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration
 {
     public abstract class GRoleTypeFavMenuBase : BaseInfoEntity<string>
     {

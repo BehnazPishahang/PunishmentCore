@@ -26,7 +26,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن شماره يا مشخصه")]
-            public Anu.Enumerations.PunishmentOrg.CharacteristicDoc CharacteristicRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.CharacteristicDoc CharacteristicRN { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -44,7 +44,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن توضيحات")]
-            public Anu.Enumerations.PunishmentOrg.DescriptionDoc DescriptionRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.DescriptionDoc DescriptionRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("فايل پيوست")]
@@ -57,7 +57,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("پسوند فايل")]
-            public Anu.Enumerations.FileExtension FileExtension { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.FileExtension FileExtension { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تاريخ صدور")]
@@ -65,7 +65,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن تاريخ صدور")]
-            public Anu.Enumerations.PunishmentOrg.IssuingDateDoc IssuingDateRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.IssuingDateDoc IssuingDateRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره ترتيب")]
@@ -81,7 +81,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن مالک ")]
-            public Anu.Enumerations.PunishmentOrg.OwnerDoc OwnerRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.OwnerDoc OwnerRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تعداد اوراق")]
@@ -93,7 +93,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("وضعيت پردازش پيوست")]
-            public Anu.Enumerations.AttachmentProcessState ProcessState { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.AttachmentProcessState ProcessState { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -103,7 +103,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نحوه ذخيره فايل پيوست")]
-            public Anu.Enumerations.SaveAttachmentType SaveAttachmentType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.SaveAttachmentType SaveAttachmentType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ثانيه و ميلي ثانيه ثبت با فرمت SS:MS")]

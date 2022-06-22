@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Destroyed
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Destroyed
 {
     public abstract class PForm5MinuteBase : PunishmentOrgEntity<string>
     {
@@ -50,10 +50,10 @@ namespace Anu.PunishmentOrg.Destroyed
 		public virtual List<Anu.PunishmentOrg.Destroyed.PForm5MinutePages>? ThePForm5MinutePagesList { get; set; }
 
 		[ForeignKey("REGISTRARUSERID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegistrarUser { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegistrarUser { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PFORM5MINUTE")]

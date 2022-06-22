@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.InspectionReport
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.InspectionReport
 {
     public abstract class PMobilePatrolsRegulatoryBase : PunishmentOrgEntity<string>
     {

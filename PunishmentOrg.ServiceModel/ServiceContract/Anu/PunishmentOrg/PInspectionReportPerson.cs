@@ -39,12 +39,12 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("تابعيت")]
-            public Anu.Enumerations.PunishmentOrg.PUNationality Nationality { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUNationality Nationality { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع شخص")]
-            public Anu.Enumerations.PersonType PersonType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.PersonType PersonType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کد پستي")]
@@ -57,7 +57,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("جنسيت")]
-            public Anu.Enumerations.SexType Sex { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.SexType Sex { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

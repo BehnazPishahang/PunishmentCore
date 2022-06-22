@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Case
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Case
 {
     public abstract class PTransferCaseCasesBase : PunishmentOrgEntity<string>
     {
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PTRANSFERCASEID")]
 		public virtual Anu.PunishmentOrg.Case.PTransferCase? ThePTransferCase { get; set; }

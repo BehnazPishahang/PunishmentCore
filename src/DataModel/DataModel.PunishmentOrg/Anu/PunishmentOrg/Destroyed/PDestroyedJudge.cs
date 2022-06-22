@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Destroyed
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Destroyed
 {
     public abstract class PDestroyedJudgeBase : PunishmentOrgEntity<string>
     {
@@ -35,7 +35,7 @@ namespace Anu.PunishmentOrg.Destroyed
 		public virtual Anu.PunishmentOrg.Terminate.PJudgment? ThePJudgment { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PDESTROYEDJUDGE")]

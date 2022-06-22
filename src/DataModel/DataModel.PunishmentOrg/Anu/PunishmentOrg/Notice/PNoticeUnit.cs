@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Notice
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Notice
 {
     public abstract class PNoticeUnitBase : PunishmentOrgEntity<string>
     {

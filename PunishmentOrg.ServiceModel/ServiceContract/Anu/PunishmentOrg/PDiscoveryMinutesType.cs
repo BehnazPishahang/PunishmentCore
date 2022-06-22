@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع محل و مکان محل کشف")]
-            public Anu.Enumerations.PunishmentOrg.PBDiscoveryMinutesType PBDiscoveryMinuteType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PBDiscoveryMinutesType PBDiscoveryMinuteType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

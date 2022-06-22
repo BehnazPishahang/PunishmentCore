@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Terminate
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Terminate
 {
     public abstract class PTerminateOrderBase : PunishmentOrgEntity<string>
     {
@@ -23,7 +23,7 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual string? No { get; set; }
 
 		[Column("STATISTICSTATUS")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUStatisticStatus? StatisticStatus { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUStatisticStatus? StatisticStatus { get; set; }
 
 		[Column("TERMINATEDATETIME")]
 		public virtual string? TerminateDateTime { get; set; }
@@ -32,7 +32,7 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual string? TerminateText { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[InverseProperty("ThePTerminateOrder")]
 		public virtual List<Anu.PunishmentOrg.Terminate.PTerminateOrderCase>? ThePTerminateOrderCaseList { get; set; }
@@ -44,7 +44,7 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual List<Anu.PunishmentOrg.Terminate.PTerminateOrderUnit>? ThePTerminateOrderUnitList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PTERMINATEORDER")]

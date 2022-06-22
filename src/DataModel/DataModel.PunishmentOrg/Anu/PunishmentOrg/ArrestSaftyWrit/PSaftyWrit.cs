@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.ArrestSaftyWrit
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.ArrestSaftyWrit
 {
     public abstract class PSaftyWritBase : PunishmentOrgEntity<string>
     {
@@ -26,19 +26,19 @@ namespace Anu.PunishmentOrg.ArrestSaftyWrit
 		public virtual string? No { get; set; }
 
 		[Column("SAFTYWRITTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUSaftyWritType? SaftyWritType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUSaftyWritType? SaftyWritType { get; set; }
 
 		[ForeignKey("BASEWRITID")]
 		public virtual Anu.PunishmentOrg.ArrestSaftyWrit.PSaftyWrit? TheBaseWrit { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[InverseProperty("ThePSaftyWrit")]
 		public virtual List<Anu.PunishmentOrg.ArrestSaftyWrit.PArrested>? ThePArrestedList { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PCASEPERSONID")]
 		public virtual Anu.PunishmentOrg.Case.PCasePerson? ThePCasePerson { get; set; }
@@ -53,10 +53,10 @@ namespace Anu.PunishmentOrg.ArrestSaftyWrit
 		public virtual List<Anu.PunishmentOrg.ArrestSaftyWrit.PSaftyWritUnit>? ThePSaftyWritUnitList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
 		[Column("VALUETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUSaftyWritValueType? ValueType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUSaftyWritValueType? ValueType { get; set; }
 
 		[Column("WRITAMOUNT")]
 		public virtual long? WritAmount { get; set; }

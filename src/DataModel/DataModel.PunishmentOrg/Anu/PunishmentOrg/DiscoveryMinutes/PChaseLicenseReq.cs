@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PChaseLicenseReqBase : PunishmentOrgEntity<string>
     {
@@ -17,13 +17,13 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? ChaseLicenseRequestText { get; set; }
 
 		[Column("CHASERESULT")]
-		public virtual Anu.Enumerations.PunishmentOrg.PChaseResult? ChaseResult { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PChaseResult? ChaseResult { get; set; }
 
 		[Column("CHASETITLE")]
 		public virtual string? ChaseTitle { get; set; }
 
 		[Column("CONCLUSIONREQUEST")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUConclusion? ConclusionRequest { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUConclusion? ConclusionRequest { get; set; }
 
 		[Column("CREATEDATETIME")]
 		public virtual string? CreateDateTime { get; set; }
@@ -35,7 +35,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? InstitutionCode { get; set; }
 
 		[Column("INSTITUTIONEXPORTER")]
-		public virtual Anu.Enumerations.PunishmentOrg.DiscoveryMinutesCompetenceReference? InstitutionExporter { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryMinutesCompetenceReference? InstitutionExporter { get; set; }
 
 		[Column("INSTITUTIONTITLE")]
 		public virtual string? InstitutionTitle { get; set; }
@@ -77,16 +77,16 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual long? SubNo { get; set; }
 
 		[ForeignKey("CITYPUOREFUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheCityPuoRefUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheCityPuoRefUnit { get; set; }
 
 		[ForeignKey("GEOLOCATIONID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
 
 		[ForeignKey("JUDICIALUNITID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBExchangeUnit? TheJudicialUnit { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PBEXCHANGEUNITID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBExchangeUnit? ThePBExchangeUnit { get; set; }
@@ -122,10 +122,10 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual Anu.PunishmentOrg.DiscoveryMinutes.PChaseLicenseReq? ThePrvReq { get; set; }
 
 		[ForeignKey("REFERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheReferUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheReferUnit { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
 		[Column("UNIQUENO")]
 		public virtual string? UniqueNo { get; set; }
@@ -137,10 +137,10 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? UnwriteReqDescByOfficer { get; set; }
 
 		[Column("UNWRITEREQRESULTBYLICENSOR")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUConclusion? UnwriteReqResultByLicensor { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUConclusion? UnwriteReqResultByLicensor { get; set; }
 
 		[Column("UNWRITEREQRESULTBYOFFICER")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUConclusion? UnwriteReqResultByOfficer { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUConclusion? UnwriteReqResultByOfficer { get; set; }
 
 		[Column("UNWRITTENREQFAMILY")]
 		public virtual string? UnwrittenReqFamily { get; set; }
@@ -152,7 +152,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual long? ValidityDays { get; set; }
 
 		[Column("WRITTENORORAL")]
-		public virtual Anu.Enumerations.PunishmentOrg.WrittenOrOral? WrittenOrOral { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.WrittenOrOral? WrittenOrOral { get; set; }
 
     }
     [Table("PCHASELICENSEREQ")]

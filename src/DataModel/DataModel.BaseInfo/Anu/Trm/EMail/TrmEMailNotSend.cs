@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.Trm.EMail
+namespace DataModel.BaseInfo.Anu.Trm.EMail
 {
     public abstract class TrmEMailNotSendBase : BaseInfoEntity<string>
     {

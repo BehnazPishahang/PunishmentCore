@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Case
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Case
 {
     public abstract class PCaseEventBase : PunishmentOrgEntity<string>
     {
@@ -23,10 +23,10 @@ namespace Anu.PunishmentOrg.Case
 		public virtual string? EventDate { get; set; }
 
 		[Column("HOWTOMAKEEVENT")]
-		public virtual Anu.Enumerations.HowToMakeEvent? HowToMakeEvent { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.HowToMakeEvent? HowToMakeEvent { get; set; }
 
 		[Column("ISCASEPERSONSEE")]
-		public virtual Anu.Enumerations.YesNo? IsCasePersonSee { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsCasePersonSee { get; set; }
 
 		[Column("RELATEDDOCID")]
 		public virtual string? RelatedDocId { get; set; }
@@ -41,7 +41,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual Anu.BaseInfo.PunishmentOrg.PBCaseEventType? ThePBCaseEventType { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
     }
     [Table("PCASEEVENT")]

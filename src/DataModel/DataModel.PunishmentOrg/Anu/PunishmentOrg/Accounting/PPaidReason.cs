@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Accounting
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Accounting
 {
     public abstract class PPaidReasonBase : PunishmentOrgEntity<string>
     {
@@ -38,7 +38,7 @@ namespace Anu.PunishmentOrg.Accounting
 		public virtual Anu.PunishmentOrg.Accounting.PPaid? ThePPaid { get; set; }
 
 		[ForeignKey("SYSTEMFORMID")]
-		public virtual Anu.BaseInfo.SystemObject.SystemForm? TheSystemForm { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.SystemForm? TheSystemForm { get; set; }
 
     }
     [Table("PPAIDREASON")]

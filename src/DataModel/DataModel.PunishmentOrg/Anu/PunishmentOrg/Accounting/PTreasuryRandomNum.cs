@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Accounting
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Accounting
 {
     public abstract class PTreasuryRandomNumBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.Accounting
 		public virtual string? CreateDateTime { get; set; }
 
 		[Column("ISPAID")]
-		public virtual Anu.Enumerations.YesNo? IsPaid { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsPaid { get; set; }
 
 		[Column("POSNUMBER")]
 		public virtual string? POSNumber { get; set; }

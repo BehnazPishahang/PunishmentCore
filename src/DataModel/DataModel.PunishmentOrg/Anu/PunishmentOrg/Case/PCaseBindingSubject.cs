@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Case
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Case
 {
     public abstract class PCaseBindingSubjectBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual string? EndPenaltyDate { get; set; }
 
 		[Column("EXECUTIVESTATUS")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUExecutiveStatus? ExecutiveStatus { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUExecutiveStatus? ExecutiveStatus { get; set; }
 
 		[Column("JUDGEDATE")]
 		public virtual string? JudgeDate { get; set; }
@@ -29,7 +29,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual decimal? PenaltyAmount { get; set; }
 
 		[Column("PENALTYGETTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PenaltyGetType? PenaltyGetType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PenaltyGetType? PenaltyGetType { get; set; }
 
 		[Column("ROWNUMBER")]
 		public virtual long? RowNumber { get; set; }
@@ -41,10 +41,10 @@ namespace Anu.PunishmentOrg.Case
 		public virtual string? SubjectTitle { get; set; }
 
 		[ForeignKey("ISSUERJUDGEUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheIssuerJudgeUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheIssuerJudgeUnit { get; set; }
 
 		[ForeignKey("MEASUREMENTUNITTYPEID")]
-		public virtual Anu.BaseInfo.Types.MeasurementUnitType? TheMeasurementUnitType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.MeasurementUnitType? TheMeasurementUnitType { get; set; }
 
 		[ForeignKey("PBBINDINGSUBJECTTYPEID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBBindingSubjectType? ThePBBindingSubjectType { get; set; }
@@ -53,7 +53,7 @@ namespace Anu.PunishmentOrg.Case
 		public virtual List<Anu.PunishmentOrg.Accounting.PBill4PaidReason>? ThePBill4PaidReasonList { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[InverseProperty("ThePCaseBindingSubject")]
 		public virtual List<Anu.PunishmentOrg.Case.PCaseBindingSubjectProduct>? ThePCaseBindingSubjectProductList { get; set; }

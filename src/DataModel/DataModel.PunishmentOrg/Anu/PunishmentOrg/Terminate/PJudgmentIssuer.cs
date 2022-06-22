@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Terminate
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Terminate
 {
     public abstract class PJudgmentIssuerBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual string? Family { get; set; }
 
 		[Column("MEMBERTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUMemberType? MemberType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUMemberType? MemberType { get; set; }
 
 		[Column("NAME")]
 		public virtual string? Name { get; set; }
@@ -32,7 +32,7 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual Anu.PunishmentOrg.Terminate.PJudgment? ThePJudgment { get; set; }
 
 		[ForeignKey("REGISTERUSERHISTORYID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
     }
     [Table("PJUDGMENTISSUER")]

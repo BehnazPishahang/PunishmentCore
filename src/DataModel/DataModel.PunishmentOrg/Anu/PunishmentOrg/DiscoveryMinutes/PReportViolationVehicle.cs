@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PReportViolationVehicleBase : PunishmentOrgEntity<string>
     {
 
 		[Column("ARRESTEDVEHICLE")]
-		public virtual Anu.Enumerations.YesNo? ArrestedVehicle { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? ArrestedVehicle { get; set; }
 
 		[Column("CHASSISNUMBER")]
 		public virtual string? ChassisNumber { get; set; }

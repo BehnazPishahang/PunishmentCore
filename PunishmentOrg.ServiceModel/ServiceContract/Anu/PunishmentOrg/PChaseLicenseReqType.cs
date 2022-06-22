@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع مجوز تعقيب/بازرسي")]
-            public Anu.Enumerations.PunishmentOrg.PUChaseLicenseType ChaseLicenseType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUChaseLicenseType ChaseLicenseType { get; set ;} 
             
 
     }

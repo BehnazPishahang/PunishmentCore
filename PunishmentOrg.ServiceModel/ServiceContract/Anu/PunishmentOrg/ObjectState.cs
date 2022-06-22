@@ -16,7 +16,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع وضعيت")]
-            public Anu.Enumerations.StateType StateType { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.StateType StateType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

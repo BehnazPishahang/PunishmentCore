@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.PunishmentOrg
+namespace DataModel.PunishemntOrg.Anu.BaseInfo.PunishmentOrg
 {
     public abstract class PBGravamenRejectDefectTypeBase : PunishmentOrgEntity<string>
     {
@@ -17,10 +17,10 @@ namespace Anu.BaseInfo.PunishmentOrg
 		public virtual string? Code { get; set; }
 
 		[Column("REJECTORDEFECT")]
-		public virtual Anu.Enumerations.PunishmentOrg.RejectOrDefect? RejectOrDefect { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.RejectOrDefect? RejectOrDefect { get; set; }
 
 		[Column("STATE")]
-		public virtual Anu.Enumerations.State? State { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.State? State { get; set; }
 
 		[Column("TITLE")]
 		public virtual string? Title { get; set; }

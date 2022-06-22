@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Gravamen
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Gravamen
 {
     public abstract class PGravamenNoticeHstBase : PunishmentOrgEntity<string>
     {
@@ -20,7 +20,7 @@ namespace Anu.PunishmentOrg.Gravamen
 		public virtual string? NoticeText { get; set; }
 
 		[Column("NOTICETYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.GravamenNoticeType? NoticeType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.GravamenNoticeType? NoticeType { get; set; }
 
 		[ForeignKey("PGRAVAMENID")]
 		public virtual Anu.PunishmentOrg.Gravamen.PGravamen? ThePGravamen { get; set; }

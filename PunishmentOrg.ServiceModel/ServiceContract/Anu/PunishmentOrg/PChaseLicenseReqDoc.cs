@@ -10,7 +10,7 @@ namespace Anu.PunishmentOrg.ServiceContract
         }
             
             [System.ComponentModel.DisplayName("نتيجه درخواست")]
-            public Anu.Enumerations.PunishmentOrg.PUConclusion ConclusionRequest { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PUConclusion ConclusionRequest { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تاريخ سند")]
@@ -31,11 +31,11 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("عادي/رسمي بودن سند")]
-            public Anu.Enumerations.PunishmentOrg.DocIssueType IssueType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.DocIssueType IssueType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نوع مالکيت سند")]
-            public Anu.Enumerations.PunishmentOrg.OwnershipType OwnershipType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.OwnershipType OwnershipType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

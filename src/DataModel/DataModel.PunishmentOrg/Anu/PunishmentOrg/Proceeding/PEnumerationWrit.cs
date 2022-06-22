@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Proceeding
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Proceeding
 {
     public abstract class PEnumerationWritBase : PunishmentOrgEntity<string>
     {
@@ -38,7 +38,7 @@ namespace Anu.PunishmentOrg.Proceeding
 		public virtual string? No { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[InverseProperty("ThePEnumerationWrit")]
 		public virtual List<Anu.PunishmentOrg.Proceeding.PEnumerationWritCase>? ThePEnumerationWritCaseList { get; set; }
@@ -59,7 +59,7 @@ namespace Anu.PunishmentOrg.Proceeding
 		public virtual Anu.PunishmentOrg.Letter.PIncomingLetter? ThePIncomingLetter { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
 		[Column("WRITDATE")]
 		public virtual string? WritDate { get; set; }
@@ -68,7 +68,7 @@ namespace Anu.PunishmentOrg.Proceeding
 		public virtual string? WritText { get; set; }
 
 		[Column("WRITTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUEnumerationWritType? WritType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUEnumerationWritType? WritType { get; set; }
 
     }
     [Table("PENUMERATIONWRIT")]

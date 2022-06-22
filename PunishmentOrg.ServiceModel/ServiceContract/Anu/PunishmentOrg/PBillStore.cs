@@ -67,11 +67,11 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("آيا کالاهاي تحويلي به سازمان نگه دارنده کالا/ارز مکشوفه با آنچه در صورتجلسه کشف قيد شده، مطابقت دارد؟")]
-            public Anu.Enumerations.YesNo IsEquality { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo IsEquality { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("آيا قبض/رسيد پس از صورتجلسه/گزارش کشف اسنادي کشف صادر شده؟")]
-            public Anu.Enumerations.YesNo IsIssueAfterDisMin { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo IsIssueAfterDisMin { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره کلاسه")]

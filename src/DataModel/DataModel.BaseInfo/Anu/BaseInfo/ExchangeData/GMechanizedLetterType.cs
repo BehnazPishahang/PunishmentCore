@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.ExchangeData
+namespace DataModel.BaseInfo.Anu.BaseInfo.ExchangeData
 {
     public abstract class GMechanizedLetterTypeBase : BaseInfoEntity<string>
     {

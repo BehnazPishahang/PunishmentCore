@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
 
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("نوع از نظر نامه بازگشتي/پيروي")]
-        public Anu.Enumerations.MechanizedLetterRelType RelationType { get; set; }
+        public DataModel.BaseInfo.Anu.Enumerations.MechanizedLetterRelType RelationType { get; set; }
 
 
         [System.ComponentModel.DisplayName("تاريخ نامه بازگشتي/پيروي")]
@@ -20,7 +20,7 @@ namespace Anu.PunishmentOrg.ServiceContract
 
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("نوع از نظر مکانيزه بودن يا غيرمکانيزه بودن نامه بازگشتي/پيروي")]
-        public Anu.Enumerations.MechanizedLetterRelLetterGetType RelLetterGetType { get; set; }
+        public DataModel.BaseInfo.Anu.Enumerations.MechanizedLetterRelLetterGetType RelLetterGetType { get; set; }
 
 
         [System.ComponentModel.DataAnnotations.Required]

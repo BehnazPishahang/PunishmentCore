@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Case
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Case
 {
     public abstract class PCaseWhiteListBase : PunishmentOrgEntity<string>
     {
@@ -23,13 +23,13 @@ namespace Anu.PunishmentOrg.Case
 		public virtual string? DocLetterNo { get; set; }
 
 		[Column("EXCEPTIONTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.ExceptionType? ExceptionType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.ExceptionType? ExceptionType { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PCASEWHITELIST")]

@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("سمت شخص")]
-            public Anu.Enumerations.PunishmentOrg.PSuspectPostType PostType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PSuspectPostType PostType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

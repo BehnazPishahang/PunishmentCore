@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Gravamen
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Gravamen
 {
     public abstract class PNote1Article21ProtestBase : PunishmentOrgEntity<string>
     {
@@ -32,10 +32,10 @@ namespace Anu.PunishmentOrg.Gravamen
 		public virtual string? RequestReason { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PDISCOVERYMINUTESID")]
 		public virtual Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes? ThePDiscoveryMinutes { get; set; }
@@ -47,10 +47,10 @@ namespace Anu.PunishmentOrg.Gravamen
 		public virtual List<Anu.PunishmentOrg.Gravamen.PNote1Article21ProtestUnit>? ThePNote1Article21ProtestUnitList { get; set; }
 
 		[ForeignKey("RECEIVEUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheReceiveUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheReceiveUnit { get; set; }
 
 		[ForeignKey("TRIALUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheTrialUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheTrialUnit { get; set; }
 
     }
     [Table("PNOTE1ARTICLE21PROTEST")]

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.PunishmentOrg
+namespace DataModel.PunishemntOrg.Anu.BaseInfo.PunishmentOrg
 {
     public abstract class PBCaseStoreUnitBase : PunishmentOrgEntity<string>
     {
@@ -17,7 +17,7 @@ namespace Anu.BaseInfo.PunishmentOrg
 		public virtual Anu.BaseInfo.PunishmentOrg.PBCaseStore? ThePBCaseStore { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
     }
     [Table("PBCASESTOREUNIT")]

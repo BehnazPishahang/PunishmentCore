@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PDiscoveryMinutesBase : PunishmentOrgEntity<string>
     {
@@ -26,7 +26,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual long? CaseSubNo { get; set; }
 
 		[Column("COMPETENCEREFERENCE")]
-		public virtual Anu.Enumerations.PunishmentOrg.DiscoveryMinutesCompetenceReference? CompetenceReference { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryMinutesCompetenceReference? CompetenceReference { get; set; }
 
 		[Column("CREATEDATETIME")]
 		public virtual string? CreateDateTime { get; set; }
@@ -35,7 +35,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? DiscoveryDate { get; set; }
 
 		[Column("DISCOVERYDOCTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.DiscoveryDocType? DiscoveryDocType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryDocType? DiscoveryDocType { get; set; }
 
 		[Column("DISCOVERYNO")]
 		public virtual string? DiscoveryNO { get; set; }
@@ -65,25 +65,25 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? DiscoveryPlacePhoneNum { get; set; }
 
 		[Column("DISCOVERYPLACEPHONENUMRN")]
-		public virtual Anu.Enumerations.PunishmentOrg.DiscoveryPlacePhoneNum? DiscoveryPlacePhoneNumRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryPlacePhoneNum? DiscoveryPlacePhoneNumRN { get; set; }
 
 		[Column("DISCOVERYPLACEPLAQUE")]
 		public virtual string? DiscoveryPlacePlaque { get; set; }
 
 		[Column("DISCOVERYPLACEPLAQUERN")]
-		public virtual Anu.Enumerations.PunishmentOrg.DiscoveryPlacePlaque? DiscoveryPlacePlaqueRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryPlacePlaque? DiscoveryPlacePlaqueRN { get; set; }
 
 		[Column("DISCOVERYPLACEPOSTALCODE")]
 		public virtual string? DiscoveryPlacePostalCode { get; set; }
 
 		[Column("DISCOVERYPLACEPOSTALCODERN")]
-		public virtual Anu.Enumerations.PunishmentOrg.DiscoveryPlacePostalCode? DiscoveryPlacePostalCodeRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryPlacePostalCode? DiscoveryPlacePostalCodeRN { get; set; }
 
 		[Column("DISCOVERYPLACEUNITNAME")]
 		public virtual string? DiscoveryPlaceUnitName { get; set; }
 
 		[Column("DISCOVERYPLACEUNITNAMERN")]
-		public virtual Anu.Enumerations.PunishmentOrg.DiscoveryPlaceUnitName? DiscoveryPlaceUnitNameRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryPlaceUnitName? DiscoveryPlaceUnitNameRN { get; set; }
 
 		[Column("DISCOVERYTIME")]
 		public virtual string? DiscoveryTime { get; set; }
@@ -98,7 +98,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? EvidencePossibility { get; set; }
 
 		[Column("HAVEPLACELICENSENUMBER")]
-		public virtual Anu.Enumerations.HaveNoHave? HavePlacelicenseNumber { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.HaveNoHave? HavePlacelicenseNumber { get; set; }
 
 		[Column("HOWFINDARREST")]
 		public virtual string? HowFindArrest { get; set; }
@@ -110,28 +110,28 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? InaccessProductReason { get; set; }
 
 		[Column("ISVEHICLE")]
-		public virtual Anu.Enumerations.HaveAttachment? IsVehicle { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.HaveAttachment? IsVehicle { get; set; }
 
 		[Column("KEEPPLACESTATE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PURegister? KeepPlaceState { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PURegister? KeepPlaceState { get; set; }
 
 		[Column("LACKOFOWNERSHIPREASON")]
 		public virtual string? LackOfOwnershipReason { get; set; }
 
 		[Column("NOTIFYOFAWARE")]
-		public virtual Anu.Enumerations.YesNo? NotifyOfAware { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? NotifyOfAware { get; set; }
 
 		[Column("PRODUCTFOUNDDESC")]
 		public virtual string? ProductFoundDesc { get; set; }
 
 		[Column("PRODUCTFOUNDDESCRN")]
-		public virtual Anu.Enumerations.PunishmentOrg.ProductFoundDesc? ProductFoundDescRN { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.ProductFoundDesc? ProductFoundDescRN { get; set; }
 
 		[Column("REASONCHOICEACCORDANCELAW")]
-		public virtual Anu.Enumerations.PunishmentOrg.PReasonChoiceCasesAccordanceWithLaw? ReasonChoiceAccordanceLaw { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PReasonChoiceCasesAccordanceWithLaw? ReasonChoiceAccordanceLaw { get; set; }
 
 		[Column("REASONCHOICEREFRENCE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PReferenceSelectReason? ReasonChoiceRefrence { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PReferenceSelectReason? ReasonChoiceRefrence { get; set; }
 
 		[Column("SMUGGLINGTRICK")]
 		public virtual string? SmugglingTrick { get; set; }
@@ -143,19 +143,19 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? SmugglingWithCrimes { get; set; }
 
 		[Column("SUSPECTSTATE")]
-		public virtual Anu.Enumerations.PunishmentOrg.SuspectState? SuspectState { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.SuspectState? SuspectState { get; set; }
 
 		[ForeignKey("CITYPUOREFUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheCityPuoRefUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheCityPuoRefUnit { get; set; }
 
 		[ForeignKey("GEOLOCATIONID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
 
 		[ForeignKey("GEXCHANGEUNITTITLEID")]
-		public virtual Anu.BaseInfo.ExchangeData.GExchangeUnitTitle? TheGExchangeUnitTitle { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.ExchangeData.GExchangeUnitTitle? TheGExchangeUnitTitle { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PBEXCHANGEUNITID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBExchangeUnit? ThePBExchangeUnit { get; set; }
@@ -164,7 +164,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual List<Anu.PunishmentOrg.BillStore.PBillStore>? ThePBillStoreList { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[ForeignKey("PCHASELICENSEREQID")]
 		public virtual Anu.PunishmentOrg.DiscoveryMinutes.PChaseLicenseReq? ThePChaseLicenseReq { get; set; }
@@ -200,13 +200,13 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual List<Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutesVehicle>? ThePDiscoveryMinutesVehicleList { get; set; }
 
 		[ForeignKey("RECEIVERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheReceiverUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheReceiverUnit { get; set; }
 
 		[ForeignKey("REFERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheReferUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheReferUnit { get; set; }
 
 		[Column("TOTALARTIFACTSVALUE")]
-		public virtual Anu.Enumerations.YesNo? TotalArtifactsValue { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? TotalArtifactsValue { get; set; }
 
 		[Column("TOTALPRODUCTFOUND")]
 		public virtual decimal? TotalProductFound { get; set; }

@@ -32,7 +32,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نوع مرجع صلاحيت دارجهت رسيدگي به پرونده")]
-            public Anu.Enumerations.PunishmentOrg.DiscoveryMinutesCompetenceReference CompetenceReference { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryMinutesCompetenceReference CompetenceReference { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -47,7 +47,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع مدرک")]
-            public Anu.Enumerations.PunishmentOrg.DiscoveryDocType DiscoveryDocType { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryDocType DiscoveryDocType { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -89,7 +89,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن شماره تلفن محل کشف")]
-            public Anu.Enumerations.PunishmentOrg.DiscoveryPlacePhoneNum DiscoveryPlacePhoneNumRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryPlacePhoneNum DiscoveryPlacePhoneNumRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("پلاک محل کشف")]
@@ -97,7 +97,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن پلاک محل کشف")]
-            public Anu.Enumerations.PunishmentOrg.DiscoveryPlacePlaque DiscoveryPlacePlaqueRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryPlacePlaque DiscoveryPlacePlaqueRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کد پستي محل کشف")]
@@ -105,7 +105,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن کد پستي محل کشف")]
-            public Anu.Enumerations.PunishmentOrg.DiscoveryPlacePostalCode DiscoveryPlacePostalCodeRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryPlacePostalCode DiscoveryPlacePostalCodeRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام واحد محل کشف")]
@@ -113,7 +113,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن نام واحد محل کشف")]
-            public Anu.Enumerations.PunishmentOrg.DiscoveryPlaceUnitName DiscoveryPlaceUnitNameRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.DiscoveryPlaceUnitName DiscoveryPlaceUnitNameRN { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -134,7 +134,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("وضعيت شماره پروانه/مجوز صنفي محل کشف")]
-            public Anu.Enumerations.HaveNoHave HavePlacelicenseNumber { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.HaveNoHave HavePlacelicenseNumber { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -151,11 +151,11 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("آيا کالا يا ارز قاچاق کشف شده است(مخصوص گزارش کشف)؟")]
-            public Anu.Enumerations.YesNo IsDiscoverSmuggling { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo IsDiscoverSmuggling { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("وضعيت ثبت محل نگهداري کالا در سامانه جامع انبارها و مراکز نگهداري کالا")]
-            public Anu.Enumerations.PunishmentOrg.PURegister KeepPlaceState { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PURegister KeepPlaceState { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("دلايل عدم احراز مالکيت کالا و ارز,وسيله نقليه و محل نگهداري آنها")]
@@ -163,7 +163,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("اطلاع از طريق مخبر")]
-            public Anu.Enumerations.YesNo NotifyOfAware { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo NotifyOfAware { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کلمه عبور")]
@@ -175,15 +175,15 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن توضيحات ارز/کالاي مکشوفه")]
-            public Anu.Enumerations.PunishmentOrg.ProductFoundDesc ProductFoundDescRN { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.ProductFoundDesc ProductFoundDescRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("موارد مطابق قانون تعيين دليل انتخاب مرجع")]
-            public Anu.Enumerations.PunishmentOrg.PReasonChoiceCasesAccordanceWithLaw ReasonChoiceAccordanceLaw { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PReasonChoiceCasesAccordanceWithLaw ReasonChoiceAccordanceLaw { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تعيين دليل انتخاب مرجع")]
-            public Anu.Enumerations.PunishmentOrg.PReferenceSelectReason ReasonChoiceRefrence { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.PReferenceSelectReason ReasonChoiceRefrence { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شگرد ارتکاب جرم يا تخلف")]
@@ -200,7 +200,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("وضعيت وجود مظنون/مظنونان کشف ")]
-            public Anu.Enumerations.PunishmentOrg.SuspectState SuspectState { get; set ;} 
+            public DataModel.Anu.Enumerations.PunishmentOrg.SuspectState SuspectState { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]
@@ -270,7 +270,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("مجموع مکشوفه ده ميليون ريال يا کمتر ارزش دارد")]
-            public Anu.Enumerations.YesNo TotalArtifactsValue { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.YesNo TotalArtifactsValue { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

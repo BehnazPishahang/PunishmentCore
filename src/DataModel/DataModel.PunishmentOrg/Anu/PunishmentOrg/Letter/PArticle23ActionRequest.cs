@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Letter
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Letter
 {
     public abstract class PArticle23ActionRequestBase : PunishmentOrgEntity<string>
     {
@@ -29,13 +29,13 @@ namespace Anu.PunishmentOrg.Letter
 		public virtual long? CaseSubNo { get; set; }
 
 		[Column("CHECKINGRESULT")]
-		public virtual Anu.Enumerations.PArticleChekingResult? CheckingResult { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PArticleChekingResult? CheckingResult { get; set; }
 
 		[Column("CHIEFASSESSMENT")]
 		public virtual string? ChiefAssessment { get; set; }
 
 		[Column("CHIEFORDER")]
-		public virtual Anu.Enumerations.PArticle50ChiefOrder? ChiefOrder { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PArticle50ChiefOrder? ChiefOrder { get; set; }
 
 		[Column("CONDEMNEDFAMILY")]
 		public virtual string? CondemnedFamily { get; set; }
@@ -56,13 +56,13 @@ namespace Anu.PunishmentOrg.Letter
 		public virtual string? CreateDateTime { get; set; }
 
 		[Column("DEMANDANTPOST")]
-		public virtual Anu.Enumerations.PunishmentOrg.Article23Demandant? DemandantPost { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.Article23Demandant? DemandantPost { get; set; }
 
 		[Column("EXPERTASSESSMENT")]
 		public virtual string? ExpertAssessment { get; set; }
 
 		[Column("FINALSTATE")]
-		public virtual Anu.Enumerations.PunishmentOrg.Article23FinalState? FinalState { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.Article23FinalState? FinalState { get; set; }
 
 		[Column("HEADASSESSMENT")]
 		public virtual string? HeadAssessment { get; set; }
@@ -71,16 +71,16 @@ namespace Anu.PunishmentOrg.Letter
 		public virtual string? HeadAssessmentForChief { get; set; }
 
 		[Column("ISMECHANIZE")]
-		public virtual Anu.Enumerations.YesNo? IsMechanize { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsMechanize { get; set; }
 
 		[Column("NO")]
 		public virtual string? No { get; set; }
 
 		[Column("PERSONTYPE")]
-		public virtual Anu.Enumerations.PersonType? PersonType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PersonType? PersonType { get; set; }
 
 		[Column("PLANNEDOBJECTION")]
-		public virtual Anu.Enumerations.PlannedObjection? PlannedObjection { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PlannedObjection? PlannedObjection { get; set; }
 
 		[Column("PROVINCERESPONSE")]
 		public virtual string? ProvinceResponse { get; set; }
@@ -95,7 +95,7 @@ namespace Anu.PunishmentOrg.Letter
 		public virtual string? RequestReason { get; set; }
 
 		[Column("REQUESTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.Article23RequestType? RequestType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.Article23RequestType? RequestType { get; set; }
 
 		[Column("SIDENOTE")]
 		public virtual string? SideNote { get; set; }
@@ -104,13 +104,13 @@ namespace Anu.PunishmentOrg.Letter
 		public virtual Anu.PunishmentOrg.Case.PCasePerson? TheCondemnedPerson { get; set; }
 
 		[ForeignKey("CONSULTANTEXPERTID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheConsultantExpert { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheConsultantExpert { get; set; }
 
 		[ForeignKey("JUDGEEXPERTID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheJudgeExpert { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheJudgeExpert { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[InverseProperty("ThePArticle23ActionRequest")]
 		public virtual List<Anu.PunishmentOrg.Letter.PArticle23ActionReqAttach>? ThePArticle23ActionReqAttachList { get; set; }
@@ -122,22 +122,22 @@ namespace Anu.PunishmentOrg.Letter
 		public virtual List<Anu.PunishmentOrg.Letter.PArticle23Assessment>? ThePArticle23AssessmentList { get; set; }
 
 		[ForeignKey("RELATEDCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? TheRelatedCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? TheRelatedCase { get; set; }
 
 		[ForeignKey("RELATEDJUDGEID")]
 		public virtual Anu.PunishmentOrg.Terminate.PJudgment? TheRelatedJudge { get; set; }
 
 		[ForeignKey("RELATEDJUDGEUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheRelatedJudgeUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheRelatedJudgeUnit { get; set; }
 
 		[ForeignKey("REQUESTRECIPIENTUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheRequestRecipientUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheRequestRecipientUnit { get; set; }
 
 		[ForeignKey("SUPERIORCOURTID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheSuperiorCourt { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheSuperiorCourt { get; set; }
 
 		[Column("UNITTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.Article23UnitType? UnitType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.Article23UnitType? UnitType { get; set; }
 
     }
     [Table("PARTICLE23ACTIONREQUEST")]

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Case
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Case
 {
     public abstract class PCaseViolationBase : PunishmentOrgEntity<string>
     {
@@ -23,16 +23,16 @@ namespace Anu.PunishmentOrg.Case
 		public virtual string? SubjectTitle { get; set; }
 
 		[ForeignKey("GEOLOCATIONID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
 
 		[ForeignKey("MEASUREMENTUNITTYPEID")]
-		public virtual Anu.BaseInfo.Types.MeasurementUnitType? TheMeasurementUnitType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.Types.MeasurementUnitType? TheMeasurementUnitType { get; set; }
 
 		[ForeignKey("PBVIOLATIONTYPEID")]
 		public virtual Anu.BaseInfo.PunishmentOrg.PBViolationType? ThePBViolationType { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[InverseProperty("ThePCaseViolation")]
 		public virtual List<Anu.PunishmentOrg.Case.PCaseProductViolation>? ThePCaseProductViolationList { get; set; }

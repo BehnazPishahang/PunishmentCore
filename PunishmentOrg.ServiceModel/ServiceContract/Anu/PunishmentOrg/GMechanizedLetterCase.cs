@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.ServiceContract
             
             [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("پرونده(يا مدرک اصلي مشابه) مبداء/مقصد")]
-            public Anu.Enumerations.MechanizedLetterCaseLocation CaseLocation { get; set ;} 
+            public DataModel.BaseInfo.Anu.Enumerations.MechanizedLetterCaseLocation CaseLocation { get; set ;} 
             
             
             [System.ComponentModel.DataAnnotations.Required]

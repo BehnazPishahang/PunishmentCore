@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Terminate
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Terminate
 {
     public abstract class PConvictsDatabaseBase : PunishmentOrgEntity<string>
     {
@@ -41,10 +41,10 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual string? NationalCode { get; set; }
 
 		[Column("NATIONALITY")]
-		public virtual Anu.Enumerations.LNationality? Nationality { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.LNationality? Nationality { get; set; }
 
 		[Column("PERSONTYPE")]
-		public virtual Anu.Enumerations.PersonType? PersonType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PersonType? PersonType { get; set; }
 
 		[Column("PHONENUMBER")]
 		public virtual string? PhoneNumber { get; set; }
@@ -53,7 +53,7 @@ namespace Anu.PunishmentOrg.Terminate
 		public virtual string? PostCode { get; set; }
 
 		[Column("SEX")]
-		public virtual Anu.Enumerations.SexType? Sex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? Sex { get; set; }
 
 		[InverseProperty("ThePConvictsDatabase")]
 		public virtual List<Anu.PunishmentOrg.Terminate.PConvictsDatabaseJudge>? ThePConvictsDatabaseJudgeList { get; set; }

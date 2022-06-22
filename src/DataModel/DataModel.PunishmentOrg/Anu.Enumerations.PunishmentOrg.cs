@@ -1,7 +1,7 @@
     using System;
 	using System.ComponentModel;
 
-	namespace Anu.Enumerations.PunishmentOrg
+	namespace DataModel.Anu.Enumerations.PunishmentOrg
 	{
 		[Description("EnmAccountType")]
 		public enum AccountType

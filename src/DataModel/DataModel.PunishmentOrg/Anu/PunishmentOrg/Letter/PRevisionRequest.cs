@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Letter
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Letter
 {
     public abstract class PRevisionRequestBase : PunishmentOrgEntity<string>
     {
@@ -17,13 +17,13 @@ namespace Anu.PunishmentOrg.Letter
 		public virtual string? CasesNoSubno { get; set; }
 
 		[Column("CONTRABANDOPINION")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUContrabandOpinion? ContrabandOpinion { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUContrabandOpinion? ContrabandOpinion { get; set; }
 
 		[Column("CREATEDATETIME")]
 		public virtual string? CreateDateTime { get; set; }
 
 		[Column("HIGHREVISIONPOST")]
-		public virtual Anu.Enumerations.PunishmentOrg.PURevisionRequestHighRevisionPost? HighRevisionPost { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PURevisionRequestHighRevisionPost? HighRevisionPost { get; set; }
 
 		[Column("JUDGEDATE")]
 		public virtual string? JudgeDate { get; set; }
@@ -38,13 +38,13 @@ namespace Anu.PunishmentOrg.Letter
 		public virtual string? ReqDate { get; set; }
 
 		[Column("REQUESTSUBJECT")]
-		public virtual Anu.Enumerations.PunishmentOrg.PURevisionRequestSubject? RequestSubject { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PURevisionRequestSubject? RequestSubject { get; set; }
 
 		[Column("REVISIONPOST")]
-		public virtual Anu.Enumerations.PunishmentOrg.PURevisionRequestRevisionPost? RevisionPost { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PURevisionRequestRevisionPost? RevisionPost { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[InverseProperty("ThePRevisionRequest")]
 		public virtual List<Anu.PunishmentOrg.Case.PCaseInput>? ThePCaseInputList { get; set; }
@@ -65,10 +65,10 @@ namespace Anu.PunishmentOrg.Letter
 		public virtual List<Anu.PunishmentOrg.Letter.PRevisionRequestUnit>? ThePRevisionRequestUnitList { get; set; }
 
 		[ForeignKey("UNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheUnit { get; set; }
 
 		[Column("TRIPADVISOROPINION")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUTripAdvisorOpinion? TripAdvisorOpinion { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUTripAdvisorOpinion? TripAdvisorOpinion { get; set; }
 
     }
     [Table("PREVISIONREQUEST")]

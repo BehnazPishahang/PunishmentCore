@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.PunishmentOrg
+namespace DataModel.PunishemntOrg.Anu.BaseInfo.PunishmentOrg
 {
     public abstract class PBViolationTypeBase : PunishmentOrgEntity<string>
     {
 
 		[Column("CASESUBJECT")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUViolationType? CaseSubject { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUViolationType? CaseSubject { get; set; }
 
 		[Column("CODE")]
 		public virtual string? Code { get; set; }
@@ -23,13 +23,13 @@ namespace Anu.BaseInfo.PunishmentOrg
 		public virtual string? LawDocument { get; set; }
 
 		[Column("PRODUCTCURRENCY")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUProductCurrency? ProductCurrency { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUProductCurrency? ProductCurrency { get; set; }
 
 		[Column("STATE")]
-		public virtual Anu.Enumerations.State? State { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.State? State { get; set; }
 
 		[Column("SUBJECTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PUSubjectTYpe? SubjectType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PUSubjectTYpe? SubjectType { get; set; }
 
 		[InverseProperty("ThePBViolationType")]
 		public virtual List<Anu.BaseInfo.PunishmentOrg.PBViolationTypeInspection>? ThePBViolationTypeInspectionList { get; set; }

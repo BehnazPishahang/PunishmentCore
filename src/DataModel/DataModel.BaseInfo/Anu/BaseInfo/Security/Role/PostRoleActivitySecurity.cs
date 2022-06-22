@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.BaseInfo.Security.Role
+namespace DataModel.BaseInfo.Anu.BaseInfo.Security.Role
 {
     public abstract class PostRoleActivitySecurityBase : BaseInfoEntity<string>
     {

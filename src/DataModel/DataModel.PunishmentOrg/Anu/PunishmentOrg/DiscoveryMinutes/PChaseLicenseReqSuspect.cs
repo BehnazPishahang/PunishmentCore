@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.DiscoveryMinutes
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
     public abstract class PChaseLicenseReqSuspectBase : PunishmentOrgEntity<string>
     {
@@ -38,7 +38,7 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? NationalCode { get; set; }
 
 		[Column("NATIONALITY")]
-		public virtual Anu.Enumerations.LNationality? Nationality { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.LNationality? Nationality { get; set; }
 
 		[Column("PASSPORTNO")]
 		public virtual string? PassportNo { get; set; }
@@ -47,10 +47,10 @@ namespace Anu.PunishmentOrg.DiscoveryMinutes
 		public virtual string? PhoneNumber { get; set; }
 
 		[Column("POSTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.PSuspectPostType? PostType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.PSuspectPostType? PostType { get; set; }
 
 		[ForeignKey("NONIRANIANCITIZENSHIPID")]
-		public virtual Anu.BaseInfo.GeoInfo.GeoLocation? TheNonIranianCitizenship { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.GeoInfo.GeoLocation? TheNonIranianCitizenship { get; set; }
 
 		[ForeignKey("PCHASELICENSEREQID")]
 		public virtual Anu.PunishmentOrg.DiscoveryMinutes.PChaseLicenseReq? ThePChaseLicenseReq { get; set; }

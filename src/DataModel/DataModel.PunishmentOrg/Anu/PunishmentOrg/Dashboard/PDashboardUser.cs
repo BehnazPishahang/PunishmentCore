@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Dashboard
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Dashboard
 {
     public abstract class PDashboardUserBase : PunishmentOrgEntity<string>
     {
@@ -26,7 +26,7 @@ namespace Anu.PunishmentOrg.Dashboard
 		public virtual List<Anu.PunishmentOrg.Dashboard.PDashboardUserCharts>? ThePDashboardUserChartsList { get; set; }
 
 		[ForeignKey("REGISTERUSERHISTORYID")]
-		public virtual Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
     }
     [Table("PDASHBOARDUSER")]

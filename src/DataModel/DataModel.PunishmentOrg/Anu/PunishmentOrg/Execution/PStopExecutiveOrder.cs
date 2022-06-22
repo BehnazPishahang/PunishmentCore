@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Execution
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Execution
 {
     public abstract class PStopExecutiveOrderBase : PunishmentOrgEntity<string>
     {
@@ -44,22 +44,22 @@ namespace Anu.PunishmentOrg.Execution
 		public virtual string? StopOrderLetterNo { get; set; }
 
 		[Column("SUPREMECOURTTYPE")]
-		public virtual Anu.Enumerations.PunishmentOrg.SupremeCourtType? SupremeCourtType { get; set; }
+		public virtual DataModel.Anu.Enumerations.PunishmentOrg.SupremeCourtType? SupremeCourtType { get; set; }
 
 		[ForeignKey("OBJECTSTATEID")]
-		public virtual Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState? TheObjectState { get; set; }
 
 		[ForeignKey("PCASEID")]
-		public virtual Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
+		public virtual DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase? ThePCase { get; set; }
 
 		[InverseProperty("ThePStopExecutiveOrder")]
 		public virtual List<Anu.PunishmentOrg.Execution.PStopExecutiveOrderUnit>? ThePStopExecutiveOrderUnitList { get; set; }
 
 		[ForeignKey("PUOISSUERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? ThePUOIssuerUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? ThePUOIssuerUnit { get; set; }
 
 		[ForeignKey("REGISTERUNITID")]
-		public virtual Anu.BaseInfo.OrganizationChart.Unit? TheRegisterUnit { get; set; }
+		public virtual DataModel.BaseInfo.Anu.BaseInfo.OrganizationChart.Unit? TheRegisterUnit { get; set; }
 
     }
     [Table("PSTOPEXECUTIVEORDER")]

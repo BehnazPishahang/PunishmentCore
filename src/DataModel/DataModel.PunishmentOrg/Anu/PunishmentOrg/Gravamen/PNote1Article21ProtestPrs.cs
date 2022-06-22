@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Gravamen
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Gravamen
 {
     public abstract class PNote1Article21ProtestPrsBase : PunishmentOrgEntity<string>
     {
@@ -32,13 +32,13 @@ namespace Anu.PunishmentOrg.Gravamen
 		public virtual string? NationalCode { get; set; }
 
 		[Column("PERSONTYPE")]
-		public virtual Anu.Enumerations.PersonType? PersonType { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.PersonType? PersonType { get; set; }
 
 		[Column("ROWNUMBER")]
 		public virtual long? RowNumber { get; set; }
 
 		[Column("SEX")]
-		public virtual Anu.Enumerations.SexType? Sex { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.SexType? Sex { get; set; }
 
 		[ForeignKey("PNOTE1ARTICLE21PROTESTID")]
 		public virtual Anu.PunishmentOrg.Gravamen.PNote1Article21Protest? ThePNote1Article21Protest { get; set; }

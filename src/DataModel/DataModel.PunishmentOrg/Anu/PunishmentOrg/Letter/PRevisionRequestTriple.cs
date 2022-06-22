@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Anu.PunishmentOrg.Letter
+namespace DataModel.PunishemntOrg.Anu.PunishmentOrg.Letter
 {
     public abstract class PRevisionRequestTripleBase : PunishmentOrgEntity<string>
     {
 
 		[Column("ISCONFIRM")]
-		public virtual Anu.Enumerations.YesNo? IsConfirm { get; set; }
+		public virtual DataModel.BaseInfo.Anu.Enumerations.YesNo? IsConfirm { get; set; }
 
 		[ForeignKey("PCASETRIPLEID")]
 		public virtual Anu.PunishmentOrg.Case.PCaseTriple? ThePCaseTriple { get; set; }
