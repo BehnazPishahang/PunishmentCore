@@ -2,7 +2,7 @@
 
 namespace PunishmentOrg.DataAccess.Repositories.PunishmentOrg.Anu.PunishmentOrg.DiscoveryMinutes
 {
-    public class PDiscoveryMinutesRepository : GenericRepository<DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes>, Domain.Interface.PunishmentOrg.IPDiscoveryMinutesRepository
+    public class PDiscoveryMinutesRepository : GenericRepository<DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes>, Domain.Interface.PunishmentOrg.DiscoveryMinutes.IPDiscoveryMinutesRepository
     {
         public PDiscoveryMinutesRepository(ApplicationDbContext context) : base(context)
         {

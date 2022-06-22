@@ -23,6 +23,7 @@ namespace ServiceModel.Commons.ServiceResponse
     public interface IResult
     {
         string Message { get; set; }
+        string Description { get; set; }
         string Code { get; set; }
     }
 
@@ -31,9 +32,11 @@ namespace ServiceModel.Commons.ServiceResponse
         public Result()
         {
             this.Message = "";
+            this.Description = "";
             this.Code = "";
         }
         public string Message { get; set; }
+        public string Description { get; set; }
         public string Code { get; set; }
     }
 }

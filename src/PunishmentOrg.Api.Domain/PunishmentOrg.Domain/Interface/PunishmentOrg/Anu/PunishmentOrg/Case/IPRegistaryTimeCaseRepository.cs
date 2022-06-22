@@ -2,6 +2,6 @@
 {
     public interface IPRegistaryTimeCaseRepository : IGenericRepository<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PRegistaryTimeCase>
     {
-        public Task<IEnumerable<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PRegistaryTimeCase>> GetPCaseByNo(string pCaseNo, DataModel.Anu.Enumerations.PunishmentOrg.PURegisterTimeType timeType);
+        public Task<IEnumerable<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PRegistaryTimeCase>> GetPRegistaryTimeCaseByNo(string pCaseNo, DataModel.Anu.Enumerations.PunishmentOrg.PURegisterTimeType timeType);
     }
 }
