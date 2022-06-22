@@ -1,8 +1,6 @@
-﻿using Anu.BaseInfo.FrontEndSecurity;
+﻿using DataModel.BaseInfo.Anu.BaseInfo.FrontEndSecurity;
 using PunishmentOrg.Domain.Interface;
 using ServiceModel.Commons.ServiceResponse;
-using ServiceModel.Constants;
-using Utility;
 using Utility.Guard;
 
 namespace Validations.Commons

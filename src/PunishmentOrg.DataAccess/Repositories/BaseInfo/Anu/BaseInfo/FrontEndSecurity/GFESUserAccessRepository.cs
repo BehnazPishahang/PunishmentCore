@@ -1,19 +1,18 @@
-﻿using Anu.BaseInfo.FrontEndSecurity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Utility.CalendarHelper;
 
 namespace PunishmentOrg.DataAccess.Repositories.BaseInfo.Anu.BaseInfo.FrontEndSecurity
 {
-    public class GFESUserAccessRepository : GenericRepository<GFESUserAccess>, Domain.Interface.BaseInfo.Anu.BaseInfo.FrontEndSecurity.IGFESUserAccessRepository
+    public class GFESUserAccessRepository : GenericRepository<DataModel.BaseInfo.Anu.BaseInfo.FrontEndSecurity.GFESUserAccess>, Domain.Interface.BaseInfo.Anu.BaseInfo.FrontEndSecurity.IGFESUserAccessRepository
     {
         public GFESUserAccessRepository(ApplicationDbContext context) : base(context)
         {
         }
 
-        public async Task<IEnumerable<GFESUserAccess>> ValidateUserAndPassword(string userName, string hashedPassword, string GFESUserAccessType)
+        public async Task<IEnumerable<DataModel.BaseInfo.Anu.BaseInfo.FrontEndSecurity.GFESUserAccess>> ValidateUserAndPassword(string userName, string hashedPassword, string GFESUserAccessType)
         {
 
-            return await _context.Set<GFESUserAccess>()
+            return await _context.Set<DataModel.BaseInfo.Anu.BaseInfo.FrontEndSecurity.GFESUserAccess>()
                 .Include(a => a.TheGFESUser)
                 .Include(a => a.TheGFESUserAccessType)
                 .Where(a =>

@@ -1,11 +1,5 @@
-﻿using Anu;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Oracle.DbContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PunishmentOrg.DataAccess
 {
@@ -20,8 +14,8 @@ namespace PunishmentOrg.DataAccess
             //this.UseEntity<T1>();
             //this.UseEntity<T2>();
             //this.UseEntity<T3<object>>();
-            this.UseAssembly(typeof(BaseInfoEntity<>).Assembly);
-            this.UseAssembly(typeof(PunishmentOrgEntity<>).Assembly);
+            this.UseAssembly(typeof(DataModel.BaseInfo.Anu.BaseInfoEntity<>).Assembly);
+            this.UseAssembly(typeof(DataModel.PunishemntOrg.Anu.PunishmentOrgEntity<>).Assembly);
             base.OnModelCreating(modelBuilder);
         }
 
