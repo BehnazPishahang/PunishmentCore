@@ -1,6 +1,6 @@
 ﻿
 using System.Collections.Generic;
-namespace Anu.PunishmentOrg.ServiceContract
+namespace ServiceModel.PunishmentOrg.ServiceContract.Anu.PunishmentOrg.ServiceContract
 {
     [System.ComponentModel.DisplayName("سايرضمائم و مدارک صورتجلسه/گزارش کشف قاچاق در سرويس")]
     public class PDiscoveryMinutesAttach

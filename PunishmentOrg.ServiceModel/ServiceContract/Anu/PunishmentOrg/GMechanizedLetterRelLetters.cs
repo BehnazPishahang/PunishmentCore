@@ -1,6 +1,6 @@
 ﻿
 using System.Collections.Generic;
-namespace Anu.PunishmentOrg.ServiceContract
+namespace ServiceModel.PunishmentOrg.ServiceContract.Anu.PunishmentOrg.ServiceContract
 {
     [System.ComponentModel.DisplayName("نامه هاي بازگشتي/پيروي نامه جاري در وب سرويس دريافت مکاتبات")]
     public class GMechanizedLetterRelLetters

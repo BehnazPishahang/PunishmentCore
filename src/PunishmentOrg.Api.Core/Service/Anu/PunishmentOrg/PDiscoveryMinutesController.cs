@@ -1,4 +1,4 @@
-﻿using Anu.PunishmentOrg.ServiceContract;
+﻿using DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes;
 using Microsoft.AspNetCore.Mvc;
 using PunishmentOrg.Domain.Interface;
 using ServiceModel.Commons.ServiceResponse;
