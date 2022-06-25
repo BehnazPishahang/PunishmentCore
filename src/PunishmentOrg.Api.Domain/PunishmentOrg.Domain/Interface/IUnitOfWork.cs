@@ -2,11 +2,13 @@
 {
     public partial interface IUnitOfWork : IDisposable
     {
-        PunishmentOrg.IPCaseRepository PCaseRepository { get; }
-        PunishmentOrg.IPDiscoveryMinutesRepository PDiscoveryMinutes { get; }
+        PunishmentOrg.Case.IPCaseRepository PCaseRepository { get; }
+        PunishmentOrg.DiscoveryMinutes.IPDiscoveryMinutesRepository PDiscoveryMinutes { get; }
         BaseInfo.Anu.BaseInfo.FrontEndSecurity.IGFESUserRepository GFESUser { get; }
         BaseInfo.Anu.BaseInfo.FrontEndSecurity.IGFESUserAccessRepository GFESUserAccess { get; }
-        IObjectStateRepository ObjectState { get; }
+        PunishmentOrg.DataModelPunishmentOrgAnu.PunishmentOrg.Case.IPRegistaryTimeCaseRepository PRegistaryTimeCase { get; }
+        PunishmentOrg.Anu.PunishmentOrg.Terminate.IPJudgmentCaseRepository PJudgmentCase { get; }
+        BaseInfo.SystemObject.IObjectStateRepository ObjectState { get; }
         int Complete();
     }
 }

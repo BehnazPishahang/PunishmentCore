@@ -9,7 +9,7 @@ namespace PunishmentOrg.DataAccess.Repositories.PunishmentOrg.Anu.PunishmentOrg.
         {
         }
 
-        public async Task<IEnumerable<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PRegistaryTimeCase>> GetPCaseByNo(string pCaseNo, DataModel.Anu.Enumerations.PunishmentOrg.PURegisterTimeType timeType)
+        public async Task<IEnumerable<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PRegistaryTimeCase>> GetPRegistaryTimeCaseByNo(string pCaseNo, DataModel.Anu.Enumerations.PunishmentOrg.PURegisterTimeType timeType)
         {
             return await _context.Set<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PRegistaryTimeCase>()
                 .Include(x => x.ThePCase)
@@ -18,7 +18,7 @@ namespace PunishmentOrg.DataAccess.Repositories.PunishmentOrg.Anu.PunishmentOrg.
                 a.ThePCase.No == pCaseNo &&
                 a.ThePRegistaryTime.RegisterDate.ToDateTime() >= CalendarHelper.DateTimeNow() &&
                 a.ThePRegistaryTime.TimeType == timeType
-                ).ToListAsync();
+                ).OrderBy(a=>a.ThePRegistaryTime.RegisterDate).ToListAsync();
         }
     }
 }

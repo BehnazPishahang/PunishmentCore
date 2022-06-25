@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PunishmentOrg.Domain.Interface;
 
-namespace PunishmentOrg.DataAccess.Repositories
+namespace PunishmentOrg.DataAccess.Repositories.BaseInfo.Anu.BaseInfo.SystemObject
 {
     public class ObjectStateRepository : GenericRepository<DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState>,
-        IObjectStateRepository
+        Domain.Interface.BaseInfo.SystemObject.IObjectStateRepository
     {
         public ObjectStateRepository(ApplicationDbContext context) : base(context)
         {

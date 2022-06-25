@@ -1,4 +1,4 @@
-﻿namespace PunishmentOrg.Domain.Interface.PunishmentOrg
+﻿namespace PunishmentOrg.Domain.Interface.PunishmentOrg.DiscoveryMinutes
 {
     public interface IPDiscoveryMinutesRepository : IGenericRepository<DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes.PDiscoveryMinutes>
     {

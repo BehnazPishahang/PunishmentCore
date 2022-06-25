@@ -2,7 +2,7 @@
 
 namespace PunishmentOrg.DataAccess.Repositories.PunishmentOrg
 {
-    public class PCaseRepository : GenericRepository<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase>, Domain.Interface.PunishmentOrg.IPCaseRepository
+    public class PCaseRepository : GenericRepository<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase>, Domain.Interface.PunishmentOrg.Case.IPCaseRepository
     {
         public PCaseRepository(ApplicationDbContext context) : base(context)
         {

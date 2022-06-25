@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PunishmentOrg.Domain.Interface
+namespace PunishmentOrg.Domain.Interface.BaseInfo.SystemObject
 {
     public interface IObjectStateRepository : IGenericRepository<DataModel.BaseInfo.Anu.BaseInfo.SystemObject.ObjectState> 
     {

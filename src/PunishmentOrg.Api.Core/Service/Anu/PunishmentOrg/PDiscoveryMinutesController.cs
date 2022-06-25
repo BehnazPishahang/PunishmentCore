@@ -1,4 +1,6 @@
-﻿using DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes;
+﻿using DataModel.Anu.Enumerations.PunishmentOrg;
+using DataModel.PunishemntOrg.Anu.PunishmentOrg.Case;
+using DataModel.PunishemntOrg.Anu.PunishmentOrg.DiscoveryMinutes;
 using Microsoft.AspNetCore.Mvc;
 using PunishmentOrg.Domain.Interface;
 using ServiceModel.Commons.ServiceResponse;
@@ -102,6 +104,7 @@ namespace PunishmentOrg.Api.Core.Service.Anu.PunishmentOrg
                         sendPDiscoveryMinuteStateResponse.Result = ResultUtility.getResult(ResultType.PDiscoveryMinuteSate_ReferToCity);
                         return sendPDiscoveryMinuteStateResponse;
                     case PunishmentOrgObjectState.PDiscoveryMinutes.CreateCaseInUnit:
+                        sendPDiscoveryMinuteStateResponse = await this.CaseStateOfPDiscoveryMinute(sendPDiscoveryMinuteStateResponse, pDiscoveryMinutes);
                         sendPDiscoveryMinuteStateResponse.UniqueNo = request.UnitNo;
                         return sendPDiscoveryMinuteStateResponse;
                     case PunishmentOrgObjectState.PDiscoveryMinutes.Start:
@@ -120,10 +123,6 @@ namespace PunishmentOrg.Api.Core.Service.Anu.PunishmentOrg
                         sendPDiscoveryMinuteStateResponse.Result = ResultUtility.getResult(ResultType.Error_to_Find_State);
                         return sendPDiscoveryMinuteStateResponse;
                 }
-
-
-
-                return null;
             }
             catch (AnuExceptions ex)
             {
@@ -136,7 +135,7 @@ namespace PunishmentOrg.Api.Core.Service.Anu.PunishmentOrg
 
         }
 
-        private SendPDiscoveryMinutesStateResponse CaseStateOfPDiscoveryMinute(SendPDiscoveryMinutesStateResponse sendPDiscoveryMinutesStateResponse, PDiscoveryMinutes pDiscoveryMinutes)
+        private async Task<SendPDiscoveryMinutesStateResponse> CaseStateOfPDiscoveryMinute(SendPDiscoveryMinutesStateResponse sendPDiscoveryMinutesStateResponse, PDiscoveryMinutes pDiscoveryMinutes)
         {
             List<string> Executive = new List<string>();
             Executive.Add("008");
@@ -150,84 +149,81 @@ namespace PunishmentOrg.Api.Core.Service.Anu.PunishmentOrg
             Revision.Add("015");
 
 
-            //var pCaseCollection = _unitOfWork.PCaseRepository.GetPCaseByNo(pDiscoveryMinutes.ThePCase.No);
+            var pCaseCollection = await _unitOfWork.PCaseRepository.GetPCaseByNo(pDiscoveryMinutes.ThePCase.No);
 
-            //#region وقت رسیدگی
-            //Criteria criteriaRegisterTime = new Criteria();
-            //criteriaRegisterTime.AddEqualTo(Anu.PunishmentOrgQueryBase.PRegistaryTimeCase.ThePCase.No, thePDiscoveryMinutes.ThePCase.No);
-            //criteriaRegisterTime.AddGreaterOrEqualThan(Anu.PunishmentOrgQueryBase.PRegistaryTimeCase.ThePRegistaryTime.RegisterDate, Anu.BaseInfoContext.Instance.CurrentDate);
-            //criteriaRegisterTime.AddEqualTo(Anu.PunishmentOrgQueryBase.PRegistaryTimeCase.ThePRegistaryTime.TimeType, DataModel.Anu.Enumerations.PunishmentOrg.PURegisterTimeType.Disposition);
-            //IPRegistaryTimeCaseCollection thePRegistaryTimeCaseCollection = (IPRegistaryTimeCaseCollection)Anu.InstanceBuilder.GetEntityListByCriteria<IPRegistaryTimeCase>(criteriaRegisterTime);
+            #region وقت رسیدگی
 
-            //thePRegistaryTimeCaseCollection.Sort(true, new string[] { "ThePRegistaryTime.RegisterDate" });
+            var thePRegistaryTimeCaseCollection = await _unitOfWork.PRegistaryTimeCase.GetPRegistaryTimeCaseByNo(
+                pDiscoveryMinutes.ThePCase.No, PURegisterTimeType.Disposition);
 
-            //if (thePRegistaryTimeCaseCollection.Count != 0)
-            //{
-            //    IPRegistaryTimeCase registerDateTimeItem = (IPRegistaryTimeCase)thePRegistaryTimeCaseCollection.GetItem(0);
 
-            //    sendPDiscoveryMinutesStateResponse.RegisterDate = registerDateTimeItem?.ThePRegistaryTime?.RegisterDate;
-            //}
+            if (thePRegistaryTimeCaseCollection.Count() != 0)
+            {
+                var registerTimeCase = thePRegistaryTimeCaseCollection.ToList()[0];
 
-            //#endregion وقت رسیدگی
+                sendPDiscoveryMinutesStateResponse.RegisterDate = registerTimeCase?.ThePRegistaryTime?.RegisterDate;
+            }
 
-            //#region اجرای احکام
-            //bool RevisionHas = false;
-            //foreach (IPCase item in pCaseCollection)
-            //{
-            //    if (Revision.Contains(item.TheHandlerUnit.TheGUnitType.Code))
-            //    {
-            //        RevisionHas = true;
-            //    }
-            //}
+            #endregion وقت رسیدگی
 
-            //foreach (IPCase item in pCaseCollection)
-            //{
-            //    if (Executive.Contains(item.TheHandlerUnit.TheGUnitType.Code))
-            //    {
-            //        sendPDiscoveryMinutesStateResponse = this.ReturnResultSendPDiscoveryMinuteStateResponse(sendPDiscoveryMinutesStateResponse, Anu.Constants.PunishmentOrg.ResultCode.SendPDiscoveryMinuteStateResultServiceResult_Successful_PDiscoveryMinuteSate_Execution);
-            //        if (item.CaseArchiveState == Enumerations.PunishmentOrg.PUCaseArchiveState.Closed)
-            //            sendPDiscoveryMinutesStateResponse.Result.Description = "حکم صادر شده اجرا شده است.";
-            //        if (item.CaseArchiveState == Enumerations.PunishmentOrg.PUCaseArchiveState.Active)
-            //            sendPDiscoveryMinutesStateResponse.Result.Description = "حکم صادر شده در حال اجرا است.";
-            //        if (RevisionHas)
-            //            sendPDiscoveryMinutesStateResponse.RevisionRequest = "دارای تجدید نظر میباشد.";
-            //        sendPDiscoveryMinutesStateResponse.UniqueNo = thePDiscoveryMinutes.UniqueNo;
-            //        sendPDiscoveryMinutesStateResponse.UnitName = thePDiscoveryMinutes.ThePCase.TheHandlerUnit.UnitName;
-            //        sendPDiscoveryMinutesStateResponse.UnitNo = thePDiscoveryMinutes.ThePCase.TheHandlerUnit.Code;
-            //        return sendPDiscoveryMinutesStateResponse;
-            //    }
-            //}
-            //#endregion اجرای احکام
+            #region اجرای احکام
+            bool RevisionHas = false;
+            foreach (PCase item in pCaseCollection)
+            {
+                if (Revision.Contains(item.TheHandlerUnit.TheGUnitType.Code))
+                {
+                    RevisionHas = true;
+                }
+            }
 
-            //#region بررسی اینکه رای صادر شده یا نه
-            //criteria = new Criteria();
-            //criteria.AddEqualTo(Anu.PunishmentOrgQueryBase.PJudgmentCase.ThePCase.ObjectId, thePDiscoveryMinutes.ThePCase.ObjectId);
-            //IPJudgmentCaseCollection thePJudgmentCase = (IPJudgmentCaseCollection)Anu.InstanceBuilder.GetEntityListByCriteria<IPJudgmentCase>(criteria);
-            //if (thePJudgmentCase.Count != 0)
-            //{
-            //    sendPDiscoveryMinutesStateResponse = this.ReturnResultSendPDiscoveryMinuteStateResponse(sendPDiscoveryMinutesStateResponse, Anu.Constants.PunishmentOrg.ResultCode.SendPDiscoveryMinuteStateResultServiceResult_Successful_PDiscoveryMinuteSate_PJudgment);
+            foreach (PCase item in pCaseCollection)
+            {
+                if (Executive.Contains(item.TheHandlerUnit.TheGUnitType.Code))
+                {
+                    sendPDiscoveryMinutesStateResponse.Result = ResultUtility.getResult(ResultType.Execution);
+                    if (item.CaseArchiveState == PUCaseArchiveState.Closed)
+                        sendPDiscoveryMinutesStateResponse.Result.Description = "حکم صادر شده اجرا شده است.";
+                    if (item.CaseArchiveState == PUCaseArchiveState.Active)
+                        sendPDiscoveryMinutesStateResponse.Result.Description = "حکم صادر شده در حال اجرا است.";
+                    if (RevisionHas)
+                        sendPDiscoveryMinutesStateResponse.RevisionRequest = "دارای تجدید نظر میباشد.";
+                    sendPDiscoveryMinutesStateResponse.UniqueNo = pDiscoveryMinutes.UniqueNo;
+                    sendPDiscoveryMinutesStateResponse.UnitName = pDiscoveryMinutes.ThePCase.TheHandlerUnit.UnitName;
+                    sendPDiscoveryMinutesStateResponse.UnitNo = pDiscoveryMinutes.ThePCase.TheHandlerUnit.Code;
+                    return sendPDiscoveryMinutesStateResponse;
+                }
+            }
+            #endregion اجرای احکام
 
-            //    #region Fiil_Judgment_Information
-            //    thePJudgmentCase.Sort(false, new string[] { "ThePJudgment.JudgeDateTime" });
-            //    IPJudgmentCase pJudgmentCase = (IPJudgmentCase)thePJudgmentCase.GetItem(0);
-            //    sendPDiscoveryMinutesStateResponse.Result.Description = Convert.ToBase64String(System.Text.Encoding.Unicode.GetBytes(pJudgmentCase.ThePJudgment.VerdictText));
-            //    sendPDiscoveryMinutesStateResponse.Result.Message = sendPDiscoveryMinutesStateResponse.Result.Message + "*" + pJudgmentCase.ThePJudgment.No;
-            //    #endregion Fiil_Judgment_Information
+            #region بررسی اینکه رای صادر شده یا نه
+            var thePJudgmentCase = await _unitOfWork.PJudgmentCase.GetPJudgmentCaseByObjectID(pDiscoveryMinutes.ThePCase.SourceObjectId);
 
-            //    if (RevisionHas)
-            //        sendPDiscoveryMinutesStateResponse.RevisionRequest = "دارای تجدید نظر میباشد.";
-            //    sendPDiscoveryMinutesStateResponse.UnitNo = thePDiscoveryMinutes.TheReferUnit.Code;
-            //    sendPDiscoveryMinutesStateResponse.UnitName = thePDiscoveryMinutes.TheReferUnit.UnitName;
-            //    return sendPDiscoveryMinutesStateResponse;
-            //}
-            //#endregion بررسی اینکه رای صادر شده یا نه
+            if (thePJudgmentCase.Count() != 0)
+            {
+                sendPDiscoveryMinutesStateResponse.Result = ResultUtility.getResult(ResultType.PJudgment);
 
-            //#region تشکیل پرونده و شروع به رسیدگی
-            //else
-            //{
-            //    return this.ReturnResultSendPDiscoveryMinuteStateResponse(sendPDiscoveryMinutesStateResponse, Anu.Constants.PunishmentOrg.ResultCode.SendPDiscoveryMinuteStateResultServiceResult_Successful_PDiscoveryMinuteSate_CreateCase);
-            //}
-//#endregion تشکیل پرونده و شروع به رسیدگی
+                #region Fiil_Judgment_Information
+                var pJudgmentCase = thePJudgmentCase.ToList()[0];
+
+                sendPDiscoveryMinutesStateResponse.Result.Description = Convert.ToBase64String(System.Text.Encoding.Unicode.GetBytes(pJudgmentCase.ThePJudgment.VerdictText));
+                sendPDiscoveryMinutesStateResponse.Result.Message = sendPDiscoveryMinutesStateResponse.Result.Message + "*" + pJudgmentCase.ThePJudgment.No;
+                #endregion Fiil_Judgment_Information
+
+                if (RevisionHas)
+                    sendPDiscoveryMinutesStateResponse.RevisionRequest = "دارای تجدید نظر میباشد.";
+                sendPDiscoveryMinutesStateResponse.UnitNo = pDiscoveryMinutes.TheReferUnit.Code;
+                sendPDiscoveryMinutesStateResponse.UnitName = pDiscoveryMinutes.TheReferUnit.UnitName;
+                return sendPDiscoveryMinutesStateResponse;
+            }
+            #endregion بررسی اینکه رای صادر شده یا نه
+
+            #region تشکیل پرونده و شروع به رسیدگی
+            else
+            {
+                sendPDiscoveryMinutesStateResponse.Result = ResultUtility.getResult(ResultType.PDiscoveryMinuteSate_CreateCase);
+                return sendPDiscoveryMinutesStateResponse;
+            }
+            #endregion تشکیل پرونده و شروع به رسیدگی
             return null;
         }
 

@@ -1,4 +1,4 @@
-﻿namespace PunishmentOrg.Domain.Interface.PunishmentOrg
+﻿namespace PunishmentOrg.Domain.Interface.PunishmentOrg.Case
 {
     public interface IPCaseRepository : IGenericRepository<DataModel.PunishemntOrg.Anu.PunishmentOrg.Case.PCase>
     {
