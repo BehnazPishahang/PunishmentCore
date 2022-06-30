@@ -1,6 +1,6 @@
-﻿namespace DataModel.BaseInfo.Anu
+﻿namespace Anu.BaseInfo.DataModel
 {
-    public abstract partial class BaseInfoEntity<TKey> : DataModel.BaseEntity<TKey>
+    public abstract partial class BaseInfoEntity<TKey> : Anu.DataModel.BaseEntity<TKey>
     {
 
 

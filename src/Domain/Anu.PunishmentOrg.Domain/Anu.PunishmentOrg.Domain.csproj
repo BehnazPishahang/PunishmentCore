@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataModel\DataModel.BaseInfo\Anu.BaseInfo.DataModel.csproj" />
+    <ProjectReference Include="..\..\DataModel\DataModel.PunishmentOrg\Anu.PunishmentOrg.DataModel.csproj" />
+    <ProjectReference Include="..\Anu.BaseInfo.Domain\Anu.BaseInfo.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

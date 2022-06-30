@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Oracle.DbContext
+namespace Anu.Oracle.DbContext
 {
     public abstract class OracleDbContext : Microsoft.EntityFrameworkCore.DbContext
     {

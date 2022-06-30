@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Oracle.DbContext
+namespace Anu.Oracle.DbContext
 {
     public static class IQueryableExtensions
     {

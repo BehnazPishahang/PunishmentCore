@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataModel
+namespace Anu.DataModel
 {
     public abstract class BaseEntity<TKey> : IEntity
     {

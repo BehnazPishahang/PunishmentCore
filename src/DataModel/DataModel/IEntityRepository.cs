@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataModel
+namespace Anu.DataModel
 {
     public interface IEntityRepository<TEntity> where TEntity : IEntity
     {
