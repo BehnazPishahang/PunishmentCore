@@ -1,5 +1,5 @@
 ﻿
-namespace DataModel
+namespace Anu.DataModel
 {
     public interface IEntity
     {

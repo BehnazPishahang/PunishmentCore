@@ -1,8 +1,7 @@
-﻿using DataModel;
-
-namespace DataModel.PunishemntOrg.Anu
+﻿
+namespace Anu.PunishmentOrg.DataModel
 {
-    public abstract partial class PunishmentOrgEntity<TKey> : BaseEntity<TKey>
+    public abstract partial class PunishmentOrgEntity<TKey> : Anu.DataModel.BaseEntity<TKey>
     {
 
 
