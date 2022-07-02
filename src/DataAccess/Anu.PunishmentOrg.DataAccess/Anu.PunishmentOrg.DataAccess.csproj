@@ -7,10 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DataModel\DataModel.BaseInfo\Anu.BaseInfo.DataModel.csproj" />
-    <ProjectReference Include="..\..\DataModel\DataModel.PunishmentOrg\Anu.PunishmentOrg.DataModel.csproj" />
     <ProjectReference Include="..\..\Domain\Anu.BaseInfo.Domain\Anu.BaseInfo.Domain.csproj" />
-    <ProjectReference Include="..\..\Utility\Utility\Anu.Utility.csproj" />
+    <ProjectReference Include="..\..\Utility\Anu.Utility\Anu.Utility.csproj" />
     <ProjectReference Include="..\Anu.DataAccess\Anu.DataAccess.csproj" />
   </ItemGroup>
 

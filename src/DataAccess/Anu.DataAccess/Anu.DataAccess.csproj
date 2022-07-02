@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DataModel\DataModel.BaseInfo\Anu.BaseInfo.DataModel.csproj" />
-    <ProjectReference Include="..\..\DataModel\DataModel.PunishmentOrg\Anu.PunishmentOrg.DataModel.csproj" />
-    <ProjectReference Include="..\..\DataModel\Oracle.DbContext\Anu.Oracle.DbContext.csproj" />
+    <ProjectReference Include="..\..\DataModel\Anu.Oracle.DbContext\Anu.Oracle.DbContext.csproj" />
     <ProjectReference Include="..\..\Domain\Anu.BaseInfo.Domain\Anu.BaseInfo.Domain.csproj" />
     <ProjectReference Include="..\..\Domain\Anu.PunishmentOrg.Domain\Anu.PunishmentOrg.Domain.csproj" />
   </ItemGroup>
