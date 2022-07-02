@@ -39,7 +39,8 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Anu.PunishmentOrg.Resources.Common.Resources.ResultType", typeof(Resources_ResultType).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Anu.PunishmentOrg.Resources.Anu.PunishmentOrg.Resources.Common.Resources.ResultTy" +
+                            "pe", typeof(Resources_ResultType).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -6,10 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  
+
   <ItemGroup>
-    <ProjectReference Include="..\..\Domain\Anu.BaseInfo.Domain\Anu.BaseInfo.Domain.csproj" />
+    <ProjectReference Include="..\..\DataAccess\Anu.DataAccess\Anu.DataAccess.csproj" />
+    <ProjectReference Include="..\..\ServiceModel\Anu.Commons.ServiceModel\Anu.Commons.ServiceModel.csproj" />
     <ProjectReference Include="..\..\Utility\Anu.Utility\Anu.Utility.csproj" />
-    <ProjectReference Include="..\Anu.DataAccess\Anu.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
