@@ -14,7 +14,7 @@ namespace Anu.Commons.Validations
             request.PassWord.NullOrWhiteSpace(ResultType.UserName_Or_PassWord_Is_Not_Entered);
 
             string hashPass = MD5Core.GetHashString(request.PassWord);
-            var userAccess = await unitOfWork.GFESUserAccess.ValidateUserAndPassword(request.UserName, request.PassWord, GFESUserAccessType);
+            var userAccess = await unitOfWork.GFESUserAccess.ValidateUserAndPassword(request.UserName, hashPass, GFESUserAccessType);
             userAccess.Null(ResultType.UserName_Or_PassWord_Is_Not_Valid);
 
             return userAccess.FirstOrDefault();

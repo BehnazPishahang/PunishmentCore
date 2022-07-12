@@ -13,6 +13,7 @@ namespace Anu.PunishmentOrg.DataAccess.Terminate
         {
             return await _context.Set<DataModel.Terminate.PJudgmentCase>()
                 .Include(a=>a.ThePCase)
+                .Include(a=>a.ThePJudgment)
                 .Where(a=>a.ThePCase.SourceObjectId==ObjectID)
                 .OrderByDescending(a=>a.ThePJudgment.JudgeDateTime)
                 .ToListAsync();

@@ -9,48 +9,48 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ساعت خاتمه جلسه رسيدگي")]
-            public string EndTime { get; set ;} 
+            public string? EndTime { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کلمه عبور")]
-            public string PassWord { get; set ;} 
+            public string? PassWord { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("تاريخ وقت")]
-            public string RegisterDate { get; set ;} 
+            public string? RegisterDate { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("وضعيت تجديد نظر")]
-            public string RevisionRequest { get; set ;} 
+            public string? RevisionRequest { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ساعت شروع جلسه رسيدگي")]
-            public string StartTime { get; set ;} 
+            public string? StartTime { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شناسه يکتا")]
-            public string UniqueNo { get; set ;} 
+            public string? UniqueNo { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نام واحد")]
-            public string UnitName { get; set ;} 
+            public string? UnitName { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره واحد رسيدگي کننده")]
-            public string UnitNo { get; set ;} 
+            public string? UnitNo { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نام کاربري")]
-            public string UserName { get; set ;} 
+            public string? UserName { get; set ;} 
             
 
     }

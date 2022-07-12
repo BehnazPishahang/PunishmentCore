@@ -23,7 +23,6 @@ namespace Anu.Commons.ServiceModel.SeviceRequest
 
     public interface IRequest
     {
-        [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("نام کاربري")]
         string UserName { get; set; }
 

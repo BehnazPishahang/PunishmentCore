@@ -19,7 +19,7 @@ namespace Anu.PunishmentOrg.DataAccess.DiscoveryMinutes
 
         public async Task<IEnumerable<DataModel.DiscoveryMinutes.PDiscoveryMinutes>> getObejectStateTitleWithUniqueNo(string UniqueNo)
         {
-            return await _context.Set<DataModel.DiscoveryMinutes.PDiscoveryMinutes>().Include(x => x.TheObjectState).ToListAsync();
+            return await _context.Set<DataModel.DiscoveryMinutes.PDiscoveryMinutes>().Include(x => x.TheObjectState).Where(a=>a.UniqueNo==UniqueNo).ToListAsync();
         }
 
         public async Task<DataModel.DiscoveryMinutes.PDiscoveryMinutes> GetPDiscoveryMinutesByUniqueNo(string UniqueNo)

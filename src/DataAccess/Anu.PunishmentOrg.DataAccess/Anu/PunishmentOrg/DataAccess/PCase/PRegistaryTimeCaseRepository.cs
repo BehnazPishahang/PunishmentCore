@@ -11,14 +11,18 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
 
         public async Task<IEnumerable<DataModel.Case.PRegistaryTimeCase>> GetPRegistaryTimeCaseByNo(string pCaseNo, Anu.PunishmentOrg.Enumerations.PURegisterTimeType timeType)
         {
-            return await _context.Set<DataModel.Case.PRegistaryTimeCase>()
+            var q=  _context.Set<DataModel.Case.PRegistaryTimeCase>()
                 .Include(x => x.ThePCase)
-                .Include(x=>x.ThePRegistaryTime)
+                .Include(x => x.ThePRegistaryTime)
                 .Where(a =>
                 a.ThePCase.No == pCaseNo &&
-                a.ThePRegistaryTime.RegisterDate.ToDateTime() >= CalendarHelper.DateTimeNow() &&
                 a.ThePRegistaryTime.TimeType == timeType
-                ).OrderBy(a=>a.ThePRegistaryTime.RegisterDate).ToListAsync();
+                ).OrderBy(a => a.ThePRegistaryTime.RegisterDate);
+
+            var script = q.ToQueryString();
+            var prt =await  q.ToListAsync();
+
+            return prt.Where(a => a.ThePRegistaryTime.RegisterDate.ToDateTime() >= CalendarHelper.DateTimeNow());
         }
     }
 }
