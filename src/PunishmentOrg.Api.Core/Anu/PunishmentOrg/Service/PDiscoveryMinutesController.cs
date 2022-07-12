@@ -24,14 +24,11 @@ namespace Anu.PunishmentOrg.Service
         {
             try
             {
-                No = null;
-                No.Null(ResultType.Error);
-
 
                 var pDiscovery = await _unitOfWork.PDiscoveryMinutes.getObejectStateTitleWithUniqueNo(No);
                 string title = pDiscovery.FirstOrDefault().TheObjectState.Title.ToString();
 
-                _unitOfWork.Complete();
+                //_unitOfWork.Complete();
 
 
                 return new Result { Code = ResultType.Successful.ToString(), Message = title };
@@ -42,6 +39,9 @@ namespace Anu.PunishmentOrg.Service
             }
         }
 
+        /// <summary>
+        /// وب سرویس استعلام وضعیت صورتجلسه کشف
+        /// </summary>
         public override async Task<SendPDiscoveryMinutesStateResponse> SendPDiscoveryMinutesState([FromBody] SendPDiscoveryMinutesStateRequest request)
         {
             var sendPDiscoveryMinuteStateResponse = new SendPDiscoveryMinutesStateResponse();
@@ -51,8 +51,8 @@ namespace Anu.PunishmentOrg.Service
             {
                 await Login.ValidateLoginAsync(request.Request, GFESUserAccessType.SendPDiscoveryMinute, _unitOfWork);
 
-                request.UnitNo.IsDigit(ResultType.Error_UniqueNo_Is_Required);
-                request.UnitNo.NullOrWhiteSpace(ResultType.Error_UniqueNo_Is_Required);
+                request.UniqueNo.IsDigit(ResultType.Error_UniqueNo_Is_Required);
+                request.UniqueNo.NullOrWhiteSpace(ResultType.Error_UniqueNo_Is_Required);
 
                 var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.UniqueNo);
                 pDiscoveryMinutes.Null(ResultType.PDiscoveryMinuteSate_No_Is_NotValid);
