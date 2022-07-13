@@ -4,14 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anu.Commons.ServiceModel.ServiceResponse
+namespace Anu.PunishmentOrg.ServiceModel.ServiceResponse
 {
-    public enum ResultTypenew
+    public enum PunishmentOrgResult
     {
-        Successful = 10000,
-        Error = 10005,
-        UserName_Or_PassWord_Is_Not_Valid = 10010,
-        UserName_Or_PassWord_Is_Not_Entered = 10012,
         Error_to_Find_State = 10006,
         Error_UniqueNo_Is_Required = 10001,
         Execution = 00062601,
@@ -27,5 +23,4 @@ namespace Anu.Commons.ServiceModel.ServiceResponse
         PJudgment = 00062602,
         ThePBBillGeoLocation_Is_Required = 10015
     }
-
 }

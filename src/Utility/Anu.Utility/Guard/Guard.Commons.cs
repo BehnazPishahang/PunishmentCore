@@ -5,7 +5,7 @@ namespace Utility.Guard
 {
     public static class Commons
     {
-        public static T Null<T>(this T input, ResultType type)
+        public static T Null<T>(this T input, Enum type)
         {
             if (input is null)
             {
@@ -15,7 +15,7 @@ namespace Utility.Guard
             return input;
         }
 
-        public static string NullOrEmpty(this string? input, ResultType type)
+        public static string NullOrEmpty(this string? input, Enum type)
         {
             input.Null(type);
             if (input == string.Empty)
@@ -26,7 +26,7 @@ namespace Utility.Guard
             return input;
         }
 
-        public static Guid NullOrEmpty(this Guid? input, ResultType type)
+        public static Guid NullOrEmpty(this Guid? input, Enum type)
         {
             input.Null(type);
             if (input == Guid.Empty)
@@ -37,7 +37,7 @@ namespace Utility.Guard
             return input.Value;
         }
 
-        public static IEnumerable<T> NullOrEmpty<T>(this IEnumerable<T>? input, ResultType type)
+        public static IEnumerable<T> NullOrEmpty<T>(this IEnumerable<T>? input, Enum type)
         {
             input.Null(type);
             if (!input.Any())
@@ -48,7 +48,7 @@ namespace Utility.Guard
             return input;
         }
 
-        public static string NullOrWhiteSpace(this string? input, ResultType type)
+        public static string NullOrWhiteSpace(this string? input, Enum type)
         {
             input.NullOrEmpty(type);
             if (String.IsNullOrWhiteSpace(input))
@@ -59,7 +59,7 @@ namespace Utility.Guard
             return input;
         }
 
-        public static T Default<T>(this T input, ResultType type)
+        public static T Default<T>(this T input, Enum type)
         {
             if (EqualityComparer<T>.Default.Equals(input, default(T)!) || input is null)
             {
@@ -69,7 +69,7 @@ namespace Utility.Guard
             return input;
         }
 
-        public static string IsDigit(this string value, ResultType type, int length = 0)
+        public static string IsDigit(this string value, Enum type, int length = 0)
         {
             if (string.IsNullOrEmpty(value))
             {
