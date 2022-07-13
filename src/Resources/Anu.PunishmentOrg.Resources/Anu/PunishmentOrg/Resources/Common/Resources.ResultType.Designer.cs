@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Anu.PunishmentOrg.Resources.Common {
+namespace Anu.PunishmentOrg.Resources.Anu.PunishmentOrg.Resources.Common {
     using System;
     
     
@@ -94,6 +94,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string Execution {
             get {
                 return ResourceManager.GetString("Execution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره قبض تکراری است و امروز قابل ثبت نیست.
+        /// </summary>
+        public static string PBillStore_Duplicate_Bill {
+            get {
+                return ResourceManager.GetString("PBillStore_Duplicate_Bill", resourceCulture);
             }
         }
         

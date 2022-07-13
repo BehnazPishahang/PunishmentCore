@@ -133,6 +133,10 @@
     <value>به واحد اجرای احکام ارجاع شده</value>
     <comment>20003</comment>
   </data>
+  <data name="PBillStore_Duplicate_Bill" xml:space="preserve">
+    <value>شماره قبض تکراری است و امروز قابل ثبت نیست</value>
+    <comment>10065</comment>
+  </data>
   <data name="PDiscoveryMinuteSate_ConfirmAndSendToUnit" xml:space="preserve">
     <value>ثبت و ارسال به مرجع رسیدگی کننده</value>
     <comment>20004</comment>
