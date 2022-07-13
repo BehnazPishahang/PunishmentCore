@@ -15,6 +15,7 @@
             PJudgmentCase = new PunishmentOrg.DataAccess.Terminate.PJudgmentCaseRepository(_context);
         }
         public Anu.PunishmentOrg.Domain.DiscoveryMinutes.IPDiscoveryMinutesRepository PDiscoveryMinutes { get; private set; }
+        public Anu.PunishmentOrg.Domain.PBillStore.IPBillSoreRepository PBillStoreRepository { get; private set; }
 
         public Anu.BaseInfo.Domain.SystemObject.IObjectStateRepository ObjectState { get; private set; }
         public Anu.BaseInfo.Domain.FrontEndSecurity.IGFESUserRepository GFESUser { get; private set; }
@@ -22,6 +23,7 @@
         public Anu.PunishmentOrg.Domain.Case.IPRegistaryTimeCaseRepository PRegistaryTimeCase { get; private set; }
         public Anu.PunishmentOrg.Domain.Case.IPCaseRepository PCaseRepository { get; private set; }
         public Anu.PunishmentOrg.Domain.Terminate.IPJudgmentCaseRepository PJudgmentCase { get; private set; }
+        public Anu.PunishmentOrg.Domain.BaseInfo.IPBExchangeUnitRepository PBExchangeUnitRepository { get; private set; }
 
         public int Complete()
         {
