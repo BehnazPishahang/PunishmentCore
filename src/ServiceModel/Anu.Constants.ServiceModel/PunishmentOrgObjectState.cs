@@ -55,5 +55,21 @@ namespace ServiceModel.Constants
             public const string Expire = "000630";
 
         }
+
+        public static class PBillStore
+    {
+
+        /// <summary>
+        /// تایید شده
+        /// </summary>
+        public const string Confirm = "000640";
+
+        /// <summary>
+        /// پیش نویس
+        /// </summary>
+        public const string Draft = "000641";
+    }
+
+
     }
 }
