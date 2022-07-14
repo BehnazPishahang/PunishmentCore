@@ -20,7 +20,7 @@ public class PBillStoreController : IPBillStoreBase
     {
     }
 
-    [Route("api/pbill")]
+    
     public override async Task<ReceivePBillStoreFromScmsResponse> ReceivePBillStoreFromScms([FromBody] ReceivePBillStoreFromScmsRequest request)
     {
         var receivePBillStoreFromScmsResponse = new ReceivePBillStoreFromScmsResponse()
