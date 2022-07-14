@@ -9,12 +9,12 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("سمت شخص")]
             public Anu.PunishmentOrg.Enumerations.PSuspectPostType PostType { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("اداره کننده/صاحب پروانه در سرويس")]
             public PInspectionReportDirectors ThePInspectionReportDirectors { get; set ;} 
             

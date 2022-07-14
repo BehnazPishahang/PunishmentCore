@@ -9,7 +9,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("اتهام")]
             public Anu.BaseInfo.Enumerations.Crimes Crimes { get; set ;} 
             

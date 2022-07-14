@@ -9,12 +9,12 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع جرم يا تخلف")]
             public Anu.PunishmentOrg.Enumerations.PSmuggling SmugglingType { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ورودي سرويس صورتجلسه کشف")]
             public PDiscoveryMinutes ThePDiscoveryMinutes { get; set ;} 
             

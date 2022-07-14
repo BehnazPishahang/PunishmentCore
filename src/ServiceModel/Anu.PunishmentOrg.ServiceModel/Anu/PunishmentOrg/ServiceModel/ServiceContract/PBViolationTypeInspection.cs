@@ -9,12 +9,12 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع تخلف گزارش بازرسي در سرويس")]
             public PBInspectionViolationType ThePBInspectionViolationType { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع تخلف/اتهام/خواسته در سرويس")]
             public PBViolationType ThePBViolationType { get; set ;} 
             

@@ -18,49 +18,49 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نشاني محل ")]
-            public string PlaceAddress { get; set ;} 
+            public string? PlaceAddress { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("بهره بردار محل")]
-            public string PlaceBeneficiary { get; set ;} 
+            public string? PlaceBeneficiary { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره پروانه/مجوز محل")]
-            public string PlacelicenseNumber { get; set ;} 
+            public string? PlacelicenseNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("مالک محل")]
-            public string PlaceOwner { get; set ;} 
+            public string? PlaceOwner { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره تلفن محل")]
-            public string PlacePhoneNum { get; set ;} 
+            public string? PlacePhoneNum { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("پلاک محل")]
-            public string PlacePlaque { get; set ;} 
+            public string? PlacePlaque { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کد پستي محل")]
-            public string PlacePostCode { get; set ;} 
+            public string? PlacePostCode { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام واحد صنفي")]
-            public string PlaceUnitName { get; set ;} 
+            public string? PlaceUnitName { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره ترتيب")]
             public long? RowNumber { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ورودي سرويس درخواست مجوز تعقيب/بازرسي")]
             public PChaseLicenseReq ThePChaseLicenseReq { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کاربري محل")]
-            public string UserLocation { get; set ;} 
+            public string? UserLocation { get; set ;} 
             
 
     }

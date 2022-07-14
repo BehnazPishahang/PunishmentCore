@@ -4,8 +4,8 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
 {
     public class PBillStoreRequestMessage
     {
-                public string BillNo { get; set ;} 
-                public string UniqueNo { get; set ;} 
+                public string? BillNo { get; set ;} 
+                public string? UniqueNo { get; set ;} 
 
     }
 }

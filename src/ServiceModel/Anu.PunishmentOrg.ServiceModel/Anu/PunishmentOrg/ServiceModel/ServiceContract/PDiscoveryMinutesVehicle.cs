@@ -9,26 +9,26 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("وسيله نقليه توقيف و تحويل پارکينگ شده است")]
             public Anu.BaseInfo.Enumerations.YesNo ArrestedVehicle { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره شاسي")]
-            public string ChassisNumber { get; set ;} 
+            public string? ChassisNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن شماره شاسي")]
-            public string ChassisNumberRN { get; set ;} 
+            public string? ChassisNumberRN { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("رنگ")]
-            public string Color { get; set ;} 
+            public string? Color { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام خانوادگي راننده وسيله نقليه")]
-            public string DriverFamily { get; set ;} 
+            public string? DriverFamily { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن نام و نام خانوادگي راننده وسيله نقليه")]
@@ -36,32 +36,32 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نام راننده وسيله نقليه")]
-            public string DriverName { get; set ;} 
+            public string? DriverName { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کد پلاک")]
-            public string IranNumber { get; set ;} 
+            public string? IranNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("آيا قبض پارکينگ صادر شده است")]
             public Anu.BaseInfo.Enumerations.YesNo IssueParkBillReg { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("مدل")]
-            public string Model { get; set ;} 
+            public string? Model { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره موتور")]
-            public string MotorNumber { get; set ;} 
+            public string? MotorNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن شماره موتور")]
-            public string MotorNumberRN { get; set ;} 
+            public string? MotorNumberRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ساير مشخصات")]
-            public string OtherInfo { get; set ;} 
+            public string? OtherInfo { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن ساير مشخصات")]
@@ -69,27 +69,27 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نام خانوادگي مالک وسيله نقليه")]
-            public string OwnerFamily { get; set ;} 
+            public string? OwnerFamily { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن نام و نام خانوادگي مالک وسيله نقليه")]
-            public string OwnerFullNameRN { get; set ;} 
+            public string? OwnerFullNameRN { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام مالک وسيله نقليه")]
-            public string OwnerName { get; set ;} 
+            public string? OwnerName { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره قبض پارکينگ")]
-            public string ParkFicheNo { get; set ;} 
+            public string? ParkFicheNo { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام پارکينگ")]
-            public string ParkingName { get; set ;} 
+            public string? ParkingName { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره انتظامي(پلاک)")]
-            public string PlaqueNumber { get; set ;} 
+            public string? PlaqueNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن شماره انتظامي(پلاک)")]
@@ -101,11 +101,11 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("پلاک سه رقم")]
-            public string PlaqueThreeDigit { get; set ;} 
+            public string? PlaqueThreeDigit { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("پلاک دو رقم")]
-            public string PlaqueTwoDigit { get; set ;} 
+            public string? PlaqueTwoDigit { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نوع پلاک")]
@@ -120,23 +120,23 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             public Anu.PunishmentOrg.Enumerations.RegInWaybill RegInWaybillRN { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره ترتيب")]
             public long? RowNumber { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ورودي سرويس صورتجلسه کشف")]
             public PDiscoveryMinutes ThePDiscoveryMinutes { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع وسيله نقليه")]
             public Anu.PunishmentOrg.Enumerations.VehicleType VehicleType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره بارنامه ")]
-            public string WayBillNO { get; set ;} 
+            public string? WayBillNO { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن شماره بارنامه ")]
@@ -144,7 +144,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("سريال بارنامه")]
-            public string WayBillSerial { get; set ;} 
+            public string? WayBillSerial { get; set ;} 
             
 
     }

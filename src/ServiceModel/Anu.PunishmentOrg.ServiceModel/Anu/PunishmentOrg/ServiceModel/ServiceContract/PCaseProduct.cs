@@ -15,7 +15,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نام تجاري(برند)")]
-            public string BrandName { get; set ;} 
+            public string? BrandName { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نوع کالاي قاچاق بلحاظ قانوني")]
@@ -23,11 +23,11 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("کشور سازنده")]
-            public string CountryCreate { get; set ;} 
+            public string? CountryCreate { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("واحد قطعات ارز")]
-            public string CurrencyUnit { get; set ;} 
+            public string? CurrencyUnit { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ميزان ارز")]
@@ -39,28 +39,28 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("ساير مشخصات")]
-            public string OtherInfo { get; set ;} 
+            public string? OtherInfo { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("کالا/ارز/خدمات")]
             public Anu.PunishmentOrg.Enumerations.PUProductCurrency ProductCurrency { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شناسه کالا")]
-            public string ProductID { get; set ;} 
+            public string? ProductID { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نوع کالاي کشف شده بلحاظ جنس کلي کالا")]
             public Anu.PunishmentOrg.Enumerations.PProductType ProductType { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("تعداد/مقدار کالا/ارز از نظر دادگاه")]
             public decimal? ProductValue { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره ترتيب")]
             public long? RowNumber { get; set ;} 
             
@@ -70,12 +70,12 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("سريال")]
-            public string SerialNumber { get; set ;} 
+            public string? SerialNumber { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("کد/شناسه کالا/ارز/خدمات مبدا")]
-            public string SourceObjectId { get; set ;} 
+            public string? SourceObjectId { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تعداد/مقدار کالا/ارز در صورتجلسه کشف/گزارش بازرسي")]
@@ -90,12 +90,12 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             public long? StandardPrice { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نام کالا/ارز/خدمات")]
-            public string SubjectTitle { get; set ;} 
+            public string? SubjectTitle { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("کالا/ارز هاي پرونده بر اساس کالا/ارز هاي قبض/رسيد صادر شده در سرويس")]
             public List<PCaseViolationProductBillST> ThePCaseViolationProductBillSTList { get; set ;} 
             

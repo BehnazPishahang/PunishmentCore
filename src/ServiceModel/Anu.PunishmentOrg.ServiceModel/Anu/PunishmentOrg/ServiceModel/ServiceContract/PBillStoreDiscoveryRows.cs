@@ -10,14 +10,14 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         }
             
             [System.ComponentModel.DisplayName("توضيحات")]
-            public string Description { get; set ;} 
+            public string? Description { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره ترتيب")]
             public long? DiscoveryRowNumbers { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("خروجي کالا/ارز قبض/رسيد کالا/ارز صادر شده")]
             public PBillStoreProduct ThePBillStoreProduct { get; set ;} 
             
