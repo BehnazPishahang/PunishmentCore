@@ -107,6 +107,15 @@ namespace Anu.PunishmentOrg.Resources.Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لیست کالا خالی است!.
+        /// </summary>
+        public static string PBillStore_NoProductListProvided {
+            get {
+                return ResourceManager.GetString("PBillStore_NoProductListProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ثبت و ارسال به مرجع رسیدگی کننده.
         /// </summary>
         public static string PDiscoveryMinuteSate_ConfirmAndSendToUnit {
