@@ -119,74 +119,74 @@
   </resheader>
   <data name="Error" xml:space="preserve">
     <value>خطای غیر منتظره</value>
-    <comment>10005</comment>
+    <comment>-10001</comment>
   </data>
   <data name="Error_to_Find_State" xml:space="preserve">
     <value>وضعیتی برای صورتجلسه کشف ارسالی یافت نشد.</value>
-    <comment>10006</comment>
+    <comment>20001</comment>
   </data>
   <data name="Error_UniqueNo_Is_Required" xml:space="preserve">
     <value>شماره یکتای صورتجلسه کشف درخواستی الزامی میباشد.</value>
-    <comment>10001</comment>
+    <comment>-20002</comment>
   </data>
   <data name="Execution" xml:space="preserve">
     <value>به واحد اجرای احکام ارجاع شده</value>
-    <comment>00062601</comment>
+    <comment>20003</comment>
   </data>
   <data name="PDiscoveryMinuteSate_ConfirmAndSendToUnit" xml:space="preserve">
     <value>ثبت و ارسال به مرجع رسیدگی کننده</value>
-    <comment>000622</comment>
+    <comment>20004</comment>
   </data>
   <data name="PDiscoveryMinuteSate_CreateCase" xml:space="preserve">
     <value>تشکیل پرونده شده است.</value>
-    <comment>000626</comment>
+    <comment>20005</comment>
   </data>
   <data name="PDiscoveryMinuteSate_Expired" xml:space="preserve">
     <value>دریافت نسخه فیزیکی صورتجلسه کشف قبل از نسخه الکترونیکی</value>
-    <comment>000630</comment>
+    <comment>20006</comment>
   </data>
   <data name="PDiscoveryMinuteSate_No_Is_NotValid" xml:space="preserve">
     <value>شماره یکتای صورتجلسه کشف ارسالی معتبر نمی باشد</value>
-    <comment>10011</comment>
+    <comment>-20007</comment>
   </data>
   <data name="PDiscoveryMinuteSate_PrimRegistery" xml:space="preserve">
     <value>صورتجلسه كشف / گزارش كشف اسنادي ثبت موقت شده</value>
-    <comment>000620</comment>
+    <comment>20008</comment>
   </data>
   <data name="PDiscoveryMinuteSate_ReferToCity" xml:space="preserve">
     <value>ارسال شده به شهر دیگر به دلیل اشتباه در ارجاع</value>
-    <comment>000625</comment>
+    <comment>20009</comment>
   </data>
   <data name="PDiscoveryMinuteSate_ReferToUnit" xml:space="preserve">
     <value>ارجاع شده به شعبه رسیدگی کننده</value>
-    <comment>000624</comment>
+    <comment>200010</comment>
   </data>
   <data name="PDiscoveryMinuteSate_SendToSmuggling" xml:space="preserve">
     <value>صورتجلسه کشف ارسال شده به سامانه قاچاق</value>
-    <comment>000621</comment>
+    <comment>200011</comment>
   </data>
   <data name="PDiscoveryMinuteSate_Start" xml:space="preserve">
     <value>شروع شده</value>
-    <comment>000628</comment>
+    <comment>200012</comment>
   </data>
   <data name="PJudgment" xml:space="preserve">
     <value>رای صادر شده است.</value>
-    <comment>00062602</comment>
+    <comment>200013</comment>
   </data>
   <data name="Successful" xml:space="preserve">
     <value>عملیات با موفقیت انجام شد .</value>
-    <comment>10000</comment>
+    <comment>1000</comment>
   </data>
   <data name="ThePBBillGeoLocation_Is_Required" xml:space="preserve">
     <value>مکان جغرافیایی گزارش بازرسی نمی تواند خالی باشد</value>
-    <comment>10015</comment>
+    <comment>200014</comment>
   </data>
   <data name="UserName_Or_PassWord_Is_Not_Entered" xml:space="preserve">
     <value>نام کاربری و کلمه عبور را وارد کنید</value>
-    <comment>10012</comment>
+    <comment>-10003</comment>
   </data>
   <data name="UserName_Or_PassWord_Is_Not_Valid" xml:space="preserve">
     <value>با نام کاربری و کلمه عبور ارسالی هیچ دسترسی برای سرویس جاری یافت نشد</value>
-    <comment>10010</comment>
+    <comment>-10002</comment>
   </data>
 </root>

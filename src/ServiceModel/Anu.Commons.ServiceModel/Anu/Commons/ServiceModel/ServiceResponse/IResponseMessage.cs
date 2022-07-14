@@ -24,7 +24,7 @@ namespace Anu.Commons.ServiceModel.ServiceResponse
     {
         string Message { get; set; }
         string Description { get; set; }
-        string Code { get; set; }
+        int Code { get; set; }
     }
 
     public class Result : IResult
@@ -33,10 +33,10 @@ namespace Anu.Commons.ServiceModel.ServiceResponse
         {
             this.Message = "";
             this.Description = "";
-            this.Code = "";
+            this.Code = 0;
         }
         public string Message { get; set; }
         public string Description { get; set; }
-        public string Code { get; set; }
+        public int Code { get; set; }
     }
 }
