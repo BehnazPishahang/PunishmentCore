@@ -10,12 +10,12 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             this.ThePBillStoreList = new List<PBillStore>(); 
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره پرونده")]
-            public string No { get; set ;} 
+            public string? No { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ورودي سرويس قبض/رسيد انبار")]
             public List<PBillStore> ThePBillStoreList { get; set ;} 
             

@@ -9,9 +9,9 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره مکانيزه")]
-            public string No { get; set ;} 
+            public string? No { get; set ;} 
             
 
     }

@@ -14,20 +14,20 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("تاريخ سند")]
-            public string DocDate { get; set ;} 
+            public string? DocDate { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره سند")]
-            public string DocNo { get; set ;} 
+            public string? DocNo { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("عنوان سند")]
-            public string DocTitle { get; set ;} 
+            public string? DocTitle { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("مرجع صادر کننده سند")]
-            public string IssuerUnit { get; set ;} 
+            public string? IssuerUnit { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("عادي/رسمي بودن سند")]
@@ -38,12 +38,12 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             public Anu.PunishmentOrg.Enumerations.OwnershipType OwnershipType { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره ترتيب")]
             public long? RowNumber { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ورودي سرويس درخواست مجوز تعقيب/بازرسي")]
             public PChaseLicenseReq ThePChaseLicenseReq { get; set ;} 
             

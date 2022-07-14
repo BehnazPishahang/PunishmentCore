@@ -10,7 +10,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         }
             
             [System.ComponentModel.DisplayName("کد رهگيري رسيد مادر-تجميع")]
-            public string Code { get; set ;} 
+            public string? Code { get; set ;} 
             
 
     }

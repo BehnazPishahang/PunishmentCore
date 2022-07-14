@@ -13,55 +13,55 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         }
             
             [System.ComponentModel.DisplayName("ماده 21 در فرآورده نفتي")]
-            public string Article21 { get; set ;} 
+            public string? Article21 { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام تجاري(برند)")]
-            public string BrandName { get; set ;} 
+            public string? BrandName { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-تعداد محور")]
-            public string CarAxle { get; set ;} 
+            public string? CarAxle { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-شماره بدنه")]
-            public string CarBodyNumber { get; set ;} 
+            public string? CarBodyNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-ظرفيت")]
-            public string CarCapacity { get; set ;} 
+            public string? CarCapacity { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-شماره شاسي")]
-            public string CarChassisNumber { get; set ;} 
+            public string? CarChassisNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-رنگ")]
-            public string CarColor { get; set ;} 
+            public string? CarColor { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-تعداد سيلندر")]
-            public string CarCylinder { get; set ;} 
+            public string? CarCylinder { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-تعداد درب")]
-            public string CarDoorNumber { get; set ;} 
+            public string? CarDoorNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-حجم موتور")]
-            public string CarEngineVolume { get; set ;} 
+            public string? CarEngineVolume { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-شماره موتور")]
-            public string CarEnginNumber { get; set ;} 
+            public string? CarEnginNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-نوع سوخت")]
-            public string CarFuel { get; set ;} 
+            public string? CarFuel { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-نوع گيربکس")]
-            public string CarGearboxType { get; set ;} 
+            public string? CarGearboxType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-وضعيت اوراقي")]
@@ -69,43 +69,43 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("ماشين-مدل")]
-            public string CarModel { get; set ;} 
+            public string? CarModel { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-شماره پلاک")]
-            public string CarPlaque { get; set ;} 
+            public string? CarPlaque { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-تاريخ نصب پلاک")]
-            public string CarPlaqueDate { get; set ;} 
+            public string? CarPlaqueDate { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-تيپ")]
-            public string CarStyle { get; set ;} 
+            public string? CarStyle { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-سيستم")]
-            public string CarSystem { get; set ;} 
+            public string? CarSystem { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-نوع خودرو")]
-            public string CarType { get; set ;} 
+            public string? CarType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-نوع کاربري")]
-            public string CarUsage { get; set ;} 
+            public string? CarUsage { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماشين-تعداد چرخ")]
-            public string CarWheel { get; set ;} 
+            public string? CarWheel { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کشور سازنده")]
-            public string CountryCreate { get; set ;} 
+            public string? CountryCreate { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("واحد قطعات ارز")]
-            public string CurrencyUnit { get; set ;} 
+            public string? CurrencyUnit { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ميزان ارز")]
@@ -113,20 +113,20 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("شماره ترتيب هاي کالاها در صورتجلسه کشف")]
-            public string DiscoveryRowNumbers { get; set ;} 
+            public string? DiscoveryRowNumbers { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ارزش تخميني/کارشناسي")]
             public decimal? EstimatedValue { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تاريخ انقضا")]
-            public string ExpireDate { get; set ;} 
+            public string? ExpireDate { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شناسه کالا")]
-            public string IDNumber { get; set ;} 
+            public string? IDNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("آيا چوب بعنوان هيزم استفاده ميشود؟")]
@@ -134,27 +134,27 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("طلاوجواهر-درشتي")]
-            public string JewelryCoarse { get; set ;} 
+            public string? JewelryCoarse { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("طلاوجواهر-عيار")]
-            public string JewelryCut { get; set ;} 
+            public string? JewelryCut { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("طلاوجواهر-تراش")]
-            public string JewelryCutting { get; set ;} 
+            public string? JewelryCutting { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("طلاوجواهر-نوع جنس")]
-            public string JewelryMaterial { get; set ;} 
+            public string? JewelryMaterial { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("طلاوجواهر-وزن")]
-            public string JewelryWeight { get; set ;} 
+            public string? JewelryWeight { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("فرآورده نفتي غير اصلي")]
-            public string NonEssentialPetroleumProduct { get; set ;} 
+            public string? NonEssentialPetroleumProduct { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("قدمت شيء به سال")]
@@ -162,15 +162,15 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("ارزش فرهنگي تاريخي شيء")]
-            public string ObjectCulturalValue { get; set ;} 
+            public string? ObjectCulturalValue { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("توضيح در مورد شيء/کالا")]
-            public string ObjectDesc { get; set ;} 
+            public string? ObjectDesc { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("جنس شيء/چوب آلات")]
-            public string ObjectGender { get; set ;} 
+            public string? ObjectGender { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ارتفاع شيء/چوب به سانتيمتر")]
@@ -178,7 +178,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("تصوير شيء")]
-            public byte[] ObjectImage { get; set ;} 
+            public byte[]? ObjectImage { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("طول شيء/چوب به سانتيمتر")]
@@ -194,7 +194,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نوع بسته بندي")]
-            public string PackingType { get; set ;} 
+            public string? PackingType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ارزش اوليه/ارزش ريالي شيء")]
@@ -202,15 +202,15 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("مشخصات کالا")]
-            public string ProductDesc { get; set ;} 
+            public string? ProductDesc { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("طبقه اصلي کالا")]
-            public string ProductMainGrade { get; set ;} 
+            public string? ProductMainGrade { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ماهيت کالاي مکشوفه")]
-            public string ProductNature { get; set ;} 
+            public string? ProductNature { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کالا/ارز کشف شده")]
@@ -222,11 +222,11 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("نام زيرگروه/طبقه فرعي کالا")]
-            public string ProductSubsidiaryGrade { get; set ;} 
+            public string? ProductSubsidiaryGrade { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام/شرح کالا/شيء")]
-            public string ProductTitle { get; set ;} 
+            public string? ProductTitle { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نوع کالاي تحويل شده")]
@@ -237,54 +237,54 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             public decimal? RemindValue { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره ترتيب")]
             public long? RowNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره سريال ساخت")]
-            public string SerialNumber { get; set ;} 
+            public string? SerialNumber { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تاريخ توليد")]
-            public string StartDate { get; set ;} 
+            public string? StartDate { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع واحد اندازه گيري در سرويس")]
-            public MeasurementUnitType TheMeasurementUnitType { get; set ;} 
+            public MeasurementUnitTypeContarct? TheMeasurementUnitType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نوع واحد اندازه گيري سازمان تعامل کننده در سرويس")]
-            public PBBillMeasurementUnitType ThePBBillMeasurementUnitType { get; set ;} 
+            public PBBillMeasurementUnitType? ThePBBillMeasurementUnitType { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("گروه کالا/ارز سازمان تعامل کننده در سرويس")]
-            public PBBillProductGrp ThePBBillProductGrp { get; set ;} 
+            public PBBillProductGrp? ThePBBillProductGrp { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ورودي سرويس قبض/رسيد انبار")]
-            public PBillStore ThePBillStore { get; set ;} 
+            public PBillStore? ThePBillStore { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره رديف هاي کالاهاي صورتجلسه کشف در قبض انبار")]
             public List<PBillStoreDiscoveryRows> ThePBillStoreDiscoveryRowsList { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("کالا/ارز هاي قبض/رسيد صادر شده بر اساس کلا/ارز هاي صورتجلسه کشف در سرويس")]
             public List<PBillStoreProductDiscovery> ThePBillStoreProductDiscoveryList { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع کالا/ارز/خدمات در سرويس")]
-            public PBProductCurrencyType ThePBProductCurrencyType { get; set ;} 
+            public PBProductCurrencyType? ThePBProductCurrencyType { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("کالا/ارز هاي پرونده بر اساس کالا/ارز هاي قبض/رسيد صادر شده در سرويس")]
             public List<PCaseViolationProductBillST> ThePCaseViolationProductBillSTList { get; set ;} 
             

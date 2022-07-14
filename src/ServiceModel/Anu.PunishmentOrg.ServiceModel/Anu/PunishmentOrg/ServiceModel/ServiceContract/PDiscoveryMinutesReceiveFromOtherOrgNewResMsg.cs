@@ -6,9 +6,9 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
     public class PDiscoveryMinutesReceiveFromOtherOrgNewResMsg
     {
             
-                [System.ComponentModel.DataAnnotations.Required]
+                
             [System.ComponentModel.DisplayName("شناسه يکتا")]
-                public string UniqueNo { get; set ;} 
+                public string? UniqueNo { get; set ;} 
             
 
     }
