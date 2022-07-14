@@ -26,6 +26,7 @@ namespace Anu.Commons.ServiceModel.ServiceResponse
         PDiscoveryMinuteSate_Start = 000628,
         PJudgment = 00062602,
         ThePBBillGeoLocation_Is_Required = 10015,
-        PBillStore_Duplicate_Bill=10065
+        PBillStore_Duplicate_Bill = 10065,
+        PBillStore_NoProductListProvided = 10066
     }
 }
