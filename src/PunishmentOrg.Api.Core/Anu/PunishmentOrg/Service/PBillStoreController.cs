@@ -20,7 +20,7 @@ public class PBillStoreController : IPBillStoreBase
     {
     }
 
-    
+
     public override async Task<ReceivePBillStoreFromScmsResponse> ReceivePBillStoreFromScms([FromBody] ReceivePBillStoreFromScmsRequest request)
     {
         var receivePBillStoreFromScmsResponse = new ReceivePBillStoreFromScmsResponse()
@@ -33,16 +33,24 @@ public class PBillStoreController : IPBillStoreBase
 
             await Login.ValidateLoginAsync(request.Request, GFESUserAccessType.SendPBillStoreService, _unitOfWork);
 
-            if (IsDuplicateEntry(request))            
+            if (IsDuplicateEntry(request))
             {
                 receivePBillStoreFromScmsResponse.Result = Utility.ResultUtility.getResult(ResultType.PBillStore_Duplicate_Bill);
 
                 return receivePBillStoreFromScmsResponse;
             }
-            
+
+            if (IsProductListEmpty(request))
+            {
+                receivePBillStoreFromScmsResponse.Result = Utility.ResultUtility.getResult(ResultType.PBillStore_NoProductListProvided);
+
+                return receivePBillStoreFromScmsResponse;
+            }
 
             PBillStore pBillStore = new()
             {
+                Id = new Guid().ToString().Substring(0,31),
+                Timestamp=1,
                 BillDate = request.BillDate,
                 BillNo = request.BillNumber,
                 CreateDateTime = CalendarHelper.GetCurrentDateTime(),
@@ -91,12 +99,16 @@ public class PBillStoreController : IPBillStoreBase
             int rowNumber = 1;
             foreach (var product in request.ThePBillStoreProductList)
             {
-                var pBillStoreProduct = new PBillStoreProduct();
-                pBillStoreProduct.RowNumber = rowNumber;
-                pBillStoreProduct.IDNumber = product.IDNumber; //previously was Cid_Code
-                pBillStoreProduct.ProductTitle = product.ProductTitle; //previously was Goods_Name
-                pBillStoreProduct.ProductDesc = product.ProductDesc; //previously was Good_Desc
-                pBillStoreProduct.PackingType = product.PackingType; //previously was Package_Type
+                var pBillStoreProduct = new PBillStoreProduct()
+                {
+                    Id = new Guid().ToString().Substring(0,31),
+                    Timestamp=1,
+                    RowNumber = rowNumber,
+                    IDNumber = product.IDNumber, //previously was Cid_Code
+                    ProductTitle = product.ProductTitle, //previously was Goods_Name
+                    ProductDesc = product.ProductDesc, //previously was Good_Desc
+                    PackingType = product.PackingType //previously was Package_Type
+                };
 
                 rowNumber++;
                 pBillStore.ThePBillStoreProductList.Add(pBillStoreProduct);
@@ -105,6 +117,9 @@ public class PBillStoreController : IPBillStoreBase
             receivePBillStoreFromScmsResponse.Result = Utility.ResultUtility.getResult(ResultType.Successful);
             receivePBillStoreFromScmsResponse.UniqueNo = pBillStore.UniqueNo;
 
+            _unitOfWork.PBillStoreRepository.Add(pBillStore);
+            _unitOfWork.Complete();
+
             return receivePBillStoreFromScmsResponse;
         }
         catch (AnuExceptions ex)
@@ -112,6 +127,16 @@ public class PBillStoreController : IPBillStoreBase
             receivePBillStoreFromScmsResponse.Result = ex.result;
             return receivePBillStoreFromScmsResponse;
         }
+        catch (Exception ex)
+        {
+            return new ReceivePBillStoreFromScmsResponse() { Result = Utility.ResultUtility.getResult(ResultType.Error, ex) };
+        }
+
+    }
+
+    private bool IsProductListEmpty(ReceivePBillStoreFromScmsRequest request)
+    {
+        return request.ThePBillStoreProductList is null || request.ThePBillStoreProductList.Count.Equals(0);
     }
 
     private bool IsDuplicateEntry(ReceivePBillStoreFromScmsRequest request)
@@ -120,7 +145,7 @@ public class PBillStoreController : IPBillStoreBase
 
         var billEntity = _unitOfWork.PBillStoreRepository.GetByNumberDate(request.BillNumber, request.BillDate);
 
-        if (billEntity is null)
+        if (billEntity.Result.Count() != 0)
         {
             isDuplicate = true;
         }
