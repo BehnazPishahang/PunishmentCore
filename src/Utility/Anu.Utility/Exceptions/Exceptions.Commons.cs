@@ -16,7 +16,7 @@ namespace Utility.Exceptions
             : base(message, inner) { }
         public AnuExceptions(Enum type) 
         {
-            result = type.getResult();
+            result = type.GetResult();
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponse;
+using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
 using Anu.PunishmentOrg.DataModel.Case;
 using Anu.PunishmentOrg.DataModel.DiscoveryMinutes;
 using Anu.PunishmentOrg.Enumerations;
 using Anu.PunishmentOrg.ServiceModel.ServiceRequest;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponse;
+using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Microsoft.AspNetCore.Mvc;
 using ServiceModel.Constants;
 using Utility;
@@ -30,7 +32,7 @@ namespace Anu.PunishmentOrg.Service
 
                 //_unitOfWork.Complete();
 
-                return AnuResult.Successful.getResult();
+                return AnuResult.Successful.GetResult();
             }
             catch (AnuExceptions ex)
             {
@@ -50,40 +52,40 @@ namespace Anu.PunishmentOrg.Service
             {
                 await Login.ValidateLoginAsync(request.Request, GFESUserAccessType.SendPDiscoveryMinute, _unitOfWork);
 
-                request.UniqueNo.IsDigit(PunishmentOrgResult.Error_UniqueNo_Is_Required);
-                request.UniqueNo.NullOrWhiteSpace(PunishmentOrgResult.Error_UniqueNo_Is_Required);
+                request.UniqueNo.IsDigit(PDiscoveryMinutesResult.Error_UniqueNo_Is_Required);
+                request.UniqueNo.NullOrWhiteSpace(PDiscoveryMinutesResult.Error_UniqueNo_Is_Required);
 
                 var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.UniqueNo);
-                pDiscoveryMinutes.Null(PunishmentOrgResult.PDiscoveryMinuteSate_No_Is_NotValid);
-                pDiscoveryMinutes.TheObjectState.Null(PunishmentOrgResult.Error_to_Find_State);
+                pDiscoveryMinutes.Null(PDiscoveryMinutesResult.PDiscoveryMinuteSate_No_Is_NotValid);
+                pDiscoveryMinutes.TheObjectState.Null(PDiscoveryMinutesResult.Error_to_Find_State);
 
                 switch (pDiscoveryMinutes.TheObjectState.Code)
                 {
                     case PunishmentOrgObjectState.PDiscoveryMinutes.PrimRegistery:
                         sendPDiscoveryMinuteStateResponse.UniqueNo = request.UnitNo;
-                        sendPDiscoveryMinuteStateResponse.Result = PunishmentOrgResult.PDiscoveryMinuteSate_PrimRegistery.getResult();
+                        sendPDiscoveryMinuteStateResponse.Result = PDiscoveryMinutesResult.PDiscoveryMinuteSate_PrimRegistery.GetResult();
                         return sendPDiscoveryMinuteStateResponse;
                     case PunishmentOrgObjectState.PDiscoveryMinutes.SendToSmuggling:
                         sendPDiscoveryMinuteStateResponse.UniqueNo = request.UnitNo;
-                        sendPDiscoveryMinuteStateResponse.Result = PunishmentOrgResult.PDiscoveryMinuteSate_SendToSmuggling.getResult();
+                        sendPDiscoveryMinuteStateResponse.Result = PDiscoveryMinutesResult.PDiscoveryMinuteSate_SendToSmuggling.GetResult();
                         return sendPDiscoveryMinuteStateResponse;
                     case PunishmentOrgObjectState.PDiscoveryMinutes.ConfirmAndSendToUnit:
                         sendPDiscoveryMinuteStateResponse.UniqueNo = request.UnitNo;
                         sendPDiscoveryMinuteStateResponse.UnitNo = pDiscoveryMinutes.TheReceiverUnit.Code;
                         sendPDiscoveryMinuteStateResponse.UnitName = pDiscoveryMinutes.TheReceiverUnit.UnitName;
-                        sendPDiscoveryMinuteStateResponse.Result = PunishmentOrgResult.PDiscoveryMinuteSate_ConfirmAndSendToUnit.getResult();
+                        sendPDiscoveryMinuteStateResponse.Result = PDiscoveryMinutesResult.PDiscoveryMinuteSate_ConfirmAndSendToUnit.GetResult();
                         return sendPDiscoveryMinuteStateResponse;
                     case PunishmentOrgObjectState.PDiscoveryMinutes.ReferToUnit:
                         sendPDiscoveryMinuteStateResponse.UniqueNo = request.UnitNo;
                         sendPDiscoveryMinuteStateResponse.UnitNo = pDiscoveryMinutes.TheReferUnit.Code;
                         sendPDiscoveryMinuteStateResponse.UnitName = pDiscoveryMinutes.TheReferUnit.UnitName;
-                        sendPDiscoveryMinuteStateResponse.Result = PunishmentOrgResult.PDiscoveryMinuteSate_ReferToUnit.getResult();
+                        sendPDiscoveryMinuteStateResponse.Result = PDiscoveryMinutesResult.PDiscoveryMinuteSate_ReferToUnit.GetResult();
                         return sendPDiscoveryMinuteStateResponse;
                     case PunishmentOrgObjectState.PDiscoveryMinutes.ReferToCity:
                         sendPDiscoveryMinuteStateResponse.UniqueNo = request.UnitNo;
                         sendPDiscoveryMinuteStateResponse.UnitNo = pDiscoveryMinutes.TheCityPuoRefUnit.Code;
                         sendPDiscoveryMinuteStateResponse.UnitName = pDiscoveryMinutes.TheCityPuoRefUnit.UnitName;
-                        sendPDiscoveryMinuteStateResponse.Result = PunishmentOrgResult.PDiscoveryMinuteSate_ReferToCity.getResult();
+                        sendPDiscoveryMinuteStateResponse.Result = PDiscoveryMinutesResult.PDiscoveryMinuteSate_ReferToCity.GetResult();
                         return sendPDiscoveryMinuteStateResponse;
                     case PunishmentOrgObjectState.PDiscoveryMinutes.CreateCaseInUnit:
                         sendPDiscoveryMinuteStateResponse = await this.CaseStateOfPDiscoveryMinute(sendPDiscoveryMinuteStateResponse, pDiscoveryMinutes);
@@ -91,18 +93,18 @@ namespace Anu.PunishmentOrg.Service
                         return sendPDiscoveryMinuteStateResponse;
                     case PunishmentOrgObjectState.PDiscoveryMinutes.Start:
                         sendPDiscoveryMinuteStateResponse.UniqueNo = request.UnitNo;
-                        sendPDiscoveryMinuteStateResponse.Result = PunishmentOrgResult.PDiscoveryMinuteSate_Start.getResult();
+                        sendPDiscoveryMinuteStateResponse.Result = PDiscoveryMinutesResult.PDiscoveryMinuteSate_Start.GetResult();
                         return sendPDiscoveryMinuteStateResponse;
                     case PunishmentOrgObjectState.PDiscoveryMinutes.Expire:
                         sendPDiscoveryMinuteStateResponse.UniqueNo = request.UnitNo;
-                        sendPDiscoveryMinuteStateResponse.Result = PunishmentOrgResult.PDiscoveryMinuteSate_Expired.getResult();
+                        sendPDiscoveryMinuteStateResponse.Result = PDiscoveryMinutesResult.PDiscoveryMinuteSate_Expired.GetResult();
                         //اگر گزارش بازرسی ابطال شده باشد دلیل ابطال را پر میکنیم
                         //این فیلد فعلا دیده نشده است 
                         //ToDo
                         return sendPDiscoveryMinuteStateResponse;
                     default:
                         sendPDiscoveryMinuteStateResponse.UniqueNo = request.UnitNo;
-                        sendPDiscoveryMinuteStateResponse.Result = PunishmentOrgResult.Error_to_Find_State.getResult();
+                        sendPDiscoveryMinuteStateResponse.Result = PDiscoveryMinutesResult.Error_to_Find_State.GetResult();
                         return sendPDiscoveryMinuteStateResponse;
                 }
             }
@@ -112,7 +114,7 @@ namespace Anu.PunishmentOrg.Service
             }
             catch(Exception ex)
             {
-                return new SendPDiscoveryMinutesStateResponse { Result = AnuResult.Error.getResult(ex) };
+                return new SendPDiscoveryMinutesStateResponse { Result = AnuResult.Error.GetResult(ex) };
             }
 
         }
@@ -162,7 +164,7 @@ namespace Anu.PunishmentOrg.Service
             {
                 if (Executive.Contains(item.TheHandlerUnit.TheGUnitType.Code))
                 {
-                    sendPDiscoveryMinutesStateResponse.Result = PunishmentOrgResult.Execution.getResult();
+                    sendPDiscoveryMinutesStateResponse.Result = PDiscoveryMinutesResult.Execution.GetResult();
                     if (item.CaseArchiveState == PUCaseArchiveState.Closed)
                         sendPDiscoveryMinutesStateResponse.Result.Description = "حکم صادر شده اجرا شده است.";
                     if (item.CaseArchiveState == PUCaseArchiveState.Active)
@@ -182,7 +184,7 @@ namespace Anu.PunishmentOrg.Service
 
             if (thePJudgmentCase.Count() != 0)
             {
-                sendPDiscoveryMinutesStateResponse.Result = PunishmentOrgResult.PJudgment.getResult();
+                sendPDiscoveryMinutesStateResponse.Result = PDiscoveryMinutesResult.PJudgment.GetResult();
 
                 #region Fiil_Judgment_Information
                 var pJudgmentCase = thePJudgmentCase.ToList()[0];
@@ -202,7 +204,7 @@ namespace Anu.PunishmentOrg.Service
             #region تشکیل پرونده و شروع به رسیدگی
             else
             {
-                sendPDiscoveryMinutesStateResponse.Result = PunishmentOrgResult.PDiscoveryMinuteSate_CreateCase.getResult();
+                sendPDiscoveryMinutesStateResponse.Result = PDiscoveryMinutesResult.PDiscoveryMinuteSate_CreateCase.GetResult();
                 return sendPDiscoveryMinutesStateResponse;
             }
             #endregion تشکیل پرونده و شروع به رسیدگی
