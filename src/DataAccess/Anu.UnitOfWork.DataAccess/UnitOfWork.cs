@@ -13,6 +13,8 @@
             GFESUserAccess = new BaseInfo.DataAccess.FrontEndSecurity.GFESUserAccessRepository(_context);
             PRegistaryTimeCase = new PunishmentOrg.DataAccess.PCase.PRegistaryTimeCaseRepository(_context);
             PJudgmentCase = new PunishmentOrg.DataAccess.Terminate.PJudgmentCaseRepository(_context);
+            PBillStoreRepository = new Anu.PunishmentOrg.DataAccess.PBillStore.PBillStoreRepository(_context);
+            PBExchangeUnitRepository = new Anu.PunishmentOrg.DataAccess.BaseInfo.PBExchangeUnitRepository(_context);
         }
         public Anu.PunishmentOrg.Domain.DiscoveryMinutes.IPDiscoveryMinutesRepository PDiscoveryMinutes { get; private set; }
         public Anu.PunishmentOrg.Domain.PBillStore.IPBillSoreRepository PBillStoreRepository { get; private set; }
