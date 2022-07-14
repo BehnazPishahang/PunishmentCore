@@ -66,13 +66,12 @@ namespace Utility.CalendarHelper
             var gregorianDate = DateTime.Now;
             var persianCalendar = new PersianCalendar();
 
-            var currentDateTime = ("{0}/{1}/{2} {3}:{4}:{5}",
-                      persianCalendar.GetDayOfMonth(gregorianDate),
-                      persianCalendar.GetMonth(gregorianDate),
+            var currentDateTime = string.Format("{0}/{1}/{2} {3}:{4}",
                       persianCalendar.GetYear(gregorianDate),
+                      persianCalendar.GetMonth(gregorianDate),
+                      persianCalendar.GetDayOfMonth(gregorianDate),
                       persianCalendar.GetHour(gregorianDate),
-                      persianCalendar.GetMinute(gregorianDate),
-                      persianCalendar.GetSecond(gregorianDate));
+                      persianCalendar.GetMinute(gregorianDate));
 
             return currentDateTime.ToString();
         }
@@ -86,10 +85,10 @@ namespace Utility.CalendarHelper
             var gregorianDate = DateTime.Now;
             var persianCalendar = new PersianCalendar();
 
-            var currentDate = ("{0}/{1}/{2}",
-                      persianCalendar.GetDayOfMonth(gregorianDate),
+            var currentDate = string.Format("{0}/{1}/{2}",
+                      persianCalendar.GetYear(gregorianDate),
                       persianCalendar.GetMonth(gregorianDate),
-                      persianCalendar.GetYear(gregorianDate));
+                      persianCalendar.GetDayOfMonth(gregorianDate));
 
 
             return currentDate.ToString();
@@ -104,7 +103,7 @@ namespace Utility.CalendarHelper
             var gregorianDate = DateTime.Now;
             var persianCalendar = new PersianCalendar();
 
-            var currentTime = ("{0}/{1}/{2}",
+            var currentTime = string.Format("{0}/{1}/{2}",
                       persianCalendar.GetHour(gregorianDate),
                       persianCalendar.GetMinute(gregorianDate),
                       persianCalendar.GetSecond(gregorianDate));
@@ -140,12 +139,12 @@ namespace Utility.CalendarHelper
             var persianCalendar = new PersianCalendar();
             var dayOfWeek = persianCalendar.GetDayOfWeek(gregorianDate);
 
-            var fullDate = ("{0}, {1}/{2}/{3}",
+            var fullDate = string.Format("{0}, {1}/{2}/{3}",
                       CalculateDayOfWeek(dayOfWeek),
                       persianCalendar.GetDayOfWeek(gregorianDate),
-                      persianCalendar.GetDayOfMonth(gregorianDate),
+                      persianCalendar.GetYear(gregorianDate),
                       persianCalendar.GetMonth(gregorianDate),
-                      persianCalendar.GetYear(gregorianDate));
+                      persianCalendar.GetDayOfMonth(gregorianDate));
 
             return fullDate.ToString();
         }
@@ -161,11 +160,11 @@ namespace Utility.CalendarHelper
             var persianCalendar = new PersianCalendar();
             var dayOfWeek = persianCalendar.GetDayOfWeek(gregorianDate);
 
-            var fullDateTime = ("{0}, {1}/{2}/{3} {4}:{5}:{6}",
+            var fullDateTime = string.Format("{0}, {1}/{2}/{3} {4}:{5}:{6}",
                       CalculateDayOfWeek(dayOfWeek),
-                      persianCalendar.GetDayOfMonth(gregorianDate),
-                      persianCalendar.GetMonth(gregorianDate),
                       persianCalendar.GetYear(gregorianDate),
+                      persianCalendar.GetMonth(gregorianDate),
+                      persianCalendar.GetDayOfMonth(gregorianDate),
                       persianCalendar.GetHour(gregorianDate),
                       persianCalendar.GetMinute(gregorianDate),
                       persianCalendar.GetSecond(gregorianDate));
