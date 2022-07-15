@@ -1,11 +1,9 @@
-﻿using Anu.DataAccess.Repositories;
+﻿using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using Anu.DataAccess.Repositories;
 using Anu.PunishmentOrg.DataModel.BaseInfo;
 using Anu.PunishmentOrg.Domain.BaseInfo;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Anu.BaseInfo.DataModel.ExchangeData;
 using Utility.Guard;
-using Anu.Commons.ServiceModel.ServiceResponse;
 
 namespace Anu.PunishmentOrg.DataAccess.BaseInfo;
 
@@ -19,7 +17,7 @@ public class PBExchangeUnitRepository : GenericRepository<DataModel.BaseInfo.PBE
     {
         var najaUnitId = await _context.Set<Anu.BaseInfo.DataModel.ExchangeData.NAJAUnit>().Where(x => x.Code == code).Select(n => n.Id).FirstAsync();
 
-        najaUnitId.Null(ResultType.Error);
+        najaUnitId.Null(AnuResult.Error);
 
         var pbExchange = await _context.Set<PBExchangeUnit>().Where(p => p.Id == najaUnitId.ToString()).ToListAsync();
 
