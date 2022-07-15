@@ -1,16 +1,17 @@
-﻿using Anu.Commons.ServiceModel.ServiceResponse;
+﻿using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
 using Anu.PunishmentOrg.DataModel.BaseInfo;
 using Anu.PunishmentOrg.DataModel.BillStore;
 using Anu.PunishmentOrg.ServiceBase;
 using Anu.PunishmentOrg.ServiceModel.ServiceRequest;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponse;
+using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Microsoft.AspNetCore.Mvc;
 using ServiceModel.Constants;
 using System.Text;
+using Utility;
 using Utility.CalendarHelper;
 using Utility.Exceptions;
-using Utility.Guard;
 
 namespace Anu.PunishmentOrg.Service;
 
@@ -33,24 +34,22 @@ public class PBillStoreController : IPBillStoreBase
 
             await Login.ValidateLoginAsync(request.Request, GFESUserAccessType.SendPBillStoreService, _unitOfWork);
 
+            //TODO: Add bill number(max:32) and date(max:12?) length validation
+
             if (IsDuplicateEntry(request))
             {
-                receivePBillStoreFromScmsResponse.Result = Utility.ResultUtility.getResult(ResultType.PBillStore_Duplicate_Bill);
-
-                return receivePBillStoreFromScmsResponse;
+                return Respond(PBillStoreResult.PBillStore_Duplicate_Bill);
             }
 
             if (IsProductListEmpty(request))
             {
-                receivePBillStoreFromScmsResponse.Result = Utility.ResultUtility.getResult(ResultType.PBillStore_NoProductListProvided);
-
-                return receivePBillStoreFromScmsResponse;
+                return Respond(PBillStoreResult.PBillStore_NoProductListProvided);
             }
 
             PBillStore pBillStore = new()
             {
-                Id = new Guid().ToString().Substring(0,31),
-                Timestamp=1,
+                Id = new Guid().ToString()[..31],
+                Timestamp = 1,
                 BillDate = request.BillDate,
                 BillNo = request.BillNumber,
                 CreateDateTime = CalendarHelper.GetCurrentDateTime(),
@@ -62,9 +61,6 @@ public class PBillStoreController : IPBillStoreBase
             pBillStore.ThePDiscoveryMinutes = (pDiscoveryMinutes is null) ? null : pDiscoveryMinutes;
 
             pBillStore.TheObjectState = _unitOfWork.ObjectState.GetById(PunishmentOrgObjectState.PBillStore.Confirm);
-            //InstanceBuilder.GetEntityById<IObjectState>(Anu.PunishmentOrg.ObjectStates.PBillStore.Confirm);
-
-            //pBillStore.ThePDiscoveryMinutes = InstanceBuilder.GetEntityByCode<IPDiscoveryMinutes>(request.ProceedingNumber, PunishmentOrgQueryBase.PDiscoveryMinutes.UniqueNo);
 
             pBillStore.TheDiscoveryOrg = GetDiscoveryOrganization(request.CodingDeviceDetector);
             pBillStore.id_shenaseResid = request.TrackingCodeStores;
@@ -101,8 +97,8 @@ public class PBillStoreController : IPBillStoreBase
             {
                 var pBillStoreProduct = new PBillStoreProduct()
                 {
-                    Id = new Guid().ToString().Substring(0,31),
-                    Timestamp=1,
+                    Id = new Guid().ToString()[..31],
+                    Timestamp = 1,
                     RowNumber = rowNumber,
                     IDNumber = product.IDNumber, //previously was Cid_Code
                     ProductTitle = product.ProductTitle, //previously was Goods_Name
@@ -114,13 +110,10 @@ public class PBillStoreController : IPBillStoreBase
                 pBillStore.ThePBillStoreProductList.Add(pBillStoreProduct);
             }
 
-            receivePBillStoreFromScmsResponse.Result = Utility.ResultUtility.getResult(ResultType.Successful);
-            receivePBillStoreFromScmsResponse.UniqueNo = pBillStore.UniqueNo;
-
             _unitOfWork.PBillStoreRepository.Add(pBillStore);
             _unitOfWork.Complete();
 
-            return receivePBillStoreFromScmsResponse;
+            return Respond(AnuResult.Successful, pBillStore.UniqueNo);
         }
         catch (AnuExceptions ex)
         {
@@ -129,11 +122,26 @@ public class PBillStoreController : IPBillStoreBase
         }
         catch (Exception ex)
         {
-            return new ReceivePBillStoreFromScmsResponse() { Result = Utility.ResultUtility.getResult(ResultType.Error, ex) };
+            return new ReceivePBillStoreFromScmsResponse() { Result = AnuResult.Successful.GetResult(ex) };
         }
 
     }
 
+    private ReceivePBillStoreFromScmsResponse Respond(PBillStoreResult result)
+    {
+        var response = new ReceivePBillStoreFromScmsResponse() { Result = result.GetResult() };
+        return response;
+    }
+    private ReceivePBillStoreFromScmsResponse Respond(AnuResult result, string uniqueNumber = "-1")
+    {
+        var response = new ReceivePBillStoreFromScmsResponse()
+        {
+            Result = result.GetResult(),
+            UniqueNo = uniqueNumber
+        };
+        return response;
+    }
+   
     private bool IsProductListEmpty(ReceivePBillStoreFromScmsRequest request)
     {
         return request.ThePBillStoreProductList is null || request.ThePBillStoreProductList.Count.Equals(0);
