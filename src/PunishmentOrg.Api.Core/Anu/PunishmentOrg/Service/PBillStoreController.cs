@@ -122,7 +122,7 @@ public class PBillStoreController : IPBillStoreBase
         }
         catch (Exception ex)
         {
-            return new ReceivePBillStoreFromScmsResponse() { Result = AnuResult.Successful.GetResult(ex) };
+            return new ReceivePBillStoreFromScmsResponse() { Result = AnuResult.Error.GetResult(ex) };
         }
 
     }
