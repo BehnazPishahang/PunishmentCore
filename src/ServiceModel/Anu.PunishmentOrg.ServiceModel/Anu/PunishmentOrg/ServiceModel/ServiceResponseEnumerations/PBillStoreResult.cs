@@ -18,6 +18,6 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
         PBillStore_Duplicate_Bill = -30001,
         PBillStore_NoProductListProvided = -30002,
         PBillStore_BillNumber_IsTooLong = -30003,
-        PBillStore_Date_IsTooLong = -30004
+        PBillStore_Date_IsInvalid = -30004
     }
 }

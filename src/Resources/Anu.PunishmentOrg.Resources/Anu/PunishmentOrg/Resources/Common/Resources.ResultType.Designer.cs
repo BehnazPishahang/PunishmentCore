@@ -8,8 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Anu.PunishmentOrg.Resources.Anu.PunishmentOrg.Resources.Common {
-    using System;
+namespace Anu.PunishmentOrg.Resources.Common {
+
     
     
     /// <summary>
