@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http.Json;
+using System.Security.AccessControl;
 
 namespace Anu.PunishmentOrg.ApiSample.PBillStore
 {
@@ -50,7 +51,7 @@ namespace Anu.PunishmentOrg.ApiSample.PBillStore
                 PackingType = "ضربه گیر"
             };
 
-            var pBillStore = new PBillStoreFromScms()
+            var pBillStore = new ReceivePBillStoreFromScmsRequest()
             {
                 BillDate = "1401/01/01",
                 BillNumber = "123456789101112",
@@ -68,11 +69,11 @@ namespace Anu.PunishmentOrg.ApiSample.PBillStore
                     apiPerson2
                 },
 
-                //Request =
-                //{
-                //    UserName = "Service.SCMS",
-                //    PassWord = "123qweR",
-                //}
+                Request =
+                {
+                    UserName = "Service.SCMS",
+                    PassWord = "123qweR",
+                }
 
             };
 
@@ -80,8 +81,15 @@ namespace Anu.PunishmentOrg.ApiSample.PBillStore
             var url = "http://localhost:93/SendPDiscoveryMinutesState";
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(pBillStore, Formatting.Indented);
 
+            SaveJsonFileByCodeFile(json);
+
             var pBillStoreResult = this.CallApi<ReceivePBillStoreFromScmsRequest>(url, pBillStore);
+
+
+
         }
+
+
         #endregion
 
         #region CallApi
@@ -285,5 +293,38 @@ namespace Anu.PunishmentOrg.ApiSample.PBillStore
         }
 
         #endregion Response Classes
+
+
+
+
+        private static void SaveJsonFileByCodeFile(string json)
+        {
+            string path = GetCodeFilePath();
+
+            GrantWriteAccess(path);
+
+            File.WriteAllText(path + "/file.json", json);
+        }
+
+        private static string GetCodeFilePath()
+        {
+            var currentNamespace = typeof(ReceivePBillStoreFromScmsSample).Namespace;
+
+            var namespaceSections = currentNamespace.Split('.');
+
+            var path = string.Format("../../../{0}/{1}/{2}/{3}", namespaceSections[0], namespaceSections[1], namespaceSections[2], namespaceSections[3]);
+
+            return path;
+        }
+        private static void GrantWriteAccess(string path)
+        {
+            var username = Environment.UserName;
+            var directoryInfo = new DirectoryInfo(path);
+            var directorySecurity = directoryInfo.GetAccessControl();
+            directorySecurity.AddAccessRule(new FileSystemAccessRule(username, FileSystemRights.FullControl, InheritanceFlags.ObjectInherit, PropagationFlags.InheritOnly, AccessControlType.Allow));
+            directoryInfo.Attributes &= ~FileAttributes.ReadOnly;
+            directoryInfo.SetAccessControl(directorySecurity);
+        }
+
     }
 }
