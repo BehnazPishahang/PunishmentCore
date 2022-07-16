@@ -9,12 +9,12 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع محل و مکان محل کشف")]
             public Anu.PunishmentOrg.Enumerations.PBDiscoveryMinutesType PBDiscoveryMinuteType { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ورودي سرويس صورتجلسه کشف")]
             public PDiscoveryMinutes ThePDiscoveryMinutes { get; set ;} 
             

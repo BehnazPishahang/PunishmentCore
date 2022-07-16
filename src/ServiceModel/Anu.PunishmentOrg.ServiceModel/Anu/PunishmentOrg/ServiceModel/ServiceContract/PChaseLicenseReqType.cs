@@ -9,7 +9,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع مجوز تعقيب/بازرسي")]
             public Anu.PunishmentOrg.Enumerations.PUChaseLicenseType ChaseLicenseType { get; set ;} 
             

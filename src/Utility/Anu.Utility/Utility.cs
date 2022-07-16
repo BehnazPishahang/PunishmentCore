@@ -9,7 +9,7 @@ namespace Utility
     public static class Utility
     {
 
-        public static int toInt(this string text)
+        public static int ToInt(this string text)
         {
             int result;
 
@@ -19,6 +19,19 @@ namespace Utility
                 result = Convert.ToInt32(text);
 
             return result;
+        }
+
+        public static string GetRandomNumber(int length)
+        {
+            string AllowChars = "0123456789";
+            var chars = new char[length];
+            Random random = new();
+            for (int i = 0; i < length; i++)
+            {
+                chars[i] = AllowChars[random.Next(0, AllowChars.Length)];
+            }
+
+            return new string(chars);
         }
 
     }

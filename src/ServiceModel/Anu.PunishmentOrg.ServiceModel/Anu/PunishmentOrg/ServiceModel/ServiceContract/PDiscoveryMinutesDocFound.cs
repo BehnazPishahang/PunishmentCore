@@ -10,37 +10,37 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         }
             
             [System.ComponentModel.DisplayName("تاريخ مدرک پيوست")]
-            public string AttachmentDocDate { get; set ;} 
+            public string? AttachmentDocDate { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره مدرک پيوست")]
-            public string AttachmentDocNo { get; set ;} 
+            public string? AttachmentDocNo { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره رسيد/قبض سازمان تحويل گيرنده ارز")]
-            public string BillNoDocFound { get; set ;} 
+            public string? BillNoDocFound { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره يا مشخصه")]
-            public string Characteristic { get; set ;} 
+            public string? Characteristic { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن شماره يا مشخصه")]
             public Anu.PunishmentOrg.Enumerations.CharacteristicDoc CharacteristicRN { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("تعداد")]
             public long? Count { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("زمان ثبت")]
-            public string CreateDateTime { get; set ;} 
+            public string? CreateDateTime { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("توضيحات")]
-            public string Description { get; set ;} 
+            public string? Description { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن توضيحات")]
@@ -51,9 +51,9 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             public byte[] DocFile { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("صادر کننده")]
-            public string Exporter { get; set ;} 
+            public string? Exporter { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("پسوند فايل")]
@@ -61,7 +61,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("تاريخ صدور")]
-            public string IssuingDate { get; set ;} 
+            public string? IssuingDate { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن تاريخ صدور")]
@@ -73,11 +73,11 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("ساير اطلاعات ضميمه")]
-            public string OtherData { get; set ;} 
+            public string? OtherData { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("مالک ")]
-            public string Owner { get; set ;} 
+            public string? Owner { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن مالک ")]
@@ -89,44 +89,44 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("مسير و نام فايل پيوست بر روي حافظه جانبي/شناسه فايل در سامانه مديريت سند")]
-            public string PathAndFileName { get; set ;} 
+            public string? PathAndFileName { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("وضعيت پردازش پيوست")]
             public Anu.BaseInfo.Enumerations.AttachmentProcessState ProcessState { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره ترتيب")]
             public long? RowNumber { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نحوه ذخيره فايل پيوست")]
             public Anu.BaseInfo.Enumerations.SaveAttachmentType SaveAttachmentType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("ثانيه و ميلي ثانيه ثبت با فرمت SS:MS")]
-            public string SecondMili { get; set ;} 
+            public string? SecondMili { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("عنوان")]
-            public string SubjectTitle { get; set ;} 
+            public string? SubjectTitle { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع سند يا پيوست در سرويس")]
             public AttachmentType TheAttachmentType { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ورودي سرويس صورتجلسه کشف")]
             public PDiscoveryMinutes ThePDiscoveryMinutes { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("عنوان ضميمه")]
-            public string Title { get; set ;} 
+            public string? Title { get; set ;} 
             
 
     }

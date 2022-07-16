@@ -10,17 +10,17 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         }
             
             [System.ComponentModel.DisplayName("کلمه عبور")]
-            public string PassWord { get; set ;} 
+            public string? PassWord { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شناسه يکتا")]
-            public string UniqueNo { get; set ;} 
+            public string? UniqueNo { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نام کاربري")]
-            public string UserName { get; set ;} 
+            public string? UserName { get; set ;} 
             
 
     }

@@ -9,19 +9,19 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        
         [System.ComponentModel.DisplayName("از تاريخ و ساعت")]
-        public string FromDateTime { get; set; }
+        public string? FromDateTime { get; set; }
 
 
-        [System.ComponentModel.DataAnnotations.Required]
+        
         [System.ComponentModel.DisplayName("متن امضاي كاربر")]
-        public string SignText { get; set; }
+        public string? SignText { get; set; }
 
 
-        [System.ComponentModel.DataAnnotations.Required]
+        
         [System.ComponentModel.DisplayName("تا تاريخ و ساعت")]
-        public string ToDateTime { get; set; }
+        public string? ToDateTime { get; set; }
 
 
     }

@@ -9,7 +9,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع واحد صنفي در سرويس")]
             public PBTradeUnitType ThePBTradeUnitType { get; set ;} 
             

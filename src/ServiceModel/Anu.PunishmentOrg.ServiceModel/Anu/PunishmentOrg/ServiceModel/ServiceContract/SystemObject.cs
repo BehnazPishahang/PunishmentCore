@@ -9,31 +9,31 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("اسم dll")]
-            public string AssemblyName { get; set ;} 
+            public string? AssemblyName { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("كد")]
-            public string Code { get; set ;} 
+            public string? Code { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نام انگليسي")]
-            public string EnglishName { get; set ;} 
+            public string? EnglishName { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("عنوان فارسي")]
-            public string FarsiName { get; set ;} 
+            public string? FarsiName { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شناسه شيء در ابزار تحليل")]
-            public string RoseId { get; set ;} 
+            public string? RoseId { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع شيء")]
             public Anu.BaseInfo.Enumerations.SystemObjectType SystemObjectType { get; set ;} 
             

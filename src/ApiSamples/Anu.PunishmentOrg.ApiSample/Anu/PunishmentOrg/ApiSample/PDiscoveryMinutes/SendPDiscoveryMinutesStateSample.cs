@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http.Json;
-
+using System.Security.AccessControl;
 
 namespace Anu.PunishmentOrg.ApiSample.PDiscoveryMinutes;
 
@@ -27,7 +27,7 @@ internal class SendPDiscoveryMinutesStateSample
 
         var url = "http://localhost:93/SendPDiscoveryMinutesState";
         var json = Newtonsoft.Json.JsonConvert.SerializeObject(sendPDiscoveryMinutesStateRequest, Formatting.Indented);
-
+        SaveJsonFileByCodeFile(json);
         var PDiscoveryMinutesStateResult = this.CallApi<SendPDiscoveryMinutesStateResponse>(url, sendPDiscoveryMinutesStateRequest);
 
         Console.WriteLine("send");
@@ -178,4 +178,35 @@ internal class SendPDiscoveryMinutesStateSample
     }
 
     #endregion Response Classes
+
+
+
+    private static void SaveJsonFileByCodeFile(string json)
+        {
+            string path = GetCodeFilePath();
+
+            GrantWriteAccess(path);
+
+            File.WriteAllText(path + "/file.json", json);
+        }
+
+        private static string GetCodeFilePath()
+        {
+            var currentNamespace = typeof(SendPDiscoveryMinutesStateSample).Namespace;
+
+            var namespaceSections = currentNamespace.Split('.');
+
+            var path = string.Format("../../../{0}/{1}/{2}/{3}", namespaceSections[0], namespaceSections[1], namespaceSections[2], namespaceSections[3]);
+
+            return path;
+        }
+        private static void GrantWriteAccess(string path)
+        {
+            var username = Environment.UserName;
+            var directoryInfo = new DirectoryInfo(path);
+            var directorySecurity = directoryInfo.GetAccessControl();
+            directorySecurity.AddAccessRule(new FileSystemAccessRule(username, FileSystemRights.FullControl, InheritanceFlags.ObjectInherit, PropagationFlags.InheritOnly, AccessControlType.Allow));
+            directoryInfo.Attributes &= ~FileAttributes.ReadOnly;
+            directoryInfo.SetAccessControl(directorySecurity);
+        }
 }

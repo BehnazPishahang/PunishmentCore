@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace Anu.PunishmentOrg.Resources.Common {
-    using System;
+
     
     
     /// <summary>
@@ -94,6 +94,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string Execution {
             get {
                 return ResourceManager.GetString("Execution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره قبض تکراری است و امروز قابل ثبت نیست.
+        /// </summary>
+        public static string PBillStore_Duplicate_Bill {
+            get {
+                return ResourceManager.GetString("PBillStore_Duplicate_Bill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لیست کالا خالی است!.
+        /// </summary>
+        public static string PBillStore_NoProductListProvided {
+            get {
+                return ResourceManager.GetString("PBillStore_NoProductListProvided", resourceCulture);
             }
         }
         

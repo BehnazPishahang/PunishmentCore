@@ -10,48 +10,48 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         }
             
             [System.ComponentModel.DisplayName("نشاني")]
-            public string Address { get; set ;} 
+            public string? Address { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تاريخ تولد/ثبت")]
-            public string BirthDate { get; set ;} 
+            public string? BirthDate { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام خانوادگي")]
-            public string Family { get; set ;} 
+            public string? Family { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("نام پدر")]
-            public string FatherName { get; set ;} 
+            public string? FatherName { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تلفن همراه")]
-            public string MobilNumber { get; set ;} 
+            public string? MobilNumber { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نام")]
-            public string Name { get; set ;} 
+            public string? Name { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره ملي/شناسه ملي")]
-            public string NationalCode { get; set ;} 
+            public string? NationalCode { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("تابعيت")]
             public Anu.PunishmentOrg.Enumerations.PUNationality Nationality { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع شخص")]
             public Anu.BaseInfo.Enumerations.PersonType PersonType { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کد پستي")]
-            public string PostCode { get; set ;} 
+            public string? PostCode { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره ترتيب")]
             public long? RowNumber { get; set ;} 
             
@@ -60,7 +60,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             public Anu.BaseInfo.Enumerations.SexType Sex { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("ورودي سرويس گزارش بازرسي")]
             public PInspectionReport ThePInspectionReport { get; set ;} 
             

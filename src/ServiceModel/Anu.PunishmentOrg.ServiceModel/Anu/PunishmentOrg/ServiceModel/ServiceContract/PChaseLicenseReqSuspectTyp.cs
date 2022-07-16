@@ -13,17 +13,17 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             public Anu.PunishmentOrg.Enumerations.PUConclusion ConclusionRequest { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نوع مجوز در مورد شخص")]
             public Anu.PunishmentOrg.Enumerations.LicensePersonType LicensePersonType { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره ترتيب")]
             public long? RowNumber { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("اشخاص مورد تعقيب درخواست مجوز تعقيب/بازرسي در سرويس")]
             public PChaseLicenseReqSuspect ThePChaseLicenseReqSuspect { get; set ;} 
             

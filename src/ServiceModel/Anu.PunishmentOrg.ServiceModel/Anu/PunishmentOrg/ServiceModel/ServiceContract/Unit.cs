@@ -9,17 +9,17 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
         {
         }
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("کد")]
-            public string LocationCode { get; set ;} 
+            public string? LocationCode { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("نام")]
-            public string LocationName { get; set ;} 
+            public string? LocationName { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("وضعيت")]
             public Anu.BaseInfo.Enumerations.State State { get; set ;} 
             

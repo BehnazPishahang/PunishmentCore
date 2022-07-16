@@ -13,7 +13,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             public Anu.PunishmentOrg.Enumerations.PUConclusion ConclusionRequest { get; set ;} 
             
             
-            [System.ComponentModel.DataAnnotations.Required]
+            
             [System.ComponentModel.DisplayName("شماره ترتيب")]
             public long? RowNumber { get; set ;} 
             
