@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceModel.Constants
+namespace Anu.Constants.ServiceModel.PunishmentOrg
 {
     public static class GFESUserAccessType
     {
@@ -139,17 +139,5 @@ namespace ServiceModel.Constants
     {
         Transferee = 1,
         Delivery
-    }
-
-
-    /// <summary>
-    /// ثابت های عمومی که در دسته بندی خاصی قرار نمیگیرند و یا همه جا قابل استفاده هستند
-    /// </summary>
-    public static class ConventionalConstants
-    {
-        /// <summary>
-        /// طول شناسه یکتا
-        /// </summary>
-        public const int UniqueNumberLength = 18;
     }
 }

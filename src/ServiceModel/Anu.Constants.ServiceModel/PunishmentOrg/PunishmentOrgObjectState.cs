@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServiceModel.Constants
+namespace Anu.Constants.ServiceModel.PunishmentOrg
 {
     public class PunishmentOrgObjectState
     {
@@ -56,19 +56,22 @@ namespace ServiceModel.Constants
 
         }
 
+        /// <summary>
+        /// قبض انبار
+        /// </summary>
         public static class PBillStore
-    {
+        {
 
-        /// <summary>
-        /// تایید شده
-        /// </summary>
-        public const string Confirm = "000640";
+            /// <summary>
+            /// تایید شده
+            /// </summary>
+            public const string Confirm = "000640";
 
-        /// <summary>
-        /// پیش نویس
-        /// </summary>
-        public const string Draft = "000641";
-    }
+            /// <summary>
+            /// پیش نویس
+            /// </summary>
+            public const string Draft = "000641";
+        }
 
 
     }
