@@ -1,6 +1,7 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
+using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.PunishmentOrg.DataModel.Case;
 using Anu.PunishmentOrg.DataModel.DiscoveryMinutes;
 using Anu.PunishmentOrg.Enumerations;
@@ -8,7 +9,6 @@ using Anu.PunishmentOrg.ServiceModel.ServiceRequest;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponse;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Microsoft.AspNetCore.Mvc;
-using ServiceModel.Constants;
 using Utility;
 using Utility.Exceptions;
 using Utility.Guard;

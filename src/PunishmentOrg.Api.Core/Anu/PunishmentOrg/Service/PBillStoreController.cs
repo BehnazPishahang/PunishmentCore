@@ -1,5 +1,6 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
+using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.PunishmentOrg.DataModel.BaseInfo;
 using Anu.PunishmentOrg.DataModel.BillStore;
 using Anu.PunishmentOrg.ServiceBase;
@@ -7,7 +8,6 @@ using Anu.PunishmentOrg.ServiceModel.ServiceRequest;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponse;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Microsoft.AspNetCore.Mvc;
-using ServiceModel.Constants;
 using System.Text;
 using Utility;
 using Utility.CalendarHelper;
@@ -54,7 +54,7 @@ public class PBillStoreController : IPBillStoreBase
                 BillNo = request.BillNumber,
                 CreateDateTime = CalendarHelper.GetCurrentDateTime(),
                 PCaseNo = request.ParentContentNumber,
-                UniqueNo = Utility.Utility.GetRandomNumber(ConventionalConstants.UniqueNumberLength)
+                UniqueNo = Utility.Utility.GetRandomNumber(Anu.Constants.ServiceModel.General.GeneralConstants.ConventionalConstants.UniqueNumberLength)
             };
 
             var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
