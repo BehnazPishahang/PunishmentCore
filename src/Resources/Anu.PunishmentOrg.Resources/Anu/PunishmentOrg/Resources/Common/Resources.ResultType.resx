@@ -150,7 +150,7 @@
     <comment>20005</comment>
   </data>
   <data name="PDiscoveryMinuteSate_Expired" xml:space="preserve">
-    <value>دریافت نسخه فیزیکی صورتجلسه کشف قبل از نسخه الکترونیکی</value>
+    <value>ابطال شده است .</value>
     <comment>20006</comment>
   </data>
   <data name="PDiscoveryMinuteSate_No_Is_NotValid" xml:space="preserve">

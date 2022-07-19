@@ -8,8 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Anu.PunishmentOrg.Resources.Common {
-
+namespace Anu.PunishmentOrg.Resources.Anu.PunishmentOrg.Resources.Common {
+    using System;
     
     
     /// <summary>
@@ -134,7 +134,7 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to دریافت نسخه فیزیکی صورتجلسه کشف قبل از نسخه الکترونیکی.
+        ///   Looks up a localized string similar to ابطال شده است ..
         /// </summary>
         public static string PDiscoveryMinuteSate_Expired {
             get {
