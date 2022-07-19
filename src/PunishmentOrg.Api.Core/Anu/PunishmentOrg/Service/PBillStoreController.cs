@@ -15,7 +15,7 @@ using Utility.Exceptions;
 
 namespace Anu.PunishmentOrg.Service;
 
-public class PBillStoreController : IPBillStoreBase
+public class PBillStoreController : ServiceBase.PBillStoreBase
 {
     public PBillStoreController(Anu.DataAccess.IUnitOfWork unitOfWork) : base(unitOfWork)
     {

@@ -16,7 +16,7 @@ using Utility.Guard;
 namespace Anu.PunishmentOrg.Service
 {
 
-    public class PDiscoveryMinutesController : Anu.PunishmentOrg.ServiceBase.IPDiscoveryMinutesBase
+    public class PDiscoveryMinutesController : Anu.PunishmentOrg.ServiceBase.PDiscoveryMinutesBase
     {
         public PDiscoveryMinutesController(Anu.DataAccess.IUnitOfWork unitOfWork) : base(unitOfWork)
         {
