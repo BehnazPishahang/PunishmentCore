@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Anu.BaseInfo.DataModel\Anu.BaseInfo.DataModel.csproj" />
+    <ProjectReference Include="..\Anu.Oracle.DbContext\Anu.Oracle.DbContext.csproj" />
   </ItemGroup>
 
 </Project>

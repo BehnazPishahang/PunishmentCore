@@ -9,6 +9,7 @@ namespace Anu.DataModel
     {
         [Key]
         [Column("ID")]
+        [Microsoft.EntityFrameworkCore.Unicode(false)]
         public TKey? Id { get; set; }
 
         [Column("TIMESTAMP")]

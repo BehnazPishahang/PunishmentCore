@@ -59,6 +59,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         public virtual string? MechanizeInfo { get; set; }
 
         [Column("NO")]
+        [Microsoft.EntityFrameworkCore.Unicode(false)]
         public virtual string? No { get; set; }
 
         [Column("PETITIONDESCRIPTION")]
@@ -74,6 +75,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         public virtual string? PreBillNoInWarehouse { get; set; }
 
         [Column("SOURCEOBJECTID")]
+        [Microsoft.EntityFrameworkCore.Unicode(false)]
         public virtual string? SourceObjectId { get; set; }
 
         [Column("SUBNO")]
