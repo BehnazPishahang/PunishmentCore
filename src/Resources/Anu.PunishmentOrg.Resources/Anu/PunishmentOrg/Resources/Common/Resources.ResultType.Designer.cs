@@ -71,7 +71,7 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to وضعیتی برای صورتجلسه کشف ارسالی یافت نشد..
+        ///   Looks up a localized string similar to وضعیتی برای {0} ارسالی یافت نشد..
         /// </summary>
         public static string Error_to_Find_State {
             get {
@@ -80,7 +80,7 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to شماره یکتای صورتجلسه کشف درخواستی الزامی میباشد..
+        ///   Looks up a localized string similar to شماره {0} درخواستی الزامی میباشد..
         /// </summary>
         public static string Error_UniqueNo_Is_Required {
             get {
@@ -193,6 +193,141 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string PDiscoveryMinuteSate_Start {
             get {
                 return ResourceManager.GetString("PDiscoveryMinuteSate_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پيش نويس.
+        /// </summary>
+        public static string PInspectionReport_Drafted {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Drafted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to گزارش بازرسي توسط شاكي ثبت شده.
+        /// </summary>
+        public static string PInspectionReport_Drafted_Old {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Drafted_Old", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to به واحد اجرای احکام ارجاع شده.
+        /// </summary>
+        public static string PInspectionReport_Execution {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Execution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to دریافت نسخه فیزیکی پرونده قبل از نسخه الکترونیکی.
+        /// </summary>
+        public static string PInspectionReport_Expired {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره مکانیزه گزارش بازرسی ارسالی معتبر نمی باشد.
+        /// </summary>
+        public static string PInspectionReport_No_Is_NotValid {
+            get {
+                return ResourceManager.GetString("PInspectionReport_No_Is_NotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to رای صادر شده است..
+        /// </summary>
+        public static string PInspectionReport_PJudgment {
+            get {
+                return ResourceManager.GetString("PInspectionReport_PJudgment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to دريافت شده از سازمان گزارش دهنده.
+        /// </summary>
+        public static string PInspectionReport_Received_From_SupportOrg {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Received_From_SupportOrg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to گزارش بازرسي ارجاع شده.
+        /// </summary>
+        public static string PInspectionReport_Refered_old {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Refered_old", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ارجاع شده به شعبه.
+        /// </summary>
+        public static string PInspectionReport_Referred {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Referred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ارجاع شده به شهرستان.
+        /// </summary>
+        public static string PInspectionReport_Referred_To_City {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Referred_To_City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شروع به رسیدگی و تشكيل پرونده شده.
+        /// </summary>
+        public static string PInspectionReport_RegisterCase {
+            get {
+                return ResourceManager.GetString("PInspectionReport_RegisterCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ثبت شده جهت تاييد مدير.
+        /// </summary>
+        public static string PInspectionReport_Registered_to_ManagerConfirm {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Registered_to_ManagerConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to برگشت شده به ثبت كننده جهت اصلاح.
+        /// </summary>
+        public static string PInspectionReport_Return_to_Registrar {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Return_to_Registrar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to برگشت شده به شهرستان ارجاع دهنده جهت اصلاح.
+        /// </summary>
+        public static string PInspectionReport_Returnd_to_Referrer {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Returnd_to_Referrer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to برگشت شده به سازمان ارسال کننده.
+        /// </summary>
+        public static string PInspectionReport_Returnd_To_Sender {
+            get {
+                return ResourceManager.GetString("PInspectionReport_Returnd_To_Sender", resourceCulture);
             }
         }
         

@@ -5,85 +5,85 @@ namespace Utility.Guard
 {
     public static class Commons
     {
-        public static T Null<T>(this T input, Enum type)
+        public static T Null<T>(this T input, Enum type, string args = null)
         {
             if (input is null)
             {
-                throw new AnuExceptions(type);
+                throw new AnuExceptions(type, args);
             }
 
             return input;
         }
 
-        public static string NullOrEmpty(this string? input, Enum type)
+        public static string NullOrEmpty(this string? input, Enum type, string args = null)
         {
             input.Null(type);
             if (input == string.Empty)
             {
-                throw new AnuExceptions(type);
+                throw new AnuExceptions(type, args);
             }
 
             return input;
         }
 
-        public static Guid NullOrEmpty(this Guid? input, Enum type)
+        public static Guid NullOrEmpty(this Guid? input, Enum type, string args = null)
         {
             input.Null(type);
             if (input == Guid.Empty)
             {
-                throw new AnuExceptions(type);
+                throw new AnuExceptions(type, args);
             }
 
             return input.Value;
         }
 
-        public static IEnumerable<T> NullOrEmpty<T>(this IEnumerable<T>? input, Enum type)
+        public static IEnumerable<T> NullOrEmpty<T>(this IEnumerable<T>? input, Enum type, string args = null)
         {
             input.Null(type);
             if (!input.Any())
             {
-                throw new AnuExceptions(type);
+                throw new AnuExceptions(type, args);
             }
 
             return input;
         }
 
-        public static string NullOrWhiteSpace(this string? input, Enum type)
+        public static string NullOrWhiteSpace(this string? input, Enum type, string args = null)
         {
             input.NullOrEmpty(type);
             if (String.IsNullOrWhiteSpace(input))
             {
-                throw new AnuExceptions(type);
+                throw new AnuExceptions(type, args);
             }
 
             return input;
         }
 
-        public static T Default<T>(this T input, Enum type)
+        public static T Default<T>(this T input, Enum type, string args = null)
         {
             if (EqualityComparer<T>.Default.Equals(input, default(T)!) || input is null)
             {
-                throw new AnuExceptions(type);
+                throw new AnuExceptions(type, args);
             }
 
             return input;
         }
 
-        public static string IsDigit(this string value, Enum type, int length = 0)
+        public static string IsDigit(this string value, Enum type, int length = 0, string args = null)
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new AnuExceptions(type);
+                throw new AnuExceptions(type, args);
             }
             if (length != 0 && value.Length != length)
             {
-                throw new AnuExceptions(type);
+                throw new AnuExceptions(type, args);
             }
             for (int i = 0; i < value.Length; i++)
             {
                 if (!char.IsDigit(value[i]))
                 {
-                    throw new AnuExceptions(type);
+                    throw new AnuExceptions(type, args);
                 }
             }
             return value;

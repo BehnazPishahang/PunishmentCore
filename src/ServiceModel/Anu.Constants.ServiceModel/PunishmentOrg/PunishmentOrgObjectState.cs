@@ -73,6 +73,62 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
             public const string Draft = "000641";
         }
 
+        public static class PInspectionReport
+        {
+            /// <summary>
+            /// پيش نويس
+            /// </summary>
+            public const string Drafted_old = "000518";
+            /// <summary>
+            /// گزارش بازرسي ارجاع شده
+            /// </summary>
+            public const string Refered_old = "000522";
+            /// <summary>
+            /// پيش نويس
+            /// </summary>
+            public const string Drafted = "000536";
+            /// <summary>
+            /// برگشت شده به ثبت کننده جهت اصلاح
+            /// </summary>
+            public const string ReturndToRegistrar = "000538";
+            /// <summary>
+            /// ثبت شده جهت تاييد مدير
+            /// </summary>
+            public const string RegisteredToManagerConfirm = "000540";
+            /// <summary>
+            /// ارسال شده به سازمان تعزيرات
+            /// </summary>
+            public const string SendedToPunishment = "000542";
+            /// <summary>
+            /// دريافت شده از سازمان گزارش دهنده
+            /// </summary>
+            public const string ReceivedFromSupportOrg = "000544";
+            /// <summary>
+            /// ابطال شده
+            /// </summary>
+            public const string Expired = "000546";
+            /// <summary>
+            /// برگشت شده به شهرستان ارجاع دهنده جهت اصلاح
+            /// </summary>
+            public const string ReturndToReferrer = "000548";
+            /// <summary>
+            /// ارجاع شده به شعبه
+            /// </summary>
+            public const string Referred = "000550";
+            /// <summary>
+            /// ارجاع شده به شهرستان
+            /// </summary>
+            public const string ReferredToCity = "000551";
+            /// <summary>
+            /// تشکيل پرونده شده
+            /// </summary>
+            public const string RegisterCase = "000552";
+            /// <summary>
+            /// برگشت شده به سازمان ارسال کننده
+            /// </summary>
+            public const string ReturndToSender = "000549";
+
+        }
 
     }
 }

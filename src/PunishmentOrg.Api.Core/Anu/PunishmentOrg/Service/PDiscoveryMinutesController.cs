@@ -45,19 +45,20 @@ namespace Anu.PunishmentOrg.Service
         /// </summary>
         public override async Task<SendPDiscoveryMinutesStateResponse> SendPDiscoveryMinutesState([FromBody] SendPDiscoveryMinutesStateRequest request)
         {
-            var sendPDiscoveryMinuteStateResponse = new SendPDiscoveryMinutesStateResponse();
-            sendPDiscoveryMinuteStateResponse.UniqueNo = "-1";
-            sendPDiscoveryMinuteStateResponse.UserName = request.Request.UserName;
             try
             {
                 await Login.ValidateLoginAsync(request.Request, GFESUserAccessType.SendPDiscoveryMinute, _unitOfWork);
 
-                request.UniqueNo.IsDigit(PDiscoveryMinutesResult.Error_UniqueNo_Is_Required);
-                request.UniqueNo.NullOrWhiteSpace(PDiscoveryMinutesResult.Error_UniqueNo_Is_Required);
+                request.UniqueNo.NullOrWhiteSpace(PDiscoveryMinutesResult.Error_UniqueNo_Is_Required, "یکتای صورتجلسه کشف");
+                request.UniqueNo.IsDigit(PDiscoveryMinutesResult.Error_UniqueNo_Is_Required , args:"یکتای صورتجلسه کشف");
 
                 var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.UniqueNo);
                 pDiscoveryMinutes.Null(PDiscoveryMinutesResult.PDiscoveryMinuteSate_No_Is_NotValid);
-                pDiscoveryMinutes.TheObjectState.Null(PDiscoveryMinutesResult.Error_to_Find_State);
+                pDiscoveryMinutes.TheObjectState.Null(PDiscoveryMinutesResult.Error_to_Find_State , "صورتجلسه کشف");
+
+                var sendPDiscoveryMinuteStateResponse = new SendPDiscoveryMinutesStateResponse();
+                sendPDiscoveryMinuteStateResponse.UniqueNo = "-1";
+                sendPDiscoveryMinuteStateResponse.UserName = request.Request.UserName;
 
                 switch (pDiscoveryMinutes.TheObjectState.Code)
                 {
@@ -104,7 +105,7 @@ namespace Anu.PunishmentOrg.Service
                         return sendPDiscoveryMinuteStateResponse;
                     default:
                         sendPDiscoveryMinuteStateResponse.UniqueNo = request.UnitNo;
-                        sendPDiscoveryMinuteStateResponse.Result = PDiscoveryMinutesResult.Error_to_Find_State.GetResult();
+                        sendPDiscoveryMinuteStateResponse.Result = PDiscoveryMinutesResult.Error_to_Find_State.GetResult("صورتجلسه کشف");
                         return sendPDiscoveryMinuteStateResponse;
                 }
             }
@@ -133,7 +134,7 @@ namespace Anu.PunishmentOrg.Service
             Revision.Add("015");
 
 
-            var pCaseCollection = await _unitOfWork.PCaseRepository.GetPCaseByNo(pDiscoveryMinutes.ThePCase.No);
+            var pCaseCollection = await _unitOfWork.PCase.GetPCaseByNo(pDiscoveryMinutes.ThePCase.No);
 
             #region وقت رسیدگی
 

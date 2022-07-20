@@ -15,7 +15,7 @@ namespace Anu.PunishmentOrg.ServiceBase
             _unitOfWork = unitOfWork;
         }
 
-        [HttpPost("SendPDiscoveryMinutesState")]
+        [HttpPost("SendPInspectionReportState")]
         public abstract Task<Anu.PunishmentOrg.ServiceModel.ServiceResponse.SendPInspectionReportStateResponse> SendPInspectionReportState([FromBody] Anu.PunishmentOrg.ServiceModel.ServiceRequest.SendPInspectionReportStateRequest request);
 
     }
