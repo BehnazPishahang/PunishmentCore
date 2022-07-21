@@ -2,6 +2,7 @@
 
 using Anu.PunishmentOrg.ApiSample.PBillStore;
 using Anu.PunishmentOrg.ApiSample.PDiscoveryMinutes;
+using Anu.PunishmentOrg.ApiSample.PInspectionReport;
 
 namespace Anu.PunishmentOrg.ApiSample;
 class Program
@@ -12,8 +13,11 @@ class Program
         //var _SendPDiscoveryMinutesStateSample = new SendPDiscoveryMinutesStateSample();
         //_SendPDiscoveryMinutesStateSample.Send();
 
-        var receivePBillStoreFromScmsSample = new ReceivePBillStoreFromScmsSample();
-        receivePBillStoreFromScmsSample.Send();
+        //var receivePBillStoreFromScmsSample = new ReceivePBillStoreFromScmsSample();
+        //receivePBillStoreFromScmsSample.Send();
+
+        var _SendPInspectionReportState = new SendPInspectionReportStateSample();
+        _SendPInspectionReportState.Send();
 
     }
 }

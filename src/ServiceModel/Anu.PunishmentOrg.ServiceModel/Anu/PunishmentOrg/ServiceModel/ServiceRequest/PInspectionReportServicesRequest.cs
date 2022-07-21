@@ -4,7 +4,7 @@ using Anu.Commons.ServiceModel.SeviceRequest;
 namespace Anu.PunishmentOrg.ServiceModel.ServiceRequest
 {
     public class ReceivePInspectionReportRequest : PInspectionReport, IRequestMessage
-        {
+    {
         public Request Request { get; set; }
 
         public ReceivePInspectionReportRequest()
@@ -12,8 +12,8 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceRequest
             Request = new Request();
         }
     }
-        public class SendPInspectionReportRequest : PInspectionReport, IRequestMessage
-        {
+    public class SendPInspectionReportRequest : PInspectionReport, IRequestMessage
+    {
         public Request Request { get; set; }
 
         public SendPInspectionReportRequest()
@@ -21,8 +21,8 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceRequest
             Request = new Request();
         }
     }
-        public class SendPInspectionReportStateRequest : PInspectionResponse, IRequestMessage
-        {
+    public class SendPInspectionReportStateRequest : PInspectionResponse, IRequestMessage
+    {
         public Request Request { get; set; }
 
         public SendPInspectionReportStateRequest()
