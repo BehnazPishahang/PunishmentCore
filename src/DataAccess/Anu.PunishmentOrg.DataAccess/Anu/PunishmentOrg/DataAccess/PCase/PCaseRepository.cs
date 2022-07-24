@@ -10,7 +10,11 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
 
         public async Task<IEnumerable<Anu.PunishmentOrg.DataModel.Case.PCase>> GetPCaseByNo(string no)
         {
-            return await _context.Set<Anu.PunishmentOrg.DataModel.Case.PCase>().Where(a=>a.No==no).ToListAsync();
+            return await _context.Set<Anu.PunishmentOrg.DataModel.Case.PCase>()
+                .Include(x => x.TheHandlerUnit)
+                .ThenInclude(x=>x.TheGUnitType)
+                .Where(a=>a.No==no)
+                .ToListAsync();
         }
     }
 }

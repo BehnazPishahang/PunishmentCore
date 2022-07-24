@@ -209,6 +209,7 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         public virtual string? TrackingCodeStores { get; set; }
 
         [Column("UNIQUENO")]
+        [Microsoft.EntityFrameworkCore.Unicode(false)]
         public virtual string? UniqueNo { get; set; }
 
         [Column("VERIFICATIONDATETIME")]

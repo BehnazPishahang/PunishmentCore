@@ -41,6 +41,7 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
         public virtual List<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUserAccess>? TheGFESUserAccessList { get; set; }
 
         [Column("USERID")]
+        [Microsoft.EntityFrameworkCore.Unicode(false)]
         public virtual string? UserID { get; set; }
 
     }

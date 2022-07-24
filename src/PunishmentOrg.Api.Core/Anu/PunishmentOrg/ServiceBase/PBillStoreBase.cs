@@ -6,12 +6,12 @@ namespace Anu.PunishmentOrg.ServiceBase
 {
     [Route("api/[controller]")]
     [ApiController]
-    public abstract class IPBillStoreBase : ControllerBase
+    public abstract class PBillStoreBase : ControllerBase
     {
         protected readonly Anu.DataAccess.IUnitOfWork _unitOfWork;
 
 
-        public IPBillStoreBase(Anu.DataAccess.IUnitOfWork unitOfWork)
+        public PBillStoreBase(Anu.DataAccess.IUnitOfWork unitOfWork)
         {
 
             _unitOfWork = unitOfWork;

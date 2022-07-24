@@ -15,7 +15,7 @@ using Utility.Exceptions;
 
 namespace Anu.PunishmentOrg.Service;
 
-public class PBillStoreController : IPBillStoreBase
+public class PBillStoreController : ServiceBase.PBillStoreBase
 {
     public PBillStoreController(Anu.DataAccess.IUnitOfWork unitOfWork) : base(unitOfWork)
     {
@@ -110,7 +110,7 @@ public class PBillStoreController : IPBillStoreBase
                 pBillStore.ThePBillStoreProductList.Add(pBillStoreProduct);
             }
 
-            _unitOfWork.PBillStoreRepository.Add(pBillStore);
+            _unitOfWork.PBillStore.Add(pBillStore);
             _unitOfWork.Complete();
 
             return Respond(AnuResult.Successful, pBillStore.UniqueNo);
@@ -151,7 +151,7 @@ public class PBillStoreController : IPBillStoreBase
     {
         var isDuplicate = false;
 
-        var billEntity = _unitOfWork.PBillStoreRepository.GetByNumberDate(request.BillNumber, request.BillDate);
+        var billEntity = _unitOfWork.PBillStore.GetByNumberDate(request.BillNumber, request.BillDate);
 
         if (billEntity.Result.Count() != 0)
         {
@@ -220,6 +220,6 @@ public class PBillStoreController : IPBillStoreBase
                 break;
 
         }
-        return _unitOfWork.PBExchangeUnitRepository.GetById(organizationId);
+        return _unitOfWork.PBExchangeUnit.GetById(organizationId);
     }
 }

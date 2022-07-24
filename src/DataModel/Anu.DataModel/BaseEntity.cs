@@ -1,4 +1,5 @@
 ﻿
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,6 +9,7 @@ namespace Anu.DataModel
     {
         [Key]
         [Column("ID")]
+        [Microsoft.EntityFrameworkCore.Unicode(false)]
         public TKey? Id { get; set; }
 
         [Column("TIMESTAMP")]

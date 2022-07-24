@@ -134,6 +134,7 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
         public virtual string? MonitoringPlanTitle { get; set; }
 
         [Column("NO")]
+        [Microsoft.EntityFrameworkCore.Unicode(false)]
         public virtual string? No { get; set; }
 
         [Column("OWNERESTATETYPE")]
