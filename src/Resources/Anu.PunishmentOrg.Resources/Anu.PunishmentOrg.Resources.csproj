@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Anu\PunishmentOrg\Resources\Common\Resources.ResultType.Designer.cs">
+    <Compile Update="Common\Resources.ResultType.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.ResultType.resx</DependentUpon>
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Anu\PunishmentOrg\Resources\Common\Resources.ResultType.resx">
+    <EmbeddedResource Update="Common\Resources.ResultType.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.ResultType.Designer.cs</LastGenOutput>
     </EmbeddedResource>

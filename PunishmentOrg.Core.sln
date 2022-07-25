@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0D932611-902A-4082-8180-B4C49025EAA4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PunishmentOrg.Api.Core", "src\PunishmentOrg.Api.Core\PunishmentOrg.Api.Core.csproj", "{61120161-CB61-463D-B840-8B76F6BA4DB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anu.PunishmentOrg.Api", "src\PunishmentOrg.Api.Core\Anu.PunishmentOrg.Api.csproj", "{61120161-CB61-463D-B840-8B76F6BA4DB4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataModel", "DataModel", "{0EC94908-0C76-4B66-8581-74A97702468B}"
 EndProject
@@ -59,7 +59,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anu.PunishmentOrg.Validatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiSamples", "ApiSamples", "{1F4D6D01-050F-42D4-896B-66AFEB5A226F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anu.PunishmentOrg.ApiSample", "src\ApiSamples\Anu.PunishmentOrg.ApiSample\Anu.PunishmentOrg.ApiSample.csproj", "{8C39A551-4669-4583-B29C-6066ACD35586}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anu.PunishmentOrg.ApiSample", "src\ApiSamples\Anu.PunishmentOrg.ApiSample\Anu.PunishmentOrg.ApiSample.csproj", "{8C39A551-4669-4583-B29C-6066ACD35586}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anu.BaseInfo.ServiceModel", "src\ServiceModel\Anu.BaseInfo.ServiceModel\Anu.BaseInfo.ServiceModel.csproj", "{645FCF89-5253-4ED5-ABF5-CAFF5782B8C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +149,10 @@ Global
 		{8C39A551-4669-4583-B29C-6066ACD35586}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C39A551-4669-4583-B29C-6066ACD35586}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C39A551-4669-4583-B29C-6066ACD35586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{645FCF89-5253-4ED5-ABF5-CAFF5782B8C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{645FCF89-5253-4ED5-ABF5-CAFF5782B8C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{645FCF89-5253-4ED5-ABF5-CAFF5782B8C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{645FCF89-5253-4ED5-ABF5-CAFF5782B8C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -180,6 +186,7 @@ Global
 		{C8DEEB8B-728E-4301-8D04-389A0ECA5928} = {B4996021-D08D-4F6D-A872-0162A94A332E}
 		{1F4D6D01-050F-42D4-896B-66AFEB5A226F} = {0D932611-902A-4082-8180-B4C49025EAA4}
 		{8C39A551-4669-4583-B29C-6066ACD35586} = {1F4D6D01-050F-42D4-896B-66AFEB5A226F}
+		{645FCF89-5253-4ED5-ABF5-CAFF5782B8C9} = {4836AB3B-A0B2-423C-BF9A-BCEC862848BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CC95B07-6C72-475D-9332-5EC60C981FED}
