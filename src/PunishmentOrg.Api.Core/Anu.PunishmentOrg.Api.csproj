@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Compile Remove="Domain\**" />
+    <Content Remove="Controllers\**" />
+    <Content Remove="Domain\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="Domain\**" />
+    <None Remove="Controllers\**" />
+    <None Remove="Domain\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\Anu.DataAccess\Anu.DataAccess.csproj" />
+    <ProjectReference Include="..\DataAccess\Anu.UnitOfWork.DataAccess\Anu.UnitOfWork.DataAccess.csproj" />
+    <ProjectReference Include="..\DataModel\Anu.PunishmentOrg.DataModel\Anu.PunishmentOrg.DataModel.csproj" />
+    <ProjectReference Include="..\ServiceModel\Anu.Constants.ServiceModel\Anu.Constants.ServiceModel.csproj" />
+    <ProjectReference Include="..\ServiceModel\Anu.PunishmentOrg.ServiceModel\Anu.PunishmentOrg.ServiceModel.csproj" />
+    <ProjectReference Include="..\Validations\Anu.Commons.Validation\Anu.Commons.Validation.csproj" />
+  </ItemGroup>
+
+</Project>
