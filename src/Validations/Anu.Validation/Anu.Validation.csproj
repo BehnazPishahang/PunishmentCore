@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Anu.BaseInfo.DataModel\Anu.BaseInfo.DataModel.csproj" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
   </ItemGroup>
 
 </Project>
