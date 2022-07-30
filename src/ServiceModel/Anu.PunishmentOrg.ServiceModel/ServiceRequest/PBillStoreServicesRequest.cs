@@ -4,7 +4,7 @@ using Anu.Commons.ServiceModel.SeviceRequest;
 namespace Anu.PunishmentOrg.ServiceModel.ServiceRequest
 {
     public class ReceivePBillStoreRequest : PBillStore, IRequestMessage
-        {
+    {
         public Request Request { get; set; }
 
         public ReceivePBillStoreRequest()
@@ -12,8 +12,8 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceRequest
             Request = new Request();
         }
     }
-        public class SendPBillStoreRequest : PBillStoreResponse, IRequestMessage
-        {
+    public class SendPBillStoreRequest : PBillStoreResponse, IRequestMessage
+    {
         public Request Request { get; set; }
 
         public SendPBillStoreRequest()
@@ -21,8 +21,8 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceRequest
             Request = new Request();
         }
     }
-        public class ReceivePBillStoreFromScmsRequest : PBillStoreFromScms, IRequestMessage
-        {
+    public class ReceivePBillStoreFromScmsRequest : PBillStoreFromScms, IRequestMessage
+    {
         public Request Request { get; set; }
 
         public ReceivePBillStoreFromScmsRequest()
