@@ -10,7 +10,7 @@ namespace Anu.PunishmentOrg.Api.Notice
         }
         [Microsoft.AspNetCore.Mvc.HttpPost]
         [Microsoft.AspNetCore.Mvc.Route("api/v2/BillStore/InqueryPNoticeList")]
-        public abstract PNoticeInqueryResponse InqueryPNoticeList([Microsoft.AspNetCore.Mvc.FromBody] PNoticePersonContract request);
+        public abstract Task<PNoticeInqueryResponse> InqueryPNoticeList([Microsoft.AspNetCore.Mvc.FromBody] PNoticeInqueryRequest request);
 
     }
 }

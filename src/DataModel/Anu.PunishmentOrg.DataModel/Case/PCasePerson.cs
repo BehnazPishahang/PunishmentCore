@@ -83,6 +83,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         public virtual string? Name { get; set; }
 
         [Column("NATIONALCODE")]
+        [Microsoft.EntityFrameworkCore.Unicode(true)]
         public virtual string? NationalCode { get; set; }
 
         [Column("NATIONALITY")]

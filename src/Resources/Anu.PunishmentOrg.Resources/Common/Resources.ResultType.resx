@@ -133,6 +133,10 @@
     <value>به واحد اجرای احکام ارجاع شده</value>
     <comment>20003</comment>
   </data>
+  <data name="NationalCodeIs_Required" xml:space="preserve">
+    <value>کد ملی را وارد کنید.</value>
+    <comment>-50001</comment>
+  </data>
   <data name="PBillStore_Duplicate_Bill" xml:space="preserve">
     <value>شماره قبض تکراری است و امروز قابل ثبت نیست</value>
     <comment>-30001</comment>
@@ -240,6 +244,10 @@
   <data name="PJudgment" xml:space="preserve">
     <value>رای صادر شده است.</value>
     <comment>200013</comment>
+  </data>
+  <data name="PNotice_NotFound" xml:space="preserve">
+    <value>ابلاغیه ای یافت نشد.</value>
+    <comment>-50002</comment>
   </data>
   <data name="Successful" xml:space="preserve">
     <value>عملیات با موفقیت انجام شد .</value>
