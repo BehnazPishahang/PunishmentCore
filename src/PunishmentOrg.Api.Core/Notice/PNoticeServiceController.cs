@@ -24,6 +24,7 @@ namespace Anu.PunishmentOrg.Api.Notice
         #endregion Properties
 
         #region Overrides
+
         public override async Task<PNoticeInqueryResponse> InqueryPNoticeList([FromBody] PNoticeInqueryRequest request)
         {
             try
