@@ -1,6 +1,4 @@
-﻿using Anu.PunishmentOrg.Domain.InspectionReport;
-
-namespace Anu.UnitOfWork.DataAccess
+﻿namespace Anu.UnitOfWork.DataAccess
 {
     public partial class UnitOfWork : Anu.DataAccess.IUnitOfWork
     {
@@ -18,6 +16,7 @@ namespace Anu.UnitOfWork.DataAccess
             PBillStore = new Anu.PunishmentOrg.DataAccess.PBillStore.PBillStoreRepository(_context);
             PBExchangeUnit = new Anu.PunishmentOrg.DataAccess.BaseInfo.PBExchangeUnitRepository(_context);
             PInspectionReport = new PunishmentOrg.DataAccess.InspectionReport.PInspectionReportRepository(_context);
+            PNotice = new PunishmentOrg.DataAccess.Notice.PNoticeRepository(_context);
         }
         public Anu.PunishmentOrg.Domain.DiscoveryMinutes.IPDiscoveryMinutesRepository PDiscoveryMinutes { get; private set; }
         public Anu.PunishmentOrg.Domain.PBillStore.IPBillSoreRepository PBillStore { get; private set; }
@@ -30,7 +29,8 @@ namespace Anu.UnitOfWork.DataAccess
         public Anu.PunishmentOrg.Domain.Terminate.IPJudgmentCaseRepository PJudgmentCase { get; private set; }
         public Anu.PunishmentOrg.Domain.BaseInfo.IPBExchangeUnitRepository PBExchangeUnit { get; private set; }
 
-        public IPInspectionReportRepository PInspectionReport { get; private set; }
+        public PunishmentOrg.Domain.InspectionReport.IPInspectionReportRepository PInspectionReport { get; private set; }
+        public PunishmentOrg.Domain.Notice.IPNoticeRepository PNotice { get; private set; }
 
         public int Complete()
         {
