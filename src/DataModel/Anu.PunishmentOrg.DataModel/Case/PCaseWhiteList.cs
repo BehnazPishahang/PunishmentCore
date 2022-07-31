@@ -1,18 +1,21 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
     public abstract class PCaseWhiteListBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("DOCLETTERDATE")]
         public virtual string? DocLetterDate { get; set; }
 
         [Column("DOCLETTERIMAGE")]
         public virtual byte[]? DocLetterImage { get; set; }
 
+        [Unicode(false)]
         [Column("DOCLETTERNO")]
         public virtual string? DocLetterNo { get; set; }
 
@@ -31,4 +34,4 @@ namespace Anu.PunishmentOrg.DataModel.Case
     public partial class PCaseWhiteList : PCaseWhiteListBase
     {
     }
-}
+    }

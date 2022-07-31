@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
     public abstract class CMSUserRoleTypeBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -16,6 +18,7 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [Column("MULTISESSIONPOLICY")]
         public virtual Anu.BaseInfo.Enumerations.MultiSessionPolicy? MultiSessionPolicy { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
@@ -43,4 +46,4 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
     public partial class CMSUserRoleType : CMSUserRoleTypeBase
     {
     }
-}
+    }

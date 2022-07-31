@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
     public abstract class PIncomingLetterBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CASESNOSUBNO")]
         public virtual string? CasesNoSubno { get; set; }
 
@@ -25,4 +27,4 @@ namespace Anu.PunishmentOrg.DataModel.Letter
     public partial class PIncomingLetter : PIncomingLetterBase
     {
     }
-}
+    }

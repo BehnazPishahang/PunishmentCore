@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
 {
     public abstract class PDiscoveryMinutesProductFoundBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("BILLNOPRODUCTFOUND")]
         public virtual string? BillNoProductFound { get; set; }
 
+        [Unicode(false)]
         [Column("BRANDNAME")]
         public virtual string? BrandName { get; set; }
 
@@ -22,12 +25,14 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [Column("COUNT")]
         public virtual decimal? Count { get; set; }
 
+        [Unicode(false)]
         [Column("COUNTRYCREATE")]
         public virtual string? CountryCreate { get; set; }
 
         [Column("COUNTRYCREATERN")]
         public virtual Anu.PunishmentOrg.Enumerations.CountryCreate? CountryCreateRN { get; set; }
 
+        [Unicode(false)]
         [Column("CURRENCYUNIT")]
         public virtual string? CurrencyUnit { get; set; }
 
@@ -37,12 +42,18 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [Column("ESTIMATEDVALUE")]
         public virtual decimal? EstimatedValue { get; set; }
 
+        [Unicode(false)]
+        [Column("GENERALPRODUCTID")]
+        public virtual string? GeneralProductID { get; set; }
+
+        [Unicode(false)]
         [Column("IDNUMBER")]
         public virtual string? IDNumber { get; set; }
 
         [Column("IDNUMBERRN")]
         public virtual Anu.PunishmentOrg.Enumerations.IDNumber? IDNumberRN { get; set; }
 
+        [Unicode(false)]
         [Column("OTHERINFO")]
         public virtual string? OtherInfo { get; set; }
 
@@ -55,12 +66,14 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [Column("ROWNUMBER")]
         public virtual long? RowNumber { get; set; }
 
+        [Unicode(false)]
         [Column("SERIALNUMBER")]
         public virtual string? SerialNumber { get; set; }
 
         [Column("SERIALNUMBERRN")]
         public virtual Anu.PunishmentOrg.Enumerations.SerialNumber? SerialNumberRN { get; set; }
 
+        [Unicode(false)]
         [Column("SUBJECTTITLE")]
         public virtual string? SubjectTitle { get; set; }
 
@@ -88,4 +101,4 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
     public partial class PDiscoveryMinutesProductFound : PDiscoveryMinutesProductFoundBase
     {
     }
-}
+    }

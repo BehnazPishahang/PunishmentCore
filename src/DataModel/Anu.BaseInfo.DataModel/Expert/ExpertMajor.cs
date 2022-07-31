@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Expert
 {
     public abstract class ExpertMajorBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -19,6 +21,7 @@ namespace Anu.BaseInfo.DataModel.Expert
         [InverseProperty("TheExpertMajor")]
         public virtual List<Anu.BaseInfo.DataModel.Expert.ExpertManSubject>? TheExpertManSubjectList { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -28,4 +31,4 @@ namespace Anu.BaseInfo.DataModel.Expert
     public partial class ExpertMajor : ExpertMajorBase
     {
     }
-}
+    }

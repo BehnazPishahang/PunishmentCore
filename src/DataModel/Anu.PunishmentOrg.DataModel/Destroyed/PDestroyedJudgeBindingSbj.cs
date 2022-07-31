@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
@@ -13,6 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         [Column("ROWNUMBER")]
         public virtual long? RowNumber { get; set; }
 
+        [Unicode(false)]
         [Column("SUBJECTTITLE")]
         public virtual string? SubjectTitle { get; set; }
 
@@ -28,4 +30,4 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
     public partial class PDestroyedJudgeBindingSbj : PDestroyedJudgeBindingSbjBase
     {
     }
-}
+    }

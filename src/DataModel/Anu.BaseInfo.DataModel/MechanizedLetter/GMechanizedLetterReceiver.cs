@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.MechanizedLetter
 {
@@ -19,6 +20,7 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         [Column("RECEIVERTYPE")]
         public virtual Anu.BaseInfo.Enumerations.MechanizeRefererType? ReceiverType { get; set; }
 
+        [Unicode(false)]
         [Column("SENDDATETIME")]
         public virtual string? SendDateTime { get; set; }
 
@@ -46,12 +48,15 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         [ForeignKey("RECEIVERUSERANDPOSTID")]
         public virtual Anu.BaseInfo.DataModel.SystemConfiguration.RegisterUserHistory? TheReceiverUserAndPost { get; set; }
 
+        [Unicode(false)]
         [Column("TRANSCRIPTTEXT")]
         public virtual string? TranscriptText { get; set; }
 
+        [Unicode(false)]
         [Column("VIEWDATETIME")]
         public virtual string? ViewDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("VIEWERUSERNAME")]
         public virtual string? ViewerUserName { get; set; }
 
@@ -61,4 +66,4 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
     public partial class GMechanizedLetterReceiver : GMechanizedLetterReceiverBase
     {
     }
-}
+    }

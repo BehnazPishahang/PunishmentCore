@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Types
 {
     public abstract class MeasurementUnitTypeBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -22,6 +24,7 @@ namespace Anu.BaseInfo.DataModel.Types
         [ForeignKey("GMEASUREMENTBASICUNITID")]
         public virtual Anu.BaseInfo.DataModel.Types.GMeasurementBasicUnit? TheGMeasurementBasicUnit { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -31,4 +34,4 @@ namespace Anu.BaseInfo.DataModel.Types
     public partial class MeasurementUnitType : MeasurementUnitTypeBase
     {
     }
-}
+    }

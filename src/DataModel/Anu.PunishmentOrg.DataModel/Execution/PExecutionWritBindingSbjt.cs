@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
@@ -10,6 +11,7 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [Column("DEBTREDUCTIONVALUE")]
         public virtual long? DebtReductionValue { get; set; }
 
+        [Unicode(false)]
         [Column("OLDCASEBINDINGIDS")]
         public virtual string? OldCaseBindingIDs { get; set; }
 
@@ -25,4 +27,4 @@ namespace Anu.PunishmentOrg.DataModel.Execution
     public partial class PExecutionWritBindingSbjt : PExecutionWritBindingSbjtBase
     {
     }
-}
+    }

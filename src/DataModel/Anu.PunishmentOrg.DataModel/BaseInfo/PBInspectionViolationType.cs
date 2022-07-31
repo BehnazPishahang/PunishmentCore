@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.BaseInfo
 {
@@ -10,6 +11,7 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
         [Column("CASESUBJECT")]
         public virtual Anu.PunishmentOrg.Enumerations.PUViolationType? CaseSubject { get; set; }
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -19,6 +21,7 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
         [InverseProperty("ThePBInspectionViolationType")]
         public virtual List<Anu.PunishmentOrg.DataModel.BaseInfo.PBViolationTypeInspection>? ThePBViolationTypeInspectionList { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -28,4 +31,4 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
     public partial class PBInspectionViolationType : PBInspectionViolationTypeBase
     {
     }
-}
+    }

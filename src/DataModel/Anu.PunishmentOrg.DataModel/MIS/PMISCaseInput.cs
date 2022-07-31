@@ -1,21 +1,25 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.MIS
 {
     public abstract class PMISCaseInputBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ENDDATETIME")]
         public virtual string? EndDateTime { get; set; }
 
         [Column("SENDERUNITTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.PUSenderCaseType? SenderUnitType { get; set; }
 
+        [Unicode(false)]
         [Column("SOURCECASENO")]
         public virtual string? SourceCaseNo { get; set; }
 
+        [Unicode(false)]
         [Column("STARTDATETIME")]
         public virtual string? StartDateTime { get; set; }
 
@@ -52,4 +56,4 @@ namespace Anu.PunishmentOrg.DataModel.MIS
     public partial class PMISCaseInput : PMISCaseInputBase
     {
     }
-}
+    }

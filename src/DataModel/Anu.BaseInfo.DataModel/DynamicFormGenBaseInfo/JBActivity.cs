@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
 {
     public abstract class JBActivityBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -34,4 +36,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
     public partial class JBActivity : JBActivityBase
     {
     }
-}
+    }

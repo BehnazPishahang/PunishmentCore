@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.MechanizedLetter
 {
@@ -10,9 +11,11 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         [Column("AMOUNT")]
         public virtual long? Amount { get; set; }
 
+        [Unicode(false)]
         [Column("ATTACHEDID")]
         public virtual string? AttachedId { get; set; }
 
+        [Unicode(false)]
         [Column("ATTACHMENTDESC")]
         public virtual string? AttachmentDesc { get; set; }
 
@@ -22,12 +25,14 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         [Column("DOCFILEEXTENTION")]
         public virtual Anu.BaseInfo.Enumerations.FileExtension? DocFileExtention { get; set; }
 
+        [Unicode(false)]
         [Column("FIELDDESC")]
         public virtual string? FieldDesc { get; set; }
 
         [Column("FILEDDATATYPE")]
         public virtual Anu.BaseInfo.Enumerations.ChangedFiledDataType? FiledDataType { get; set; }
 
+        [Unicode(false)]
         [Column("TEXTAMOUNT")]
         public virtual string? TextAmount { get; set; }
 
@@ -52,4 +57,4 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
     public partial class GMechanizedLetterFields : GMechanizedLetterFieldsBase
     {
     }
-}
+    }

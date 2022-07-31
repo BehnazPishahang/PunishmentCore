@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Accounting
 {
@@ -16,15 +17,18 @@ namespace Anu.PunishmentOrg.DataModel.Accounting
         [Column("DISCOUNTSTATE")]
         public virtual Anu.BaseInfo.Enumerations.HaveNoHave? DiscountState { get; set; }
 
+        [Unicode(false)]
         [Column("OLDCASEBINDINGIDS")]
         public virtual string? OldCaseBindingIDs { get; set; }
 
         [Column("PAIDCOST")]
         public virtual long? PaidCost { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDDOCID")]
         public virtual string? RelatedDocId { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDDOCNO")]
         public virtual string? RelatedDocNo { get; set; }
 
@@ -49,4 +53,4 @@ namespace Anu.PunishmentOrg.DataModel.Accounting
     public partial class PCashReason : PCashReasonBase
     {
     }
-}
+    }

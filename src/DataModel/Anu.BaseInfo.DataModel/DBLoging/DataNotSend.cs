@@ -1,18 +1,21 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
     public abstract class DataNotSendBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CHANGEDATETIME")]
         public virtual string? ChangeDateTime { get; set; }
 
         [Column("COMMANDTYPE")]
         public virtual Anu.BaseInfo.Enumerations.CommandType? CommandType { get; set; }
 
+        [Unicode(false)]
         [Column("DATAOBJECTID")]
         public virtual string? DataObjectId { get; set; }
 
@@ -40,4 +43,4 @@ namespace Anu.BaseInfo.DataModel.DBLoging
     public partial class DataNotSend : DataNotSendBase
     {
     }
-}
+    }

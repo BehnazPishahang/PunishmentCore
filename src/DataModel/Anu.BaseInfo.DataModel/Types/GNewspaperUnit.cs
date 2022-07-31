@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Types
 {
@@ -19,4 +20,4 @@ namespace Anu.BaseInfo.DataModel.Types
     public partial class GNewspaperUnit : GNewspaperUnitBase
     {
     }
-}
+    }

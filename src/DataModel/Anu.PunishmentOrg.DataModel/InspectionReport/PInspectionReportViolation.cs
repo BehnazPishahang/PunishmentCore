@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.InspectionReport
 {
@@ -13,12 +14,15 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
         [Column("APPROVEDFAIRGUIDANCEPRICE")]
         public virtual long? ApprovedFairGuidancePrice { get; set; }
 
+        [Unicode(false)]
         [Column("GOODCODE")]
         public virtual string? GoodCode { get; set; }
 
+        [Unicode(false)]
         [Column("GOODSIDENTITY")]
         public virtual string? GoodsIdentity { get; set; }
 
+        [Unicode(false)]
         [Column("GOODSSERVICESNAME")]
         public virtual string? GoodsServicesName { get; set; }
 
@@ -28,6 +32,7 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
         [Column("MONETARYABUSE")]
         public virtual long? MonetaryAbuse { get; set; }
 
+        [Unicode(false)]
         [Column("PBINSPECTIONVIOTYPOTHER")]
         public virtual string? PBInspectionVioTypOther { get; set; }
 
@@ -61,6 +66,7 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
         [Column("TOTALVALUEGOODS")]
         public virtual long? TotalValueGoods { get; set; }
 
+        [Unicode(false)]
         [Column("VIOLATIONDESC")]
         public virtual string? ViolationDesc { get; set; }
 
@@ -70,4 +76,4 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
     public partial class PInspectionReportViolation : PInspectionReportViolationBase
     {
     }
-}
+    }

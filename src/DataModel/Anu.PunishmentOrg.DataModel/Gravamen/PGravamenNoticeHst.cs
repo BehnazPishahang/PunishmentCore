@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Gravamen
 {
     public abstract class PGravamenNoticeHstBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ISSUEDATETIME")]
         public virtual string? IssueDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("NOTICETEXT")]
         public virtual string? NoticeText { get; set; }
 
@@ -25,4 +28,4 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
     public partial class PGravamenNoticeHst : PGravamenNoticeHstBase
     {
     }
-}
+    }

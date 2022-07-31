@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
     public abstract class JColumnTitleBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("COLUMNTITLE")]
         public virtual string? ColumnTitle { get; set; }
 
@@ -31,4 +33,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
     public partial class JColumnTitle : JColumnTitleBase
     {
     }
-}
+    }

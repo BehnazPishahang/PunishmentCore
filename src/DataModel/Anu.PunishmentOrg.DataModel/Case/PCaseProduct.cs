@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -10,15 +11,18 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("BILLSTOREPRODUCTVALUE")]
         public virtual decimal? BillStoreProductValue { get; set; }
 
+        [Unicode(false)]
         [Column("BRANDNAME")]
         public virtual string? BrandName { get; set; }
 
         [Column("CONTRABANDPRODUCTTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.ContrabandProductType? ContrabandProductType { get; set; }
 
+        [Unicode(false)]
         [Column("COUNTRYCREATE")]
         public virtual string? CountryCreate { get; set; }
 
+        [Unicode(false)]
         [Column("CURRENCYUNIT")]
         public virtual string? CurrencyUnit { get; set; }
 
@@ -28,12 +32,18 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("ESTIMATEDVALUE")]
         public virtual decimal? EstimatedValue { get; set; }
 
+        [Unicode(false)]
+        [Column("GENERALPRODUCTID")]
+        public virtual string? GeneralProductID { get; set; }
+
+        [Unicode(false)]
         [Column("OTHERINFO")]
         public virtual string? OtherInfo { get; set; }
 
         [Column("PRODUCTCURRENCY")]
         public virtual Anu.PunishmentOrg.Enumerations.PUProductCurrency? ProductCurrency { get; set; }
 
+        [Unicode(false)]
         [Column("PRODUCTID")]
         public virtual string? ProductID { get; set; }
 
@@ -49,9 +59,11 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("SALEPRICE")]
         public virtual long? SalePrice { get; set; }
 
+        [Unicode(false)]
         [Column("SERIALNUMBER")]
         public virtual string? SerialNumber { get; set; }
 
+        [Unicode(false)]
         [Column("SOURCEOBJECTID")]
         public virtual string? SourceObjectId { get; set; }
 
@@ -64,6 +76,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("STANDARDPRICE")]
         public virtual long? StandardPrice { get; set; }
 
+        [Unicode(false)]
         [Column("SUBJECTTITLE")]
         public virtual string? SubjectTitle { get; set; }
 
@@ -100,4 +113,4 @@ namespace Anu.PunishmentOrg.DataModel.Case
     public partial class PCaseProduct : PCaseProductBase
     {
     }
-}
+    }

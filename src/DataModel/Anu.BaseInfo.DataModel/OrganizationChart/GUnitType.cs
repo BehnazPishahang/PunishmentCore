@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.OrganizationChart
 {
     public abstract class GUnitTypeBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
@@ -19,6 +22,7 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [InverseProperty("TheGUnitType")]
         public virtual List<Anu.BaseInfo.DataModel.SystemConfiguration.GRoleTypeValidInUnitType>? TheGRoleTypeValidInUnitTypeList { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -28,4 +32,4 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
     public partial class GUnitType : GUnitTypeBase
     {
     }
-}
+    }

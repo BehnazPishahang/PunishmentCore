@@ -1,18 +1,22 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Notice
 {
     public abstract class GNoticeDocBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("RELATEDNOTICEDOCDESC")]
         public virtual string? RelatedNoticeDocDesc { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDNOTICEDOCNO")]
         public virtual string? RelatedNoticeDocNo { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDOBJECTID")]
         public virtual string? RelatedObjectID { get; set; }
 
@@ -28,4 +32,4 @@ namespace Anu.BaseInfo.DataModel.Notice
     public partial class GNoticeDoc : GNoticeDocBase
     {
     }
-}
+    }

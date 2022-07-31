@@ -1,27 +1,34 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Gravamen
 {
     public abstract class PNote1Article21ProtestBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("DISCOVERYMINUTESDATE")]
         public virtual string? DiscoveryMinutesDate { get; set; }
 
+        [Unicode(false)]
         [Column("DISCOVERYMINUTESNO")]
         public virtual string? DiscoveryMinutesNo { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("REFERDATE")]
         public virtual string? ReferDate { get; set; }
 
+        [Unicode(false)]
         [Column("REQUESTREASON")]
         public virtual string? RequestReason { get; set; }
 
@@ -52,4 +59,4 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
     public partial class PNote1Article21Protest : PNote1Article21ProtestBase
     {
     }
-}
+    }

@@ -1,27 +1,34 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
     public abstract class ChangeLogBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CHANGEDATETIME")]
         public virtual string? ChangeDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("COMPUTERNAME")]
         public virtual string? ComputerName { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
+        [Unicode(false)]
         [Column("MILISECOND")]
         public virtual string? MiliSecond { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDOBJECTID")]
         public virtual string? RelatedObjectId { get; set; }
 
@@ -52,4 +59,4 @@ namespace Anu.BaseInfo.DataModel.DBLoging
     public partial class ChangeLog : ChangeLogBase
     {
     }
-}
+    }

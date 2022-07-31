@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Attachment
 {
@@ -10,12 +11,15 @@ namespace Anu.BaseInfo.DataModel.Attachment
         [Column("ASYNCTYPE")]
         public virtual Anu.BaseInfo.Enumerations.AsyncType? AsyncType { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("DBTRANSACTIONID")]
         public virtual string? DBTransactionId { get; set; }
 
+        [Unicode(false)]
         [Column("ECMTRANSACTIONID")]
         public virtual string? ECMTransactionId { get; set; }
 
@@ -40,4 +44,4 @@ namespace Anu.BaseInfo.DataModel.Attachment
     public partial class GTransactionAsync : GTransactionAsyncBase
     {
     }
-}
+    }

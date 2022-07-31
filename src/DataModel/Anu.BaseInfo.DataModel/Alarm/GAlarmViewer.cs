@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Alarm
 {
     public abstract class GAlarmViewerBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ACTIVEDATETIME")]
         public virtual string? ActiveDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("SEENDATETIME")]
         public virtual string? SeenDateTime { get; set; }
 
@@ -46,4 +49,4 @@ namespace Anu.BaseInfo.DataModel.Alarm
     public partial class GAlarmViewer : GAlarmViewerBase
     {
     }
-}
+    }

@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Advertising
 {
     public abstract class GAdvertisingRelatedDocBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("RELATEDDOCID")]
         public virtual string? RelatedDocID { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDDOCNO")]
         public virtual string? RelatedDocNo { get; set; }
 
@@ -28,4 +31,4 @@ namespace Anu.BaseInfo.DataModel.Advertising
     public partial class GAdvertisingRelatedDoc : GAdvertisingRelatedDocBase
     {
     }
-}
+    }

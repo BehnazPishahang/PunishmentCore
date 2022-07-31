@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Gravamen
 {
     public abstract class PGravamenBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("FOLLOWUPNO")]
         public virtual string? FollowUpNo { get; set; }
 
@@ -19,27 +22,35 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
         [Column("HOWDATATYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.PU135OrWebSite? HowDataType { get; set; }
 
+        [Unicode(false)]
         [Column("NOTICETEXT")]
         public virtual string? NoticeText { get; set; }
 
+        [Unicode(false)]
         [Column("PETITIONDESCRIPTION")]
         public virtual string? PetitionDescription { get; set; }
 
+        [Unicode(false)]
         [Column("PETITIONREASONS")]
         public virtual string? PetitionReasons { get; set; }
 
+        [Unicode(false)]
         [Column("PETITIONSUBJECT")]
         public virtual string? PetitionSubject { get; set; }
 
+        [Unicode(false)]
         [Column("REJECTREASONTEXT")]
         public virtual string? RejectReasonText { get; set; }
 
+        [Unicode(false)]
         [Column("REPORTERFAMILY")]
         public virtual string? ReporterFamily { get; set; }
 
+        [Unicode(false)]
         [Column("REPORTERMOBILNUMBER")]
         public virtual string? ReporterMobilNumber { get; set; }
 
+        [Unicode(false)]
         [Column("REPORTERNAME")]
         public virtual string? ReporterName { get; set; }
 
@@ -76,4 +87,4 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
     public partial class PGravamen : PGravamenBase
     {
     }
-}
+    }

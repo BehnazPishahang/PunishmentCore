@@ -1,18 +1,21 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.FrontEndSecurity
 {
     public abstract class GFESChangeStateHstBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CHANGEDATETIME")]
         public virtual string? ChangeDateTime { get; set; }
 
         [Column("CHANGESECOND")]
         public virtual long? ChangeSecond { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDOBJECTID")]
         public virtual string? RelatedObjectId { get; set; }
 
@@ -37,4 +40,4 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
     public partial class GFESChangeStateHst : GFESChangeStateHstBase
     {
     }
-}
+    }

@@ -1,33 +1,42 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Security.CMSUser
 {
     public abstract class CMSUserBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ENDDATE")]
         public virtual string? EndDate { get; set; }
 
+        [Unicode(false)]
         [Column("LASTCHANGEPASSWORD")]
         public virtual string? LastChangePassword { get; set; }
 
+        [Unicode(false)]
         [Column("MOBILENUMBER4SMS")]
         public virtual string? MobileNumber4SMS { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
+        [Unicode(false)]
         [Column("OLDUSERTITLE")]
         public virtual string? OldUserTitle { get; set; }
 
+        [Unicode(false)]
         [Column("PASSWORD")]
         public virtual string? Password { get; set; }
 
+        [Unicode(false)]
         [Column("SALT")]
         public virtual string? Salt { get; set; }
 
+        [Unicode(false)]
         [Column("STARTDATE")]
         public virtual string? StartDate { get; set; }
 
@@ -40,21 +49,26 @@ namespace Anu.BaseInfo.DataModel.Security.CMSUser
         [InverseProperty("TheCMSUser")]
         public virtual List<Anu.BaseInfo.DataModel.SystemConfiguration.RegisterUserHistory>? TheRegisterUserHistoryList { get; set; }
 
+        [Unicode(false)]
         [Column("USERBIRTHDATE")]
         public virtual string? UserBirthDate { get; set; }
 
+        [Unicode(false)]
         [Column("USERFAMILY")]
         public virtual string? UserFamily { get; set; }
 
+        [Unicode(false)]
         [Column("USERFATHERNAME")]
         public virtual string? UserFatherName { get; set; }
 
         [Column("USERISCHECKNATIONALITYCODE")]
         public virtual Anu.BaseInfo.Enumerations.CheckNatinalityStatus? UserIsCheckNationalityCode { get; set; }
 
+        [Unicode(false)]
         [Column("USERNAME")]
         public virtual string? UserName { get; set; }
 
+        [Unicode(false)]
         [Column("USERNATIONALITYCODE")]
         public virtual string? UserNationalityCode { get; set; }
 
@@ -67,6 +81,7 @@ namespace Anu.BaseInfo.DataModel.Security.CMSUser
         [Column("USERSIGNPIC")]
         public virtual byte[]? UserSignPic { get; set; }
 
+        [Unicode(false)]
         [Column("USERTITLE")]
         public virtual string? UserTitle { get; set; }
 
@@ -79,4 +94,4 @@ namespace Anu.BaseInfo.DataModel.Security.CMSUser
     public partial class CMSUser : CMSUserBase
     {
     }
-}
+    }

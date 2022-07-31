@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -10,27 +11,34 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("CHANGEVIEWTYPE")]
         public virtual Anu.BaseInfo.Enumerations.ViewType? ChangeViewType { get; set; }
 
+        [Unicode(false)]
         [Column("CLIENTHANDLER")]
         public virtual string? ClientHandler { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
         [Column("ISFIELDCALCONLOAD")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? IsFieldCalcOnLoad { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("PKCOLUMNNAME")]
         public virtual string? PKColumnName { get; set; }
 
+        [Unicode(false)]
         [Column("REPORTTITLE")]
         public virtual string? ReportTitle { get; set; }
 
+        [Unicode(false)]
         [Column("SERVERHANDLER")]
         public virtual string? ServerHandler { get; set; }
 
@@ -88,12 +96,14 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [ForeignKey("SAVEFUNCID")]
         public virtual Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo.JBCalcFunAssembly? TheSaveFunc { get; set; }
 
+        [Unicode(false)]
         [Column("VIEWNAME")]
         public virtual string? ViewName { get; set; }
 
         [Column("VIEWTYPE")]
         public virtual Anu.BaseInfo.Enumerations.ViewType? ViewType { get; set; }
 
+        [Unicode(false)]
         [Column("VISUALCONSTRACTION")]
         public virtual string? VisualConstraction { get; set; }
 
@@ -103,4 +113,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
     public partial class JTableReport : JTableReportBase
     {
     }
-}
+    }
