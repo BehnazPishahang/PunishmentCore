@@ -1,54 +1,68 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Letter
 {
     public abstract class GOutgoingLetterBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ATTACHMENT")]
         public virtual string? Attachment { get; set; }
 
+        [Unicode(false)]
         [Column("BACKLETTERSNO")]
         public virtual string? BackLettersNo { get; set; }
 
+        [Unicode(false)]
         [Column("CONFIRMEDDATE")]
         public virtual string? ConfirmedDate { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
+        [Unicode(false)]
         [Column("FOLLOWERLETTERSNO")]
         public virtual string? FollowerLettersNo { get; set; }
 
         [Column("ISPRINTED")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? IsPrinted { get; set; }
 
+        [Unicode(false)]
         [Column("LETTEROUTPUTDATE")]
         public virtual string? LetterOutputDate { get; set; }
 
+        [Unicode(false)]
         [Column("LETTERTEXT")]
         public virtual string? LetterText { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("PRINTDATE")]
         public virtual string? PrintDate { get; set; }
 
+        [Unicode(false)]
         [Column("RECIEVER")]
         public virtual string? Reciever { get; set; }
 
         [Column("RECIEVERTYPE")]
         public virtual Anu.BaseInfo.Enumerations.OutgoingLetterRecieverType? RecieverType { get; set; }
 
+        [Unicode(false)]
         [Column("REGISTEREDDATE")]
         public virtual string? RegisteredDate { get; set; }
 
+        [Unicode(false)]
         [Column("SENDEDDATE")]
         public virtual string? SendedDate { get; set; }
 
@@ -88,4 +102,4 @@ namespace Anu.BaseInfo.DataModel.Letter
     public partial class GOutgoingLetter : GOutgoingLetterBase
     {
     }
-}
+    }

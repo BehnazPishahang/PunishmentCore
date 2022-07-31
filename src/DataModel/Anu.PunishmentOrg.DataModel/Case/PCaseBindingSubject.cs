@@ -1,21 +1,25 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
     public abstract class PCaseBindingSubjectBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ENDPENALTYDATE")]
         public virtual string? EndPenaltyDate { get; set; }
 
         [Column("EXECUTIVESTATUS")]
         public virtual Anu.PunishmentOrg.Enumerations.PUExecutiveStatus? ExecutiveStatus { get; set; }
 
+        [Unicode(false)]
         [Column("JUDGEDATE")]
         public virtual string? JudgeDate { get; set; }
 
+        [Unicode(false)]
         [Column("JUDGENO")]
         public virtual string? JudgeNo { get; set; }
 
@@ -28,9 +32,11 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("ROWNUMBER")]
         public virtual long? RowNumber { get; set; }
 
+        [Unicode(false)]
         [Column("STARTPENALTYDATE")]
         public virtual string? StartPenaltyDate { get; set; }
 
+        [Unicode(false)]
         [Column("SUBJECTTITLE")]
         public virtual string? SubjectTitle { get; set; }
 
@@ -91,4 +97,4 @@ namespace Anu.PunishmentOrg.DataModel.Case
     public partial class PCaseBindingSubject : PCaseBindingSubjectBase
     {
     }
-}
+    }

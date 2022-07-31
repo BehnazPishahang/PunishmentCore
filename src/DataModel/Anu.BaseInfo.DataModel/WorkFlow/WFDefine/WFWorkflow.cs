@@ -1,21 +1,26 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
 {
     public abstract class WFWorkflowBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
+        [Unicode(false)]
         [Column("ENGLISHNAME")]
         public virtual string? EnglishName { get; set; }
 
+        [Unicode(false)]
         [Column("FARSINAME")]
         public virtual string? FarsiName { get; set; }
 
+        [Unicode(false)]
         [Column("INVALIDDATETIME")]
         public virtual string? InValidDateTime { get; set; }
 
@@ -40,6 +45,7 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
         [InverseProperty("TheWFWorkflow")]
         public virtual List<Anu.BaseInfo.DataModel.WorkFlow.WFDefine.WFWorkflowParameter>? TheWFWorkflowParameterList { get; set; }
 
+        [Unicode(false)]
         [Column("VALIDDATETIME")]
         public virtual string? ValidDateTime { get; set; }
 
@@ -52,4 +58,4 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
     public partial class WFWorkflow : WFWorkflowBase
     {
     }
-}
+    }

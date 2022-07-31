@@ -1,21 +1,25 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Attachment
 {
     public abstract class GChangeStateHistoryBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CHANGEDATETIME")]
         public virtual string? ChangeDateTime { get; set; }
 
         [Column("CHANGESECOND")]
         public virtual long? ChangeSecond { get; set; }
 
+        [Unicode(false)]
         [Column("HAMESH")]
         public virtual string? Hamesh { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDOBJECTID")]
         public virtual string? RelatedObjectId { get; set; }
 
@@ -46,4 +50,4 @@ namespace Anu.BaseInfo.DataModel.Attachment
     public partial class GChangeStateHistory : GChangeStateHistoryBase
     {
     }
-}
+    }

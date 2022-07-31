@@ -1,21 +1,25 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
 {
     public abstract class WFActivityBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
         [Column("DELETEFROMDIAGRAM")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? DeleteFromDiagram { get; set; }
 
+        [Unicode(false)]
         [Column("ENGLISHNAME")]
         public virtual string? EnglishName { get; set; }
 
+        [Unicode(false)]
         [Column("FARSINAME")]
         public virtual string? FarsiName { get; set; }
 
@@ -43,6 +47,9 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
         [InverseProperty("TheWFActivity")]
         public virtual List<Anu.BaseInfo.DataModel.WorkFlow.WFDefine.WFActivityParameter>? TheWFActivityParameterList { get; set; }
 
+        [InverseProperty("TheWFActivity")]
+        public virtual List<Anu.BaseInfo.DataModel.WorkFlow.WFDefine.WFActivityTransitionFunc>? TheWFActivityTransitionFuncList { get; set; }
+
         [ForeignKey("WFWORKFLOWID")]
         public virtual Anu.BaseInfo.DataModel.WorkFlow.WFDefine.WFWorkflow? TheWFWorkflow { get; set; }
 
@@ -64,4 +71,4 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
     public partial class WFActivity : WFActivityBase
     {
     }
-}
+    }

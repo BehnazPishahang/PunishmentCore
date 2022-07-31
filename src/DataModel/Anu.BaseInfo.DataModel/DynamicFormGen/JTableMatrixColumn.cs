@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
     public abstract class JTableMatrixColumnBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
@@ -31,6 +33,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [ForeignKey("JTABLEREPORTID")]
         public virtual Anu.BaseInfo.DataModel.DynamicFormGen.JTableReport? TheJTableReport { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -40,4 +43,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
     public partial class JTableMatrixColumn : JTableMatrixColumnBase
     {
     }
-}
+    }

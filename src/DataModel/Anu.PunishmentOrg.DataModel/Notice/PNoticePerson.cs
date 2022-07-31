@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Notice
 {
@@ -25,4 +26,4 @@ namespace Anu.PunishmentOrg.DataModel.Notice
     public partial class PNoticePerson : PNoticePersonBase
     {
     }
-}
+    }

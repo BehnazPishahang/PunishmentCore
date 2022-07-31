@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Letter
 {
@@ -19,4 +20,4 @@ namespace Anu.BaseInfo.DataModel.Letter
     public partial class GOutgoingLetterSubject : GOutgoingLetterSubjectBase
     {
     }
-}
+    }

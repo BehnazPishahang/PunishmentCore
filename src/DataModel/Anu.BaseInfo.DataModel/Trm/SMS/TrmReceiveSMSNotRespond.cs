@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Trm.SMS
 {
@@ -16,4 +17,4 @@ namespace Anu.BaseInfo.DataModel.Trm.SMS
     public partial class TrmReceiveSMSNotRespond : TrmReceiveSMSNotRespondBase
     {
     }
-}
+    }

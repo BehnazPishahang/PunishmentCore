@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.MIS
 {
     public abstract class PMISCaseViolationBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("SOURCEOBJECTID")]
         public virtual string? SourceObjectId { get; set; }
 
@@ -43,4 +45,4 @@ namespace Anu.PunishmentOrg.DataModel.MIS
     public partial class PMISCaseViolation : PMISCaseViolationBase
     {
     }
-}
+    }

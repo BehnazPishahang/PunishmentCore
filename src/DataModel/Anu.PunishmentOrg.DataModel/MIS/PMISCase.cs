@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.MIS
 {
@@ -19,6 +20,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("CASEARCHIVESTATE")]
         public virtual Anu.PunishmentOrg.Enumerations.PUCaseArchiveState? CaseArchiveState { get; set; }
 
+        [Unicode(false)]
         [Column("CASESTORENO")]
         public virtual string? CaseStoreNo { get; set; }
 
@@ -46,6 +48,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("CREATECASETYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.PUCreateCaseType? CreateCaseType { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
@@ -64,6 +67,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("DIVANJUDGECOUNT")]
         public virtual long? DivanJudgeCount { get; set; }
 
+        [Unicode(false)]
         [Column("ENDDATETIME")]
         public virtual string? EndDateTime { get; set; }
 
@@ -142,6 +146,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("MALEOFFENDINGCOUNT")]
         public virtual long? MaleOffendingCount { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
@@ -211,12 +216,15 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("REDUCEWRITISSUED")]
         public virtual long? ReduceWritIssued { get; set; }
 
+        [Unicode(false)]
         [Column("REFERESHDATETIME")]
         public virtual string? RefereshDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("SOURCEOBJECTID")]
         public virtual string? SourceObjectId { get; set; }
 
+        [Unicode(false)]
         [Column("STARTDATETIME")]
         public virtual string? StartDateTime { get; set; }
 
@@ -307,4 +315,4 @@ namespace Anu.PunishmentOrg.DataModel.MIS
     public partial class PMISCase : PMISCaseBase
     {
     }
-}
+    }

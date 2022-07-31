@@ -1,30 +1,38 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.ExchangeData
 {
     public abstract class NAJAUnitBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ADDRESS")]
         public virtual string? Address { get; set; }
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
+        [Unicode(false)]
         [Column("DESC1")]
         public virtual string? Desc1 { get; set; }
 
+        [Unicode(false)]
         [Column("DESC2")]
         public virtual string? Desc2 { get; set; }
 
+        [Unicode(false)]
         [Column("DESC3")]
         public virtual string? Desc3 { get; set; }
 
+        [Unicode(false)]
         [Column("LEVELCODE")]
         public virtual string? LevelCode { get; set; }
 
+        [Unicode(false)]
         [Column("NAJACODE")]
         public virtual string? NAJACode { get; set; }
 
@@ -46,6 +54,7 @@ namespace Anu.BaseInfo.DataModel.ExchangeData
         [ForeignKey("PARENTUNITID")]
         public virtual Anu.BaseInfo.DataModel.ExchangeData.NAJAUnit? TheParentUnit { get; set; }
 
+        [Unicode(false)]
         [Column("UNITNAME")]
         public virtual string? UnitName { get; set; }
 
@@ -55,4 +64,4 @@ namespace Anu.BaseInfo.DataModel.ExchangeData
     public partial class NAJAUnit : NAJAUnitBase
     {
     }
-}
+    }

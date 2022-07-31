@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.ExchangeData
 {
@@ -10,6 +11,7 @@ namespace Anu.BaseInfo.DataModel.ExchangeData
         [Column("CHANGEDFILEDDATATYPE")]
         public virtual Anu.BaseInfo.Enumerations.ChangedFiledDataType? ChangedFiledDataType { get; set; }
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -25,6 +27,7 @@ namespace Anu.BaseInfo.DataModel.ExchangeData
         [InverseProperty("TheGMechanizedLetterTypeField")]
         public virtual List<Anu.BaseInfo.DataModel.ExchangeData.GMechanizLtrTypeFieldForms>? TheGMechanizLtrTypeFieldFormsList { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -34,4 +37,4 @@ namespace Anu.BaseInfo.DataModel.ExchangeData
     public partial class GMechanizedLetterTypeField : GMechanizedLetterTypeFieldBase
     {
     }
-}
+    }

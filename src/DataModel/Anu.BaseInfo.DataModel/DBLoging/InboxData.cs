@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
     public abstract class InboxDataBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("APPLIEDDATETIME")]
         public virtual string? AppliedDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("CHANGEDATETIME")]
         public virtual string? ChangeDateTime { get; set; }
 
@@ -19,12 +22,15 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [Column("COMMANDPRIORITY")]
         public virtual long? CommandPriority { get; set; }
 
+        [Unicode(false)]
         [Column("COMMANDTYPE")]
         public virtual string? CommandType { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
+        [Unicode(false)]
         [Column("GETDATADATETIME")]
         public virtual string? GetDataDateTime { get; set; }
 
@@ -46,6 +52,7 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [ForeignKey("SYSTEMFORMID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemForm? TheSystemForm { get; set; }
 
+        [Unicode(false)]
         [Column("TMP_IP")]
         public virtual string? Tmp_Ip { get; set; }
 
@@ -58,4 +65,4 @@ namespace Anu.BaseInfo.DataModel.DBLoging
     public partial class InboxData : InboxDataBase
     {
     }
-}
+    }

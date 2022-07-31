@@ -1,33 +1,41 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Proceeding
 {
     public abstract class PEnumerationWritBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CASESNOSUBNO")]
         public virtual string? CasesNoSubno { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("EXEPRSFAMILY")]
         public virtual string? ExePrsFamily { get; set; }
 
+        [Unicode(false)]
         [Column("EXEPRSFATHERNAME")]
         public virtual string? ExePrsFatherName { get; set; }
 
+        [Unicode(false)]
         [Column("EXEPRSNAME")]
         public virtual string? ExePrsName { get; set; }
 
+        [Unicode(false)]
         [Column("EXEPRSNATIONALCODE")]
         public virtual string? ExePrsNationalCode { get; set; }
 
         [Column("EXPERTPRICE")]
         public virtual long? ExpertPrice { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
@@ -55,9 +63,11 @@ namespace Anu.PunishmentOrg.DataModel.Proceeding
         [ForeignKey("UNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheUnit { get; set; }
 
+        [Unicode(false)]
         [Column("WRITDATE")]
         public virtual string? WritDate { get; set; }
 
+        [Unicode(false)]
         [Column("WRITTEXT")]
         public virtual string? WritText { get; set; }
 
@@ -70,4 +80,4 @@ namespace Anu.PunishmentOrg.DataModel.Proceeding
     public partial class PEnumerationWrit : PEnumerationWritBase
     {
     }
-}
+    }

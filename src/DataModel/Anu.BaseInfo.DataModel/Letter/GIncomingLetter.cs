@@ -1,42 +1,54 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Letter
 {
     public abstract class GIncomingLetterBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ATTACHMENT")]
         public virtual string? Attachment { get; set; }
 
+        [Unicode(false)]
         [Column("BACKLETTERSNO")]
         public virtual string? BackLettersNo { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
+        [Unicode(false)]
         [Column("FOLLOWERLETTERSNO")]
         public virtual string? FollowerLettersNo { get; set; }
 
+        [Unicode(false)]
         [Column("LETTERDATE")]
         public virtual string? LetterDate { get; set; }
 
+        [Unicode(false)]
         [Column("LETTERNO")]
         public virtual string? LetterNo { get; set; }
 
+        [Unicode(false)]
         [Column("LETTERTEXT")]
         public virtual string? LetterText { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("RECEIVELETTERTEXT")]
         public virtual string? ReceiveLetterText { get; set; }
 
+        [Unicode(false)]
         [Column("SENDER")]
         public virtual string? Sender { get; set; }
 
@@ -76,6 +88,7 @@ namespace Anu.BaseInfo.DataModel.Letter
         [Column("URGENCYLETTER")]
         public virtual Anu.BaseInfo.Enumerations.UrgencyLetter? UrgencyLetter { get; set; }
 
+        [Unicode(false)]
         [Column("VIEWDATE")]
         public virtual string? ViewDate { get; set; }
 
@@ -85,4 +98,4 @@ namespace Anu.BaseInfo.DataModel.Letter
     public partial class GIncomingLetter : GIncomingLetterBase
     {
     }
-}
+    }

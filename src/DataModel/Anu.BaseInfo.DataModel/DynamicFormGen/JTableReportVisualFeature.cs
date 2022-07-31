@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -19,6 +20,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("ISUNDERLINE")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? IsUnderLine { get; set; }
 
+        [Unicode(false)]
         [Column("NULLROWTITLE")]
         public virtual string? NullRowTitle { get; set; }
 
@@ -46,4 +48,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
     public partial class JTableReportVisualFeature : JTableReportVisualFeatureBase
     {
     }
-}
+    }

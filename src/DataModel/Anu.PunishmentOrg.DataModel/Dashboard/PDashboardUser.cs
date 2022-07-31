@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Dashboard
 {
     public abstract class PDashboardUserBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CHANGEDATETIME")]
         public virtual string? ChangeDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("COMMONFILTERS")]
         public virtual string? CommonFilters { get; set; }
 
@@ -28,4 +31,4 @@ namespace Anu.PunishmentOrg.DataModel.Dashboard
     public partial class PDashboardUser : PDashboardUserBase
     {
     }
-}
+    }

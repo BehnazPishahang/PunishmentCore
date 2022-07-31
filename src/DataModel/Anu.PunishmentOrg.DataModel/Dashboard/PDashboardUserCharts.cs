@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Dashboard
 {
     public abstract class PDashboardUserChartsBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CHARTFILTERS")]
         public virtual string? ChartFilters { get; set; }
 
+        [Unicode(false)]
         [Column("CHARTPARAMETERS")]
         public virtual string? ChartParameters { get; set; }
 
@@ -31,4 +34,4 @@ namespace Anu.PunishmentOrg.DataModel.Dashboard
     public partial class PDashboardUserCharts : PDashboardUserChartsBase
     {
     }
-}
+    }

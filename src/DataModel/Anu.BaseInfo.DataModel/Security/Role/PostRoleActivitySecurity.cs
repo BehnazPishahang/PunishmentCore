@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Security.Role
 {
     public abstract class PostRoleActivitySecurityBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
@@ -22,4 +24,4 @@ namespace Anu.BaseInfo.DataModel.Security.Role
     public partial class PostRoleActivitySecurity : PostRoleActivitySecurityBase
     {
     }
-}
+    }

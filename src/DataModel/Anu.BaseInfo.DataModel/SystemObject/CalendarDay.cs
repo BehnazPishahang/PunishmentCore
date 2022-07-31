@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
     public abstract class CalendarDayBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CREATEDATE")]
         public virtual string? CreateDate { get; set; }
 
@@ -25,4 +27,4 @@ namespace Anu.BaseInfo.DataModel.SystemObject
     public partial class CalendarDay : CalendarDayBase
     {
     }
-}
+    }

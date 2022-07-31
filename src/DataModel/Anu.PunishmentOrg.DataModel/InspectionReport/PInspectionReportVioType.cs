@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.InspectionReport
 {
@@ -19,4 +20,4 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
     public partial class PInspectionReportVioType : PInspectionReportVioTypeBase
     {
     }
-}
+    }

@@ -1,18 +1,22 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
     public abstract class PBoxFileBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("BOXFILENO")]
         public virtual string? BoxFileNo { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("ENDYEAR")]
         public virtual string? EndYear { get; set; }
 
@@ -40,4 +44,4 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
     public partial class PBoxFile : PBoxFileBase
     {
     }
-}
+    }

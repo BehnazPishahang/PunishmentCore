@@ -1,33 +1,40 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
     public abstract class PRevisionRequestBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CASESNOSUBNO")]
         public virtual string? CasesNoSubno { get; set; }
 
         [Column("CONTRABANDOPINION")]
         public virtual Anu.PunishmentOrg.Enumerations.PUContrabandOpinion? ContrabandOpinion { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
         [Column("HIGHREVISIONPOST")]
         public virtual Anu.PunishmentOrg.Enumerations.PURevisionRequestHighRevisionPost? HighRevisionPost { get; set; }
 
+        [Unicode(false)]
         [Column("JUDGEDATE")]
         public virtual string? JudgeDate { get; set; }
 
+        [Unicode(false)]
         [Column("JUDGENO")]
         public virtual string? JudgeNo { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("REQDATE")]
         public virtual string? ReqDate { get; set; }
 
@@ -70,4 +77,4 @@ namespace Anu.PunishmentOrg.DataModel.Letter
     public partial class PRevisionRequest : PRevisionRequestBase
     {
     }
-}
+    }

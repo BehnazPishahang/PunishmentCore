@@ -1,21 +1,26 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
     public abstract class CMSOrganizationBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ADDRESS")]
         public virtual string? Address { get; set; }
 
+        [Unicode(false)]
         [Column("CMSORGANIZATIONNO")]
         public virtual string? CMSOrganizationNo { get; set; }
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
@@ -43,4 +48,4 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
     public partial class CMSOrganization : CMSOrganizationBase
     {
     }
-}
+    }

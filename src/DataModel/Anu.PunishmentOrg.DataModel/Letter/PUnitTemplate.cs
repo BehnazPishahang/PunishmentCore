@@ -1,18 +1,21 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
     public abstract class PUnitTemplateBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
         [Column("STATE")]
         public virtual Anu.BaseInfo.Enumerations.State? State { get; set; }
 
+        [Unicode(false)]
         [Column("TEMPLATETEXT")]
         public virtual string? TemplateText { get; set; }
 
@@ -22,6 +25,7 @@ namespace Anu.PunishmentOrg.DataModel.Letter
         [ForeignKey("UNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheUnit { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -31,4 +35,4 @@ namespace Anu.PunishmentOrg.DataModel.Letter
     public partial class PUnitTemplate : PUnitTemplateBase
     {
     }
-}
+    }

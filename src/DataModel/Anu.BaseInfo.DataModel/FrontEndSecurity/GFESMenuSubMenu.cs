@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.FrontEndSecurity
 {
@@ -28,4 +29,4 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
     public partial class GFESMenuSubMenu : GFESMenuSubMenuBase
     {
     }
-}
+    }

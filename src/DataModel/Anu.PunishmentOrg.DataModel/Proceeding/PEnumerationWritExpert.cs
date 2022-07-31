@@ -1,21 +1,26 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Proceeding
 {
     public abstract class PEnumerationWritExpertBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ADDRESS")]
         public virtual string? Address { get; set; }
 
+        [Unicode(false)]
         [Column("FAMILY")]
         public virtual string? Family { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
+        [Unicode(false)]
         [Column("NATIONALITYCODE")]
         public virtual string? NationalityCode { get; set; }
 
@@ -34,4 +39,4 @@ namespace Anu.PunishmentOrg.DataModel.Proceeding
     public partial class PEnumerationWritExpert : PEnumerationWritExpertBase
     {
     }
-}
+    }

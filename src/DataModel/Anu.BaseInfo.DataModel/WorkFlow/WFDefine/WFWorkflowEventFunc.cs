@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
 {
@@ -10,9 +11,11 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
         [Column("ACTIONTIME")]
         public virtual Anu.BaseInfo.Enumerations.WorkFlowActionTime? ActionTime { get; set; }
 
+        [Unicode(false)]
         [Column("ASSEMBLYNAME")]
         public virtual string? AssemblyName { get; set; }
 
+        [Unicode(false)]
         [Column("FUNCTIONFULLNAME")]
         public virtual string? FunctionFullName { get; set; }
 
@@ -28,4 +31,4 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
     public partial class WFWorkflowEventFunc : WFWorkflowEventFuncBase
     {
     }
-}
+    }

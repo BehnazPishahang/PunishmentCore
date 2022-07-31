@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
     public abstract class PInstallmentDetailBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("DUEDATE")]
         public virtual string? DueDate { get; set; }
 
@@ -16,6 +18,7 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [Column("PAYAMOUNT")]
         public virtual long? PayAmount { get; set; }
 
+        [Unicode(false)]
         [Column("PAYDATE")]
         public virtual string? PayDate { get; set; }
 
@@ -34,4 +37,4 @@ namespace Anu.PunishmentOrg.DataModel.Execution
     public partial class PInstallmentDetail : PInstallmentDetailBase
     {
     }
-}
+    }

@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Dashboard
 {
     public abstract class PDashboardUserAccessBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("FROMDATETIME")]
         public virtual string? FromDateTime { get; set; }
 
@@ -16,6 +18,7 @@ namespace Anu.PunishmentOrg.DataModel.Dashboard
         [ForeignKey("PDASHBOARDUSERID")]
         public virtual Anu.PunishmentOrg.DataModel.Dashboard.PDashboardUser? ThePDashboardUser { get; set; }
 
+        [Unicode(false)]
         [Column("TODATETIME")]
         public virtual string? ToDateTime { get; set; }
 
@@ -25,4 +28,4 @@ namespace Anu.PunishmentOrg.DataModel.Dashboard
     public partial class PDashboardUserAccess : PDashboardUserAccessBase
     {
     }
-}
+    }

@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.OrganizationChart
 {
     public abstract class JudiciaryUnitBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ADDRESS")]
         public virtual string? Address { get; set; }
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -19,6 +22,7 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [Column("ISMECHANIZEREL")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? IsMechanizeRel { get; set; }
 
+        [Unicode(false)]
         [Column("LEVELCODE")]
         public virtual string? LevelCode { get; set; }
 
@@ -31,6 +35,7 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [ForeignKey("PARENTUNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.JudiciaryUnit? TheParentUnit { get; set; }
 
+        [Unicode(false)]
         [Column("UNITNAME")]
         public virtual string? UnitName { get; set; }
 
@@ -43,4 +48,4 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
     public partial class JudiciaryUnit : JudiciaryUnitBase
     {
     }
-}
+    }

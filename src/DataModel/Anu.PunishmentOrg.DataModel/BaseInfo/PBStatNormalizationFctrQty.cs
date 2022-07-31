@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.BaseInfo
 {
@@ -10,6 +11,7 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
         [Column("QUANTITY")]
         public virtual long? Quantity { get; set; }
 
+        [Unicode(false)]
         [Column("REFRESHDATETIME")]
         public virtual string? RefreshDateTime { get; set; }
 
@@ -25,4 +27,4 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
     public partial class PBStatNormalizationFctrQty : PBStatNormalizationFctrQtyBase
     {
     }
-}
+    }

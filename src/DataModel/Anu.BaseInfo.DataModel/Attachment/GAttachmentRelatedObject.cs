@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Attachment
 {
     public abstract class GAttachmentRelatedObjectBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("RELATEDOBJECTID")]
         public virtual string? RelatedObjectId { get; set; }
 
@@ -25,4 +27,4 @@ namespace Anu.BaseInfo.DataModel.Attachment
     public partial class GAttachmentRelatedObject : GAttachmentRelatedObjectBase
     {
     }
-}
+    }

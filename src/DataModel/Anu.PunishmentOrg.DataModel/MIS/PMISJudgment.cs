@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.MIS
 {
     public abstract class PMISJudgmentBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("JUDGEDATETIME")]
         public virtual string? JudgeDateTime { get; set; }
 
@@ -52,4 +54,4 @@ namespace Anu.PunishmentOrg.DataModel.MIS
     public partial class PMISJudgment : PMISJudgmentBase
     {
     }
-}
+    }

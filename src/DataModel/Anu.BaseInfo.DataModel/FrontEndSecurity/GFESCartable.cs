@@ -1,36 +1,46 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.FrontEndSecurity
 {
     public abstract class GFESCartableBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("DESC1")]
         public virtual string? Desc1 { get; set; }
 
+        [Unicode(false)]
         [Column("DESC2")]
         public virtual string? Desc2 { get; set; }
 
+        [Unicode(false)]
         [Column("DESC3")]
         public virtual string? Desc3 { get; set; }
 
+        [Unicode(false)]
         [Column("LASTACTIONDATETIME")]
         public virtual string? LastActionDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDCASEID")]
         public virtual string? RelatedCaseId { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDCASENO")]
         public virtual string? RelatedCaseNo { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDDOCID")]
         public virtual string? RelatedDocId { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDDOCNO")]
         public virtual string? RelatedDocNo { get; set; }
 
@@ -70,4 +80,4 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
     public partial class GFESCartable : GFESCartableBase
     {
     }
-}
+    }
