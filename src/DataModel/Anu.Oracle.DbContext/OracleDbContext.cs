@@ -8,6 +8,15 @@ namespace Anu.Oracle.DbContext
         public OracleDbContext(DbContextOptions options) : base(options)
         {
             SavingChanges += OracleDbContext_SavingChanges;
+            ChangeTracker.StateChanged += ChangeTracker_StateChanged;
+        }
+
+        private void ChangeTracker_StateChanged(object? sender, Microsoft.EntityFrameworkCore.ChangeTracking.EntityStateChangedEventArgs e)
+        {
+            if (e.Entry.Entity is Entity entity)
+            {
+                entity.OnStateChanged(e);
+            }            
         }
 
         private void OracleDbContext_SavingChanges(object? sender, SavingChangesEventArgs e)
