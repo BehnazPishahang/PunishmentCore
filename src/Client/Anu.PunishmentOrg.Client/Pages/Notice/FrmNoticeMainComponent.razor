@@ -1,21 +1,12 @@
-﻿@page "/Notice"
-@using Anu.PunishmentOrg.Client.Infrastructure.Notice
-@using Anu.PunishmentOrg.ServiceModel.Notice
+﻿@page "/FrmNoticeMain"
 
-<SearchNotice OnNoticeSearch="HandleNoticeSearch"> </SearchNotice>
+
+<FrmNoticeSearchComponent OnNoticeSearch="HandleNoticeSearch"> </FrmNoticeSearchComponent>
 
 
 @if(Elements?.Count()>0)
 {
-     @*   <MudDataGrid Items="@Elements">
-            <Columns>
-                <Column T="PNoticeContract" Field="PNoticeContract" Title="Nr" />
-                <Column T="PNoticeContract" Field="No" />
-                <Column T="PNoticeContract" Field="PNoticeContract" />
-                <Column T="PNoticeContract" Field="NoticePersonFamily" />
-                <Column T="PNoticeContract" Field="NoticePersonName"  />
-            </Columns>
-        </MudDataGrid>*@
+  
         <MudChip>@Elements.Count()</MudChip>
 
 }
@@ -58,16 +49,3 @@ else
     </table>
     }
 
-@code {
-    private IEnumerable<PNoticeContract> Elements;
-
-    
-    private void HandleNoticeSearch(string nationalcode)
-    {
-       
-       
-        Elements  = NoticeService.getPNoticeList(nationalcode);
-
-    }
-        
-}

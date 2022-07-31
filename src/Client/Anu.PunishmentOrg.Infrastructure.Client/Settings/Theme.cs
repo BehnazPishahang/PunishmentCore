@@ -115,7 +115,8 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
         {
             Palette = new Palette()
             {
-                Primary = "#1E88E5",
+                //Primary = "#1E88E5",
+                Primary = " #2596be",
                 AppbarBackground = "#1E88E5",
                 Background = Colors.Grey.Lighten5,
                 DrawerBackground = "#FFF",
@@ -129,8 +130,9 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
         public static MudTheme DarkTheme = new MudTheme()
         {
             Palette = new Palette()
-            {
-                Primary = "#1E88E5",
+            { 
+               Primary=" #2596be",
+               // Primary = "#1E88E5",
                 Success = "#007E33",
                 Black = "#27272f",
                 Background = "#32333d",

@@ -1,8 +1,5 @@
-﻿@page "/SearchNotice"
-@using System.Text.Json
-@using System.Text.Json.Serialization;
-@using Anu.PunishmentOrg.Client.Infrastructure.Notice
-@inject IHttpClientFactory ClientFactory
+﻿@page "/FrmNoticeSearch"
+
 
 
 <MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
@@ -30,23 +27,3 @@
 
 
 
-@code {
-
-
-
-    public string NationalCode { get; set; }
-
-    [Parameter]
-    public EventCallback<string> OnNoticeSearch { get; set; }
-    private void HandleSearch()
-    {
-        if (NationalCode.Length != 10)
-        {
-            return;
-        }
-        OnNoticeSearch.InvokeAsync(NationalCode);
-    }
-
-     
-
-}
