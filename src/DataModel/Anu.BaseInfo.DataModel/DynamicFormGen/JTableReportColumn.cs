@@ -1,18 +1,21 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
     public abstract class JTableReportColumnBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CSSCALSSNAMES")]
         public virtual string? CSSCalssNames { get; set; }
 
         [Column("DECIMALPOINTLENGTH")]
         public virtual decimal? DecimalPointLength { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
@@ -46,6 +49,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("LOOKUPSHOWTYPE")]
         public virtual Anu.BaseInfo.Enumerations.LookupShowType? LookupShowType { get; set; }
 
+        [Unicode(false)]
         [Column("LOOKUPWHERECOND")]
         public virtual string? LookupWhereCond { get; set; }
 
@@ -91,12 +95,14 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [InverseProperty("TheJTableReportColumn")]
         public virtual List<Anu.BaseInfo.DataModel.DynamicFormGen.JTableReportVisualFeature>? TheJTableReportVisualFeatureList { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
         [Column("USEDINCALC")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? UsedInCalc { get; set; }
 
+        [Unicode(false)]
         [Column("VIEWCOLUMNNAME")]
         public virtual string? ViewColumnName { get; set; }
 
@@ -106,4 +112,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
     public partial class JTableReportColumn : JTableReportColumnBase
     {
     }
-}
+    }

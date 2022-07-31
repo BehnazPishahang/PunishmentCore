@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.FrontEndSecurity
 {
     public abstract class GFESUserAccessTypeBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -25,6 +27,7 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
         [InverseProperty("TheGFESUserAccessType")]
         public virtual List<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUserAccessBaseRole>? TheGFESUserAccessBaseRoleList { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -34,4 +37,4 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
     public partial class GFESUserAccessType : GFESUserAccessTypeBase
     {
     }
-}
+    }

@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Notice
 {
     public abstract class PNoticeDocBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("RELATEDDOCNO")]
         public virtual string? RelatedDocNo { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDOBJECTID")]
         public virtual string? RelatedObjectId { get; set; }
 
@@ -28,4 +31,4 @@ namespace Anu.PunishmentOrg.DataModel.Notice
     public partial class PNoticeDoc : PNoticeDocBase
     {
     }
-}
+    }

@@ -1,30 +1,38 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Messaging
 {
     public abstract class GMessageBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("IP")]
         public virtual string? IP { get; set; }
 
+        [Unicode(false)]
         [Column("MESSAGEDATETIME")]
         public virtual string? MessageDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("MESSAGENO")]
         public virtual string? MessageNo { get; set; }
 
+        [Unicode(false)]
         [Column("MESSAGETEXT")]
         public virtual string? MessageText { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDCASEID")]
         public virtual string? RelatedCaseID { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDCASENO")]
         public virtual string? RelatedCaseNo { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDCASETITLE")]
         public virtual string? RelatedCaseTitle { get; set; }
 
@@ -52,4 +60,4 @@ namespace Anu.BaseInfo.DataModel.Messaging
     public partial class GMessage : GMessageBase
     {
     }
-}
+    }

@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -10,6 +11,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [Column("CODE")]
         public virtual long? Code { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -19,4 +21,4 @@ namespace Anu.BaseInfo.DataModel.SystemObject
     public partial class ShortCutKeys : ShortCutKeysBase
     {
     }
-}
+    }

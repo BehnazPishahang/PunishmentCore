@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
     public abstract class ObjectStateBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -19,9 +21,11 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [ForeignKey("SYSTEMOBJECTID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemObject? TheSystemObject { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
+        [Unicode(false)]
         [Column("UNITLEVELACCESS")]
         public virtual string? UnitLevelAccess { get; set; }
 
@@ -31,4 +35,4 @@ namespace Anu.BaseInfo.DataModel.SystemObject
     public partial class ObjectState : ObjectStateBase
     {
     }
-}
+    }

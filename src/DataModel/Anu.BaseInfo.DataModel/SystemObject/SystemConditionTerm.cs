@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -13,9 +14,11 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [Column("FIRSTOPERANDTYPE")]
         public virtual Anu.BaseInfo.Enumerations.OperandType? FirstOperandType { get; set; }
 
+        [Unicode(false)]
         [Column("LEFTOPERAND")]
         public virtual string? LeftOperand { get; set; }
 
+        [Unicode(false)]
         [Column("LEFTOPERANDDESCRIPTION")]
         public virtual string? LeftOperandDescription { get; set; }
 
@@ -25,9 +28,11 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [Column("OPERATOR")]
         public virtual Anu.BaseInfo.Enumerations.OperatorType? Operator { get; set; }
 
+        [Unicode(false)]
         [Column("RIGHTOPERAND")]
         public virtual string? RightOperand { get; set; }
 
+        [Unicode(false)]
         [Column("RIGHTOPERANDDESCRIPTION")]
         public virtual string? RightOperandDescription { get; set; }
 
@@ -46,4 +51,4 @@ namespace Anu.BaseInfo.DataModel.SystemObject
     public partial class SystemConditionTerm : SystemConditionTermBase
     {
     }
-}
+    }

@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
@@ -10,12 +11,15 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [Column("CONFIRMERPOSTTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.ConfirmerExecutionDocsType? ConfirmerPostType { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("FREEDATE")]
         public virtual string? FreeDate { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
@@ -25,12 +29,15 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [Column("PRESENCE")]
         public virtual Anu.PunishmentOrg.Enumerations.PUPublicWorkTime? Presence { get; set; }
 
+        [Unicode(false)]
         [Column("PUBLICWORKNAME")]
         public virtual string? PublicWorkName { get; set; }
 
+        [Unicode(false)]
         [Column("PUBLICWORKPLACEADDRESS")]
         public virtual string? PublicWorkPlaceAddress { get; set; }
 
+        [Unicode(false)]
         [Column("STARTDATE")]
         public virtual string? StartDate { get; set; }
 
@@ -67,4 +74,4 @@ namespace Anu.PunishmentOrg.DataModel.Execution
     public partial class PPublicWorksExec : PPublicWorksExecBase
     {
     }
-}
+    }

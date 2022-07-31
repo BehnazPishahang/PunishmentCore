@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFExec
 {
@@ -10,6 +11,7 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFExec
         [Column("COMPLETEDINPUTCOUNT")]
         public virtual long? CompletedInputCount { get; set; }
 
+        [Unicode(false)]
         [Column("IDPARAMVAL")]
         public virtual string? IDParamVal { get; set; }
 
@@ -40,4 +42,4 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFExec
     public partial class WFACInstance : WFACInstanceBase
     {
     }
-}
+    }

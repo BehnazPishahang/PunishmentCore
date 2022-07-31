@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.MIS
 {
@@ -10,6 +11,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("OFFENDERINVOLVEDTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.OffenderInvolvedType? OffenderInvolvedType { get; set; }
 
+        [Unicode(false)]
         [Column("SOURCEOBJECTID")]
         public virtual string? SourceObjectId { get; set; }
 
@@ -43,4 +45,4 @@ namespace Anu.PunishmentOrg.DataModel.MIS
     public partial class PMISCaseTriple : PMISCaseTripleBase
     {
     }
-}
+    }

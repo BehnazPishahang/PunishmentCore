@@ -1,24 +1,30 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
     public abstract class PCaseInputBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ENDDATETIME")]
         public virtual string? EndDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("INSPECTIONDATE")]
         public virtual string? InspectionDate { get; set; }
 
+        [Unicode(false)]
         [Column("INSPECTIONNO")]
         public virtual string? InspectionNo { get; set; }
 
+        [Unicode(false)]
         [Column("OUTERCASEDATE")]
         public virtual string? OuterCaseDate { get; set; }
 
+        [Unicode(false)]
         [Column("OUTERCASENO")]
         public virtual string? OuterCaseNo { get; set; }
 
@@ -28,15 +34,18 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("SENDERUNITTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.PUSenderCaseType? SenderUnitType { get; set; }
 
+        [Unicode(false)]
         [Column("SOURCECASEARCHIVENO")]
         public virtual string? SourceCaseArchiveNo { get; set; }
 
+        [Unicode(false)]
         [Column("SOURCECASENO")]
         public virtual string? SourceCaseNo { get; set; }
 
         [Column("SOURCECASESUBNO")]
         public virtual long? SourceCaseSubNo { get; set; }
 
+        [Unicode(false)]
         [Column("STARTDATETIME")]
         public virtual string? StartDateTime { get; set; }
 
@@ -70,4 +79,4 @@ namespace Anu.PunishmentOrg.DataModel.Case
     public partial class PCaseInput : PCaseInputBase
     {
     }
-}
+    }

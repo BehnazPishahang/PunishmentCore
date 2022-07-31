@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
     public abstract class JTableReportFieldPageStateBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CONDITIONEXP")]
         public virtual string? ConditionExp { get; set; }
 
@@ -28,4 +30,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
     public partial class JTableReportFieldPageState : JTableReportFieldPageStateBase
     {
     }
-}
+    }

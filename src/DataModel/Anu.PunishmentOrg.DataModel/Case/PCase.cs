@@ -1,33 +1,40 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
     public abstract class PCaseBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ARCHIVENO")]
         public virtual string? ArchiveNo { get; set; }
 
+        [Unicode(false)]
         [Column("BILLNOINWAREHOUSE")]
         public virtual string? BillNoInWarehouse { get; set; }
 
+        [Unicode(false)]
         [Column("BILLNOINWAREHOUSERN")]
         public virtual string? BillNoInWarehouseRN { get; set; }
 
         [Column("CASEARCHIVESTATE")]
         public virtual Anu.PunishmentOrg.Enumerations.PUCaseArchiveState? CaseArchiveState { get; set; }
 
+        [Unicode(false)]
         [Column("CASEPASSWORD")]
         public virtual string? CasePassword { get; set; }
 
         [Column("CASESENDTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.CaseSendType? CaseSendType { get; set; }
 
+        [Unicode(false)]
         [Column("CASESTORENO")]
         public virtual string? CaseStoreNo { get; set; }
 
+        [Unicode(false)]
         [Column("CASETITLE")]
         public virtual string? CaseTitle { get; set; }
 
@@ -37,12 +44,15 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("CREATECASETYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.PUCreateCaseType? CreateCaseType { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDCASEDOCNO")]
         public virtual string? CreatedCaseDocNo { get; set; }
 
+        [Unicode(false)]
         [Column("ENDDATETIME")]
         public virtual string? EndDateTime { get; set; }
 
@@ -52,30 +62,36 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("IMPORTANCEDEGREE")]
         public virtual Anu.PunishmentOrg.Enumerations.PUImportanceDegree? ImportanceDegree { get; set; }
 
+        [Unicode(false)]
         [Column("MANUALNO")]
         public virtual string? ManualNo { get; set; }
 
+        [Unicode(false)]
         [Column("MECHANIZEINFO")]
         public virtual string? MechanizeInfo { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
-        [Microsoft.EntityFrameworkCore.Unicode(false)]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("PETITIONDESCRIPTION")]
         public virtual string? PetitionDescription { get; set; }
 
+        [Unicode(false)]
         [Column("PETITIONREASONS")]
         public virtual string? PetitionReasons { get; set; }
 
+        [Unicode(false)]
         [Column("PETITIONSUBJECT")]
         public virtual string? PetitionSubject { get; set; }
 
+        [Unicode(false)]
         [Column("PREBILLNOINWAREHOUSE")]
         public virtual string? PreBillNoInWarehouse { get; set; }
 
+        [Unicode(false)]
         [Column("SOURCEOBJECTID")]
-        [Microsoft.EntityFrameworkCore.Unicode(false)]
         public virtual string? SourceObjectId { get; set; }
 
         [Column("SUBNO")]
@@ -104,6 +120,9 @@ namespace Anu.PunishmentOrg.DataModel.Case
 
         [ForeignKey("PBEXCHANGEUNITMASTERID")]
         public virtual Anu.PunishmentOrg.DataModel.BaseInfo.PBExchangeUnit? ThePBExchangeUnitMaster { get; set; }
+
+        [ForeignKey("PBEXECCONTINUATIONREASONID")]
+        public virtual Anu.PunishmentOrg.DataModel.BaseInfo.PBExecContinuationReason? ThePBExecContinuationReason { get; set; }
 
         [InverseProperty("ThePCase")]
         public virtual List<Anu.PunishmentOrg.DataModel.Accounting.PBill4PaidCase>? ThePBill4PaidCaseList { get; set; }
@@ -249,9 +268,11 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("TOTALVIOLATIONPRICEBYEXPERT")]
         public virtual long? TotalViolationPriceByExpert { get; set; }
 
+        [Unicode(false)]
         [Column("VERIFICATIONDATETIME")]
         public virtual string? VerificationDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("VERIFICATIONRESULT")]
         public virtual string? VerificationResult { get; set; }
 
@@ -261,4 +282,4 @@ namespace Anu.PunishmentOrg.DataModel.Case
     public partial class PCase : PCaseBase
     {
     }
-}
+    }

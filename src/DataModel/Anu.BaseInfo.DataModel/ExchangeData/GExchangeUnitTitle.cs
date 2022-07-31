@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.ExchangeData
 {
     public abstract class GExchangeUnitTitleBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -22,9 +24,11 @@ namespace Anu.BaseInfo.DataModel.ExchangeData
         [InverseProperty("TheGExchangeUnitTitle")]
         public virtual List<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESNJUnitRelatedUserAccess>? TheGFESNJUnitRelatedUserAccessList { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
+        [Unicode(false)]
         [Column("WEBSERVICEFULLNAME")]
         public virtual string? WebServiceFullName { get; set; }
 
@@ -34,4 +38,4 @@ namespace Anu.BaseInfo.DataModel.ExchangeData
     public partial class GExchangeUnitTitle : GExchangeUnitTitleBase
     {
     }
-}
+    }

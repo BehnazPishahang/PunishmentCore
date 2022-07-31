@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Accounting
 {
@@ -10,30 +11,38 @@ namespace Anu.PunishmentOrg.DataModel.Accounting
         [Column("BILLTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.Bill4PaidType? Billtype { get; set; }
 
+        [Unicode(false)]
         [Column("CARDNO")]
         public virtual string? CardNo { get; set; }
 
+        [Unicode(false)]
         [Column("CASESNOSUBNO")]
         public virtual string? CasesNoSubno { get; set; }
 
+        [Unicode(false)]
         [Column("CHECKFICHENO")]
         public virtual string? CheckFicheNo { get; set; }
 
         [Column("CLOSECASEORNO")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? CloseCaseOrNo { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("FISHNO")]
         public virtual string? FishNo { get; set; }
 
+        [Unicode(false)]
         [Column("RECEIVERNO")]
         public virtual string? ReceiverNo { get; set; }
 
+        [Unicode(false)]
         [Column("SIDENOTE")]
         public virtual string? SideNote { get; set; }
 
+        [Unicode(false)]
         [Column("TERMINALID")]
         public virtual string? TerminalID { get; set; }
 
@@ -64,9 +73,11 @@ namespace Anu.PunishmentOrg.DataModel.Accounting
         [Column("TOTALPAIDCOST")]
         public virtual long? TotalPaidCost { get; set; }
 
+        [Unicode(false)]
         [Column("TRANSACTIONDATETIMESECOND")]
         public virtual string? TransactionDateTimeSecond { get; set; }
 
+        [Unicode(false)]
         [Column("TRANSACTIONRECEIPT")]
         public virtual string? TransactionReceipt { get; set; }
 
@@ -76,4 +87,4 @@ namespace Anu.PunishmentOrg.DataModel.Accounting
     public partial class PBill4Paid : PBill4PaidBase
     {
     }
-}
+    }

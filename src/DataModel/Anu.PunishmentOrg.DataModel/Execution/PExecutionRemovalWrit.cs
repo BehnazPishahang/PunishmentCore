@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
@@ -10,21 +11,27 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [Column("CONFIRMERPOSTTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.ConfirmerExecutionDocsType? ConfirmerPostType { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("JUDNO")]
         public virtual string? JudNo { get; set; }
 
+        [Unicode(false)]
         [Column("MANUALNO")]
         public virtual string? ManualNo { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("PASSPORTOFFICERDESC")]
         public virtual string? PAssportOfficerDesc { get; set; }
 
+        [Unicode(false)]
         [Column("PROSECUTORREJECTREASON")]
         public virtual string? ProsecutorRejectReason { get; set; }
 
@@ -46,6 +53,7 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [ForeignKey("UNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheUnit { get; set; }
 
+        [Unicode(false)]
         [Column("WRITTEXT")]
         public virtual string? WritText { get; set; }
 
@@ -58,4 +66,4 @@ namespace Anu.PunishmentOrg.DataModel.Execution
     public partial class PExecutionRemovalWrit : PExecutionRemovalWritBase
     {
     }
-}
+    }

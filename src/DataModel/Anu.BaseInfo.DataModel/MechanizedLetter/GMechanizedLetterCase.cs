@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.MechanizedLetter
 {
@@ -10,12 +11,15 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         [Column("CASELOCATION")]
         public virtual Anu.BaseInfo.Enumerations.MechanizedLetterCaseLocation? CaseLocation { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDCASEID")]
         public virtual string? RelatedCaseID { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDCASENO")]
         public virtual string? RelatedCaseNo { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDCASETITLE")]
         public virtual string? RelatedCaseTitle { get; set; }
 
@@ -37,4 +41,4 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
     public partial class GMechanizedLetterCase : GMechanizedLetterCaseBase
     {
     }
-}
+    }

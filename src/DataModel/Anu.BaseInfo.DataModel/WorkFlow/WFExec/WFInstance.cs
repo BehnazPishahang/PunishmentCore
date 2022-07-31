@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFExec
 {
     public abstract class WFInstanceBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("IDPARAMVAL")]
         public virtual string? IDParamVal { get; set; }
 
@@ -28,4 +30,4 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFExec
     public partial class WFInstance : WFInstanceBase
     {
     }
-}
+    }

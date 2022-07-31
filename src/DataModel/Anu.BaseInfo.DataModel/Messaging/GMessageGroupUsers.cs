@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Messaging
 {
@@ -22,4 +23,4 @@ namespace Anu.BaseInfo.DataModel.Messaging
     public partial class GMessageGroupUsers : GMessageGroupUsersBase
     {
     }
-}
+    }

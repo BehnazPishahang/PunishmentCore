@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
     public abstract class PTransferCaseBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
@@ -34,4 +37,4 @@ namespace Anu.PunishmentOrg.DataModel.Case
     public partial class PTransferCase : PTransferCaseBase
     {
     }
-}
+    }

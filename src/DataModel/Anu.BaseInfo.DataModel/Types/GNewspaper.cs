@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Types
 {
@@ -10,9 +11,11 @@ namespace Anu.BaseInfo.DataModel.Types
         [Column("CERTIFICATETYPE")]
         public virtual Anu.BaseInfo.Enumerations.NewspaperCertificateType? CertificateType { get; set; }
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
+        [Unicode(false)]
         [Column("ERSHADCODE")]
         public virtual string? ErshadCode { get; set; }
 
@@ -31,6 +34,7 @@ namespace Anu.BaseInfo.DataModel.Types
         [InverseProperty("TheGNewspaper")]
         public virtual List<Anu.BaseInfo.DataModel.Types.GNewspaperUnit>? TheGNewspaperUnitList { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -40,4 +44,4 @@ namespace Anu.BaseInfo.DataModel.Types
     public partial class GNewspaper : GNewspaperBase
     {
     }
-}
+    }

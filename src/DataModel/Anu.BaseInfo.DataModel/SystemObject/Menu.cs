@@ -1,21 +1,25 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
     public abstract class MenuBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
+        [Unicode(false)]
         [Column("DIRECTCOMMAND")]
         public virtual string? DirectCommand { get; set; }
 
         [Column("MENUITEMSTATE")]
         public virtual Anu.BaseInfo.Enumerations.MenuItemState? MenuItemState { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
@@ -37,4 +41,4 @@ namespace Anu.BaseInfo.DataModel.SystemObject
     public partial class Menu : MenuBase
     {
     }
-}
+    }

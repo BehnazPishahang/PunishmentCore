@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -16,6 +17,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("OPERAND")]
         public virtual decimal? Operand { get; set; }
 
+        [Unicode(false)]
         [Column("OPERANDDESCRIPTION")]
         public virtual string? OperandDescription { get; set; }
 
@@ -43,4 +45,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
     public partial class JTableReportFieldMathExp : JTableReportFieldMathExpBase
     {
     }
-}
+    }

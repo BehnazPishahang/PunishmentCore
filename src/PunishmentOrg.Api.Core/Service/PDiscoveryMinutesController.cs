@@ -19,7 +19,7 @@ namespace Anu.PunishmentOrg.Service
     public class PDiscoveryMinutesController : Anu.PunishmentOrg.ServiceBase.PDiscoveryMinutesBase
     {
         public PDiscoveryMinutesController(Anu.DataAccess.IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        { 
         }
 
         public override async Task<Result> PDiscovery(string No)

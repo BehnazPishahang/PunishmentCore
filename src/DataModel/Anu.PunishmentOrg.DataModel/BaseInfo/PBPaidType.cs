@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.BaseInfo
 {
     public abstract class PBPaidTypeBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -16,6 +18,7 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
         [ForeignKey("RELATEDFORMID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemForm? TheRelatedForm { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -25,4 +28,4 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
     public partial class PBPaidType : PBPaidTypeBase
     {
     }
-}
+    }

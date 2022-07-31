@@ -1,18 +1,21 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
     public abstract class ReceiverDataBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CHANGEDATETIME")]
         public virtual string? ChangeDateTime { get; set; }
 
         [Column("COMMANDPRIORITY")]
         public virtual long? CommandPriority { get; set; }
 
+        [Unicode(false)]
         [Column("COMMANDTYPE")]
         public virtual string? CommandType { get; set; }
 
@@ -22,6 +25,7 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [Column("SENDDATASTATE")]
         public virtual Anu.BaseInfo.Enumerations.SendDataState? SendDataState { get; set; }
 
+        [Unicode(false)]
         [Column("SENDDATETIME")]
         public virtual string? SendDateTime { get; set; }
 
@@ -49,4 +53,4 @@ namespace Anu.BaseInfo.DataModel.DBLoging
     public partial class ReceiverData : ReceiverDataBase
     {
     }
-}
+    }

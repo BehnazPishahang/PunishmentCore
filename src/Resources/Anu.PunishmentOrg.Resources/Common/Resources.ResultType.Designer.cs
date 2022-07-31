@@ -97,6 +97,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کد ملی را وارد کنید..
+        /// </summary>
+        public static string NationalCodeIs_Required {
+            get {
+                return ResourceManager.GetString("NationalCodeIs_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شماره قبض تکراری است و امروز قابل ثبت نیست.
         /// </summary>
         public static string PBillStore_Duplicate_Bill {
@@ -336,6 +345,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string PJudgment {
             get {
                 return ResourceManager.GetString("PJudgment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ابلاغیه ای یافت نشد..
+        /// </summary>
+        public static string PNotice_NotFound {
+            get {
+                return ResourceManager.GetString("PNotice_NotFound", resourceCulture);
             }
         }
         

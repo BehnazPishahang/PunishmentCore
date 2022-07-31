@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Attachment
 {
@@ -16,4 +17,4 @@ namespace Anu.BaseInfo.DataModel.Attachment
     public partial class GAttachmentData : GAttachmentDataBase
     {
     }
-}
+    }

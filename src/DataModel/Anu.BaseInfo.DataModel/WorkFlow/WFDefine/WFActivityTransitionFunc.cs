@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
 {
     public abstract class WFActivityTransitionFuncBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ASSEMBLYNAME")]
         public virtual string? AssemblyName { get; set; }
 
+        [Unicode(false)]
         [Column("FUNCTIONFULLNAME")]
         public virtual string? FunctionFullName { get; set; }
 
@@ -22,4 +25,4 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
     public partial class WFActivityTransitionFunc : WFActivityTransitionFuncBase
     {
     }
-}
+    }

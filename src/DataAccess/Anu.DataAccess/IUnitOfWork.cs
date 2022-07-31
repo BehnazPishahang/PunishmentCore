@@ -1,4 +1,5 @@
-﻿namespace Anu.DataAccess
+﻿
+namespace Anu.DataAccess
 {
     public partial interface IUnitOfWork : IDisposable
     {
@@ -12,7 +13,8 @@
         Anu.BaseInfo.Domain.SystemObject.IObjectStateRepository ObjectState { get; }
         Anu.PunishmentOrg.Domain.BaseInfo.IPBExchangeUnitRepository PBExchangeUnit { get; }
         Anu.PunishmentOrg.Domain.InspectionReport.IPInspectionReportRepository PInspectionReport { get; }
-        
+        Anu.PunishmentOrg.Domain.Notice.IPNoticeRepository PNotice { get; }
+
         int Complete();
     }
 }

@@ -1,24 +1,30 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Alarm
 {
     public abstract class GAlarmBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ALARMTEXT")]
         public virtual string? AlarmText { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDDOCID")]
         public virtual string? RelatedDocId { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDDOCNO")]
         public virtual string? RelatedDocNo { get; set; }
 
@@ -49,4 +55,4 @@ namespace Anu.BaseInfo.DataModel.Alarm
     public partial class GAlarm : GAlarmBase
     {
     }
-}
+    }

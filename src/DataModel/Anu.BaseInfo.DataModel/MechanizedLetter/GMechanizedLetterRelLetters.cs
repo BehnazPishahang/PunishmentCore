@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.MechanizedLetter
 {
@@ -10,12 +11,14 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         [Column("RELATIONTYPE")]
         public virtual Anu.BaseInfo.Enumerations.MechanizedLetterRelType? RelationType { get; set; }
 
+        [Unicode(false)]
         [Column("RELLETTERDATE")]
         public virtual string? RelLetterDate { get; set; }
 
         [Column("RELLETTERGETTYPE")]
         public virtual Anu.BaseInfo.Enumerations.MechanizedLetterRelLetterGetType? RelLetterGetType { get; set; }
 
+        [Unicode(false)]
         [Column("RELLETTERNO")]
         public virtual string? RelLetterNo { get; set; }
 
@@ -31,4 +34,4 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
     public partial class GMechanizedLetterRelLetters : GMechanizedLetterRelLettersBase
     {
     }
-}
+    }
