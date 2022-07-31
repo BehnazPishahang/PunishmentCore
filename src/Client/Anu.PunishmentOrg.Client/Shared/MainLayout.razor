@@ -1,0 +1,54 @@
+﻿@using Anu.PunishmentOrg.Client.Infrastructure.Settings
+
+@inherits LayoutComponentBase
+
+<style>
+    @@font-face {
+    font-family: 'Shabnam';
+    font-weight: normal;
+    font-style: normal;
+    src: url('~/fonts/Shabnam/Shabnam.eot') format('embedded-opentype'), url('~/fonts/Shabnam/Shabnam.woff') format('woff'), url('~/fonts/Shabnam/Shabnam.ttf') format('truetype');
+}
+ </Style>   
+
+<MudRTLProvider RightToLeft="true">
+
+
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout  >
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+          @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
+          <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="Color.Warning" />
+            <MudText Typo="Typo.h5" Class="ml-3">آنو سیستم </MudText>
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+         <NavMenu/>
+    </MudDrawer>
+    <MudMainContent >
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+</MudRTLProvider>
+
+@code {
+    private MudTheme _theme = Theme135.DefaultTheme;
+    private bool _isDarkMode = false;
+
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
+
+
+
