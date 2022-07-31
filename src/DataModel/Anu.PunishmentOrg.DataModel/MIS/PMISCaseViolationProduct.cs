@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.MIS
 {
@@ -19,6 +20,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("SALEPRICE")]
         public virtual long? SalePrice { get; set; }
 
+        [Unicode(false)]
         [Column("SOURCEOBJECTID")]
         public virtual string? SourceObjectId { get; set; }
 
@@ -43,4 +45,4 @@ namespace Anu.PunishmentOrg.DataModel.MIS
     public partial class PMISCaseViolationProduct : PMISCaseViolationProductBase
     {
     }
-}
+    }

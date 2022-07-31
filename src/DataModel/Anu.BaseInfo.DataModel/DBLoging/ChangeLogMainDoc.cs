@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
@@ -10,9 +11,11 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [Column("ISBASEFORMOBJECT")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? IsBaseFormObject { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDOBJECTID")]
         public virtual string? RelatedObjectId { get; set; }
 
@@ -34,4 +37,4 @@ namespace Anu.BaseInfo.DataModel.DBLoging
     public partial class ChangeLogMainDoc : ChangeLogMainDocBase
     {
     }
-}
+    }

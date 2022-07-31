@@ -1,18 +1,22 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
     public abstract class PArticle23ActionReqAttachBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ATTACHDATE")]
         public virtual string? AttachDate { get; set; }
 
+        [Unicode(false)]
         [Column("ATTACHDESC")]
         public virtual string? AttachDesc { get; set; }
 
+        [Unicode(false)]
         [Column("ATTACNO")]
         public virtual string? AttacNo { get; set; }
 
@@ -31,4 +35,4 @@ namespace Anu.PunishmentOrg.DataModel.Letter
     public partial class PArticle23ActionReqAttach : PArticle23ActionReqAttachBase
     {
     }
-}
+    }

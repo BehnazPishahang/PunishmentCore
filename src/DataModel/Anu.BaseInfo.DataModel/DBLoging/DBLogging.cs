@@ -1,24 +1,29 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
     public abstract class DBLoggingBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CHANGEDATETIME")]
         public virtual string? ChangeDateTime { get; set; }
 
         [Column("COMMANDPRIORITY")]
         public virtual long? CommandPriority { get; set; }
 
+        [Unicode(false)]
         [Column("COMPUTERNAME")]
         public virtual string? ComputerName { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
+        [Unicode(false)]
         [Column("SESSIONID")]
         public virtual string? SessionId { get; set; }
 
@@ -49,4 +54,4 @@ namespace Anu.BaseInfo.DataModel.DBLoging
     public partial class DBLogging : DBLoggingBase
     {
     }
-}
+    }

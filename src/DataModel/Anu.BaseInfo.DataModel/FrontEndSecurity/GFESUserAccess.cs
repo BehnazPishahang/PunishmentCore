@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.FrontEndSecurity
 {
     public abstract class GFESUserAccessBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("FROMDATETIME")]
         public virtual string? FromDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("SIGNTEXT")]
         public virtual string? SignText { get; set; }
 
@@ -25,6 +28,7 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
         [ForeignKey("NAJAUNITID")]
         public virtual Anu.BaseInfo.DataModel.ExchangeData.NAJAUnit? TheNAJAUnit { get; set; }
 
+        [Unicode(false)]
         [Column("TODATETIME")]
         public virtual string? ToDateTime { get; set; }
 
@@ -34,4 +38,4 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
     public partial class GFESUserAccess : GFESUserAccessBase
     {
     }
-}
+    }

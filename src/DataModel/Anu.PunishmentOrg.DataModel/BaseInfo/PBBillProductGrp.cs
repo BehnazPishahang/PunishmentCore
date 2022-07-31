@@ -1,18 +1,22 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.BaseInfo
 {
     public abstract class PBBillProductGrpBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
+        [Unicode(false)]
         [Column("ORGCODE")]
         public virtual string? OrgCode { get; set; }
 
@@ -37,4 +41,4 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
     public partial class PBBillProductGrp : PBBillProductGrpBase
     {
     }
-}
+    }

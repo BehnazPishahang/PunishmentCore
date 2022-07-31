@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Messaging
 {
     public abstract class GMessageGroupBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("GROUPTITLE")]
         public virtual string? GroupTitle { get; set; }
 
@@ -22,4 +24,4 @@ namespace Anu.BaseInfo.DataModel.Messaging
     public partial class GMessageGroup : GMessageGroupBase
     {
     }
-}
+    }

@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Messaging
 {
@@ -25,6 +26,7 @@ namespace Anu.BaseInfo.DataModel.Messaging
         [Column("VIEWBYRECIEVER")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? ViewByReciever { get; set; }
 
+        [Unicode(false)]
         [Column("VIEWDATETIME")]
         public virtual string? ViewDateTime { get; set; }
 
@@ -34,4 +36,4 @@ namespace Anu.BaseInfo.DataModel.Messaging
     public partial class GMessageReciever : GMessageRecieverBase
     {
     }
-}
+    }

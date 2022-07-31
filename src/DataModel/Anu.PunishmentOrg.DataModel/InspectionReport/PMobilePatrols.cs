@@ -1,24 +1,30 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.InspectionReport
 {
     public abstract class PMobilePatrolsBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("ENDTIME")]
         public virtual string? EndTime { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("PATROLDATE")]
         public virtual string? PatrolDate { get; set; }
 
+        [Unicode(false)]
         [Column("STARTTIME")]
         public virtual string? StartTime { get; set; }
 
@@ -40,4 +46,4 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
     public partial class PMobilePatrols : PMobilePatrolsBase
     {
     }
-}
+    }

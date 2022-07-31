@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -19,6 +20,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("FIRSTOPERANDTYPE")]
         public virtual Anu.BaseInfo.Enumerations.JOperandType? FirstOperandType { get; set; }
 
+        [Unicode(false)]
         [Column("LEFTOPERANDDESCRIPTION")]
         public virtual string? LeftOperandDescription { get; set; }
 
@@ -28,6 +30,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("OPERATOR")]
         public virtual Anu.BaseInfo.Enumerations.OperatorType? Operator { get; set; }
 
+        [Unicode(false)]
         [Column("RIGHTOPERANDDESCRIPTION")]
         public virtual string? RightOperandDescription { get; set; }
 
@@ -55,4 +58,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
     public partial class JTableReportColumnMathCond : JTableReportColumnMathCondBase
     {
     }
-}
+    }

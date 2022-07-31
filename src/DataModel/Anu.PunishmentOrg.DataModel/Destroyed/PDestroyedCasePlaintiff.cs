@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
@@ -10,12 +11,15 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         [Column("DAMAGECAUSEDVALUE")]
         public virtual long? DamageCausedValue { get; set; }
 
+        [Unicode(false)]
         [Column("FAMILY")]
         public virtual string? Family { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
+        [Unicode(false)]
         [Column("NATIONALCODE")]
         public virtual string? NationalCode { get; set; }
 
@@ -37,4 +41,4 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
     public partial class PDestroyedCasePlaintiff : PDestroyedCasePlaintiffBase
     {
     }
-}
+    }

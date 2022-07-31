@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.MIS
 {
     public abstract class PMISCasePersonBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("BIRTHDATE")]
         public virtual string? BirthDate { get; set; }
 
+        [Unicode(false)]
         [Column("CARDSTEWARDSHIPDATE")]
         public virtual string? CardStewardshipDate { get; set; }
 
@@ -19,6 +22,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("LEGALPERSONSTATE")]
         public virtual Anu.PunishmentOrg.Enumerations.PULegalPersonState? LegalPersonState { get; set; }
 
+        [Unicode(false)]
         [Column("LICENSEOWNERBIRTHDATE")]
         public virtual string? LicenseOwnerBirthDate { get; set; }
 
@@ -52,6 +56,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("SEX")]
         public virtual Anu.BaseInfo.Enumerations.SexType? Sex { get; set; }
 
+        [Unicode(false)]
         [Column("SOURCEOBJECTID")]
         public virtual string? SourceObjectId { get; set; }
 
@@ -79,6 +84,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [ForeignKey("PMISCASEID")]
         public virtual Anu.PunishmentOrg.DataModel.MIS.PMISCase? ThePMISCase { get; set; }
 
+        [Unicode(false)]
         [Column("TRADELICENSEDATE")]
         public virtual string? TradeLicenseDate { get; set; }
 
@@ -88,4 +94,4 @@ namespace Anu.PunishmentOrg.DataModel.MIS
     public partial class PMISCasePerson : PMISCasePersonBase
     {
     }
-}
+    }

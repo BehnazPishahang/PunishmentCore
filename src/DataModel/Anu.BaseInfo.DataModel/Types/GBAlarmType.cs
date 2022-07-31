@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Types
 {
     public abstract class GBAlarmTypeBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
@@ -16,6 +18,7 @@ namespace Anu.BaseInfo.DataModel.Types
         [InverseProperty("TheGBAlarmType")]
         public virtual List<Anu.BaseInfo.DataModel.Types.GBAlarmTypeViewer>? TheGBAlarmTypeViewerList { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -25,4 +28,4 @@ namespace Anu.BaseInfo.DataModel.Types
     public partial class GBAlarmType : GBAlarmTypeBase
     {
     }
-}
+    }

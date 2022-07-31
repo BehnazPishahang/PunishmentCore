@@ -1,33 +1,41 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
 {
     public abstract class PDiscoveryMinutesSuspectBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ADDRESS")]
         public virtual string? Address { get; set; }
 
+        [Unicode(false)]
         [Column("ADDRESSRN")]
         public virtual string? AddressRN { get; set; }
 
+        [Unicode(false)]
         [Column("BIRTHDATE")]
         public virtual string? BirthDate { get; set; }
 
         [Column("BIRTHDATERN")]
         public virtual Anu.PunishmentOrg.Enumerations.Refuse? BirthDateRN { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
+        [Unicode(false)]
         [Column("DISCLAIMERREASON")]
         public virtual string? DisclaimerReason { get; set; }
 
+        [Unicode(false)]
         [Column("FAMILY")]
         public virtual string? Family { get; set; }
 
+        [Unicode(false)]
         [Column("FATHERNAME")]
         public virtual string? FatherName { get; set; }
 
@@ -37,9 +45,11 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [Column("FULLNAMERN")]
         public virtual Anu.PunishmentOrg.Enumerations.Refuse? FullNameRN { get; set; }
 
+        [Unicode(false)]
         [Column("IDENTITYNUMBER")]
         public virtual string? IdentityNumber { get; set; }
 
+        [Unicode(false)]
         [Column("IDENTITYNUMBERRN")]
         public virtual string? IdentityNumberRN { get; set; }
 
@@ -49,15 +59,19 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [Column("ISSEARCHHISTORY")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? IsSearchHistory { get; set; }
 
+        [Unicode(false)]
         [Column("MOBILNUMBER")]
         public virtual string? MobilNumber { get; set; }
 
+        [Unicode(false)]
         [Column("MOBILNUMBERRN")]
         public virtual string? MobilNumberRN { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
+        [Unicode(false)]
         [Column("NATIONALCODE")]
         public virtual string? NationalCode { get; set; }
 
@@ -73,18 +87,22 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [Column("NUMOFHISTORY")]
         public virtual long? NumOfHistory { get; set; }
 
+        [Unicode(false)]
         [Column("PASSPORTNO")]
         public virtual string? PassportNo { get; set; }
 
+        [Unicode(false)]
         [Column("PASSPORTNORN")]
         public virtual string? PassportNoRN { get; set; }
 
         [Column("PERSONTYPE")]
         public virtual Anu.BaseInfo.Enumerations.PersonType? PersonType { get; set; }
 
+        [Unicode(false)]
         [Column("PHONENUMBER")]
         public virtual string? PhoneNumber { get; set; }
 
+        [Unicode(false)]
         [Column("PHONENUMBERRN")]
         public virtual string? PhoneNumberRN { get; set; }
 
@@ -112,4 +130,4 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
     public partial class PDiscoveryMinutesSuspect : PDiscoveryMinutesSuspectBase
     {
     }
-}
+    }

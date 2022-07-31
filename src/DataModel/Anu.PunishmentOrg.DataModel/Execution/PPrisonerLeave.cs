@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
     public abstract class PPrisonerLeaveBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ENDDATE")]
         public virtual string? EndDate { get; set; }
 
+        [Unicode(false)]
         [Column("STARTDATE")]
         public virtual string? StartDate { get; set; }
 
@@ -25,4 +28,4 @@ namespace Anu.PunishmentOrg.DataModel.Execution
     public partial class PPrisonerLeave : PPrisonerLeaveBase
     {
     }
-}
+    }

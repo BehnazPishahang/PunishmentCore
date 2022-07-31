@@ -1,27 +1,34 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Proceeding
 {
     public abstract class PProceedingMinuteBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("ENDTIME")]
         public virtual string? EndTime { get; set; }
 
+        [Unicode(false)]
         [Column("MEETINGDATE")]
         public virtual string? MeetingDate { get; set; }
 
+        [Unicode(false)]
         [Column("MINUTETEXT")]
         public virtual string? MinuteText { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("STARTTIME")]
         public virtual string? StartTime { get; set; }
 
@@ -49,4 +56,4 @@ namespace Anu.PunishmentOrg.DataModel.Proceeding
     public partial class PProceedingMinute : PProceedingMinuteBase
     {
     }
-}
+    }

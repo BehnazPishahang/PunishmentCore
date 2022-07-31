@@ -1,21 +1,25 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.Advertising
 {
     public abstract class GAdvertisingBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ACCESSNO")]
         public virtual string? AccessNo { get; set; }
 
+        [Unicode(false)]
         [Column("ADVERTISINGBUG")]
         public virtual string? AdvertisingBug { get; set; }
 
         [Column("ADVERTISINGCOST")]
         public virtual Anu.BaseInfo.Enumerations.HaveNoHave? AdvertisingCost { get; set; }
 
+        [Unicode(false)]
         [Column("ADVERTISINGDATE")]
         public virtual string? AdvertisingDate { get; set; }
 
@@ -25,15 +29,19 @@ namespace Anu.BaseInfo.DataModel.Advertising
         [Column("ADVERTISINGPRINTFILE")]
         public virtual byte[]? AdvertisingPrintFile { get; set; }
 
+        [Unicode(false)]
         [Column("ADVERTISINGTEXT")]
         public virtual string? AdvertisingText { get; set; }
 
+        [Unicode(false)]
         [Column("CONFIRMEDDATE")]
         public virtual string? ConfirmedDate { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("INDEXEDFIELDS")]
         public virtual string? IndexedFields { get; set; }
 
@@ -43,42 +51,55 @@ namespace Anu.BaseInfo.DataModel.Advertising
         [Column("ISPRINTED")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? IsPrinted { get; set; }
 
+        [Unicode(false)]
         [Column("LOCALFIELDS")]
         public virtual string? LocalFields { get; set; }
 
+        [Unicode(false)]
         [Column("NEWSPAPER")]
         public virtual string? Newspaper { get; set; }
 
+        [Unicode(false)]
         [Column("NEWSPAPERNO")]
         public virtual string? NewspaperNo { get; set; }
 
+        [Unicode(false)]
         [Column("NEWSPAPERPAGENO")]
         public virtual string? NewspaperPageNo { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
+        [Unicode(false)]
         [Column("PAIDDATETIME")]
         public virtual string? PaidDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("PRESENSEDATETIME")]
         public virtual string? PresenseDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("PRINTDATE")]
         public virtual string? PrintDate { get; set; }
 
+        [Unicode(false)]
         [Column("REGISTEREDDATE")]
         public virtual string? RegisteredDate { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDCASEDESCRIPTION")]
         public virtual string? RelatedCaseDescription { get; set; }
 
+        [Unicode(false)]
         [Column("REQUESTTEXT")]
         public virtual string? RequestText { get; set; }
 
+        [Unicode(false)]
         [Column("SENDEDDATE")]
         public virtual string? SendedDate { get; set; }
 
+        [Unicode(false)]
         [Column("SIDENOTE")]
         public virtual string? SideNote { get; set; }
 
@@ -106,4 +127,4 @@ namespace Anu.BaseInfo.DataModel.Advertising
     public partial class GAdvertising : GAdvertisingBase
     {
     }
-}
+    }

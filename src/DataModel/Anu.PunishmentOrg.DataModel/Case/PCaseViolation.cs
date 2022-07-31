@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -10,9 +11,11 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("ROWNUMBER")]
         public virtual long? RowNumber { get; set; }
 
+        [Unicode(false)]
         [Column("SOURCEOBJECTID")]
         public virtual string? SourceObjectId { get; set; }
 
+        [Unicode(false)]
         [Column("SUBJECTTITLE")]
         public virtual string? SubjectTitle { get; set; }
 
@@ -34,12 +37,15 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [InverseProperty("ThePCaseViolation")]
         public virtual List<Anu.PunishmentOrg.DataModel.Case.PCaseTriple>? ThePCaseTripleList { get; set; }
 
+        [Unicode(false)]
         [Column("VIOLATIONADDRESS")]
         public virtual string? ViolationAddress { get; set; }
 
+        [Unicode(false)]
         [Column("VIOLATIONDATE")]
         public virtual string? ViolationDate { get; set; }
 
+        [Unicode(false)]
         [Column("VIOLATIONDESC")]
         public virtual string? ViolationDesc { get; set; }
 
@@ -58,4 +64,4 @@ namespace Anu.PunishmentOrg.DataModel.Case
     public partial class PCaseViolation : PCaseViolationBase
     {
     }
-}
+    }

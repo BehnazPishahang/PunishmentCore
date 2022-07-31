@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -19,4 +20,4 @@ namespace Anu.PunishmentOrg.DataModel.Case
     public partial class PDocDefaultFontSize : PDocDefaultFontSizeBase
     {
     }
-}
+    }

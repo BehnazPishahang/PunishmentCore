@@ -1,12 +1,14 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Terminate
 {
     public abstract class PConvictsDatabaseBindingSujBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ENDPENALTYDATE")]
         public virtual string? EndPenaltyDate { get; set; }
 
@@ -19,6 +21,7 @@ namespace Anu.PunishmentOrg.DataModel.Terminate
         [Column("PENALTYGETTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.PenaltyGetType? PenaltyGetType { get; set; }
 
+        [Unicode(false)]
         [Column("STARTPENALTYDATE")]
         public virtual string? StartPenaltyDate { get; set; }
 
@@ -37,4 +40,4 @@ namespace Anu.PunishmentOrg.DataModel.Terminate
     public partial class PConvictsDatabaseBindingSuj : PConvictsDatabaseBindingSujBase
     {
     }
-}
+    }

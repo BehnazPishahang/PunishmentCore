@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -10,9 +11,11 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("APPLICANTTYPE")]
         public virtual Anu.BaseInfo.Enumerations.ApplicantType? ApplicantType { get; set; }
 
+        [Unicode(false)]
         [Column("COLUMNMATHEXP")]
         public virtual string? ColumnMathExp { get; set; }
 
+        [Unicode(false)]
         [Column("CONDITIONEXP")]
         public virtual string? ConditionExp { get; set; }
 
@@ -22,6 +25,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("ISROUND")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? IsRound { get; set; }
 
+        [Unicode(false)]
         [Column("LOOKUPWHERECOND")]
         public virtual string? LookupWhereCond { get; set; }
 
@@ -31,6 +35,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("ROUNDDIGITNUM")]
         public virtual decimal? RoundDigitNum { get; set; }
 
+        [Unicode(false)]
         [Column("SCRIPTEXP")]
         public virtual string? ScriptExp { get; set; }
 
@@ -52,4 +57,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
     public partial class JTableReportColMathCndExp : JTableReportColMathCndExpBase
     {
     }
-}
+    }

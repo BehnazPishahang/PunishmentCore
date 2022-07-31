@@ -1,39 +1,49 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Gravamen
 {
     public abstract class PGravamenPersonBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ADDRESS")]
         public virtual string? Address { get; set; }
 
+        [Unicode(false)]
         [Column("BIRTHDATE")]
         public virtual string? BirthDate { get; set; }
 
+        [Unicode(false)]
         [Column("FAMILY")]
         public virtual string? Family { get; set; }
 
+        [Unicode(false)]
         [Column("FATHERNAME")]
         public virtual string? FatherName { get; set; }
 
+        [Unicode(false)]
         [Column("IDENTITYNUMBER")]
         public virtual string? IdentityNumber { get; set; }
 
+        [Unicode(false)]
         [Column("MOBILNUMBER")]
         public virtual string? MobilNumber { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
+        [Unicode(false)]
         [Column("NATIONALCODE")]
         public virtual string? NationalCode { get; set; }
 
         [Column("NATIONALITY")]
         public virtual Anu.BaseInfo.Enumerations.LNationality? Nationality { get; set; }
 
+        [Unicode(false)]
         [Column("PERSONPASSWORD")]
         public virtual string? PersonPassword { get; set; }
 
@@ -43,6 +53,7 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
         [Column("PERSONTYPE")]
         public virtual Anu.BaseInfo.Enumerations.PersonType? PersonType { get; set; }
 
+        [Unicode(false)]
         [Column("POSTCODE")]
         public virtual string? PostCode { get; set; }
 
@@ -55,6 +66,7 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
         [ForeignKey("PGRAVAMENID")]
         public virtual Anu.PunishmentOrg.DataModel.Gravamen.PGravamen? ThePGravamen { get; set; }
 
+        [Unicode(false)]
         [Column("TRADEUNITNAME")]
         public virtual string? TradeUnitName { get; set; }
 
@@ -64,4 +76,4 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
     public partial class PGravamenPerson : PGravamenPersonBase
     {
     }
-}
+    }

@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
 {
     public abstract class PCancelSaftyWritBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
@@ -40,9 +43,11 @@ namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
         [Column("WRITAMOUNT")]
         public virtual long? WritAmount { get; set; }
 
+        [Unicode(false)]
         [Column("WRITDATE")]
         public virtual string? WritDate { get; set; }
 
+        [Unicode(false)]
         [Column("WRITTEXT")]
         public virtual string? WritText { get; set; }
 
@@ -52,4 +57,4 @@ namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
     public partial class PCancelSaftyWrit : PCancelSaftyWritBase
     {
     }
-}
+    }

@@ -1,45 +1,57 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.OrganizationChart
 {
     public abstract class NScriptoriumEmployeeBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("BIRTHDATE")]
         public virtual string? BirthDate { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
+        [Unicode(false)]
         [Column("EMAIL")]
         public virtual string? Email { get; set; }
 
+        [Unicode(false)]
         [Column("FATHERNAME")]
         public virtual string? FatherName { get; set; }
 
+        [Unicode(false)]
         [Column("FIRSTNAME")]
         public virtual string? FirstName { get; set; }
 
         [Column("GRADE")]
         public virtual Anu.BaseInfo.Enumerations.ScriptoriumEmployeePosition? Grade { get; set; }
 
+        [Unicode(false)]
         [Column("HOMEADDRESS")]
         public virtual string? HomeAddress { get; set; }
 
+        [Unicode(false)]
         [Column("IDENTITYNO")]
         public virtual string? IdentityNo { get; set; }
 
+        [Unicode(false)]
         [Column("LASTNAME")]
         public virtual string? LastName { get; set; }
 
+        [Unicode(false)]
         [Column("MOBILE")]
         public virtual string? Mobile { get; set; }
 
+        [Unicode(false)]
         [Column("NATIONALITYCODE")]
         public virtual string? NationalityCode { get; set; }
 
+        [Unicode(false)]
         [Column("NICKNAME")]
         public virtual string? NickName { get; set; }
 
@@ -73,4 +85,4 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
     public partial class NScriptoriumEmployee : NScriptoriumEmployeeBase
     {
     }
-}
+    }

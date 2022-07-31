@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -22,6 +23,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("CONTROLTYPE")]
         public virtual Anu.BaseInfo.Enumerations.GroupControlType? ControlType { get; set; }
 
+        [Unicode(false)]
         [Column("GRIDNAME")]
         public virtual string? GridName { get; set; }
 
@@ -31,6 +33,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("HASTABLEPAGING")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? HasTablePaging { get; set; }
 
+        [Unicode(false)]
         [Column("LABELCONTROL")]
         public virtual string? LabelControl { get; set; }
 
@@ -94,4 +97,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
     public partial class JTableReportPageAndGroup : JTableReportPageAndGroupBase
     {
     }
-}
+    }

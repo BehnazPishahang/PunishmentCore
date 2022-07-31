@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -49,6 +50,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("GUILDCASESERVICE")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? GuildCaseService { get; set; }
 
+        [Unicode(false)]
         [Column("IMPORTANCEDESCRIPTION")]
         public virtual string? ImportanceDescription { get; set; }
 
@@ -115,4 +117,4 @@ namespace Anu.PunishmentOrg.DataModel.Case
     public partial class PCaseImportanceDegree : PCaseImportanceDegreeBase
     {
     }
-}
+    }

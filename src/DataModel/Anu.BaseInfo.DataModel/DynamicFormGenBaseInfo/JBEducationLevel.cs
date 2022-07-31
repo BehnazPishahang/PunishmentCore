@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
 {
@@ -13,4 +14,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
     public partial class JBEducationLevel : JBEducationLevelBase
     {
     }
-}
+    }

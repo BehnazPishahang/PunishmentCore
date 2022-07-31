@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.BaseInfo
 {
     public abstract class PBBillMeasurementUnitTypeBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
+        [Unicode(false)]
         [Column("ORGCODE")]
         public virtual string? OrgCode { get; set; }
 
@@ -25,6 +28,7 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
         [ForeignKey("GEXCHANGEUNITTITLEID")]
         public virtual Anu.BaseInfo.DataModel.ExchangeData.GExchangeUnitTitle? TheGExchangeUnitTitle { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -34,4 +38,4 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
     public partial class PBBillMeasurementUnitType : PBBillMeasurementUnitTypeBase
     {
     }
-}
+    }

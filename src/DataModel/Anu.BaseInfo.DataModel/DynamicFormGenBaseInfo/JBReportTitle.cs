@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
 {
@@ -10,15 +11,18 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
         [Column("APPLICANTFUNCTION")]
         public virtual Anu.BaseInfo.Enumerations.ApplicantFunctionType? ApplicantFunction { get; set; }
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
         [Column("FRMBUDGETTYPE")]
         public virtual Anu.BaseInfo.Enumerations.FrmBudgetType? FrmBudgetType { get; set; }
 
+        [Unicode(false)]
         [Column("SHORTNAME")]
         public virtual string? ShortName { get; set; }
 
@@ -31,6 +35,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
         [InverseProperty("TheMainReport")]
         public virtual List<Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo.JBReportRelateds>? TheRelatedReportList { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -40,4 +45,4 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
     public partial class JBReportTitle : JBReportTitleBase
     {
     }
-}
+    }

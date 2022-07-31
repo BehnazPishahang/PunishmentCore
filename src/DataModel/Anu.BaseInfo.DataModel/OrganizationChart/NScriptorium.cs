@@ -1,42 +1,54 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.OrganizationChart
 {
     public abstract class NScriptoriumBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ADDRESS")]
         public virtual string? Address { get; set; }
 
+        [Unicode(false)]
         [Column("CODE")]
         public virtual string? Code { get; set; }
 
+        [Unicode(false)]
         [Column("EMAILADDRESS")]
         public virtual string? EMailAddress { get; set; }
 
+        [Unicode(false)]
         [Column("FAX")]
         public virtual string? Fax { get; set; }
 
+        [Unicode(false)]
         [Column("LASTMODIFIER")]
         public virtual string? LastModifier { get; set; }
 
+        [Unicode(false)]
         [Column("LASTMODIFYDATETIME")]
         public virtual string? LastModifyDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("LEGACYCODE")]
         public virtual string? LegacyCode { get; set; }
 
+        [Unicode(false)]
         [Column("MOBILENUMBER4SMS")]
         public virtual string? MobileNumber4SMS { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
+        [Unicode(false)]
         [Column("NATIONALID")]
         public virtual string? NationalID { get; set; }
 
+        [Unicode(false)]
         [Column("POSTALCODE")]
         public virtual string? PostalCode { get; set; }
 
@@ -49,9 +61,11 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [Column("SCRIPTORIUMTYPE")]
         public virtual Anu.BaseInfo.Enumerations.NotaryActivityType? ScriptoriumType { get; set; }
 
+        [Unicode(false)]
         [Column("SMSENGLISHNAME")]
         public virtual string? SMSEnglishName { get; set; }
 
+        [Unicode(false)]
         [Column("SMSFARSINAME")]
         public virtual string? SMSFarsiName { get; set; }
 
@@ -61,6 +75,7 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [Column("SYNCHRONIZEISDONE")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? SynchronizeIsDone { get; set; }
 
+        [Unicode(false)]
         [Column("TEL")]
         public virtual string? Tel { get; set; }
 
@@ -88,4 +103,4 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
     public partial class NScriptorium : NScriptoriumBase
     {
     }
-}
+    }

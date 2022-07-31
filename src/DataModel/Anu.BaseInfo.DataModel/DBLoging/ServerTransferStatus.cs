@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
@@ -28,4 +29,4 @@ namespace Anu.BaseInfo.DataModel.DBLoging
     public partial class ServerTransferStatus : ServerTransferStatusBase
     {
     }
-}
+    }

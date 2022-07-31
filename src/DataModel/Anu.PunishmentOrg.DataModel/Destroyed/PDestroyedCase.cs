@@ -1,30 +1,38 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
     public abstract class PDestroyedCaseBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("CMSNO")]
         public virtual string? CMSNo { get; set; }
 
+        [Unicode(false)]
         [Column("CONFIRMDATETIME")]
         public virtual string? ConfirmDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("DESTROYEDNO")]
         public virtual string? DestroyedNo { get; set; }
 
+        [Unicode(false)]
         [Column("ENDDATE")]
         public virtual string? EndDate { get; set; }
 
+        [Unicode(false)]
         [Column("ENDYEAR")]
         public virtual string? EndYear { get; set; }
 
+        [Unicode(false)]
         [Column("MANUALNO")]
         public virtual string? ManualNo { get; set; }
 
@@ -76,4 +84,4 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
     public partial class PDestroyedCase : PDestroyedCaseBase
     {
     }
-}
+    }

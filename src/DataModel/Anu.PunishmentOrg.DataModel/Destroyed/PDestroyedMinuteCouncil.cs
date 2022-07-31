@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
     public abstract class PDestroyedMinuteCouncilBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("FAMILY")]
         public virtual string? Family { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
@@ -28,4 +31,4 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
     public partial class PDestroyedMinuteCouncil : PDestroyedMinuteCouncilBase
     {
     }
-}
+    }

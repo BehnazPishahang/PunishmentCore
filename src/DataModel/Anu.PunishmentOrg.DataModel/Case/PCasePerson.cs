@@ -1,69 +1,86 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
     public abstract class PCasePersonBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ADDINGACCUSEDDATE")]
         public virtual string? AddingAccusedDate { get; set; }
 
+        [Unicode(false)]
         [Column("ADDRESS")]
         public virtual string? Address { get; set; }
 
+        [Unicode(false)]
         [Column("BIRTHDATE")]
         public virtual string? BirthDate { get; set; }
 
+        [Unicode(false)]
         [Column("CARDSTEWARDSHIPDATE")]
         public virtual string? CardStewardshipDate { get; set; }
 
+        [Unicode(false)]
         [Column("CARDSTEWARDSHIPNO")]
         public virtual string? CardStewardshipNo { get; set; }
 
+        [Unicode(false)]
         [Column("COMPANYTYPE")]
         public virtual string? CompanyType { get; set; }
 
         [Column("DAMAGECAUSEDVALUE")]
         public virtual long? DamageCausedValue { get; set; }
 
+        [Unicode(false)]
         [Column("EMAIL")]
         public virtual string? EMail { get; set; }
 
+        [Unicode(false)]
         [Column("FAMILY")]
         public virtual string? Family { get; set; }
 
+        [Unicode(false)]
         [Column("FATHERNAME")]
         public virtual string? FatherName { get; set; }
 
+        [Unicode(false)]
         [Column("GOVORGOWNER")]
         public virtual string? GovOrgOwner { get; set; }
 
         [Column("HASCARDSTEWARDSHIP")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? HasCardStewardship { get; set; }
 
+        [Unicode(false)]
         [Column("IDENTITYNUMBER")]
         public virtual string? IdentityNumber { get; set; }
 
         [Column("ISSEARCHHISTORY")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? IsSearchHistory { get; set; }
 
+        [Unicode(false)]
         [Column("JOBTITLE")]
         public virtual string? JobTitle { get; set; }
 
         [Column("LEGALPERSONSTATE")]
         public virtual Anu.PunishmentOrg.Enumerations.PULegalPersonState? LegalPersonState { get; set; }
 
+        [Unicode(false)]
         [Column("LICENSEOWNERBIRTHDATE")]
         public virtual string? LicenseOwnerBirthDate { get; set; }
 
+        [Unicode(false)]
         [Column("LICENSEOWNERFAMILY")]
         public virtual string? LicenseOwnerFamily { get; set; }
 
+        [Unicode(false)]
         [Column("LICENSEOWNERNAME")]
         public virtual string? LicenseOwnerName { get; set; }
 
+        [Unicode(false)]
         [Column("LICENSEOWNERNATIONALCODE")]
         public virtual string? LicenseOwnerNationalCode { get; set; }
 
@@ -76,14 +93,16 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("LIFESTATE")]
         public virtual Anu.PunishmentOrg.Enumerations.PULifeState? LifeState { get; set; }
 
+        [Unicode(false)]
         [Column("MOBILNUMBER")]
         public virtual string? MobilNumber { get; set; }
 
+        [Unicode(false)]
         [Column("NAME")]
         public virtual string? Name { get; set; }
 
+        [Unicode(false)]
         [Column("NATIONALCODE")]
-        [Microsoft.EntityFrameworkCore.Unicode(true)]
         public virtual string? NationalCode { get; set; }
 
         [Column("NATIONALITY")]
@@ -95,6 +114,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("OWNERSHIPTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.PUOwnershipType? OwnershipType { get; set; }
 
+        [Unicode(false)]
         [Column("PERSONPASSWORD")]
         public virtual string? PersonPassword { get; set; }
 
@@ -104,9 +124,11 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("PERSONTYPE")]
         public virtual Anu.BaseInfo.Enumerations.PersonType? PersonType { get; set; }
 
+        [Unicode(false)]
         [Column("PHONENUMBER")]
         public virtual string? PhoneNumber { get; set; }
 
+        [Unicode(false)]
         [Column("POSTCODE")]
         public virtual string? PostCode { get; set; }
 
@@ -119,6 +141,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("SEX")]
         public virtual Anu.BaseInfo.Enumerations.SexType? Sex { get; set; }
 
+        [Unicode(false)]
         [Column("SOURCEOBJECTID")]
         public virtual string? SourceObjectId { get; set; }
 
@@ -201,17 +224,21 @@ namespace Anu.PunishmentOrg.DataModel.Case
         public virtual List<Anu.PunishmentOrg.DataModel.ArrestSaftyWrit.PSaftyWrit>? ThePSaftyWritList { get; set; }
 
         [Column("TRADELICENSE")]
-        public virtual Anu.PunishmentOrg.Enumerations.LicenseType? TradeLicense { get; set; }
+        public virtual Anu.PunishmentOrg.Enumerations.PULicenseType? TradeLicense { get; set; }
 
+        [Unicode(false)]
         [Column("TRADELICENSEDATE")]
         public virtual string? TradeLicenseDate { get; set; }
 
+        [Unicode(false)]
         [Column("TRADELICENSENUMBER")]
         public virtual string? TradeLicenseNumber { get; set; }
 
+        [Unicode(false)]
         [Column("TRADEUNITIDENTITYNUMBER")]
         public virtual string? TradeUnitIdentityNumber { get; set; }
 
+        [Unicode(false)]
         [Column("TRADEUNITNAME")]
         public virtual string? TradeUnitName { get; set; }
 
@@ -221,4 +248,4 @@ namespace Anu.PunishmentOrg.DataModel.Case
     public partial class PCasePerson : PCasePersonBase
     {
     }
-}
+    }

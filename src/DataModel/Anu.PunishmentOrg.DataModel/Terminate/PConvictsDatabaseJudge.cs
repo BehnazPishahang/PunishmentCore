@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Terminate
 {
     public abstract class PConvictsDatabaseJudgeBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("JUDGEDATE")]
         public virtual string? JudgeDate { get; set; }
 
+        [Unicode(false)]
         [Column("JUDGENO")]
         public virtual string? JudgeNo { get; set; }
 
@@ -40,4 +43,4 @@ namespace Anu.PunishmentOrg.DataModel.Terminate
     public partial class PConvictsDatabaseJudge : PConvictsDatabaseJudgeBase
     {
     }
-}
+    }

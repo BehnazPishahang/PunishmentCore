@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
@@ -22,4 +23,4 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
     public partial class PForm5MinuteImages : PForm5MinuteImagesBase
     {
     }
-}
+    }

@@ -1,30 +1,37 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
     public abstract class PForm5MinuteBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ARCHIVEADDRESS")]
         public virtual string? ArchiveAddress { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
         [Column("FREEAREA")]
         public virtual long? FreeArea { get; set; }
 
+        [Unicode(false)]
         [Column("ISSUEDATE")]
         public virtual string? IssueDate { get; set; }
 
+        [Unicode(false)]
         [Column("LETTERDATE")]
         public virtual string? LetterDate { get; set; }
 
+        [Unicode(false)]
         [Column("LETTERNO")]
         public virtual string? LetterNo { get; set; }
 
+        [Unicode(false)]
         [Column("NO")]
         public virtual string? No { get; set; }
 
@@ -55,4 +62,4 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
     public partial class PForm5Minute : PForm5MinuteBase
     {
     }
-}
+    }

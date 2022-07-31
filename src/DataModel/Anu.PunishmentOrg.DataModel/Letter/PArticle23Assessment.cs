@@ -1,15 +1,18 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
     public abstract class PArticle23AssessmentBase : PunishmentOrgEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ASSESSMENT")]
         public virtual string? Assessment { get; set; }
 
+        [Unicode(false)]
         [Column("ASSESSMENTDATE")]
         public virtual string? AssessmentDate { get; set; }
 
@@ -37,4 +40,4 @@ namespace Anu.PunishmentOrg.DataModel.Letter
     public partial class PArticle23Assessment : PArticle23AssessmentBase
     {
     }
-}
+    }

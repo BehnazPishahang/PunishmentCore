@@ -1,45 +1,58 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
     public abstract class WorkFlowInstanceWorkItemBase : BaseInfoEntity<string>
     {
 
+        [Unicode(false)]
         [Column("ACTIVATEDATE")]
         public virtual string? ActivateDate { get; set; }
 
+        [Unicode(false)]
         [Column("CREATEDATETIME")]
         public virtual string? CreateDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("DESCRIPTION")]
         public virtual string? Description { get; set; }
 
+        [Unicode(false)]
         [Column("KEYFIELD1")]
         public virtual string? KeyField1 { get; set; }
 
+        [Unicode(false)]
         [Column("KEYFIELD2")]
         public virtual string? KeyField2 { get; set; }
 
+        [Unicode(false)]
         [Column("LASTACTIONDATETIME")]
         public virtual string? LastActionDateTime { get; set; }
 
+        [Unicode(false)]
         [Column("MAXDELAYDATE")]
         public virtual string? MaxDelayDate { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDCASEID")]
         public virtual string? RelatedCaseId { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDCASENO")]
         public virtual string? RelatedCaseNo { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDDOCID")]
         public virtual string? RelatedDocId { get; set; }
 
+        [Unicode(false)]
         [Column("RELATEDDOCNO")]
         public virtual string? RelatedDocNo { get; set; }
 
+        [Unicode(false)]
         [Column("SECURITYORGANIZATIONID")]
         public virtual string? SecurityOrganizationId { get; set; }
 
@@ -76,6 +89,7 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [ForeignKey("WFACINSTANCEID")]
         public virtual Anu.BaseInfo.DataModel.WorkFlow.WFExec.WFACInstance? TheWFACInstance { get; set; }
 
+        [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
@@ -91,4 +105,4 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
     public partial class WorkFlowInstanceWorkItem : WorkFlowInstanceWorkItemBase
     {
     }
-}
+    }

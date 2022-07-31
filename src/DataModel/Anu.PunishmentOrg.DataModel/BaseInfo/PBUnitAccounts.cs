@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.BaseInfo
 {
@@ -10,6 +11,7 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
         [Column("ACCUNTTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.AccountType? AccuntType { get; set; }
 
+        [Unicode(false)]
         [Column("CLIENTNUMBER")]
         public virtual string? ClientNumber { get; set; }
 
@@ -25,4 +27,4 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
     public partial class PBUnitAccounts : PBUnitAccountsBase
     {
     }
-}
+    }

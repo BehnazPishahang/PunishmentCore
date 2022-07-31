@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
@@ -22,4 +23,4 @@ namespace Anu.PunishmentOrg.DataModel.Letter
     public partial class POutgoingLetterSendCase : POutgoingLetterSendCaseBase
     {
     }
-}
+    }

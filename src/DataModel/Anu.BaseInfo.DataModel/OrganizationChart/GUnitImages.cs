@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataModel.OrganizationChart
 {
@@ -22,4 +23,4 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
     public partial class GUnitImages : GUnitImagesBase
     {
     }
-}
+    }
