@@ -15,7 +15,6 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.7" />
 		<PackageReference Include="MudBlazor" Version="6.0.12" />
 		<PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
-		<PackageReference Include="System.Net.Http.Formatting.Extension" Version="5.2.3" />
 		<PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
 		<PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.1.0" />
 	</ItemGroup>
