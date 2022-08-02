@@ -2,44 +2,46 @@
 
 <UserCard />
 <MudNavMenu Color="Color.Primary">
-    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor=Color.Secondary> کارتابل </MudNavLink>
+    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  Color="@_iconColor"> کارتابل </MudNavLink>
  
-      <MudNavLink Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch" IconColor=Color.Secondary>
+      <MudNavLink Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch" Color="@_iconColor">
                 جستجوی ابلاغ
             </MudNavLink>
-            <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall" IconColor=Color.Secondary>
+            <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall" Color="@_iconColor">
                  ثبت شکایت 
             </MudNavLink>
-              <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments" IconColor=Color.Secondary>
+              <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments" Color="@_iconColor">
                  پرداخت وجه 
             </MudNavLink>
-            <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.DocumentScanner" IconColor=Color.Secondary>
+            <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.DocumentScanner" Color="@_iconColor">
                 لایحه
             </MudNavLink>
-                <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DriveFileRenameOutline" IconColor=Color.Secondary>
+                <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DriveFileRenameOutline" Color="@_iconColor">
                 درخواست تجدید نظر خواهی 
             </MudNavLink>
-             <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DonutLarge" IconColor=Color.Secondary>
+             <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DonutLarge" Color="@_iconColor">
                درخواست اعمال ماده ۲۳ 
             </MudNavLink>
-              <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EscalatorWarning" IconColor=Color.Secondary>
+              <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EscalatorWarning" Color="@_iconColor">
                 ثبت وکالت نامه 
             </MudNavLink>
-                <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DoorSliding" IconColor=Color.Secondary>
+                <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DoorSliding" Color="@_iconColor">
                 درخواست رسیدگی مجدد  
             </MudNavLink>
-             <MudNavLink Href="/isConstracting" Icon="@Icons.Custom.Uncategorized.FolderOpen" IconColor=Color.Secondary>
+             <MudNavLink Href="/isConstracting" Icon="@Icons.Custom.Uncategorized.FolderOpen" Color="@_iconColor">
              پیگیری پرونده 
             </MudNavLink>
-             <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EmojiPeople" IconColor=Color.Secondary>
+             <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EmojiPeople" Color="@_iconColor">
              ثبت اعتراض  
             </MudNavLink>
-        }
+        
     
     
 </MudNavMenu>
 
 @code {
+
+     MudBlazor.Color _iconColor = Color.Success;
     private ClaimsPrincipal _authenticationStateProviderUser;
 
     private bool _canViewHangfire;
@@ -68,7 +70,7 @@
        // _canViewBrands = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Brands.View)).Succeeded
 
 
-       _canViewHangfire = true;
+        _canViewHangfire = true;
         _canViewDashboards = true;
         _canViewDocuments = true;
         _canViewDocumentTypes =true;
@@ -80,4 +82,4 @@
         _canViewBrands = true;
 
     }
-}
+  }

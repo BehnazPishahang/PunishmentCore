@@ -32,6 +32,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
            
             return result.PNoticeList.AsEnumerable();
 
+
         }
     }
 }
