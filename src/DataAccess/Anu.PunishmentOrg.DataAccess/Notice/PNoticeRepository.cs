@@ -12,13 +12,14 @@ namespace Anu.PunishmentOrg.DataAccess.Notice
 
         public async Task<IEnumerable<PNotice>> GetAllPNoticeByNationalCode(string NationalCode)
         {
-            var noticePerson = await _context.Set<PNoticePerson>()
+            var notice = await _context.Set<PNoticePerson>()
                 .Include(a => a.ThePNotice)
                 .Include(a => a.ThePCasePerson)
                 .Where(a => a.ThePCasePerson.NationalCode == NationalCode)
+                .Select(a => a.ThePNotice)
                 .ToListAsync();
 
-            return noticePerson.Select(a => a.ThePNotice);
+            return notice;
         }
     }
 }
