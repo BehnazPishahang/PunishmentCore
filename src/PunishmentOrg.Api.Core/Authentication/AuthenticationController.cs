@@ -28,6 +28,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         [System.ComponentModel.DataAnnotations.Required]
         public string? Address { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string? AddressNew { get; set; }
     }
 
     public class AuthResult
