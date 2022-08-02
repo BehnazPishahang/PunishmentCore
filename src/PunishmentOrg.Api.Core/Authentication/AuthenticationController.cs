@@ -24,13 +24,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
         public string? PhoneNumber { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public string? Address { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Required]
-        public string? Title { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Required]
-        public string? Codee { get; set; }
+        public string? TitleNew { get; set; }
     }
 
     public class AuthResult
