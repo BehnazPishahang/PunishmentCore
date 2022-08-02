@@ -1,0 +1,29 @@
+﻿@page "/FrmNoticeSearch"
+
+
+
+<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true"></MudText>
+    <MudGrid Spacing="4" Class="mt-16">
+        <MudItem xs="7">
+            <MudText Typo="Typo.h5" GutterBottom="true">جستجوی ابلاغ </MudText>
+            <MudGrid>
+                <MudItem xs="12">
+                  
+                    <MudTextField Align="Align.Center" Typo="Typo.h3"Mask="@(new PatternMask("0000000000"))" Required="true"   @bind-Value="NationalCode" Label="شماره ملی " HelperText="شماره ملی 10 رقمی" Variant="Variant.Outlined" RequiredError="شماره ملی را وارد نمایید " Clearable />
+
+                </MudItem>
+                
+             
+                <MudItem xs="12" Class="d-flex justify-center">
+                    <MudButton Align="Align.Center" Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Large" Class="mt-8" @onclick="HandleSearch">مشاهده</MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+        
+     
+    </MudGrid>
+</MudContainer>
+
+
+

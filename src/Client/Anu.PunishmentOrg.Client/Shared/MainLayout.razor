@@ -2,52 +2,92 @@
 
 @inherits LayoutComponentBase
 
-<style>
-    @@font-face {
-    font-family: 'Shabnam';
-    font-weight: normal;
-    font-style: normal;
-    src: url('/fonts/Shabnam/Shabnam.eot') format('embedded-opentype'), url('/fonts/Shabnam/Shabnam.woff') format('woff'), url('/fonts/Shabnam/Shabnam.ttf') format('truetype');
-}
- </Style>   
+
 
 <MudRTLProvider RightToLeft="true">
+@*        <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+*@        <MudThemeProvider Theme="_themeManager.Theme" @bind-IsDarkMode="@_isDarkMode" />
+    
+                       <MudDrawer @bind-Open="_drawerOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation" Style="padding: 1vw"></MudDrawer>
 
+         <MudDialogProvider />
+        <MudSnackbarProvider />
 
-<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+        <MudLayout  >
+            
+            <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme" />
 
-<MudDialogProvider />
-<MudSnackbarProvider />
+            <MudAppBar Elevation="1">
+                 
+                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+                    @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
+                     
+              <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
+                    <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="Color.Warning" />
+                    <MudText Typo="Typo.h5" Class="ml-3">آنو سیستم </MudText>
+                <MudSpacer />
+       
+                    <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" @onclick="onDarkMode" />
+  
+                <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+                    <MudMenu Direction="Direction.Right" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+                <ActivatorContent>
+                        <MudAvatar Color="Color.Secondary"></MudAvatar>
+                </ActivatorContent>
 
-<MudLayout  >
-    <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-          @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
-          <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="Color.Warning" />
-            <MudText Typo="Typo.h5" Class="ml-3">آنو سیستم </MudText>
-        <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
-    </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-         <NavMenu/>
-    </MudDrawer>
-    <MudMainContent >
-        @Body
-    </MudMainContent>
-</MudLayout>
+                <ChildContent>
+                    <UserCard Class="mt-n2" />
+                    <MudDivider Class="mb-2" />
+                    <MudListItem Text="Account" Href="/account" Icon="@Icons.Material.Outlined.Person" />
+                    <MudListItem Text="Logout" Icon="@Icons.Material.Filled.Logout" />
+                </ChildContent>
+            </MudMenu>
+            </MudAppBar>
+            <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+                    <NavMenu />
+            </MudDrawer>
+            <MudMainContent >
+                @Body
+            </MudMainContent>
+        </MudLayout>
 
 </MudRTLProvider>
 
 @code {
     private MudTheme _theme = Theme135.DefaultTheme;
-    private bool _isDarkMode = false;
-
+    private bool _isDarkMode = true;
+    public EventCallback OnDarkModeToggle { get; set; }
     bool _drawerOpen = true;
 
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
     }
+    private void onDarkMode()
+    {
+         _isDarkMode = !_isDarkMode;
+     }
+
+     private ThemeManagerTheme _themeManager = new ThemeManagerTheme();
+public bool _themeManagerOpen = false;
+
+void OpenThemeManager(bool value)
+{
+    _themeManagerOpen = value;
+}
+
+void UpdateTheme(ThemeManagerTheme value)
+{
+    _themeManager = value;
+    StateHasChanged();
+}
+
+protected override void OnInitialized()
+{
+    StateHasChanged();
+}
+
+    
 }
 
 
