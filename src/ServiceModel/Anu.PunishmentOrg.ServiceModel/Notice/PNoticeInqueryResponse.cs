@@ -1,4 +1,5 @@
 ﻿
+using Anu.Commons.ServiceModel.ServicePaging;
 using Anu.Commons.ServiceModel.ServiceResponse;
 
 namespace Anu.PunishmentOrg.ServiceModel.Notice
@@ -7,12 +8,25 @@ namespace Anu.PunishmentOrg.ServiceModel.Notice
     public class PNoticeInqueryResponse : IResponseMessage
     {
         public Result Result { get; set; }
-        public List<PNoticeContract> PNoticeList { get; set; }
+
+        public PNoticeInquery PNotice { get; set; }
+
         public PNoticeInqueryResponse()
         {
             Result = new Result();
-            PNoticeList = new List<PNoticeContract>();
+            PNotice = new PNoticeInquery();
         }
 
+    }
+
+    public class PNoticeInquery : IPaging
+    {
+        public PNoticeInquery()
+        {
+            PNoticeList = new List<PNoticeContract>();
+            Page = new Page();
+        }
+        public List<PNoticeContract> PNoticeList { get; set; }
+        public Page Page { get; set; }
     }
 }

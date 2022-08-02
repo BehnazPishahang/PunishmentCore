@@ -24,17 +24,18 @@ namespace Anu.PunishmentOrg.Api.Notice
         #endregion Properties
 
         #region Overrides
-
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<PNoticeInqueryResponse> InqueryPNoticeList([FromBody] PNoticeInqueryRequest request)
         {
             try
             {
 
-                request.NationalityCode.Null(PNoticeResult.NationalCodeIs_Required);
+                request.PNoticePersonContract.NationalityCode.Null(PNoticeResult.NationalCodeIs_Required);
 
-                var pNotice = await _unitOfWork.PNotice.GetAllPNoticeByNationalCode(request.NationalityCode.ToString());
+                var pNotice = await _unitOfWork.PNotice.GetAllPNoticeByNationalCode(request.PNoticePersonContract.NationalityCode.ToString(),request.Page);
 
                 pNotice.Null(PNoticeResult.PNotice_NotFound);
+
 
                 var pNoticeContractList = pNotice.Select(a => new PNoticeContract()
                 {
@@ -46,7 +47,10 @@ namespace Anu.PunishmentOrg.Api.Notice
                 }
                 ).ToList();
 
-                return new PNoticeInqueryResponse { PNoticeList = pNoticeContractList, Result = AnuResult.Successful.GetResult() };
+                return new PNoticeInqueryResponse { 
+                    PNotice = new PNoticeInquery { Page = request.Page, PNoticeList = pNoticeContractList }, 
+                    Result = AnuResult.Successful.GetResult() 
+                };
 
             }
             catch (AnuExceptions ex)
