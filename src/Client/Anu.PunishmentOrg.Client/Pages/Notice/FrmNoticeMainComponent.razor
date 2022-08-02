@@ -3,6 +3,7 @@
 
 <FrmNoticeSearchComponent OnNoticeSearch="HandleNoticeSearch"> </FrmNoticeSearchComponent>
 
+@using Anu.PunishmentOrg.ServiceModel.Notice
 
 @if(Elements?.Count()>0)
 {
@@ -22,7 +23,7 @@ else
 }
 else
 {
-    <table class="table">
+     @* <table class="table">
             <thead>
                 <tr>
                     <th>  زمان ثبت </th>
@@ -46,6 +47,21 @@ else
                     </tr>
                 }
         </tbody>
-    </table>
-    }
+    </table>*@
+
+
+  <MudDataGrid Items="@Elements.Take(5)"  Hover="true" Dense="true" Striped="true" Bordered="true" SortMode="SortMode.Multiple" Filterable="true"
+    >
+    <Columns>
+        <Column T="PNoticeContract" Field="CreateDateTime" Title="زمان ثبت" />
+        <Column T="PNoticeContract" Field="No" Title="شماره " />
+        <Column T="PNoticeContract" Field="NoticeDate"   Title="تاريخ ابلاغ " />
+        <Column T="PNoticeContract" Field="NoticePersonName"   Title="نام  ابلاغ شونده " />
+        <Column T="PNoticeContract" Field="NoticePersonFamily" Title="نام خانوادگي ابلاغ شوند" />
+    </Columns>
+</MudDataGrid>
+
+ }
+
+
 

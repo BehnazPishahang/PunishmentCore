@@ -10,7 +10,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
         public EventCallback<string> OnNoticeSearch { get; set; }
         private void HandleSearch()
         {
-            if (NationalCode.Length != 10)
+            if (NationalCode!.Length != 10)
             {
                 return;
             }
