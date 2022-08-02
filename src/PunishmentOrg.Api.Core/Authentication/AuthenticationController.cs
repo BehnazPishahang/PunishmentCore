@@ -30,7 +30,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
         public string? Title { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public string? Code { get; set; }
+        public string? Codee { get; set; }
     }
 
     public class AuthResult
