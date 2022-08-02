@@ -25,6 +25,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         [System.ComponentModel.DataAnnotations.Required]
         public string? PhoneNumber { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string? PhoneNumberNew { get; set; }
     }
 
     public class AuthResult
