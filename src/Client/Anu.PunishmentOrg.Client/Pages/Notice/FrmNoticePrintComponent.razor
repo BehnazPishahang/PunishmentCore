@@ -1,0 +1,12 @@
+﻿@using Anu.PunishmentOrg.Client.Infrastructure.Notice
+@using Anu.PunishmentOrg.ServiceModel.Notice
+<h3>FrmNoticePrintComponent</h3>
+
+@code {
+    private IEnumerable<PNoticeContract> Elements;
+
+        private void HandleNoticeSearch(string nationalcode)
+        {
+            Elements = NoticeService.getPNoticeList(nationalcode);
+        }
+}
