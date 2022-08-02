@@ -18,9 +18,6 @@ namespace Anu.PunishmentOrg.Api.Authentication
         public string? Email { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public string? EmailNew { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Required]
         public string? Password { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
