@@ -67,13 +67,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anu.Validation", "src\Valid
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CAB601A7-BF2C-42AE-BF44-252F44E1DE89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anu.PunishmentOrg.Api.Test", "test\Anu.PunishmentOrg.Api.Test\Anu.PunishmentOrg.Api.Test.csproj", "{7A810A17-CDAF-4759-8AE2-670444217839}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anu.PunishmentOrg.Api.Test", "test\Anu.PunishmentOrg.Api.Test\Anu.PunishmentOrg.Api.Test.csproj", "{7A810A17-CDAF-4759-8AE2-670444217839}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{764DEE62-5D42-48EC-980C-BD2C1952F9C8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anu.PunishmentOrg.Client", "src\Client\Anu.PunishmentOrg.Client\Anu.PunishmentOrg.Client.csproj", "{6F1C259C-F3C0-42A1-9DA5-27135EC56981}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anu.PunishmentOrg.Client.Infrastructure", "src\Client\Anu.PunishmentOrg.Infrastructure.Client\Anu.PunishmentOrg.Client.Infrastructure.csproj", "{9FEFDA58-5BE1-42C8-923B-8BAE041D5775}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorComponent", "BlazorComponent", "{AE959C85-B45B-4FB2-8541-CDD9E71A05EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.PersianDatePicker", "src\Client\BlazorComponents\Blazor.PersianDatePicker\Blazor.PersianDatePicker.csproj", "{9061904E-2B64-4E46-9362-A4E173AB6C11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -181,6 +185,10 @@ Global
 		{9FEFDA58-5BE1-42C8-923B-8BAE041D5775}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FEFDA58-5BE1-42C8-923B-8BAE041D5775}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FEFDA58-5BE1-42C8-923B-8BAE041D5775}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9061904E-2B64-4E46-9362-A4E173AB6C11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9061904E-2B64-4E46-9362-A4E173AB6C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9061904E-2B64-4E46-9362-A4E173AB6C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9061904E-2B64-4E46-9362-A4E173AB6C11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -220,6 +228,8 @@ Global
 		{764DEE62-5D42-48EC-980C-BD2C1952F9C8} = {0D932611-902A-4082-8180-B4C49025EAA4}
 		{6F1C259C-F3C0-42A1-9DA5-27135EC56981} = {764DEE62-5D42-48EC-980C-BD2C1952F9C8}
 		{9FEFDA58-5BE1-42C8-923B-8BAE041D5775} = {764DEE62-5D42-48EC-980C-BD2C1952F9C8}
+		{AE959C85-B45B-4FB2-8541-CDD9E71A05EA} = {764DEE62-5D42-48EC-980C-BD2C1952F9C8}
+		{9061904E-2B64-4E46-9362-A4E173AB6C11} = {AE959C85-B45B-4FB2-8541-CDD9E71A05EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CC95B07-6C72-475D-9332-5EC60C981FED}

@@ -6,20 +6,46 @@
 
 
 <MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true"></MudText>
+    <MudText Typo="Typo.h3" Align="MudBlazor.Align.Center" GutterBottom="true"></MudText>
     <MudGrid Spacing="4" Class="mt-16">
         <MudItem xs="7">
             <MudText Typo="Typo.h5" GutterBottom="true">جستجوی ابلاغ </MudText>
             <MudGrid>
                 <MudItem xs="12">
                   
-                    <MudTextField Typo="Typo.h3" @bind-Value="CaseNo" Label=" شماه پرونده " HelperText="شماره ۱۶ رقمی پرونده " Variant="Variant.Outlined" />
+                    <MudTextField Typo="Typo.h1" @bind-Value="CaseNo" Label=" شماه پرونده " HelperText="شماره ۱۶ رقمی پرونده " Variant="Variant.Outlined" />
 
                 </MudItem>
                 <MudItem xs="12">
                    <MudTextField Typo="Typo.h3"  @bind-Value="Password" Label="رمز شخصی" HelperText="    " Variant="Variant.Outlined" />
                 </MudItem>
+                <MudItem lg="12"  >
              
+                <InputPersianDatePicker Id="myInputDatePicker3"
+                        @bind-Value="_variable1"
+                        Name="myInputName"
+                        Visible="true"
+                        Disabled="false"
+                        PickerAlign="Blazor.PersianDatePicker.Align .Left"
+                        PickerOffsetTopPositionInPixels="0"
+                        InitialValue="false"
+                        CalendarType="Calendar.SingleModeJalali"
+                        DigitType="DigitType.BasedOnCalendar"
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                        MinDateSetOnToday="true"
+                        Placeholder="انتخاب تاریخ"
+                        CssClass="form-control"
+                        Style=" text-align: right;
+                                border: 0px solid #bdbdbd;
+                                margin-left: 20px;
+                                width: 50%;
+                                height: 40px;
+                                float: right;  
+                         "
+                        Theme="PickerTheme.Cheerup"
+                        OnChange="@(() => Console.WriteLine("OK"))" />
+                </MudItem>
+
                 <MudItem xs="12" Class="d-flex justify-center">
                     <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Large" Class="mt-8" @onclick="HandleSearch">مشاهده</MudButton>
                 </MudItem>
@@ -34,6 +60,7 @@
 
 @code {
 
+    private string _variable1;
 
     public string Password { get; set; }
     public string CaseNo { get; set; }
@@ -44,7 +71,7 @@
     {
 
         var Dto = new SearchNoticeDto(CaseNo, Password);
-        OnNoticeSearch.InvokeAsync(Dto);
+        Task res = OnNoticeSearch.InvokeAsync(Dto);
     }
 
      
