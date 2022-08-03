@@ -1,4 +1,5 @@
 ﻿
+using Anu.Commons.ServiceModel.ServicePaging;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.PunishmentOrg.ServiceModel.Notice;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
@@ -48,7 +49,7 @@ namespace Anu.PunishmentOrg.Api.Notice
                 ).ToList();
 
                 return new PNoticeInqueryResponse { 
-                    PNotice = new PNoticeInquery { Page = request.Page, PNoticeList = pNoticeContractList }, 
+                    PNotice = new Page<List<PNoticeContract>> { Paged = request.Page, Data = pNoticeContractList }, 
                     Result = AnuResult.Successful.GetResult() 
                 };
 
