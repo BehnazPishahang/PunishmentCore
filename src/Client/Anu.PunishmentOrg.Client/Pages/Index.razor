@@ -1,8 +1,35 @@
 ﻿@page "/"
+@page "/{isLogedId:bool}"
+ @if(!isLogedId)
+{
+  <DashboardPublic>
 
-  <Dashboard>
+    </DashboardPublic>
+}
+else
+{
+<Dashboard></Dashboard>    
+}
 
-  </Dashboard>
+@code
+{
+    [Parameter]
+    public bool isLogedId { get; set; } = false;
 
+    protected override async Task OnInitializedAsync()
+    {
+        var A= SharedInfo.NationalCode;
+    }
+    protected override void OnParametersSet()
+    {
+        var A= SharedInfo.NationalCode;
+        base.OnParametersSet();
+    }
 
-
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        var A= SharedInfo.NationalCode;
+        return base.OnAfterRenderAsync(firstRender);
+    }
+   
+}

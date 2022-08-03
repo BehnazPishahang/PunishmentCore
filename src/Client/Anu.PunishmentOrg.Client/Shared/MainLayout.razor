@@ -1,32 +1,40 @@
 ﻿@using Anu.PunishmentOrg.Client.Infrastructure.Settings
+@using Anu.PunishmentOrg.Client.Pages.Authentication
 
 @inherits LayoutComponentBase
+@inject IDialogService DialogService
 
 
 
 <MudRTLProvider RightToLeft="true">
-@*        <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+@*    
 *@        <MudThemeProvider Theme="_themeManager.Theme" @bind-IsDarkMode="@_isDarkMode" />
     
                        <MudDrawer @bind-Open="_drawerOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation" Style="padding: 1vw"></MudDrawer>
 
-         <MudDialogProvider />
+        <MudDialogProvider
+                FullWidth="true"
+                MaxWidth="MaxWidth.ExtraSmall"
+                CloseButton="true"
+                DisableBackdropClick="true"
+                NoHeader="true"
+                Position="DialogPosition.Center"
+                CloseOnEscapeKey="true"
+            />
         <MudSnackbarProvider />
 
         <MudLayout  >
             
-            <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme" />
+            <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme"  />
 
             <MudAppBar Elevation="1">
                  
                 <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-                    @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
-                     
-              <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
                     <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="Color.Warning" />
                     <MudText Typo="Typo.h5" Class="ml-3">آنو سیستم </MudText>
                 <MudSpacer />
        
+                    <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit"OnClick="@((e) => OpenThemeManager(true))" />
                     <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" @onclick="onDarkMode" />
   
                 <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
@@ -38,7 +46,7 @@
                 <ChildContent>
                     <UserCard Class="mt-n2" />
                     <MudDivider Class="mb-2" />
-                    <MudListItem Text="ورود " Href="/login" Icon="@Icons.Material.Outlined.Person" />
+                    <MudListItem Text="ورود " Icon="@Icons.Material.Outlined.Person" @onclick="showlogin" />
                     <MudListItem Text="ثبت نام " Href="/register" Icon="@Icons.Material.Filled.AppRegistration" />
                 </ChildContent>
             </MudMenu>
@@ -59,6 +67,11 @@
     public EventCallback OnDarkModeToggle { get; set; }
     bool _drawerOpen = true;
 
+    void showlogin()
+    {
+       var options = new DialogOptions { CloseOnEscapeKey = true };
+        DialogService.Show<Login>("Simple Dialog", options);
+    }
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;

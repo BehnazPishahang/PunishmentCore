@@ -1,41 +1,64 @@
-﻿@page "/login"
-@layout MainLayout
-@attribute [AllowAnonymous]
-
-
+﻿
 <EditForm Model="@_tokenModel" >
-    @*<FluentValidationValidator @ref="_fluentValidationValidator" />*@
-    <MudGrid>
-        <MudItem xs="12">
+      <MudDialog>
+        <TitleContent> 
             <div class="d-flex justify-center">
-                <MudIcon Icon="@Icons.Filled.Balance" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
-            </div>
-        </MudItem>
-        <DataAnnotationsValidator />
-        <MudItem xs="12">
-            <div class="d-flex justify-center">
-                <MudText Typo="Typo.h4">ورود به سایت </MudText>
-            </div>
-        </MudItem>
+                                <MudIcon Icon="@Icons.Filled.Balance" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
+                            </div>
+         </TitleContent>
+    <DialogContent>
+                    <MudGrid>
+                        <MudItem xs="12">
+                            
+                        </MudItem>
+                        <DataAnnotationsValidator />
+                        <MudItem xs="12">
+                            <div class="d-flex justify-center">
+                                <MudText Typo="Typo.h4">ورود به سایت </MudText>
+                            </div>
+                        </MudItem>
        
-        <MudItem xs="12">
-            <div class="d-flex justify-center">
-                <MudText>آیا در سایت ثبت نام نکردبد؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
-            </div>
-        </MudItem>
-        <MudItem xs="12">
-            <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined"
-                          @bind-Value="_tokenModel.NationalCode" For="@(() => _tokenModel.NationalCode)" />
-        </MudItem>
-        <MudItem xs="12">
-            <MudTextField Label="کلمه عبور" Variant="Variant.Outlined"
-                          @bind-Value="_tokenModel.Password" For="@(() => _tokenModel.Password)"
-                          InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
-        </MudItem>
+                        <MudItem xs="12">
+                            <div class="d-flex justify-center">
+                                <MudText>آیا در سایت ثبت نام نکردبد؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined"
+                                          @bind-Value="_tokenModel.NationalCode" For="@(() => _tokenModel.NationalCode)" />
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudTextField Label="کلمه عبور" Variant="Variant.Outlined"
+                                          @bind-Value="_tokenModel.Password" For="@(() => _tokenModel.Password)"
+                                          InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
+                        </MudItem>
         
+                      @*  <MudItem xs="12" Class="d-flex justify-center">
+                            <MudButton  Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;"  >ورود </MudButton>
+                        </MudItem>*@
+                    </MudGrid>
+ </DialogContent>
+   <DialogActions>
         <MudItem xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">ورود </MudButton>
-        </MudItem>
-     
-    </MudGrid>
+                           <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
+                        </MudItem>
+                        <MudItem xs="12" Class="d-flex justify-center">
+                           <MudButton Variant="Variant.Filled" Color="Color.Warning" Href="/true" Size="Size.Large" Style="width: 100%;">برگشت</MudButton>
+                        </MudItem>
+      
+       
+    </DialogActions>
+</MudDialog>
 </EditForm>
+
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    void Submit()
+    {
+        SharedInfo.NationalCode = _tokenModel.NationalCode;
+        _navigationManager.NavigateTo("/true");
+     }
+    void Cancel() => MudDialog.Cancel();
+}

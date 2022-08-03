@@ -9,7 +9,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Authentication
 {
     public partial class Login
     {
-        private FluentValidationValidator _fluentValidationValidator;
+       
      //   private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
         private TokenRequest _tokenModel = new();
 
@@ -24,18 +24,31 @@ namespace Anu.PunishmentOrg.Client.Pages.Authentication
         //    //}
         //}
 
-        //private async Task SubmitAsync()
-        //{
-        //    //var result = await _authenticationManager.Login(_tokenModel);
-        //    //if (!result.Succeeded)
-        //    //{
-        //    //    foreach (var message in result.Messages)
-        //    //    {
-        //    //        _snackBar.Add(message, Severity.Error);
-        //    //    }
-        //    //}
-        //}
+        private async Task SubmitAsync()
+        {
+            /// var result = await _authenticationManager.Login(_tokenModel);
+            //if (!result.Succeeded)
+            //{
+            //    foreach (var message in result.Messages)
+            //    {
+            //        _snackBar.Add(message, Severity.Error);
+            //    }
+            //}
+            _navigationManager.NavigateTo("/Dashboard");
+        }
 
+        private  void onlogin()
+        {
+            /// var result = await _authenticationManager.Login(_tokenModel);
+            //if (!result.Succeeded)
+            //{
+            //    foreach (var message in result.Messages)
+            //    {
+            //        _snackBar.Add(message, Severity.Error);
+            //    }
+            //}
+            _navigationManager.NavigateTo("/Dashboard");
+        }
         private bool _passwordVisibility;
         private InputType _passwordInput = InputType.Password;
         private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;

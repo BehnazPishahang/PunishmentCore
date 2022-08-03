@@ -1,9 +1,25 @@
 ﻿@using System.Security.Claims
 
 <UserCard />
-<MudNavMenu Color="Color.Primary">
+   @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
+{
+    <MudNavMenu Color="Color.Primary">
     <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  Color="@_iconColor"> کارتابل </MudNavLink>
  
+    
+            <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall" Color="@_iconColor">
+                 ثبت شکایت 
+            </MudNavLink>
+              <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments" Color="@_iconColor">
+                 پرداخت وجه 
+            </MudNavLink>
+</MudNavMenu>
+}
+else
+   {
+<MudNavMenu Color="Color.Primary">
+    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  Color="@_iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
+
       <MudNavLink Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch" Color="@_iconColor">
                 جستجوی ابلاغ
             </MudNavLink>
@@ -38,10 +54,10 @@
     
     
 </MudNavMenu>
-
+}
 @code {
 
-     MudBlazor.Color _iconColor = Color.Success;
+    MudBlazor.Color _iconColor = Color.Success;
     private ClaimsPrincipal _authenticationStateProviderUser;
 
     private bool _canViewHangfire;
@@ -57,19 +73,8 @@
 
     protected override async Task OnParametersSetAsync()
     {
-       //// _authenticationStateProviderUser = await _stateProvider.GetAuthenticationStateProviderUserAsync();
-       // _canViewHangfire = ( _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Hangfawaitire.View)).Succeeded;
-       // _canViewDashboards = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Dashboards.View)).Succeeded;
-       // _canViewDocuments = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Documents.View)).Succeeded;
-       // _canViewDocumentTypes = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.DocumentTypes.View)).Succeeded;
-       // _canViewAuditTrails = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.AuditTrails.View)).Succeeded;
-       // _canViewRoles = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Roles.View)).Succeeded;
-       // _canViewUsers = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Users.View)).Succeeded;
-       // _canViewChat = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Communication.Chat)).Succeeded;
-       // _canViewProducts = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Products.View)).Succeeded;
-       // _canViewBrands = (await _authorizationService.AuthorizeAsync(_authenticationStateProviderUser, Permissions.Brands.View)).Succeeded
 
-
+        string nationalcode = SharedInfo.NationalCode;
         _canViewHangfire = true;
         _canViewDashboards = true;
         _canViewDocuments = true;
