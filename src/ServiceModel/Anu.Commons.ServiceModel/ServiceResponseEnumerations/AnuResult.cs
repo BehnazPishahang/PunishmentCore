@@ -18,6 +18,7 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         Successful = 1000,
         Error = -10001,
         UserName_Or_PassWord_Is_Not_Valid = -10002,
-        UserName_Or_PassWord_Is_Not_Entered = -10003
+        UserName_Or_PassWord_Is_Not_Entered = -10003,
+        PropertyOrderNotFound = -10004
     }
 }

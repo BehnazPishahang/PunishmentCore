@@ -20,7 +20,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
         {
 
             PNoticeInqueryRequest inputData = new PNoticeInqueryRequest();
-            inputData.NationalityCode = (long)Convert.ToDouble(nationalCode);
+            inputData.PNoticePersonContract.NationalityCode = (long)Convert.ToDouble(nationalCode);
 
            
             var client = new HttpClient();
@@ -30,7 +30,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
 
             PNoticeInqueryResponse result = response.Content.ReadAsAsync<PNoticeInqueryResponse>().Result;
            
-            return result.PNoticeList.AsEnumerable();
+            return result.PNotice.PNoticeList.AsEnumerable();
 
 
         }
