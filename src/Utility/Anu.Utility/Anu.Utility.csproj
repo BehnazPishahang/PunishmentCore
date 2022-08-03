@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\DataModel\Anu.Oracle.DbContext\Anu.Oracle.DbContext.csproj" />
     <ProjectReference Include="..\..\Resources\Anu.PunishmentOrg.Resources\Anu.PunishmentOrg.Resources.csproj" />
     <ProjectReference Include="..\..\ServiceModel\Anu.Commons.ServiceModel\Anu.Commons.ServiceModel.csproj" />
   </ItemGroup>
