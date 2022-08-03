@@ -1,3 +1,4 @@
+//using Anu.PunishmentOrg.Api.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +36,59 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("Manage",
+//        policyBuilder =>
+//            policyBuilder.AddRequirements(
+//                //new Anu.PunishmentOrg.Api.Authentication.IsAccountEnabledRequirement(),
+//                //new Anu.PunishmentOrg.Api.Authentication.IsAllowedToManageProductRequirement()
+//                //new Anu.PunishmentOrg.Api.Authentication.MinimumAgeRequirement("All")
+//                new Anu.PunishmentOrg.Api.Authentication.PermissionRequirement("")
+//            ));
+//});
+
+//builder.Services.AddSingleton<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, Anu.PunishmentOrg.Api.Authentication.IsAccountNotDisabledHandler>();
+//builder.Services.AddSingleton<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, Anu.PunishmentOrg.Api.Authentication.IsEmployeeHandler>();
+//builder.Services.AddSingleton<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, Anu.PunishmentOrg.Api.Authentication.IsVIPCustomerHandler>();
+
+
+//builder.Services.AddAuthorization(options =>
+//{
+//    foreach (var criterion in Anu.PunishmentOrg.Api.Authentication.PrincipalPermission.Criteria)
+//    {
+//        options.AddPolicy(criterion.Method.Name, policy => policy.RequireAssertion(criterion));
+//    }
+//});
+
+//builder.Services.AddAuthorization(config =>
+//{
+//    config.AddPolicy("AccessPolicy", policyBuilder =>
+//    {
+//        //policyBuilder.UserRequireCustomClaim(ClaimTypes.Email);
+//        //policyBuilder.UserRequireCustomClaim(ClaimTypes.DateOfBirth);
+//        new Anu.PunishmentOrg.Api.Authentication.PoliciesAuthorizationHandler();
+//    });
+//});
+
+//builder.Services.AddScoped<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, Anu.PunishmentOrg.Api.Authentication.PoliciesAuthorizationHandler>();
+////builder.Services.AddScoped<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, RolesAuthorizationHandler>();
+
+
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+//});
+
+builder.Services.AddSingleton<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, Anu.PunishmentOrg.Api.Authentication.PermissionAuthorizationHandler>();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Permission", policyBuilder =>
+    {
+        policyBuilder.Requirements.Add(new Anu.PunishmentOrg.Api.Authentication.PermissionAuthorizationRequirement());
+    });
+});
 
 builder.Services.AddDbContext<Anu.DataAccess.ApplicationDbContext>(
                 options =>
