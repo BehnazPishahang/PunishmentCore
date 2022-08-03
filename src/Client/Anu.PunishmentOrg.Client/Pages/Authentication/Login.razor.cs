@@ -58,13 +58,13 @@ namespace Anu.PunishmentOrg.Client.Pages.Authentication
 
         private void FillAdministratorCredentials()
         {
-            _tokenModel.Email = "mukesh@blazorhero.com";
+            _tokenModel.NationalCode = "mukesh@blazorhero.com";
             _tokenModel.Password = "123Pa$$word!";
         }
 
         private void FillBasicUserCredentials()
         {
-            _tokenModel.Email = "john@blazorhero.com";
+            _tokenModel.NationalCode = "john@blazorhero.com";
             _tokenModel.Password = "123Pa$$word!";
         }
     }

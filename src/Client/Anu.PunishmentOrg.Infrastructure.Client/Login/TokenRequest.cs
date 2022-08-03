@@ -12,7 +12,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Login
     public class TokenRequest
     {
         [Required]
-        public string Email { get; set; }
+        public string NationalCode { get; set; }
 
         [Required]
         public string Password { get; set; }
