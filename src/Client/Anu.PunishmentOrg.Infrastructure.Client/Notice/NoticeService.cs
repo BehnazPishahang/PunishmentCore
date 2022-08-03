@@ -30,7 +30,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
 
             PNoticeInqueryResponse result = response.Content.ReadAsAsync<PNoticeInqueryResponse>().Result;
            
-            return result.PNotice.PNoticeList.AsEnumerable();
+            return result.PNotice.Data.AsEnumerable();
 
 
         }
