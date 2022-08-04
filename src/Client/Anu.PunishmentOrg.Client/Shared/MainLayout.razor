@@ -1,7 +1,7 @@
 ﻿@using Anu.PunishmentOrg.Client.Infrastructure.Settings
 @using Anu.PunishmentOrg.Client.Pages.Authentication
-
 @inherits LayoutComponentBase
+@inject IDialogService DialogService
 
 <MudRTLProvider RightToLeft="true">
 @*    
@@ -53,38 +53,55 @@
             <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
                    @* <NavMenu />*@
                     <MudNavMenu Color="@_iconColor">
-                        <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor = "@_iconColor"  > کارتابل </MudNavLink>
-     
-                                  <MudNavLink id="FrmNoticeMain" Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch"   IconColor = "@_iconColor" >
-                                            جستجوی ابلاغ
-                                        </MudNavLink>
-                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall"  IconColor = "@_iconColor" >
+                           @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
+                            {
+                                <MudNavMenu Color="Color.Primary">
+                                <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  Color="@_iconColor"> کارتابل </MudNavLink>
+ 
+    
+                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall" Color="@_iconColor">
                                              ثبت شکایت 
                                         </MudNavLink>
-                                          <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments"  IconColor="@_iconColor"  >
+                                          <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments" Color="@_iconColor">
                                              پرداخت وجه 
                                         </MudNavLink>
-                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.DocumentScanner"  IconColor = "@_iconColor"  >
-                                            لایحه
-                                        </MudNavLink>
-                                            <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DriveFileRenameOutline"  IconColor = "@_iconColor">
-                                            درخواست تجدید نظر خواهی 
-                                        </MudNavLink>
-                                         <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DonutLarge" IconColor = "@_iconColor" >
-                                           درخواست اعمال ماده ۲۳ 
-                                        </MudNavLink>
-                                          <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EscalatorWarning" IconColor = "@_iconColor" >
-                                            ثبت وکالت نامه 
-                                        </MudNavLink>
-                                            <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DoorSliding"  IconColor = "@_iconColor">
-                                            درخواست رسیدگی مجدد  
-                                        </MudNavLink>
-                                         <MudNavLink Href="/isConstracting" Icon="@Icons.Custom.Uncategorized.FolderOpen" IconColor = "@_iconColor" >
-                                         پیگیری پرونده 
-                                        </MudNavLink>
-                                         <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EmojiPeople" IconColor = "@_iconColor" >
-                                         ثبت اعتراض  
-                                        </MudNavLink>
+                            </MudNavMenu>
+                            }
+                            else
+                               {
+                                    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor = "@_iconColor"  > کارتابل </MudNavLink>
+     
+                                              <MudNavLink id="FrmNoticeMain" Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch"   IconColor = "@_iconColor" >
+                                                        جستجوی ابلاغ
+                                                    </MudNavLink>
+                                                    <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall"  IconColor = "@_iconColor" >
+                                                         ثبت شکایت 
+                                                    </MudNavLink>
+                                                      <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments"  IconColor="@_iconColor"  >
+                                                         پرداخت وجه 
+                                                    </MudNavLink>
+                                                    <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.DocumentScanner"  IconColor = "@_iconColor"  >
+                                                        لایحه
+                                                    </MudNavLink>
+                                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DriveFileRenameOutline"  IconColor = "@_iconColor">
+                                                        درخواست تجدید نظر خواهی 
+                                                    </MudNavLink>
+                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DonutLarge" IconColor = "@_iconColor" >
+                                                       درخواست اعمال ماده ۲۳ 
+                                                    </MudNavLink>
+                                                      <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EscalatorWarning" IconColor = "@_iconColor" >
+                                                        ثبت وکالت نامه 
+                                                    </MudNavLink>
+                                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DoorSliding"  IconColor = "@_iconColor">
+                                                        درخواست رسیدگی مجدد  
+                                                    </MudNavLink>
+                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Custom.Uncategorized.FolderOpen" IconColor = "@_iconColor" >
+                                                     پیگیری پرونده 
+                                                    </MudNavLink>
+                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EmojiPeople" IconColor = "@_iconColor" >
+                                                     ثبت اعتراض  
+                                                    </MudNavLink>
+                                 }
         
                 </MudNavMenu>
             </MudDrawer>
@@ -137,8 +154,8 @@
             _style ="height:100px;background-color:#ede3e3";
             _class ="Circle";
         }
-             NavigationManager.NavigateTo("/FrmNoticeMain");
-             NavigationManager.NavigateTo("/");
+             _navigationManager.NavigateTo("/FrmNoticeMain");
+             _navigationManager.NavigateTo("/");
              StateHasChanged();
 
 
