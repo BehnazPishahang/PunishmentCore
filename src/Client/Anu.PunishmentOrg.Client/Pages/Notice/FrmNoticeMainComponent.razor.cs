@@ -1,5 +1,6 @@
 ﻿using Anu.PunishmentOrg.Client.Infrastructure.Notice;
 using Anu.PunishmentOrg.ServiceModel.Notice;
+using Microsoft.AspNetCore.Components;
 
 namespace Anu.PunishmentOrg.Client.Pages.Notice
 {
@@ -11,5 +12,17 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
         {
             Elements = NoticeService.getPNoticeList(nationalcode);
         }
+  
+
+    [Parameter]
+    public string NationalCode { get; set; }
+        public object OnNoticeSearch { get; private set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            
+            Elements = NoticeService.getPNoticeList(NationalCode);
+        }
+
     }
 }

@@ -15,6 +15,16 @@ namespace Utility.Guard
             return input;
         }
 
+        public static bool Null<T>(this T input)
+        {
+            if (input is null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public static string NullOrEmpty(this string? input, Enum type, string args = null)
         {
             input.Null(type);
@@ -24,6 +34,21 @@ namespace Utility.Guard
             }
 
             return input;
+        }
+
+        public static bool NullOrEmpty(this string? input)
+        {
+            if (!input.Null())
+            {
+                return false;
+            }
+            
+            if (input == string.Empty)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public static Guid NullOrEmpty(this Guid? input, Enum type, string args = null)
@@ -58,6 +83,21 @@ namespace Utility.Guard
 
             return input;
         }
+
+        public static bool NullOrWhiteSpace(this string? input)
+        {
+            if (!input.NullOrEmpty())
+            {
+                return false;
+            }
+            if (String.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
 
         public static T Default<T>(this T input, Enum type, string args = null)
         {

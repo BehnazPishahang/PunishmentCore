@@ -249,6 +249,10 @@
     <value>ابلاغیه ای یافت نشد.</value>
     <comment>-50002</comment>
   </data>
+  <data name="PropertyOrderNotFound" xml:space="preserve">
+    <value>مرتب سازی ویژگی یافت نشد.</value>
+    <comment>-10004</comment>
+  </data>
   <data name="Successful" xml:space="preserve">
     <value>عملیات با موفقیت انجام شد .</value>
     <comment>1000</comment>
