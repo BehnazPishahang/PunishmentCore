@@ -1,15 +1,12 @@
 ﻿@using Anu.PunishmentOrg.Client.Infrastructure.Settings
 
 @inherits LayoutComponentBase
-
-
+@inject NavigationManager NavigationManager
 
 <MudRTLProvider RightToLeft="true">
-@*        <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
-*@        <MudThemeProvider Theme="_themeManager.Theme" @bind-IsDarkMode="@_isDarkMode" />
-    
-                       <MudDrawer @bind-Open="_drawerOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation" Style="padding: 1vw"></MudDrawer>
-
+         <MudThemeProvider Theme="_themeManager.Theme" @bind-IsDarkMode="@_isDarkMode" />
+         @*<MudThemeProvider Theme="AnuCustomTheme" @bind-IsDarkMode="@_isDarkMode" />*@
+              <MudDrawer Color="@_iconColor" @bind-Open="_drawerOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation" Style="padding: 1vw"></MudDrawer>
          <MudDialogProvider />
         <MudSnackbarProvider />
 
@@ -19,34 +16,69 @@
 
             <MudAppBar Elevation="1">
                  
-                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-                    @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
+              <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="@_iconColor" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+                 @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
                      
               <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
-                    <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="Color.Warning" />
-                    <MudText Typo="Typo.h5" Class="ml-3">آنو سیستم </MudText>
+                    <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="@_iconColor" />
+                    <MudText Typo="Typo.h5" Class="mr-3" Color="@_iconColor">  فناوران اطلاعات آنو    </MudText>
                 <MudSpacer />
        
-                    <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" @onclick="onDarkMode" />
+              <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="@_iconColor" @onclick="onDarkMode" />
   
-                <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
-                    <MudMenu Direction="Direction.Right" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+               @* <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="@_iconColor" Edge="Edge.End" />*@
+             <MudMenu Direction="Direction.Right" OffsetX="true" Dense="true" Class="mt-1 ml-4">
                 <ActivatorContent>
-                        <MudAvatar Color="Color.Secondary"></MudAvatar>
+                        <MudAvatar Color="@_iconColor">ورود</MudAvatar>
                 </ActivatorContent>
 
-                <ChildContent>
+                <ChildContent  >
                     <UserCard Class="mt-n2" />
                     <MudDivider Class="mb-2" />
-                    <MudListItem Text="Account" Href="/account" Icon="@Icons.Material.Outlined.Person" />
-                    <MudListItem Text="Logout" Icon="@Icons.Material.Filled.Logout" />
+                    <MudListItem Text="پروفایل" Href="/account" Icon="@Icons.Material.Outlined.Person" />
+                    <MudListItem Text="خروج" Icon="@Icons.Material.Filled.Logout" />
                 </ChildContent>
             </MudMenu>
             </MudAppBar>
             <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-                    <NavMenu />
+                   @* <NavMenu />*@
+                    <MudNavMenu Color="@_iconColor">
+                        <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor = "@_iconColor"  > کارتابل </MudNavLink>
+     
+                                  <MudNavLink id="FrmNoticeMain" Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch"   IconColor = "@_iconColor" >
+                                            جستجوی ابلاغ
+                                        </MudNavLink>
+                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall"  IconColor = "@_iconColor" >
+                                             ثبت شکایت 
+                                        </MudNavLink>
+                                          <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments"  IconColor="@_iconColor"  >
+                                             پرداخت وجه 
+                                        </MudNavLink>
+                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.DocumentScanner"  IconColor = "@_iconColor"  >
+                                            لایحه
+                                        </MudNavLink>
+                                            <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DriveFileRenameOutline"  IconColor = "@_iconColor">
+                                            درخواست تجدید نظر خواهی 
+                                        </MudNavLink>
+                                         <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DonutLarge" IconColor = "@_iconColor" >
+                                           درخواست اعمال ماده ۲۳ 
+                                        </MudNavLink>
+                                          <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EscalatorWarning" IconColor = "@_iconColor" >
+                                            ثبت وکالت نامه 
+                                        </MudNavLink>
+                                            <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DoorSliding"  IconColor = "@_iconColor">
+                                            درخواست رسیدگی مجدد  
+                                        </MudNavLink>
+                                         <MudNavLink Href="/isConstracting" Icon="@Icons.Custom.Uncategorized.FolderOpen" IconColor = "@_iconColor" >
+                                         پیگیری پرونده 
+                                        </MudNavLink>
+                                         <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EmojiPeople" IconColor = "@_iconColor" >
+                                         ثبت اعتراض  
+                                        </MudNavLink>
+        
+                </MudNavMenu>
             </MudDrawer>
-            <MudMainContent >
+            <MudMainContent > @*Class="@_Mode" > *@
                 @Body
             </MudMainContent>
         </MudLayout>
@@ -54,21 +86,53 @@
 </MudRTLProvider>
 
 @code {
+    [Parameter]
+    public  bool _isDarkMode { set; get; } = true;
+
+    public static MudBlazor.Color _iconColor = Color.Success;
+    public static string _style ="height:100px;background-color:#181c1c";
+    public static string _class ="Circle_night";
+    public static bool DarkMode = true;
     private MudTheme _theme = Theme135.DefaultTheme;
-    private bool _isDarkMode = true;
+
+    private bool _Day = false;
+    private bool _Night = true;
+
+    public string _Mode =  "Mud-Main-Content-night";
     public EventCallback OnDarkModeToggle { get; set; }
     bool _drawerOpen = true;
+
+
+
 
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
     }
-    private void onDarkMode()
+    public void onDarkMode()
     {
-         _isDarkMode = !_isDarkMode;
-     }
+        _isDarkMode = !_isDarkMode;
+        DarkMode = _isDarkMode;
+        if(  _isDarkMode )
+        {
+            _iconColor = Color.Success;
+            _style ="height:100px;background-color:#181c1c";
+            _class ="Circle_night";
+        }
+        else
+        {
+            _iconColor = Color.Info;
+            _style ="height:100px;background-color:#ede3e3";
+            _class ="Circle";
+        }
+             NavigationManager.NavigateTo("/FrmNoticeMain");
+             NavigationManager.NavigateTo("/");
+             StateHasChanged();
 
-     private ThemeManagerTheme _themeManager = new ThemeManagerTheme();
+
+    }
+
+private ThemeManagerTheme _themeManager = new ThemeManagerTheme();
 public bool _themeManagerOpen = false;
 
 void OpenThemeManager(bool value)

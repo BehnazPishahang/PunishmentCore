@@ -1,47 +1,51 @@
 ﻿@using System.Security.Claims
 
 <UserCard />
-<MudNavMenu Color="Color.Primary">
-    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  Color="@_iconColor"> کارتابل </MudNavLink>
- 
-      <MudNavLink Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch" Color="@_iconColor">
+@*<MudNavMenu Color="Color.Primary">
+    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  > کارتابل </MudNavLink>
+
+    <MudIcon Icon="@selectedIcon" Color="@MainLayout._iconColor"    />
+
+    <MudButton Variant="Variant.Filled" OnClick="ChangeIcon" DisableElevation="true" Size="Size.Small">Change Icon</MudButton>
+
+      <MudNavLink Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch"   IconColor = "@_iconColor" >
                 جستجوی ابلاغ
             </MudNavLink>
-            <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall" Color="@_iconColor">
+            <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall"  IconColor = "@_iconColor" >
                  ثبت شکایت 
             </MudNavLink>
-              <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments" Color="@_iconColor">
+              <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments"  IconColor="@_iconColor"  >
                  پرداخت وجه 
             </MudNavLink>
-            <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.DocumentScanner" Color="@_iconColor">
+            <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.DocumentScanner"  IconColor = "@_iconColor"  >
                 لایحه
             </MudNavLink>
-                <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DriveFileRenameOutline" Color="@_iconColor">
+                <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DriveFileRenameOutline" >
                 درخواست تجدید نظر خواهی 
             </MudNavLink>
-             <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DonutLarge" Color="@_iconColor">
+             <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DonutLarge" >
                درخواست اعمال ماده ۲۳ 
             </MudNavLink>
-              <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EscalatorWarning" Color="@_iconColor">
+              <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EscalatorWarning" >
                 ثبت وکالت نامه 
             </MudNavLink>
-                <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DoorSliding" Color="@_iconColor">
+                <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DoorSliding" >
                 درخواست رسیدگی مجدد  
             </MudNavLink>
-             <MudNavLink Href="/isConstracting" Icon="@Icons.Custom.Uncategorized.FolderOpen" Color="@_iconColor">
+             <MudNavLink Href="/isConstracting" Icon="@Icons.Custom.Uncategorized.FolderOpen" >
              پیگیری پرونده 
             </MudNavLink>
-             <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EmojiPeople" Color="@_iconColor">
+             <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EmojiPeople" >
              ثبت اعتراض  
             </MudNavLink>
         
     
     
-</MudNavMenu>
+</MudNavMenu>*@
 
 @code {
 
-     MudBlazor.Color _iconColor = Color.Success;
+    static MudBlazor.Color  _iconColor = Color.Success;
     private ClaimsPrincipal _authenticationStateProviderUser;
 
     private bool _canViewHangfire;
@@ -54,7 +58,25 @@
     private bool _canViewChat;
     private bool _canViewProducts;
     private bool _canViewBrands;
-
+    System.Collections.Generic.Dictionary<string, object> _custom;
+    private static string selectedIcon = Icons.Custom.Brands.MudBlazor;
+     public static void ChangeIcon()
+    {
+        if (MainLayout.DarkMode)// selectedIcon == Icons.Custom.Brands.MudBlazor)
+        {
+            selectedIcon = Icons.Custom.Brands.GitHub;
+            _iconColor = Color.Success;
+        }
+        else
+        {
+             selectedIcon = Icons.Custom.Brands.MudBlazor;
+            _iconColor = Color.Error;
+        }
+    }
+    protected override void OnInitialized()
+    {
+   
+    }    
     protected override async Task OnParametersSetAsync()
     {
        //// _authenticationStateProviderUser = await _stateProvider.GetAuthenticationStateProviderUserAsync();
