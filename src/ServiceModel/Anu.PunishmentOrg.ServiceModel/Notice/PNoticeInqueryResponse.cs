@@ -9,24 +9,13 @@ namespace Anu.PunishmentOrg.ServiceModel.Notice
     {
         public Result Result { get; set; }
 
-        public PNoticeInquery PNotice { get; set; }
+        public Page<List<PNoticeContract>> PNotice { get; set; }
 
         public PNoticeInqueryResponse()
         {
             Result = new Result();
-            PNotice = new PNoticeInquery();
+            PNotice = new Page<List<PNoticeContract>>();
         }
 
-    }
-
-    public class PNoticeInquery : IPaging
-    {
-        public PNoticeInquery()
-        {
-            PNoticeList = new List<PNoticeContract>();
-            Page = new Page();
-        }
-        public List<PNoticeContract> PNoticeList { get; set; }
-        public Page Page { get; set; }
     }
 }
