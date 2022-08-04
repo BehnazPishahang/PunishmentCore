@@ -27,9 +27,37 @@
         <MudItem  xs="12" sm="6" md="6">
             <MudTextField For="@(() => _registerUserModel.LastName)" @bind-Value="_registerUserModel.LastName" Label="نام خانوادگی " Variant="Variant.Outlined"/>
         </MudItem>
-        <MudItem  xs="12" sm="6" md="6">
+         <MudItem  xs="12" sm="6" md="6">
+            <MudItem  xs="6" sm="6" md="6">
+            <label>تاریخ تولد</label>
+           </MudItem>
+                        <InputPersianDatePicker Id="myInputDatePicker3"
+                        @bind-Value="_variable1"
+                        Name="myInputName"
+                        Visible="true"
+                        Disabled="false"
+                        PickerAlign="Blazor.PersianDatePicker.Align .Left"
+                        PickerOffsetTopPositionInPixels="0"
+                        InitialValue="false"
+                        CalendarType="Calendar.SingleModeJalali"
+                        DigitType="DigitType.BasedOnCalendar"
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                        MinDateSetOnToday="true"
+                        Placeholder="تاریخ تولد"
+                        CssClass="form-control"
+                        Style=" text-align: right;
+                                border: 0px solid #bdbdbd;
+                                margin-left: 20px;
+                                width: 50%;
+                                height: 40px;
+                                float: right;  
+                         "
+                        Theme="PickerTheme.Cheerup"
+                        OnChange="@(() => Console.WriteLine("OK"))" />
+       </MudItem>
+        @*<MudItem  xs="12" sm="6" md="6">
             <MudTextField T="string" Label="آیمیل" @bind-Value="_registerUserModel.Email" For="@(() => _registerUserModel.Email)" Variant="Variant.Outlined"/>
-        </MudItem>
+        </MudItem>*@
         <MudItem  xs="12" sm="6" md="6">
             <MudTextField T="string" Label="شماره تلفن " @bind-Value="_registerUserModel.PhoneNumber" For="@(() => _registerUserModel.PhoneNumber)" Variant="Variant.Outlined"/>
         </MudItem>
@@ -44,3 +72,7 @@
         </MudItem>
     </MudGrid>
 </EditForm>
+@code {
+
+    private string _variable1;
+}
