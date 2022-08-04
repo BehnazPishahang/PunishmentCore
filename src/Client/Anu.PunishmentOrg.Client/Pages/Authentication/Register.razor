@@ -8,7 +8,8 @@
 <MudGrid>
         <MudItem xs="12">
             <div class="d-flex justify-center">
-                <MudIcon Icon="@CustomIcons.BlazorHero" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
+              
+                <MudIcon Icon="@Icons.Filled.Balance" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
             </div>
         </MudItem>
         <MudItem xs="12">
@@ -16,34 +17,30 @@
                 <MudText Typo="Typo.h4">ثبت نام</MudText>
             </div>
         </MudItem>
+        
         <MudItem  xs="12">
-            <div class="d-flex justify-center">
-                <MudText>قبلا ثبت نام کردید? <MudLink Href="/login">Sign In</MudLink></MudText>
-            </div>
-        </MudItem>
-        <MudItem  xs="12">
-            <MudTextField For="@(() => _registerUserModel.UserName)" @bind-Value="_registerUserModel.UserName" Label="User Name" />
+            <MudTextField For="@(() => _registerUserModel.UserName)" @bind-Value="_registerUserModel.UserName" Label="کدملی " Variant="Variant.Outlined" />
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField For="@(() => _registerUserModel.FirstName)" @bind-Value="_registerUserModel.FirstName" Label="First Name" />
+            <MudTextField For="@(() => _registerUserModel.FirstName)" @bind-Value="_registerUserModel.FirstName" Label="نام " Variant="Variant.Outlined"/>
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField For="@(() => _registerUserModel.LastName)" @bind-Value="_registerUserModel.LastName" Label="Last Name" />
+            <MudTextField For="@(() => _registerUserModel.LastName)" @bind-Value="_registerUserModel.LastName" Label="نام خانوادگی " Variant="Variant.Outlined"/>
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField T="string" Label="E-mail" @bind-Value="_registerUserModel.Email" For="@(() => _registerUserModel.Email)" />
+            <MudTextField T="string" Label="آیمیل" @bind-Value="_registerUserModel.Email" For="@(() => _registerUserModel.Email)" Variant="Variant.Outlined"/>
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField T="string" Label="Phone Number" @bind-Value="_registerUserModel.PhoneNumber" For="@(() => _registerUserModel.PhoneNumber)" />
+            <MudTextField T="string" Label="شماره تلفن " @bind-Value="_registerUserModel.PhoneNumber" For="@(() => _registerUserModel.PhoneNumber)" Variant="Variant.Outlined"/>
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField For="@(() => _registerUserModel.Password)" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" @bind-Value="_registerUserModel.Password" Label="Password" />
+            <MudTextField For="@(() => _registerUserModel.Password)" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" @bind-Value="_registerUserModel.Password" Label="کلمه عبور" Variant="Variant.Outlined"/>
         </MudItem>
         <MudItem  xs="12" sm="6" md="6">
-            <MudTextField For="@(() => _registerUserModel.ConfirmPassword)" InputType="InputType.Password" @bind-Value="_registerUserModel.ConfirmPassword" Label="Confirm Password" />
+            <MudTextField For="@(() => _registerUserModel.ConfirmPassword)" InputType="InputType.Password" @bind-Value="_registerUserModel.ConfirmPassword" Label=" تایید کلمه عبور" Variant="Variant.Outlined" />
         </MudItem>
         <MudItem  xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">Register</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">ثبت نام</MudButton>
         </MudItem>
     </MudGrid>
 </EditForm>
