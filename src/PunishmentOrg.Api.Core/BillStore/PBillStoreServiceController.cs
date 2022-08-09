@@ -1,9 +1,17 @@
 ﻿
+using Anu.BaseInfo.DataAccess.SystemObject;
+using Anu.BaseInfo.Domain.SystemObject;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
+using Anu.PunishmentOrg.DataAccess.BaseInfo;
+using Anu.PunishmentOrg.DataAccess.DiscoveryMinutes;
+using Anu.PunishmentOrg.DataAccess.PBillStore;
 using Anu.PunishmentOrg.DataModel.BaseInfo;
 using Anu.PunishmentOrg.DataModel.BillStore;
+using Anu.PunishmentOrg.Domain.BaseInfo;
+using Anu.PunishmentOrg.Domain.DiscoveryMinutes;
+using Anu.PunishmentOrg.Domain.PBillStore;
 using Anu.PunishmentOrg.ServiceModel.BillStore;
 
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
@@ -72,10 +80,11 @@ namespace Anu.PunishmentOrg.Api.BillStore
                     UniqueNo = Utility.Utility.GetRandomNumber(Anu.Constants.ServiceModel.General.GeneralConstants.ConventionalConstants.UniqueNumberLength)
                 };
 
-                var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
+                //var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
+                var pDiscoveryMinutes = await _unitOfWork.Repositorey<PDiscoveryMinutesRepository>().GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
                 pBillStore.ThePDiscoveryMinutes = (pDiscoveryMinutes is null) ? null : pDiscoveryMinutes;
 
-                pBillStore.TheObjectState = _unitOfWork.ObjectState.GetById(PunishmentOrgObjectState.PBillStore.Confirm);
+                pBillStore.TheObjectState = _unitOfWork.Repositorey<ObjectStateRepository>().GetById(PunishmentOrgObjectState.PBillStore.Confirm);
 
                 pBillStore.TheDiscoveryOrg = GetDiscoveryOrganization(request.CodingDeviceDetector);
                 pBillStore.id_shenaseResid = request.TrackingCodeStores;
@@ -125,7 +134,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
                     pBillStore.ThePBillStoreProductList.Add(pBillStoreProduct);
                 }
 
-                _unitOfWork.PBillStore.Add(pBillStore);
+                _unitOfWork.Repositorey<PBillStoreRepository>().Add(pBillStore);
                 _unitOfWork.Complete();
 
                 return Respond(AnuResult.Successful, pBillStore.UniqueNo);
@@ -179,7 +188,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
         {
             var isDuplicate = false;
 
-            var billEntity = _unitOfWork.PBillStore.GetByNumberDate(request.BillNumber, request.BillDate);
+            var billEntity = _unitOfWork.Repositorey<PBillStoreRepository>().GetByNumberDate(request.BillNumber, request.BillDate);
 
             if (billEntity.Result.Count() != 0)
             {
@@ -248,7 +257,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
                     break;
 
             }
-            return _unitOfWork.PBExchangeUnit.GetById(organizationId);
+            return _unitOfWork.Repositorey<PBExchangeUnitRepository>().GetById(organizationId);
         }
 
 

@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
+using Anu.BaseInfo.Domain.FrontEndSecurity;
+using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using Anu.DataAccess;
+using Anu.PunishmentOrg.Domain.DiscoveryMinutes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Utility.Guard;
 
 namespace Anu.PunishmentOrg.Api.Authentication
 {
@@ -14,13 +20,10 @@ namespace Anu.PunishmentOrg.Api.Authentication
     public class UserLoginRequestDto
     {
         [System.ComponentModel.DataAnnotations.Required]
-        public string? Id { get; set; }
+        public string? UserName { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public string? Email { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Required]
-        public string? Password { get; set; }
+        public string? PassWord { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string? PhoneNumber { get; set; }
@@ -36,10 +39,12 @@ namespace Anu.PunishmentOrg.Api.Authentication
     public class AuthenticationController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AuthenticationController(IConfiguration configuration)
+        public AuthenticationController(IConfiguration configuration, IUnitOfWork unitOfWork)
         {
             _configuration = configuration;
+            _unitOfWork = unitOfWork;
         }
 
         [Route("Login")]
@@ -47,11 +52,16 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] UserLoginRequestDto loginRequest)
         {
-            // Check if the user exist
-            //var existing_user;// await _userManager.FindByEmailAsync(loginRequest.Email);
-
             if (loginRequest == null)
                 return BadRequest(new AuthResult() { Errors = new List<string>() { "Invalid payload" }, Result = false });
+
+            // Check if the user exist
+            loginRequest.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            loginRequest.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+
+            string hashPass = MD5Core.GetHashString(loginRequest.PassWord);
+            var userAccess = await _unitOfWork.Repositorey<GFESUserAccessRepository>().ValidateUserAndPassword(loginRequest.UserName, hashPass, "");
+            userAccess.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
             //var isCorrect = await _userManager.CheckPasswordAsync(existing_user, loginRequest.Password);
 
@@ -76,11 +86,11 @@ namespace Anu.PunishmentOrg.Api.Authentication
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim("Id", user.Id),
                     new Claim("IsDisable", "true"),
                     new Claim("permissions", ";;" ),
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Email, value:user.Email),
+                    new Claim("UserName", user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Email, value:user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString())
                 }),
