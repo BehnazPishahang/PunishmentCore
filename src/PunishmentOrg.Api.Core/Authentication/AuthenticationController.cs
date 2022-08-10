@@ -1,7 +1,11 @@
 ﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
+using Anu.BaseInfo.DataModel.ExchangeData;
+using Anu.BaseInfo.DataModel.FrontEndSecurity;
+using Anu.BaseInfo.DataModel.SystemObject;
 using Anu.BaseInfo.Domain.FrontEndSecurity;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.DataAccess;
+using Anu.DataAccess.Repositories;
 using Anu.PunishmentOrg.Domain.DiscoveryMinutes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -50,32 +54,27 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Route("Login")]
         [HttpPost]
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] UserLoginRequestDto loginRequest)
+        public async Task<IActionResult> Login([FromBody] UserLoginRequestDto request)
         {
-            if (loginRequest == null)
+            if (request == null)
                 return BadRequest(new AuthResult() { Errors = new List<string>() { "Invalid payload" }, Result = false });
 
-            // Check if the user exist
-            loginRequest.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-            loginRequest.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            // Check if the theGFESUser exist
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
-            string hashPass = MD5Core.GetHashString(loginRequest.PassWord);
-            var userAccess = await _unitOfWork.Repositorey<GFESUserAccessRepository>().ValidateUserAndPassword(loginRequest.UserName, hashPass, "");
-            userAccess.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
+            //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
+            var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsync(request.UserName, request.PassWord);
 
-            //var isCorrect = await _userManager.CheckPasswordAsync(existing_user, loginRequest.Password);
+            theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            //if (!isCorrect)
-            //    return BadRequest(new AuthResult() { Errors = new List<string>() { "Invalid credentials" }, Result = false });
-
-            var jwtToken = GenerateJwtToken(loginRequest);
+            var jwtToken = GenerateJwtToken(theGFESUser);
 
             return Ok(new AuthResult() { Token = jwtToken, Result = true });
-
-            //return BadRequest(new AuthResult() { Errors = new List<string>() { "Invalid payload" }, Result = false });
         }
 
-        private string GenerateJwtToken(UserLoginRequestDto user)
+        private string GenerateJwtToken(GFESUser theGFESUser)
         {
             var jwtTokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
 
@@ -87,10 +86,10 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim("IsDisable", "true"),
-                    new Claim("permissions", ";;" ),
-                    new Claim("UserName", user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Email, value:user.UserName),
+                    new Claim("permissions", this.GetPermissions(theGFESUser)),
+                    new Claim("UserName", theGFESUser.UserID),
+                    new Claim(JwtRegisteredClaimNames.Sub, theGFESUser.UserID),
+                    new Claim(JwtRegisteredClaimNames.Email, value:theGFESUser.UserID),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString())
                 }),
@@ -103,6 +102,12 @@ namespace Anu.PunishmentOrg.Api.Authentication
             return jwtTokenHandler.WriteToken(token);
         }
 
+        private string GetPermissions(GFESUser theGFESUser)
+        {
+            //return ";All;";
+            var theGFESUserAccessTypeCodes = string.Join(';',theGFESUser.TheGFESUserAccessList.Select(x => x.TheGFESUserAccessType.Code));
+            return theGFESUserAccessTypeCodes;
+        }
     }
 
     public abstract class AttributeAuthorizationHandler<TRequirement, TAttribute> : AuthorizationHandler<TRequirement> where TRequirement : IAuthorizationRequirement where TAttribute : Attribute

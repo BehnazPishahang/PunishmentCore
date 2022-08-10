@@ -151,10 +151,10 @@ namespace Anu.PunishmentOrg.Api.BillStore
         }
 
 
-        //[Authentication.Permission("SendPBillStore")]
+        [Authentication.Permission("003")]
         public override PBillStoreServiceResponse SendPBillStore([FromBody] PBillStoreServiceRequest request)
         {
-            throw new NotImplementedException();
+            return new PBillStoreServiceResponse() { ThePBillStoreContract = null };
         }
 
 
