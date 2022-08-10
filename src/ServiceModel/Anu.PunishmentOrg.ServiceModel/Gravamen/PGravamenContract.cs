@@ -6,6 +6,7 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
     {
         public PGravamenContract()
         {
+
         }
 
     }
