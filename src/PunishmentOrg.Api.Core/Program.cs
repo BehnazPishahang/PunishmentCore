@@ -11,6 +11,9 @@ builder.Services.AddControllers(options =>
 {
     var policy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter(policy));
+}).AddJsonOptions(option =>
+{
+    option.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -67,11 +70,11 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-.AddJwtBearer(jwt =>
+.AddJwtBearer(option =>
 {
     var key = System.Text.Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
-    jwt.SaveToken = true;
-    jwt.TokenValidationParameters = new TokenValidationParameters()
+    option.SaveToken = true;
+    option.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
@@ -79,6 +82,30 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false, // for dev
         RequireExpirationTime = false, // for dev -- needs to be updated when refresh token is added
         ValidateLifetime = true
+    };
+
+    option.Events = new JwtBearerEvents
+    {
+        OnChallenge = async context =>
+        {
+            // Call this to skip the default logic and avoid using the default response
+            context.HandleResponse();
+
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = 401;
+            //context.Response.Headers.Append("my-custom-header", "custom-value");
+            var responseMessage = new Anu.Commons.ServiceModel.ServiceResponse.ResponseMessage()
+            { 
+                Result = new Anu.Commons.ServiceModel.ServiceResponse.Result()
+                {
+                    Code = -1,
+                    Message = "JWT token is not valid",
+                    Description = "JWT token is not valid"
+                }
+            };
+            string responseMessagestring = System.Text.Json.JsonSerializer.Serialize(responseMessage);
+            await context.Response.WriteAsync(responseMessagestring);
+        }
     };
 });
 

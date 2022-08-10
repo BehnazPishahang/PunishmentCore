@@ -3,6 +3,7 @@ using Anu.BaseInfo.DataModel.ExchangeData;
 using Anu.BaseInfo.DataModel.FrontEndSecurity;
 using Anu.BaseInfo.DataModel.SystemObject;
 using Anu.BaseInfo.Domain.FrontEndSecurity;
+using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.DataAccess;
 using Anu.DataAccess.Repositories;
@@ -33,11 +34,13 @@ namespace Anu.PunishmentOrg.Api.Authentication
         public string? PhoneNumber { get; set; }
     }
 
-    public class AuthResult
+    public class AuthResult : IResponseMessage
     {
-        public string? Token { get; set; }
-        public bool Result { get; set; }
-        public List<string>? Errors { get; set; }
+        public string? AccessToken { get; set; }
+
+        public string? RefreshToken { get; set; }
+
+        public Result Result { get; set; }
     }
 
     public class AuthenticationController : Microsoft.AspNetCore.Mvc.ControllerBase
@@ -54,24 +57,24 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Route("Login")]
         [HttpPost]
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] UserLoginRequestDto request)
+        public async Task<AuthResult> Login([FromBody] UserLoginRequestDto request)
         {
             if (request == null)
-                return BadRequest(new AuthResult() { Errors = new List<string>() { "Invalid payload" }, Result = false });
+            {
+                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = new Result() { Code = -1, Message = "invalid login request" } };
+            }
 
-            // Check if the theGFESUser exist
             request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
             request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
             //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
             //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
             var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsync(request.UserName, request.PassWord);
-
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
             var jwtToken = GenerateJwtToken(theGFESUser);
 
-            return Ok(new AuthResult() { Token = jwtToken, Result = true });
+            return new AuthResult() {  AccessToken = jwtToken, RefreshToken = "", Result = new Result() { Code = 1000, Message = "" } };
         }
 
         private string GenerateJwtToken(GFESUser theGFESUser)
