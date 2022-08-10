@@ -30,7 +30,7 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
 
         [Unicode(false)]
         [Column("MOBILNUMBER")]
-        public virtual string? MobilNumber { get; set; }
+        public virtual string? MobileNumber { get; set; }
 
         [Unicode(false)]
         [Column("NAME")]
