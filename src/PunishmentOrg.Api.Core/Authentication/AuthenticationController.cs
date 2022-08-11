@@ -14,6 +14,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Utility;
+using Utility.Exceptions;
 using Utility.Guard;
 
 namespace Anu.PunishmentOrg.Api.Authentication
@@ -59,22 +61,30 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public async Task<AuthResult> Login([FromBody] UserLoginRequestDto request)
         {
-            if (request == null)
+            try
             {
-                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = new Result() { Code = -1, Message = "invalid login request" } };
+                if (request == null)
+                {
+                    return new AuthResult() { AccessToken = "", RefreshToken = "", Result = new Result() { Code = -1, Message = "invalid login request" } };
+                }
+
+                request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+                request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+
+                //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
+                //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
+                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsync(request.UserName, request.PassWord);
+                theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+                var jwtToken = GenerateJwtToken(theGFESUser);
+
+                return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
+            }
+            catch (AnuExceptions ex)
+            {
+                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = ex.result };
             }
 
-            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-            request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-
-            //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
-            //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
-            var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsync(request.UserName, request.PassWord);
-            theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
-
-            var jwtToken = GenerateJwtToken(theGFESUser);
-
-            return new AuthResult() {  AccessToken = jwtToken, RefreshToken = "", Result = new Result() { Code = 1000, Message = "" } };
         }
 
         private string GenerateJwtToken(GFESUser theGFESUser)

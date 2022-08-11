@@ -10,11 +10,11 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
         {
         }
 
-        public Task<GFESUser> GetGFESUserByUserNameAndPassWordAsync(string userName, string passWord)
+        public async Task<GFESUser> GetGFESUserByUserNameAndPassWordAsync(string userName, string passWord)
         {
             string passWordHash = MD5Core.GetHashString(passWord);
 
-            var theGFESUser = _context.Set<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUser>()
+            var theGFESUser = await _context.Set<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUser>()
                                       .Include(user => user.TheGFESUserAccessList)
                                       .ThenInclude(userAccess => userAccess.TheGFESUserAccessType)
                                       .Where(user =>
@@ -22,18 +22,18 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
                                           && user.Password == passWordHash
                                            )
                                       .Select(user => user)
-                                      .Single();
+                                      .SingleAsync();
 
             var result =  theGFESUser.TheGFESUserAccessList
-                                     //.Where(userAccess =>
-                                     //       userAccess.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.DateTimeNow() &&
-                                     //       userAccess.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.DateTimeNow() &&
-                                     //       userAccess.ToDateTime.ToDateTime() >= CalendarHelper.DateTimeNow() &&
-                                     //       userAccess.FromDateTime.ToDateTime() <= CalendarHelper.DateTimeNow())
+                                     .Where(userAccess =>
+                                            userAccess.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.DateTimeNow() &&
+                                            userAccess.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.DateTimeNow() &&
+                                            userAccess.ToDateTime.ToDateTime() >= CalendarHelper.DateTimeNow() &&
+                                            userAccess.FromDateTime.ToDateTime() <= CalendarHelper.DateTimeNow())
                                      .Select(s => s.TheGFESUser)
                                      .First();
 
-            return Task.FromResult(result);
+            return result;
         }
     }
 }

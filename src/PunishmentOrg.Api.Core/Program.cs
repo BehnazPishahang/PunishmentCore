@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.Swagger;
+using Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -95,13 +96,8 @@ builder.Services.AddAuthentication(options =>
             context.Response.StatusCode = 401;
             //context.Response.Headers.Append("my-custom-header", "custom-value");
             var responseMessage = new Anu.Commons.ServiceModel.ServiceResponse.ResponseMessage()
-            { 
-                Result = new Anu.Commons.ServiceModel.ServiceResponse.Result()
-                {
-                    Code = -1,
-                    Message = "JWT token is not valid",
-                    Description = "JWT token is not valid"
-                }
+            {
+                Result = Anu.Commons.ServiceModel.ServiceResponseEnumerations.AnuResult.JwtTokenIsNotValid.GetResult()
             };
             string responseMessagestring = System.Text.Json.JsonSerializer.Serialize(responseMessage);
             await context.Response.WriteAsync(responseMessagestring);

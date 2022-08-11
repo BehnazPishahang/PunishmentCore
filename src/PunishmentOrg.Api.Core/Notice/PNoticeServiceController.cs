@@ -1,6 +1,8 @@
 ﻿
 using Anu.Commons.ServiceModel.ServicePaging;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using Anu.Constants.ServiceModel.PunishmentOrg;
+using Anu.PunishmentOrg.Api.Authentication;
 using Anu.PunishmentOrg.DataAccess.Notice;
 using Anu.PunishmentOrg.Domain.Notice;
 using Anu.PunishmentOrg.ServiceModel.Notice;
@@ -27,7 +29,7 @@ namespace Anu.PunishmentOrg.Api.Notice
         #endregion Properties
 
         #region Overrides
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        //[PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.)]
         public override async Task<PNoticeInqueryResponse> InqueryPNoticeList([FromBody] PNoticeInqueryRequest request)
         {
             try

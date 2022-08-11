@@ -133,6 +133,10 @@
     <value>به واحد اجرای احکام ارجاع شده</value>
     <comment>20003</comment>
   </data>
+  <data name="JwtTokenIsNotValid" xml:space="preserve">
+    <value>توکن شما معتبر نیست.</value>
+    <comment>-10005</comment>
+  </data>
   <data name="NationalCodeIs_Required" xml:space="preserve">
     <value>کد ملی را وارد کنید.</value>
     <comment>-50001</comment>

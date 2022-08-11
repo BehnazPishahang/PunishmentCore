@@ -18,6 +18,7 @@ using Anu.PunishmentOrg.Domain.Terminate;
 using Anu.PunishmentOrg.DataAccess.InspectionReport;
 using Anu.PunishmentOrg.DataAccess.PCase;
 using Anu.PunishmentOrg.DataAccess.Terminate;
+using Anu.PunishmentOrg.Api.Authentication;
 
 namespace Anu.PunishmentOrg.Service
 {
@@ -26,12 +27,12 @@ namespace Anu.PunishmentOrg.Service
         public PInspectionReportController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
-
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.SendPInspectionReportServices)]
         public override async Task<SendPInspectionReportStateResponse> SendPInspectionReportState([FromBody] SendPInspectionReportStateRequest request)
         {
             try
             {
-                await LoginValidation.ValidateLoginAsync(request.Request, Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgConstants.GFESUserAccessType.SendPInspectionReportServices, _unitOfWork);
+                //await LoginValidation.ValidateLoginAsync(request.Request, Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgConstants.GFESUserAccessType.SendPInspectionReportServices, _unitOfWork);
 
                 request.UniqueNo.NullOrWhiteSpace(PInspectionReportResult.Error_UniqueNo_Is_Required, "مکانیزه گزارش بازرسی");
                 request.UniqueNo.IsDigit(PInspectionReportResult.Error_UniqueNo_Is_Required, args: "مکانیزه گزارش بازرسی");

@@ -4,6 +4,7 @@ using Anu.BaseInfo.Domain.SystemObject;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
+using Anu.PunishmentOrg.Api.Authentication;
 using Anu.PunishmentOrg.DataAccess.BaseInfo;
 using Anu.PunishmentOrg.DataAccess.DiscoveryMinutes;
 using Anu.PunishmentOrg.DataAccess.PBillStore;
@@ -44,7 +45,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
         #endregion Properties
 
         #region Overrides
-
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.SendPBillStoreService)]
         public async override Task<PBillStoreServiceResponse> ReceivePBillStoreFromScms([FromBody] PBillStoreServiceRequest request)
         {
             var receivePBillStoreFromScmsResponse = new PBillStoreServiceResponse()
@@ -55,7 +56,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
             try
             {
 
-                await LoginValidation.ValidateLoginAsync(request.Request, PunishmentOrgConstants.GFESUserAccessType.SendPBillStoreService, _unitOfWork);
+                //await LoginValidation.ValidateLoginAsync(request.Request, PunishmentOrgConstants.GFESUserAccessType.SendPBillStoreService, _unitOfWork);
 
                 //TODO: Add bill number(max:32) and date(max:12?) length validation
 

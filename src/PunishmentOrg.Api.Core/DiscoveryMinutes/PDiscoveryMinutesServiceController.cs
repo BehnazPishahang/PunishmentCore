@@ -2,6 +2,7 @@
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
+using Anu.PunishmentOrg.Api.Authentication;
 using Anu.PunishmentOrg.DataAccess.DiscoveryMinutes;
 using Anu.PunishmentOrg.DataAccess.PCase;
 using Anu.PunishmentOrg.DataAccess.Terminate;
@@ -32,11 +33,12 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
             _unitOfWork = unitOfWork;
         }
 
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.SendPDiscoveryMinute)]
         public override async Task<PDiscoveryMinutesStateResponse> SendPDiscoveryMinutesState([FromBody] PDiscoveryMinutesStateRequest request)
         {
             try
             {
-                await LoginValidation.ValidateLoginAsync(request.Request, Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgConstants.GFESUserAccessType.SendPDiscoveryMinute, _unitOfWork);
+                //await LoginValidation.ValidateLoginAsync(request.Request, Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgConstants.GFESUserAccessType.SendPDiscoveryMinute, _unitOfWork);
 
                 request.ThePDiscoveryMinutesInputContract.UniqueNo.NullOrWhiteSpace(PDiscoveryMinutesResult.Error_UniqueNo_Is_Required, "یکتای صورتجلسه کشف");
                 request.ThePDiscoveryMinutesInputContract.UniqueNo.IsDigit(PDiscoveryMinutesResult.Error_UniqueNo_Is_Required, args: "یکتای صورتجلسه کشف");
