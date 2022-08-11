@@ -9,7 +9,7 @@ namespace Anu.PunishmentOrg.ServiceModel.Notice
         }
 
         [System.ComponentModel.DisplayName("کد ملی شخص ابلاغ شونده")]
-        public long? NationalityCode { get; set; }
+        public string? NationalityCode { get; set; }
 
 
 
