@@ -20,8 +20,8 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
 
         protected override async Task OnInitializedAsync()
         {
-            
-            Elements = NoticeService.getPNoticeList(NationalCode);
+            string ncode = SharedInfo.NationalCode;
+            Elements = NoticeService.getPNoticeList(ncode);
         }
 
     }

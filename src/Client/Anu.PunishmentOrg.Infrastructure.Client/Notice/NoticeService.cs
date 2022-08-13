@@ -20,9 +20,14 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
         {
 
             PNoticeInqueryRequest inputData = new PNoticeInqueryRequest();
-            inputData.PNoticePersonContract.NationalityCode = (long)Convert.ToDouble(nationalCode);
+            inputData.PNoticePersonContract.NationalityCode = nationalCode;
+            inputData.Page = new Commons.ServiceModel.ServicePaging.Page();
+            inputData.Page.TotallPage = 15;
+            inputData.Page.RowCountPerPage = 20;
+            inputData.Page.PageNumber = 0;
+            inputData.Page.TotalResult = 0;
+            inputData.Page.OrderPage = new Commons.ServiceModel.ServicePaging.OrderPage() { Property="",Ascending=true};
 
-           
             var client = new HttpClient();
             client.BaseAddress = new Uri(Baseurl);
           
