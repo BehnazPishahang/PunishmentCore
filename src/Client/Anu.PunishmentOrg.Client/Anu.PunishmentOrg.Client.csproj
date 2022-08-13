@@ -9,11 +9,13 @@
   <ItemGroup>
     <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
-    <PackageReference Include="MudBlazor" Version="6.0.12" />
+    <PackageReference Include="MudBlazor" Version="6.0.14" />
+    <PackageReference Include="MudBlazor.ThemeManager" Version="1.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Anu.PunishmentOrg.Infrastructure.Client\Anu.PunishmentOrg.Client.Infrastructure.csproj" />
+    <ProjectReference Include="..\BlazorComponents\Blazor.PersianDatePicker\Blazor.PersianDatePicker.csproj" />
   </ItemGroup>
 
 </Project>

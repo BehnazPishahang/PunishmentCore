@@ -1,196 +1,238 @@
 ﻿@page "/dashboard"
+@inherits MainLayout
 
 <MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
-   
-   
-            
-        
-          
-              
-        
-     
-
+    
 
     <MudGrid>
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="6"  >
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
-            href="/Notice"
+            href="/FrmNoticeMain"
             target="blank"
             rel="noopener noreferrer">
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.ManageSearch" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">ابلاغ</MudText>
-                    <MudText >7</MudText>
+ 
+              <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100%">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.ManageSearch" Color="@MainLayout._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                </div>
+                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> ابلاغ</MudText>
+                   </div>
+                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">65</MudText>
+                   </div>
                 </div>
             </MudPaper>
             </MudElement>
         </MudItem>
 
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="6">
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
             href="/isConstracting"
             target="blank"
             rel="noopener noreferrer">
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.AddIcCall" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">ثبت شکایت</MudText>
-                    <MudText  >10</MudText>
+             <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100%">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.AddIcCall" Color="@MainLayout._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                </div>
+                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> ثبت شکایت</MudText>
+                   </div>
+                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">4</MudText>
+                   </div>
                 </div>
             </MudPaper>
+ 
              </MudElement>
         </MudItem>
-        <MudItem xs="12" sm="6" md="3">
+        <MudItem xs="12" sm="6" md="6" >
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
             href="/isConstracting"
             target="blank"
             rel="noopener noreferrer">
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.Payments" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">‍‍‍پرداخت  وجه  </MudText>
-                    <MudText  >15</MudText>
+          <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.Payments" Color="@MainLayout._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                 </div>
+                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
-            </MudPaper>
-            </MudElement>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="3">
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-            href="/isConstracting"
-            target="blank"
-            rel="noopener noreferrer">
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.Payments" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">پرداخت وجه  </MudText>
-                    <MudText  >6</MudText>
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  ">  پرداخت  وجه </MudText>
+                   </div>
+                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1   @MainLayout._class">
+                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">30</MudText>
+                   </div>
                 </div>
             </MudPaper>
+ 
             </MudElement>
-        </MudItem>
+       </MudItem>
        
 
-           <MudItem xs="12" sm="6" md="3">
+           <MudItem xs="12" sm="6" md="6">
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
             href="/isConstracting"
             target="blank"
             rel="noopener noreferrer">
+            <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.DocumentScanner" Color="@MainLayout._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                </div>
+                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.DocumentScanner" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1"> لایحه  </MudText>
-                    <MudText >6</MudText>
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  ">  لایحه </MudText>
+                   </div>
+                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">3</MudText>
+                   </div>
                 </div>
             </MudPaper>
+ 
             </MudElement>
         </MudItem>
 
 
-  <MudItem xs="12" sm="6" md="3">
+  <MudItem xs="12" sm="6" md="6">
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
             href="/isConstracting"
             target="blank"
             rel="noopener noreferrer">
+            <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.DriveFileRenameOutline" Color="@MainLayout._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                </div>
+                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.DriveFileRenameOutline" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1"> درخواست تجدید نظر خواهی  </MudText>
-                    <MudText >6</MudText>
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  ">  درخواست تجدید نظر خواهی </MudText>
+                   </div>
+                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">7</MudText>
+                   </div>
                 </div>
             </MudPaper>
+ 
             </MudElement>
         </MudItem>   
         
 
-         <MudItem xs="12" sm="6" md="3">
+         <MudItem xs="12" sm="6" md="6">
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
             href="/isConstracting"
             target="blank"
             rel="noopener noreferrer">
+            <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.DonutLarge" Color="@MainLayout._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                </div>
+                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.DonutLarge" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1"> درخواست اعمال ماده ۲۳  </MudText>
-                    <MudText  >6</MudText>
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> درخواست اعمال ماده ۲۳ </MudText>
+                   </div>
+                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">8</MudText>
+                   </div>
                 </div>
             </MudPaper>
+ 
             </MudElement>
         </MudItem>   
 
-                 <MudItem xs="12" sm="6" md="3">
+                 <MudItem xs="12" sm="6" md="6">
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
             href="/isConstracting"
             target="blank"
             rel="noopener noreferrer">
+                        <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.EscalatorWarning" Color="@MainLayout._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                </div>
+                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.EscalatorWarning" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1"> ثبت وکالت نامه   </MudText>
-                    <MudText  >6</MudText>
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography mud-text-secondary mb-n1 mt-4 text-center dashboard_items "> ثبت وکالت نامه </MudText>
+                   </div>
+                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2" >9</MudText>
+                   </div>
                 </div>
             </MudPaper>
+ 
             </MudElement>
         </MudItem>   
 
-              <MudItem xs="12" sm="6" md="3">
+              <MudItem xs="12" sm="6" md="6">
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
             href="/isConstracting"
             target="blank"
             rel="noopener noreferrer">
+            <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.DoorSliding" Color="@MainLayout._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                </div>
+                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Material.Filled.DoorSliding" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1"> درخواست رسیدگی مجدد   </MudText>
-                    <MudText  >6</MudText>
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> درخواست رسیدگی مجدد </MudText>
+                   </div>
+                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">12</MudText>
+                   </div>
                 </div>
             </MudPaper>
+ 
             </MudElement>
         </MudItem>
 
-          <MudItem xs="12" sm="6" md="3">
+          <MudItem xs="12" sm="6" md="6">
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
             href="/isConstracting"
             target="blank"
             rel="noopener noreferrer">
+             <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.FolderOpen" Color="@MainLayout._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                </div>
+                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Custom.Uncategorized.FolderOpen" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">پیگیری پرونده</MudText>
-                    <MudText  >6</MudText>
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> پیگیری پرونده</MudText>
+                   </div>
+                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2" >15</MudText>
+                   </div>
                 </div>
             </MudPaper>
+ 
             </MudElement>
         </MudItem>
 
-         <MudItem xs="12" sm="6" md="3">
+         <MudItem xs="12" sm="6" md="6">
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
@@ -198,11 +240,18 @@
             target="blank"
             rel="noopener noreferrer">
 
-            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
-                <MudIcon Icon="@Icons.Filled.EmojiPeople" Color="Color.Secondary" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                <div>
-                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1"> ثبت اعتراض</MudText>
-                    <MudText  >6</MudText>
+            <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.EmojiPeople" Color="@MainLayout._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                </div>
+                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> ثبت اعتراض</MudText>
+                   </div>
+                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1   @MainLayout._class">
+                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2" >6</MudText>
+                   </div>
                 </div>
             </MudPaper>
             </MudElement>
@@ -214,3 +263,12 @@
 
         
 </MudContainer>
+
+@code
+{
+    
+   public static MudBlazor.Color _iconColorDashboard = MainLayout.DarkMode ? Color.Success : Color.Info;
+        
+     
+    
+}

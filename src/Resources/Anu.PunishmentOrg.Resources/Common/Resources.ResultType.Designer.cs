@@ -358,6 +358,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مرتب سازی ویژگی یافت نشد..
+        /// </summary>
+        public static string PropertyOrderNotFound {
+            get {
+                return ResourceManager.GetString("PropertyOrderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to عملیات با موفقیت انجام شد ..
         /// </summary>
         public static string Successful {

@@ -11,7 +11,7 @@ namespace Anu.Oracle.DbContext
 {
     public static class IQueryableExtensions
     {
-        private static MemberExpression GetMemberAccessExpression(ParameterExpression parameter, string path)
+        public static MemberExpression GetMemberAccessExpression(ParameterExpression parameter, string path)
         {
             var type = parameter.Type;
             var pNames = path.Split('.');

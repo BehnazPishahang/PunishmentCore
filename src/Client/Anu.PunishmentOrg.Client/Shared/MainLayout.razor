@@ -1,53 +1,186 @@
 ﻿@using Anu.PunishmentOrg.Client.Infrastructure.Settings
-
+@using Anu.PunishmentOrg.Client.Pages.Authentication
 @inherits LayoutComponentBase
-
-<style>
-    @@font-face {
-    font-family: 'Shabnam';
-    font-weight: normal;
-    font-style: normal;
-    src: url('~/fonts/Shabnam/Shabnam.eot') format('embedded-opentype'), url('~/fonts/Shabnam/Shabnam.woff') format('woff'), url('~/fonts/Shabnam/Shabnam.ttf') format('truetype');
-}
- </Style>   
+@inject IDialogService DialogService
 
 <MudRTLProvider RightToLeft="true">
+@*    
+*@        <MudThemeProvider Theme="_themeManager.Theme" @bind-IsDarkMode="@_isDarkMode" />
+    
+                       <MudDrawer @bind-Open="_drawerOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation" Style="padding: 1vw"></MudDrawer>
 
+        <MudDialogProvider
+                FullWidth="true"
+                MaxWidth="MaxWidth.ExtraSmall"
+                CloseButton="true"
+                DisableBackdropClick="true"
+                NoHeader="true"
+                Position="DialogPosition.Center"
+                CloseOnEscapeKey="true"
+            />
+        <MudSnackbarProvider />
 
-<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+        <MudLayout  >
+            
+            <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme"  />
 
-<MudDialogProvider />
-<MudSnackbarProvider />
+            <MudAppBar Elevation="1">
+                 
+              <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="@_iconColor" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+                 @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
+                     
+              <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
+                    <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="@_iconColor" />
+                    <MudText Typo="Typo.h5" Class="mr-3" Color="@_iconColor">  فناوران اطلاعات آنو    </MudText>
+                <MudSpacer />
+       
+              <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="@_iconColor" @onclick="onDarkMode" />
+  
+               @* <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="@_iconColor" Edge="Edge.End" />*@
+             <MudMenu Direction="Direction.Right" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+                <ActivatorContent>
+                        <MudAvatar Color="@_iconColor">ورود</MudAvatar>
+                </ActivatorContent>
 
-<MudLayout  >
-    <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-          @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
-          <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="Color.Warning" />
-            <MudText Typo="Typo.h5" Class="ml-3">آنو سیستم </MudText>
-        <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
-    </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-         <NavMenu/>
-    </MudDrawer>
-    <MudMainContent >
-        @Body
-    </MudMainContent>
-</MudLayout>
+                <ChildContent  >
+                    <UserCard Class="mt-n2" />
+                    <MudDivider Class="mb-2" />
+                    <MudListItem Text="ورود " Icon="@Icons.Material.Outlined.Person" @onclick="showlogin" />
+                    <MudListItem Text="ثبت نام " Href="/register" Icon="@Icons.Material.Filled.AppRegistration" />
+                </ChildContent>
+            </MudMenu>
+            </MudAppBar>
+            <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+                   @* <NavMenu />*@
+                    <MudNavMenu Color="@_iconColor">
+                           @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
+                            {
+                                <MudNavMenu Color="Color.Primary">
+                                <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  Color="@_iconColor"> کارتابل </MudNavLink>
+ 
+    
+                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall" Color="@_iconColor">
+                                             ثبت شکایت 
+                                        </MudNavLink>
+                                          <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments" Color="@_iconColor">
+                                             پرداخت وجه 
+                                        </MudNavLink>
+                            </MudNavMenu>
+                            }
+                            else
+                               {
+                                    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor = "@_iconColor"  > کارتابل </MudNavLink>
+     
+                                              <MudNavLink id="FrmNoticeMain" Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch"   IconColor = "@_iconColor" >
+                                                        جستجوی ابلاغ
+                                                    </MudNavLink>
+                                                    <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall"  IconColor = "@_iconColor" >
+                                                         ثبت شکایت 
+                                                    </MudNavLink>
+                                                      <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments"  IconColor="@_iconColor"  >
+                                                         پرداخت وجه 
+                                                    </MudNavLink>
+                                                    <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.DocumentScanner"  IconColor = "@_iconColor"  >
+                                                        لایحه
+                                                    </MudNavLink>
+                                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DriveFileRenameOutline"  IconColor = "@_iconColor">
+                                                        درخواست تجدید نظر خواهی 
+                                                    </MudNavLink>
+                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DonutLarge" IconColor = "@_iconColor" >
+                                                       درخواست اعمال ماده ۲۳ 
+                                                    </MudNavLink>
+                                                      <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EscalatorWarning" IconColor = "@_iconColor" >
+                                                        ثبت وکالت نامه 
+                                                    </MudNavLink>
+                                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DoorSliding"  IconColor = "@_iconColor">
+                                                        درخواست رسیدگی مجدد  
+                                                    </MudNavLink>
+                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Custom.Uncategorized.FolderOpen" IconColor = "@_iconColor" >
+                                                     پیگیری پرونده 
+                                                    </MudNavLink>
+                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EmojiPeople" IconColor = "@_iconColor" >
+                                                     ثبت اعتراض  
+                                                    </MudNavLink>
+                                 }
+        
+                </MudNavMenu>
+            </MudDrawer>
+            <MudMainContent > @*Class="@_Mode" > *@
+                @Body
+            </MudMainContent>
+        </MudLayout>
 
 </MudRTLProvider>
 
 @code {
-    private MudTheme _theme = Theme135.DefaultTheme;
-    private bool _isDarkMode = false;
+    [Parameter]
+    public  bool _isDarkMode { set; get; } = true;
 
+    public static MudBlazor.Color _iconColor = Color.Success;
+    public static string _style ="height:100px;background-color:#181c1c";
+    public static string _class ="Circle_night";
+    public static bool DarkMode = true;
+    private MudTheme _theme = Theme135.DefaultTheme;
+
+    private bool _Day = false;
+    private bool _Night = true;
+
+    public string _Mode =  "Mud-Main-Content-night";
+    public EventCallback OnDarkModeToggle { get; set; }
     bool _drawerOpen = true;
 
+    void showlogin()
+    {
+       var options = new DialogOptions { CloseOnEscapeKey = true };
+        DialogService.Show<Login>("Simple Dialog", options);
+    }
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
     }
+    public void onDarkMode()
+    {
+        _isDarkMode = !_isDarkMode;
+        DarkMode = _isDarkMode;
+        if(  _isDarkMode )
+        {
+            _iconColor = Color.Success;
+            _style ="height:100px;background-color:#181c1c";
+            _class ="Circle_night";
+        }
+        else
+        {
+            _iconColor = Color.Info;
+            _style ="height:100px;background-color:#ede3e3";
+            _class ="Circle";
+        }
+             _navigationManager.NavigateTo("/FrmNoticeMain");
+             _navigationManager.NavigateTo("/");
+             StateHasChanged();
+
+
+    }
+
+private ThemeManagerTheme _themeManager = new ThemeManagerTheme();
+public bool _themeManagerOpen = false;
+
+void OpenThemeManager(bool value)
+{
+    _themeManagerOpen = value;
+}
+
+void UpdateTheme(ThemeManagerTheme value)
+{
+    _themeManager = value;
+    StateHasChanged();
+}
+
+protected override void OnInitialized()
+{
+    StateHasChanged();
+}
+
+    
 }
 
 

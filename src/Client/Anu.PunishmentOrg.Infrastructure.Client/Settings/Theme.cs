@@ -20,7 +20,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
             {
                 FontFamily = new[] { "Shabnam" },
                 FontSize = "6rem",
-                FontWeight = 300,
+                FontWeight = 400,
                 LineHeight = 1.167,
                 LetterSpacing = "-.01562em"
             },
@@ -28,7 +28,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
             {
                  FontFamily = new[] { "Shabnam" },
                 FontSize = "3.75rem",
-                FontWeight = 300,
+                FontWeight = 400,
                 LineHeight = 1.2,
                 LetterSpacing = "-.00833em"
             },
@@ -59,8 +59,8 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
             H6 = new H6()
             {
                 FontFamily = new[] { "Shabnam" },
-                FontSize = "1.25rem",
-                FontWeight = 400,
+                FontSize = "5.25rem",
+                FontWeight = 600,
                 LineHeight = 1.6,
                 LetterSpacing = ".0075em"
             },
@@ -115,11 +115,15 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
         {
             Palette = new Palette()
             {
-                Primary = "#1E88E5",
+                Primary = " #2596be",
+                Secondary = Colors.Green.Accent1,
                 AppbarBackground = "#1E88E5",
                 Background = Colors.Grey.Lighten5,
-                DrawerBackground = "#FFF",
-                DrawerText = "rgba(0,0,0, 0.7)",
+
+                //TextPrimary = "rgba(0,0,0, 0.70)",
+                //TextSecondary = "rgba(0,0,0, 0.50)",
+                //DrawerBackground = "#FFF",
+                //DrawerText = "rgba(0,0,0, 0.7)",
                 Success = "#007E33"
             },
             Typography = DefaultTypography,
@@ -129,8 +133,9 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
         public static MudTheme DarkTheme = new MudTheme()
         {
             Palette = new Palette()
-            {
-                Primary = "#1E88E5",
+            { 
+               Primary=" #2596be",
+                Secondary = Colors.Green.Accent1,
                 Success = "#007E33",
                 Black = "#27272f",
                 Background = "#32333d",
@@ -150,5 +155,20 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
             Typography = DefaultTypography,
             LayoutProperties = DefaultLayoutProperties
         };
+    }
+
+    public class ButtonStyle
+    {
+        public string Height { get; set; }
+
+        public string Width { get; set; }
+
+        public string FontSize { get; set; }
+
+        public string ForegroundColor { get; set; }
+
+        public string BackgroundColor { get; set; }
+
+        public string Content { get; set; }
     }
 }
