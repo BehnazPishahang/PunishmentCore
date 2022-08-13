@@ -25,10 +25,21 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            var responseMessage = new Anu.Commons.ServiceModel.ServiceResponse.ResponseMessage()
+            var responseMessage = new Anu.Commons.ServiceModel.ServiceResponse.ResponseMessage();
+            var result = new Commons.ServiceModel.ServiceResponse.Result();
+
+            try
             {
-                Result = ((AnuExceptions)exception).result
-            };
+                result = ((AnuExceptions)exception).result;
+            }
+            catch (Exception innerException)
+            {
+                result = new Commons.ServiceModel.ServiceResponse.Result() { Code = -1, Message = "خطای غیر منتظره", Description = "unhandledexception" + innerException.Message };
+            }
+            finally
+            {
+                responseMessage.Result = result;
+            }
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)System.Net.HttpStatusCode.InternalServerError;

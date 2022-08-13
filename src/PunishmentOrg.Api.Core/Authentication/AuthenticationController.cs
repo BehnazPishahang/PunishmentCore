@@ -63,22 +63,22 @@ namespace Anu.PunishmentOrg.Api.Authentication
         {
             //try
             //{
-                if (request == null)
-                {
-                    return new AuthResult() { AccessToken = "", RefreshToken = "", Result = new Result() { Code = -1, Message = "invalid login request" } };
-                }
+            if (request == null)
+            {
+                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = new Result() { Code = -1, Message = "invalid login request" } };
+            }
 
-                request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
-                //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
-                //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
-                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsync(request.UserName, request.PassWord);
-                theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
+            //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
+            var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsync(request.UserName, request.PassWord);
+            theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-                var jwtToken = GenerateJwtToken(theGFESUser);
+            var jwtToken = GenerateJwtToken(theGFESUser);
 
-                return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
+            return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
             //}
             //catch (AnuExceptions ex)
             //{
