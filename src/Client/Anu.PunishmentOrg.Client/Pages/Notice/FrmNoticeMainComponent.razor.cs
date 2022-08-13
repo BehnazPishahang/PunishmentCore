@@ -18,10 +18,23 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
     public string NationalCode { get; set; }
         public object OnNoticeSearch { get; private set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override   void OnInitialized ()
         {
-            
-            Elements = NoticeService.getPNoticeList(NationalCode);
+
+            //Elements = NoticeService.getPNoticeList(NationalCode);
+
+            IList<PNoticeContract> getPNoticeList = new List<PNoticeContract> ();
+            PNoticeContract notice = new PNoticeContract();
+            notice.NoticeDate = "1400/01/001";
+            notice.NoticePersonName = "ali";
+            notice.NoticePersonFamily = "nemati";
+            notice.CreateDateTime = "1400/01/001";
+
+            getPNoticeList.Add(notice);
+            getPNoticeList.Add(notice);
+            getPNoticeList.Add(notice);
+            Elements = getPNoticeList;
+            //return await  ;
         }
 
     }
