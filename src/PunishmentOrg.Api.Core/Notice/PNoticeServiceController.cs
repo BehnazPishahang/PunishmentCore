@@ -1,6 +1,10 @@
 ﻿
 using Anu.Commons.ServiceModel.ServicePaging;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using Anu.Constants.ServiceModel.PunishmentOrg;
+using Anu.PunishmentOrg.Api.Authentication;
+using Anu.PunishmentOrg.DataAccess.Notice;
+using Anu.PunishmentOrg.Domain.Notice;
 using Anu.PunishmentOrg.ServiceModel.Notice;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +37,7 @@ namespace Anu.PunishmentOrg.Api.Notice
 
                 request.PNoticePersonContract.NationalityCode.Null(PNoticeResult.NationalCodeIs_Required);
 
-                var pNotice = await _unitOfWork.PNotice.GetAllPNoticeByNationalCode(request.PNoticePersonContract.NationalityCode.ToString(),request.Page);
+                var pNotice = await _unitOfWork.Repositorey<PNoticeRepository>().GetAllPNoticeByNationalCode(request.PNoticePersonContract.NationalityCode.ToString(),request.Page);
 
                 pNotice.Null(PNoticeResult.PNotice_NotFound);
 

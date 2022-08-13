@@ -19,6 +19,7 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         Error = -10001,
         UserName_Or_PassWord_Is_Not_Valid = -10002,
         UserName_Or_PassWord_Is_Not_Entered = -10003,
-        PropertyOrderNotFound = -10004
+        PropertyOrderNotFound = -10004,
+        JwtTokenIsNotValid = -10005
     }
 }

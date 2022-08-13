@@ -97,6 +97,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to توکن شما معتبر نیست..
+        /// </summary>
+        public static string JwtTokenIsNotValid {
+            get {
+                return ResourceManager.GetString("JwtTokenIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کد ملی را وارد کنید..
         /// </summary>
         public static string NationalCodeIs_Required {
