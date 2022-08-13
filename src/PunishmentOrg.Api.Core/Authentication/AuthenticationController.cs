@@ -61,8 +61,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public async Task<AuthResult> Login([FromBody] UserLoginRequestDto request)
         {
-            try
-            {
+            //try
+            //{
                 if (request == null)
                 {
                     return new AuthResult() { AccessToken = "", RefreshToken = "", Result = new Result() { Code = -1, Message = "invalid login request" } };
@@ -79,12 +79,11 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 var jwtToken = GenerateJwtToken(theGFESUser);
 
                 return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
-            }
-            catch (AnuExceptions ex)
-            {
-                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = ex.result };
-            }
-
+            //}
+            //catch (AnuExceptions ex)
+            //{
+            //    return new AuthResult() { AccessToken = "", RefreshToken = "", Result = ex.result };
+            //}
         }
 
         private string GenerateJwtToken(GFESUser theGFESUser)

@@ -120,5 +120,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseMiddleware<Anu.PunishmentOrg.Api.Authentication.ErrorHandlingMiddleware>(); 
 
 app.Run();
