@@ -16,6 +16,9 @@ namespace Anu.Commons.ServiceModel.ServicePaging
     public interface IPage
     {
         public int TotallPage { get; set; }
+
+        public int TotalResult { get; set; }
+
         public int RowCountPerPage { get; set; }
         public int PageNumber { get; set; }
         public OrderPage OrderPage { get; set; }
@@ -41,6 +44,7 @@ namespace Anu.Commons.ServiceModel.ServicePaging
         public Page()
         {
             this.TotallPage = 0;
+            this.TotalResult = 0;
             this.RowCountPerPage = 10;
             this.PageNumber = 1;
             this.OrderPage = new OrderPage();
@@ -48,6 +52,7 @@ namespace Anu.Commons.ServiceModel.ServicePaging
 
 
         public int TotallPage { get; set; }
+        public int TotalResult { get; set; }
         public int RowCountPerPage { get; set; } = 10;
         public int PageNumber { get; set; } = 1;
         public OrderPage OrderPage { get; set; }

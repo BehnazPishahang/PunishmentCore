@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace Anu.PunishmentOrg.Client.Pages.Notice
 {
-    public partial class FrmNoticeMainComponent
+    public partial class FrmNoticeMainComponent2
     {
-        private IEnumerable<PNoticeContract> Elements;
+        
 
         private void HandleNoticeSearch(string nationalcode)
         {
@@ -18,11 +18,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
     public string NationalCode { get; set; }
         public object OnNoticeSearch { get; private set; }
 
-        protected override async Task OnInitializedAsync()
-        {
-            string ncode = SharedInfo.NationalCode;
-            Elements = NoticeService.getPNoticeList(ncode);
-        }
+      
 
     }
 }

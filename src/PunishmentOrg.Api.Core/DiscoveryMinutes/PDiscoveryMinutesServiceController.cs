@@ -2,8 +2,15 @@
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
+using Anu.PunishmentOrg.Api.Authentication;
+using Anu.PunishmentOrg.DataAccess.DiscoveryMinutes;
+using Anu.PunishmentOrg.DataAccess.PCase;
+using Anu.PunishmentOrg.DataAccess.Terminate;
 using Anu.PunishmentOrg.DataModel.Case;
 using Anu.PunishmentOrg.DataModel.DiscoveryMinutes;
+using Anu.PunishmentOrg.Domain.Case;
+using Anu.PunishmentOrg.Domain.DiscoveryMinutes;
+using Anu.PunishmentOrg.Domain.Terminate;
 using Anu.PunishmentOrg.Enumerations;
 using Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
@@ -26,16 +33,17 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
             _unitOfWork = unitOfWork;
         }
 
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.SendPDiscoveryMinute)]
         public override async Task<PDiscoveryMinutesStateResponse> SendPDiscoveryMinutesState([FromBody] PDiscoveryMinutesStateRequest request)
         {
             try
             {
-                await LoginValidation.ValidateLoginAsync(request.Request, Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgConstants.GFESUserAccessType.SendPDiscoveryMinute, _unitOfWork);
+                //await LoginValidation.ValidateLoginAsync(request.Request, Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgConstants.GFESUserAccessType.SendPDiscoveryMinute, _unitOfWork);
 
                 request.ThePDiscoveryMinutesInputContract.UniqueNo.NullOrWhiteSpace(PDiscoveryMinutesResult.Error_UniqueNo_Is_Required, "یکتای صورتجلسه کشف");
                 request.ThePDiscoveryMinutesInputContract.UniqueNo.IsDigit(PDiscoveryMinutesResult.Error_UniqueNo_Is_Required, args: "یکتای صورتجلسه کشف");
 
-                var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.ThePDiscoveryMinutesInputContract.UniqueNo);
+                var pDiscoveryMinutes = await _unitOfWork.Repositorey<PDiscoveryMinutesRepository>().GetPDiscoveryMinutesByUniqueNo(request.ThePDiscoveryMinutesInputContract.UniqueNo);
                 pDiscoveryMinutes.Null(PDiscoveryMinutesResult.PDiscoveryMinuteSate_No_Is_NotValid);
                 pDiscoveryMinutes.TheObjectState.Null(PDiscoveryMinutesResult.Error_to_Find_State, "صورتجلسه کشف");
 
@@ -116,11 +124,11 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
             Revision.Add("015");
 
 
-            var pCaseCollection = await _unitOfWork.PCase.GetPCaseByNo(pDiscoveryMinutes.ThePCase.No);
+            var pCaseCollection = await _unitOfWork.Repositorey<PCaseRepository>().GetPCaseByNo(pDiscoveryMinutes.ThePCase.No);
 
             #region وقت رسیدگی
 
-            var thePRegistaryTimeCaseCollection = await _unitOfWork.PRegistaryTimeCase.GetPRegistaryTimeCaseByNo(
+            var thePRegistaryTimeCaseCollection = await _unitOfWork.Repositorey<PRegistaryTimeCaseRepository>().GetPRegistaryTimeCaseByNo(
                 pDiscoveryMinutes.ThePCase.No, PURegisterTimeType.Disposition);
 
 
@@ -163,7 +171,7 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
             #endregion اجرای احکام
 
             #region بررسی اینکه رای صادر شده یا نه
-            var thePJudgmentCase = await _unitOfWork.PJudgmentCase.GetPJudgmentCaseByObjectID(pDiscoveryMinutes.ThePCase.SourceObjectId);
+            var thePJudgmentCase = await _unitOfWork.Repositorey<PJudgmentCaseRepository> ().GetPJudgmentCaseByObjectID(pDiscoveryMinutes.ThePCase.SourceObjectId);
 
             if (thePJudgmentCase.Count() != 0)
             {

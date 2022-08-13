@@ -1,6 +1,5 @@
 ﻿@page "/FrmNoticeMain"
 @page "/FrmNoticeMain/{NAtionalCode:bool}"
-@*<FrmNoticeSearchComponent OnNoticeSearch="HandleNoticeSearch"> </FrmNoticeSearchComponent>*@
 
 @using Anu.PunishmentOrg.ServiceModel.Notice
 
@@ -16,10 +15,40 @@ else
  }
 
 
+@if (Elements is null)
+{
+    <p><em>Loading... !</em></p>
+}
+else
+{
+     @* <table class="table">
+            <thead>
+                <tr>
+                    <th>  زمان ثبت </th>
+                    <th> شماره</th>
+                    <th>  تاريخ ابلاغ </th>
+                    <th>  نام  ابلاغ شونده</th>
+                    <th>  نام خانوادگي ابلاغ شوند</th>
+                </tr>
+            </thead>
+        <tbody>
+            @foreach(var emp in Elements)
+                {
+                    <tr>
+               
+                        <td>@emp.CreateDateTime</td>
+                         <td>@emp.No</td>
+                         <td>@emp.NoticeDate</td
+                         <td>@emp.NoticePersonName</td>
+                        <td>@emp.NoticePersonFamily</td>
+                
+                    </tr>
+                }
+        </tbody>
+    </table>*@
 
 
-
-  <MudDataGrid Items="@Elements.Take(5)"  Hover="true" Dense="true" Striped="true" Bordered="true" SortMode="SortMode.Multiple" Filterable="true"
+  <MudDataGrid Items="@Elements.Take(20)"  Hover="true" Dense="true" Striped="true" Bordered="true" SortMode="SortMode.Multiple" Filterable="true"
     >
     <Columns>
         <Column T="PNoticeContract" Field="CreateDateTime" Title="زمان ثبت" />
@@ -27,6 +56,7 @@ else
         <Column T="PNoticeContract" Field="NoticeDate"   Title="تاريخ ابلاغ " />
         <Column T="PNoticeContract" Field="NoticePersonName"   Title="نام  ابلاغ شونده " />
         <Column T="PNoticeContract" Field="NoticePersonFamily" Title="نام خانوادگي ابلاغ شوند" />
+      
     </Columns>
 </MudDataGrid>
 

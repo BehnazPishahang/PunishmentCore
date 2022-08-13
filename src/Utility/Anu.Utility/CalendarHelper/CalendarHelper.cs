@@ -54,6 +54,14 @@ namespace Utility.CalendarHelper
 
         public static DateTime ToDateTime(this string dateTime)
         {
+            if (dateTime.Contains("0000/00/00"))
+            {
+                dateTime = "1300/01/01 00:01";
+            }
+            if (dateTime.Contains("9999/99/99"))
+            {
+                dateTime = "1500/01/01 23:59";
+            }
             return DateTime.Parse(dateTime);
         }
 

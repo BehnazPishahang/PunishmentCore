@@ -45,6 +45,7 @@ namespace Anu.Utility.Pagination
                 }
                 page.TotallPage = a;
             }
+            page.TotalResult = countAll;
             return page;
         }
 
