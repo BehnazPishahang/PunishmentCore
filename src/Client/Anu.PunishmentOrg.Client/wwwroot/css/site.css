@@ -88,8 +88,12 @@ svg {
 }
 /**/
 .mud-thememanager-button {
-    right: 97% !important;
-    left: 0 !important;
+    right: 91% !important;
+    /*left: 0 !important;*/
+    top: 12 !important;
+    background-color: inherit !important;
+    box-shadow: inherit !important;
+    position: static !important;  
 }
 .dashboard_items {
     font-size: large !important;
