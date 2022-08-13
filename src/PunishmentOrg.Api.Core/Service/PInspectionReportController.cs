@@ -12,6 +12,13 @@ using static Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgObjectState;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Utility;
 using Anu.PunishmentOrg.Enumerations;
+using Anu.PunishmentOrg.Domain.InspectionReport;
+using Anu.PunishmentOrg.Domain.Case;
+using Anu.PunishmentOrg.Domain.Terminate;
+using Anu.PunishmentOrg.DataAccess.InspectionReport;
+using Anu.PunishmentOrg.DataAccess.PCase;
+using Anu.PunishmentOrg.DataAccess.Terminate;
+using Anu.PunishmentOrg.Api.Authentication;
 
 namespace Anu.PunishmentOrg.Service
 {
@@ -20,17 +27,17 @@ namespace Anu.PunishmentOrg.Service
         public PInspectionReportController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
-
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.SendPInspectionReportServices)]
         public override async Task<SendPInspectionReportStateResponse> SendPInspectionReportState([FromBody] SendPInspectionReportStateRequest request)
         {
             try
             {
-                await LoginValidation.ValidateLoginAsync(request.Request, Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgConstants.GFESUserAccessType.SendPInspectionReportServices, _unitOfWork);
+                //await LoginValidation.ValidateLoginAsync(request.Request, Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgConstants.GFESUserAccessType.SendPInspectionReportServices, _unitOfWork);
 
                 request.UniqueNo.NullOrWhiteSpace(PInspectionReportResult.Error_UniqueNo_Is_Required, "مکانیزه گزارش بازرسی");
                 request.UniqueNo.IsDigit(PInspectionReportResult.Error_UniqueNo_Is_Required, args: "مکانیزه گزارش بازرسی");
                 
-                var thePInspectionReport = await _unitOfWork.PInspectionReport.GetPInspectionReportByUniqueNo(request.UniqueNo);
+                var thePInspectionReport = await _unitOfWork.Repositorey<PInspectionReportRepository>().GetPInspectionReportByUniqueNo(request.UniqueNo);
                 thePInspectionReport.Null(PInspectionReportResult.PInspectionReport_No_Is_NotValid);
                 thePInspectionReport.TheObjectState.Null(PInspectionReportResult.Error_to_Find_State, "گزارش بازرسی");
 
@@ -129,11 +136,11 @@ namespace Anu.PunishmentOrg.Service
             Revision.Add("014");
             Revision.Add("015");
 
-            var pCaseCollection = await _unitOfWork.PCase.GetPCaseByNo(thePInspectionReport.ThePCase.No);
+            var pCaseCollection = await _unitOfWork.Repositorey<PCaseRepository>().GetPCaseByNo(thePInspectionReport.ThePCase.No);
 
             #region وقت رسیدگی
 
-            var thePRegistaryTimeCaseCollection = await _unitOfWork.PRegistaryTimeCase.GetPRegistaryTimeCaseByNo(thePInspectionReport.ThePCase.No, PURegisterTimeType.Disposition);
+            var thePRegistaryTimeCaseCollection = await _unitOfWork.Repositorey<IPRegistaryTimeCaseRepository> ().GetPRegistaryTimeCaseByNo(thePInspectionReport.ThePCase.No, PURegisterTimeType.Disposition);
 
             if (thePRegistaryTimeCaseCollection.Count() != 0)
             {
@@ -174,7 +181,7 @@ namespace Anu.PunishmentOrg.Service
             #endregion اجرای احکام
 
             #region بررسی اینکه رای صادر شده یا نه
-            var thePJudgmentCase = await _unitOfWork.PJudgmentCase.GetPJudgmentCaseByObjectID(thePInspectionReport.ThePCase.SourceObjectId);
+            var thePJudgmentCase = await _unitOfWork.Repositorey<PJudgmentCaseRepository>().GetPJudgmentCaseByObjectID(thePInspectionReport.ThePCase.SourceObjectId);
             if (thePJudgmentCase.Count() != 0)
             {
                 sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_PJudgment.GetResult();

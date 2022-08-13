@@ -15,9 +15,9 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
                 .Include(a => a.TheGFESUser)
                 .Include(a => a.TheGFESUserAccessType)
                 .Where(a =>
-                    a.TheGFESUser.UserID == userName.Trim() &&
-                    a.TheGFESUser.Password == hashedPassword &&
-                    a.TheGFESUserAccessType.Id == GFESUserAccessType
+                    a.TheGFESUser.UserID == userName.Trim() 
+                    && a.TheGFESUser.Password == hashedPassword 
+                    //&& a.TheGFESUserAccessType.Id == GFESUserAccessType
                     ).ToListAsync();
 
             return gfeUser.Where(a => 
