@@ -1,6 +1,5 @@
 ﻿
 using Anu.PunishmentOrg.ServiceModel.Gravamen;
-using Anu.PunishmentOrg.ServiceModel.Gravamen;
 
 namespace Anu.PunishmentOrg.Api.Gravamen
 {
@@ -11,7 +10,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
     }
         [Microsoft.AspNetCore.Mvc.HttpPost]
             [Microsoft.AspNetCore.Mvc.Route("api/v1/[controller]/[action]")]
-        public abstract PGravamenServiceResponse RecieveGravamen([Microsoft.AspNetCore.Mvc.FromBody]PGravamenServiceRequest request);
+        public abstract Task<PGravamenServiceResponse> RecieveGravamen([Microsoft.AspNetCore.Mvc.FromBody]PGravamenServiceRequest request);
 
     }
     }

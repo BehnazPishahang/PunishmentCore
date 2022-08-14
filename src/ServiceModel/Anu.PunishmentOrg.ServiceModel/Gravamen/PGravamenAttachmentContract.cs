@@ -1,10 +1,10 @@
 ﻿
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
-    [System.ComponentModel.DisplayName("ورودی سرویس شکوائیه")]
-    public class PGravamenServiceRequest
+    [System.ComponentModel.DisplayName("پیوست شکوائیه/گزارش مردمی در سرویس")]
+    public class PGravamenAttachmentContract
     {
-        public PGravamenServiceRequest()
+        public PGravamenAttachmentContract()
         {
         }
             

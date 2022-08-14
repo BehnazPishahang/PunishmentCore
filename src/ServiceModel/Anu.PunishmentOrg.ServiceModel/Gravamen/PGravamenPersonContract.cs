@@ -7,58 +7,103 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         public PGravamenPersonContract()
         {
         }
+            
+            [System.ComponentModel.DisplayName("نشاني")]
+        public string? Address { get; set; }
 
-        [System.ComponentModel.DisplayName("نشانی")]
-        public virtual string? Address { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("تاريخ تولد/ثبت")]
+        public string? BirthDate { get; set; }
 
-        [System.ComponentModel.DisplayName("تاریخ تولد/ثبت")]
-        public virtual string? BirthDate { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("نام خانوادگي")]
+        public string? Family { get; set; }
 
-        [System.ComponentModel.DisplayName("نام خانوادگی")]
-        public virtual string? Family { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("نام پدر")]
+        public string? FatherName { get; set; }
 
-        [System.ComponentModel.DisplayName("نام پدر")]
-        public virtual string? FatherName { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName(" رديف")]
+        public string? Id { get; set; }
 
-        [System.ComponentModel.DisplayName("شماره شناسنامه/شماره ثبت")]
-        public virtual string? IdentityNumber { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("شماره شناسنامه/شماره ثبت")]
+        public string? IdentityNumber { get; set; }
 
-        [System.ComponentModel.DisplayName("تلفن همراه")]
-        public virtual string? MobileNumber { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("تلفن همراه")]
+        public string? MobilNumber { get; set; }
 
-        [System.ComponentModel.DisplayName("نام")]
-        public virtual string? Name { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("نام")]
+        public string? Name { get; set; }
 
-        [System.ComponentModel.DisplayName("شماره ملی/شناسه ملی")]
-        public virtual string? NationalCode { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("شماره ملي/شناسه ملي")]
+        public string? NationalCode { get; set; }
 
-        [System.ComponentModel.DisplayName("تابعیت")]
-        public virtual Anu.BaseInfo.Enumerations.LNationality? Nationality { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("تابعيت")]
+        public Anu.BaseInfo.Enumerations.LNationality? Nationality { get; set; }
 
-        [System.ComponentModel.DisplayName("رمز شخص")]
-        public virtual string? PersonPassword { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("رمز شخص")]
+        public string? PersonPassword { get; set; }
 
-        [System.ComponentModel.DisplayName("سمت شخص در شروع دادرسی")]
-        public virtual Anu.PunishmentOrg.Enumerations.PUPersonStartPost? PersonStartPost { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("سمت شخص در شروع دادرسي")]
+        public Anu.PunishmentOrg.Enumerations.PUPersonStartPost? PersonStartPost { get; set; }
 
-        [System.ComponentModel.DisplayName("نوع شص")]
-        public virtual Anu.BaseInfo.Enumerations.PersonType? PersonType { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("نوع شخص")]
+        public Anu.BaseInfo.Enumerations.PersonType? PersonType { get; set; }
 
-        [System.ComponentModel.DisplayName("کد پستی")]
-        public virtual string? PostCode { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("کد پستي")]
+        public string? PostCode { get; set; }
 
-        [System.ComponentModel.DisplayName("شماره ترتیب")]
-        public virtual long? RowNumber { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("شماره ترتيب")]
+        public long? RowNumber { get; set; }
 
-        [System.ComponentModel.DisplayName("جنسیت")]
-        public virtual Anu.BaseInfo.Enumerations.SexType? Sex { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("جنسيت")]
+        public Anu.BaseInfo.Enumerations.SexType? Sex { get; set; }
 
-        [System.ComponentModel.DisplayName("شکوائیه/گزارش مردمی")]
-        public virtual Anu.PunishmentOrg.DataModel.Gravamen.PGravamen? ThePGravamen { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("شکوائیه/گزارش مردمی در سرویس")]
+        public Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenContract? ThePGravamenContract { get; set; }
 
-        [System.ComponentModel.DisplayName("نام واحد صنفی مربوطه")]
-        public virtual string? TradeUnitName { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("نام واحد صنفي مربوطه")]
+        public string? TradeUnitName { get; set; }
 
+            
 
     }
-}
+    }

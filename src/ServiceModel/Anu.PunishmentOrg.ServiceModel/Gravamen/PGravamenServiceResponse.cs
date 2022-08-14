@@ -7,7 +7,6 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
     public class PGravamenServiceResponse : IResponseMessage
     {
         public Result Result { get; set; }
-
         public PGravamenServiceResponse()
         {
             Result = new Result();
