@@ -141,6 +141,18 @@
     <value>کد ملی را وارد کنید.</value>
     <comment>-50001</comment>
   </data>
+  <data name="NationalCode_Is_Not_Valid" xml:space="preserve">
+    <value>لطفا کد ملی را صحیح وارد نمایید.</value>
+    <comment>-10006</comment>
+  </data>
+  <data name="NationalCode_Length_Is_Not_Valid" xml:space="preserve">
+    <value>طول کد ملی باید ده کاراکتر باشد.</value>
+    <comment>-10007</comment>
+  </data>
+  <data name="NationalCode_Must_Be_Number" xml:space="preserve">
+    <value>کد ملی تشکیل شده از ده رقم عددی می‌باشد؛ لطفا کد ملی را صحیح وارد نمایید.</value>
+    <comment>-10008</comment>
+  </data>
   <data name="PBillStore_Duplicate_Bill" xml:space="preserve">
     <value>شماره قبض تکراری است و امروز قابل ثبت نیست</value>
     <comment>-30001</comment>
@@ -184,6 +196,14 @@
   <data name="PDiscoveryMinuteSate_Start" xml:space="preserve">
     <value>شروع شده</value>
     <comment>200012</comment>
+  </data>
+  <data name="PhoneNumber_Is_Not_Entered" xml:space="preserve">
+    <value>تلفن همراه را وارد کنید.</value>
+    <comment>-10009</comment>
+  </data>
+  <data name="PhoneNumber_Is_Not_Valid" xml:space="preserve">
+    <value>تلفن همراه معتبر نمی باشد.</value>
+    <comment>-100010</comment>
   </data>
   <data name="PInspectionReport_Drafted" xml:space="preserve">
     <value>پيش نويس</value>
@@ -272,5 +292,9 @@
   <data name="UserName_Or_PassWord_Is_Not_Valid" xml:space="preserve">
     <value>با نام کاربری و کلمه عبور ارسالی هیچ دسترسی برای سرویس جاری یافت نشد</value>
     <comment>-10002</comment>
+  </data>
+  <data name="User_Is_Exist" xml:space="preserve">
+    <value>کاربر وجود دارد.</value>
+    <comment>-100011</comment>
   </data>
 </root>

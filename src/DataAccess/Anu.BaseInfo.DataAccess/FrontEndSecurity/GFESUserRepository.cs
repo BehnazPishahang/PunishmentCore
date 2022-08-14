@@ -15,6 +15,20 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
             string passWordHash = MD5Core.GetHashString(passWord);
 
             var theGFESUser = await _context.Set<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUser>()
+                                      .Where(user =>
+                                             user.UserID == userName.Trim()
+                                          && user.Password == passWordHash
+                                           )
+                                      .Select(user => user)
+                                      .SingleAsync();
+            return theGFESUser;
+        }
+
+        public async Task<GFESUser> GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(string userName, string passWord)
+        {
+            string passWordHash = MD5Core.GetHashString(passWord);
+
+            var theGFESUser = await _context.Set<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUser>()
                                       .Include(user => user.TheGFESUserAccessList)
                                       .ThenInclude(userAccess => userAccess.TheGFESUserAccessType)
                                       .Where(user =>
@@ -24,7 +38,7 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
                                       .Select(user => user)
                                       .SingleAsync();
 
-            var result =  theGFESUser.TheGFESUserAccessList
+            var result = theGFESUser.TheGFESUserAccessList
                                      .Where(userAccess =>
                                             userAccess.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.DateTimeNow() &&
                                             userAccess.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.DateTimeNow() &&

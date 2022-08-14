@@ -85,9 +85,9 @@ namespace Anu.PunishmentOrg.Api.BillStore
                 var pDiscoveryMinutes = await _unitOfWork.Repositorey<PDiscoveryMinutesRepository>().GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
                 pBillStore.ThePDiscoveryMinutes = (pDiscoveryMinutes is null) ? null : pDiscoveryMinutes;
 
-                pBillStore.TheObjectState = _unitOfWork.Repositorey<ObjectStateRepository>().GetById(PunishmentOrgObjectState.PBillStore.Confirm);
+                pBillStore.TheObjectState = await _unitOfWork.Repositorey<ObjectStateRepository>().GetById(PunishmentOrgObjectState.PBillStore.Confirm);
 
-                pBillStore.TheDiscoveryOrg = GetDiscoveryOrganization(request.CodingDeviceDetector);
+                pBillStore.TheDiscoveryOrg = await GetDiscoveryOrganization(request.CodingDeviceDetector);
                 pBillStore.id_shenaseResid = request.TrackingCodeStores;
 
 
@@ -200,7 +200,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
             return isDuplicate;
         }
 
-        private PBExchangeUnit GetDiscoveryOrganization(string organizationCode)
+        private async Task<PBExchangeUnit> GetDiscoveryOrganization(string organizationCode)
         {
             string organizationId = string.Empty;
 
@@ -259,7 +259,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
                     break;
 
             }
-            return _unitOfWork.Repositorey<PBExchangeUnitRepository>().GetById(organizationId);
+            return await _unitOfWork.Repositorey<PBExchangeUnitRepository>().GetById(organizationId);
         }
 
 

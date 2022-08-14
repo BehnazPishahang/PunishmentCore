@@ -15,6 +15,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Utility;
+using Utility.CalendarHelper;
 using Utility.Exceptions;
 using Utility.Guard;
 
@@ -25,6 +26,18 @@ namespace Anu.PunishmentOrg.Api.Authentication
     }
 
     public class UserLoginRequestDto
+    {
+        [System.ComponentModel.DataAnnotations.Required]
+        public string? UserName { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string? PassWord { get; set; }
+
+        //[System.ComponentModel.DataAnnotations.Required]
+        //public string? PhoneNumber { get; set; }
+    }
+
+    public class UserRegisterRequestDto
     {
         [System.ComponentModel.DataAnnotations.Required]
         public string? UserName { get; set; }
@@ -63,10 +76,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
         {
             try
             {
-                if (request == null)
-                {
-                    return new AuthResult() { AccessToken = "", RefreshToken = "", Result = new Result() { Code = -1, Message = "invalid login request" } };
-                }
+                request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
                 request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
                 request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
@@ -83,6 +93,71 @@ namespace Anu.PunishmentOrg.Api.Authentication
             catch (AnuExceptions ex)
             {
                 return new AuthResult() { AccessToken = "", RefreshToken = "", Result = ex.result };
+            }
+
+        }
+
+        [Route("Register")]
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public async Task<AuthResult> Register([FromBody] UserRegisterRequestDto request)
+        {
+            try
+            {
+                request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+                request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+                request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+                request.PhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
+
+                request.UserName.IsValidNationalCode();
+                request.PhoneNumber.IsValidPhone();
+
+                if (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Exist(a=>a.UserID==request.UserName))
+                {
+                    return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.User_Is_Exist.GetResult() };
+                }
+
+                string passWordHash = MD5Core.GetHashString(request.PassWord);
+
+                var user = new GFESUser()
+                {
+                    Id = System.Guid.NewGuid().ToString("N"),
+                    UserID = request.UserName,
+                    Password = passWordHash,
+                    MobileNumber4SMS = request.PhoneNumber,
+                    NationalityCode = request.UserName,
+                    StartDate = CalendarHelper.GetCurrentDateTime(),
+                    EndDate = CalendarHelper.MaxDateTime(),
+                    Family = "a",
+                    FatherName = "b",
+                    LastChangePassword = CalendarHelper.GetCurrentDateTime(),
+                    Name = "c",
+                    Sex = BaseInfo.Enumerations.SexType.None
+                };
+
+                await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Add(user);
+                
+                if (_unitOfWork.Complete()<0)
+                {
+                    return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.Error.GetResult()};
+                }
+
+
+                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsync(request.UserName, request.PassWord);
+                theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+                var jwtToken = GenerateJwtToken(theGFESUser);
+
+                return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
+            }
+            catch (AnuExceptions ex)
+            {
+                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = ex.result };
+            }
+            catch (Exception ex)
+            {
+                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.Error.GetResult(ex) };
             }
 
         }
@@ -118,7 +193,11 @@ namespace Anu.PunishmentOrg.Api.Authentication
         private string GetPermissions(GFESUser theGFESUser)
         {
             //return ";All;";
-            var theGFESUserAccessTypeCodes = string.Join(';',theGFESUser.TheGFESUserAccessList.Select(x => x.TheGFESUserAccessType.Code));
+            if (theGFESUser.TheGFESUserAccessList==null)
+            {
+                return ";All;";
+            }
+            var theGFESUserAccessTypeCodes = string.Join(';', theGFESUser.TheGFESUserAccessList.Select(x => x.TheGFESUserAccessType.Code));
             return theGFESUserAccessTypeCodes;
         }
     }
