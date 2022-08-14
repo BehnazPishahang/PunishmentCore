@@ -20,6 +20,12 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         UserName_Or_PassWord_Is_Not_Valid = -10002,
         UserName_Or_PassWord_Is_Not_Entered = -10003,
         PropertyOrderNotFound = -10004,
-        JwtTokenIsNotValid = -10005
+        JwtTokenIsNotValid = -10005,
+        NationalCode_Is_Not_Valid = -10006,
+        NationalCode_Length_Is_Not_Valid = -10007,
+        NationalCode_Must_Be_Number = -10008,
+        PhoneNumber_Is_Not_Entered = -10009,
+        PhoneNumber_Is_Not_Valid = -100010,
+        User_Is_Exist = -100011
     }
 }

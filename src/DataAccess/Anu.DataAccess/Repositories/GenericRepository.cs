@@ -9,31 +9,36 @@ namespace Anu.DataAccess.Repositories
         {
             _context = context;
         }
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
             _context.Set<T>().Add(entity);
         }
-        public void AddRange(IEnumerable<T> entities)
+        public async Task AddRange(IEnumerable<T> entities)
         {
             _context.Set<T>().AddRange(entities);
         }
-        public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
+        public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> expression)
         {
             return _context.Set<T>().Where(expression);
         }
-        public IEnumerable<T> GetAll()
+        
+        public async Task<bool> Exist(Expression<Func<T, bool>> expression)
+        {
+            return _context.Set<T>().Any(expression);
+        }
+        public async Task<IEnumerable<T>> GetAll()
         {
             return _context.Set<T>().ToList();
         }
-        public T GetById(string id)
+        public async Task<T> GetById(string id)
         {
             return _context.Set<T>().Find(id);
         }
-        public void Remove(T entity)
+        public async Task Remove(T entity)
         {
             _context.Set<T>().Remove(entity);
         }
-        public void RemoveRange(IEnumerable<T> entities)
+        public async Task RemoveRange(IEnumerable<T> entities)
         {
             _context.Set<T>().RemoveRange(entities);
         }
