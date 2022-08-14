@@ -7,34 +7,50 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         public PGravamenViolationContract()
         {
         }
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName(" رديف")]
+        public string? Id { get; set; }
 
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("شماره ترتيب")]
+        public long? RowNumber { get; set; }
 
-        [System.ComponentModel.DisplayName("شماره ترتیب")]
-        public virtual long? RowNumber { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("عنوان موضوع")]
+        public string? SubjectTitle { get; set; }
 
-        [System.ComponentModel.DisplayName("عنوان موضوع")]
-        public virtual string? SubjectTitle { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("شکوائیه/گزارش مردمی در سرویس")]
+        public Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenContract? ThePGravamenContract { get; set; }
 
-        [System.ComponentModel.DisplayName("نشانی جغرافیایی محل وقوع/کشف تخلف")]
-        public virtual Anu.BaseInfo.DataModel.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("نشاني محل وقوع/کشف تخلف")]
+        public string? ViolationAddress { get; set; }
 
-        [System.ComponentModel.DisplayName("نوع تخلف/اتهام/خواسته")]
-        public virtual Anu.PunishmentOrg.DataModel.BaseInfo.PBViolationType? ThePBViolationType { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("تاريخ وقوع تخلف")]
+        public string? ViolationDate { get; set; }
 
-        [System.ComponentModel.DisplayName("شکوائیه/گزارش مردمی")]
-        public virtual Anu.PunishmentOrg.DataModel.Gravamen.PGravamen? ThePGravamen { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("توضيحات")]
+        public string? ViolationDesc { get; set; }
 
-        [System.ComponentModel.DisplayName("نشانی محل وقوع/کشف تخلف")]
-        public virtual string? ViolationAddress { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("ارزش مالي تخلف")]
+        public long? ViolationPrice { get; set; }
 
-        [System.ComponentModel.DisplayName("تاریخ وقوع تخلف")]
-        public virtual string? ViolationDate { get; set; }
-
-        [System.ComponentModel.DisplayName("توضیحات")]
-        public virtual string? ViolationDesc { get; set; }
-
-        [System.ComponentModel.DisplayName("ارزش مالی تخلف")]
-        public virtual long? ViolationPrice { get; set; }
+            
 
     }
-}
+    }

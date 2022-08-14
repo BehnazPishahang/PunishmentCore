@@ -6,51 +6,95 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
     {
         public PGravamenContract()
         {
+        ThePGravamenAttachmentContractList = new List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenAttachmentContract>();
+
+        ThePGravamenPersonContractList = new List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenPersonContract>();
+
+        ThePGravamenViolationContractList = new List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenViolationContract>();
 
         }
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("زمان ثبت")]
+        public string? CreateDateTime { get; set; }
 
-        [System.ComponentModel.DisplayName("متن آخرین ابلاغیه در مورد شکوائیه")]
-        public virtual string? NoticeText { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("شماره پيگيري")]
+        public string? FollowUpNo { get; set; }
 
-        [System.ComponentModel.DisplayName("شرح شکوائیه")]
-        public virtual string? PetitionDescription { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("شکوائيه/گزارش مردمي")]
+        public Anu.PunishmentOrg.Enumerations.GravamenOrReport? GravamenOrReport { get; set; }
 
-        [System.ComponentModel.DisplayName("مدارک و مستندات")]
-        public virtual string? PetitionReasons { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("نحوه اخذ اطلاعات")]
+        public Anu.PunishmentOrg.Enumerations.PU135OrWebSite? HowDataType { get; set; }
 
-        [System.ComponentModel.DisplayName("موضوع شکایت")]
-        public virtual string? PetitionSubject { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("متن آخرين ابلاغيه در مورد شکوائيه")]
+        public string? NoticeText { get; set; }
 
-        [System.ComponentModel.DisplayName("علت رد/نقض شکوائیه")]
-        public virtual string? RejectReasonText { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("شرح شکوائيه")]
+        public string? PetitionDescription { get; set; }
 
-        [System.ComponentModel.DisplayName("نام خانوادگی گزارش دهنده")]
-        public virtual string? ReporterFamily { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("مدارک و مستندات")]
+        public string? PetitionReasons { get; set; }
 
-        [System.ComponentModel.DisplayName("تلفن همراه گزارش دهنده")]
-        public virtual string? ReporterMobilNumber { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("موضوع شکايت")]
+        public string? PetitionSubject { get; set; }
 
-        [System.ComponentModel.DisplayName("نام گزارش دهنده")]
-        public virtual string? ReporterName { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("علت رد/نقص شکوائيه")]
+        public string? RejectReasonText { get; set; }
 
-        //public virtual Anu.BaseInfo.DataModel.SystemObject.ObjectState? TheObjectState { get; set; }
-        [System.ComponentModel.DisplayName("پرونده سازمان تعزیرات")]
-        public virtual Anu.PunishmentOrg.DataModel.Case.PCase? ThePCase { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("نام خانوادگي گزارش دهنده در گزارش مردمي")]
+        public string? ReporterFamily { get; set; }
 
-        [System.ComponentModel.DisplayName("پیوست شکوائیه/گزارش مردمی")]
-        public virtual List<Anu.PunishmentOrg.DataModel.Gravamen.PGravamenAttachment>? ThePGravamenAttachmentList { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("تلفن همراه گزارش دهنده در گزارش مردمي")]
+        public string? ReporterMobilNumber { get; set; }
 
-        [System.ComponentModel.DisplayName("شخص شکوائیه/گزارش مردمی")]
-        public virtual List<Anu.PunishmentOrg.DataModel.Gravamen.PGravamenPerson>? ThePGravamenPersonList { get; set; }
+            
+            
+            [System.ComponentModel.DisplayName("نام گزارش دهنده در گزارش مردمي")]
+        public string? ReporterName { get; set; }
 
-        [System.ComponentModel.DisplayName("تخلفات شکوائیه/گزارش مردمی")]
-        public virtual List<Anu.PunishmentOrg.DataModel.Gravamen.PGravamenViolation>? ThePGravamenViolationList { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("پیوست شکوائیه/گزارش مردمی در سرویس")]
+        public List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenAttachmentContract>? ThePGravamenAttachmentContractList { get; set; }
 
-        [System.ComponentModel.DisplayName("واحد تعزیرات دریافت کننده اولیه شکوائ")]
-        public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheReceiveUnit { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("شخص شکوائیه/گزارش مردمی در سرویس")]
+        public List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenPersonContract>? ThePGravamenPersonContractList { get; set; }
 
-        [System.ComponentModel.DisplayName("شعبه ارجاع شونده")]
-        public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheReferUnit { get; set; }
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("تخلفات شکوائیه/گزارش مردمی در سرویس")]
+        public List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenViolationContract>? ThePGravamenViolationContractList { get; set; }
+
+            
 
     }
-}
+    }
