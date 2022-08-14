@@ -17,10 +17,17 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
             var theGFESUser = await _context.Set<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUser>()
                                       .Where(user =>
                                              user.UserID == userName.Trim()
-                                          && user.Password == passWordHash
                                            )
                                       .Select(user => user)
                                       .SingleAsync();
+
+            if (theGFESUser == null) return null;
+
+            if (theGFESUser.Password != passWordHash)
+            {
+                return null;
+            }
+
             return theGFESUser;
         }
 
@@ -33,10 +40,16 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
                                       .ThenInclude(userAccess => userAccess.TheGFESUserAccessType)
                                       .Where(user =>
                                              user.UserID == userName.Trim()
-                                          && user.Password == passWordHash
                                            )
                                       .Select(user => user)
                                       .SingleAsync();
+            
+            if (theGFESUser == null) return null;
+
+            if (theGFESUser.Password != passWordHash)
+            {
+                return null;
+            }
 
             var result = theGFESUser.TheGFESUserAccessList
                                      .Where(userAccess =>
@@ -45,7 +58,7 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
                                             userAccess.ToDateTime.ToDateTime() >= CalendarHelper.DateTimeNow() &&
                                             userAccess.FromDateTime.ToDateTime() <= CalendarHelper.DateTimeNow())
                                      .Select(s => s.TheGFESUser)
-                                     .First();
+                                     .FirstOrDefault();
 
             return result;
         }

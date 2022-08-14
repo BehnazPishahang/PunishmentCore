@@ -83,7 +83,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
                 //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
                 //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
-                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsync(request.UserName, request.PassWord);
+                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.PassWord);
                 theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
                 var jwtToken = GenerateJwtToken(theGFESUser);
