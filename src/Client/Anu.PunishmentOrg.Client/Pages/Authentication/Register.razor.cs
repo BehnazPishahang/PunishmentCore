@@ -1,4 +1,7 @@
-﻿using Anu.PunishmentOrg.Client.Infrastructure.Login;
+﻿using Anu.Commons.ServiceModel.ServiceLogin;
+using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using Anu.PunishmentOrg.Client.Infrastructure.Login;
+using Anu.PunishmentOrg.Client.Infrastructure.Notice;
 using Blazored.FluentValidation;
 using MudBlazor;
 
@@ -8,24 +11,22 @@ namespace Anu.PunishmentOrg.Client.Pages.Authentication
     {
         private FluentValidationValidator _fluentValidationValidator;
         private bool Validated = true; // => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-        private RegisterRequest _registerUserModel = new();
-
+        private UserRegisterRequest _registerUserModel = new();
+        private string errorMessage = string.Empty;
         private async Task SubmitAsync()
         {
-            //var response = await _userManager.RegisterUserAsync(_registerUserModel);
-            //if (response.Succeeded)
-            //{
-            //    _snackBar.Add(response.Messages[0], Severity.Success);
-            //    _navigationManager.NavigateTo("/login");
-            //    _registerUserModel = new RegisterRequest();
-            //}
-            //else
-            //{
-            //    foreach (var message in response.Messages)
-            //    {
-            //        _snackBar.Add(message, Severity.Error);
-            //    }
-            //}
+            AuthResult result = AuthorizationService.RegisterUser(_registerUserModel);
+
+            if (result.Result.Code == (int)AnuResult.Successful)
+            {
+                SharedInfo.NationalCode = _registerUserModel.UserName;
+                _navigationManager.NavigateTo("/true");
+                errorMessage = "";
+            }
+            else
+            {
+                errorMessage = result.Result.Message;
+            }
         }
 
         private bool _passwordVisibility;
