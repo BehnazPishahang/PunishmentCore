@@ -62,7 +62,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
             H6 = new H6()
             {
                 FontFamily = new[] { "Shabnam" },
-                FontSize = "5.25rem",
+                FontSize = "1.25rem",
                 FontWeight = 600,
                 LineHeight = 1.6,
                 LetterSpacing = ".0075em"

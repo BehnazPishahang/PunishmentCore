@@ -130,4 +130,11 @@ svg {
 /*.mud-layout {
     background-color: white !important;
 }*/
- 
+.mud-table-cell{
+
+    border: 1px solid !important;
+}
+.mud-table-head {
+    background: #939380 !important ;
+}
+}
