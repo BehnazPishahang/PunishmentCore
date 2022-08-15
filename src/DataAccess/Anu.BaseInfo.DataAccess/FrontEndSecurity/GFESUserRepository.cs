@@ -15,25 +15,56 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
             string passWordHash = MD5Core.GetHashString(passWord);
 
             var theGFESUser = await _context.Set<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUser>()
+                                      .Where(user =>
+                                             user.UserID == userName.Trim()
+                                           )
+                                      .Select(user => user)
+                                      .SingleOrDefaultAsync();
+
+            if (theGFESUser == null) return null;
+
+            if (theGFESUser.Password != passWordHash)
+            {
+                return null;
+            }
+
+            return theGFESUser;
+        }
+
+        public async Task<GFESUser> GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(string userName, string passWord)
+        {
+            string passWordHash = MD5Core.GetHashString(passWord);
+
+            var theGFESUser = await _context.Set<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUser>()
                                       .Include(user => user.TheGFESUserAccessList)
                                       .ThenInclude(userAccess => userAccess.TheGFESUserAccessType)
                                       .Where(user =>
                                              user.UserID == userName.Trim()
-                                          && user.Password == passWordHash
                                            )
                                       .Select(user => user)
-                                      .SingleAsync();
+                                      .SingleOrDefaultAsync();
 
-            var result =  theGFESUser.TheGFESUserAccessList
-                                     .Where(userAccess =>
-                                            userAccess.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.DateTimeNow() &&
-                                            userAccess.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.DateTimeNow() &&
-                                            userAccess.ToDateTime.ToDateTime() >= CalendarHelper.DateTimeNow() &&
-                                            userAccess.FromDateTime.ToDateTime() <= CalendarHelper.DateTimeNow())
-                                     .Select(s => s.TheGFESUser)
-                                     .First();
+            if (theGFESUser == null) return null;
 
-            return result;
+            if (theGFESUser.Password != passWordHash)
+            {
+                return null;
+            }
+
+            if (theGFESUser.TheGFESUserAccessList != null && theGFESUser.TheGFESUserAccessList.Count()>0)
+            {
+                return theGFESUser.TheGFESUserAccessList
+                                         .Where(userAccess =>
+                                                userAccess.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.DateTimeNow() &&
+                                                userAccess.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.DateTimeNow() &&
+                                                userAccess.ToDateTime.ToDateTime() >= CalendarHelper.DateTimeNow() &&
+                                                userAccess.FromDateTime.ToDateTime() <= CalendarHelper.DateTimeNow())
+                                         .Select(s => s.TheGFESUser)
+                                         .FirstOrDefault();
+            }
+
+
+            return theGFESUser;
         }
     }
 }
