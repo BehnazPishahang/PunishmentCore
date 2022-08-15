@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
     public  static class NoticeService
     {
 
-      static string Baseurl = "http://192.168.1.14:94/";
+      static string Baseurl = "http://192.168.1.62:83/";
 
       static string ServiceAdderss = "api/v2/BillStore/InqueryPNoticeList";
         public static IEnumerable<PNoticeContract> getPNoticeList(string nationalCode)
