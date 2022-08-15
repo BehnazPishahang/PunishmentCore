@@ -15,7 +15,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
     public  static class AuthorizationService
     {
 
-       static string BaseUrl = "http://192.168.1.14:94/";
+       static string BaseUrl = "http://192.168.1.62:83/";
 
         static string RegisterAddress = "api/v1/Register";
         static string LoginAddress = "api/v1/Login";
