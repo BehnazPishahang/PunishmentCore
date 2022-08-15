@@ -3,6 +3,7 @@ using Anu.BaseInfo.DataModel.ExchangeData;
 using Anu.BaseInfo.DataModel.FrontEndSecurity;
 using Anu.BaseInfo.DataModel.SystemObject;
 using Anu.BaseInfo.Domain.FrontEndSecurity;
+using Anu.Commons.ServiceModel.ServiceLogin;
 using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.DataAccess;
@@ -21,43 +22,6 @@ using Utility.Guard;
 
 namespace Anu.PunishmentOrg.Api.Authentication
 {
-    public class User
-    {
-    }
-
-    public class UserLoginRequestDto
-    {
-        [System.ComponentModel.DataAnnotations.Required]
-        public string? UserName { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Required]
-        public string? PassWord { get; set; }
-
-        //[System.ComponentModel.DataAnnotations.Required]
-        //public string? PhoneNumber { get; set; }
-    }
-
-    public class UserRegisterRequestDto
-    {
-        [System.ComponentModel.DataAnnotations.Required]
-        public string? UserName { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Required]
-        public string? PassWord { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Required]
-        public string? PhoneNumber { get; set; }
-    }
-
-    public class AuthResult : IResponseMessage
-    {
-        public string? AccessToken { get; set; }
-
-        public string? RefreshToken { get; set; }
-
-        public Result Result { get; set; }
-    }
-
     public class AuthenticationController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -69,10 +33,10 @@ namespace Anu.PunishmentOrg.Api.Authentication
             _unitOfWork = unitOfWork;
         }
 
-        [Route("Login")]
+        [Route("api/v1/Login")]
         [HttpPost]
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<AuthResult> Login([FromBody] UserLoginRequestDto request)
+        public async Task<AuthResult> Login([FromBody] UserLoginRequest request)
         {
             try
             {
@@ -97,10 +61,10 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         }
 
-        [Route("Register")]
+        [Route("api/v1/Register")]
         [HttpPost]
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<AuthResult> Register([FromBody] UserRegisterRequestDto request)
+        public async Task<AuthResult> Register([FromBody] UserRegisterRequest request)
         {
             try
             {
@@ -144,7 +108,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 }
 
 
-                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsync(request.UserName, request.PassWord);
+                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.PassWord);
                 theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
             var jwtToken = GenerateJwtToken(theGFESUser);
