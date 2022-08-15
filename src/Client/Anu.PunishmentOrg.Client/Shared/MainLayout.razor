@@ -4,10 +4,9 @@
 @inject IDialogService DialogService
 
 <MudRTLProvider RightToLeft="true">
-@*    
-*@        <MudThemeProvider Theme="_themeManager.Theme" @bind-IsDarkMode="@_isDarkMode" />
+        <MudThemeProvider Theme="_theme" @bind-IsDarkMode="@_isDarkMode" />
     
-                       <MudDrawer @bind-Open="_drawerOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation" Style="padding: 1vw"></MudDrawer>
+          <MudDrawer @bind-Open="_drawerOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation" Style="padding: 1vw"></MudDrawer>
 
         <MudDialogProvider
                 FullWidth="true"
@@ -22,24 +21,24 @@
 
         <MudLayout  >
             
-            <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme"  />
-
+           
+           @* <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit"OnClick="@((e) => OpenThemeManager(true))" />*@
             <MudAppBar Elevation="1">
                  
-              <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="@_iconColor" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+              <MudIconButton Icon="@_menuIcons" Color="@Theme135._iconColor" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
                  @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
                      
               <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
-                    <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="@_iconColor" />
-                    <MudText Typo="Typo.h5" Class="mr-3" Color="@_iconColor">  فناوران اطلاعات آنو    </MudText>
+                    <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="@Theme135._LogoColor" />
+                    <MudText Typo="Typo.h5" Class="mr-3" Color="@Theme135._LogoColor">  فناوران اطلاعات آنو    </MudText>
                 <MudSpacer />
        
-              <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="@_iconColor" @onclick="onDarkMode" />
-  
-               @* <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="@_iconColor" Edge="Edge.End" />*@
+              <MudIconButton Icon="@_dayNightIcons" Color="@Theme135._iconColor" @onclick="onDarkMode" />
+              <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme"  />
+               
              <MudMenu Direction="Direction.Right" OffsetX="true" Dense="true" Class="mt-1 ml-4">
                 <ActivatorContent>
-                        <MudAvatar Color="@_iconColor">ورود</MudAvatar>
+                        <MudAvatar Color="@Theme135._iconColor">ورود</MudAvatar>
                 </ActivatorContent>
 
                 <ChildContent  >
@@ -52,60 +51,60 @@
             </MudAppBar>
             <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
                    @* <NavMenu />*@
-                    <MudNavMenu Color="@_iconColor">
+                    <MudNavMenu Color="@Theme135._iconColor">
                            @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
                             {
                                 <MudNavMenu Color="Color.Primary">
-                                <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  Color="@_iconColor"> کارتابل </MudNavLink>
+                                <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor="@Theme135._iconColor"> کارتابل </MudNavLink>
  
     
-                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall" Color="@_iconColor">
+                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall" IconColor="@Theme135._iconColor">
                                              ثبت شکایت 
                                         </MudNavLink>
-                                          <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments" Color="@_iconColor">
+                                          <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments" IconColor="@Theme135._iconColor">
                                              پرداخت وجه 
                                         </MudNavLink>
                             </MudNavMenu>
                             }
                             else
                                {
-                                    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor = "@_iconColor"  > کارتابل </MudNavLink>
+                                    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor = "@Theme135._iconColor"  > کارتابل </MudNavLink>
      
-                                              <MudNavLink id="FrmNoticeMain" Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch"   IconColor = "@_iconColor" >
+                                              <MudNavLink id="FrmNoticeMain" Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch"   IconColor = "@Theme135._iconColor" >
                                                         جستجوی ابلاغ
                                                     </MudNavLink>
-                                                    <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall"  IconColor = "@_iconColor" >
+                                                    <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall"  IconColor = "@Theme135._iconColor" >
                                                          ثبت شکایت 
                                                     </MudNavLink>
-                                                      <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments"  IconColor="@_iconColor"  >
+                                                      <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.Payments"  IconColor="@Theme135._iconColor"  >
                                                          پرداخت وجه 
                                                     </MudNavLink>
-                                                    <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.DocumentScanner"  IconColor = "@_iconColor"  >
+                                                    <MudNavLink Href="/isConstracting" Icon="@Icons.Material.Filled.DocumentScanner"  IconColor = "@Theme135._iconColor"  >
                                                         لایحه
                                                     </MudNavLink>
-                                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DriveFileRenameOutline"  IconColor = "@_iconColor">
+                                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DriveFileRenameOutline"  IconColor = "@Theme135._iconColor">
                                                         درخواست تجدید نظر خواهی 
                                                     </MudNavLink>
-                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DonutLarge" IconColor = "@_iconColor" >
+                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DonutLarge" IconColor = "@Theme135._iconColor" >
                                                        درخواست اعمال ماده ۲۳ 
                                                     </MudNavLink>
-                                                      <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EscalatorWarning" IconColor = "@_iconColor" >
+                                                      <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EscalatorWarning" IconColor = "@Theme135._iconColor" >
                                                         ثبت وکالت نامه 
                                                     </MudNavLink>
-                                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DoorSliding"  IconColor = "@_iconColor">
+                                                        <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.DoorSliding"  IconColor = "@Theme135._iconColor">
                                                         درخواست رسیدگی مجدد  
                                                     </MudNavLink>
-                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Custom.Uncategorized.FolderOpen" IconColor = "@_iconColor" >
+                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Custom.Uncategorized.FolderOpen" IconColor = "@Theme135._iconColor" >
                                                      پیگیری پرونده 
                                                     </MudNavLink>
-                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EmojiPeople" IconColor = "@_iconColor" >
+                                                     <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.EmojiPeople" IconColor = "@Theme135._iconColor" >
                                                      ثبت اعتراض  
                                                     </MudNavLink>
                                  }
         
                 </MudNavMenu>
             </MudDrawer>
-            <MudMainContent > @*Class="@_Mode" > *@
+            <MudMainContent >  
                 @Body
             </MudMainContent>
         </MudLayout>
@@ -114,49 +113,65 @@
 
 @code {
     [Parameter]
-    public  bool _isDarkMode { set; get; } = true;
+    public  bool _isDarkMode { set; get; } = false;
+    private static string _dayNightIcons = Icons.Material.Filled.DarkMode;
+    private static string _menuIcons = Icons.Material.Filled.MenuOpen;
 
-    public static MudBlazor.Color _iconColor = Color.Success;
-    public static string _style ="height:100px;background-color:#181c1c";
+    public static string _style ="height:100px;background-color:#ede3e3";
     public static string _class ="Circle_night";
     public static bool DarkMode = true;
     private MudTheme _theme = Theme135.DefaultTheme;
 
     private bool _Day = false;
     private bool _Night = true;
-
-    public string _Mode =  "Mud-Main-Content-night";
+ 
     public EventCallback OnDarkModeToggle { get; set; }
     bool _drawerOpen = true;
 
     void showlogin()
     {
-       var options = new DialogOptions { CloseOnEscapeKey = true };
+        var options = new DialogOptions { CloseOnEscapeKey = true };
         DialogService.Show<Login>("Simple Dialog", options);
     }
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
+        if(_drawerOpen)
+            _menuIcons = Icons.Material.Filled.MenuOpen;
+        else
+            _menuIcons = Icons.Material.Filled.Menu;
+
     }
     public void onDarkMode()
     {
-        _isDarkMode = !_isDarkMode;
-        DarkMode = _isDarkMode;
-        if(  _isDarkMode )
+    
+        if(! _isDarkMode )
         {
-            _iconColor = Color.Success;
+            Theme135._iconColor = Color.Success ;
+            Theme135._LogoColor = Color.Success;
+
             _style ="height:100px;background-color:#181c1c";
-            _class ="Circle_night";
+            _class ="Circle";
+            _dayNightIcons = Icons.Material.Filled.LightMode;
+
         }
         else
         {
-            _iconColor = Color.Info;
+            Theme135._iconColor = Color.Info;
+            Theme135._LogoColor = Color.Surface;
             _style ="height:100px;background-color:#ede3e3";
-            _class ="Circle";
+            _class ="Circle_night";
+            _dayNightIcons = Icons.Material.Filled.DarkMode;
         }
-             _navigationManager.NavigateTo("/FrmNoticeMain");
-             _navigationManager.NavigateTo("/");
-             StateHasChanged();
+
+        DarkMode = _isDarkMode;
+            _isDarkMode = !_isDarkMode;
+            
+        string[] uri =  _navigationManager.Uri.Split('/');
+        string CurrentPage = uri[uri.Length-1];
+        _navigationManager.NavigateTo("/DashboardPublic");
+        _navigationManager.NavigateTo("/"+CurrentPage);
+         StateHasChanged();
 
 
     }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataAccess.PBillStore;
 
-public class PBillStoreRepository : GenericRepository<DataModel.BillStore.PBillStore>, IPBillSoreRepository
+public class PBillStoreRepository : GenericRepository<DataModel.BillStore.PBillStore>, IPBillStoreRepository
 {
     public PBillStoreRepository(Anu.DataAccess.ApplicationDbContext context) : base(context)
     {

@@ -1,4 +1,6 @@
-﻿
+﻿@using Anu.Commons.ServiceModel.ServiceLogin
+@using Anu.PunishmentOrg.Client.Infrastructure.Notice
+
 <EditForm Model="@_tokenModel" >
       <MudDialog>
         <TitleContent> 
@@ -25,7 +27,7 @@
                         </MudItem>
                         <MudItem xs="12">
                             <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined"
-                                          @bind-Value="_tokenModel.NationalCode" For="@(() => _tokenModel.NationalCode)" />
+                                          @bind-Value="_tokenModel.UserName" For="@(() => _tokenModel.UserName)" />
                         </MudItem>
                         <MudItem xs="12">
                             <MudTextField Label="کلمه عبور" Variant="Variant.Outlined"
@@ -36,6 +38,11 @@
                       @*  <MudItem xs="12" Class="d-flex justify-center">
                             <MudButton  Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;"  >ورود </MudButton>
                         </MudItem>*@
+                        <MudItem xs="12">
+                            <div class="d-flex justify-center">
+                                <MudText Color="Color.Error">@errorMessage </MudText>
+                            </div>
+                        </MudItem>
                     </MudGrid>
  </DialogContent>
    <DialogActions>
@@ -54,11 +61,25 @@
 
 @code {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-
+    string errorMessage = "";
     void Submit()
     {
-        SharedInfo.NationalCode = _tokenModel.NationalCode;
-        _navigationManager.NavigateTo("/true");
+        AuthResult  result= AuthorizationService.LoginUser(_tokenModel);
+
+        if (result.Result.Code == 1000)
+        {
+            SharedInfo.NationalCode = _tokenModel.UserName;
+            _navigationManager.NavigateTo("/true");
+            errorMessage = "";
+        }
+        else
+        {
+            errorMessage = result.Result.Message;
+        }
+
+
      }
+
+
     void Cancel() => MudDialog.Cancel();
 }

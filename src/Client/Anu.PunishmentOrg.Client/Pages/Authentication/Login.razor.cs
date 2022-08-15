@@ -1,4 +1,5 @@
-﻿using Anu.PunishmentOrg.Client.Infrastructure.Login;
+﻿using Anu.Commons.ServiceModel.ServiceLogin;
+using Anu.PunishmentOrg.Client.Infrastructure.Login;
 using Blazored.FluentValidation;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
@@ -11,7 +12,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Authentication
     {
        
      //   private bool Validated => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
-        private TokenRequest _tokenModel = new();
+        private UserLoginRequest _tokenModel = new();
 
         private bool Validated = true;
 
@@ -34,7 +35,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Authentication
             //        _snackBar.Add(message, Severity.Error);
             //    }
             //}
-            _navigationManager.NavigateTo("/Dashboard");
+           // _navigationManager.NavigateTo("/Dashboard");
         }
 
         private  void onlogin()
@@ -47,7 +48,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Authentication
             //        _snackBar.Add(message, Severity.Error);
             //    }
             //}
-            _navigationManager.NavigateTo("/Dashboard");
+           // _navigationManager.NavigateTo("/Dashboard");
         }
         private bool _passwordVisibility;
         private InputType _passwordInput = InputType.Password;
@@ -71,13 +72,13 @@ namespace Anu.PunishmentOrg.Client.Pages.Authentication
 
         private void FillAdministratorCredentials()
         {
-            _tokenModel.NationalCode = "mukesh@blazorhero.com";
+            _tokenModel.UserName = "mukesh@blazorhero.com";
             _tokenModel.Password = "123Pa$$word!";
         }
 
         private void FillBasicUserCredentials()
         {
-            _tokenModel.NationalCode = "john@blazorhero.com";
+            _tokenModel.Password = "john@blazorhero.com";
             _tokenModel.Password = "123Pa$$word!";
         }
     }
