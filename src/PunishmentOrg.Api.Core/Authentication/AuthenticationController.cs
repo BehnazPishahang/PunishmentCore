@@ -43,11 +43,11 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
                 request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+                request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
                 //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
                 //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
-                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.PassWord);
+                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
                 theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
                 var jwtToken = GenerateJwtToken(theGFESUser);
@@ -71,7 +71,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
                 request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+                request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
                 request.PhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
 
                 request.UserName.IsValidNationalCode();
@@ -82,7 +82,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                     return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.User_Is_Exist.GetResult() };
                 }
 
-                string passWordHash = MD5Core.GetHashString(request.PassWord);
+                string passWordHash = MD5Core.GetHashString(request.Password);
 
                 var user = new GFESUser()
                 {
@@ -108,7 +108,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 }
 
 
-                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.PassWord);
+                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
                 theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
             var jwtToken = GenerateJwtToken(theGFESUser);
