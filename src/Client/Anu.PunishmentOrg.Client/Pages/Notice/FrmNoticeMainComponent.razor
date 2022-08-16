@@ -1,13 +1,17 @@
 ﻿@page "/FrmNoticeMain"
-@page "/FrmNoticeMain/{NAtionalCode:bool}"
+@page "/FrmNoticeMain/{NationalCode:bool}"
 
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice
 @using Anu.PunishmentOrg.ServiceModel.Notice
+
+@inject INoticeService _noticeService
+
+@inject AppConfiguration _appConfiguration;
+
 
 @if(Elements?.Count()>0)
 {
-  
         <MudChip>@Elements.Count()</MudChip>
-
 }
 else
 {
@@ -21,33 +25,7 @@ else
 }
 else
 {
-     @* <table class="table">
-            <thead>
-                <tr>
-                    <th>  زمان ثبت </th>
-                    <th> شماره</th>
-                    <th>  تاريخ ابلاغ </th>
-                    <th>  نام  ابلاغ شونده</th>
-                    <th>  نام خانوادگي ابلاغ شوند</th>
-                </tr>
-            </thead>
-        <tbody>
-            @foreach(var emp in Elements)
-                {
-                    <tr>
-               
-                        <td>@emp.CreateDateTime</td>
-                         <td>@emp.No</td>
-                         <td>@emp.NoticeDate</td
-                         <td>@emp.NoticePersonName</td>
-                        <td>@emp.NoticePersonFamily</td>
-                
-                    </tr>
-                }
-        </tbody>
-    </table>*@
-
-
+    
   <MudDataGrid Items="@Elements.Take(20)"  Hover="true" Dense="true" Striped="true" Bordered="true" SortMode="SortMode.Multiple" Filterable="true"
     >
     <Columns>

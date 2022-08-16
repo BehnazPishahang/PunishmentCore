@@ -1,7 +1,9 @@
 ﻿@page "/register"
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
 @layout MainLayout
 @attribute [AllowAnonymous]
-
+@inject AppConfiguration _appConfiguration;
+@inject IAnuAuthorizationService  anuAuthorizationService;
 <EditForm Model="@_registerUserModel" OnValidSubmit="SubmitAsync">
 @*    <FluentValidationValidator @ref="_fluentValidationValidator" />
 *@ 

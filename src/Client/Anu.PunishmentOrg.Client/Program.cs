@@ -1,14 +1,23 @@
+using Anu.PunishmentOrg.Client;
 using Anu.PunishmentOrg.Client.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Services;
+using System.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.ManageIOC(builder.Configuration);
 
+ 
+//AppConfiguration.Instance= builder.Configuration.GetSection(AppConfiguration.ConfigurationPosition).Get<AppConfiguration>();
+
+//builder.Services.Configure<AppConfiguration>(Configuration.GetSection(AppConfiguration.ConfigurationPosition));
+
+//builder.Services.Configure<AppConfiguration>(Configuration.GetSection("BackendSetting").Get<AppConfiguration>());
 
 
 builder.Services.AddHttpClient();

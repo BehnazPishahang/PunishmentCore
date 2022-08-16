@@ -1,24 +1,68 @@
-﻿using Anu.PunishmentOrg.Client.Infrastructure.Notice;
+﻿using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice;
+using Anu.PunishmentOrg.Client.Infrastructure.Notice;
 using Anu.PunishmentOrg.ServiceModel.Notice;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace Anu.PunishmentOrg.Client.Pages.Notice
 {
     public partial class FrmNoticeMainComponent2
     {
-        
+        private string _searchString;
+        private bool _sortNameByLength;
+        private List<string> _events = new();
+       
+        private IEnumerable<PNoticeContract> Elements;
 
-        private void HandleNoticeSearch(string nationalcode)
+
+     
+
+        // custom sort by name length
+        private Func<PNoticeContract, object> _sortBy => x =>
         {
-            Elements = NoticeService.getPNoticeList(nationalcode);
+            if (_sortNameByLength)
+                return x.CreateDateTime.Length;
+            else
+                return x.CreateDateTime;
+        };
+        // quick filter - filter gobally across multiple columns with the same input
+        private Func<PNoticeContract, bool> _quickFilter => x =>
+        {
+            if (string.IsNullOrWhiteSpace(_searchString))
+                return true;
+
+            if (x.CreateDateTime.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            if (x.No.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            if ($"{x.NoticeDate} {x.NoticePersonFamily} {x.NoticePersonName}".Contains(_searchString))
+                return true;
+
+            return false;
+        };
+
+        // events
+        void RowClicked(DataGridRowClickEventArgs<PNoticeContract> args)
+        {
+            _events.Insert(0, $"Event = RowClick, Index = {args.RowIndex}, Data = {System.Text.Json.JsonSerializer.Serialize(args.Item)}");
         }
-  
 
-    [Parameter]
-    public string NationalCode { get; set; }
-        public object OnNoticeSearch { get; private set; }
+        void SelectedItemsChanged(HashSet<PNoticeContract> items)
+        {
+            _events.Insert(0, $"Event = SelectedItemsChanged, Data = {System.Text.Json.JsonSerializer.Serialize(items)}");
+        }
 
-      
+        protected override async Task OnInitializedAsync()
+        {
+            string ncode = SharedInfo.NationalCode;
+            Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode);
+        }
 
     }
+
+
+
 }
+
