@@ -36,7 +36,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             }
             catch (Exception innerException)
             {
-                result = AnuResult.Error.GetResult(description: "unhandledexception" + exception.Message);
+                result = AnuResult.Error.GetResult(exception,description: "unhandledexception" + exception.Message);
             }
             finally
             {
