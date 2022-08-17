@@ -24,8 +24,8 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         public virtual Anu.BaseInfo.Enumerations.YesNo? IsSendByOuterOrg { get; set; }
 
         [Unicode(false)]
-        [Column("LETTERTEXT")]
-        public virtual string? LetterText { get; set; }
+        [Column("LETTERTEXT",TypeName ="blob")]
+        public virtual string LetterText { get; set; }
 
         [Unicode(false)]
         [Column("NO")]

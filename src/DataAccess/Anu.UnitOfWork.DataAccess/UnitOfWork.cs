@@ -28,7 +28,7 @@
         //public Anu.PunishmentOrg.Domain.Case.IPCaseRepository PCase { get; private set; }
         //public Anu.PunishmentOrg.Domain.Terminate.IPJudgmentCaseRepository PJudgmentCase { get; private set; }
         //public Anu.PunishmentOrg.Domain.BaseInfo.IPBExchangeUnitRepository PBExchangeUnit { get; private set; }
-
+        //
         //public PunishmentOrg.Domain.InspectionReport.IPInspectionReportRepository PInspectionReport { get; private set; }
         //public PunishmentOrg.Domain.Notice.IPNoticeRepository PNotice { get; private set; }
 
