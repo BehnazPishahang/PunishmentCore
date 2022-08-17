@@ -14,7 +14,16 @@ namespace Anu.DataAccess
         Anu.PunishmentOrg.Domain.BaseInfo.IPBExchangeUnitRepository PBExchangeUnit { get; }
         Anu.PunishmentOrg.Domain.InspectionReport.IPInspectionReportRepository PInspectionReport { get; }
         Anu.PunishmentOrg.Domain.Notice.IPNoticeRepository PNotice { get; }
-
+        Anu.BaseInfo.Domain.ExchangeData.IGMechanizedLetterTypeRepository GMechanizedLetterType { get; }
+        Anu.BaseInfo.Domain.ExchangeData.INAJAUnitRepository NAJAUnit { get; }
+        Anu.BaseInfo.Domain.SystemConfiguration.ICMSOrganizationRepository CMSOrganization { get; }
+        Anu.BaseInfo.Domain.SystemConfiguration.ICMSUserRoleTypeRepository CMSUserRoleType { get; }
+        Anu.BaseInfo.Domain.OrganizationChart.IUnitRepository Unit { get; }
+        Anu.BaseInfo.Domain.SystemObject.ISystemObjectRepository SystemObject { get; }
+        Anu.BaseInfo.Domain.SystemObject.ISystemFormRepository SystemForm { get; }
+        Anu.BaseInfo.Domain.MechanizedLetter.IGMechanizedLetterRepository GMechanizedLetter { get; }
+        Anu.BaseInfo.Domain.Security.IBaseRoleRepository BaseRole { get; }
+        Anu.BaseInfo.Domain.Security.ICMSUserRepository CMSUser { get; }
         int Complete();
     }
 }
