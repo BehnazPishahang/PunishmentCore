@@ -38,9 +38,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public async Task<AuthResult> Login([FromBody] UserLoginRequest request)
         {
-            try
-            {
-                request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
                 request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
                 request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
@@ -50,14 +49,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
                 theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-                var jwtToken = GenerateJwtToken(theGFESUser);
+            var jwtToken = GenerateJwtToken(theGFESUser);
 
-                return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
-            }
-            catch (AnuExceptions ex)
-            {
-                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = ex.result };
-            }
+            return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
 
         }
 
@@ -66,46 +60,44 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public async Task<AuthResult> Register([FromBody] UserRegisterRequest request)
         {
-            try
-            {
-                request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
                 request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
                 request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
                 request.PhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
 
-                request.UserName.IsValidNationalCode();
-                request.PhoneNumber.IsValidPhone();
+            request.UserName.IsValidNationalCode();
+            request.PhoneNumber.IsValidPhone();
 
-                if (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Exist(a=>a.UserID==request.UserName))
-                {
-                    return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.User_Is_Exist.GetResult() };
-                }
+            if (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Exist(a => a.UserID == request.UserName))
+            {
+                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.User_Is_Exist.GetResult() };
+            }
 
                 string passWordHash = MD5Core.GetHashString(request.Password);
 
-                var user = new GFESUser()
-                {
-                    Id = System.Guid.NewGuid().ToString("N"),
-                    UserID = request.UserName,
-                    Password = passWordHash,
-                    MobileNumber4SMS = request.PhoneNumber,
-                    NationalityCode = request.UserName,
-                    StartDate = CalendarHelper.GetCurrentDateTime(),
-                    EndDate = CalendarHelper.MaxDateTime(),
-                    Family = "a",
-                    FatherName = "b",
-                    LastChangePassword = CalendarHelper.GetCurrentDateTime(),
-                    Name = "c",
-                    Sex = BaseInfo.Enumerations.SexType.None
-                };
+            var user = new GFESUser()
+            {
+                Id = System.Guid.NewGuid().ToString("N"),
+                UserID = request.UserName,
+                Password = passWordHash,
+                MobileNumber4SMS = request.PhoneNumber,
+                NationalityCode = request.UserName,
+                StartDate = CalendarHelper.GetCurrentDateTime(),
+                EndDate = CalendarHelper.MaxDateTime(),
+                Family = "a",
+                FatherName = "b",
+                LastChangePassword = CalendarHelper.GetCurrentDateTime(),
+                Name = "c",
+                Sex = BaseInfo.Enumerations.SexType.None
+            };
 
-                await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Add(user);
-                
-                if (_unitOfWork.Complete()<0)
-                {
-                    return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.Error.GetResult()};
-                }
+            await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Add(user);
+
+            if (_unitOfWork.Complete() < 0)
+            {
+                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.Error.GetResult() };
+            }
 
 
                 var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
@@ -113,16 +105,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             var jwtToken = GenerateJwtToken(theGFESUser);
 
-                return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
-            }
-            catch (AnuExceptions ex)
-            {
-                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = ex.result };
-            }
-            catch (Exception ex)
-            {
-                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.Error.GetResult(ex) };
-            }
+            return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
+
 
         }
 
@@ -157,7 +141,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
         private string GetPermissions(GFESUser theGFESUser)
         {
             //return ";All;";
-            if (theGFESUser.TheGFESUserAccessList==null)
+            if (theGFESUser.TheGFESUserAccessList == null)
             {
                 return ";All;";
             }
