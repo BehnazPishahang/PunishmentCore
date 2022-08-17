@@ -1,74 +1,75 @@
-﻿using Anu.Commons.Validations;
+﻿
 using Anu.Constants.ServiceModel.PunishmentOrg;
-using Anu.DataAccess;
-using Anu.PunishmentOrg.ServiceBase;
-using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
-using Anu.PunishmentOrg.ServiceModel.ServiceRequest;
-using Anu.PunishmentOrg.ServiceModel.ServiceResponse;
-using Microsoft.AspNetCore.Mvc;
-using Utility.Exceptions;
-using Utility.Guard;
-using static Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgObjectState;
-using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
-using Utility;
-using Anu.PunishmentOrg.Enumerations;
-using Anu.PunishmentOrg.Domain.InspectionReport;
-using Anu.PunishmentOrg.Domain.Case;
-using Anu.PunishmentOrg.Domain.Terminate;
+using Anu.PunishmentOrg.Api.Authentication;
 using Anu.PunishmentOrg.DataAccess.InspectionReport;
 using Anu.PunishmentOrg.DataAccess.PCase;
 using Anu.PunishmentOrg.DataAccess.Terminate;
-using Anu.PunishmentOrg.Api.Authentication;
+using Anu.PunishmentOrg.Domain.Case;
+using Anu.PunishmentOrg.Enumerations;
+using Anu.PunishmentOrg.ServiceModel.InspectionReport;
+using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
+using Microsoft.AspNetCore.Mvc;
+using Utility;
+using Utility.Guard;
+using static Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgObjectState;
 
-namespace Anu.PunishmentOrg.Service
+namespace Anu.PunishmentOrg.Api.InspectionReport
 {
-    public class PInspectionReportController : PInspectionReportBase
+    public class PInspectionServiceController : PInspectionServiceControllerBase
     {
-        public PInspectionReportController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        #region Constructor
+        protected readonly Anu.DataAccess.IUnitOfWork _unitOfWork;
+        public PInspectionServiceController(Anu.DataAccess.IUnitOfWork unitOfWork)
         {
+
+            _unitOfWork = unitOfWork;
         }
+
+        #endregion Constructor
+
+        #region Properties
+        #endregion Properties
+
+        #region Overrides
         [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.SendPInspectionReportServices)]
-        public override async Task<SendPInspectionReportStateResponse> SendPInspectionReportState([FromBody] SendPInspectionReportStateRequest request)
+        public override async Task<PInspectionReportStateResponse> SendPInspectionReportState([FromBody] PInspectionReportStateRequest request)
         {
-            //await LoginValidation.ValidateLoginAsync(request.Request, Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgConstants.GFESUserAccessType.SendPInspectionReportServices, _unitOfWork);
+            request.ThePInspectionReportStateInputContract.UniqueNo.NullOrWhiteSpace(PInspectionReportResult.Error_UniqueNo_Is_Required, "مکانیزه گزارش بازرسی");
+            request.ThePInspectionReportStateInputContract.UniqueNo.IsDigit(PInspectionReportResult.Error_UniqueNo_Is_Required, args: "مکانیزه گزارش بازرسی");
 
-            request.UniqueNo.NullOrWhiteSpace(PInspectionReportResult.Error_UniqueNo_Is_Required, "مکانیزه گزارش بازرسی");
-            request.UniqueNo.IsDigit(PInspectionReportResult.Error_UniqueNo_Is_Required, args: "مکانیزه گزارش بازرسی");
-
-            var thePInspectionReport = await _unitOfWork.Repositorey<PInspectionReportRepository>().GetPInspectionReportByUniqueNo(request.UniqueNo);
+            var thePInspectionReport = await _unitOfWork.Repositorey<PInspectionReportRepository>().GetPInspectionReportByUniqueNo(request.ThePInspectionReportStateInputContract.ThePInspectionReportStateInputContract.UniqueNo);
             thePInspectionReport.Null(PInspectionReportResult.PInspectionReport_No_Is_NotValid);
             thePInspectionReport.TheObjectState.Null(PInspectionReportResult.Error_to_Find_State, "گزارش بازرسی");
 
 
-            var sendPInspectionReportStateResponse = new SendPInspectionReportStateResponse();
-            sendPInspectionReportStateResponse.UniqueNo = "-1";
-            sendPInspectionReportStateResponse.UserName = request.UserName;
+            var sendPInspectionReportStateResponse = new PInspectionReportStateResponse();
+            sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = "-1";
 
             switch (thePInspectionReport.TheObjectState.Code)
             {
                 case PInspectionReport.Drafted_old:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_Drafted_Old.GetResult();
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
                 case PInspectionReport.Refered_old:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_Refered_old.GetResult();
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
                 case PInspectionReport.Drafted:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_Drafted.GetResult();
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
                 case PInspectionReport.ReturndToRegistrar:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_Return_to_Registrar.GetResult();
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
                 case PInspectionReport.RegisteredToManagerConfirm:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_Registered_to_ManagerConfirm.GetResult();
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
                 case PInspectionReport.ReceivedFromSupportOrg:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_Received_From_SupportOrg.GetResult();
-                    sendPInspectionReportStateResponse.UniqueNo = thePInspectionReport.No;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = thePInspectionReport.No;
                     return sendPInspectionReportStateResponse;
                 case PInspectionReport.Expired:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_Expired.GetResult();
@@ -76,25 +77,25 @@ namespace Anu.PunishmentOrg.Service
                     //این فیلد فعلا دیده نشده است 
                     //ToDo
                     sendPInspectionReportStateResponse.Result.Description = "";
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
                 case PInspectionReport.ReturndToReferrer:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_Returnd_to_Referrer.GetResult();
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
                 case PInspectionReport.Referred:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_Referred.GetResult();
-                    sendPInspectionReportStateResponse.UnitNo = thePInspectionReport.TheReferUnit.Code;
-                    sendPInspectionReportStateResponse.UnitName = thePInspectionReport.TheReferUnit.UnitName;
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UnitNo = thePInspectionReport.TheReferUnit.Code;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UnitName = thePInspectionReport.TheReferUnit.UnitName;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
                 case PInspectionReport.ReferredToCity:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_Referred_To_City.GetResult();
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
                 case PInspectionReport.RegisterCase:
                     sendPInspectionReportStateResponse = await this.CaseStateOfPInspection(sendPInspectionReportStateResponse, thePInspectionReport);
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
                 case PInspectionReport.ReturndToSender:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_Returnd_To_Sender.GetResult();
@@ -102,18 +103,18 @@ namespace Anu.PunishmentOrg.Service
                     //این فیلد فعلا دیده نشده است 
                     //ToDo
                     sendPInspectionReportStateResponse.Result.Description = "";
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
                 default:
                     sendPInspectionReportStateResponse.Result = PInspectionReportResult.Error_to_Find_State.GetResult("گزارش بازرسی");
-                    sendPInspectionReportStateResponse.UniqueNo = request.UniqueNo;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = request.ThePInspectionReportStateInputContract.UniqueNo;
                     return sendPInspectionReportStateResponse;
             }
 
         }
 
 
-        private async Task<SendPInspectionReportStateResponse> CaseStateOfPInspection(SendPInspectionReportStateResponse sendPInspectionReportStateResponse, DataModel.InspectionReport.PInspectionReport thePInspectionReport)
+        private async Task<PInspectionReportStateResponse> CaseStateOfPInspection(PInspectionReportStateResponse sendPInspectionReportStateResponse, DataModel.InspectionReport.PInspectionReport thePInspectionReport)
         {
             List<string> Executive = new List<string>();
             Executive.Add("008");
@@ -136,7 +137,7 @@ namespace Anu.PunishmentOrg.Service
             {
                 var registerDateTimeItem = thePRegistaryTimeCaseCollection.ToList()[0];
 
-                sendPInspectionReportStateResponse.RegisterDate = registerDateTimeItem?.ThePRegistaryTime?.RegisterDate;
+                sendPInspectionReportStateResponse.ThePInspectionReportStateContract.RegisterDate = registerDateTimeItem?.ThePRegistaryTime?.RegisterDate;
             }
 
             #endregion وقت رسیدگی
@@ -161,10 +162,10 @@ namespace Anu.PunishmentOrg.Service
                     if (item.CaseArchiveState == PUCaseArchiveState.Active)
                         sendPInspectionReportStateResponse.Result.Description = "حکم صادر شده در حال اجرا است.";
                     if (RevisionHas)
-                        sendPInspectionReportStateResponse.RevisionRequest = "دارای تجدید نظر میباشد.";
-                    sendPInspectionReportStateResponse.UniqueNo = thePInspectionReport.No;
-                    sendPInspectionReportStateResponse.UnitName = thePInspectionReport.ThePCase.TheHandlerUnit.UnitName;
-                    sendPInspectionReportStateResponse.UnitNo = thePInspectionReport.ThePCase.TheHandlerUnit.Code;
+                        sendPInspectionReportStateResponse.ThePInspectionReportStateContract.RevisionRequest = "دارای تجدید نظر میباشد.";
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UniqueNo = thePInspectionReport.No;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UnitName = thePInspectionReport.ThePCase.TheHandlerUnit.UnitName;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UnitNo = thePInspectionReport.ThePCase.TheHandlerUnit.Code;
                     return sendPInspectionReportStateResponse;
                 }
             }
@@ -184,9 +185,9 @@ namespace Anu.PunishmentOrg.Service
                 #endregion Fiil_Judgment_Information
 
                 if (RevisionHas)
-                    sendPInspectionReportStateResponse.RevisionRequest = "دارای تجدید نظر میباشد.";
-                sendPInspectionReportStateResponse.UnitNo = thePInspectionReport.TheReferUnit.Code;
-                sendPInspectionReportStateResponse.UnitName = thePInspectionReport.TheReferUnit.UnitName;
+                    sendPInspectionReportStateResponse.ThePInspectionReportStateContract.RevisionRequest = "دارای تجدید نظر میباشد.";
+                sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UnitNo = thePInspectionReport.TheReferUnit.Code;
+                sendPInspectionReportStateResponse.ThePInspectionReportStateContract.UnitName = thePInspectionReport.TheReferUnit.UnitName;
                 return sendPInspectionReportStateResponse;
             }
             #endregion بررسی اینکه رای صادر شده یا نه
@@ -200,6 +201,9 @@ namespace Anu.PunishmentOrg.Service
             #endregion تشکیل پرونده و شروع به رسیدگی
 
         }
+        #endregion Overrides
 
+        #region Methods
+        #endregion Methods
     }
 }
