@@ -197,6 +197,18 @@
     <value>شروع شده</value>
     <comment>200012</comment>
   </data>
+  <data name="PGravamen_Field_IsNullOrInvalid" xml:space="preserve">
+    <value>فیلد {0} خالی یا نامعتبر است</value>
+    <comment>-60001</comment>
+  </data>
+  <data name="PGravamen_NecessaryPositions_AreNotAvailabe" xml:space="preserve">
+    <value>دو نقش اصلی (شاکی و متهم) در شکوائیه لحاظ نشده است</value>
+    <comment>-60003</comment>
+  </data>
+  <data name="PGravamen_Request_IsNullOrCorrupt" xml:space="preserve">
+    <value>درخواست ارسالی خالی یا نامعتبر است</value>
+    <comment>-60002</comment>
+  </data>
   <data name="PhoneNumber_Is_Not_Entered" xml:space="preserve">
     <value>تلفن همراه را وارد کنید.</value>
     <comment>-10009</comment>
@@ -296,5 +308,8 @@
   <data name="User_Is_Exist" xml:space="preserve">
     <value>کاربر وجود دارد.</value>
     <comment>-100011</comment>
+  </data>
+  <data name="کل من علیها fun" xml:space="preserve">
+    <value />
   </data>
 </root>
