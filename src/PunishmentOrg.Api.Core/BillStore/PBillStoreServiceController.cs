@@ -1,18 +1,9 @@
 ﻿
-using Anu.BaseInfo.DataAccess.SystemObject;
-using Anu.BaseInfo.Domain.SystemObject;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
-using Anu.PunishmentOrg.Api.Authentication;
-using Anu.PunishmentOrg.DataAccess.BaseInfo;
-using Anu.PunishmentOrg.DataAccess.DiscoveryMinutes;
-using Anu.PunishmentOrg.DataAccess.PBillStore;
 using Anu.PunishmentOrg.DataModel.BaseInfo;
 using Anu.PunishmentOrg.DataModel.BillStore;
-using Anu.PunishmentOrg.Domain.BaseInfo;
-using Anu.PunishmentOrg.Domain.DiscoveryMinutes;
-using Anu.PunishmentOrg.Domain.PBillStore;
 using Anu.PunishmentOrg.ServiceModel.BillStore;
 
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
@@ -45,7 +36,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
         #endregion Properties
 
         #region Overrides
-        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.SendPBillStoreService)]
+
         public async override Task<PBillStoreServiceResponse> ReceivePBillStoreFromScms([FromBody] PBillStoreServiceRequest request)
         {
             var receivePBillStoreFromScmsResponse = new PBillStoreServiceResponse()
@@ -56,7 +47,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
             try
             {
 
-                //await LoginValidation.ValidateLoginAsync(request.Request, PunishmentOrgConstants.GFESUserAccessType.SendPBillStoreService, _unitOfWork);
+                await LoginValidation.ValidateLoginAsync(request.Request, PunishmentOrgConstants.GFESUserAccessType.SendPBillStoreService, _unitOfWork);
 
                 //TODO: Add bill number(max:32) and date(max:12?) length validation
 
@@ -81,13 +72,12 @@ namespace Anu.PunishmentOrg.Api.BillStore
                     UniqueNo = Utility.Utility.GetRandomNumber(Anu.Constants.ServiceModel.General.GeneralConstants.ConventionalConstants.UniqueNumberLength)
                 };
 
-                //var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
-                var pDiscoveryMinutes = await _unitOfWork.Repositorey<PDiscoveryMinutesRepository>().GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
+                var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
                 pBillStore.ThePDiscoveryMinutes = (pDiscoveryMinutes is null) ? null : pDiscoveryMinutes;
 
-                pBillStore.TheObjectState = await _unitOfWork.Repositorey<ObjectStateRepository>().GetById(PunishmentOrgObjectState.PBillStore.Confirm);
+                pBillStore.TheObjectState = _unitOfWork.ObjectState.GetById(PunishmentOrgObjectState.PBillStore.Confirm);
 
-                pBillStore.TheDiscoveryOrg = await GetDiscoveryOrganization(request.CodingDeviceDetector);
+                pBillStore.TheDiscoveryOrg = GetDiscoveryOrganization(request.CodingDeviceDetector);
                 pBillStore.id_shenaseResid = request.TrackingCodeStores;
 
 
@@ -135,7 +125,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
                     pBillStore.ThePBillStoreProductList.Add(pBillStoreProduct);
                 }
 
-                _unitOfWork.Repositorey<PBillStoreRepository>().Add(pBillStore);
+                _unitOfWork.PBillStore.Add(pBillStore);
                 _unitOfWork.Complete();
 
                 return Respond(AnuResult.Successful, pBillStore.UniqueNo);
@@ -152,11 +142,10 @@ namespace Anu.PunishmentOrg.Api.BillStore
         }
 
 
-        [Authentication.Permission("003")]
+        //[Authentication.Permission("SendPBillStore")]
         public override PBillStoreServiceResponse SendPBillStore([FromBody] PBillStoreServiceRequest request)
         {
-
-            return new PBillStoreServiceResponse() { ThePBillStoreContract = null };
+            throw new NotImplementedException();
         }
 
 
@@ -190,7 +179,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
         {
             var isDuplicate = false;
 
-            var billEntity = _unitOfWork.Repositorey<PBillStoreRepository>().GetByNumberDate(request.BillNumber, request.BillDate);
+            var billEntity = _unitOfWork.PBillStore.GetByNumberDate(request.BillNumber, request.BillDate);
 
             if (billEntity.Result.Count() != 0)
             {
@@ -200,7 +189,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
             return isDuplicate;
         }
 
-        private async Task<PBExchangeUnit> GetDiscoveryOrganization(string organizationCode)
+        private PBExchangeUnit GetDiscoveryOrganization(string organizationCode)
         {
             string organizationId = string.Empty;
 
@@ -259,7 +248,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
                     break;
 
             }
-            return await _unitOfWork.Repositorey<PBExchangeUnitRepository>().GetById(organizationId);
+            return _unitOfWork.PBExchangeUnit.GetById(organizationId);
         }
 
 

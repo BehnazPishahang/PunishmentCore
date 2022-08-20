@@ -12,8 +12,4 @@
     <ProjectReference Include="..\Anu.BaseInfo.Domain\Anu.BaseInfo.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Gravamen\" />
-  </ItemGroup>
-
 </Project>

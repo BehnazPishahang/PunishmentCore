@@ -48,7 +48,7 @@ else
     </table>*@
 
 
-  <MudDataGrid Items="@Elements.Take(20)"  Hover="true" Dense="true" Striped="true" Bordered="true" SortMode="SortMode.Multiple" Filterable="true"
+  <MudDataGrid Items="@Elements.Take(5)"  Hover="true" Dense="true" Striped="true" Bordered="true" SortMode="SortMode.Multiple" Filterable="true"
     >
     <Columns>
         <Column T="PNoticeContract" Field="CreateDateTime" Title="زمان ثبت" />
@@ -56,7 +56,6 @@ else
         <Column T="PNoticeContract" Field="NoticeDate"   Title="تاريخ ابلاغ " />
         <Column T="PNoticeContract" Field="NoticePersonName"   Title="نام  ابلاغ شونده " />
         <Column T="PNoticeContract" Field="NoticePersonFamily" Title="نام خانوادگي ابلاغ شوند" />
-      
     </Columns>
 </MudDataGrid>
 

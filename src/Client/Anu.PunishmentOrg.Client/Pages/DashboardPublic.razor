@@ -1,58 +1,43 @@
 ﻿@page "/DashboardPublic"
-@using Anu.PunishmentOrg.Client.Infrastructure.Settings
-@using Anu.PunishmentOrg.Client.Pages.Authentication
 
 <MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
    
 
     <MudGrid>
-        <MudItem xs="12" sm="6" md="6">
+        <MudItem xs="12" sm="6" md="3">
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
             href="/isConstracting"
             target="blank"
             rel="noopener noreferrer">
-             <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100%">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.AddIcCall" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
-
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> ثبت شکایت</MudText>
-                   </div>
-                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
-                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">4</MudText>
-                   </div>
+            <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                <MudIcon Icon="@Icons.Material.Filled.AddIcCall" Color="@_iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                <div>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">ثبت شکایت</MudText>
+                    
                 </div>
             </MudPaper>
              </MudElement>
         </MudItem>
-        <MudItem xs="12" sm="6" md="6" >
+        <MudItem xs="12" sm="6" md="3" >
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
             href="/isConstracting"
             target="blank"
             rel="noopener noreferrer">
-              <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
-                    <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                        <MudIcon Icon="@Icons.Filled.Payments" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                    </div>
-                    <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+            <MudPaper   Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100px;">
+                <MudIcon Icon="@Icons.Material.Filled.Payments" Color="Color.Info" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                <div>
+                    <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">‍‍‍پرداخت  وجه  </MudText>
+                  
+                </div>
 
-                       <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                        <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  ">  پرداخت  وجه </MudText>
-                       </div>
-                       <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1   @MainLayout._class">
-                          <MudText xs="6" sm="6" md="6" Class="text-center mt-2">30</MudText>
-                       </div>
-                    </div>
-                </MudPaper>
+            </MudPaper>
             </MudElement>
        </MudItem>  
-     @*  <MudButton @onclick="onGotToDirect">FrmNoticeMain</MudButton>*@
+       <MudButton @onclick="onGotToDirect">FrmNoticeMain</MudButton>
     </MudGrid>
 
 

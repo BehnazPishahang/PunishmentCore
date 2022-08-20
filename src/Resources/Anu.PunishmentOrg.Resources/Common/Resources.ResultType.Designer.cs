@@ -97,42 +97,6 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to توکن شما معتبر نیست..
-        /// </summary>
-        public static string JwtTokenIsNotValid {
-            get {
-                return ResourceManager.GetString("JwtTokenIsNotValid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to لطفا کد ملی را صحیح وارد نمایید..
-        /// </summary>
-        public static string NationalCode_Is_Not_Valid {
-            get {
-                return ResourceManager.GetString("NationalCode_Is_Not_Valid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to طول کد ملی باید ده کاراکتر باشد..
-        /// </summary>
-        public static string NationalCode_Length_Is_Not_Valid {
-            get {
-                return ResourceManager.GetString("NationalCode_Length_Is_Not_Valid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to کد ملی تشکیل شده از ده رقم عددی می‌باشد؛ لطفا کد ملی را صحیح وارد نمایید..
-        /// </summary>
-        public static string NationalCode_Must_Be_Number {
-            get {
-                return ResourceManager.GetString("NationalCode_Must_Be_Number", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to کد ملی را وارد کنید..
         /// </summary>
         public static string NationalCodeIs_Required {
@@ -237,51 +201,6 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string PDiscoveryMinuteSate_Start {
             get {
                 return ResourceManager.GetString("PDiscoveryMinuteSate_Start", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to فیلد {0} خالی یا نامعتبر است.
-        /// </summary>
-        public static string PGravamen_Field_IsNullOrInvalid {
-            get {
-                return ResourceManager.GetString("PGravamen_Field_IsNullOrInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to دو نقش اصلی (شاکی و متهم) در شکوائیه لحاظ نشده است.
-        /// </summary>
-        public static string PGravamen_NecessaryPositions_AreNotAvailabe {
-            get {
-                return ResourceManager.GetString("PGravamen_NecessaryPositions_AreNotAvailabe", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to درخواست ارسالی خالی یا نامعتبر است.
-        /// </summary>
-        public static string PGravamen_Request_IsNullOrCorrupt {
-            get {
-                return ResourceManager.GetString("PGravamen_Request_IsNullOrCorrupt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to تلفن همراه را وارد کنید..
-        /// </summary>
-        public static string PhoneNumber_Is_Not_Entered {
-            get {
-                return ResourceManager.GetString("PhoneNumber_Is_Not_Entered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to تلفن همراه معتبر نمی باشد..
-        /// </summary>
-        public static string PhoneNumber_Is_Not_Valid {
-            get {
-                return ResourceManager.GetString("PhoneNumber_Is_Not_Valid", resourceCulture);
             }
         }
         
@@ -462,15 +381,6 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string ThePBBillGeoLocation_Is_Required {
             get {
                 return ResourceManager.GetString("ThePBBillGeoLocation_Is_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to کاربر وجود دارد..
-        /// </summary>
-        public static string User_Is_Exist {
-            get {
-                return ResourceManager.GetString("User_Is_Exist", resourceCulture);
             }
         }
         

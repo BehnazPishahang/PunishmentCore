@@ -5,10 +5,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
 {
     public class Theme135
     {
-        public static MudBlazor.Color _iconColor = Color.Success;
-        public static MudBlazor.Color _LogoColor = Color.Success;
-
-
+      
         private static Typography DefaultTypography = new Typography()
         {
             Default = new Default()
@@ -147,9 +144,9 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
                 DrawerBackground = "#27272f",
                 DrawerText = "rgba(255,255,255, 0.50)",
                 AppbarBackground = "#373740",
-                AppbarText = "rgba(0,0,0, 0.70)",
-                TextPrimary = "rgba(0,0,0, 0.70)",
-                TextSecondary = "rgba(0,0,0, 0.50)",
+                AppbarText = "rgba(255,255,255, 0.70)",
+                TextPrimary = "rgba(255,255,255, 0.70)",
+                TextSecondary = "rgba(255,255,255, 0.50)",
                 ActionDefault = "#adadb1",
                 ActionDisabled = "rgba(255,255,255, 0.26)",
                 ActionDisabledBackground = "rgba(255,255,255, 0.12)",

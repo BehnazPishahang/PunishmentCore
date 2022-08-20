@@ -1,23 +1,9 @@
-﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
-using Anu.BaseInfo.DataModel.ExchangeData;
-using Anu.BaseInfo.DataModel.FrontEndSecurity;
-using Anu.BaseInfo.DataModel.SystemObject;
-using Anu.BaseInfo.Domain.FrontEndSecurity;
-using Anu.Commons.ServiceModel.ServiceResponse;
-using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
-using Anu.DataAccess;
-using Anu.DataAccess.Repositories;
-using Anu.PunishmentOrg.Domain.DiscoveryMinutes;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Utility;
-using Utility.CalendarHelper;
-using Utility.Exceptions;
-using Utility.Guard;
 
 namespace Anu.PunishmentOrg.Api.Authentication
 {
@@ -28,141 +14,58 @@ namespace Anu.PunishmentOrg.Api.Authentication
     public class UserLoginRequestDto
     {
         [System.ComponentModel.DataAnnotations.Required]
-        public string? UserName { get; set; }
+        public string? Id { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public string? PassWord { get; set; }
-
-        //[System.ComponentModel.DataAnnotations.Required]
-        //public string? PhoneNumber { get; set; }
-    }
-
-    public class UserRegisterRequestDto
-    {
-        [System.ComponentModel.DataAnnotations.Required]
-        public string? UserName { get; set; }
+        public string? Email { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public string? PassWord { get; set; }
+        public string? Password { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string? PhoneNumber { get; set; }
     }
 
-    public class AuthResult : IResponseMessage
+    public class AuthResult
     {
-        public string? AccessToken { get; set; }
-
-        public string? RefreshToken { get; set; }
-
-        public Result Result { get; set; }
+        public string? Token { get; set; }
+        public bool Result { get; set; }
+        public List<string>? Errors { get; set; }
     }
 
     public class AuthenticationController : Microsoft.AspNetCore.Mvc.ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IUnitOfWork _unitOfWork;
 
-        public AuthenticationController(IConfiguration configuration, IUnitOfWork unitOfWork)
+        public AuthenticationController(IConfiguration configuration)
         {
             _configuration = configuration;
-            _unitOfWork = unitOfWork;
         }
 
         [Route("Login")]
         [HttpPost]
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<AuthResult> Login([FromBody] UserLoginRequestDto request)
+        public async Task<IActionResult> Login([FromBody] UserLoginRequestDto loginRequest)
         {
-            try
-            {
-                request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            // Check if the user exist
+            //var existing_user;// await _userManager.FindByEmailAsync(loginRequest.Email);
 
-                request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            if (loginRequest == null)
+                return BadRequest(new AuthResult() { Errors = new List<string>() { "Invalid payload" }, Result = false });
 
-                //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
-                //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
-                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.PassWord);
-                theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            //var isCorrect = await _userManager.CheckPasswordAsync(existing_user, loginRequest.Password);
 
-                var jwtToken = GenerateJwtToken(theGFESUser);
+            //if (!isCorrect)
+            //    return BadRequest(new AuthResult() { Errors = new List<string>() { "Invalid credentials" }, Result = false });
 
-                return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
-            }
-            catch (AnuExceptions ex)
-            {
-                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = ex.result };
-            }
+            var jwtToken = GenerateJwtToken(loginRequest);
 
+            return Ok(new AuthResult() { Token = jwtToken, Result = true });
+
+            //return BadRequest(new AuthResult() { Errors = new List<string>() { "Invalid payload" }, Result = false });
         }
 
-        [Route("Register")]
-        [HttpPost]
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<AuthResult> Register([FromBody] UserRegisterRequestDto request)
-        {
-            try
-            {
-                request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
-
-                request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.PassWord.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.PhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
-
-                request.UserName.IsValidNationalCode();
-                request.PhoneNumber.IsValidPhone();
-
-                if (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Exist(a=>a.UserID==request.UserName))
-                {
-                    return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.User_Is_Exist.GetResult() };
-                }
-
-                string passWordHash = MD5Core.GetHashString(request.PassWord);
-
-                var user = new GFESUser()
-                {
-                    Id = System.Guid.NewGuid().ToString("N"),
-                    UserID = request.UserName,
-                    Password = passWordHash,
-                    MobileNumber4SMS = request.PhoneNumber,
-                    NationalityCode = request.UserName,
-                    StartDate = CalendarHelper.GetCurrentDateTime(),
-                    EndDate = CalendarHelper.MaxDateTime(),
-                    Family = "a",
-                    FatherName = "b",
-                    LastChangePassword = CalendarHelper.GetCurrentDateTime(),
-                    Name = "c",
-                    Sex = BaseInfo.Enumerations.SexType.None
-                };
-
-                await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Add(user);
-                
-                if (_unitOfWork.Complete()<0)
-                {
-                    return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.Error.GetResult()};
-                }
-
-
-                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsync(request.UserName, request.PassWord);
-                theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
-
-            var jwtToken = GenerateJwtToken(theGFESUser);
-
-                return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
-            }
-            catch (AnuExceptions ex)
-            {
-                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = ex.result };
-            }
-            catch (Exception ex)
-            {
-                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.Error.GetResult(ex) };
-            }
-
-        }
-
-        private string GenerateJwtToken(GFESUser theGFESUser)
+        private string GenerateJwtToken(UserLoginRequestDto user)
         {
             var jwtTokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
 
@@ -173,11 +76,11 @@ namespace Anu.PunishmentOrg.Api.Authentication
             {
                 Subject = new ClaimsIdentity(new[]
                 {
+                    new Claim("Id", user.Id),
                     new Claim("IsDisable", "true"),
-                    new Claim("permissions", this.GetPermissions(theGFESUser)),
-                    new Claim("UserName", theGFESUser.UserID),
-                    new Claim(JwtRegisteredClaimNames.Sub, theGFESUser.UserID),
-                    new Claim(JwtRegisteredClaimNames.Email, value:theGFESUser.UserID),
+                    new Claim("permissions", ";;" ),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Email, value:user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString())
                 }),
@@ -190,16 +93,6 @@ namespace Anu.PunishmentOrg.Api.Authentication
             return jwtTokenHandler.WriteToken(token);
         }
 
-        private string GetPermissions(GFESUser theGFESUser)
-        {
-            //return ";All;";
-            if (theGFESUser.TheGFESUserAccessList==null)
-            {
-                return ";All;";
-            }
-            var theGFESUserAccessTypeCodes = string.Join(';', theGFESUser.TheGFESUserAccessList.Select(x => x.TheGFESUserAccessType.Code));
-            return theGFESUserAccessTypeCodes;
-        }
     }
 
     public abstract class AttributeAuthorizationHandler<TRequirement, TAttribute> : AuthorizationHandler<TRequirement> where TRequirement : IAuthorizationRequirement where TAttribute : Attribute
