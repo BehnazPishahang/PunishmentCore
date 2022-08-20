@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.Swagger;
-using Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(options =>
 {
-    var policy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-    options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter(policy));
-}).AddJsonOptions(option =>
-{
-    option.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
+    //var policy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    //options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter(policy));
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -71,11 +67,11 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-.AddJwtBearer(option =>
+.AddJwtBearer(jwt =>
 {
     var key = System.Text.Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JwtConfig:Secret").Value);
-    option.SaveToken = true;
-    option.TokenValidationParameters = new TokenValidationParameters()
+    jwt.SaveToken = true;
+    jwt.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
@@ -83,25 +79,6 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = false, // for dev
         RequireExpirationTime = false, // for dev -- needs to be updated when refresh token is added
         ValidateLifetime = true
-    };
-
-    option.Events = new JwtBearerEvents
-    {
-        OnChallenge = async context =>
-        {
-            // Call this to skip the default logic and avoid using the default response
-            context.HandleResponse();
-
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = 401;
-            //context.Response.Headers.Append("my-custom-header", "custom-value");
-            var responseMessage = new Anu.Commons.ServiceModel.ServiceResponse.ResponseMessage()
-            {
-                Result = Anu.Commons.ServiceModel.ServiceResponseEnumerations.AnuResult.JwtTokenIsNotValid.GetResult()
-            };
-            string responseMessagestring = System.Text.Json.JsonSerializer.Serialize(responseMessage);
-            await context.Response.WriteAsync(responseMessagestring);
-        }
     };
 });
 
@@ -120,6 +97,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.UseMiddleware<Anu.PunishmentOrg.Api.Authentication.ErrorHandlingMiddleware>(); 
 
 app.Run();

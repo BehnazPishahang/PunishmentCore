@@ -5,10 +5,6 @@ namespace Utility.CalendarHelper
 {
     public static class CalendarHelper
     {
-        /// <summary>
-        ///  get dateTime Now with shamsi
-        /// </summary>
-        /// <returns></returns>
         public static DateTime DateTimeNow()
         {
             return DateTime.Now.ToPersianDate();
@@ -58,30 +54,11 @@ namespace Utility.CalendarHelper
 
         public static DateTime ToDateTime(this string dateTime)
         {
-            if (dateTime.Contains("0000/00/00"))
-            {
-                dateTime = MinDateTime();
-            }
-            if (dateTime.Contains("9999/99/99"))
-            {
-                dateTime = MaxDateTime();
-            }
             return DateTime.Parse(dateTime);
         }
 
-        public static string MaxDateTime()
-        {
-            return "1500/01/01 23:59";
-        }
-
-        public static string MinDateTime()
-        {
-            return "1300/01/01 00:01";
-        }
-
-
         /// <summary>
-        /// Gets current shamsi date and time like: 11/1/1111 16:18:20
+        /// Gets current date and time like: 11/1/1111 16:18:20
         /// </summary>
         /// <returns></returns>
         public static string GetCurrentDateTime()
@@ -100,7 +77,7 @@ namespace Utility.CalendarHelper
         }
 
         /// <summary>
-        /// Gets current shamsi date like: 11/1/1111
+        /// Gets current date like: 11/1/1111
         /// </summary>
         /// <returns></returns>
         public static string GetCurrentDate()
@@ -118,7 +95,7 @@ namespace Utility.CalendarHelper
         }
 
         /// <summary>
-        /// Gets current shamsi time like: 16:18:20
+        /// Gets current time like: 16:18:20
         /// </summary>
         /// <returns></returns>
         public static string GetCurrentTime()
