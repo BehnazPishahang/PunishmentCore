@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Utility;
-using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice;
 
 namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
 {
-    public   class NoticeService: INoticeService
+    public  static class NoticeService
     {
 
- 
-        public  IEnumerable<PNoticeContract> getPNoticeList(String baseURl, string serviceName, string nationalCode)
+      static string Baseurl = "http://192.168.1.62:83/";
+
+      static string ServiceAdderss = "api/v2/BillStore/InqueryPNoticeList";
+        public static IEnumerable<PNoticeContract> getPNoticeList(string nationalCode)
         {
 
             PNoticeInqueryRequest inputData = new PNoticeInqueryRequest();
@@ -29,9 +30,9 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
             inputData.Page.OrderPage = new Commons.ServiceModel.ServicePaging.OrderPage() { Property="",Ascending=true};
 
             var client = new HttpClient();
-            client.BaseAddress = new Uri(baseURl);
+            client.BaseAddress = new Uri(Baseurl);
           
-            var response =  client.PostAsJsonAsync(serviceName, inputData).Result;
+            var response =  client.PostAsJsonAsync(ServiceAdderss, inputData).Result;
 
             PNoticeInqueryResponse result = response.Content.ReadAsAsync<PNoticeInqueryResponse>().Result;
 
