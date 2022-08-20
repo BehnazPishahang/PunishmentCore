@@ -9,12 +9,13 @@ namespace Anu.Domain
 {
     public interface IGenericRepository<T> where T : class
     {
-        T GetById(string id);
-        IEnumerable<T> GetAll();
-        IEnumerable<T> Find(Expression<Func<T, bool>> expression);
-        void Add(T entity);
-        void AddRange(IEnumerable<T> entities);
-        void Remove(T entity);
-        void RemoveRange(IEnumerable<T> entities);
+        Task<T> GetById(string id);
+        Task<IEnumerable<T>> GetAll();
+        Task<IEnumerable<T>> Find(Expression<Func<T, bool>> expression);
+        Task<bool> Exist(Expression<Func<T, bool>> expression);
+        Task Add(T entity);
+        Task AddRange(IEnumerable<T> entities);
+        Task Remove(T entity);
+        Task RemoveRange(IEnumerable<T> entities);
     }
 }
