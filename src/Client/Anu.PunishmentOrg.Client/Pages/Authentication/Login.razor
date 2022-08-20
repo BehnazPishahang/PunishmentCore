@@ -1,5 +1,10 @@
 ﻿@using Anu.Commons.ServiceModel.ServiceLogin
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
 @using Anu.PunishmentOrg.Client.Infrastructure.Notice
+@using Microsoft.Extensions.Options
+
+@inject IAnuAuthorizationService  _anuAuthorizationService;
+@inject AppConfiguration _appConfiguration;
 
 <EditForm Model="@_tokenModel" >
       <MudDialog>
@@ -62,9 +67,11 @@
 @code {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
     string errorMessage = "";
+    AppConfiguration appConfiguration;
     void Submit()
     {
-        AuthResult  result= AuthorizationService.LoginUser(_tokenModel);
+        var ss=  _appConfiguration.BackendServerAddress;
+        AuthResult  result= _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress , _appConfiguration.LoginAddress ,_tokenModel);
 
         if (result.Result.Code == 1000)
         {
@@ -78,7 +85,12 @@
         }
 
 
-     }
+    }
+
+    protected override void OnInitialized()
+    {
+       
+    }
 
 
     void Cancel() => MudDialog.Cancel();

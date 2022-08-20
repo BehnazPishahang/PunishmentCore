@@ -15,7 +15,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Authentication
         private string errorMessage = string.Empty;
         private async Task SubmitAsync()
         {
-            AuthResult result = AuthorizationService.RegisterUser(_registerUserModel);
+            AuthResult result = anuAuthorizationService.RegisterUser(_appConfiguration.BackendServerAddress, _appConfiguration.RegisterAddress, _registerUserModel);
 
             if (result.Result.Code == (int)AnuResult.Successful)
             {

@@ -1,50 +1,35 @@
-﻿using Anu.PunishmentOrg.ServiceModel.Notice;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http;
-using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
-using Utility;
+﻿
 using Anu.Commons.ServiceModel.ServiceLogin;
+using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization;
 
-namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
+namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
 {
-    public  static class AuthorizationService
+    public class AnuAuthorizationService : IAnuAuthorizationService
     {
 
-       static string BaseUrl = "http://192.168.1.62:83/";
-
-        static string RegisterAddress = "api/v1/Register";
-        static string LoginAddress = "api/v1/Login";
-        public static AuthResult RegisterUser(UserRegisterRequest UserRegisterinfo)
+     
+        public AuthResult RegisterUser(String baseURl, string serviceName, UserRegisterRequest UserRegisterinfo)
         {
 
 
             var client = new HttpClient();
-            client.BaseAddress = new Uri(BaseUrl);
-            var response = client.PostAsJsonAsync(RegisterAddress, UserRegisterinfo).Result;
-
-            AuthResult result = response.Content.ReadAsAsync<AuthResult>().Result;
-            return  result;
-
-        }
-
-        public static AuthResult LoginUser(UserLoginRequest loginInfo)
-        {
-
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(BaseUrl);
-            var response = client.PostAsJsonAsync(LoginAddress, loginInfo).Result;
+            client.BaseAddress = new Uri(baseURl);
+            var response = client.PostAsJsonAsync(serviceName, UserRegisterinfo).Result;
 
             AuthResult result = response.Content.ReadAsAsync<AuthResult>().Result;
             return result;
 
-           
+        }
 
+        public AuthResult LoginUser(String baseURl, string serviceName, UserLoginRequest loginInfo)
 
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(baseURl);
+            var response = client.PostAsJsonAsync(serviceName, loginInfo).Result;
+
+            AuthResult result = response.Content.ReadAsAsync<AuthResult>().Result;
+            return result;
         }
     }
 }
