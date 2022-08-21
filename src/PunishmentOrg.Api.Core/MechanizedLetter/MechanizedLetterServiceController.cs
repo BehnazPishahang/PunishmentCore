@@ -2,17 +2,14 @@
 using Anu.BaseInfo.DataModel.MechanizedLetter;
 using Anu.BaseInfo.ServiceModel.MechanizedLetter;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
-using Anu.Commons.Validations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
-using Utility.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Utility;
 using Utility.CalendarHelper;
 using Utility.Exceptions;
-using Microsoft.EntityFrameworkCore;
-using Anu.PunishmentOrg.Domain.Case;
-using Anu.BaseInfo.DataModel.SystemConfiguration;
+using Utility.Guard;
 
 namespace Anu.BaseInfo.Api.MechanizedLetter
 {
@@ -34,11 +31,100 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
         public async override Task<MechanizedLetterResponse> SendMechanizedLetter([FromBody] MechanizedLetterRequest request)
         {
             var OneMechanizedLetterResponse = new MechanizedLetterResponse();
+            var GMechanizedLetterType = await _unitOfWork.GMechanizedLetterType.GetByCode(request.TheGMechanizedLetterContract.TheGMechanizedLetterTypeContract.Code);
+            var NajaUnit = await _unitOfWork.NAJAUnit.GetByCode(request.TheGMechanizedLetterContract.TheNAJAUnitContract.Code);
             try
             {
                 // await LoginValidation.ValidateLoginAsync(request.Request, PunishmentOrgConstants.GFESUserAccessType.SendPBillStoreService, _unitOfWork);
 
 
+                #region Validation
+
+                #region [CreatorUserName]
+                if (request.TheGMechanizedLetterContract.CreatorUserName == null || request.TheGMechanizedLetterContract.CreatorUserName == String.Empty)
+                {
+                    return Respond(MechanizedLetterResult.MechanizedLetter_CreatorUserName_Is_Null);
+
+                }
+                #endregion [CreatorUserName]
+
+                #region [OuterOrgLetterDate]
+
+                request.TheGMechanizedLetterContract.OuterOrgLetterDate.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_OuterOrgLetterDate_Is_Null);
+                request.TheGMechanizedLetterContract.OuterOrgLetterDate.IsValidDate(MechanizedLetterResult.MechanizedLetter_OuterOrgLetterDate_Is_Not_ValidDate);
+
+                #endregion [OuterOrgLetterDate]
+
+
+                #region [OuterOrgLetterNo]
+                request.TheGMechanizedLetterContract.OuterOrgLetterNo.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_OuterOrgLetterNo_Is_Null, args: "شماره نامه فرستنده را وارد نمایید.");
+                request.TheGMechanizedLetterContract.OuterOrgLetterNo.IsDigit(MechanizedLetterResult.MechanizedLetter_OuterOrgLetterNo_Is_Not_Digit, args: "شماره نامه فرستنده از نوع عدد نمی باشد.");
+
+                #endregion [OuterOrgLetterNo]
+
+
+                #region [GMechanizedLetterType]
+                List<string> GMechanizedLetterTypeCodes = new List<string>();
+                GMechanizedLetterTypeCodes.Add("00027");
+                GMechanizedLetterTypeCodes.Add("00028");
+                GMechanizedLetterTypeCodes.Add("00029");
+                GMechanizedLetterTypeCodes.Add("00030");
+
+
+                if (request.TheGMechanizedLetterContract.TheGMechanizedLetterTypeContract.Code == null || !GMechanizedLetterTypeCodes.Contains(request.TheGMechanizedLetterContract.TheGMechanizedLetterTypeContract.Code))
+                {
+                    return Respond(MechanizedLetterResult.MechanizedLetter_GMechanizedLetterTypeCode_Is_Not_Valid);
+
+                }
+                #endregion [GMechanizedLetterType]
+
+                #region [TheGMechanizedLetterReceiverList]
+                if (request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList == null ||
+                    (request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList != null && request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList.Count == 0))
+                {
+                    return Respond(MechanizedLetterResult.MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null);
+                }
+                #endregion [TheGMechanizedLetterReceiverList]
+
+                #region [TheSenderOuterOrg]
+
+                request.TheGMechanizedLetterContract.TheNAJAUnitContract.Code.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_SenderOuterOrgCode_Is_Null);
+
+
+                if (NajaUnit == null)
+                {
+                    return Respond(MechanizedLetterResult.MechanizedLetter_SenderOuterOrgCode_Is_Not_Valid);
+                }
+
+                #endregion [TheSenderOuterOrg]
+
+                #region [TheReceiverInnerOrg]
+                foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList)
+                {
+                    if (item.TheCMSOrganizationContract.Code != null)
+                    {
+                        var OneCMSOrganization = await _unitOfWork.CMSOrganization.GetByCode(item.TheCMSOrganizationContract.Code);
+
+                        if (OneCMSOrganization == null)
+                        {
+                            return Respond(MechanizedLetterResult.MechanizedLetter_TheReceiverInnerOrgCode_Is_Not_Valid);
+
+                        }
+                    }
+                }
+                #endregion [TheReceiverInnerOrg]
+
+                #region LetterText
+                if (request.TheGMechanizedLetterContract.LetterText == null || request.TheGMechanizedLetterContract.LetterText == string.Empty)
+                {
+                    return Respond(MechanizedLetterResult.MechanizedLetter_LetterText_Is_Null);
+
+                }
+                #endregion
+
+                #endregion
+
+                #region CreateGMechanizedLetter
                 GMechanizedLetter OneGMechanizedLetter = new()
                 {
                     Id = Guid.NewGuid().ToString("N"),
@@ -53,12 +139,12 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
                 };
 
                 #region GMechanizedLetterType 
-                var GMechanizedLetterType = await _unitOfWork.GMechanizedLetterType.GetByCode(request.TheGMechanizedLetterContract.TheGMechanizedLetterTypeContract.Code);
+
                 OneGMechanizedLetter.TheGMechanizedLetterType = (GMechanizedLetterType is null) ? null : GMechanizedLetterType;
                 #endregion
 
                 #region NajaUnit
-                var NajaUnit = await _unitOfWork.NAJAUnit.GetByCode(request.TheGMechanizedLetterContract.TheNAJAUnitContract.Code);
+
                 OneGMechanizedLetter.TheSenderOuterOrg = (NajaUnit is null) ? null : NajaUnit;
                 #endregion
 
@@ -267,6 +353,29 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
                 #endregion
 
                 #region GMechanizedLetterFieldsContractList
+                int turn = 1;
+
+                switch (GMechanizedLetterType.Code)
+                {
+
+                    // معرفی نماینده حقوقی جهت شرکت در جلسه رسیدگی
+                    case "00027":
+
+                        break;
+
+                    //درخواست تجدید نظر از سمت سازمان حمایت
+                    case "00028":
+                        break;
+
+                    //پاسخ درخواست کارشناسی در خصوص پرونده
+                    case "00029":
+                        break;
+                    //سایر موضوعات مکاتبه در خصوص پرونده
+                    case "00030":
+                        break;
+
+                }
+
                 foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterFieldsContractList)
                 {
                 }
@@ -276,11 +385,12 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
 
                 _unitOfWork.GMechanizedLetter.Add(OneGMechanizedLetter);
                 _unitOfWork.Complete();
-                //return Respond(AnuResult.Successful, OneGMechanizedLetter.No);
+                return Respond(AnuResult.Successful, OneGMechanizedLetter.No);
 
-                OneMechanizedLetterResponse.Result.Description = OneGMechanizedLetter.No;
-                OneMechanizedLetterResponse.Result.Code = 1000;
-                OneMechanizedLetterResponse.Result.Message = "عملیات با موفقیت انجام شد .";
+                //OneMechanizedLetterResponse.Result.Description = OneGMechanizedLetter.No;
+                //OneMechanizedLetterResponse.Result.Code = 1000;
+                //OneMechanizedLetterResponse.Result.Message = "عملیات با موفقیت انجام شد .";
+                #endregion
 
                 return OneMechanizedLetterResponse;
 
@@ -305,14 +415,22 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
         #endregion Overrides
 
         #region Methods
-        private MechanizedLetterResponse Respond(AnuResult result, string no)
+        private MechanizedLetterResponse Respond(AnuResult result, string? no)
         {
+
             var response = new MechanizedLetterResponse()
             {
                 Result = result.GetResult(),
-
-
+                TheGMechanizedLetterOutputContract = new GMechanizedLetterOutputContract() { No = no}
             };
+            return response;
+
+
+
+        }
+        private MechanizedLetterResponse Respond(MechanizedLetterResult result)
+        {
+            var response = new MechanizedLetterResponse() { Result = result.GetResult() };
             return response;
         }
 
