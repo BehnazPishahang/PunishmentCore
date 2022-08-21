@@ -6,7 +6,7 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
     //! کل من علیها fun
     [System.ComponentModel.DisplayName("خروجی سرویس شکوائیه")]
-    public class PGravamenServiceResponse : PGravamenResponse, IResponseMessage
+    public class PGravamenServiceResponse : IResponseMessage
     {
         public Result Result { get; set; }
         public PGravamenServiceResponse()

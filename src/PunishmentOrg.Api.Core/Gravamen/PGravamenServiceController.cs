@@ -193,7 +193,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             {
                 Result = result.GetResult(),
 
-                FollowupNumber = followupNumber
+                //FollowupNumber = followupNumber
             };
             return response;
         }
