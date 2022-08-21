@@ -1,4 +1,5 @@
 ﻿
+using Anu.BaseInfo.DataModel.Attachment;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
@@ -52,6 +53,69 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 }
 
                 var followupNumber = GenerateFollowUpNo(PU135OrWebSite.WebSite);
+
+                var personList = new List<PGravamenPerson>();
+                foreach (var person in request.ThePGravamenContract!.ThePGravamenPersonContractList!)
+                {
+                    var p = new PGravamenPerson()
+                    {
+                        Name = person?.Name,
+                        Family = person?.Family,
+                        Address = person?.Address,
+                        BirthDate = person?.BirthDate,
+                        FatherName = person?.FatherName,
+                        IdentityNumber = person?.IdentityNumber,
+                        MobilNumber = person?.MobilNumber,
+                        NationalCode = person?.NationalCode,
+                        Nationality = person?.Nationality,
+                        PersonStartPost = person?.PersonStartPost,
+                        Sex = person?.Sex,
+                        PersonType = person?.PersonType,
+                        PostCode = person?.PostCode,
+                        TradeUnitName = person?.TradeUnitName,
+                        PersonPassword = person?.PersonPassword,
+                    };
+
+                    personList.Add(p);
+                }
+
+                var violationList = new List<PGravamenViolation>();
+                foreach (var violation in request.ThePGravamenContract!.ThePGravamenViolationContractList!)
+                {
+                    var v = new PGravamenViolation()
+                    {
+                        RowNumber = violation.RowNumber,
+                        SubjectTitle = violation?.SubjectTitle,
+                        ViolationAddress = violation?.ViolationAddress,
+                        ViolationDate = violation?.ViolationDate,
+                        ViolationDesc = violation?.ViolationDesc,
+                        ViolationPrice = violation?.ViolationPrice,
+                    };
+
+                    violationList.Add(v);
+                }
+
+
+                var attachmentList = new List<PGravamenAttachment>();
+                foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
+                {
+                    var a = new GAttachment()
+                    {
+                        FileExtension = attachment.FileExtension,
+                        TheAttachmentType = new BaseInfo.DataModel.Types.AttachmentType()
+                        {
+                            Code = "300",
+                            Id = "300",
+                            Title = "پيوست شكوائيه مردمي"
+                        },
+                        TheGAttachmentData = new GAttachmentData()
+                        {
+                            DocFile = attachment.TheGAttachmentDataContract.DocFile
+                        }
+                    };
+                }
+
+
                 var gravamen = new PGravamen()
                 {
                     PetitionSubject = request.ThePGravamenContract.PetitionSubject,
@@ -62,6 +126,10 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     ReporterName = request.ThePGravamenContract.ReporterName,
                     ReporterFamily = request.ThePGravamenContract.ReporterFamily,
                     ReporterMobilNumber = request.ThePGravamenContract.ReporterMobilNumber,
+
+                    ThePGravamenPersonList = personList,
+                    //ThePGravamenAttachmentList
+                    //ThePGravamenViolationList
 
                     CreateDateTime = CalendarHelper.DateTimeNow().ToString(),
                     FollowUpNo = followupNumber,
@@ -193,7 +261,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             {
                 Result = result.GetResult(),
 
-                FollowupNumber = followupNumber
+                FollowUpNo = followupNumber
             };
             return response;
         }

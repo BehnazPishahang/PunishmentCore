@@ -1,19 +1,12 @@
 ﻿
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
-    //! کل من علیها fun
     [System.ComponentModel.DisplayName("تخلفات شکوائیه/گزارش مردمی در سرویس")]
     public class PGravamenViolationContract
     {
         public PGravamenViolationContract()
         {
         }
-            
-                [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName(" رديف")]
-        public string? Id { get; set; }
-
-            
             
                 [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("شماره ترتيب")]
