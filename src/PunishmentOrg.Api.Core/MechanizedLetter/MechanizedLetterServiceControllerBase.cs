@@ -1,6 +1,5 @@
 ﻿
 using Anu.BaseInfo.ServiceModel.MechanizedLetter;
-using Anu.BaseInfo.ServiceModel.MechanizedLetter;
 
 namespace Anu.BaseInfo.Api.MechanizedLetter
 {

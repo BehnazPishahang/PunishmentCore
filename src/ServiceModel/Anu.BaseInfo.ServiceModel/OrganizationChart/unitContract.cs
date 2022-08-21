@@ -10,8 +10,6 @@ namespace Anu.BaseInfo.ServiceModel.OrganizationChart
 
             TheGUnitRelatedNajaUnitContractList = new List<Anu.BaseInfo.ServiceModel.ExchangeData.GUnitRelatedNajaUnitContract>();
 
-            TheGUnitTypeContractList = new List<Anu.BaseInfo.ServiceModel.OrganizationChart.GUnitTypeContract>();
-
         }
 
         [System.ComponentModel.DisplayName("آدرس")]
@@ -42,19 +40,16 @@ namespace Anu.BaseInfo.ServiceModel.OrganizationChart
 
 
 
-        [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("واحدهاي زيردست")]
         public List<Anu.BaseInfo.ServiceModel.OrganizationChart.unitContract>? TheChildUnitsList { get; set; }
 
 
 
-        [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("سازمان مكانيزه در سرویس")]
         public Anu.BaseInfo.ServiceModel.SystemConfiguration.CMSOrganizationContract? TheCMSOrganizationContract { get; set; }
 
 
 
-        [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("مکان جغرافيايي در سرویس")]
         public Anu.BaseInfo.ServiceModel.GeoInfo.GeoLocationContract? TheGeoLocationContract { get; set; }
 
@@ -68,11 +63,10 @@ namespace Anu.BaseInfo.ServiceModel.OrganizationChart
 
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("نوع واحد سازماني در سرویس")]
-        public List<Anu.BaseInfo.ServiceModel.OrganizationChart.GUnitTypeContract>? TheGUnitTypeContractList { get; set; }
+        public Anu.BaseInfo.ServiceModel.OrganizationChart.GUnitTypeContract? TheGUnitTypeContract { get; set; }
 
 
 
-        [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("واحد بالادست")]
         public Anu.BaseInfo.ServiceModel.OrganizationChart.unitContract? TheParentUnit { get; set; }
 

@@ -9,12 +9,11 @@ namespace Anu.BaseInfo.ServiceModel.MechanizedLetter
         public Result Result { get; set; }
         public MechanizedLetterResponse()
         {
-            Result = new Result();
         }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName("نامه مکانیزه در سرویس")]
-        public Anu.BaseInfo.ServiceModel.MechanizedLetter.GMechanizedLetterContract? TheGMechanizedLetterContract { get; set; }
+        [System.ComponentModel.DisplayName("آخرین وضعیت مکاتبات مکانیزه در سرویس")]
+        public Anu.BaseInfo.ServiceModel.MechanizedLetter.GMechanizedLetterOutputContract? TheGMechanizedLetterOutputContract { get; set; }
 
 
 
