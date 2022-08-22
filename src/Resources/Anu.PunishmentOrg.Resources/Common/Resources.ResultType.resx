@@ -137,13 +137,17 @@
     <value>كاربر ثبت كننده نامه را وارد کنید.</value>
     <comment>-60001</comment>
   </data>
-  <data name="MechanizedLetter_GMechanizedLetterTypeCode_Is_Not_Valid" xml:space="preserve">
-    <value>کد نوع موضوع نامه معتبر نمی باشد.</value>
+  <data name="MechanizedLetter_GMechanizedLetterTypeCode_Is_null" xml:space="preserve">
+    <value>کد نوع موضوع نامه را انتخاب کنید.</value>
     <comment>-60006</comment>
   </data>
   <data name="MechanizedLetter_LetterText_Is_Null" xml:space="preserve">
     <value>متن نامه را وارد نمایید.</value>
     <comment>-60011</comment>
+  </data>
+  <data name="MechanizedLetter_NAJAUnit_Is_Null" xml:space="preserve">
+    <value>وارد کردن کد واحد فرستنده نامه اجباری می باشد.</value>
+    <comment>-60013</comment>
   </data>
   <data name="MechanizedLetter_OuterOrgLetterDate_Is_Not_ValidDate" xml:space="preserve">
     <value>تاريخ نامه فرستنده معتبر نمی باشد.</value>
@@ -164,6 +168,10 @@
   <data name="MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null" xml:space="preserve">
     <value>وارد کردن اطلاعات حداقل یک گیرنده برای نامه اجباری می باشد.</value>
     <comment>-60007</comment>
+  </data>
+  <data name="MechanizedLetter_Request_Is_Null" xml:space="preserve">
+    <value>وارد کردن پارامترهای ورودی اجباری می باشد.</value>
+    <comment>-60012</comment>
   </data>
   <data name="MechanizedLetter_SenderOuterOrgCode_Is_Not_Valid" xml:space="preserve">
     <value>کد واحد فرستنده نامه معتبر نمی باشد.</value>
