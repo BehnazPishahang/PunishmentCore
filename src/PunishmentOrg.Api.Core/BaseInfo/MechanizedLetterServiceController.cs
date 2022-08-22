@@ -1,5 +1,4 @@
-﻿
-using Anu.BaseInfo.DataAccess.ExchangeData;
+﻿using Anu.BaseInfo.DataAccess.ExchangeData;
 using Anu.BaseInfo.DataAccess.GMechanizedLetter;
 using Anu.BaseInfo.DataAccess.OrganizationChart;
 using Anu.BaseInfo.DataAccess.SystemConfiguration;
@@ -17,7 +16,7 @@ using Utility.CalendarHelper;
 using Utility.Exceptions;
 using Utility.Guard;
 
-namespace Anu.BaseInfo.Api.MechanizedLetter
+namespace Anu.PunishmentOrg.Api.BaseInfo
 {
     public class MechanizedLetterServiceController : MechanizedLetterServiceControllerBase
     {
@@ -63,7 +62,7 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
 
                     #region Validation
                     #region [CreatorUserName]
-                    if (request.TheGMechanizedLetterContract.CreatorUserName == null || request.TheGMechanizedLetterContract.CreatorUserName == String.Empty)
+                    if (request.TheGMechanizedLetterContract.CreatorUserName == null || request.TheGMechanizedLetterContract.CreatorUserName == string.Empty)
                     {
                         return Respond(MechanizedLetterResult.MechanizedLetter_CreatorUserName_Is_Null);
 
@@ -86,7 +85,7 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
 
                     #region [TheGMechanizedLetterReceiverList]
                     if (request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList == null ||
-                        (request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList != null && request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList.Count == 0))
+                        request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList != null && request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList.Count == 0)
                     {
                         return Respond(MechanizedLetterResult.MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null);
                     }
@@ -135,22 +134,22 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
                         Id = Guid.NewGuid().ToString("N"),
                         Timestamp = 1,
                         CreateDateTime = CalendarHelper.GetCurrentDateTime(),
-                        OuterOrgLetterNo = (request.TheGMechanizedLetterContract.OuterOrgLetterNo is null) ? null : request.TheGMechanizedLetterContract.OuterOrgLetterNo,
-                        OuterOrgLetterDate = (request.TheGMechanizedLetterContract.OuterOrgLetterDate is null) ? null : request.TheGMechanizedLetterContract.OuterOrgLetterDate,
+                        OuterOrgLetterNo = request.TheGMechanizedLetterContract.OuterOrgLetterNo is null ? null : request.TheGMechanizedLetterContract.OuterOrgLetterNo,
+                        OuterOrgLetterDate = request.TheGMechanizedLetterContract.OuterOrgLetterDate is null ? null : request.TheGMechanizedLetterContract.OuterOrgLetterDate,
                         LetterText = request.TheGMechanizedLetterContract.LetterText,
-                        IsSendByOuterOrg = Enumerations.YesNo.Yes,
+                        IsSendByOuterOrg = Anu.BaseInfo.Enumerations.YesNo.Yes,
                         CreatorUserName = request.TheGMechanizedLetterContract.CreatorUserName,
                         TheObjectState = await _unitOfWork.Repositorey<ObjectStateRepository>().GetById(PunishmentOrgObjectState.PMechanizeLetter.ConfirmedToSend),
                     };
 
                     #region GMechanizedLetterType 
 
-                    OneGMechanizedLetter.TheGMechanizedLetterType = (GMechanizedLetterType is null) ? null : GMechanizedLetterType;
+                    OneGMechanizedLetter.TheGMechanizedLetterType = GMechanizedLetterType is null ? null : GMechanizedLetterType;
                     #endregion
 
                     #region NajaUnit
 
-                    OneGMechanizedLetter.TheSenderOuterOrg = (NajaUnit is null) ? null : NajaUnit;
+                    OneGMechanizedLetter.TheSenderOuterOrg = NajaUnit is null ? null : NajaUnit;
                     #endregion
 
                     #region GMechanizedLetterReceiver
@@ -164,15 +163,15 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
                         var oneGMechanizedLetterReceiver = new GMechanizedLetterReceiver()
                         {
                             Id = Guid.NewGuid().ToString("N"),
-                            IsMechanizeRelation = Enumerations.YesNo.Yes,
-                            InnerOrOutterRcvType = Enumerations.MechanizedLetterReceiverType.InnerOrg,
+                            IsMechanizeRelation = Anu.BaseInfo.Enumerations.YesNo.Yes,
+                            InnerOrOutterRcvType = Anu.BaseInfo.Enumerations.MechanizedLetterReceiverType.InnerOrg,
                             MainRcvOrTranscriptRcv = item.MainRcvOrTranscriptRcv,
                             ReceiverType = item.ReceiverType,
                             SendDateTime = CalendarHelper.GetCurrentDateTime(),
                             ViewDateTime = "9999/99/99-99:99",
                             TheObjectState = await _unitOfWork.Repositorey<ObjectStateRepository>().GetById(PunishmentOrgObjectState.PMechanizeLetter.ReceivedByReceiverUnit),
-                            TheReceiverInnerOrg = (ReceiverInnerOrg is null) ? null : ReceiverInnerOrg,
-                            TheReceiverPost = (CMSUserRoleType is null) ? null : CMSUserRoleType
+                            TheReceiverInnerOrg = ReceiverInnerOrg is null ? null : ReceiverInnerOrg,
+                            TheReceiverPost = CMSUserRoleType is null ? null : CMSUserRoleType
 
                         };
                         OneGMechanizedLetter.TheGMechanizedLetterReceiverList.Add(oneGMechanizedLetterReceiver);
@@ -323,10 +322,10 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
                         var GMechanizedLetterCase = new GMechanizedLetterCase()
                         {
                             Id = Guid.NewGuid().ToString("N"),
-                            TheUnit = (Unit is null) ? null : Unit,
+                            TheUnit = Unit is null ? null : Unit,
                             RelatedCaseNo = item.RelatedCaseNo,
                             RelatedCaseTitle = item.RelatedCaseTitle,
-                            CaseLocation = Enumerations.MechanizedLetterCaseLocation.Destination,
+                            CaseLocation = Anu.BaseInfo.Enumerations.MechanizedLetterCaseLocation.Destination,
                             TheRelatedCaseClass = await _unitOfWork.Repositorey<SystemObjectRepository>().GetById("21c7d5f0a1524460898a56c0417e0755"),
                             TheRelatedCaseForm = await _unitOfWork.Repositorey<SystemFormRepository>().GetById("5A1F4099A1B6437BA5E1D568000A751C"),
                             RelatedCaseID = OneCaseId,
@@ -349,7 +348,7 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
                             RelLetterGetType = item.RelLetterGetType,
                             RelLetterNo = item.RelLetterNo,
                             TheMainLetter = OneGMechanizedLetter,
-                            TheRelLetter = (GMechanizedLetterObj is null) ? null : GMechanizedLetterObj,
+                            TheRelLetter = GMechanizedLetterObj is null ? null : GMechanizedLetterObj,
 
                         };
 

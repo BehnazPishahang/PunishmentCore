@@ -1,9 +1,9 @@
-﻿using Anu.BaseInfo.Api.MechanizedLetter;
-using Anu.BaseInfo.ServiceModel.ExchangeData;
+﻿using Anu.BaseInfo.ServiceModel.ExchangeData;
 using Anu.BaseInfo.ServiceModel.MechanizedLetter;
 using Anu.BaseInfo.ServiceModel.OrganizationChart;
 using Anu.BaseInfo.ServiceModel.SystemConfiguration;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using Anu.PunishmentOrg.Api.BaseInfo;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Moq;
 using System;
