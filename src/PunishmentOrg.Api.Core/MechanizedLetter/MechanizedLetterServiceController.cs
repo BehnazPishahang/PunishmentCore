@@ -34,7 +34,7 @@ namespace Anu.BaseInfo.Api.MechanizedLetter
 
         #region Overrides
 
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        //[Microsoft.AspNetCore.Authorization.AllowAnonymous]----
         public async override Task<MechanizedLetterResponse> SendMechanizedLetter([FromBody] MechanizedLetterRequest request)
 
         {
