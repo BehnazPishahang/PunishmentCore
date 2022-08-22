@@ -1,4 +1,6 @@
-﻿namespace Anu.Utility
+﻿using System.Net.Http.Json;
+
+namespace Anu.Utility
 {
     public static class Utility
     {
@@ -27,6 +29,32 @@
 
             return new string(chars);
         }
+
+        public static async Task<T> CallApi<T>(this string apiUrl, object value)
+        {
+            try
+            {
+                using (var client = new System.Net.Http.HttpClient())
+                {
+                    client.BaseAddress = new Uri(apiUrl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    var w = client.PostAsJsonAsync(apiUrl, value);
+                    w.Wait();
+                    HttpResponseMessage response = w.Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("test");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return default(T);
+        }
+
 
     }
 }
