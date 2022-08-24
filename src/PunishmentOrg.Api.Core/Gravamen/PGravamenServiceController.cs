@@ -111,7 +111,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                         Id = GenerateFollowUpNo(PU135OrWebSite.WebSite),
                         Timestamp = 1,
                         FileExtension = attachment.FileExtension,
-                        TheAttachmentType = new BaseInfo.DataModel.Types.AttachmentType()
+                        TheAttachmentType = new Anu.BaseInfo.DataModel.Types.AttachmentType()
                         {
                             Code = "300",
                             Id = "300",
@@ -173,13 +173,16 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
         }
 
-        private void ValidateDocFile(byte[] docFile)
+        private PGravamenServiceResponse ValidateDocFile(byte[] docFile)
         {
+            PGravamenServiceResponse pGravamenServiceResponse = new PGravamenServiceResponse();
             docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
+
             if (docFile.Length / 1000 > 6000)
             {
-                return Respond(PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold);
+                pGravamenServiceResponse = Respond(PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold);
             }
+            return pGravamenServiceResponse;
         }
         #endregion Overrides
 

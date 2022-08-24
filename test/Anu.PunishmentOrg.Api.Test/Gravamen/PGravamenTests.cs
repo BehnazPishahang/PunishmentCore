@@ -41,10 +41,10 @@ public class PGravamenTests
             IdentityNumber = "",
             MobilNumber = "",
             NationalCode = "",
-            Nationality = BaseInfo.Enumerations.LNationality.Iranian,
+            Nationality = Anu.BaseInfo.Enumerations.LNationality.Iranian,
             PersonStartPost = Enumerations.PUPersonStartPost.PlaintiffPerson,
-            Sex = BaseInfo.Enumerations.SexType.Male,
-            PersonType = BaseInfo.Enumerations.PersonType.NaturalPerson,
+            Sex = Anu.BaseInfo.Enumerations.SexType.Male,
+            PersonType = Anu.BaseInfo.Enumerations.PersonType.NaturalPerson,
             PostCode = "",
             TradeUnitName = "",
             PersonPassword = "",
@@ -60,10 +60,10 @@ public class PGravamenTests
             IdentityNumber = "",
             MobilNumber = "",
             NationalCode = "",
-            Nationality = BaseInfo.Enumerations.LNationality.Iranian,
+            Nationality = Anu.BaseInfo.Enumerations.LNationality.Iranian,
             PersonStartPost = Enumerations.PUPersonStartPost.OffendingPerson,
-            Sex = BaseInfo.Enumerations.SexType.Male,
-            PersonType = BaseInfo.Enumerations.PersonType.NaturalPerson,
+            Sex = Anu.BaseInfo.Enumerations.SexType.Male,
+            PersonType = Anu.BaseInfo.Enumerations.PersonType.NaturalPerson,
             PostCode = "",
             TradeUnitName = "KH",
             PersonPassword = "",
@@ -82,8 +82,8 @@ public class PGravamenTests
 
         var a = new PGravamenAttachment()
         {
-            FileExtension = BaseInfo.Enumerations.FileExtension.PDF,
-            TheAttachmentType = new BaseInfo.DataModel.Types.AttachmentType()
+            FileExtension = Anu.BaseInfo.Enumerations.FileExtension.PDF,
+            TheAttachmentType = new Anu.BaseInfo.DataModel.Types.AttachmentType()
             {
                 Code = "300",
                 Id = "300",
