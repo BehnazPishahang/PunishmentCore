@@ -6,6 +6,7 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
     {
         public PGravamenServiceRequest()
         {
+            ThePGravamenContract = new Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenContract();
         }
 
         [System.ComponentModel.DataAnnotations.Required]
