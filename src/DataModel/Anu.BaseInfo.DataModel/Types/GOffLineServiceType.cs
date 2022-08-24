@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Types
 {
@@ -22,7 +22,7 @@ namespace Anu.BaseInfo.DataModel.Types
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
-    }
+        }
 
     [Table("GOFFLINESERVICETYPE")]
     public partial class GOffLineServiceType : GOffLineServiceTypeBase

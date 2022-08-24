@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
 {
@@ -170,7 +170,7 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [Column("WRITTENORORAL")]
         public virtual Anu.PunishmentOrg.Enumerations.WrittenOrOral? WrittenOrOral { get; set; }
 
-    }
+        }
 
     [Table("PCHASELICENSEREQ")]
     public partial class PChaseLicenseReq : PChaseLicenseReqBase

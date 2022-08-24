@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
 {
@@ -14,7 +14,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
         [ForeignKey("TABLETWOID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemObject? TheTableTwo { get; set; }
 
-    }
+        }
 
     [Table("JBCHANGEABLETABLES")]
     public partial class JBChangeableTables : JBChangeableTablesBase

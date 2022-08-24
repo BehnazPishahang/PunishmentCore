@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Trm.SMS
 {
@@ -31,7 +31,7 @@ namespace Anu.BaseInfo.DataModel.Trm.SMS
         [InverseProperty("TheTrmReceiveSMS")]
         public virtual List<Anu.BaseInfo.DataModel.Trm.SMS.TrmReceiveSMSNotRespond>? TheTrmReceiveSMSNotRespondList { get; set; }
 
-    }
+        }
 
     [Table("TRMRECEIVESMS")]
     public partial class TrmReceiveSMS : TrmReceiveSMSBase

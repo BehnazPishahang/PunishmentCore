@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Letter
         [ForeignKey("POUTGOINGLETTERID")]
         public virtual Anu.PunishmentOrg.DataModel.Letter.POutgoingLetter? ThePOutgoingLetter { get; set; }
 
-    }
+        }
 
     [Table("POUTGOINGLETTERUNIT")]
     public partial class POutgoingLetterUnit : POutgoingLetterUnitBase

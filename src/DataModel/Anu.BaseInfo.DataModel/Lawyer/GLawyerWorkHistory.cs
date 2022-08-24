@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Lawyer
 {
@@ -29,7 +29,7 @@ namespace Anu.BaseInfo.DataModel.Lawyer
         [Column("TODATE")]
         public virtual string? ToDate { get; set; }
 
-    }
+        }
 
     [Table("GLAWYERWORKHISTORY")]
     public partial class GLawyerWorkHistory : GLawyerWorkHistoryBase

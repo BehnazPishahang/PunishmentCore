@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.FrontEndSecurity
 {
@@ -17,7 +17,7 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
         [ForeignKey("GFESUSERACCESSID")]
         public virtual Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUserAccess? TheGFESUserAccess { get; set; }
 
-    }
+        }
 
     [Table("GFESUSERROLEFAVMENU")]
     public partial class GFESUserRoleFavMenu : GFESUserRoleFavMenuBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
 {
@@ -53,7 +53,7 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [ForeignKey("PDISCOVERYMINUTESID")]
         public virtual Anu.PunishmentOrg.DataModel.DiscoveryMinutes.PDiscoveryMinutes? ThePDiscoveryMinutes { get; set; }
 
-    }
+        }
 
     [Table("PDISCOVERYMINUTESOFFICER")]
     public partial class PDiscoveryMinutesOfficer : PDiscoveryMinutesOfficerBase

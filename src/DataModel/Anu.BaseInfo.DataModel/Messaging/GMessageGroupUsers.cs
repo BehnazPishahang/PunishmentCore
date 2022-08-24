@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Messaging
 {
@@ -17,7 +17,7 @@ namespace Anu.BaseInfo.DataModel.Messaging
         [ForeignKey("GMESSAGEGROUPID")]
         public virtual Anu.BaseInfo.DataModel.Messaging.GMessageGroup? TheGMessageGroup { get; set; }
 
-    }
+        }
 
     [Table("GMESSAGEGROUPUSERS")]
     public partial class GMessageGroupUsers : GMessageGroupUsersBase

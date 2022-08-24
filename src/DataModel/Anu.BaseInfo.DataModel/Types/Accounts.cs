@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Types
 {
@@ -44,7 +44,7 @@ namespace Anu.BaseInfo.DataModel.Types
         [Column("TREASURYID")]
         public virtual string? TreasuryID { get; set; }
 
-    }
+        }
 
     [Table("ACCOUNTS")]
     public partial class Accounts : AccountsBase

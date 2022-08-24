@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Terminate
 {
@@ -64,7 +64,7 @@ namespace Anu.PunishmentOrg.DataModel.Terminate
         [InverseProperty("ThePConvictsDatabase")]
         public virtual List<Anu.PunishmentOrg.DataModel.Terminate.PConvictsDatabaseJudge>? ThePConvictsDatabaseJudgeList { get; set; }
 
-    }
+        }
 
     [Table("PCONVICTSDATABASE")]
     public partial class PConvictsDatabase : PConvictsDatabaseBase

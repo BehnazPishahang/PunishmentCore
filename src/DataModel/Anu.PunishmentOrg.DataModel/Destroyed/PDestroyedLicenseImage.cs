@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         [ForeignKey("PDESTROYEDLICENSEID")]
         public virtual Anu.PunishmentOrg.DataModel.Destroyed.PDestroyedLicense? ThePDestroyedLicense { get; set; }
 
-    }
+        }
 
     [Table("PDESTROYEDLICENSEIMAGE")]
     public partial class PDestroyedLicenseImage : PDestroyedLicenseImageBase

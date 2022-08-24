@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.InspectionReport
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
         [ForeignKey("PINSPECTIONREPORTDIRECTORSID")]
         public virtual Anu.PunishmentOrg.DataModel.InspectionReport.PInspectionReportDirectors? ThePInspectionReportDirectors { get; set; }
 
-    }
+        }
 
     [Table("PINSPECTIONREPORTPOST")]
     public partial class PInspectionReportPost : PInspectionReportPostBase

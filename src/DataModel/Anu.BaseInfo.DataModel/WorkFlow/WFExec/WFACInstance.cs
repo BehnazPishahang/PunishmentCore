@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFExec
 {
@@ -36,7 +36,7 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFExec
         [ForeignKey("WFINSTANCEID")]
         public virtual Anu.BaseInfo.DataModel.WorkFlow.WFExec.WFInstance? TheWFInstance { get; set; }
 
-    }
+        }
 
     [Table("WFACINSTANCE")]
     public partial class WFACInstance : WFACInstanceBase

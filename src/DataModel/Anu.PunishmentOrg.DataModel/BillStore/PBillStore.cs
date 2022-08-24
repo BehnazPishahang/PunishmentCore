@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.BillStore
 {
@@ -150,7 +150,7 @@ namespace Anu.PunishmentOrg.DataModel.BillStore
         [Column("UNIQUENO")]
         public virtual string? UniqueNo { get; set; }
 
-    }
+        }
 
     [Table("PBILLSTORE")]
     public partial class PBillStore : PBillStoreBase

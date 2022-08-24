@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
@@ -47,7 +47,7 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [ForeignKey("SENDERCMSORGANIZATIONID")]
         public virtual Anu.BaseInfo.DataModel.SystemConfiguration.CMSOrganization? TheSenderCMSOrganization { get; set; }
 
-    }
+        }
 
     [Table("RECEIVERDATA")]
     public partial class ReceiverData : ReceiverDataBase

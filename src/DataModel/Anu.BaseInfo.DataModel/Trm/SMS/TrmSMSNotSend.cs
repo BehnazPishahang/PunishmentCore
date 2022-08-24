@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Trm.SMS
 {
@@ -15,7 +15,7 @@ namespace Anu.BaseInfo.DataModel.Trm.SMS
         [Column("RESPITESENDTIME")]
         public virtual long? RespiteSendTime { get; set; }
 
-    }
+        }
 
     [Table("TRMSMSNOTSEND")]
     public partial class TrmSMSNotSend : TrmSMSNotSendBase

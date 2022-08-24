@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.MechanizedLetter
 {
@@ -24,7 +24,7 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         public virtual Anu.BaseInfo.Enumerations.YesNo? IsSendByOuterOrg { get; set; }
 
         [Unicode(false)]
-        [Column("LETTERTEXT")]
+        [Column("LETTERTEXT", TypeName = "BLOB")]
         public virtual string? LetterText { get; set; }
 
         [Unicode(false)]
@@ -73,7 +73,7 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         [ForeignKey("SENDEROUTERORGID")]
         public virtual Anu.BaseInfo.DataModel.ExchangeData.NAJAUnit? TheSenderOuterOrg { get; set; }
 
-    }
+        }
 
     [Table("GMECHANIZEDLETTER")]
     public partial class GMechanizedLetter : GMechanizedLetterBase

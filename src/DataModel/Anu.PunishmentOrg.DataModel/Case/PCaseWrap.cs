@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [ForeignKey("WRAPCASEID")]
         public virtual Anu.PunishmentOrg.DataModel.Case.PCase? TheWrapCase { get; set; }
 
-    }
+        }
 
     [Table("PCASEWRAP")]
     public partial class PCaseWrap : PCaseWrapBase

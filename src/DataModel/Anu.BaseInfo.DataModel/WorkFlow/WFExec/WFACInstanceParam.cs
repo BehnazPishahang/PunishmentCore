@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFExec
 {
@@ -32,7 +32,7 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFExec
         [ForeignKey("WFACTIVITYPARAMETERID")]
         public virtual Anu.BaseInfo.DataModel.WorkFlow.WFDefine.WFActivityParameter? TheWFActivityParameter { get; set; }
 
-    }
+        }
 
     [Table("WFACINSTANCEPARAM")]
     public partial class WFACInstanceParam : WFACInstanceParamBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Letter
 {
@@ -14,7 +14,7 @@ namespace Anu.BaseInfo.DataModel.Letter
         [ForeignKey("INPUTLETTERTYPEID")]
         public virtual Anu.BaseInfo.DataModel.Types.InputLetterType? TheInputLetterType { get; set; }
 
-    }
+        }
 
     [Table("GINCOMINGLETTERSUBJECT")]
     public partial class GIncomingLetterSubject : GIncomingLetterSubjectBase

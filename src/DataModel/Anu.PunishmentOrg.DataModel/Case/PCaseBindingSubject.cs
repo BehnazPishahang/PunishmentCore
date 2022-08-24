@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -91,7 +91,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [ForeignKey("TERMINATETERMINATEORDERID")]
         public virtual Anu.PunishmentOrg.DataModel.Terminate.PTerminateOrder? TheTerminateTerminateOrder { get; set; }
 
-    }
+        }
 
     [Table("PCASEBINDINGSUBJECT")]
     public partial class PCaseBindingSubject : PCaseBindingSubjectBase

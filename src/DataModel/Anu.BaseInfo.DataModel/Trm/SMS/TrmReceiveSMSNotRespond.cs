@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Trm.SMS
 {
@@ -11,7 +11,7 @@ namespace Anu.BaseInfo.DataModel.Trm.SMS
         [ForeignKey("TRMRECEIVESMSID")]
         public virtual Anu.BaseInfo.DataModel.Trm.SMS.TrmReceiveSMS? TheTrmReceiveSMS { get; set; }
 
-    }
+        }
 
     [Table("TRMRECEIVESMSNOTRESPOND")]
     public partial class TrmReceiveSMSNotRespond : TrmReceiveSMSNotRespondBase

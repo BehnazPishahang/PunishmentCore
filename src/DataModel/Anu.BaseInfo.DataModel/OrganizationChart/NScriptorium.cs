@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.OrganizationChart
 {
@@ -97,7 +97,7 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [ForeignKey("NOTARYSECONDASSISTANTID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.NScriptoriumEmployee? TheNotarySecondAssistant { get; set; }
 
-    }
+        }
 
     [Table("NSCRIPTORIUM")]
     public partial class NScriptorium : NScriptoriumBase

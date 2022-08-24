@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Terminate
 {
@@ -23,7 +23,7 @@ namespace Anu.PunishmentOrg.DataModel.Terminate
         [InverseProperty("ThePJudgmentTriple")]
         public virtual List<Anu.PunishmentOrg.DataModel.Terminate.PJudgmentBindingSubTriple>? ThePJudgmentBindingSubTripleList { get; set; }
 
-    }
+        }
 
     [Table("PJUDGMENTTRIPLE")]
     public partial class PJudgmentTriple : PJudgmentTripleBase

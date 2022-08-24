@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Expert
 {
@@ -25,7 +25,7 @@ namespace Anu.BaseInfo.DataModel.Expert
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
-    }
+        }
 
     [Table("EXPERTMAJOR")]
     public partial class ExpertMajor : ExpertMajorBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.MIS
 {
@@ -88,7 +88,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("TRADELICENSEDATE")]
         public virtual string? TradeLicenseDate { get; set; }
 
-    }
+        }
 
     [Table("PMISCASEPERSON")]
     public partial class PMISCasePerson : PMISCasePersonBase

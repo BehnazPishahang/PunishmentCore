@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -55,7 +55,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [Column("WORKFLOWSTARTER")]
         public virtual string? WorkFlowStarter { get; set; }
 
-    }
+        }
 
     [Table("SYSTEMFORM")]
     public partial class SystemForm : SystemFormBase

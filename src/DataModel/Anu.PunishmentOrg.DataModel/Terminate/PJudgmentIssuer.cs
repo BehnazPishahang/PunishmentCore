@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Terminate
 {
@@ -32,7 +32,7 @@ namespace Anu.PunishmentOrg.DataModel.Terminate
         [ForeignKey("REGISTERUSERHISTORYID")]
         public virtual Anu.BaseInfo.DataModel.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
-    }
+        }
 
     [Table("PJUDGMENTISSUER")]
     public partial class PJudgmentIssuer : PJudgmentIssuerBase

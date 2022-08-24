@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Tablet
 {
@@ -34,7 +34,7 @@ namespace Anu.PunishmentOrg.DataModel.Tablet
         [Column("VERSIONNO")]
         public virtual string? VersionNo { get; set; }
 
-    }
+        }
 
     [Table("PAPPVERSION")]
     public partial class PAppVersion : PAppVersionBase

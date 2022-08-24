@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
@@ -68,7 +68,7 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [Column("WORKTIMECOUNT")]
         public virtual long? WorkTimeCount { get; set; }
 
-    }
+        }
 
     [Table("PPUBLICWORKSEXEC")]
     public partial class PPublicWorksExec : PPublicWorksExecBase

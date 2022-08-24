@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
@@ -32,10 +32,6 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         [Column("ENDYEAR")]
         public virtual string? EndYear { get; set; }
 
-        [Unicode(false)]
-        [Column("MANUALNO")]
-        public virtual string? ManualNo { get; set; }
-
         [Column("PAGENUMBER")]
         public virtual long? PageNumber { get; set; }
 
@@ -44,6 +40,9 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
 
         [ForeignKey("CONFIRMERID")]
         public virtual Anu.BaseInfo.DataModel.SystemConfiguration.RegisterUserHistory? TheConfirmer { get; set; }
+
+        [ForeignKey("MAKHTUMEID")]
+        public virtual Anu.PunishmentOrg.DataModel.Destroyed.Makhtume? TheMakhtume { get; set; }
 
         [ForeignKey("OBJECTSTATEID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.ObjectState? TheObjectState { get; set; }
@@ -70,6 +69,9 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         public virtual List<Anu.PunishmentOrg.DataModel.Destroyed.PDestroyedCaseViolation>? ThePDestroyedCaseViolationList { get; set; }
 
         [InverseProperty("ThePDestroyedCase")]
+        public virtual List<Anu.PunishmentOrg.DataModel.Destroyed.PDestroyedCaseWrap>? ThePDestroyedCaseWrapList { get; set; }
+
+        [InverseProperty("ThePDestroyedCase")]
         public virtual List<Anu.PunishmentOrg.DataModel.Destroyed.PDestroyedJudge>? ThePDestroyedJudgeList { get; set; }
 
         [ForeignKey("REGISTRARID")]
@@ -78,7 +80,7 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         [ForeignKey("UNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheUnit { get; set; }
 
-    }
+        }
 
     [Table("PDESTROYEDCASE")]
     public partial class PDestroyedCase : PDestroyedCaseBase

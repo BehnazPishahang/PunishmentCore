@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Accounting
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Accounting
         [ForeignKey("PPAIDID")]
         public virtual Anu.PunishmentOrg.DataModel.Accounting.PPaid? ThePPaid { get; set; }
 
-    }
+        }
 
     [Table("PPAIDUNIT")]
     public partial class PPaidUnit : PPaidUnitBase

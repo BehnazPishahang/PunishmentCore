@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Expert
 {
@@ -22,7 +22,7 @@ namespace Anu.BaseInfo.DataModel.Expert
         [Column("TODATE")]
         public virtual string? ToDate { get; set; }
 
-    }
+        }
 
     [Table("EXPERTBACKGROUND")]
     public partial class ExpertBackground : ExpertBackgroundBase

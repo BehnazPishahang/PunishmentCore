@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
@@ -67,7 +67,7 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [Column("TRYAGAINPERIOD")]
         public virtual long? TryAgainPeriod { get; set; }
 
-    }
+        }
 
     [Table("OFFLINESERVICECALL")]
     public partial class OfflineServiceCall : OfflineServiceCallBase

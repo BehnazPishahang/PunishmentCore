@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.MechanizedLetter
 {
@@ -51,7 +51,7 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         [Column("VIEWERUSERNAME")]
         public virtual string? ViewerUserName { get; set; }
 
-    }
+        }
 
     [Table("GMECHANIZEDLETTERREFER")]
     public partial class GMechanizedLetterRefer : GMechanizedLetterReferBase

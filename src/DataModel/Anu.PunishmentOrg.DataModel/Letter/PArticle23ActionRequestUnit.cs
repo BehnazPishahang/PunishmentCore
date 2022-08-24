@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Letter
         [ForeignKey("PBEXCHANGEUNITID")]
         public virtual Anu.PunishmentOrg.DataModel.BaseInfo.PBExchangeUnit? ThePBExchangeUnit { get; set; }
 
-    }
+        }
 
     [Table("PARTICLE23ACTIONREQUESTUNIT")]
     public partial class PArticle23ActionRequestUnit : PArticle23ActionRequestUnitBase

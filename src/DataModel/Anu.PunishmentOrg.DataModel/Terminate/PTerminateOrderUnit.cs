@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Terminate
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Terminate
         [ForeignKey("PTERMINATEORDERID")]
         public virtual Anu.PunishmentOrg.DataModel.Terminate.PTerminateOrder? ThePTerminateOrder { get; set; }
 
-    }
+        }
 
     [Table("PTERMINATEORDERUNIT")]
     public partial class PTerminateOrderUnit : PTerminateOrderUnitBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Notice
 {
@@ -51,7 +51,7 @@ namespace Anu.BaseInfo.DataModel.Notice
         public virtual string? DeliverPost { get; set; }
 
         [Unicode(false)]
-        [Column("DESCRIPTION")]
+        [Column("DESCRIPTION", TypeName = "BLOB")]
         public virtual string? Description { get; set; }
 
         [Unicode(false)]
@@ -59,7 +59,7 @@ namespace Anu.BaseInfo.DataModel.Notice
         public virtual string? EMailAddress { get; set; }
 
         [Unicode(false)]
-        [Column("EMAILTEXT")]
+        [Column("EMAILTEXT", TypeName = "BLOB")]
         public virtual string? EMailText { get; set; }
 
         [Column("HOWNOTIFIED")]
@@ -96,7 +96,7 @@ namespace Anu.BaseInfo.DataModel.Notice
         public virtual Anu.BaseInfo.Enumerations.NoticeFinalResult? NoticeFinalResult { get; set; }
 
         [Unicode(false)]
-        [Column("NOTICEORDER")]
+        [Column("NOTICEORDER", TypeName = "BLOB")]
         public virtual string? NoticeOrder { get; set; }
 
         [Unicode(false)]
@@ -155,7 +155,7 @@ namespace Anu.BaseInfo.DataModel.Notice
         public virtual string? RelatedPersonID { get; set; }
 
         [Unicode(false)]
-        [Column("REQUESTBODY")]
+        [Column("REQUESTBODY", TypeName = "BLOB")]
         public virtual string? RequestBody { get; set; }
 
         [Unicode(false)]
@@ -220,7 +220,7 @@ namespace Anu.BaseInfo.DataModel.Notice
         [Column("USERNO")]
         public virtual string? UserNo { get; set; }
 
-    }
+        }
 
     [Table("GNOTICE")]
     public partial class GNotice : GNoticeBase

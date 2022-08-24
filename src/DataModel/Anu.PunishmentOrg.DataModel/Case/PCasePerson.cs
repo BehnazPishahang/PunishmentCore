@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -242,7 +242,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("TRADEUNITNAME")]
         public virtual string? TradeUnitName { get; set; }
 
-    }
+        }
 
     [Table("PCASEPERSON")]
     public partial class PCasePerson : PCasePersonBase

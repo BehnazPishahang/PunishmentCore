@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
@@ -31,7 +31,7 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [ForeignKey("SYSTEMOBJECTID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemObject? TheSystemObject { get; set; }
 
-    }
+        }
 
     [Table("CHANGELOGMAINDOC")]
     public partial class ChangeLogMainDoc : ChangeLogMainDocBase

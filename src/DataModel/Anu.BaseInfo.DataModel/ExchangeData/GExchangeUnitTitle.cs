@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.ExchangeData
 {
@@ -32,7 +32,7 @@ namespace Anu.BaseInfo.DataModel.ExchangeData
         [Column("WEBSERVICEFULLNAME")]
         public virtual string? WebServiceFullName { get; set; }
 
-    }
+        }
 
     [Table("GEXCHANGEUNITTITLE")]
     public partial class GExchangeUnitTitle : GExchangeUnitTitleBase

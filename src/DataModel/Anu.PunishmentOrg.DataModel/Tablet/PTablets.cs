@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Tablet
 {
@@ -30,7 +30,7 @@ namespace Anu.PunishmentOrg.DataModel.Tablet
         [Column("TODATETIME")]
         public virtual string? ToDateTime { get; set; }
 
-    }
+        }
 
     [Table("PTABLETS")]
     public partial class PTablets : PTabletsBase

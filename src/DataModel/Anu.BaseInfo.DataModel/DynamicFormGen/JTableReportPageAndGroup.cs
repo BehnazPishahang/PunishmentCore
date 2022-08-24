@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -91,7 +91,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [InverseProperty("TheMasterGrp")]
         public virtual List<Anu.BaseInfo.DataModel.DynamicFormGen.JTableReportGrpRelation>? TheRelationGrpByMasterList { get; set; }
 
-    }
+        }
 
     [Table("JTABLEREPORTPAGEANDGROUP")]
     public partial class JTableReportPageAndGroup : JTableReportPageAndGroupBase

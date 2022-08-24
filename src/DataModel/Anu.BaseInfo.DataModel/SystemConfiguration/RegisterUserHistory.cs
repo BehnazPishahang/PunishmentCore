@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
@@ -32,7 +32,7 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [Column("TODATETIME")]
         public virtual string? ToDateTime { get; set; }
 
-    }
+        }
 
     [Table("REGISTERUSERHISTORY")]
     public partial class RegisterUserHistory : RegisterUserHistoryBase

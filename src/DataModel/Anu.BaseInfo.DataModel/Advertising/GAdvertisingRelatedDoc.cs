@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Advertising
 {
@@ -25,7 +25,7 @@ namespace Anu.BaseInfo.DataModel.Advertising
         [ForeignKey("SYSTEMOBJECTID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemObject? TheSystemObject { get; set; }
 
-    }
+        }
 
     [Table("GADVERTISINGRELATEDDOC")]
     public partial class GAdvertisingRelatedDoc : GAdvertisingRelatedDocBase

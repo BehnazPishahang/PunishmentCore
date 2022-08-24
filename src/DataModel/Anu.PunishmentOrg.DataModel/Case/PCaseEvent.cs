@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -43,7 +43,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [ForeignKey("PCASEID")]
         public virtual Anu.PunishmentOrg.DataModel.Case.PCase? ThePCase { get; set; }
 
-    }
+        }
 
     [Table("PCASEEVENT")]
     public partial class PCaseEvent : PCaseEventBase

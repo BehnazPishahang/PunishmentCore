@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -20,7 +20,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [ForeignKey("SUBMENUID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.Menu? TheSubMenu { get; set; }
 
-    }
+        }
 
     [Table("MENUSUBMENU")]
     public partial class MenuSubMenu : MenuSubMenuBase

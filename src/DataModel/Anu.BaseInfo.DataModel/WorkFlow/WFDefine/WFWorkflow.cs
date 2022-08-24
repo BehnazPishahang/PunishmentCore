@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
 {
@@ -52,7 +52,7 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
         [Column("VERSIONNUMBER")]
         public virtual long? VersionNumber { get; set; }
 
-    }
+        }
 
     [Table("WFWORKFLOW")]
     public partial class WFWorkflow : WFWorkflowBase

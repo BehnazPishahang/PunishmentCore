@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Gravamen
 {
@@ -70,7 +70,7 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
         [Column("TRADEUNITNAME")]
         public virtual string? TradeUnitName { get; set; }
 
-    }
+        }
 
     [Table("PGRAVAMENPERSON")]
     public partial class PGravamenPerson : PGravamenPersonBase

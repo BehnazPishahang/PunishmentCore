@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
 {
@@ -17,7 +17,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
         [ForeignKey("OLDRECID")]
         public virtual Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo.JBBaseInfoBudget? TheOldRec { get; set; }
 
-    }
+        }
 
     [Table("JBBASEINFOBUDGETCONNECTIONS")]
     public partial class JBBaseInfoBudgetConnections : JBBaseInfoBudgetConnectionsBase

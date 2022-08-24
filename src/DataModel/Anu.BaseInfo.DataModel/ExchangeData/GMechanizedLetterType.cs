@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.ExchangeData
 {
@@ -43,7 +43,7 @@ namespace Anu.BaseInfo.DataModel.ExchangeData
         [Column("UNITTYPEACCESS")]
         public virtual string? UnitTypeAccess { get; set; }
 
-    }
+        }
 
     [Table("GMECHANIZEDLETTERTYPE")]
     public partial class GMechanizedLetterType : GMechanizedLetterTypeBase

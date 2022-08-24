@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
 {
@@ -65,7 +65,7 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
         [Column("USERCHOOSETRANSITION")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? UserChooseTransition { get; set; }
 
-    }
+        }
 
     [Table("WFACTIVITY")]
     public partial class WFActivity : WFActivityBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
 {
@@ -131,7 +131,7 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [Column("WAYBILLSERIAL")]
         public virtual string? WayBillSerial { get; set; }
 
-    }
+        }
 
     [Table("PDISCOVERYMINUTESVEHICLE")]
     public partial class PDiscoveryMinutesVehicle : PDiscoveryMinutesVehicleBase

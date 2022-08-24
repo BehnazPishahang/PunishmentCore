@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFExec
 {
@@ -14,7 +14,7 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFExec
         [ForeignKey("WFACTIVITYTRANSITIONID")]
         public virtual Anu.BaseInfo.DataModel.WorkFlow.WFDefine.WFActivityTransition? TheWFActivityTransition { get; set; }
 
-    }
+        }
 
     [Table("WFACINSTANCETRANS")]
     public partial class WFACInstanceTrans : WFACInstanceTransBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
@@ -23,7 +23,7 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [ForeignKey("CASESERVERID")]
         public virtual Anu.BaseInfo.DataModel.SystemConfiguration.CaseServer? TheCaseServer { get; set; }
 
-    }
+        }
 
     [Table("SERVERTRANSFERSTATUS")]
     public partial class ServerTransferStatus : ServerTransferStatusBase
