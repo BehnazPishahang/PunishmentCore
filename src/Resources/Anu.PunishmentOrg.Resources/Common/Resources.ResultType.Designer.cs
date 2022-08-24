@@ -241,11 +241,20 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to یکی از فیلدهای ضروری خالی می باشد.
+        ///   Looks up a localized string similar to {0} خالی یا نامعتبر می باشد.
         /// </summary>
         public static string PGravamen_Field_IsNullOrInvalid {
             get {
                 return ResourceManager.GetString("PGravamen_Field_IsNullOrInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to سایز فایل ارسالی بیش از حد مجاز است.
+        /// </summary>
+        public static string PGravamen_FileIsLargerThanAllowedThreshold {
+            get {
+                return ResourceManager.GetString("PGravamen_FileIsLargerThanAllowedThreshold", resourceCulture);
             }
         }
         
@@ -255,6 +264,42 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string PGravamen_NecessaryPositions_AreNotAvailabe {
             get {
                 return ResourceManager.GetString("PGravamen_NecessaryPositions_AreNotAvailabe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لیست فایل های ارسالی خالی است.
+        /// </summary>
+        public static string PGravamen_NoAttachmentAvailable {
+            get {
+                return ResourceManager.GetString("PGravamen_NoAttachmentAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to هیچ فایلی الصاق نشده است.
+        /// </summary>
+        public static string PGravamen_NoFileIsAttached {
+            get {
+                return ResourceManager.GetString("PGravamen_NoFileIsAttached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} برای شخص متهم ضروری است.
+        /// </summary>
+        public static string PGravamen_OffendingNecessaryField_IsNullOrInvalid {
+            get {
+                return ResourceManager.GetString("PGravamen_OffendingNecessaryField_IsNullOrInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} برای شخص شاکی ضروری است.
+        /// </summary>
+        public static string PGravamen_PlatiffNecessaryField_IsNullOrInvalid {
+            get {
+                return ResourceManager.GetString("PGravamen_PlatiffNecessaryField_IsNullOrInvalid", resourceCulture);
             }
         }
         
