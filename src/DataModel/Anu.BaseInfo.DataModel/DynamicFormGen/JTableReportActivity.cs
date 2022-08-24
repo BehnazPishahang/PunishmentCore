@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -65,7 +65,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [ForeignKey("RETURNEDOBJECTSTATEID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.ObjectState? TheReturnedObjectState { get; set; }
 
-    }
+        }
 
     [Table("JTABLEREPORTACTIVITY")]
     public partial class JTableReportActivity : JTableReportActivityBase

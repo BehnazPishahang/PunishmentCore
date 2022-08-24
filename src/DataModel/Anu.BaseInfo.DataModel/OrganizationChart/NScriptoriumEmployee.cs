@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.OrganizationChart
 {
@@ -79,7 +79,7 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [InverseProperty("TheNotarySecondAssistant")]
         public virtual List<Anu.BaseInfo.DataModel.OrganizationChart.NScriptorium>? TheNotarySecondAssistantList { get; set; }
 
-    }
+        }
 
     [Table("NSCRIPTORIUMEMPLOYEE")]
     public partial class NScriptoriumEmployee : NScriptoriumEmployeeBase

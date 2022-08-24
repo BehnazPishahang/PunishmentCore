@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Advertising
 {
@@ -35,7 +35,7 @@ namespace Anu.BaseInfo.DataModel.Advertising
         [ForeignKey("RELATEDCASEFORMID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemForm? TheRelatedCaseForm { get; set; }
 
-    }
+        }
 
     [Table("GADVERTISINGCASE")]
     public partial class GAdvertisingCase : GAdvertisingCaseBase

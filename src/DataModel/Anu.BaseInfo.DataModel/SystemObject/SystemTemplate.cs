@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -13,7 +13,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         public virtual string? Code { get; set; }
 
         [Unicode(false)]
-        [Column("COMPUTERTEMPLATETEXT")]
+        [Column("COMPUTERTEMPLATETEXT", TypeName = "BLOB")]
         public virtual string? ComputerTemplateText { get; set; }
 
         [Unicode(false)]
@@ -49,10 +49,10 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         public virtual Anu.BaseInfo.DataModel.SystemObject.TemplateUsageType? TheTemplateUsageType { get; set; }
 
         [Unicode(false)]
-        [Column("USERTEMPLATETEXT")]
+        [Column("USERTEMPLATETEXT", TypeName = "BLOB")]
         public virtual string? UserTemplateText { get; set; }
 
-    }
+        }
 
     [Table("SYSTEMTEMPLATE")]
     public partial class SystemTemplate : SystemTemplateBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.OrganizationChart
 {
@@ -56,7 +56,7 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [Column("UNITNO")]
         public virtual string? UnitNo { get; set; }
 
-    }
+        }
 
     [Table("UNIT")]
     public partial class Unit : UnitBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Trm.SMS
 {
@@ -67,7 +67,7 @@ namespace Anu.BaseInfo.DataModel.Trm.SMS
         [ForeignKey("TRMSMSID")]
         public virtual List<Anu.BaseInfo.DataModel.Trm.SMS.TrmSMSNotSend>? TheTrmSMSNotSendList { get; set; }
 
-    }
+        }
 
     [Table("TRMSMS")]
     public partial class TrmSMS : TrmSMSBase

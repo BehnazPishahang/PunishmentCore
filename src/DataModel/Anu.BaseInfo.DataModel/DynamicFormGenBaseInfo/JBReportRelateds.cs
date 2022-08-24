@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
 {
@@ -17,7 +17,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
         [ForeignKey("RELATEDREPORTID")]
         public virtual Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo.JBReportTitle? TheRelatedReport { get; set; }
 
-    }
+        }
 
     [Table("JBREPORTRELATEDS")]
     public partial class JBReportRelateds : JBReportRelatedsBase

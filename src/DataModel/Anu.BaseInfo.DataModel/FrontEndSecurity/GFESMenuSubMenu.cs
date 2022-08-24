@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.FrontEndSecurity
 {
@@ -23,7 +23,7 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
         [ForeignKey("SUBMENUID")]
         public virtual Anu.BaseInfo.DataModel.FrontEndSecurity.GFESMenu? TheSubMenu { get; set; }
 
-    }
+        }
 
     [Table("GFESMENUSUBMENU")]
     public partial class GFESMenuSubMenu : GFESMenuSubMenuBase

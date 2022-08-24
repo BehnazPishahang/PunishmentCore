@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -106,7 +106,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("VIEWCOLUMNNAME")]
         public virtual string? ViewColumnName { get; set; }
 
-    }
+        }
 
     [Table("JTABLEREPORTCOLUMN")]
     public partial class JTableReportColumn : JTableReportColumnBase

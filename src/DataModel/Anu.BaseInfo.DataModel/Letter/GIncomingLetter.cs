@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Letter
 {
@@ -21,7 +21,7 @@ namespace Anu.BaseInfo.DataModel.Letter
         public virtual string? CreateDateTime { get; set; }
 
         [Unicode(false)]
-        [Column("DESCRIPTION")]
+        [Column("DESCRIPTION", TypeName = "BLOB")]
         public virtual string? Description { get; set; }
 
         [Unicode(false)]
@@ -37,7 +37,7 @@ namespace Anu.BaseInfo.DataModel.Letter
         public virtual string? LetterNo { get; set; }
 
         [Unicode(false)]
-        [Column("LETTERTEXT")]
+        [Column("LETTERTEXT", TypeName = "BLOB")]
         public virtual string? LetterText { get; set; }
 
         [Unicode(false)]
@@ -92,7 +92,7 @@ namespace Anu.BaseInfo.DataModel.Letter
         [Column("VIEWDATE")]
         public virtual string? ViewDate { get; set; }
 
-    }
+        }
 
     [Table("GINCOMINGLETTER")]
     public partial class GIncomingLetter : GIncomingLetterBase

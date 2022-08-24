@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Gravamen
 {
@@ -39,7 +39,7 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
         [Column("VIOLATIONPRICE")]
         public virtual long? ViolationPrice { get; set; }
 
-    }
+        }
 
     [Table("PGRAVAMENVIOLATION")]
     public partial class PGravamenViolation : PGravamenViolationBase

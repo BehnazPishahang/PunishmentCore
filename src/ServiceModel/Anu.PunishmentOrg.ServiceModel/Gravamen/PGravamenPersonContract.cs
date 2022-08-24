@@ -1,7 +1,6 @@
 ﻿
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
-    //! کل من علیها fun
     [System.ComponentModel.DisplayName("شخص شکوائیه/گزارش مردمی در سرویس")]
     public class PGravamenPersonContract
     {
@@ -26,12 +25,6 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
             
             [System.ComponentModel.DisplayName("نام پدر")]
         public string? FatherName { get; set; }
-
-            
-            
-                [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName(" رديف")]
-        public string? Id { get; set; }
 
             
             

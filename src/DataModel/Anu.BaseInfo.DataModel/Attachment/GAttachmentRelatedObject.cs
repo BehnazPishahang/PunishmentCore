@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Attachment
 {
@@ -21,7 +21,7 @@ namespace Anu.BaseInfo.DataModel.Attachment
         [ForeignKey("RELATEDSYSTEMOBJECTID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemObject? TheRelatedSystemObject { get; set; }
 
-    }
+        }
 
     [Table("GATTACHMENTRELATEDOBJECT")]
     public partial class GAttachmentRelatedObject : GAttachmentRelatedObjectBase

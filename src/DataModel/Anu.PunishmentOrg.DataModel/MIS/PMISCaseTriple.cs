@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.MIS
 {
@@ -39,7 +39,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [ForeignKey("RELATEDCASEINPUTID")]
         public virtual Anu.PunishmentOrg.DataModel.MIS.PMISCaseInput? TheRelatedCaseInput { get; set; }
 
-    }
+        }
 
     [Table("PMISCASETRIPLE")]
     public partial class PMISCaseTriple : PMISCaseTripleBase

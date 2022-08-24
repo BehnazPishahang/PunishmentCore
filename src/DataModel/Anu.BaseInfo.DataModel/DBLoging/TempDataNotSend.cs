@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
@@ -44,7 +44,7 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [Column("TRANSACTIONORDERNO")]
         public virtual long? TransactionOrderNo { get; set; }
 
-    }
+        }
 
     [Table("TEMPDATANOTSEND")]
     public partial class TempDataNotSend : TempDataNotSendBase

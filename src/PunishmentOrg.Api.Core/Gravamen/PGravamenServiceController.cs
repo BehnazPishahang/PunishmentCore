@@ -1,4 +1,5 @@
 ﻿
+using Anu.BaseInfo.DataModel.Attachment;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
@@ -7,6 +8,7 @@ using Anu.PunishmentOrg.DataModel.Gravamen;
 using Anu.PunishmentOrg.Enumerations;
 using Anu.PunishmentOrg.ServiceModel.Gravamen;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Utility;
 using Utility.CalendarHelper;
@@ -33,6 +35,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
         #region Overrides
 
+        [AllowAnonymous]
         public async override Task<PGravamenServiceResponse> RecieveGravamen([FromBody] PGravamenServiceRequest request)
         {
             var response = new PGravamenServiceResponse()
@@ -44,7 +47,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             {
                 request.Null(PGravamenResult.PGravamen_Request_IsNullOrCorrupt);
 
-                NullCheckNecessaryFields(request);
+                NullCheckNecessaryRequestFields(request);
 
                 if (!AreNecessaryStartPositionsAvailable(request))
                 {
@@ -52,8 +55,83 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 }
 
                 var followupNumber = GenerateFollowUpNo(PU135OrWebSite.WebSite);
+
+                var personList = new List<PGravamenPerson>();
+                foreach (var person in request.ThePGravamenContract!.ThePGravamenPersonContractList!)
+                {
+                    var currenPerson = new PGravamenPerson()
+                    {
+                        Id = GenerateFollowUpNo(PU135OrWebSite.WebSite),
+                        Timestamp = 1,
+                        Name = person?.Name,
+                        Family = person?.Family,
+                        Address = person?.Address,
+                        BirthDate = person?.BirthDate,
+                        FatherName = person?.FatherName,
+                        IdentityNumber = person?.IdentityNumber,
+                        MobilNumber = person?.MobilNumber,
+                        NationalCode = person?.NationalCode,
+                        Nationality = person?.Nationality,
+                        PersonStartPost = person?.PersonStartPost,
+                        Sex = person?.Sex,
+                        PersonType = person?.PersonType,
+                        PostCode = person?.PostCode,
+                        TradeUnitName = person?.TradeUnitName,
+                        PersonPassword = person?.PersonPassword,
+                    };
+
+                    personList.Add(currenPerson);
+                }
+
+                var violationList = new List<PGravamenViolation>();
+                foreach (var violation in request.ThePGravamenContract!.ThePGravamenViolationContractList!)
+                {
+                    var violatedAct = new PGravamenViolation()
+                    {
+                        Id = GenerateFollowUpNo(PU135OrWebSite.WebSite),
+                        Timestamp = 1,
+                        RowNumber = violation?.RowNumber,
+                        SubjectTitle = violation?.SubjectTitle,
+                        ViolationAddress = violation?.ViolationAddress,
+                        ViolationDate = violation?.ViolationDate,
+                        ViolationDesc = violation?.ViolationDesc,
+                        ViolationPrice = violation?.ViolationPrice,
+                    };
+
+                    violationList.Add(violatedAct);
+                }
+
+
+                var attachmentList = new List<PGravamenAttachment>();
+                foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
+                {
+                    ValidateDocFile(attachment.TheGAttachmentDataContract!.DocFile);
+                    var attachedFile = new PGravamenAttachment()
+                    {
+                        Id = GenerateFollowUpNo(PU135OrWebSite.WebSite),
+                        Timestamp = 1,
+                        FileExtension = attachment.FileExtension,
+                        TheAttachmentType = new BaseInfo.DataModel.Types.AttachmentType()
+                        {
+                            Code = "300",
+                            Id = "300",
+                            Title = "پيوست شكوائيه مردمي",
+                            Timestamp = 1
+                        },
+                        TheGAttachmentData = new GAttachmentData()
+                        {
+                            DocFile = attachment.TheGAttachmentDataContract!.DocFile
+                        }
+                    };
+
+                    attachmentList.Add(attachedFile);
+                }
+
+
                 var gravamen = new PGravamen()
                 {
+                    Id = GenerateFollowUpNo(PU135OrWebSite.WebSite),
+                    Timestamp = 1,
                     PetitionSubject = request.ThePGravamenContract.PetitionSubject,
                     PetitionDescription = request.ThePGravamenContract.PetitionDescription,
                     NoticeText = request.ThePGravamenContract.NoticeText,
@@ -63,16 +141,24 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     ReporterFamily = request.ThePGravamenContract.ReporterFamily,
                     ReporterMobilNumber = request.ThePGravamenContract.ReporterMobilNumber,
 
-                    CreateDateTime = CalendarHelper.DateTimeNow().ToString(),
+                    ThePGravamenPersonList = personList,
+                    ThePGravamenAttachmentList = attachmentList,
+                    ThePGravamenViolationList = violationList,
+
+                    CreateDateTime = DateTime.Now.ToPersian().ToString(),
                     FollowUpNo = followupNumber,
                     HowDataType = PU135OrWebSite.WebSite,
-                    GravamenOrReport = request.ThePGravamenContract.GravamenOrReport,
+                    GravamenOrReport = Anu.PunishmentOrg.Enumerations.GravamenOrReport.Gravamen,
+
+
                 };
 
 
                 //await _unitOfWork.Repositorey<PGravamenRepository>().Add(gravamen);
+                //_unitOfWork.Complete();
 
-                return Respond(AnuResult.Successful);
+
+                return Respond(AnuResult.Successful, followupNumber);
             }
             catch (AnuExceptions ex)
             {
@@ -87,55 +173,14 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
         }
 
-        private bool AreNecessaryStartPositionsAvailable(PGravamenServiceRequest request)
+        private void ValidateDocFile(byte[] docFile)
         {
-            var personList = request.ThePGravamenContract.ThePGravamenPersonContractList;
-
-            bool[] availablePositions = new bool[2];
-            //var positionList = new List<string>();
-            var plaintiffIndex = 0;
-            var offendingIndex = 1;
-
-            foreach (var person in personList)
+            docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
+            if (docFile.Length / 1000 > 6000)
             {
-                if (person.Equals(nameof(PUPersonStartPost.PlaintiffPerson)))
-                {
-                    availablePositions[plaintiffIndex] = true;
-                }
-                if (person.Equals(nameof(PUPersonStartPost.OffendingPerson)))
-                {
-                    availablePositions[offendingIndex] = true;
-                }
-                //positionList.Add(nameof(person.PersonStartPost));
+                return Respond(PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold);
             }
-            if (availablePositions[plaintiffIndex] && availablePositions[offendingIndex])
-            {
-                return true;
-            }
-
-            //if (positionList.Contains(nameof(PUPersonStartPost.PlaintiffPerson)) && positionList.Contains(nameof(PUPersonStartPost.OffendingPerson)))
-            //{
-            //    return true;
-            //}
-
-            return false;
         }
-
-        private void NullCheckNecessaryFields(PGravamenServiceRequest request)
-        {
-            var req = request.ThePGravamenContract;
-            var errorResult = PGravamenResult.PGravamen_Field_IsNullOrInvalid;
-
-            req.PetitionSubject.NullOrWhiteSpace(errorResult, "موضوع شکوائیه");
-            req.PetitionDescription.NullOrWhiteSpace(errorResult, "شرح شکوائیه");
-            req.PetitionReasons.NullOrWhiteSpace(errorResult, "مدارک و مستندات");
-            req.RejectReasonText.NullOrWhiteSpace(errorResult, "علت رد/نقص شکوائیه");
-            req.NoticeText.NullOrWhiteSpace(errorResult, "متن آخرين ابلاغيه در مورد شکوائيه");
-            req.ReporterName.NullOrWhiteSpace(errorResult, "نام گزارش دهنده");
-            req.ReporterFamily.NullOrWhiteSpace(errorResult, "نام خانوادگی گزارش دهنده");
-            req.ReporterMobilNumber.NullOrWhiteSpace(errorResult, "تلفن همراه گزارش دهنده");
-        }
-
         #endregion Overrides
 
         #region Methods
@@ -193,9 +238,88 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             {
                 Result = result.GetResult(),
 
-                FollowupNumber = followupNumber
+                FollowUpNo = followupNumber
             };
             return response;
+        }
+
+        private bool AreNecessaryStartPositionsAvailable(PGravamenServiceRequest request)
+        {
+            var personList = request.ThePGravamenContract.ThePGravamenPersonContractList;
+
+            bool[] availablePositions = new bool[2];
+            //var positionList = new List<string>();
+            var plaintiffIndex = 0;
+            var offendingIndex = 1;
+
+            foreach (var person in personList)
+            {
+                PUPersonStartPost startPost;
+                if (person.PersonStartPost == PUPersonStartPost.PlaintiffPerson)
+                {
+                    NullCheckNecessaryPersonFields(person, PUPersonStartPost.PlaintiffPerson);
+
+                    availablePositions[plaintiffIndex] = true;
+                }
+                if (person.PersonStartPost == PUPersonStartPost.OffendingPerson)
+                {
+                    NullCheckNecessaryPersonFields(person, PUPersonStartPost.OffendingPerson);
+
+                    availablePositions[offendingIndex] = true;
+                }
+                //positionList.Add(nameof(person.PersonStartPost));
+            }
+            if (availablePositions[plaintiffIndex] && availablePositions[offendingIndex])
+            {
+                return true;
+            }
+
+            //if (positionList.Contains(nameof(PUPersonStartPost.PlaintiffPerson)) && positionList.Contains(nameof(PUPersonStartPost.OffendingPerson)))
+            //{
+            //    return true;
+            //}
+
+            return false;
+        }
+
+        private void NullCheckNecessaryPersonFields(PGravamenPersonContract person, PUPersonStartPost startPosition)
+        {
+            switch (startPosition)
+            {
+                case PUPersonStartPost.PlaintiffPerson:
+                    var errorCode = PGravamenResult.PGravamen_PlatiffNecessaryField_IsNullOrInvalid;
+                    person.Name.NullOrWhiteSpace(errorCode, "نام");
+                    person.Family.NullOrWhiteSpace(errorCode, "نام خانوادگی");
+                    person.BirthDate.NullOrWhiteSpace(errorCode, "تاریخ تولد");
+                    person.NationalCode.NullOrWhiteSpace(errorCode, "کد ملی");
+                    person.MobilNumber.NullOrWhiteSpace(errorCode, "تلفن همراه");
+                    person.Sex.Null(errorCode, "جنسیت");
+                    person.Address.NullOrWhiteSpace(errorCode, "ادرس");
+                    break;
+
+                case PUPersonStartPost.OffendingPerson:
+                    errorCode = PGravamenResult.PGravamen_OffendingNecessaryField_IsNullOrInvalid;
+                    person.Name.NullOrWhiteSpace(errorCode, "نام");
+                    person.TradeUnitName.NullOrWhiteSpace(errorCode, "نام واحد صنفی");
+                    break;
+            }
+        }
+
+        private void NullCheckNecessaryRequestFields(PGravamenServiceRequest request)
+        {
+            var req = request.ThePGravamenContract;
+            var errorResult = PGravamenResult.PGravamen_Field_IsNullOrInvalid;
+
+            req.PetitionSubject.NullOrWhiteSpace(errorResult, "موضوع شکوائیه");
+            req.PetitionDescription.NullOrWhiteSpace(errorResult, "شرح شکوائیه");
+            req.PetitionReasons.NullOrWhiteSpace(errorResult, "مدارک و مستندات");
+            req.RejectReasonText.NullOrWhiteSpace(errorResult, "علت رد/نقص شکوائیه");
+            req.NoticeText.NullOrWhiteSpace(errorResult, "متن آخرين ابلاغيه در مورد شکوائيه");
+            req.ReporterName.NullOrWhiteSpace(errorResult, "نام گزارش دهنده");
+            req.ReporterFamily.NullOrWhiteSpace(errorResult, "نام خانوادگی گزارش دهنده");
+            req.ReporterMobilNumber.NullOrWhiteSpace(errorResult, "تلفن همراه گزارش دهنده");
+
+            req.TheGAttachmentContractList.NullOrEmpty(PGravamenResult.PGravamen_NoAttachmentAvailable);
         }
 
         #endregion Methods

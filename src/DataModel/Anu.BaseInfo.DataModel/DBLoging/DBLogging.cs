@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
@@ -20,7 +20,7 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         public virtual string? ComputerName { get; set; }
 
         [Unicode(false)]
-        [Column("DESCRIPTION")]
+        [Column("DESCRIPTION", TypeName = "BLOB")]
         public virtual string? Description { get; set; }
 
         [Unicode(false)]
@@ -48,7 +48,7 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [Column("TRANSACTIONORDERNO")]
         public virtual long? TransactionOrderNo { get; set; }
 
-    }
+        }
 
     [Table("DBLOGGING")]
     public partial class DBLogging : DBLoggingBase

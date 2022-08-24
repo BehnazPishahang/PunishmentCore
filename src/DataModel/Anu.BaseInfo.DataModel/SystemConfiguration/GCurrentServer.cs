@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
@@ -22,7 +22,7 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
-    }
+        }
 
     [Table("GCURRENTSERVER")]
     public partial class GCurrentServer : GCurrentServerBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Terminate
 {
@@ -34,7 +34,7 @@ namespace Anu.PunishmentOrg.DataModel.Terminate
         [ForeignKey("PCONVICTSDATABASEJUDGEID")]
         public virtual Anu.PunishmentOrg.DataModel.Terminate.PConvictsDatabaseJudge? ThePConvictsDatabaseJudge { get; set; }
 
-    }
+        }
 
     [Table("PCONVICTSDATABASEBINDINGSUJ")]
     public partial class PConvictsDatabaseBindingSuj : PConvictsDatabaseBindingSujBase

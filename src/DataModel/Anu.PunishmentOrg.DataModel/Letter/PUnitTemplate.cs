@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
@@ -29,7 +29,7 @@ namespace Anu.PunishmentOrg.DataModel.Letter
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
-    }
+        }
 
     [Table("PUNITTEMPLATE")]
     public partial class PUnitTemplate : PUnitTemplateBase

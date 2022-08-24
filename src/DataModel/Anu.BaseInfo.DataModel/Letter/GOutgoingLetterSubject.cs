@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Letter
 {
@@ -14,7 +14,7 @@ namespace Anu.BaseInfo.DataModel.Letter
         [ForeignKey("OUTPUTLETTERTYPEID")]
         public virtual Anu.BaseInfo.DataModel.Types.OutputLetterType? TheOutputLetterType { get; set; }
 
-    }
+        }
 
     [Table("GOUTGOINGLETTERSUBJECT")]
     public partial class GOutgoingLetterSubject : GOutgoingLetterSubjectBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.InspectionReport
 {
@@ -116,7 +116,7 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
         [InverseProperty("ThePInspectionReportDirectors")]
         public virtual List<Anu.PunishmentOrg.DataModel.InspectionReport.PInspectionReportPost>? ThePInspectionReportPostList { get; set; }
 
-    }
+        }
 
     [Table("PINSPECTIONREPORTDIRECTORS")]
     public partial class PInspectionReportDirectors : PInspectionReportDirectorsBase

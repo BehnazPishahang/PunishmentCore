@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -19,7 +19,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [Column("PARAMETERCOUNT")]
         public virtual long? ParameterCount { get; set; }
 
-    }
+        }
 
     [Table("SYSTEMMESSAGE")]
     public partial class SystemMessage : SystemMessageBase

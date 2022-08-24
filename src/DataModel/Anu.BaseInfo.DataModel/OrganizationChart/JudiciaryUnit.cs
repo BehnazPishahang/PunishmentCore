@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.OrganizationChart
 {
@@ -42,7 +42,7 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [Column("UNITTYPE")]
         public virtual Anu.BaseInfo.Enumerations.JudiciaryUnitType? UnitType { get; set; }
 
-    }
+        }
 
     [Table("JUDICIARYUNIT")]
     public partial class JudiciaryUnit : JudiciaryUnitBase

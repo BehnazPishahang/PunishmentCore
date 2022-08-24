@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Security.Role
 {
@@ -18,7 +18,7 @@ namespace Anu.BaseInfo.DataModel.Security.Role
         [ForeignKey("CMSUSERROLETYPEID")]
         public virtual Anu.BaseInfo.DataModel.SystemConfiguration.CMSUserRoleType? TheCMSUserRoleType { get; set; }
 
-    }
+        }
 
     [Table("POSTROLEACTIVITYSECURITY")]
     public partial class PostRoleActivitySecurity : PostRoleActivitySecurityBase

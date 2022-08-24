@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
@@ -25,7 +25,7 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         [ForeignKey("PFORM5MINUTEID")]
         public virtual Anu.PunishmentOrg.DataModel.Destroyed.PForm5Minute? ThePForm5Minute { get; set; }
 
-    }
+        }
 
     [Table("PFORM5MINUTECONFIRMER")]
     public partial class PForm5MinuteConfirmer : PForm5MinuteConfirmerBase

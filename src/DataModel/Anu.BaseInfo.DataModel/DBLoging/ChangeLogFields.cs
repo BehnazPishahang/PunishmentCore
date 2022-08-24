@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
@@ -51,7 +51,7 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [ForeignKey("RELATEDSYSTEMOBJECTID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemObject? TheRelatedSystemObject { get; set; }
 
-    }
+        }
 
     [Table("CHANGELOGFIELDS")]
     public partial class ChangeLogFields : ChangeLogFieldsBase

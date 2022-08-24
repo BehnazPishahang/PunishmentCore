@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Dashboard
 {
@@ -28,7 +28,7 @@ namespace Anu.PunishmentOrg.DataModel.Dashboard
         [ForeignKey("PDASHBOARDUSERID")]
         public virtual Anu.PunishmentOrg.DataModel.Dashboard.PDashboardUser? ThePDashboardUser { get; set; }
 
-    }
+        }
 
     [Table("PDASHBOARDUSERCHARTS")]
     public partial class PDashboardUserCharts : PDashboardUserChartsBase

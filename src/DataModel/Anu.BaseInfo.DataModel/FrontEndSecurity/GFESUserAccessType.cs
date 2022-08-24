@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.FrontEndSecurity
 {
@@ -31,7 +31,7 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
-    }
+        }
 
     [Table("GFESUSERACCESSTYPE")]
     public partial class GFESUserAccessType : GFESUserAccessTypeBase

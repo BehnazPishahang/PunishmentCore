@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Lawyer
 {
@@ -19,7 +19,7 @@ namespace Anu.BaseInfo.DataModel.Lawyer
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
-    }
+        }
 
     [Table("GLAWYERCLUB")]
     public partial class GLawyerClub : GLawyerClubBase

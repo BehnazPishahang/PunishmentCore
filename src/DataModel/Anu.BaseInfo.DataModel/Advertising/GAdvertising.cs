@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Advertising
 {
@@ -30,7 +30,7 @@ namespace Anu.BaseInfo.DataModel.Advertising
         public virtual byte[]? AdvertisingPrintFile { get; set; }
 
         [Unicode(false)]
-        [Column("ADVERTISINGTEXT")]
+        [Column("ADVERTISINGTEXT", TypeName = "BLOB")]
         public virtual string? AdvertisingText { get; set; }
 
         [Unicode(false)]
@@ -92,7 +92,7 @@ namespace Anu.BaseInfo.DataModel.Advertising
         public virtual string? RelatedCaseDescription { get; set; }
 
         [Unicode(false)]
-        [Column("REQUESTTEXT")]
+        [Column("REQUESTTEXT", TypeName = "BLOB")]
         public virtual string? RequestText { get; set; }
 
         [Unicode(false)]
@@ -121,7 +121,7 @@ namespace Anu.BaseInfo.DataModel.Advertising
         [ForeignKey("OBJECTSTATEID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.ObjectState? TheObjectState { get; set; }
 
-    }
+        }
 
     [Table("GADVERTISING")]
     public partial class GAdvertising : GAdvertisingBase

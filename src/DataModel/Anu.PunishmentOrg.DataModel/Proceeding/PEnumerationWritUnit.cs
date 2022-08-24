@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Proceeding
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Proceeding
         [ForeignKey("PENUMERATIONWRITID")]
         public virtual Anu.PunishmentOrg.DataModel.Proceeding.PEnumerationWrit? ThePEnumerationWrit { get; set; }
 
-    }
+        }
 
     [Table("PENUMERATIONWRITUNIT")]
     public partial class PEnumerationWritUnit : PEnumerationWritUnitBase

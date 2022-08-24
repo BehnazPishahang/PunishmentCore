@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -36,7 +36,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [ForeignKey("OPERANDCOLUMNID")]
         public virtual Anu.BaseInfo.DataModel.DynamicFormGen.JTableReportColumn? TheOperandColumn { get; set; }
 
-    }
+        }
 
     [Table("JTABLEREPORTCOLUMNMATHEXP")]
     public partial class JTableReportColumnMathExp : JTableReportColumnMathExpBase

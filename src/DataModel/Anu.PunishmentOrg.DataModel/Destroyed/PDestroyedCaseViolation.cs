@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
@@ -24,7 +24,7 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         [ForeignKey("PDESTROYEDCASEID")]
         public virtual Anu.PunishmentOrg.DataModel.Destroyed.PDestroyedCase? ThePDestroyedCase { get; set; }
 
-    }
+        }
 
     [Table("PDESTROYEDCASEVIOLATION")]
     public partial class PDestroyedCaseViolation : PDestroyedCaseViolationBase

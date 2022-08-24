@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
 {
@@ -124,7 +124,7 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [InverseProperty("ThePDiscoveryMinutesSuspect")]
         public virtual List<Anu.PunishmentOrg.DataModel.DiscoveryMinutes.PDiscoveryMinutesSuspectVio>? ThePDiscoveryMinutesSuspectVioList { get; set; }
 
-    }
+        }
 
     [Table("PDISCOVERYMINUTESSUSPECT")]
     public partial class PDiscoveryMinutesSuspect : PDiscoveryMinutesSuspectBase

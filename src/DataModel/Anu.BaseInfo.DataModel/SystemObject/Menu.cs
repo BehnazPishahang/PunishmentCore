@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -35,7 +35,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [ForeignKey("SYSTEMFORMID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemForm? TheSystemForm { get; set; }
 
-    }
+        }
 
     [Table("MENU")]
     public partial class Menu : MenuBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -24,7 +24,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [ForeignKey("JTABLEREPORTPAGEANDGROUPID")]
         public virtual Anu.BaseInfo.DataModel.DynamicFormGen.JTableReportPageAndGroup? TheJTableReportPageAndGroup { get; set; }
 
-    }
+        }
 
     [Table("JTABLEREPORTFIELDPAGESTATE")]
     public partial class JTableReportFieldPageState : JTableReportFieldPageStateBase

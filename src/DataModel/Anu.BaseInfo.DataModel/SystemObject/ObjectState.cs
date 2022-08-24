@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -29,7 +29,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [Column("UNITLEVELACCESS")]
         public virtual string? UnitLevelAccess { get; set; }
 
-    }
+        }
 
     [Table("OBJECTSTATE")]
     public partial class ObjectState : ObjectStateBase

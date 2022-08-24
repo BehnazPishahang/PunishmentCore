@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [ForeignKey("UNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheUnit { get; set; }
 
-    }
+        }
 
     [Table("PDOCDEFAULTFONTSIZE")]
     public partial class PDocDefaultFontSize : PDocDefaultFontSizeBase

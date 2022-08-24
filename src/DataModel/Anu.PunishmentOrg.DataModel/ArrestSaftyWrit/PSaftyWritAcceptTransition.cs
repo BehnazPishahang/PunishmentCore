@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
 {
@@ -55,7 +55,7 @@ namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
         [Column("TRANSITIONPERSONTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.PUSaftyWritAcceptTransitionPersonType? TransitionPersonType { get; set; }
 
-    }
+        }
 
     [Table("PSAFTYWRITACCEPTTRANSITION")]
     public partial class PSaftyWritAcceptTransition : PSaftyWritAcceptTransitionBase
