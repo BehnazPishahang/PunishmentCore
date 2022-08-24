@@ -97,11 +97,119 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to توکن شما معتبر نیست..
+        ///   Looks up a localized string similar to كاربر ثبت كننده نامه را وارد کنید..
         /// </summary>
-        public static string JwtTokenIsNotValid {
+        public static string MechanizedLetter_CreatorUserName_Is_Null {
             get {
-                return ResourceManager.GetString("JwtTokenIsNotValid", resourceCulture);
+                return ResourceManager.GetString("MechanizedLetter_CreatorUserName_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد نوع موضوع نامه را انتخاب کنید..
+        /// </summary>
+        public static string MechanizedLetter_GMechanizedLetterTypeCode_Is_null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_GMechanizedLetterTypeCode_Is_null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to متن نامه را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_LetterText_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_LetterText_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to وارد کردن کد واحد فرستنده نامه اجباری می باشد..
+        /// </summary>
+        public static string MechanizedLetter_NAJAUnit_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_NAJAUnit_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاريخ نامه فرستنده معتبر نمی باشد..
+        /// </summary>
+        public static string MechanizedLetter_OuterOrgLetterDate_Is_Not_ValidDate {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_OuterOrgLetterDate_Is_Not_ValidDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاريخ نامه فرستنده را وارد نمایید...
+        /// </summary>
+        public static string MechanizedLetter_OuterOrgLetterDate_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_OuterOrgLetterDate_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره نامه فرستنده از نوع عدد نمی باشد..
+        /// </summary>
+        public static string MechanizedLetter_OuterOrgLetterNo_Is_Not_Digit {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_OuterOrgLetterNo_Is_Not_Digit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره نامه فرستنده را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_OuterOrgLetterNo_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_OuterOrgLetterNo_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to وارد کردن اطلاعات حداقل یک گیرنده برای نامه اجباری می باشد..
+        /// </summary>
+        public static string MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to وارد کردن پارامترهای ورودی اجباری می باشد..
+        /// </summary>
+        public static string MechanizedLetter_Request_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_Request_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد واحد فرستنده نامه معتبر نمی باشد..
+        /// </summary>
+        public static string MechanizedLetter_SenderOuterOrgCode_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_SenderOuterOrgCode_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد واحد فرستنده نامه را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_SenderOuterOrgCode_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_SenderOuterOrgCode_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد واحد گیرنده نامه معتبر نمی باشد..
+        /// </summary>
+        public static string MechanizedLetter_TheReceiverInnerOrgCode_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_TheReceiverInnerOrgCode_Is_Not_Valid", resourceCulture);
             }
         }
         

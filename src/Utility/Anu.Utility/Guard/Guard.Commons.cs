@@ -44,7 +44,7 @@ namespace Utility.Guard
             {
                 return false;
             }
-            
+
             if (input == string.Empty)
             {
                 return false;
@@ -151,53 +151,151 @@ namespace Utility.Guard
 
         public static string IsValidNationalCode(this string nationalCode)
         {
-            //در صورتی که کد ملی وارد شده تهی باشد
-            nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
+            ////در صورتی که کد ملی وارد شده تهی باشد
+            //nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
+            //
+            ////در صورتی که کد ملی وارد شده طولش کمتر از 10 رقم باشد
+            //nationalCode.Length(AnuResult.NationalCode_Length_Is_Not_Valid, 10);
+            //
+            ////در صورتی که کد ملی ده رقم عددی نباشد
+            //var regex = new Regex(@"\d{10}");
+            //nationalCode.IsMatch(AnuResult.NationalCode_Must_Be_Number, regex);
+            //
+            ////در صورتی که رقم‌های کد ملی وارد شده یکسان باشد
+            //var allDigitEqual = new[] { "0000000000", "1111111111", "2222222222", "3333333333", "4444444444", "5555555555", "6666666666", "7777777777", "8888888888", "9999999999" };
+            //if (allDigitEqual.Contains(nationalCode))
+            //{
+            //    nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
+            //}
 
-            //در صورتی که کد ملی وارد شده طولش کمتر از 10 رقم باشد
-            nationalCode.Length(AnuResult.NationalCode_Length_Is_Not_Valid, 10);
-
-            //در صورتی که کد ملی ده رقم عددی نباشد
-            var regex = new Regex(@"\d{10}");
-            nationalCode.IsMatch(AnuResult.NationalCode_Must_Be_Number,regex);
-
-            //در صورتی که رقم‌های کد ملی وارد شده یکسان باشد
-            var allDigitEqual = new[] { "0000000000", "1111111111", "2222222222", "3333333333", "4444444444", "5555555555", "6666666666", "7777777777", "8888888888", "9999999999" };
-            if (allDigitEqual.Contains(nationalCode))
-            {
-                nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
-            }
-
-            var chArray = nationalCode.ToCharArray();
-            var num0 = Convert.ToInt32(chArray[0].ToString()) * 10;
-            var num2 = Convert.ToInt32(chArray[1].ToString()) * 9;
-            var num3 = Convert.ToInt32(chArray[2].ToString()) * 8;
-            var num4 = Convert.ToInt32(chArray[3].ToString()) * 7;
-            var num5 = Convert.ToInt32(chArray[4].ToString()) * 6;
-            var num6 = Convert.ToInt32(chArray[5].ToString()) * 5;
-            var num7 = Convert.ToInt32(chArray[6].ToString()) * 4;
-            var num8 = Convert.ToInt32(chArray[7].ToString()) * 3;
-            var num9 = Convert.ToInt32(chArray[8].ToString()) * 2;
-            var a = Convert.ToInt32(chArray[9].ToString());
-
-            var b = (((((((num0 + num2) + num3) + num4) + num5) + num6) + num7) + num8) + num9;
-            var c = b % 11;
-
-            if(!(((c < 2) && (a == c)) || ((c >= 2) && ((11 - c) == a))))
-            {
-                throw new AnuExceptions(AnuResult.NationalCode_Is_Not_Valid);
-            }
-
-            return nationalCode;
+            return "";
         }
 
-        public static string IsValidPhone(this string Phone)
+        public static bool IsValidDate(this string? dateString, Enum type, string args = null)
         {
-            Phone.NullOrEmpty(AnuResult.PhoneNumber_Is_Not_Entered);
-            var r = new Regex(@"^(?:0|98|\+98|\+980|0098|098|00980)?(9\d{9})$");
-            Phone.IsMatch(AnuResult.PhoneNumber_Is_Not_Valid, r);
+            if (string.IsNullOrEmpty(dateString))
+            {
+                throw new AnuExceptions(type, args);
+            }
 
-            return Phone;
+            bool blnTruncated = true;
+            bool blnValid = true;
+
+            dateString = dateString.Trim();
+
+            if (dateString.Length == 10)
+                blnTruncated = false;
+            else if (dateString.Length == 8)
+                blnTruncated = true;
+            else
+            {
+                blnValid = false;
+                throw new AnuExceptions(type, args);
+            }
+
+            if (blnValid)
+            {
+                int pos1 = dateString.IndexOf("/");
+
+                if ((pos1 == 4 && !blnTruncated) || (pos1 == 2 && blnTruncated))
+                {
+                    int pos2 = dateString.IndexOf("/", pos1 + 1);
+                    if ((pos2 == 7 && !blnTruncated) || (pos1 == 5 && blnTruncated))
+                    {
+                        string[] arrDateItems = dateString.Split('/');
+
+                        int year = int.Parse(arrDateItems[0]);
+                        int month = int.Parse(arrDateItems[1]);
+                        int day = int.Parse(arrDateItems[2]);
+
+                        if (blnTruncated)
+                            year += 1300;
+
+                        if (month <= 12 && month >= 1)
+                        {
+                            if (month < 7)
+                                blnValid = (day <= 31 && day >= 1);
+                            else if ((month < 12 && month >= 7) || (month == 12 && IsLeapYear(year)))
+                                blnValid = (day <= 30 && day >= 1);
+                            else
+                                blnValid = (day <= 29 && day >= 1);
+
+                        }
+                        else
+                        {
+                            blnValid = false;
+                            throw new AnuExceptions(type, args);
+                        }
+
+                    }
+                    else
+                    {
+                        blnValid = false;
+                        throw new AnuExceptions(type, args);
+                    }
+                }
+                else
+                {
+                    blnValid = false;
+                    throw new AnuExceptions(type, args);
+                }
+            }
+
+            return blnValid;
+
+        }
+
+        public static bool IsValidPhone(this string? dateString)
+        {
+            return true;
+        }
+
+        public static bool IsLeapYear(int year)
+        {
+            int temp1, temp2;
+
+            if (year == 474)
+                return true;
+
+            if (year < 474)
+                temp1 = year + 42;
+            else
+                temp1 = year + 38;
+
+            temp2 = (temp1 % 128);
+            if (temp2 == 0)
+                return true;
+
+            if (temp2 <= 30)//main
+            {
+                if (((temp2 % 4) == 1) && (temp2 != 1))
+                    return true;
+            }
+            else
+            {
+                if (temp2 <= 63) //2
+                {
+                    if ((temp2 % 4) == 2)
+                        return true;
+                }
+                else
+                {
+                    if (temp2 <= 96) //3
+                    {
+                        if ((temp2 % 4) == 3)
+                            return true;
+                    }
+                    else
+                    {
+                        if (temp2 > 30)
+                        {
+                            if ((temp2 % 4) == 0) return true;
+                        }
+                    }//else 3
+                }//else 2
+            }//if else main
+
+            return false;
         }
 
         public enum PasswordScore

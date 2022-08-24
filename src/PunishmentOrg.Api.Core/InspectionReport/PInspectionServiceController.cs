@@ -37,7 +37,7 @@ namespace Anu.PunishmentOrg.Api.InspectionReport
             request.ThePInspectionReportStateInputContract.UniqueNo.NullOrWhiteSpace(PInspectionReportResult.Error_UniqueNo_Is_Required, "مکانیزه گزارش بازرسی");
             request.ThePInspectionReportStateInputContract.UniqueNo.IsDigit(PInspectionReportResult.Error_UniqueNo_Is_Required, args: "مکانیزه گزارش بازرسی");
 
-            var thePInspectionReport = await _unitOfWork.Repositorey<PInspectionReportRepository>().GetPInspectionReportByUniqueNo(request.ThePInspectionReportStateInputContract.ThePInspectionReportStateInputContract.UniqueNo);
+            var thePInspectionReport = await _unitOfWork.Repositorey<PInspectionReportRepository>().GetPInspectionReportByUniqueNo(request.ThePInspectionReportStateInputContract.UniqueNo);
             thePInspectionReport.Null(PInspectionReportResult.PInspectionReport_No_Is_NotValid);
             thePInspectionReport.TheObjectState.Null(PInspectionReportResult.Error_to_Find_State, "گزارش بازرسی");
 

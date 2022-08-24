@@ -89,7 +89,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 FatherName = "b",
                 LastChangePassword = CalendarHelper.GetCurrentDateTime(),
                 Name = "c",
-                Sex = BaseInfo.Enumerations.SexType.None
+                Sex = Anu.BaseInfo.Enumerations.SexType.None
             };
 
             await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Add(user);
