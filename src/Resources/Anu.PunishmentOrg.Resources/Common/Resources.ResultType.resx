@@ -133,6 +133,10 @@
     <value>به واحد اجرای احکام ارجاع شده</value>
     <comment>20003</comment>
   </data>
+  <data name="GeoLocation_Request_IsNull" xml:space="preserve">
+    <value>درخواست بدنه نمی‌تواند خالی باشد.</value>
+    <comment>-50001</comment>
+  </data>
   <data name="MechanizedLetter_CreatorUserName_Is_Null" xml:space="preserve">
     <value>كاربر ثبت كننده نامه را وارد کنید.</value>
     <comment>-60001</comment>
@@ -208,6 +212,9 @@
   <data name="PBillStore_NoProductListProvided" xml:space="preserve">
     <value>لیست کالا خالی است!</value>
     <comment>-30002</comment>
+  </data>
+  <data name="PBillStore_Request_NotValid" xml:space="preserve">
+    <value>درخواست معتبر نمی باشد.</value>
   </data>
   <data name="PDiscoveryMinuteSate_ConfirmAndSendToUnit" xml:space="preserve">
     <value>ثبت و ارسال به مرجع رسیدگی کننده</value>
