@@ -47,7 +47,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             {
                 request.Null(PGravamenResult.PGravamen_Request_IsNullOrCorrupt);
 
-                NullCheckNecessaryFields(request);
+                NullCheckNecessaryRequestFields(request);
 
                 if (!AreNecessaryStartPositionsAvailable(request))
                 {
@@ -59,7 +59,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 var personList = new List<PGravamenPerson>();
                 foreach (var person in request.ThePGravamenContract!.ThePGravamenPersonContractList!)
                 {
-                    var p = new PGravamenPerson()
+                    var currenPerson = new PGravamenPerson()
                     {
                         Id = GenerateFollowUpNo(PU135OrWebSite.WebSite),
                         Timestamp = 1,
@@ -80,13 +80,13 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                         PersonPassword = person?.PersonPassword,
                     };
 
-                    personList.Add(p);
+                    personList.Add(currenPerson);
                 }
 
                 var violationList = new List<PGravamenViolation>();
                 foreach (var violation in request.ThePGravamenContract!.ThePGravamenViolationContractList!)
                 {
-                    var v = new PGravamenViolation()
+                    var violatedAct = new PGravamenViolation()
                     {
                         Id = GenerateFollowUpNo(PU135OrWebSite.WebSite),
                         Timestamp = 1,
@@ -98,14 +98,15 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                         ViolationPrice = violation?.ViolationPrice,
                     };
 
-                    violationList.Add(v);
+                    violationList.Add(violatedAct);
                 }
 
 
                 var attachmentList = new List<PGravamenAttachment>();
                 foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
                 {
-                    var a = new PGravamenAttachment()
+                    ValidateDocFile(attachment.TheGAttachmentDataContract!.DocFile);
+                    var attachedFile = new PGravamenAttachment()
                     {
                         Id = GenerateFollowUpNo(PU135OrWebSite.WebSite),
                         Timestamp = 1,
@@ -123,7 +124,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                         }
                     };
 
-                    attachmentList.Add(a);
+                    attachmentList.Add(attachedFile);
                 }
 
 
@@ -149,12 +150,12 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     HowDataType = PU135OrWebSite.WebSite,
                     GravamenOrReport = Anu.PunishmentOrg.Enumerations.GravamenOrReport.Gravamen,
 
-                    
+
                 };
 
 
-                await _unitOfWork.Repositorey<PGravamenRepository>().Add(gravamen);
-                _unitOfWork.Complete();
+                //await _unitOfWork.Repositorey<PGravamenRepository>().Add(gravamen);
+                //_unitOfWork.Complete();
 
 
                 return Respond(AnuResult.Successful, followupNumber);
@@ -170,6 +171,15 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 return response;
             }
 
+        }
+
+        private void ValidateDocFile(byte[] docFile)
+        {
+            docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
+            if (docFile.Length / 1000 > 6000)
+            {
+                return Respond(PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold);
+            }
         }
         #endregion Overrides
 
@@ -247,10 +257,14 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 PUPersonStartPost startPost;
                 if (person.PersonStartPost == PUPersonStartPost.PlaintiffPerson)
                 {
+                    NullCheckNecessaryPersonFields(person, PUPersonStartPost.PlaintiffPerson);
+
                     availablePositions[plaintiffIndex] = true;
                 }
                 if (person.PersonStartPost == PUPersonStartPost.OffendingPerson)
                 {
+                    NullCheckNecessaryPersonFields(person, PUPersonStartPost.OffendingPerson);
+
                     availablePositions[offendingIndex] = true;
                 }
                 //positionList.Add(nameof(person.PersonStartPost));
@@ -268,7 +282,30 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             return false;
         }
 
-        private void NullCheckNecessaryFields(PGravamenServiceRequest request)
+        private void NullCheckNecessaryPersonFields(PGravamenPersonContract person, PUPersonStartPost startPosition)
+        {
+            switch (startPosition)
+            {
+                case PUPersonStartPost.PlaintiffPerson:
+                    var errorCode = PGravamenResult.PGravamen_PlatiffNecessaryField_IsNullOrInvalid;
+                    person.Name.NullOrWhiteSpace(errorCode, "نام");
+                    person.Family.NullOrWhiteSpace(errorCode, "نام خانوادگی");
+                    person.BirthDate.NullOrWhiteSpace(errorCode, "تاریخ تولد");
+                    person.NationalCode.NullOrWhiteSpace(errorCode, "کد ملی");
+                    person.MobilNumber.NullOrWhiteSpace(errorCode, "تلفن همراه");
+                    person.Sex.Null(errorCode, "جنسیت");
+                    person.Address.NullOrWhiteSpace(errorCode, "ادرس");
+                    break;
+
+                case PUPersonStartPost.OffendingPerson:
+                    errorCode = PGravamenResult.PGravamen_OffendingNecessaryField_IsNullOrInvalid;
+                    person.Name.NullOrWhiteSpace(errorCode, "نام");
+                    person.TradeUnitName.NullOrWhiteSpace(errorCode, "نام واحد صنفی");
+                    break;
+            }
+        }
+
+        private void NullCheckNecessaryRequestFields(PGravamenServiceRequest request)
         {
             var req = request.ThePGravamenContract;
             var errorResult = PGravamenResult.PGravamen_Field_IsNullOrInvalid;
@@ -281,6 +318,8 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             req.ReporterName.NullOrWhiteSpace(errorResult, "نام گزارش دهنده");
             req.ReporterFamily.NullOrWhiteSpace(errorResult, "نام خانوادگی گزارش دهنده");
             req.ReporterMobilNumber.NullOrWhiteSpace(errorResult, "تلفن همراه گزارش دهنده");
+
+            req.TheGAttachmentContractList.NullOrEmpty(PGravamenResult.PGravamen_NoAttachmentAvailable);
         }
 
         #endregion Methods
