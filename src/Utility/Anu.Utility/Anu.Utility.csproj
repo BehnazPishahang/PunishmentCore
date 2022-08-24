@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\DataModel\Anu.Oracle.DbContext\Anu.Oracle.DbContext.csproj" />
     <ProjectReference Include="..\..\Resources\Anu.PunishmentOrg.Resources\Anu.PunishmentOrg.Resources.csproj" />
     <ProjectReference Include="..\..\ServiceModel\Anu.Commons.ServiceModel\Anu.Commons.ServiceModel.csproj" />

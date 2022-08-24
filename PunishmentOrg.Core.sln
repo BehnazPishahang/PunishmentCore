@@ -79,8 +79,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorComponent", "BlazorCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.PersianDatePicker", "src\Client\BlazorComponents\Blazor.PersianDatePicker\Blazor.PersianDatePicker.csproj", "{9061904E-2B64-4E46-9362-A4E173AB6C11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anu.SmsMagfa.Utility", "src\Utility\Anu.SmsMagfa.Utility\Anu.SmsMagfa.Utility.csproj", "{EE89FC91-B424-4EA6-9A10-21E1BB5E49D1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -191,10 +189,6 @@ Global
 		{9061904E-2B64-4E46-9362-A4E173AB6C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9061904E-2B64-4E46-9362-A4E173AB6C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9061904E-2B64-4E46-9362-A4E173AB6C11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE89FC91-B424-4EA6-9A10-21E1BB5E49D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE89FC91-B424-4EA6-9A10-21E1BB5E49D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE89FC91-B424-4EA6-9A10-21E1BB5E49D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE89FC91-B424-4EA6-9A10-21E1BB5E49D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -236,7 +230,6 @@ Global
 		{9FEFDA58-5BE1-42C8-923B-8BAE041D5775} = {764DEE62-5D42-48EC-980C-BD2C1952F9C8}
 		{AE959C85-B45B-4FB2-8541-CDD9E71A05EA} = {764DEE62-5D42-48EC-980C-BD2C1952F9C8}
 		{9061904E-2B64-4E46-9362-A4E173AB6C11} = {AE959C85-B45B-4FB2-8541-CDD9E71A05EA}
-		{EE89FC91-B424-4EA6-9A10-21E1BB5E49D1} = {7CE599F6-EB99-4A75-8801-CBEE545BF8BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CC95B07-6C72-475D-9332-5EC60C981FED}

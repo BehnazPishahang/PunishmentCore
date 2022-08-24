@@ -14,7 +14,12 @@ namespace Utility.Exceptions
 
         public AnuExceptions(string message, Exception inner)
             : base(message, inner) { }
-        public AnuExceptions(Enum type, string args = null) 
+
+        public AnuExceptions(Enum type)
+        {
+            result = type.GetResult();
+        }
+        public AnuExceptions(Enum type, string args = null)
         {
             if (args is null)
             {
@@ -24,6 +29,46 @@ namespace Utility.Exceptions
             {
                 result = type.GetResult(args);
             }
+        }
+
+        public AnuExceptions(Enum type, string args = null, Exception exception = null)
+        {
+            if (args is null)
+            {
+                if (exception is null)
+                {
+                    result = type.GetResult();
+                }
+                else
+                {
+                    result = type.GetResult(exception);
+                }
+            }
+            else
+            {
+                if (exception is null)
+                {
+                    result = type.GetResult(args);
+                }
+                else
+                {
+                    result = type.GetResult(args, exception);
+                }
+            }
+        }
+
+        public AnuExceptions(Enum type, Exception exception = null)
+        {
+
+            if (exception is null)
+            {
+                result = type.GetResult();
+            }
+            else
+            {
+                result = type.GetResult(exception);
+            }
+
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Anu.SmsMagfa.Utility.Sms;
+﻿using Anu.Utility.Sms;
 
 namespace Anu.PunishmentOrg.Api.Authentication.Utility
 {
@@ -10,7 +10,7 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
             string message = "کد فعال سازی شما {0} است .";
             message = string.Format(message,code);
 
-            await SmsSender.SendSms(message);
+            await SmsSender.SendSms(phoneNumber,message);
 
             return code;
         }
