@@ -241,6 +241,33 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to یکی از فیلدهای ضروری خالی می باشد.
+        /// </summary>
+        public static string PGravamen_Field_IsNullOrInvalid {
+            get {
+                return ResourceManager.GetString("PGravamen_Field_IsNullOrInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to یک یا هر دو جایگاه ضروری در شکوائیه، وجود ندارد.
+        /// </summary>
+        public static string PGravamen_NecessaryPositions_AreNotAvailabe {
+            get {
+                return ResourceManager.GetString("PGravamen_NecessaryPositions_AreNotAvailabe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نامعتبر است.
+        /// </summary>
+        public static string PGravamen_Request_IsNullOrCorrupt {
+            get {
+                return ResourceManager.GetString("PGravamen_Request_IsNullOrCorrupt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تلفن همراه را وارد کنید..
         /// </summary>
         public static string PhoneNumber_Is_Not_Entered {
