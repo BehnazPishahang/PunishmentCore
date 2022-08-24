@@ -34,7 +34,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
         public async Task<FirstStepAuthResult> Login([FromBody] FirstStepUserLoginRequest request)
         {
 
-            //string password =await "13156156".SendAuthenticateSms(6);
+            string password = await "13156156".SendAuthenticateSms(6);
 
 
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
@@ -49,7 +49,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            string password = await request.PhoneNumber.SendAuthenticateSms(6);
+            //string password = await request.PhoneNumber.SendAuthenticateSms(6);
             string passWordHash = MD5Core.GetHashString(password);
 
             theGFESUser.Password = passWordHash;

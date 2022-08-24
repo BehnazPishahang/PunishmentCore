@@ -50,7 +50,7 @@ namespace SmsMagfa
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("messagesResult", Namespace = "webservice.magfa.com")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "webservice.magfa.com")]
     public partial class messagesResult
     {
 
@@ -59,7 +59,7 @@ namespace SmsMagfa
         private datedCustomerReturnIncomingFormat[] messagesField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("status", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        [System.Xml.Serialization.XmlElementAttribute( Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
         public int status
         {
             get
@@ -73,7 +73,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("messages", IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
+        [System.Xml.Serialization.XmlElementAttribute( IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
         public datedCustomerReturnIncomingFormat[] messages
         {
             get
@@ -97,7 +97,7 @@ namespace SmsMagfa
         private string dateField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("date", IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
         public string date
         {
             get
@@ -115,7 +115,7 @@ namespace SmsMagfa
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(datedCustomerReturnIncomingFormat))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("customerReturnIncomingFormat", Namespace = "webservice.magfa.com")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "webservice.magfa.com")]
     public partial class customerReturnIncomingFormat
     {
 
@@ -128,7 +128,7 @@ namespace SmsMagfa
         private string errorResultField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("body", IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
         public string body
         {
             get
@@ -142,7 +142,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("senderNumber", IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
         public string senderNumber
         {
             get
@@ -156,7 +156,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("recipientNumber", IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
         public string recipientNumber
         {
             get
@@ -170,7 +170,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("errorResult", IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
         public string errorResult
         {
             get
@@ -187,7 +187,7 @@ namespace SmsMagfa
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("creditResult", Namespace = "webservice.magfa.com")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "webservice.magfa.com")]
     public partial class creditResult
     {
 
@@ -196,7 +196,7 @@ namespace SmsMagfa
         private decimal balanceField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("status", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
         public int status
         {
             get
@@ -210,7 +210,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("balance", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
         public decimal balance
         {
             get
@@ -227,7 +227,7 @@ namespace SmsMagfa
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("sendMessage", Namespace = "webservice.magfa.com")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "webservice.magfa.com")]
     public partial class sendMessage
     {
 
@@ -246,7 +246,7 @@ namespace SmsMagfa
         private long userIdField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("alphabet", IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
         public string alphabet
         {
             get
@@ -260,7 +260,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("id", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
         public long id
         {
             get
@@ -274,7 +274,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("parts", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
         public int parts
         {
             get
@@ -288,7 +288,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("recipient", IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
         public string recipient
         {
             get
@@ -302,7 +302,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("status", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 4)]
         public int status
         {
             get
@@ -316,7 +316,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("tariff", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 5)]
         public double tariff
         {
             get
@@ -330,7 +330,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("userId", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 6)]
         public long userId
         {
             get
@@ -347,7 +347,7 @@ namespace SmsMagfa
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("sendResult", Namespace = "webservice.magfa.com")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "webservice.magfa.com")]
     public partial class sendResult
     {
 
@@ -356,7 +356,7 @@ namespace SmsMagfa
         private sendMessage[] messagesField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("status", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
         public int status
         {
             get
@@ -370,7 +370,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("messages", IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
+        [System.Xml.Serialization.XmlElementAttribute( IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
         public sendMessage[] messages
         {
             get
@@ -387,7 +387,7 @@ namespace SmsMagfa
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("deliveryStatus", Namespace = "webservice.magfa.com")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "webservice.magfa.com")]
     public partial class deliveryStatus
     {
 
@@ -400,7 +400,7 @@ namespace SmsMagfa
         private string smscField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("mid", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
         public long mid
         {
             get
@@ -414,7 +414,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("status", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
         public int status
         {
             get
@@ -428,7 +428,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("date", IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 2)]
         public string date
         {
             get
@@ -442,7 +442,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("smsc", IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true, Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 3)]
         public string smsc
         {
             get
@@ -459,7 +459,7 @@ namespace SmsMagfa
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("deliveryResult", Namespace = "webservice.magfa.com")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "webservice.magfa.com")]
     public partial class deliveryResult
     {
 
@@ -468,7 +468,7 @@ namespace SmsMagfa
         private deliveryStatus[] dlrsField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("status", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
         public int status
         {
             get
@@ -499,7 +499,7 @@ namespace SmsMagfa
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute("messageIdResult", Namespace = "webservice.magfa.com")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "webservice.magfa.com")]
     public partial class messageIdResult
     {
 
@@ -508,7 +508,7 @@ namespace SmsMagfa
         private long midField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("status", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 0)]
         public int status
         {
             get
@@ -522,7 +522,7 @@ namespace SmsMagfa
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("mid", Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified, Order = 1)]
         public long mid
         {
             get
@@ -546,7 +546,7 @@ namespace SmsMagfa
 
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "webservice.magfa.com", Order = 0)]
         [System.Xml.Serialization.XmlArrayAttribute()]
-        [System.Xml.Serialization.XmlArrayItemAttribute("item", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public System.Nullable<long>[] mids;
 
         public statuses()
@@ -590,37 +590,37 @@ namespace SmsMagfa
 
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "webservice.magfa.com", Order = 0)]
         [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("messages", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute( Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string[] messages;
 
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "webservice.magfa.com", Order = 1)]
         [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("senders", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string[] senders;
 
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "webservice.magfa.com", Order = 2)]
         [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("recipients", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string[] recipients;
 
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "webservice.magfa.com", Order = 3)]
         [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("uids", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public System.Nullable<long>[] uids;
 
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "webservice.magfa.com", Order = 4)]
         [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("encodings", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public System.Nullable<int>[] encodings;
 
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "webservice.magfa.com", Order = 5)]
         [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("udhs", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string[] udhs;
 
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "webservice.magfa.com", Order = 6)]
         [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
-        [System.Xml.Serialization.XmlArrayItemAttribute("priorities", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public System.Nullable<int>[] priorities;
 
         public send()
