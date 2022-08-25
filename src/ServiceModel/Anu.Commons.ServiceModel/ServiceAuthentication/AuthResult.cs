@@ -1,6 +1,6 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponse;
 
-namespace Anu.Commons.ServiceModel.ServiceLogin
+namespace Anu.Commons.ServiceModel.ServiceAuthentication
 {
     public class AuthResult : IResponseMessage
     {

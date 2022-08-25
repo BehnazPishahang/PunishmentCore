@@ -26,6 +26,8 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         NationalCode_Must_Be_Number = -10008,
         PhoneNumber_Is_Not_Entered = -10009,
         PhoneNumber_Is_Not_Valid = -100010,
-        User_Is_Exist = -100011
+        User_Is_Exist = -100011,
+        Error_Send_Sms = -100012,
+        HttpError_Send_Sms = -100012
     }
 }

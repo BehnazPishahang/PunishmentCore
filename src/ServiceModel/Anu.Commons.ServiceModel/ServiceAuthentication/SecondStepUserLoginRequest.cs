@@ -1,9 +1,9 @@
-﻿namespace Anu.Commons.ServiceModel.ServiceLogin
+﻿namespace Anu.Commons.ServiceModel.ServiceAuthentication
 {
-    public class UserRegisterRequest
+    public class SecondStepUserLoginRequest
     {
-        [System.ComponentModel.DataAnnotations.Required]
-        public string? UserName { get; set; }
+        //[System.ComponentModel.DataAnnotations.Required]
+        //public string? UserName { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string? Password { get; set; }
