@@ -41,9 +41,17 @@
         {
             _context.Dispose();
         }
-
-        public TRepository Repositorey<TRepository>() where TRepository : class
+        
+        public TRepository Repositorey<TRepository>() where TRepository : Domain.IGenericRepository
         {
+            //if (typeof(TRepository).IsClass)
+            //{ 
+            //}
+            //
+            //if (typeof(TRepository).IsInterface)
+            //{
+            //
+            //}
             return (TRepository)Activator.CreateInstance(typeof(TRepository), new object[] { _context });
         }
 

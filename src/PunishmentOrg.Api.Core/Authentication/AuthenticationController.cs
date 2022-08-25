@@ -1,8 +1,10 @@
 ﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
+using Anu.BaseInfo.DataAccess.SystemObject;
 using Anu.BaseInfo.DataModel.ExchangeData;
 using Anu.BaseInfo.DataModel.FrontEndSecurity;
 using Anu.BaseInfo.DataModel.SystemObject;
 using Anu.BaseInfo.Domain.FrontEndSecurity;
+using Anu.BaseInfo.Domain.SystemObject;
 using Anu.Commons.ServiceModel.ServiceLogin;
 using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
@@ -41,13 +43,14 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-                request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
-                //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
-                //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
-                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
-                theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
+            var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
+            var ObjectStateAll1 = _unitOfWork.Repositorey<IObjectStateRepository>().GetAll();
+            var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+            theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
             var jwtToken = GenerateJwtToken(theGFESUser);
 
