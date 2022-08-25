@@ -1,6 +1,7 @@
 ﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
 using Anu.BaseInfo.DataModel.FrontEndSecurity;
 using Anu.BaseInfo.Domain.FrontEndSecurity;
+using Anu.BaseInfo.Domain.SystemObject;
 using Anu.Commons.ServiceModel.ServiceLogin;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.DataAccess;
