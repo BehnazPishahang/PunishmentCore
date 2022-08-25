@@ -24,5 +24,10 @@
 	  <ProjectReference Include="..\..\ServiceModel\Anu.PunishmentOrg.ServiceModel\Anu.PunishmentOrg.ServiceModel.csproj" />
 	  <ProjectReference Include="..\..\Utility\Anu.Utility\Anu.Utility.csproj" />
 	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Folder Include="Gravamen\" />
+	</ItemGroup>
 	
 </Project>

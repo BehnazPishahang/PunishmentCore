@@ -1,6 +1,4 @@
-﻿
-using Anu.Commons.ServiceModel.ServiceResponse;
-using Anu.PunishmentOrg.ServiceModel.ServiceContract;
+﻿using Anu.Commons.ServiceModel.ServiceResponse;
 
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
