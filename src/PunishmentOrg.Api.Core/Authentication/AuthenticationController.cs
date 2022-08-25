@@ -35,19 +35,16 @@ namespace Anu.PunishmentOrg.Api.Authentication
         {
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            request.PhoneNumber.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-            //request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
-            request.PhoneNumber.IsValidPhone();
+            request.UserName.IsValidNationalCode();
 
             var theGFESUser = (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>()
-                .Find(x => x.MobileNumber4SMS==request.PhoneNumber)).FirstOrDefault();
+                .Find(x => x.NationalityCode==request.UserName)).FirstOrDefault();
 
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-
-
-            string password = await request.PhoneNumber.SendAuthenticateSms(6);
+            string password = await theGFESUser.MobileNumber4SMS.SendAuthenticateSms(6);
             string passWordHash = MD5Core.GetHashString(password);
 
             theGFESUser.Password = passWordHash;
@@ -56,12 +53,6 @@ namespace Anu.PunishmentOrg.Api.Authentication
             {
                 return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
             }
-
-
-            //var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
-            //theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
-
-            //var jwtToken = GenerateJwtToken(theGFESUser);
 
             return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.Successful.GetResult() };
 
@@ -85,8 +76,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 return new FirstStepAuthResult() { Result = AnuResult.User_Is_Exist.GetResult() };
             }
 
-            request.ShahkarAuthenticate();
-            request.SabteahvalAuthenticate();
+            await request.ShahkarAuthenticate();
+            await request.SabteahvalAuthenticate();
 
 
             string password = await request.PhoneNumber.SendAuthenticateSms(6);
