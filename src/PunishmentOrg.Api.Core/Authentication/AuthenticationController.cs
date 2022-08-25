@@ -101,11 +101,11 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 NationalityCode = request.UserName,
                 StartDate = CalendarHelper.GetCurrentDateTime(),
                 EndDate = CalendarHelper.MaxDateTime(),
-                Family = "a",
+                Family = request.LastName,
                 FatherName = "b",
                 LastChangePassword = CalendarHelper.GetCurrentDateTime(),
-                Name = "c",
-                Sex = BaseInfo.Enumerations.SexType.None
+                Name = request.FirstName,
+                Sex = request.Sex
             };
 
             await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Add(user);
