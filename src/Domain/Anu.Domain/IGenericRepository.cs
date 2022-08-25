@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Anu.Domain
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> : IGenericRepository
+        where T : class
     {
         Task<T> GetById(string id);
         Task<IEnumerable<T>> GetAll();
@@ -17,5 +18,9 @@ namespace Anu.Domain
         Task AddRange(IEnumerable<T> entities);
         Task Remove(T entity);
         Task RemoveRange(IEnumerable<T> entities);
+    }
+
+    public interface IGenericRepository
+    {
     }
 }
