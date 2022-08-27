@@ -127,13 +127,13 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            request.PhoneNumber.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
             request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
-            request.PhoneNumber.IsValidPhone();
+            request.UserName.IsValidNationalCode();
 
 
-            var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByPhoneNumberAndPassWordAsyncWithAccessTypes(request.PhoneNumber, request.Password);
+            var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
             //check the database for how seconds pass and is the code valid
