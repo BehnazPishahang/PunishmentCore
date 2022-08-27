@@ -1,5 +1,6 @@
 ﻿
-using Anu.Commons.ServiceModel.ServiceLogin;
+using Anu.Commons.ServiceModel.ServiceAuthentication;
+
 using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization;
 
 namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
@@ -21,12 +22,22 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
 
         }
 
-        public AuthResult LoginUser(String baseURl, string serviceName, UserLoginRequest loginInfo)
+        public AuthResult LoginUser(String baseURl, string serviceName, FirstStepUserLoginRequest firstStepUserLoginRequest)
 
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(baseURl);
-            var response = client.PostAsJsonAsync(serviceName, loginInfo).Result;
+            var response = client.PostAsJsonAsync(serviceName, firstStepUserLoginRequest).Result;
+
+            AuthResult result = response.Content.ReadAsAsync<AuthResult>().Result;
+            return result;
+        }
+
+        public AuthResult SecondStepLogin(string baseURl, string serviceName, SecondStepUserLoginRequest secondStepUserLoginRequest)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(baseURl);
+            var response = client.PostAsJsonAsync(serviceName, secondStepUserLoginRequest).Result;
 
             AuthResult result = response.Content.ReadAsAsync<AuthResult>().Result;
             return result;

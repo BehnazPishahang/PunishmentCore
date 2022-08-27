@@ -1,4 +1,4 @@
-﻿using Anu.Commons.ServiceModel.ServiceLogin;
+﻿using Anu.Commons.ServiceModel.ServiceAuthentication;
 
 namespace Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
 {
@@ -6,7 +6,12 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
     {
         public AuthResult RegisterUser(String baseURl, string serviceName, UserRegisterRequest UserRegisterinfo);
 
-        public AuthResult LoginUser(String baseURl, string serviceName,UserLoginRequest loginInfo);
+        public AuthResult LoginUser(String baseURl, string serviceName, FirstStepUserLoginRequest loginInfo);
+
+        public AuthResult SecondStepLogin(String baseURl, string serviceName, SecondStepUserLoginRequest secondStepUserLoginRequest);
+
+
+       
 
     }
 }
