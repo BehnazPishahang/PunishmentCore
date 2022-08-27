@@ -25,6 +25,8 @@ namespace Anu.PunishmentOrg.Api.Test.BaseInfo.MechanizedLetter
     public class MechanizedLetterTest
     {
 
+
+
         private readonly Mock<Anu.DataAccess.IUnitOfWork> _unitOfWork = new Mock<Anu.DataAccess.IUnitOfWork>();
 
 
