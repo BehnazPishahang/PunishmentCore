@@ -259,6 +259,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شماره قبض بیش از اندازه مجاز می باشد.
+        /// </summary>
+        public static string PBillStore_BillNumber_IsTooLong {
+            get {
+                return ResourceManager.GetString("PBillStore_BillNumber_IsTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاریخ وارده طولانی یا نامعتبر است.
+        /// </summary>
+        public static string PBillStore_Date_IsInvalid {
+            get {
+                return ResourceManager.GetString("PBillStore_Date_IsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شماره قبض تکراری است و امروز قابل ثبت نیست.
         /// </summary>
         public static string PBillStore_Duplicate_Bill {
