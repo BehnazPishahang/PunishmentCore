@@ -135,55 +135,55 @@
   </data>
   <data name="MechanizedLetter_CreatorUserName_Is_Null" xml:space="preserve">
     <value>كاربر ثبت كننده نامه را وارد کنید.</value>
-    <comment>-60001</comment>
+    <comment>30131</comment>
   </data>
   <data name="MechanizedLetter_GMechanizedLetterTypeCode_Is_null" xml:space="preserve">
     <value>کد نوع موضوع نامه را انتخاب کنید.</value>
-    <comment>-60006</comment>
+    <comment>30136</comment>
   </data>
   <data name="MechanizedLetter_LetterText_Is_Null" xml:space="preserve">
     <value>متن نامه را وارد نمایید.</value>
-    <comment>-60011</comment>
+    <comment>301311</comment>
   </data>
   <data name="MechanizedLetter_NAJAUnit_Is_Null" xml:space="preserve">
     <value>وارد کردن کد واحد فرستنده نامه اجباری می باشد.</value>
-    <comment>-60013</comment>
+    <comment>301313</comment>
   </data>
   <data name="MechanizedLetter_OuterOrgLetterDate_Is_Not_ValidDate" xml:space="preserve">
     <value>تاريخ نامه فرستنده معتبر نمی باشد.</value>
-    <comment>-60002</comment>
+    <comment>30132</comment>
   </data>
   <data name="MechanizedLetter_OuterOrgLetterDate_Is_Null" xml:space="preserve">
     <value>تاريخ نامه فرستنده را وارد نمایید..</value>
-    <comment>-60003</comment>
+    <comment>30133</comment>
   </data>
   <data name="MechanizedLetter_OuterOrgLetterNo_Is_Not_Digit" xml:space="preserve">
     <value>شماره نامه فرستنده از نوع عدد نمی باشد.</value>
-    <comment>-60004</comment>
+    <comment>30134</comment>
   </data>
   <data name="MechanizedLetter_OuterOrgLetterNo_Is_Null" xml:space="preserve">
     <value>شماره نامه فرستنده را وارد نمایید.</value>
-    <comment>-60005</comment>
+    <comment>30135</comment>
   </data>
   <data name="MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null" xml:space="preserve">
     <value>وارد کردن اطلاعات حداقل یک گیرنده برای نامه اجباری می باشد.</value>
-    <comment>-60007</comment>
+    <comment>30137</comment>
   </data>
   <data name="MechanizedLetter_Request_Is_Null" xml:space="preserve">
     <value>وارد کردن پارامترهای ورودی اجباری می باشد.</value>
-    <comment>-60012</comment>
+    <comment>301312</comment>
   </data>
   <data name="MechanizedLetter_SenderOuterOrgCode_Is_Not_Valid" xml:space="preserve">
     <value>کد واحد فرستنده نامه معتبر نمی باشد.</value>
-    <comment>-60009</comment>
+    <comment>30139</comment>
   </data>
   <data name="MechanizedLetter_SenderOuterOrgCode_Is_Null" xml:space="preserve">
     <value>کد واحد فرستنده نامه را وارد نمایید.</value>
-    <comment>-60008</comment>
+    <comment>30138</comment>
   </data>
   <data name="MechanizedLetter_TheReceiverInnerOrgCode_Is_Not_Valid" xml:space="preserve">
     <value>کد واحد گیرنده نامه معتبر نمی باشد.</value>
-    <comment>-60010</comment>
+    <comment>301310</comment>
   </data>
   <data name="NationalCodeIs_Required" xml:space="preserve">
     <value>کد ملی را وارد کنید.</value>
