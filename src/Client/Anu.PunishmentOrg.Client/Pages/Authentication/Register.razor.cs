@@ -1,7 +1,5 @@
-﻿using Anu.Commons.ServiceModel.ServiceLogin;
+﻿using Anu.Commons.ServiceModel.ServiceAuthentication;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
-using Anu.PunishmentOrg.Client.Infrastructure.Login;
-using Anu.PunishmentOrg.Client.Infrastructure.Notice;
 using Blazored.FluentValidation;
 using MudBlazor;
 
