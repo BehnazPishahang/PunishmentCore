@@ -1,10 +1,4 @@
-﻿using Anu.BaseInfo.DataModel.OrganizationChart;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Anu.BaseInfo.DataAccess.OrganizationChart
 {
@@ -16,9 +10,18 @@ namespace Anu.BaseInfo.DataAccess.OrganizationChart
 
         }
 
-        public async Task<Unit> GetByCode(string code)
+        public async Task<DataModel.OrganizationChart.Unit> FindRelatedUnitToGeoLocation(string locationCode , List<string> gUnitTypes)
         {
-            return await _context.Set<Anu.BaseInfo.DataModel.OrganizationChart.Unit>().Where(x => x.Code == code).FirstOrDefaultAsync();
+            return await _context.Set<Anu.BaseInfo.DataModel.OrganizationChart.Unit>().
+                Where(x =>  x.TheGeoLocation.LocationCode == locationCode
+                      && x.State == Anu.BaseInfo.Enumerations.State.Valid
+                      && gUnitTypes.Contains(x.TheGUnitType.Code))
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Anu.BaseInfo.DataModel.OrganizationChart.Unit> GetByCode(string unitNo)
+        {
+            return await _context.Set<Anu.BaseInfo.DataModel.OrganizationChart.Unit>().Where(x => x.UnitNo == unitNo).FirstOrDefaultAsync();
         }
     }
 }

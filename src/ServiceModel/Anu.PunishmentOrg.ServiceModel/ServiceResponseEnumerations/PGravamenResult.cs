@@ -24,5 +24,6 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
         PGravamen_NoAttachmentAvailable=-60006,
         PGravamen_NoFileIsAttached=-60007,
         PGravamen_FileIsLargerThanAllowedThreshold=-60008,
+        PGravamen_TheGeoLocation_IsRequired=-60009,
     }
 }

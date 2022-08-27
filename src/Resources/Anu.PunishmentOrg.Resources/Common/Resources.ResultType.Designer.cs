@@ -97,6 +97,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to درخواست بدنه نمی‌تواند خالی باشد..
+        /// </summary>
+        public static string GeoLocation_Request_IsNull {
+            get {
+                return ResourceManager.GetString("GeoLocation_Request_IsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to كاربر ثبت كننده نامه را وارد کنید..
         /// </summary>
         public static string MechanizedLetter_CreatorUserName_Is_Null {
@@ -203,26 +212,6 @@ namespace Anu.PunishmentOrg.Resources.Common {
                 return ResourceManager.GetString("MechanizedLetter_SenderOuterOrgCode_Is_Null", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to کد واحد گیرنده نامه معتبر نمی باشد..
-        ///   Looks up a localized string similar to درخواست بدنه نمی‌تواند خالی باشد..
-        /// </summary>
-        public static string GeoLocation_Request_IsNull {
-            get {
-                return ResourceManager.GetString("GeoLocation_Request_IsNull", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to کد نوع موضوع نامه معتبر نمی باشد..
-        /// </summary>
-        public static string MechanizedLetter_GMechanizedLetterTypeCode_Is_Not_Valid {
-            get {
-                return ResourceManager.GetString("MechanizedLetter_GMechanizedLetterTypeCode_Is_Not_Valid", resourceCulture);
-            }
-        }
-        
         
         /// <summary>
         ///   Looks up a localized string similar to کد واحد گیرنده نامه معتبر نمی باشد..
@@ -446,6 +435,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string PGravamen_Request_IsNullOrCorrupt {
             get {
                 return ResourceManager.GetString("PGravamen_Request_IsNullOrCorrupt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ارسال مکان جغرافیایی الزامی می‌باشد.
+        /// </summary>
+        public static string PGravamen_TheGeoLocation_IsRequired {
+            get {
+                return ResourceManager.GetString("PGravamen_TheGeoLocation_IsRequired", resourceCulture);
             }
         }
         

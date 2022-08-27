@@ -284,6 +284,10 @@
     <value>درخواست ورودی خالی یا نامعتبر است</value>
     <comment>-60002</comment>
   </data>
+  <data name="PGravamen_TheGeoLocation_IsRequired" xml:space="preserve">
+    <value>ارسال مکان جغرافیایی الزامی می‌باشد</value>
+    <comment>-60009</comment>
+  </data>
   <data name="PhoneNumber_Is_Not_Entered" xml:space="preserve">
     <value>تلفن همراه را وارد کنید.</value>
     <comment>-10009</comment>
