@@ -7,14 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\Authentication\Register.razor.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="Pages\Authentication\Register.razor" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BlazorCaptcha" Version="1.2.4" />
     <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
     <PackageReference Include="MudBlazor" Version="6.0.14" />
