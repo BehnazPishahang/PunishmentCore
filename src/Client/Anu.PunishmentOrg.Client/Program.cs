@@ -13,12 +13,6 @@ builder.Services.AddServerSideBlazor();
 builder.Services.ManageIOC(builder.Configuration);
 
  
-//AppConfiguration.Instance= builder.Configuration.GetSection(AppConfiguration.ConfigurationPosition).Get<AppConfiguration>();
-
-//builder.Services.Configure<AppConfiguration>(Configuration.GetSection(AppConfiguration.ConfigurationPosition));
-
-//builder.Services.Configure<AppConfiguration>(Configuration.GetSection("BackendSetting").Get<AppConfiguration>());
-
 
 builder.Services.AddHttpClient();
 

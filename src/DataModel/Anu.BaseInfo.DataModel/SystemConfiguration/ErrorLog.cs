@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
@@ -45,7 +45,7 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [ForeignKey("SYSTEMOBJECTID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemObject? TheSystemObject { get; set; }
 
-    }
+        }
 
     [Table("ERRORLOG")]
     public partial class ErrorLog : ErrorLogBase

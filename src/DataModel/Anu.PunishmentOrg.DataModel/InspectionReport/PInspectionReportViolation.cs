@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.InspectionReport
 {
@@ -70,7 +70,7 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
         [Column("VIOLATIONDESC")]
         public virtual string? ViolationDesc { get; set; }
 
-    }
+        }
 
     [Table("PINSPECTIONREPORTVIOLATION")]
     public partial class PInspectionReportViolation : PInspectionReportViolationBase

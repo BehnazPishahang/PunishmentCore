@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
@@ -42,7 +42,7 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [ForeignKey("UNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheUnit { get; set; }
 
-    }
+        }
 
     [Table("CMSORGANIZATION")]
     public partial class CMSOrganization : CMSOrganizationBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
@@ -35,7 +35,7 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         [ForeignKey("UNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheUnit { get; set; }
 
-    }
+        }
 
     [Table("PDESTROYEDJUDGE")]
     public partial class PDestroyedJudge : PDestroyedJudgeBase

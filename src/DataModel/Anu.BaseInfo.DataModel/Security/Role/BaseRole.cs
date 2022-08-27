@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Security.Role
 {
@@ -27,7 +27,7 @@ namespace Anu.BaseInfo.DataModel.Security.Role
         [InverseProperty("TheActivity")]
         public virtual List<Anu.BaseInfo.DataModel.Security.Role.PostRoleActivitySecurity>? ThePostRoleActivitySecurityList { get; set; }
 
-    }
+        }
 
     [Table("BASEROLE")]
     public partial class BaseRole : BaseRoleBase

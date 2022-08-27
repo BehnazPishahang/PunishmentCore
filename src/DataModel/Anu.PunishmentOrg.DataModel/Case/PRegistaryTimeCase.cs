@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [ForeignKey("PREGISTARYTIMEID")]
         public virtual Anu.PunishmentOrg.DataModel.Case.PRegistaryTime? ThePRegistaryTime { get; set; }
 
-    }
+        }
 
     [Table("PREGISTARYTIMECASE")]
     public partial class PRegistaryTimeCase : PRegistaryTimeCaseBase

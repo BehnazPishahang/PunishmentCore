@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
@@ -40,7 +40,7 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [Column("TOKENREQUIRED")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? TokenRequired { get; set; }
 
-    }
+        }
 
     [Table("CMSUSERROLETYPE")]
     public partial class CMSUserRoleType : CMSUserRoleTypeBase

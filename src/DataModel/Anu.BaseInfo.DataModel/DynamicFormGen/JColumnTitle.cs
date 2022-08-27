@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -27,7 +27,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [ForeignKey("UPPERCOLUMNID")]
         public virtual Anu.BaseInfo.DataModel.DynamicFormGen.JColumnTitle? TheUpperColumn { get; set; }
 
-    }
+        }
 
     [Table("JCOLUMNTITLE")]
     public partial class JColumnTitle : JColumnTitleBase

@@ -1,14 +1,10 @@
 ﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
-using Anu.BaseInfo.DataModel.ExchangeData;
 using Anu.BaseInfo.DataModel.FrontEndSecurity;
-using Anu.BaseInfo.DataModel.SystemObject;
-using Anu.BaseInfo.Domain.FrontEndSecurity;
-using Anu.Commons.ServiceModel.ServiceLogin;
-using Anu.Commons.ServiceModel.ServiceResponse;
+using Anu.Commons.ServiceModel.ServiceAuthentication;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.DataAccess;
 using Anu.DataAccess.Repositories;
-using Anu.PunishmentOrg.Domain.DiscoveryMinutes;
+using Anu.PunishmentOrg.Api.Authentication.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -17,7 +13,6 @@ using System.Security.Claims;
 using System.Text;
 using Utility;
 using Utility.CalendarHelper;
-using Utility.Exceptions;
 using Utility.Guard;
 
 namespace Anu.PunishmentOrg.Api.Authentication
@@ -36,45 +31,57 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Route("api/v1/Login")]
         [HttpPost]
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<AuthResult> Login([FromBody] UserLoginRequest request)
+        public async Task<FirstStepAuthResult> Login([FromBody] FirstStepUserLoginRequest request)
         {
-
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-                request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
-                //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
-                //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
-                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
-                theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            request.UserName.IsValidNationalCode();
 
-            var jwtToken = GenerateJwtToken(theGFESUser);
+            var theGFESUser = (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>()
+                .Find(x => x.NationalityCode==request.UserName)).FirstOrDefault();
 
-            return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
+            theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            string password = await theGFESUser.MobileNumber4SMS.SendAuthenticateSms(6);
+            string passWordHash = MD5Core.GetHashString(password);
+
+            theGFESUser.Password = passWordHash;
+
+            if (_unitOfWork.Complete() < 0)
+            {
+                return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
+            }
+
+            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.Successful.GetResult() };
 
         }
 
         [Route("api/v1/Register")]
         [HttpPost]
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<AuthResult> Register([FromBody] UserRegisterRequest request)
+        public async Task<FirstStepAuthResult> Register([FromBody] UserRegisterRequest request)
         {
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-                request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.PhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.PhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
 
             request.UserName.IsValidNationalCode();
             request.PhoneNumber.IsValidPhone();
 
             if (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Exist(a => a.UserID == request.UserName))
             {
-                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.User_Is_Exist.GetResult() };
+                return new FirstStepAuthResult() { Result = AnuResult.User_Is_Exist.GetResult() };
             }
 
-                string passWordHash = MD5Core.GetHashString(request.Password);
+            await request.ShahkarAuthenticate();
+            await request.SabteahvalAuthenticate();
+
+
+            string password = await request.PhoneNumber.SendAuthenticateSms(6);
+            string passWordHash = MD5Core.GetHashString(password);
 
             var user = new GFESUser()
             {
@@ -85,28 +92,55 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 NationalityCode = request.UserName,
                 StartDate = CalendarHelper.GetCurrentDateTime(),
                 EndDate = CalendarHelper.MaxDateTime(),
-                Family = "a",
+                Family = request.LastName,
                 FatherName = "b",
                 LastChangePassword = CalendarHelper.GetCurrentDateTime(),
-                Name = "c",
-                Sex = Anu.BaseInfo.Enumerations.SexType.None
+                Name = request.FirstName,
+                Sex = request.Sex
             };
 
             await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Add(user);
 
             if (_unitOfWork.Complete() < 0)
             {
-                return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.Error.GetResult() };
+                return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
             }
 
 
-                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
-                theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            //var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, password);
+            //theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            //var jwtToken = GenerateJwtToken(theGFESUser);
+
+            //insert password code and date time into table
+
+            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.Successful.GetResult() };
+
+
+        }
+
+        [Route("api/v1/SecondStepLogin")]
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public async Task<AuthResult> SecondStepLogin([FromBody] SecondStepUserLoginRequest request)
+        {
+
+            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            request.PhoneNumber.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+
+            request.PhoneNumber.IsValidPhone();
+
+
+            var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByPhoneNumberAndPassWordAsyncWithAccessTypes(request.PhoneNumber, request.Password);
+            theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            //check the database for how seconds pass and is the code valid
 
             var jwtToken = GenerateJwtToken(theGFESUser);
 
-            return new AuthResult() { AccessToken = jwtToken, RefreshToken = "", Result = AnuResult.Successful.GetResult() };
-
+            return new AuthResult() { AccessToken=jwtToken, Result = AnuResult.Successful.GetResult() };
 
         }
 

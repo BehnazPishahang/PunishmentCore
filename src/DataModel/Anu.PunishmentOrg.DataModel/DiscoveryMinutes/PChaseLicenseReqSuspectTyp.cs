@@ -1,11 +1,12 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using Anu.PunishmentOrg.DataModel.DiscoveryMinutes;
+
 
 namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
 {
-    public abstract class PChaseLicenseReqSuspectTypBase : PunishmentOrgEntity<string>
+    public abstract class PChaseLicenseReqSuspectTypBase : PChaseLicenseReqObject
     {
 
         [Column("LICENSEPERSONTYPE")]
@@ -14,6 +15,10 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [ForeignKey("PCHASELICENSEREQSUSPECTID")]
         public virtual Anu.PunishmentOrg.DataModel.DiscoveryMinutes.PChaseLicenseReqSuspect? ThePChaseLicenseReqSuspect { get; set; }
 
+    
+        [Column("TIMESTAMP")]
+        [ConcurrencyCheck]
+        public long PTimestamp { get { return base.Timestamp; } set {} }
     }
 
     [Table("PCHASELICENSEREQSUSPECTTYP")]

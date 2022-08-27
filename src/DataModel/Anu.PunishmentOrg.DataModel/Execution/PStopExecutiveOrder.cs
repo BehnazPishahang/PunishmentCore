@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
@@ -65,7 +65,7 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [ForeignKey("REGISTERUNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheRegisterUnit { get; set; }
 
-    }
+        }
 
     [Table("PSTOPEXECUTIVEORDER")]
     public partial class PStopExecutiveOrder : PStopExecutiveOrderBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -107,7 +107,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [InverseProperty("ThePCaseProduct")]
         public virtual List<Anu.PunishmentOrg.DataModel.Case.PCaseViolationProductBillST>? ThePCaseViolationProductBillSTList { get; set; }
 
-    }
+        }
 
     [Table("PCASEPRODUCT")]
     public partial class PCaseProduct : PCaseProductBase

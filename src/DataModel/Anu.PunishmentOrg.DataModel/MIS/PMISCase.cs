@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.MIS
 {
@@ -309,7 +309,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("WRITISSUED")]
         public virtual long? WritIssued { get; set; }
 
-    }
+        }
 
     [Table("PMISCASE")]
     public partial class PMISCase : PMISCaseBase

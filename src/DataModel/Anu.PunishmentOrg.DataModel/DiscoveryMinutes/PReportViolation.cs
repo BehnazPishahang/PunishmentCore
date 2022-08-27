@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
 {
@@ -115,7 +115,7 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [Column("UNIQUENO")]
         public virtual string? UniqueNo { get; set; }
 
-    }
+        }
 
     [Table("PREPORTVIOLATION")]
     public partial class PReportViolation : PReportViolationBase

@@ -1,7 +1,6 @@
 ﻿
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
-    //! کل من علیها fun
     [System.ComponentModel.DisplayName("شخص شکوائیه/گزارش مردمی در سرویس")]
     public class PGravamenPersonContract
     {
@@ -13,36 +12,20 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         public string? Address { get; set; }
 
 
-
         [System.ComponentModel.DisplayName("تاريخ تولد/ثبت")]
         public string? BirthDate { get; set; }
-
-
 
         [System.ComponentModel.DisplayName("نام خانوادگي")]
         public string? Family { get; set; }
 
-
-
         [System.ComponentModel.DisplayName("نام پدر")]
         public string? FatherName { get; set; }
-
-
-
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName(" رديف")]
-        public string? Id { get; set; }
-
-
 
         [System.ComponentModel.DisplayName("شماره شناسنامه/شماره ثبت")]
         public string? IdentityNumber { get; set; }
 
-
-
         [System.ComponentModel.DisplayName("تلفن همراه")]
         public string? MobilNumber { get; set; }
-
 
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -50,15 +33,12 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         public string? Name { get; set; }
 
 
-
         [System.ComponentModel.DisplayName("شماره ملي/شناسه ملي")]
         public string? NationalCode { get; set; }
 
 
-
         [System.ComponentModel.DisplayName("تابعيت")]
         public Anu.BaseInfo.Enumerations.LNationality? Nationality { get; set; }
-
 
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -66,11 +46,9 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         public string? PersonPassword { get; set; }
 
 
-
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("سمت شخص در شروع دادرسي")]
         public Anu.PunishmentOrg.Enumerations.PUPersonStartPost? PersonStartPost { get; set; }
-
 
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -78,9 +56,10 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         public Anu.BaseInfo.Enumerations.PersonType? PersonType { get; set; }
 
 
-
         [System.ComponentModel.DisplayName("کد پستي")]
         public string? PostCode { get; set; }
+
+
 
 
 

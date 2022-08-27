@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -30,7 +30,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [Column("TOMILISECOND")]
         public virtual string? ToMiliSecond { get; set; }
 
-    }
+        }
 
     [Table("JTABLEACTIVITYVALIDATORHST")]
     public partial class JTableActivityValidatorHst : JTableActivityValidatorHstBase

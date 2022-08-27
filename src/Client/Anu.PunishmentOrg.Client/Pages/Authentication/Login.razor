@@ -1,7 +1,6 @@
-﻿@using Anu.Commons.ServiceModel.ServiceLogin
+﻿@using Anu.Commons.ServiceModel.ServiceAuthentication
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
-@using Anu.PunishmentOrg.Client.Infrastructure.Notice
-@using Microsoft.Extensions.Options
+
 
 @inject IAnuAuthorizationService  _anuAuthorizationService;
 @inject AppConfiguration _appConfiguration;
@@ -21,26 +20,29 @@
                         <DataAnnotationsValidator />
                         <MudItem xs="12">
                             <div class="d-flex justify-center">
-                                <MudText Typo="Typo.h4">ورود به سایت </MudText>
+                                <MudText Typo="Typo.h4" Style="text-shadow: -2px 3px 3px grey;">ورود به سایت </MudText>
                             </div>
                         </MudItem>
        
                         <MudItem xs="12">
                             <div class="d-flex justify-center">
-                                <MudText>آیا در سایت ثبت نام نکردبد؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
+                                <MudText>آیا تا کنون در سایت ثبت نام نکرده اید؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
                             </div>
                         </MudItem>
                         <MudItem xs="12">
-                            <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined"
-                                          @bind-Value="_tokenModel.UserName" For="@(() => _tokenModel.UserName)" />
+                            <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                          @bind-Value="_tokenModel.UserName" For="@(() => _tokenModel.UserName)" Validation="Validated.ToString()"/>
                         </MudItem>
-                        <MudItem xs="12">
-                            <MudTextField Label="کلمه عبور" Variant="Variant.Outlined"
-                                          @bind-Value="_tokenModel.Password" For="@(() => _tokenModel.Password)"
-                                          InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" />
+                        <MudItem xs="8">
+                            <MudTextField T="string" Label="رمز پویا" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                         @bind-Value="_secondRequest.Password" For="@(() => _secondRequest.Password)"></MudTextField>
                         </MudItem>
-        
-                      @*  <MudItem xs="12" Class="d-flex justify-center">
+
+                        <MudItem xs="4">
+                            <MudButton Variant="Variant.Filled"  OnClick="GetAccessCode" Size="Size.Medium" Style="width: 100%;">دریافت رمز</MudButton>
+                        </MudItem>
+
+                @*  <MudItem xs="12" Class="d-flex justify-center">
                             <MudButton  Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;"  >ورود </MudButton>
                         </MudItem>*@
                         <MudItem xs="12">
@@ -55,7 +57,7 @@
                            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
                         </MudItem>
                         <MudItem xs="12" Class="d-flex justify-center">
-                           <MudButton Variant="Variant.Filled" Color="Color.Warning" Href="/true" Size="Size.Large" Style="width: 100%;">برگشت</MudButton>
+                           <MudButton Variant="Variant.Filled" Color="Color.Warning" Href="/false" Size="Size.Large" Style="width: 100%;">برگشت</MudButton>
                         </MudItem>
       
        
@@ -67,31 +69,41 @@
 @code {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
     string errorMessage = "";
-    AppConfiguration appConfiguration;
-    void Submit()
+    private FirstStepUserLoginRequest _tokenModel = new();
+    private SecondStepUserLoginRequest _secondRequest = new();
+    private bool Validated = true;
+
+    void GetAccessCode()
     {
         var ss=  _appConfiguration.BackendServerAddress;
         AuthResult  result= _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress , _appConfiguration.LoginAddress ,_tokenModel);
-
         if (result.Result.Code == 1000)
         {
             SharedInfo.NationalCode = _tokenModel.UserName;
-            _navigationManager.NavigateTo("/true");
             errorMessage = "";
         }
         else
         {
             errorMessage = result.Result.Message;
         }
-
-
     }
-
-    protected override void OnInitialized()
+    void Submit()
     {
-       
+        var ss=  _appConfiguration.BackendServerAddress;
+        _secondRequest.PhoneNumber = _tokenModel.UserName;
+        AuthResult  result= _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress , _appConfiguration.SecondStepLogin ,_secondRequest);
+        if (result.Result.Code == 1000)
+        {
+            _navigationManager.NavigateTo("/true");
+            errorMessage = "";
+        }
+        else
+        {
+            errorMessage = result.Result.Message;
+            Validated = false;
+        }
     }
 
 
-    void Cancel() => MudDialog.Cancel();
+   
 }

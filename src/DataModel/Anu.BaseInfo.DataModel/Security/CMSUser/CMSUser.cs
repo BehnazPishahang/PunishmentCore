@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Security.CMSUser
 {
@@ -88,7 +88,7 @@ namespace Anu.BaseInfo.DataModel.Security.CMSUser
         [Column("USERTYPE")]
         public virtual Anu.BaseInfo.Enumerations.UserType? UserType { get; set; }
 
-    }
+        }
 
     [Table("CMSUSER")]
     public partial class CMSUser : CMSUserBase

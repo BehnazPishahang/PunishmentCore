@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Expert
 {
@@ -81,7 +81,7 @@ namespace Anu.BaseInfo.DataModel.Expert
         [InverseProperty("TheExpertMan")]
         public virtual List<Anu.BaseInfo.DataModel.Expert.ExpertWorkUnit>? TheExpertWorkUnitList { get; set; }
 
-    }
+        }
 
     [Table("EXPERTMAN")]
     public partial class ExpertMan : ExpertManBase

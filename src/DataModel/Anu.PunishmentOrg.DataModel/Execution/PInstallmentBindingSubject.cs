@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
@@ -18,7 +18,7 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [ForeignKey("PINSTALLMENTID")]
         public virtual Anu.PunishmentOrg.DataModel.Execution.PInstallment? ThePInstallment { get; set; }
 
-    }
+        }
 
     [Table("PINSTALLMENTBINDINGSUBJECT")]
     public partial class PInstallmentBindingSubject : PInstallmentBindingSubjectBase

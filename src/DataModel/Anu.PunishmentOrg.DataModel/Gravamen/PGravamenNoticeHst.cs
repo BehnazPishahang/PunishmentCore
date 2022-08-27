@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Gravamen
 {
@@ -22,7 +22,7 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
         [ForeignKey("PGRAVAMENID")]
         public virtual Anu.PunishmentOrg.DataModel.Gravamen.PGravamen? ThePGravamen { get; set; }
 
-    }
+        }
 
     [Table("PGRAVAMENNOTICEHST")]
     public partial class PGravamenNoticeHst : PGravamenNoticeHstBase

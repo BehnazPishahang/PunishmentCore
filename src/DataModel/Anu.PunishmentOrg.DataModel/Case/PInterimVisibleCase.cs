@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -36,7 +36,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [ForeignKey("REGISTERUSERHISTORYID")]
         public virtual Anu.BaseInfo.DataModel.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
-    }
+        }
 
     [Table("PINTERIMVISIBLECASE")]
     public partial class PInterimVisibleCase : PInterimVisibleCaseBase

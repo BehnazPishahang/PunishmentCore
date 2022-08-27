@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.ExchangeData
 {
@@ -58,7 +58,7 @@ namespace Anu.BaseInfo.DataModel.ExchangeData
         [Column("UNITNAME")]
         public virtual string? UnitName { get; set; }
 
-    }
+        }
 
     [Table("NAJAUNIT")]
     public partial class NAJAUnit : NAJAUnitBase

@@ -1,7 +1,6 @@
 ﻿using Anu.Commons.ServiceModel.ServicePaging;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.PunishmentOrg.Api.Notice;
-using Anu.PunishmentOrg.DataAccess.Notice;
 using Anu.PunishmentOrg.DataModel.Notice;
 using Anu.PunishmentOrg.Domain.Notice;
 using Anu.PunishmentOrg.ServiceModel.Notice;
@@ -24,8 +23,8 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
         public async Task InqueryPNoticeList_PNoticeIsNull_ReturenedError50002()
         {
             //Arrange
-            _unitOfWork.Setup(repo => repo.Repositorey<PNoticeRepository>().GetAllPNoticeByNationalCode(It.IsAny<string>(),
-                new Page() {PageNumber=0,RowCountPerPage=0,TotallPage=0,TotalResult=0,OrderPage=new OrderPage() { Property="",Ascending=false} }))
+            _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(It.IsAny<string>(),
+                new Page() { PageNumber = 0, RowCountPerPage = 0, TotallPage = 0, TotalResult = 0, OrderPage = new OrderPage() { Property = "", Ascending = false } }))
                 .ReturnsAsync((IEnumerable<PNotice>)null);
 
             var controller = new PNoticeServiceController(_unitOfWork.Object);
@@ -33,7 +32,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Act
 
             var result = controller.InqueryPNoticeList(
-                new ServiceModel.Notice.PNoticeInqueryRequest() { PNoticePersonContract=new PNoticePersonContract() { NationalityCode = "23232322" } });
+                new ServiceModel.Notice.PNoticeInqueryRequest() { PNoticePersonContract = new PNoticePersonContract() { NationalityCode = "23232322" } });
 
             //Assert
             Assert.Equal((int)PNoticeResult.PNotice_NotFound, result.Result.Result.Code);
@@ -45,19 +44,22 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Arrange
             var expectedResponse = new PNoticeInqueryResponse()
             {
-                PNotice = new Page<List<PNoticeContract>> { Data = new List<PNoticeContract>(){ CreateRandomPNoticeContract("1"), CreateRandomPNoticeContract("2") } },
+                PNotice = new Page<List<PNoticeContract>> { Data = new List<PNoticeContract>() { CreateRandomPNoticeContract("1"), CreateRandomPNoticeContract("2") } },
                 Result = AnuResult.Successful.GetResult()
             };
-            
-            _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(It.IsAny<string>(),It.IsAny<Page>()))
-                .ReturnsAsync(new[] {CreateRandomPNotice("1"),CreateRandomPNotice("2")});
-            
-            
+
+            _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(It.IsAny<string>(), It.IsAny<Page>()))
+                .ReturnsAsync(new[] { CreateRandomPNotice("1"), CreateRandomPNotice("2") });
+
+
             var controller = new PNoticeServiceController(_unitOfWork.Object);
 
             //Act
             var result = controller.InqueryPNoticeList(
-               new ServiceModel.Notice.PNoticeInqueryRequest() { PNoticePersonContract = new PNoticePersonContract() { NationalityCode = "23232322" } ,Page =
+               new ServiceModel.Notice.PNoticeInqueryRequest()
+               {
+                   PNoticePersonContract = new PNoticePersonContract() { NationalityCode = "23232322" },
+                   Page =
                 new Page() { PageNumber = 0, RowCountPerPage = 0, TotallPage = 0, TotalResult = 0, OrderPage = new OrderPage() { Property = "", Ascending = false } }
                });
 

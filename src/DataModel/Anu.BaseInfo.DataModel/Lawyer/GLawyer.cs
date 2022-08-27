@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Lawyer
 {
@@ -110,7 +110,7 @@ namespace Anu.BaseInfo.DataModel.Lawyer
         [ForeignKey("ISSUELOCATIONID")]
         public virtual Anu.BaseInfo.DataModel.GeoInfo.GeoLocation? TheIssueLocation { get; set; }
 
-    }
+        }
 
     [Table("GLAWYER")]
     public partial class GLawyer : GLawyerBase

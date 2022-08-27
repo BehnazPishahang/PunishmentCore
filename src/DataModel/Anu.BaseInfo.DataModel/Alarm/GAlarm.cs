@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Alarm
 {
@@ -49,7 +49,7 @@ namespace Anu.BaseInfo.DataModel.Alarm
         [ForeignKey("SYSTEMOBJECTID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemObject? TheSystemObject { get; set; }
 
-    }
+        }
 
     [Table("GALARM")]
     public partial class GAlarm : GAlarmBase

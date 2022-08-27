@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Gravamen
 {
@@ -53,7 +53,7 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
         [ForeignKey("TRIALUNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheTrialUnit { get; set; }
 
-    }
+        }
 
     [Table("PNOTE1ARTICLE21PROTEST")]
     public partial class PNote1Article21Protest : PNote1Article21ProtestBase

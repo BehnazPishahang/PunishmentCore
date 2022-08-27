@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -133,7 +133,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("WAYBILLNORN")]
         public virtual Anu.PunishmentOrg.Enumerations.WayBillNO? WayBillNORN { get; set; }
 
-    }
+        }
 
     [Table("PCASEVEHICLE")]
     public partial class PCaseVehicle : PCaseVehicleBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.InspectionReport
 {
@@ -66,6 +66,9 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
         public virtual Anu.PunishmentOrg.DataModel.InspectionReport.PMobilePatrols? ThePMobilePatrols { get; set; }
 
         [InverseProperty("ThePMobilePatrolsTradeUnit")]
+        public virtual List<Anu.PunishmentOrg.DataModel.InspectionReport.PMobilePatrolsTUAttachment>? ThePMobilePatrolsTUAttachmentList { get; set; }
+
+        [InverseProperty("ThePMobilePatrolsTradeUnit")]
         public virtual List<Anu.PunishmentOrg.DataModel.InspectionReport.PMobilePatrolsTUProduct>? ThePMobilePatrolsTUProductList { get; set; }
 
         [InverseProperty("ThePMobilePatrolsTradeUnit")]
@@ -82,7 +85,7 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
         [Column("TRADELICENSENUMBER")]
         public virtual string? TradeLicenseNumber { get; set; }
 
-    }
+        }
 
     [Table("PMOBILEPATROLSTRADEUNIT")]
     public partial class PMobilePatrolsTradeUnit : PMobilePatrolsTradeUnitBase

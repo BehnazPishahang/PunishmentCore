@@ -1,11 +1,12 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using Anu.PunishmentOrg.DataModel.DiscoveryMinutes;
+
 
 namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
 {
-    public abstract class PChaseLicenseReqPlacesBase : PunishmentOrgEntity<string>
+    public abstract class PChaseLicenseReqPlacesBase : PChaseLicenseReqObject
     {
 
         [Column("OWNERSHIPTYPE")]
@@ -50,6 +51,10 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [Column("USERLOCATION")]
         public virtual string? UserLocation { get; set; }
 
+    
+        [Column("TIMESTAMP")]
+        [ConcurrencyCheck]
+        public long PTimestamp { get { return base.Timestamp; } set {} }
     }
 
     [Table("PCHASELICENSEREQPLACES")]

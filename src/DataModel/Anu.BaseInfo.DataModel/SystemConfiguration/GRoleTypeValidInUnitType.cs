@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
@@ -14,7 +14,7 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [ForeignKey("GUNITTYPEID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.GUnitType? TheGUnitType { get; set; }
 
-    }
+        }
 
     [Table("GROLETYPEVALIDINUNITTYPE")]
     public partial class GRoleTypeValidInUnitType : GRoleTypeValidInUnitTypeBase

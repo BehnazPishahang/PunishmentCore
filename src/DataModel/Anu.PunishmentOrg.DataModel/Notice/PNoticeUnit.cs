@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Notice
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Notice
         [ForeignKey("PNOTICEID")]
         public virtual Anu.PunishmentOrg.DataModel.Notice.PNotice? ThePNotice { get; set; }
 
-    }
+        }
 
     [Table("PNOTICEUNIT")]
     public partial class PNoticeUnit : PNoticeUnitBase

@@ -36,4 +36,8 @@
     <ProjectReference Include="..\Validations\Anu.Commons.Validation\Anu.Commons.Validation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BaseInfo\" />
+  </ItemGroup>
+
 </Project>

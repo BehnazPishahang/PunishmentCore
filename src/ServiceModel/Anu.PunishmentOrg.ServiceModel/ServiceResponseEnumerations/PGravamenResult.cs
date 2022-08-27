@@ -18,6 +18,12 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
     {
         PGravamen_Field_IsNullOrInvalid = -60001,
         PGravamen_Request_IsNullOrCorrupt=-60002,
-        PGravamen_NecessaryPositions_AreNotAvailabe=-60003
+        PGravamen_NecessaryPositions_AreNotAvailabe=-60003,
+        PGravamen_PlatiffNecessaryField_IsNullOrInvalid=-60004,
+        PGravamen_OffendingNecessaryField_IsNullOrInvalid=-60005,
+        PGravamen_NoAttachmentAvailable=-60006,
+        PGravamen_NoFileIsAttached=-60007,
+        PGravamen_FileIsLargerThanAllowedThreshold=-60008,
+        PGravamen_TheGeoLocation_IsRequired=-60009,
     }
 }

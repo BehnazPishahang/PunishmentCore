@@ -1,5 +1,4 @@
-﻿
-using Anu.Commons.ServiceModel.ServicePaging;
+﻿using Anu.Commons.ServiceModel.ServicePaging;
 using Anu.Commons.ServiceModel.SeviceRequest;
 
 namespace Anu.PunishmentOrg.ServiceModel.Notice

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Messaging
 {
@@ -18,7 +18,7 @@ namespace Anu.BaseInfo.DataModel.Messaging
         [ForeignKey("OWNERUSERID")]
         public virtual Anu.BaseInfo.DataModel.Security.CMSUser.CMSUser? TheOwnerUser { get; set; }
 
-    }
+        }
 
     [Table("GMESSAGEGROUP")]
     public partial class GMessageGroup : GMessageGroupBase

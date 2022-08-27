@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Expert
 {
@@ -14,7 +14,7 @@ namespace Anu.BaseInfo.DataModel.Expert
         [ForeignKey("UNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheUnit { get; set; }
 
-    }
+        }
 
     [Table("EXPERTWORKUNIT")]
     public partial class ExpertWorkUnit : ExpertWorkUnitBase

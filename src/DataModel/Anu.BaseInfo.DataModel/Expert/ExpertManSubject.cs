@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Expert
 {
@@ -14,7 +14,7 @@ namespace Anu.BaseInfo.DataModel.Expert
         [ForeignKey("EXPERTMANID")]
         public virtual Anu.BaseInfo.DataModel.Expert.ExpertMan? TheExpertMan { get; set; }
 
-    }
+        }
 
     [Table("EXPERTMANSUBJECT")]
     public partial class ExpertManSubject : ExpertManSubjectBase

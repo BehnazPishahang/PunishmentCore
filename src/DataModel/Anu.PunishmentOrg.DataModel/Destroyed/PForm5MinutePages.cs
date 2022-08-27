@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
@@ -30,7 +30,7 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         [Column("TODATE")]
         public virtual string? ToDate { get; set; }
 
-    }
+        }
 
     [Table("PFORM5MINUTEPAGES")]
     public partial class PForm5MinutePages : PForm5MinutePagesBase

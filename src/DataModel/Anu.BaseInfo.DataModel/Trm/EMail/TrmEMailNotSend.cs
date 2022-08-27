@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Trm.EMail
 {
@@ -12,7 +12,7 @@ namespace Anu.BaseInfo.DataModel.Trm.EMail
         [Column("DISPATCHDATETIME")]
         public virtual string? DispatchDateTime { get; set; }
 
-    }
+        }
 
     [Table("TRMEMAILNOTSEND")]
     public partial class TrmEMailNotSend : TrmEMailNotSendBase

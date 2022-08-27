@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.MIS
 {
@@ -39,7 +39,7 @@ namespace Anu.PunishmentOrg.DataModel.MIS
         [Column("VIOLATIONPRICEBYEXPERT")]
         public virtual long? ViolationPriceByExpert { get; set; }
 
-    }
+        }
 
     [Table("PMISCASEVIOLATION")]
     public partial class PMISCaseViolation : PMISCaseViolationBase

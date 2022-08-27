@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [Column("ROWNUMBER")]
         public virtual long? RowNumber { get; set; }
 
-    }
+        }
 
     [Table("PCHASELICENSEREQOBJECT")]
     public partial class PChaseLicenseReqObject : PChaseLicenseReqObjectBase

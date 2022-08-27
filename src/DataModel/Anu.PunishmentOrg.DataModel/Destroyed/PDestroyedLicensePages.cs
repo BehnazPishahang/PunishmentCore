@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
@@ -33,7 +33,7 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         [Column("TODATE")]
         public virtual string? ToDate { get; set; }
 
-    }
+        }
 
     [Table("PDESTROYEDLICENSEPAGES")]
     public partial class PDestroyedLicensePages : PDestroyedLicensePagesBase

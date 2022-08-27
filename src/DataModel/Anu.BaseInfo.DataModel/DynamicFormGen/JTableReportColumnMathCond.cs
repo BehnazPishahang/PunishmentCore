@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -52,7 +52,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [ForeignKey("JTABLEREPORTCOLMATHCNDEXPID")]
         public virtual Anu.BaseInfo.DataModel.DynamicFormGen.JTableReportColMathCndExp? TheJTableReportColMathCndExp { get; set; }
 
-    }
+        }
 
     [Table("JTABLEREPORTCOLUMNMATHCOND")]
     public partial class JTableReportColumnMathCond : JTableReportColumnMathCondBase

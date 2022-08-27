@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Letter
         [ForeignKey("PCASEPERSONID")]
         public virtual Anu.PunishmentOrg.DataModel.Case.PCasePerson? ThePCasePerson { get; set; }
 
-    }
+        }
 
     [Table("PMECHANIZEDLETTERPERSON")]
     public partial class PMechanizedLetterPerson : PMechanizedLetterPersonBase

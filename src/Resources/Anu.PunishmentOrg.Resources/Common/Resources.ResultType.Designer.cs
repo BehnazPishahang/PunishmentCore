@@ -97,6 +97,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to درخواست بدنه نمی‌تواند خالی باشد..
+        /// </summary>
+        public static string GeoLocation_Request_IsNull {
+            get {
+                return ResourceManager.GetString("GeoLocation_Request_IsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to كاربر ثبت كننده نامه را وارد کنید..
         /// </summary>
         public static string MechanizedLetter_CreatorUserName_Is_Null {
@@ -268,6 +277,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد..
+        /// </summary>
+        public static string PBillStore_Request_NotValid {
+            get {
+                return ResourceManager.GetString("PBillStore_Request_NotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ثبت و ارسال به مرجع رسیدگی کننده.
         /// </summary>
         public static string PDiscoveryMinuteSate_ConfirmAndSendToUnit {
@@ -345,6 +363,87 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string PDiscoveryMinuteSate_Start {
             get {
                 return ResourceManager.GetString("PDiscoveryMinuteSate_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} خالی یا نامعتبر می باشد.
+        /// </summary>
+        public static string PGravamen_Field_IsNullOrInvalid {
+            get {
+                return ResourceManager.GetString("PGravamen_Field_IsNullOrInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to سایز فایل ارسالی بیش از حد مجاز است.
+        /// </summary>
+        public static string PGravamen_FileIsLargerThanAllowedThreshold {
+            get {
+                return ResourceManager.GetString("PGravamen_FileIsLargerThanAllowedThreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to یک یا هر دو جایگاه ضروری در شکوائیه، وجود ندارد.
+        /// </summary>
+        public static string PGravamen_NecessaryPositions_AreNotAvailabe {
+            get {
+                return ResourceManager.GetString("PGravamen_NecessaryPositions_AreNotAvailabe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لیست فایل های ارسالی خالی است.
+        /// </summary>
+        public static string PGravamen_NoAttachmentAvailable {
+            get {
+                return ResourceManager.GetString("PGravamen_NoAttachmentAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to هیچ فایلی الصاق نشده است.
+        /// </summary>
+        public static string PGravamen_NoFileIsAttached {
+            get {
+                return ResourceManager.GetString("PGravamen_NoFileIsAttached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} برای شخص متهم ضروری است.
+        /// </summary>
+        public static string PGravamen_OffendingNecessaryField_IsNullOrInvalid {
+            get {
+                return ResourceManager.GetString("PGravamen_OffendingNecessaryField_IsNullOrInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} برای شخص شاکی ضروری است.
+        /// </summary>
+        public static string PGravamen_PlatiffNecessaryField_IsNullOrInvalid {
+            get {
+                return ResourceManager.GetString("PGravamen_PlatiffNecessaryField_IsNullOrInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نامعتبر است.
+        /// </summary>
+        public static string PGravamen_Request_IsNullOrCorrupt {
+            get {
+                return ResourceManager.GetString("PGravamen_Request_IsNullOrCorrupt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ارسال مکان جغرافیایی الزامی می‌باشد.
+        /// </summary>
+        public static string PGravamen_TheGeoLocation_IsRequired {
+            get {
+                return ResourceManager.GetString("PGravamen_TheGeoLocation_IsRequired", resourceCulture);
             }
         }
         

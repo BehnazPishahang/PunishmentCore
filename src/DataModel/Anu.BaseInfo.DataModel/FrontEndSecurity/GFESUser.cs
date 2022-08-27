@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.FrontEndSecurity
 {
@@ -54,7 +54,7 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
         [Column("USERID")]
         public virtual string? UserID { get; set; }
 
-    }
+        }
 
     [Table("GFESUSER")]
     public partial class GFESUser : GFESUserBase

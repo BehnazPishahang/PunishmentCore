@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.InspectionReport
 {
@@ -38,7 +38,7 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
         [ForeignKey("PINSPECTIONREPORTID")]
         public virtual Anu.PunishmentOrg.DataModel.InspectionReport.PInspectionReport? ThePInspectionReport { get; set; }
 
-    }
+        }
 
     [Table("PINSPECTIONREPORTINSPECTOR")]
     public partial class PInspectionReportInspector : PInspectionReportInspectorBase

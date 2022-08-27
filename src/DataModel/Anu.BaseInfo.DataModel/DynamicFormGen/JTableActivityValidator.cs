@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -23,7 +23,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [ForeignKey("VALIDATORID")]
         public virtual Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo.JBDLLRegister? TheValidator { get; set; }
 
-    }
+        }
 
     [Table("JTABLEACTIVITYVALIDATOR")]
     public partial class JTableActivityValidator : JTableActivityValidatorBase

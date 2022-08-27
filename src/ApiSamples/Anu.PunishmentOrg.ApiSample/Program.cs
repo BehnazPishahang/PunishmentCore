@@ -16,8 +16,10 @@ class Program
         //var receivePBillStoreFromScmsSample = new ReceivePBillStoreFromScmsSample();
         //receivePBillStoreFromScmsSample.Send();
 
-        var _SendPInspectionReportState = new SendPInspectionReportStateSample();
-        _SendPInspectionReportState.Send();
+        //var _SendPInspectionReportState = new SendPInspectionReportStateSample();
+        //_SendPInspectionReportState.Send();
+        var recieveGravamenSample = new RecieveGravamenSample();
+        recieveGravamenSample.Send();
 
     }
 }

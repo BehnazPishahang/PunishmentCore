@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Messaging
 {
@@ -21,7 +21,7 @@ namespace Anu.BaseInfo.DataModel.Messaging
         public virtual string? MessageNo { get; set; }
 
         [Unicode(false)]
-        [Column("MESSAGETEXT")]
+        [Column("MESSAGETEXT", TypeName = "BLOB")]
         public virtual string? MessageText { get; set; }
 
         [Unicode(false)]
@@ -54,7 +54,7 @@ namespace Anu.BaseInfo.DataModel.Messaging
         [Column("URGENTTYPE")]
         public virtual Anu.BaseInfo.Enumerations.MessageForceType? UrgentType { get; set; }
 
-    }
+        }
 
     [Table("GMESSAGE")]
     public partial class GMessage : GMessageBase

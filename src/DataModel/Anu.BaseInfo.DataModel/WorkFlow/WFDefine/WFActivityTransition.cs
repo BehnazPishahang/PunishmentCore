@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
 {
@@ -14,7 +14,7 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
         [ForeignKey("NEXTACTIVITYID")]
         public virtual Anu.BaseInfo.DataModel.WorkFlow.WFDefine.WFActivity? TheNextActivity { get; set; }
 
-    }
+        }
 
     [Table("WFACTIVITYTRANSITION")]
     public partial class WFActivityTransition : WFActivityTransitionBase

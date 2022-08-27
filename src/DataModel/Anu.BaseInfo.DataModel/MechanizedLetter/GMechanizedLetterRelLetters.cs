@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.MechanizedLetter
 {
@@ -28,7 +28,7 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         [ForeignKey("RELLETTERID")]
         public virtual Anu.BaseInfo.DataModel.MechanizedLetter.GMechanizedLetter? TheRelLetter { get; set; }
 
-    }
+        }
 
     [Table("GMECHANIZEDLETTERRELLETTERS")]
     public partial class GMechanizedLetterRelLetters : GMechanizedLetterRelLettersBase

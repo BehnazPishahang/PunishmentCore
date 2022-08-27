@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
@@ -21,7 +21,7 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [ForeignKey("PEXECUTIONWRITID")]
         public virtual Anu.PunishmentOrg.DataModel.Execution.PExecutionWrit? ThePExecutionWrit { get; set; }
 
-    }
+        }
 
     [Table("PEXECUTIONWRITBINDINGSBJT")]
     public partial class PExecutionWritBindingSbjt : PExecutionWritBindingSbjtBase

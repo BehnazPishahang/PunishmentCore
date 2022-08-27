@@ -1,11 +1,12 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using Anu.BaseInfo.DataModel.Letter;
+
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
-    public abstract class PIncomingLetterBase : PunishmentOrgEntity<string>
+    public abstract class PIncomingLetterBase : GIncomingLetter
     {
 
         [Unicode(false)]
@@ -21,6 +22,10 @@ namespace Anu.PunishmentOrg.DataModel.Letter
         [InverseProperty("ThePIncomingLetter")]
         public virtual List<Anu.PunishmentOrg.DataModel.Letter.PIncomingLetterUnit>? ThePIncomingLetterUnitList { get; set; }
 
+    
+        [Column("TIMESTAMP")]
+        [ConcurrencyCheck]
+        public long PTimestamp { get { return base.Timestamp; } set {} }
     }
 
     [Table("PINCOMINGLETTER")]

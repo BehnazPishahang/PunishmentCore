@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Trm.EMail
 {
@@ -32,7 +32,7 @@ namespace Anu.BaseInfo.DataModel.Trm.EMail
         public virtual Anu.BaseInfo.Enumerations.CMSEMailStatus? EMailStatus { get; set; }
 
         [Unicode(false)]
-        [Column("EMAILTEXT")]
+        [Column("EMAILTEXT", TypeName = "BLOB")]
         public virtual string? EMailText { get; set; }
 
         [Unicode(false)]
@@ -83,7 +83,7 @@ namespace Anu.BaseInfo.DataModel.Trm.EMail
         [ForeignKey("TRMEMAILID")]
         public virtual List<Anu.BaseInfo.DataModel.Trm.EMail.TrmEMailNotSend>? TheTrmEMailNotSendList { get; set; }
 
-    }
+        }
 
     [Table("TRMEMAIL")]
     public partial class TrmEMail : TrmEMailBase
