@@ -135,7 +135,11 @@
   </data>
   <data name="GeoLocation_Request_IsNull" xml:space="preserve">
     <value>درخواست بدنه نمی‌تواند خالی باشد.</value>
-    <comment>-50001</comment>
+    <comment>-30231</comment>
+  </data>
+  <data name="GeoLocation_Request_NotValid" xml:space="preserve">
+    <value>فیلدهای ضروری پر نشده است</value>
+    <comment>-30232</comment>
   </data>
   <data name="MechanizedLetter_CreatorUserName_Is_Null" xml:space="preserve">
     <value>كاربر ثبت كننده نامه را وارد کنید.</value>
@@ -205,13 +209,21 @@
     <value>کد ملی تشکیل شده از ده رقم عددی می‌باشد؛ لطفا کد ملی را صحیح وارد نمایید.</value>
     <comment>-10008</comment>
   </data>
+  <data name="PBillStore_BillNumber_IsTooLong" xml:space="preserve">
+    <value>شماره قبض بیش از اندازه مجاز می باشد</value>
+    <comment>-30083</comment>
+  </data>
+  <data name="PBillStore_Date_IsInvalid" xml:space="preserve">
+    <value>تاریخ وارده طولانی یا نامعتبر است</value>
+    <comment>-30084</comment>
+  </data>
   <data name="PBillStore_Duplicate_Bill" xml:space="preserve">
     <value>شماره قبض تکراری است و امروز قابل ثبت نیست</value>
-    <comment>-30001</comment>
+    <comment>-30081</comment>
   </data>
   <data name="PBillStore_NoProductListProvided" xml:space="preserve">
     <value>لیست کالا خالی است!</value>
-    <comment>-30002</comment>
+    <comment>-30082</comment>
   </data>
   <data name="PBillStore_Request_NotValid" xml:space="preserve">
     <value>درخواست معتبر نمی باشد.</value>
@@ -254,39 +266,39 @@
   </data>
   <data name="PGravamen_Field_IsNullOrInvalid" xml:space="preserve">
     <value>{0} خالی یا نامعتبر می باشد</value>
-    <comment>-60001</comment>
+    <comment>-30221</comment>
   </data>
   <data name="PGravamen_FileIsLargerThanAllowedThreshold" xml:space="preserve">
     <value>سایز فایل ارسالی بیش از حد مجاز است</value>
-    <comment>-60008</comment>
+    <comment>-30228</comment>
   </data>
   <data name="PGravamen_NecessaryPositions_AreNotAvailabe" xml:space="preserve">
     <value>یک یا هر دو جایگاه ضروری در شکوائیه، وجود ندارد</value>
-    <comment>-60003</comment>
+    <comment>-30223</comment>
   </data>
   <data name="PGravamen_NoAttachmentAvailable" xml:space="preserve">
     <value>لیست فایل های ارسالی خالی است</value>
-    <comment>-60006</comment>
+    <comment>-30226</comment>
   </data>
   <data name="PGravamen_NoFileIsAttached" xml:space="preserve">
     <value>هیچ فایلی الصاق نشده است</value>
-    <comment>-60007</comment>
+    <comment>-30227</comment>
   </data>
   <data name="PGravamen_OffendingNecessaryField_IsNullOrInvalid" xml:space="preserve">
     <value>{0} برای شخص متهم ضروری است</value>
-    <comment>-60005</comment>
+    <comment>-30225</comment>
   </data>
   <data name="PGravamen_PlatiffNecessaryField_IsNullOrInvalid" xml:space="preserve">
     <value>{0} برای شخص شاکی ضروری است</value>
-    <comment>-60004</comment>
+    <comment>-30224</comment>
   </data>
   <data name="PGravamen_Request_IsNullOrCorrupt" xml:space="preserve">
     <value>درخواست ورودی خالی یا نامعتبر است</value>
-    <comment>-60002</comment>
+    <comment>-30222</comment>
   </data>
   <data name="PGravamen_TheGeoLocation_IsRequired" xml:space="preserve">
     <value>ارسال مکان جغرافیایی الزامی می‌باشد</value>
-    <comment>-60009</comment>
+    <comment>-30229</comment>
   </data>
   <data name="PhoneNumber_Is_Not_Entered" xml:space="preserve">
     <value>تلفن همراه را وارد کنید.</value>

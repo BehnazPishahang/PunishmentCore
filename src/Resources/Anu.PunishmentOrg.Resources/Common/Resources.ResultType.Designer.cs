@@ -106,6 +106,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فیلدهای ضروری پر نشده است.
+        /// </summary>
+        public static string GeoLocation_Request_NotValid {
+            get {
+                return ResourceManager.GetString("GeoLocation_Request_NotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to كاربر ثبت كننده نامه را وارد کنید..
         /// </summary>
         public static string MechanizedLetter_CreatorUserName_Is_Null {
@@ -255,6 +264,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string NationalCodeIs_Required {
             get {
                 return ResourceManager.GetString("NationalCodeIs_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره قبض بیش از اندازه مجاز می باشد.
+        /// </summary>
+        public static string PBillStore_BillNumber_IsTooLong {
+            get {
+                return ResourceManager.GetString("PBillStore_BillNumber_IsTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاریخ وارده طولانی یا نامعتبر است.
+        /// </summary>
+        public static string PBillStore_Date_IsInvalid {
+            get {
+                return ResourceManager.GetString("PBillStore_Date_IsInvalid", resourceCulture);
             }
         }
         

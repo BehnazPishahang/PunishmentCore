@@ -9,7 +9,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations.BaseInfo.Ge
 public enum GeoLocationResult
 {
     //زمانی که بدنه درخواست خالی باشد
-    GeoLocation_Request_IsNull = -50001,
+    GeoLocation_Request_IsNull = -30231,
     //زمانی که بدنه درخواست فیلدهای لازم را نداشته باشد و معتبر نباشد
-    PBillStore_Request_NotValid = -50002
+    GeoLocation_Request_NotValid = -30232
 }
