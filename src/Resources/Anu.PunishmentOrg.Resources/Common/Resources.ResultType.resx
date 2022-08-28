@@ -135,7 +135,11 @@
   </data>
   <data name="GeoLocation_Request_IsNull" xml:space="preserve">
     <value>درخواست بدنه نمی‌تواند خالی باشد.</value>
-    <comment>-50001</comment>
+    <comment>-30231</comment>
+  </data>
+  <data name="GeoLocation_Request_NotValid" xml:space="preserve">
+    <value>فیلدهای ضروری پر نشده است</value>
+    <comment>-30232</comment>
   </data>
   <data name="MechanizedLetter_CreatorUserName_Is_Null" xml:space="preserve">
     <value>كاربر ثبت كننده نامه را وارد کنید.</value>

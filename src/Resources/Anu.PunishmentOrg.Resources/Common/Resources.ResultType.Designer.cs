@@ -106,6 +106,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فیلدهای ضروری پر نشده است.
+        /// </summary>
+        public static string GeoLocation_Request_NotValid {
+            get {
+                return ResourceManager.GetString("GeoLocation_Request_NotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to كاربر ثبت كننده نامه را وارد کنید..
         /// </summary>
         public static string MechanizedLetter_CreatorUserName_Is_Null {
