@@ -1,15 +1,16 @@
 ﻿
 using Anu.Commons.ServiceModel.ServicePaging;
+using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
-using Anu.Constants.ServiceModel.PunishmentOrg;
-using Anu.PunishmentOrg.Api.Authentication;
+using Anu.DataAccess.Repositories;
 using Anu.PunishmentOrg.DataAccess.Notice;
-using Anu.PunishmentOrg.Domain.Notice;
+using Anu.PunishmentOrg.DataModel.Notice;
+using Anu.PunishmentOrg.Report;
 using Anu.PunishmentOrg.ServiceModel.Notice;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
+using Anu.Report;
 using Microsoft.AspNetCore.Mvc;
 using Utility;
-using Utility.Exceptions;
 using Utility.Guard;
 
 namespace Anu.PunishmentOrg.Api.Notice
@@ -23,6 +24,8 @@ namespace Anu.PunishmentOrg.Api.Notice
         {
             _unitOfWork = unitOfWork;
         }
+
+       
         #endregion Constructor
 
         #region Properties
@@ -32,6 +35,7 @@ namespace Anu.PunishmentOrg.Api.Notice
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<PNoticeInqueryResponse> InqueryPNoticeList([FromBody] PNoticeInqueryRequest request)
         {
+            request.Null(PNoticeResult.NationalCodeIs_Required);
 
             request.PNoticePersonContract.NationalityCode.Null(PNoticeResult.NationalCodeIs_Required);
 
@@ -58,9 +62,27 @@ namespace Anu.PunishmentOrg.Api.Notice
 
 
         }
+
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public override async Task<PNoticeExportResponse> ExportPNotice([FromBody] PNoticeExportRequest request)
+        {
+            request.Null(PNoticeResult.No_Is_Required);
+            request.PNoticeNoContract.No.NullOrWhiteSpace(PNoticeResult.No_Is_Required);
+
+            var pNotice = (await _unitOfWork.Repositorey<GenericRepository<PNotice>>().Find(x=>x.No == request.PNoticeNoContract.No)).FirstOrDefault();
+
+            pNotice.Null(PNoticeResult.PNotice_NotFound);
+
+            return new PNoticeExportResponse()
+            {
+                PNotice = new PNoticeExportContract() { Pdf = PunishmentOrgConstants.PNotice.PNoticePrint.ExportPdf("PNotice", pNotice) },
+                Result = AnuResult.Successful.GetResult()
+            };
+        }
         #endregion Overrides
 
         #region Methods
+
         #endregion Methods
     }
 }

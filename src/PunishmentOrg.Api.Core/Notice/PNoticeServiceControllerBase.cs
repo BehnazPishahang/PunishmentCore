@@ -1,4 +1,5 @@
 ﻿
+using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.PunishmentOrg.ServiceModel.Notice;
 
 namespace Anu.PunishmentOrg.Api.Notice
@@ -9,8 +10,12 @@ namespace Anu.PunishmentOrg.Api.Notice
         {
         }
         [Microsoft.AspNetCore.Mvc.HttpPost]
-        [Microsoft.AspNetCore.Mvc.Route("api/v2/BillStore/InqueryPNoticeList")]
+        [Microsoft.AspNetCore.Mvc.Route("api/v1/[controller]/[action]")]
         public abstract Task<PNoticeInqueryResponse> InqueryPNoticeList([Microsoft.AspNetCore.Mvc.FromBody] PNoticeInqueryRequest request);
+
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [Microsoft.AspNetCore.Mvc.Route("api/v1/[controller]/[action]")]
+        public abstract Task<PNoticeExportResponse> ExportPNotice([Microsoft.AspNetCore.Mvc.FromBody] PNoticeExportRequest request);
 
     }
 }

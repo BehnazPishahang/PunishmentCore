@@ -102,6 +102,10 @@ namespace Anu.Utility
             return null;
         }
 
+        public static string ConvertToBase64(this byte[] data)
+        {
+            return Convert.ToBase64String(data,0,data.Length);
+        }
 
     }
 }
