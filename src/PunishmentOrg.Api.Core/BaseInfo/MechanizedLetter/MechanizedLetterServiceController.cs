@@ -35,8 +35,8 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
 
         #region Overrides
 
-        //[Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        [Permission(PunishmentOrgConstants.GFESUserAccessType.MechanizedLetterServices)]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        //[Permission(PunishmentOrgConstants.GFESUserAccessType.MechanizedLetterServices)]
         public async override Task<MechanizedLetterResponse> SendMechanizedLetter([FromBody] MechanizedLetterRequest request)
         {
 
