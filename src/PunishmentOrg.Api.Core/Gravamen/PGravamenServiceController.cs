@@ -5,6 +5,8 @@ using Anu.BaseInfo.DataModel.GeoInfo;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
+using Anu.DataAccess.Repositories;
+using Anu.Domain;
 using Anu.PunishmentOrg.DataAccess.PGravamen;
 using Anu.PunishmentOrg.DataModel.Gravamen;
 using Anu.PunishmentOrg.Enumerations;
@@ -58,69 +60,111 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
                 var followupNumber = GenerateFollowUpNo(PU135OrWebSite.WebSite);
 
-                //ToDo
-                //محمدرضا جان شما برای شاکی فقط فیلدهای مربوط به شاکی را پر میکنید
-                //و برای متخلف نیز همین کار تکرار میکنی
+
                 var personList = new List<PGravamenPerson>();
                 foreach (var person in request.ThePGravamenContract!.ThePGravamenPersonContractList!)
                 {
                     var rownumber = 1;
-                    var currenPerson = new PGravamenPerson()
+                    PGravamenPerson currenPerson = new();
+                    switch (person.PersonStartPost)
                     {
-                        Id = GenerateFollowUpNo(PU135OrWebSite.WebSite),
-                        Timestamp = 1,
-                        RowNumber = rownumber,
-                        Name = person?.Name,
-                        Family = person?.Family,
-                        Address = person?.Address,
-                        BirthDate = person?.BirthDate,
-                        FatherName = person?.FatherName,
-                        IdentityNumber = person?.IdentityNumber,
-                        MobilNumber = person?.MobilNumber,
-                        NationalCode = person?.NationalCode,
-                        Nationality = person?.Nationality,
-                        PersonStartPost = person?.PersonStartPost,
-                        Sex = person?.Sex,
-                        PersonType = person?.PersonType,
-                        PostCode = person?.PostCode,
-                        TradeUnitName = person?.TradeUnitName,
-                        PersonPassword = person?.PersonPassword,
-                    };
+                        case PUPersonStartPost.PlaintiffPerson:
+                        default:
+                            currenPerson = new()
+                            {
+                                Id = Guid.NewGuid().ToString("N"),
+                                Timestamp = 1,
+                                RowNumber = rownumber,
+                                Name = person?.Name,
+                                Family = person?.Family,
+                                Address = person?.Address,
+                                BirthDate = person?.BirthDate,
+                                FatherName = person?.FatherName,
+                                IdentityNumber = person?.IdentityNumber,
+                                MobilNumber = person?.MobilNumber,
+                                NationalCode = person?.NationalCode,
+                                Nationality = person?.Nationality,
+                                PersonStartPost = PUPersonStartPost.PlaintiffPerson,
+                                Sex = person?.Sex,
+                                PersonType = Anu.BaseInfo.Enumerations.PersonType.NaturalPerson,
+                                PostCode = person?.PostCode,
+                                PersonPassword = "1",
+                                TradeUnitName = string.Empty,
+                            };
+
+
+                            break;
+
+                        case PUPersonStartPost.OffendingPerson:
+                            //Problem: All fields are obligatory and must be filled, otherwise insert will not happen!!
+                            currenPerson = new()
+                            {
+                                Id = Guid.NewGuid().ToString("N"),
+                                Timestamp = 1,
+                                RowNumber = rownumber,
+                                Name = person.Name,
+                                TradeUnitName = person.TradeUnitName,
+                                PersonType = Anu.BaseInfo.Enumerations.PersonType.Legal,
+                                PersonStartPost = PUPersonStartPost.OffendingPerson,
+
+                                Family = string.Empty,
+                                Address = string.Empty,
+                                BirthDate = string.Empty,
+                                FatherName = string.Empty,
+                                IdentityNumber = string.Empty,
+                                MobilNumber = string.Empty,
+                                NationalCode = string.Empty,
+                                Nationality = Anu.BaseInfo.Enumerations.LNationality.None,
+                                Sex = Anu.BaseInfo.Enumerations.SexType.None,
+                                PostCode = string.Empty,
+                                PersonPassword = "1",
+
+                            };
+
+
+                            break;
+
+                    }
 
                     personList.Add(currenPerson);
                     rownumber++;
                 }
 
                 var attachmentList = new List<PGravamenAttachment>();
+                var gravamenAttachmentTypeId = "300";
+
+                int docFilesLength = 0;
                 foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
                 {
-                    //ToDo: you should check size of all docfile in attachmentList at once
-                    ValidateDocFile(attachment.TheGAttachmentDataContract!.DocFile);
+                    var docFile = attachment.TheGAttachmentDataContract.DocFile;
+
+                    docFilesLength += docFile.Length;
+
+                    docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
+
+                    var attachmentType = await _unitOfWork.Repositorey<GenericRepository<Anu.BaseInfo.DataModel.Types.AttachmentType>>().GetById(gravamenAttachmentTypeId);
+
+
+
                     var attachedFile = new PGravamenAttachment()
                     {
-                        Id = GenerateFollowUpNo(PU135OrWebSite.WebSite),
+                        Id = Guid.NewGuid().ToString("N"),
                         Timestamp = 1,
                         FileExtension = attachment.FileExtension,
                         SaveAttachmentType = Anu.BaseInfo.Enumerations.SaveAttachmentType.SaveInDataBase,
                         CreateDateTime = DateTime.Now.ToPersian().ToString(),
-                        //Todo:you should fetch this property from database
-                        TheAttachmentType = new Anu.BaseInfo.DataModel.Types.AttachmentType()
-                        {
-                            Code = "300",
-                            Id = "3002",
-                            Title = "پيوست شكوائيه مردمي",
-                            Timestamp = 1,
-                            State = Anu.BaseInfo.Enumerations.State.Valid,
-                            UnitTypeAccess = "1"
-                        },
+                        //TheAttachmentType = attachmentType,
+
                         TheGAttachmentData = new GAttachmentData()
                         {
-                            Id = GenerateFollowUpNo(PU135OrWebSite.SaveInternally),
+                            Id = Guid.NewGuid().ToString("N"),
                             Timestamp = 1,
                             DocFile = attachment.TheGAttachmentDataContract!.DocFile
 
                         }
                     };
+                    attachedFile.TheAttachmentType = attachmentType;
+                    ValidateDocFilesSize(docFilesLength);
 
                     attachmentList.Add(attachedFile);
                 }
@@ -128,7 +172,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
                 var gravamen = new PGravamen()
                 {
-                    Id = GenerateFollowUpNo(PU135OrWebSite.WebSite),
+                    Id = Guid.NewGuid().ToString("N"),
                     Timestamp = 1,
                     TheObjectState = await _unitOfWork.Repositorey<Anu.BaseInfo.DataAccess.SystemObject.ObjectStateRepository>().GetById(PunishmentOrgObjectState.PGravamen.Start),
                     PetitionSubject = request.ThePGravamenContract.PetitionSubject,
@@ -174,16 +218,14 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
         #region Methods
 
-        private PGravamenServiceResponse ValidateDocFile(byte[] docFile)
+        private PGravamenServiceResponse? ValidateDocFilesSize(int totalSize)
         {
-            PGravamenServiceResponse pGravamenServiceResponse = new PGravamenServiceResponse();
-            docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
-
-            if (docFile.Length / 1000 > 6000)
+            if (!(totalSize / 1000 > 6000))
             {
-                pGravamenServiceResponse = Respond(PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold);
+                return null;
             }
-            return pGravamenServiceResponse;
+
+            return Respond(PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold);
         }
 
         private string GenerateFollowUpNo(PU135OrWebSite howDataType)
