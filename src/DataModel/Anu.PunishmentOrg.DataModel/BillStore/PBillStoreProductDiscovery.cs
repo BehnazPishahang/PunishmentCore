@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.BillStore
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.BillStore
         [ForeignKey("PDISCOVERYMINUTESPRODUCTFNDID")]
         public virtual Anu.PunishmentOrg.DataModel.DiscoveryMinutes.PDiscoveryMinutesProductFound? ThePDiscoveryMinutesProductFnd { get; set; }
 
-    }
+        }
 
     [Table("PBILLSTOREPRODUCTDISCOVERY")]
     public partial class PBillStoreProductDiscovery : PBillStoreProductDiscoveryBase

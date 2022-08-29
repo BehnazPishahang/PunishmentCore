@@ -53,102 +53,92 @@ namespace Anu.PunishmentOrg.Api.BillStore
                 UniqueNo = "-1"
             };
 
-            try
+
+
+            //await LoginValidation.ValidateLoginAsync(request.Request, PunishmentOrgConstants.GFESUserAccessType.SendPBillStoreService, _unitOfWork);
+
+            //TODO: Add bill number(max:32) and date(max:12?) length validation
+
+            if (IsDuplicateEntry(request))
             {
+                return Respond(PBillStoreResult.PBillStore_Duplicate_Bill);
+            }
 
-                //await LoginValidation.ValidateLoginAsync(request.Request, PunishmentOrgConstants.GFESUserAccessType.SendPBillStoreService, _unitOfWork);
+            if (IsProductListEmpty(request))
+            {
+                return Respond(PBillStoreResult.PBillStore_NoProductListProvided);
+            }
 
-                //TODO: Add bill number(max:32) and date(max:12?) length validation
+            PBillStore pBillStore = new()
+            {
+                Id = new Guid().ToString()[..31],
+                Timestamp = 1,
+                BillDate = request.BillDate,
+                BillNo = request.BillNumber,
+                CreateDateTime = CalendarHelper.GetCurrentDateTime(),
+                PCaseNo = request.ParentContentNumber,
+                UniqueNo = Utility.Utility.GetRandomNumber(Anu.Constants.ServiceModel.General.GeneralConstants.ConventionalConstants.UniqueNumberLength)
+            };
 
-                if (IsDuplicateEntry(request))
+            //var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
+            var pDiscoveryMinutes = await _unitOfWork.Repositorey<PDiscoveryMinutesRepository>().GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
+            pBillStore.ThePDiscoveryMinutes = (pDiscoveryMinutes is null) ? null : pDiscoveryMinutes;
+
+            pBillStore.TheObjectState = await _unitOfWork.Repositorey<ObjectStateRepository>().GetById(PunishmentOrgObjectState.PBillStore.Confirm);
+
+            pBillStore.TheDiscoveryOrg = await GetDiscoveryOrganization(request.CodingDeviceDetector);
+            pBillStore.id_shenaseResid = request.TrackingCodeStores;
+
+
+            var transfereeStringBuilder = new StringBuilder();
+            var deliveryStringBuilder = new StringBuilder();
+
+            foreach (var person in request.ThePBillStorePersonScmsList)
+            {
+                var personName = person.Fname + " " + person.Lname + "-" + person.NationalCode + ",";
+
+                if (person.RoleNameEN == nameof(PersonRole.Transferee))
                 {
-                    return Respond(PBillStoreResult.PBillStore_Duplicate_Bill);
+                    transfereeStringBuilder.Append(personName);
                 }
-
-                if (IsProductListEmpty(request))
+                else
                 {
-                    return Respond(PBillStoreResult.PBillStore_NoProductListProvided);
+                    deliveryStringBuilder.Append(personName);
                 }
+            }
 
-                PBillStore pBillStore = new()
+            pBillStore.TransfereeName = transfereeStringBuilder.ToString();
+            pBillStore.TransfereeFamily = transfereeStringBuilder.ToString();
+
+            pBillStore.DeliveryName = deliveryStringBuilder.ToString();
+            pBillStore.DeliveryFamily = deliveryStringBuilder.ToString();
+
+
+
+            pBillStore.ThePBillStoreProductList = new();
+            int rowNumber = 1;
+            foreach (var product in request.ThePBillStoreProductList)
+            {
+                var pBillStoreProduct = new PBillStoreProduct()
                 {
                     Id = new Guid().ToString()[..31],
                     Timestamp = 1,
-                    BillDate = request.BillDate,
-                    BillNo = request.BillNumber,
-                    CreateDateTime = CalendarHelper.GetCurrentDateTime(),
-                    PCaseNo = request.ParentContentNumber,
-                    UniqueNo = Utility.Utility.GetRandomNumber(Anu.Constants.ServiceModel.General.GeneralConstants.ConventionalConstants.UniqueNumberLength)
+                    RowNumber = rowNumber,
+                    IDNumber = product.IDNumber, //previously was Cid_Code
+                    ProductTitle = product.ProductTitle, //previously was Goods_Name
+                    ProductDesc = product.ProductDesc, //previously was Good_Desc
+                    PackingType = product.PackingType //previously was Package_Type
                 };
 
-                //var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
-                var pDiscoveryMinutes = await _unitOfWork.Repositorey<PDiscoveryMinutesRepository>().GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
-                pBillStore.ThePDiscoveryMinutes = (pDiscoveryMinutes is null) ? null : pDiscoveryMinutes;
-
-                pBillStore.TheObjectState = await _unitOfWork.Repositorey<ObjectStateRepository>().GetById(PunishmentOrgObjectState.PBillStore.Confirm);
-
-                pBillStore.TheDiscoveryOrg = await GetDiscoveryOrganization(request.CodingDeviceDetector);
-                pBillStore.id_shenaseResid = request.TrackingCodeStores;
-
-
-                var transfereeStringBuilder = new StringBuilder();
-                var deliveryStringBuilder = new StringBuilder();
-
-                foreach (var person in request.ThePBillStorePersonScmsList)
-                {
-                    var personName = person.Fname + " " + person.Lname + "-" + person.NationalCode + ",";
-
-                    if (person.RoleNameEN == nameof(PersonRole.Transferee))
-                    {
-                        transfereeStringBuilder.Append(personName);
-                    }
-                    else
-                    {
-                        deliveryStringBuilder.Append(personName);
-                    }
-                }
-
-                pBillStore.TransfereeName = transfereeStringBuilder.ToString();
-                pBillStore.TransfereeFamily = transfereeStringBuilder.ToString();
-
-                pBillStore.DeliveryName = deliveryStringBuilder.ToString();
-                pBillStore.DeliveryFamily = deliveryStringBuilder.ToString();
-
-
-
-                pBillStore.ThePBillStoreProductList = new();
-                int rowNumber = 1;
-                foreach (var product in request.ThePBillStoreProductList)
-                {
-                    var pBillStoreProduct = new PBillStoreProduct()
-                    {
-                        Id = new Guid().ToString()[..31],
-                        Timestamp = 1,
-                        RowNumber = rowNumber,
-                        IDNumber = product.IDNumber, //previously was Cid_Code
-                        ProductTitle = product.ProductTitle, //previously was Goods_Name
-                        ProductDesc = product.ProductDesc, //previously was Good_Desc
-                        PackingType = product.PackingType //previously was Package_Type
-                    };
-
-                    rowNumber++;
-                    pBillStore.ThePBillStoreProductList.Add(pBillStoreProduct);
-                }
-
-                _unitOfWork.Repositorey<PBillStoreRepository>().Add(pBillStore);
-                _unitOfWork.Complete();
-
-                return Respond(AnuResult.Successful, pBillStore.UniqueNo);
+                rowNumber++;
+                pBillStore.ThePBillStoreProductList.Add(pBillStoreProduct);
             }
-            catch (AnuExceptions ex)
-            {
-                receivePBillStoreFromScmsResponse.Result = ex.result;
-                return receivePBillStoreFromScmsResponse;
-            }
-            catch (Exception ex)
-            {
-                return new PBillStoreServiceResponse() { Result = AnuResult.Error.GetResult(ex) };
-            }
+
+            _unitOfWork.Repositorey<PBillStoreRepository>().Add(pBillStore);
+            _unitOfWork.Complete();
+
+            return Respond(AnuResult.Successful, pBillStore.UniqueNo);
+
         }
 
 
@@ -161,7 +151,6 @@ namespace Anu.PunishmentOrg.Api.BillStore
 
 
         #endregion Overrides
-
 
         #region Methods
 

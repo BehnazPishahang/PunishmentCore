@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -17,7 +17,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [ForeignKey("AGENTTYPEID")]
         public virtual Anu.BaseInfo.DataModel.Types.AgentType? TheAgentType { get; set; }
 
-    }
+        }
 
     [Table("PCASEAGENT")]
     public partial class PCaseAgent : PCaseAgentBase

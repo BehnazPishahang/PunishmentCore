@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
@@ -60,7 +60,7 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [Column("WRITTYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.PUExecutionWritType? WritType { get; set; }
 
-    }
+        }
 
     [Table("PEXECUTIONREMOVALWRIT")]
     public partial class PExecutionRemovalWrit : PExecutionRemovalWritBase

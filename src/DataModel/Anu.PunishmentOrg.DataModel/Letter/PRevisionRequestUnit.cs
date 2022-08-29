@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Letter
         [ForeignKey("PREVISIONREQUESTID")]
         public virtual Anu.PunishmentOrg.DataModel.Letter.PRevisionRequest? ThePRevisionRequest { get; set; }
 
-    }
+        }
 
     [Table("PREVISIONREQUESTUNIT")]
     public partial class PRevisionRequestUnit : PRevisionRequestUnitBase

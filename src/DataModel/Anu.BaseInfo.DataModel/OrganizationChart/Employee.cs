@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.OrganizationChart
 {
@@ -45,7 +45,7 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [InverseProperty("TheEmployee")]
         public virtual List<Anu.BaseInfo.DataModel.Security.CMSUser.CMSUser>? TheCMSUserList { get; set; }
 
-    }
+        }
 
     [Table("EMPLOYEE")]
     public partial class Employee : EmployeeBase

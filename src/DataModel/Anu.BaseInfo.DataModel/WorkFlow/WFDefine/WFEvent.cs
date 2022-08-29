@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
 {
@@ -20,7 +20,7 @@ namespace Anu.BaseInfo.DataModel.WorkFlow.WFDefine
         [Column("FARSINAME")]
         public virtual string? FarsiName { get; set; }
 
-    }
+        }
 
     [Table("WFEVENT")]
     public partial class WFEvent : WFEventBase

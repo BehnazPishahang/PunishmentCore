@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -33,7 +33,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [ForeignKey("SYSTEMCONDITIONID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemCondition? TheSystemCondition { get; set; }
 
-    }
+        }
 
     [Table("SYSTEMTEMPLATELOOP")]
     public partial class SystemTemplateLoop : SystemTemplateLoopBase

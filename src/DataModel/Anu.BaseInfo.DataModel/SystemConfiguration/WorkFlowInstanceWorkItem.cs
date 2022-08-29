@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
@@ -99,7 +99,7 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [Column("USERCANDELAY")]
         public virtual Anu.BaseInfo.Enumerations.YesNo? UserCanDelay { get; set; }
 
-    }
+        }
 
     [Table("WORKFLOWINSTANCEWORKITEM")]
     public partial class WorkFlowInstanceWorkItem : WorkFlowInstanceWorkItemBase

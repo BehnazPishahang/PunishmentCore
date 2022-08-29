@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
 {
@@ -26,7 +26,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
-    }
+        }
 
     [Table("JBSPECIFICDATA")]
     public partial class JBSpecificData : JBSpecificDataBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
@@ -29,7 +29,7 @@ namespace Anu.PunishmentOrg.DataModel.Letter
         [ForeignKey("PARTICLE23ACTIONREQUESTID")]
         public virtual Anu.PunishmentOrg.DataModel.Letter.PArticle23ActionRequest? ThePArticle23ActionRequest { get; set; }
 
-    }
+        }
 
     [Table("PARTICLE23ACTIONREQATTACH")]
     public partial class PArticle23ActionReqAttach : PArticle23ActionReqAttachBase

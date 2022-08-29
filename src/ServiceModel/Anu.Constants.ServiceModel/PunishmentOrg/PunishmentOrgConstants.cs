@@ -50,6 +50,11 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
             /// فراخواننده سرویس ارسال مکاتبات مکانیزه به سازمان تعزیرات
             /// </summary>
             public const string SendGMechanizedLetterServices = "0022";
+
+            /// <summary>
+            /// فراخواننده سرویس دریافت مکاتبات مکانیزه به سازمان تعزیرات
+            /// </summary>
+            public const string MechanizedLetterServices="024";
         }
 
         public static class NajaUnit

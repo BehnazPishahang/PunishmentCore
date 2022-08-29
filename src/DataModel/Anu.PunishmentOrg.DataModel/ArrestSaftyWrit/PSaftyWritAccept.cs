@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
 {
@@ -89,7 +89,7 @@ namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
         [Column("WRITTEXT")]
         public virtual string? WritText { get; set; }
 
-    }
+        }
 
     [Table("PSAFTYWRITACCEPT")]
     public partial class PSaftyWritAccept : PSaftyWritAcceptBase

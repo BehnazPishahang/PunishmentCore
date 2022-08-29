@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
@@ -22,7 +22,7 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [ForeignKey("PPRISONERID")]
         public virtual Anu.PunishmentOrg.DataModel.Execution.PPrisoner? ThePPrisoner { get; set; }
 
-    }
+        }
 
     [Table("PPRISONERLEAVE")]
     public partial class PPrisonerLeave : PPrisonerLeaveBase

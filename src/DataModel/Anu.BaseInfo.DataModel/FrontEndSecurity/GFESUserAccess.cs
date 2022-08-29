@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.FrontEndSecurity
 {
@@ -32,7 +32,7 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
         [Column("TODATETIME")]
         public virtual string? ToDateTime { get; set; }
 
-    }
+        }
 
     [Table("GFESUSERACCESS")]
     public partial class GFESUserAccess : GFESUserAccessBase

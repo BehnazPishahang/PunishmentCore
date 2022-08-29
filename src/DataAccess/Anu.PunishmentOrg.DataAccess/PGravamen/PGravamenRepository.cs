@@ -3,6 +3,7 @@ using Anu.PunishmentOrg.Domain.PGravamen;
 
 namespace Anu.PunishmentOrg.DataAccess.PGravamen;
 
+//! کل من علیها fun
 public class PGravamenRepository : GenericRepository<DataModel.Gravamen.PGravamen>, IPGravamenRepository
 {
     public PGravamenRepository(Anu.DataAccess.ApplicationDbContext context) : base(context)

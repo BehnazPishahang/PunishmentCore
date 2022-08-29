@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Accounting
 {
@@ -57,7 +57,7 @@ namespace Anu.PunishmentOrg.DataModel.Accounting
         [Column("TRANSACTIONRECEIPT")]
         public virtual string? TransactionReceipt { get; set; }
 
-    }
+        }
 
     [Table("PCASHBYMOBILEPOS")]
     public partial class PCashByMobilePOS : PCashByMobilePOSBase

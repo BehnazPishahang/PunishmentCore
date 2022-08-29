@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.BillStore
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.BillStore
         [ForeignKey("PBILLSTOREID")]
         public virtual Anu.PunishmentOrg.DataModel.BillStore.PBillStore? ThePBillStore { get; set; }
 
-    }
+        }
 
     [Table("PBILLSTOREUNIT")]
     public partial class PBillStoreUnit : PBillStoreUnitBase

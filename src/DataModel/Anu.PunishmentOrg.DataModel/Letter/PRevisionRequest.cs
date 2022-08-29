@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Letter
 {
@@ -71,7 +71,7 @@ namespace Anu.PunishmentOrg.DataModel.Letter
         [Column("TRIPADVISOROPINION")]
         public virtual Anu.PunishmentOrg.Enumerations.PUTripAdvisorOpinion? TripAdvisorOpinion { get; set; }
 
-    }
+        }
 
     [Table("PREVISIONREQUEST")]
     public partial class PRevisionRequest : PRevisionRequestBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -31,7 +31,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [Column("SYSTEMOBJECTTYPE")]
         public virtual Anu.BaseInfo.Enumerations.SystemObjectType? SystemObjectType { get; set; }
 
-    }
+        }
 
     [Table("SYSTEMOBJECT")]
     public partial class SystemObject : SystemObjectBase

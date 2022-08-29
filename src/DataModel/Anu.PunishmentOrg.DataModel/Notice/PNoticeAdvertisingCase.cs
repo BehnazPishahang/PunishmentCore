@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Notice
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Notice
         [ForeignKey("PNOTICEADVERTISINGID")]
         public virtual Anu.PunishmentOrg.DataModel.Notice.PNoticeAdvertising? ThePNoticeAdvertising { get; set; }
 
-    }
+        }
 
     [Table("PNOTICEADVERTISINGCASE")]
     public partial class PNoticeAdvertisingCase : PNoticeAdvertisingCaseBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Terminate
 {
@@ -91,7 +91,7 @@ namespace Anu.PunishmentOrg.DataModel.Terminate
         [Column("VERDICTTEXT")]
         public virtual string? VerdictText { get; set; }
 
-    }
+        }
 
     [Table("PJUDGMENT")]
     public partial class PJudgment : PJudgmentBase

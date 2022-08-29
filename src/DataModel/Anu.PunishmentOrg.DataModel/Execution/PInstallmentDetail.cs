@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
@@ -31,7 +31,7 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [InverseProperty("ThePInstallmentDetail")]
         public virtual List<Anu.PunishmentOrg.DataModel.Accounting.PPaidReason>? ThePPaidReasonList { get; set; }
 
-    }
+        }
 
     [Table("PINSTALLMENTDETAIL")]
     public partial class PInstallmentDetail : PInstallmentDetailBase

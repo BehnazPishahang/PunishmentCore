@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Attachment
 {
@@ -60,7 +60,7 @@ namespace Anu.BaseInfo.DataModel.Attachment
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
-    }
+        }
 
     [Table("GATTACHMENT")]
     public partial class GAttachment : GAttachmentBase

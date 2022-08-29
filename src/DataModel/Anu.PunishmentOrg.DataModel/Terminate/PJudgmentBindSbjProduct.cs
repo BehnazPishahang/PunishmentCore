@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Terminate
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Terminate
         [ForeignKey("PJUDGMENTBINDINGSUBJECTID")]
         public virtual Anu.PunishmentOrg.DataModel.Terminate.PJudgmentBindingSubject? ThePJudgmentBindingSubject { get; set; }
 
-    }
+        }
 
     [Table("PJUDGMENTBINDSBJPRODUCT")]
     public partial class PJudgmentBindSbjProduct : PJudgmentBindSbjProductBase

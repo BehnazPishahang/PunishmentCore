@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -23,7 +23,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [ForeignKey("MASTERRELATIONFIELDID")]
         public virtual Anu.BaseInfo.DataModel.DynamicFormGen.JTableReportField? TheMasterRelationField { get; set; }
 
-    }
+        }
 
     [Table("JTABLEREPORTGRPRELATION")]
     public partial class JTableReportGrpRelation : JTableReportGrpRelationBase

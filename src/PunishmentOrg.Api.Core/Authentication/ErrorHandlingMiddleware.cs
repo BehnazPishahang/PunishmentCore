@@ -1,4 +1,6 @@
-﻿using Utility.Exceptions;
+﻿using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using Utility;
+using Utility.Exceptions;
 
 namespace Anu.PunishmentOrg.Api.Authentication
 {
@@ -34,7 +36,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             }
             catch (Exception innerException)
             {
-                result = new Commons.ServiceModel.ServiceResponse.Result() { Code = -1, Message = "خطای غیر منتظره", Description = "unhandledexception" + innerException.Message };
+                result = AnuResult.Error.GetResult(exception,description: "unhandledexception" + exception.Message);
             }
             finally
             {

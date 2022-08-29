@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Letter
 {
@@ -22,7 +22,7 @@ namespace Anu.BaseInfo.DataModel.Letter
         [Column("TRANSCRIPTTEXT")]
         public virtual string? TranscriptText { get; set; }
 
-    }
+        }
 
     [Table("GOUTGOINGLETTERTRANSCRIPT")]
     public partial class GOutgoingLetterTranscript : GOutgoingLetterTranscriptBase

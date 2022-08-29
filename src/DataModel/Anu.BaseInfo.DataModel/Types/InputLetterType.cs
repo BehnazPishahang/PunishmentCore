@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Types
 {
@@ -23,7 +23,7 @@ namespace Anu.BaseInfo.DataModel.Types
         [Column("UNITTYPEACCESS")]
         public virtual string? UnitTypeAccess { get; set; }
 
-    }
+        }
 
     [Table("INPUTLETTERTYPE")]
     public partial class InputLetterType : InputLetterTypeBase

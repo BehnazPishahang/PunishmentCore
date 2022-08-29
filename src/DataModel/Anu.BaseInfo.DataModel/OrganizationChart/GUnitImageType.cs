@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.OrganizationChart
 {
@@ -19,7 +19,7 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
-    }
+        }
 
     [Table("GUNITIMAGETYPE")]
     public partial class GUnitImageType : GUnitImageTypeBase

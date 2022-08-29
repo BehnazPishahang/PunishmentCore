@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.InspectionReport
 {
@@ -300,7 +300,7 @@ namespace Anu.PunishmentOrg.DataModel.InspectionReport
         [Column("VIOLATIONCOUNT")]
         public virtual long? ViolationCount { get; set; }
 
-    }
+        }
 
     [Table("PINSPECTIONREPORT")]
     public partial class PInspectionReport : PInspectionReportBase

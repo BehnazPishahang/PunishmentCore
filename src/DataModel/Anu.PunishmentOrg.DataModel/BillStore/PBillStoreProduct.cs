@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.BillStore
 {
@@ -261,7 +261,7 @@ namespace Anu.PunishmentOrg.DataModel.BillStore
         [Column("WOODTOTALVOLUME")]
         public virtual long? WoodTotalVolume { get; set; }
 
-    }
+        }
 
     [Table("PBILLSTOREPRODUCT")]
     public partial class PBillStoreProduct : PBillStoreProductBase

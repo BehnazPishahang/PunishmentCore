@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Attachment
 {
@@ -38,7 +38,7 @@ namespace Anu.BaseInfo.DataModel.Attachment
         [ForeignKey("SYSTEMOBJECTID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemObject? TheSystemObject { get; set; }
 
-    }
+        }
 
     [Table("GTRANSACTIONASYNC")]
     public partial class GTransactionAsync : GTransactionAsyncBase

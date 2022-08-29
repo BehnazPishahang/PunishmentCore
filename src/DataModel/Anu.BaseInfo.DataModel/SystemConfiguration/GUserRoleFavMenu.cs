@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
@@ -17,7 +17,7 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [ForeignKey("REGISTERUSERHISTORYID")]
         public virtual Anu.BaseInfo.DataModel.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
-    }
+        }
 
     [Table("GUSERROLEFAVMENU")]
     public partial class GUserRoleFavMenu : GUserRoleFavMenuBase

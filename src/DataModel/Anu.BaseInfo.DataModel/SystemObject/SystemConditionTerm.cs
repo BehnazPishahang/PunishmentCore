@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -45,7 +45,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [Column("SECONDOPERANDTYPE")]
         public virtual Anu.BaseInfo.Enumerations.OperandType? SecondOperandType { get; set; }
 
-    }
+        }
 
     [Table("SYSTEMCONDITIONTERM")]
     public partial class SystemConditionTerm : SystemConditionTermBase

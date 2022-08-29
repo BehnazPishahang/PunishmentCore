@@ -55,7 +55,7 @@
                            @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
                             {
                                 <MudNavMenu Color="Color.Primary">
-                                <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor="@Theme135._iconColor"> کارتابل </MudNavLink>
+                                <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
  
     
                                         <MudNavLink Href="/isConstracting" Icon="@Icons.Filled.AddIcCall" IconColor="@Theme135._iconColor">
@@ -68,7 +68,7 @@
                             }
                             else
                                {
-                                    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor = "@Theme135._iconColor"  > کارتابل </MudNavLink>
+                                    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor = "@Theme135._iconColor"  > خدمات الکترونیکی تعزیرات </MudNavLink>
      
                                               <MudNavLink id="FrmNoticeMain" Href="/FrmNoticeMain" Icon="@Icons.Filled.ManageSearch"   IconColor = "@Theme135._iconColor" >
                                                         جستجوی ابلاغ
@@ -104,7 +104,7 @@
         
                 </MudNavMenu>
             </MudDrawer>
-            <MudMainContent > @*Class="@_Mode" > *@
+            <MudMainContent >  
                 @Body
             </MudMainContent>
         </MudLayout>
@@ -117,15 +117,14 @@
     private static string _dayNightIcons = Icons.Material.Filled.DarkMode;
     private static string _menuIcons = Icons.Material.Filled.MenuOpen;
 
-    public static string _style ="height:100px;background-color:#181c1c";
+    public static string _style ="height:100px;background-color:#ede3e3";
     public static string _class ="Circle_night";
-    public static bool DarkMode = false;
+    public static bool DarkMode = true;
     private MudTheme _theme = Theme135.DefaultTheme;
 
     private bool _Day = false;
     private bool _Night = true;
-
-    public string _Mode =  "Mud-Main-Content-night";
+ 
     public EventCallback OnDarkModeToggle { get; set; }
     bool _drawerOpen = true;
 
@@ -146,14 +145,14 @@
     public void onDarkMode()
     {
     
-        if(  _isDarkMode )
+        if(! _isDarkMode )
         {
             Theme135._iconColor = Color.Success ;
             Theme135._LogoColor = Color.Success;
 
             _style ="height:100px;background-color:#181c1c";
-            _class ="Circle_night";
-            _dayNightIcons = Icons.Material.Filled.DarkMode;
+            _class ="Circle";
+            _dayNightIcons = Icons.Material.Filled.LightMode;
 
         }
         else
@@ -161,12 +160,12 @@
             Theme135._iconColor = Color.Info;
             Theme135._LogoColor = Color.Surface;
             _style ="height:100px;background-color:#ede3e3";
-            _class ="Circle";
-            _dayNightIcons = Icons.Material.Filled.LightMode;
+            _class ="Circle_night";
+            _dayNightIcons = Icons.Material.Filled.DarkMode;
         }
 
-            _isDarkMode = !_isDarkMode;
         DarkMode = _isDarkMode;
+            _isDarkMode = !_isDarkMode;
             
         string[] uri =  _navigationManager.Uri.Split('/');
         string CurrentPage = uri[uri.Length-1];

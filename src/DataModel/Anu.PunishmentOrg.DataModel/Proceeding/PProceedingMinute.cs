@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Proceeding
 {
@@ -50,7 +50,7 @@ namespace Anu.PunishmentOrg.DataModel.Proceeding
         [ForeignKey("UNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheUnit { get; set; }
 
-    }
+        }
 
     [Table("PPROCEEDINGMINUTE")]
     public partial class PProceedingMinute : PProceedingMinuteBase

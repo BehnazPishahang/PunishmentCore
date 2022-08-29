@@ -1,78 +1,75 @@
-﻿@page "/register"
-@layout MainLayout
-@attribute [AllowAnonymous]
+﻿
+
 
 <EditForm Model="@_registerUserModel" OnValidSubmit="SubmitAsync">
-@*    <FluentValidationValidator @ref="_fluentValidationValidator" />
-*@ 
-<MudGrid>
-        <MudItem xs="12">
-            <div class="d-flex justify-center">
-              
-                <MudIcon Icon="@Icons.Filled.Balance" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
-            </div>
-        </MudItem>
-        <MudItem xs="12">
-            <div class="d-flex justify-center">
-                <MudText Typo="Typo.h4">ثبت نام</MudText>
-            </div>
-        </MudItem>
-        
-        <MudItem  xs="6">
-            <MudTextField For="@(() => _registerUserModel.UserName)" @bind-Value="_registerUserModel.UserName" Label="کدملی " Variant="Variant.Outlined" />
-        </MudItem>
-        <MudItem  xs="6" sm="6" md="6">
-            <MudTextField For="@(() => _registerUserModel.FirstName)" @bind-Value="_registerUserModel.FirstName" Label="نام " Variant="Variant.Outlined"/>
-        </MudItem>
-        <MudItem  xs="6" sm="6" md="6">
-            <MudTextField For="@(() => _registerUserModel.LastName)" @bind-Value="_registerUserModel.LastName" Label="نام خانوادگی " Variant="Variant.Outlined"/>
-        </MudItem>
-         <MudItem  xs="6" sm="6" md="6">
-            <MudItem  xs="6" sm="6" md="6">
-            <label>تاریخ تولد</label>
-           </MudItem>
-                        <InputPersianDatePicker Id="myInputDatePicker3"
-                        @bind-Value="_variable1"
-                        Name="myInputName"
-                        Visible="true"
-                        Disabled="false"
-                        PickerAlign="Blazor.PersianDatePicker.Align .Left"
-                        PickerOffsetTopPositionInPixels="0"
-                        InitialValue="false"
-                        CalendarType="Calendar.SingleModeJalali"
-                        DigitType="DigitType.BasedOnCalendar"
-                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
-                        MinDateSetOnToday="true"
-                        Placeholder="تاریخ تولد"
-                        CssClass="form-control"
-                        Style=" text-align: right;
-                                border: 0px solid #bdbdbd;
-                                margin-left: 20px;
-                                width: 50%;
-                                height: 40px;
-                                float: right;  
-                         "
-                        Theme="PickerTheme.Cheerup"
-                        OnChange="@(() => Console.WriteLine("OK"))" />
-       </MudItem>
-        @*<MudItem  xs="12" sm="6" md="6">
-            <MudTextField T="string" Label="آیمیل" @bind-Value="_registerUserModel.Email" For="@(() => _registerUserModel.Email)" Variant="Variant.Outlined"/>
-        </MudItem>*@
-        <MudItem  xs="12" sm="6" md="6">
-            <MudTextField T="string" Label="شماره تلفن " @bind-Value="_registerUserModel.PhoneNumber" For="@(() => _registerUserModel.PhoneNumber)" Variant="Variant.Outlined"/>
-        </MudItem>
-        <MudItem  xs="12" sm="6" md="6">
-            <MudTextField For="@(() => _registerUserModel.Password)" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" @bind-Value="_registerUserModel.Password" Label="کلمه عبور" Variant="Variant.Outlined"/>
-        </MudItem>
-        <MudItem  xs="12" sm="6" md="6">
-            <MudTextField For="@(() => _registerUserModel.ConfirmPassword)" InputType="InputType.Password" @bind-Value="_registerUserModel.ConfirmPassword" Label=" تایید کلمه عبور" Variant="Variant.Outlined" />
-        </MudItem>
-        <MudItem  xs="12" Class="d-flex justify-center">
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">ثبت نام</MudButton>
-        </MudItem>
-    </MudGrid>
+    
+
+    <div class=" col-lg-12 col-12 col-md-12 col-sm-12 ">
+        <div class="col-6">
+            <MudGrid xs="4" sm="4" md="4">
+
+
+                <MudItem xs="12">
+                    <div class="d-flex justify-center">
+
+                        <MudIcon Icon="@Icons.Filled.Balance" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
+                    </div>
+                </MudItem>
+                <MudItem xs="12">
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h4">ثبت نام</MudText>
+                    </div>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField For="@(() => _registerUserModel.UserName)" @bind-Value="_registerUserModel.UserName" Label="کدملی " Variant="Variant.Outlined" />
+                </MudItem>
+
+                @*<MudItem xs="12" sm="6" md="6">
+                    <MudTextField T="string" Label="آیمیل" @bind-Value="_registerUserModel.Email" For="@(() => _registerUserModel.Email)" Variant="Variant.Outlined" />
+                </MudItem>*@
+                <MudItem xs="12" sm="12" md="12">
+                    <MudTextField T="string" Label="شماره تلفن " @bind-Value="_registerUserModel.PhoneNumber" For="@(() => _registerUserModel.PhoneNumber)" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="12" sm="12" md="12">
+                    <MudTextField For="@(() => _registerUserModel.Password)" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="TogglePasswordVisibility" @bind-Value="_registerUserModel.Password" Label="کلمه عبور" Variant="Variant.Outlined" />
+                </MudItem>
+                <MudItem xs="12">
+                    <div class="d-flex justify-center">
+                        <MudText Color="Color.Error">@errorMessage </MudText>
+                    </div>
+                </MudItem>
+                <MudItem xs="12" Class="d-flex justify-center">
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;">ثبت نام</MudButton>
+                </MudItem>
+            </MudGrid>
+        </div>
+    </div>
 </EditForm>
 @code {
+       private string _variable1;
+ private FluentValidationValidator _fluentValidationValidator;
+        private bool Validated = true; // => _fluentValidationValidator.Validate(options => { options.IncludeAllRuleSets(); });
+        private UserRegisterRequest _registerUserModel = new();
+        private string errorMessage = string.Empty;
+        private async Task SubmitAsync()
+        {
+            AuthResult result = _anuAuthorizationService.RegisterUser(_appConfiguration.BackendServerAddress, _appConfiguration.RegisterAddress, _registerUserModel);
 
-    private string _variable1;
+            if (result.Result.Code == (int)AnuResult.Successful)
+            {
+                SharedInfo.NationalCode = _registerUserModel.UserName;
+                _navigationManager.NavigateTo("/true");
+                errorMessage = "";
+            }
+            else
+            {
+                errorMessage = result.Result.Message;
+            }
+        }
+
+        private bool _passwordVisibility;
+        private InputType _passwordInput = InputType.Password;
+        private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+
 }

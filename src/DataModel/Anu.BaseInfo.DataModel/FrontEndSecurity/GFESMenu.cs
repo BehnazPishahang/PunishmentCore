@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.FrontEndSecurity
 {
@@ -32,7 +32,7 @@ namespace Anu.BaseInfo.DataModel.FrontEndSecurity
         [ForeignKey("SYSTEMFORMID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemForm? TheSystemForm { get; set; }
 
-    }
+        }
 
     [Table("GFESMENU")]
     public partial class GFESMenu : GFESMenuBase

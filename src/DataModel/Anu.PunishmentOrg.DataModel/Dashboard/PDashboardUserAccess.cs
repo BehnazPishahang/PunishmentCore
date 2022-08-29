@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Dashboard
 {
@@ -22,7 +22,7 @@ namespace Anu.PunishmentOrg.DataModel.Dashboard
         [Column("TODATETIME")]
         public virtual string? ToDateTime { get; set; }
 
-    }
+        }
 
     [Table("PDASHBOARDUSERACCESS")]
     public partial class PDashboardUserAccess : PDashboardUserAccessBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Destroyed
 {
@@ -28,7 +28,7 @@ namespace Anu.PunishmentOrg.DataModel.Destroyed
         [ForeignKey("REGISTERUSERHISTORYID")]
         public virtual Anu.BaseInfo.DataModel.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
-    }
+        }
 
     [Table("PDESTROYEDMINUTEPRESENT")]
     public partial class PDestroyedMinutePresent : PDestroyedMinutePresentBase

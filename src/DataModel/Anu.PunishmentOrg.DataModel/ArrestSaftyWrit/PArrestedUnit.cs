@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
         [ForeignKey("PBEXCHANGEUNITID")]
         public virtual Anu.PunishmentOrg.DataModel.BaseInfo.PBExchangeUnit? ThePBExchangeUnit { get; set; }
 
-    }
+        }
 
     [Table("PARRESTEDUNIT")]
     public partial class PArrestedUnit : PArrestedUnitBase

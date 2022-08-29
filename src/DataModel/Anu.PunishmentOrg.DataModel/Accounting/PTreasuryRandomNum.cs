@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Accounting
 {
@@ -23,7 +23,7 @@ namespace Anu.PunishmentOrg.DataModel.Accounting
         [Column("TREASURYNUMBER")]
         public virtual string? TreasuryNumber { get; set; }
 
-    }
+        }
 
     [Table("PTREASURYRANDOMNUM")]
     public partial class PTreasuryRandomNum : PTreasuryRandomNumBase

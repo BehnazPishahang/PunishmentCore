@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
         [ForeignKey("PSAFTYWRITACCEPTID")]
         public virtual Anu.PunishmentOrg.DataModel.ArrestSaftyWrit.PSaftyWritAccept? ThePSaftyWritAccept { get; set; }
 
-    }
+        }
 
     [Table("PSAFTYWRITACCEPTUNIT")]
     public partial class PSaftyWritAcceptUnit : PSaftyWritAcceptUnitBase

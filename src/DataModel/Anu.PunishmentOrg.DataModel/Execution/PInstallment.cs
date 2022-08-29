@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Execution
 {
@@ -76,7 +76,7 @@ namespace Anu.PunishmentOrg.DataModel.Execution
         [Column("TOTALPAIDAMOUNT")]
         public virtual long? TotalPaidAmount { get; set; }
 
-    }
+        }
 
     [Table("PINSTALLMENT")]
     public partial class PInstallment : PInstallmentBase

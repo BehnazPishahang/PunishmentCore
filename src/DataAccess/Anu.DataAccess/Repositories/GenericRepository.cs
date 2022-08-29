@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Anu.DataAccess.Repositories
 {
@@ -19,7 +20,7 @@ namespace Anu.DataAccess.Repositories
         }
         public async Task<IEnumerable<T>> Find(Expression<Func<T, bool>> expression)
         {
-            return _context.Set<T>().Where(expression);
+            return await _context.Set<T>().Where(expression).ToListAsync();
         }
         
         public async Task<bool> Exist(Expression<Func<T, bool>> expression)

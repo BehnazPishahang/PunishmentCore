@@ -1,11 +1,12 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using Anu.BaseInfo.DataModel.Security.Role;
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
 {
-    public abstract class JBActivityBase : BaseInfoEntity<string>
+    public abstract class JBActivityBase : BaseRole
     {
 
         [Unicode(false)]
@@ -30,6 +31,10 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGenBaseInfo
         [ForeignKey("GUNITTYPEID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.GUnitType? TheGUnitType { get; set; }
 
+    
+        [Column("TIMESTAMP")]
+        [ConcurrencyCheck]
+        public long PTimestamp { get { return base.Timestamp; } set {} }
     }
 
     [Table("JBACTIVITY")]

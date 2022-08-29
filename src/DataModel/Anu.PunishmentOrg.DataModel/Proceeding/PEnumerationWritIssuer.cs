@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Proceeding
 {
@@ -14,7 +14,7 @@ namespace Anu.PunishmentOrg.DataModel.Proceeding
         [ForeignKey("REGISTERUSERHISTORYID")]
         public virtual Anu.BaseInfo.DataModel.SystemConfiguration.RegisterUserHistory? TheRegisterUserHistory { get; set; }
 
-    }
+        }
 
     [Table("PENUMERATIONWRITISSUER")]
     public partial class PEnumerationWritIssuer : PEnumerationWritIssuerBase

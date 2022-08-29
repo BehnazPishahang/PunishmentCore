@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -22,7 +22,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [ForeignKey("RELATEDFORMID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemForm? TheRelatedForm { get; set; }
 
-    }
+        }
 
     [Table("FORMVALIDINFORM")]
     public partial class FormValidInForm : FormValidInFormBase

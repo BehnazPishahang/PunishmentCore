@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Notice
 {
@@ -22,7 +22,7 @@ namespace Anu.BaseInfo.DataModel.Notice
         [ForeignKey("ATTACHMENTTYPEID")]
         public virtual Anu.BaseInfo.DataModel.Types.AttachmentType? TheAttachmentType { get; set; }
 
-    }
+        }
 
     [Table("GNOTICEATTACHMENT")]
     public partial class GNoticeAttachment : GNoticeAttachmentBase

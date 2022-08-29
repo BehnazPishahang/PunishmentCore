@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DBLoging
 {
@@ -18,7 +18,7 @@ namespace Anu.BaseInfo.DataModel.DBLoging
         [ForeignKey("OFFLINESERVICECALLID")]
         public virtual Anu.BaseInfo.DataModel.DBLoging.OfflineServiceCall? TheOfflineServiceCall { get; set; }
 
-    }
+        }
 
     [Table("OFFLINESERVICECALLNOTSEND")]
     public partial class OfflineServiceCallNotSend : OfflineServiceCallNotSendBase

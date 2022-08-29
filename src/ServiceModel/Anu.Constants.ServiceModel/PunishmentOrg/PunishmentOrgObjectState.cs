@@ -130,5 +130,77 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
 
         }
 
+        /// <summary>
+        /// ارسال مکاتبه مكانيزه درون سازماني
+        /// </summary>
+        public static class PMechanizeLetter
+        {
+            /// <summary>
+            /// شروع
+            /// </summary>
+            public const string Start = "000360";
+            /// <summary>
+            /// پیش نویس شده
+            /// </summary>
+            public const string Draft = "000362";
+            /// <summary>
+            /// تاييد شده جهت ارسال
+            /// </summary>
+            public const string ConfirmedToSend = "000364";
+            /// <summary>
+            /// برگشت داده شده به ثبت كننده جهت رفع اشكال
+            /// </summary>
+            public const string ReturnToConfirmer = "000366";
+            /// <summary>
+            /// ارسال شده
+            /// </summary>
+            public const string Sended = "000368";
+            /// <summary>
+            /// ارسال نشده به گيرنده نامه مكانيزه
+            /// </summary>
+            public const string ViewByReceiver = "000370";
+
+            /// <summary>
+            /// ارسال شده به گيرنده نامه مكانيزه
+            /// </summary>
+            public const string ReceivedByReceiverUnit = "000372";
+
+            /// <summary>
+            /// رويت شده توسط گيرنده نامه مكانيزه
+            /// </summary>
+            public const string View = "000374";
+            /// <summary>
+            /// رويت و ارجاع شده توسط گيرنده نامه مكانيزه
+            /// </summary>
+            public const string ReturnToReferrer = "000376";
+            /// <summary>
+            /// چاپ مدرك
+            /// </summary>
+            public const string PrintForSend = "000378";
+            /// <summary>
+            /// چاپ مدرك
+            /// </summary>
+            public const string PrintForReceive = "000380";
+            /// <summary>
+            /// باطل شده
+            /// </summary>
+            public const string Expired = "000382";
+
+        }
+
+        public static class PGravamen
+    {
+        public const string Start = "000499";//شروع
+        public const string TemporaryRegisteredByApplicant = "000501";//پذیرش اولیه شده توسط متقاضی 
+        public const string PermanentRegisteredByApplicant = "000503";//پذیرش نهایی شده توسط متقاضی
+        public const string RegisterPlaintiff = "000498";//ثبت شده توسط شاکی
+        public const string RegisterInput = "000500";//ثبت ورود شده
+        public const string Referred = "000502";//ارجاع شده
+        public const string Failing = "000497";//نقص
+        public const string Failed = "000504";//رد شده
+        public const string Send = "000505";//ارسال شده
+        public const string RegisterCase = "000506";//تشکیل پرونده شده
+    }
+
     }
 }

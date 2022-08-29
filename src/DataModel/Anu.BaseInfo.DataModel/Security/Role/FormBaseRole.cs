@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Security.Role
 {
@@ -14,7 +14,7 @@ namespace Anu.BaseInfo.DataModel.Security.Role
         [ForeignKey("SYSTEMFORMID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemForm? TheSystemForm { get; set; }
 
-    }
+        }
 
     [Table("FORMBASEROLE")]
     public partial class FormBaseRole : FormBaseRoleBase

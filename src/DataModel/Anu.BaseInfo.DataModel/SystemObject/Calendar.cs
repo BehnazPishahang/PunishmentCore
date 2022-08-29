@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -22,7 +22,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
-    }
+        }
 
     [Table("CALENDAR")]
     public partial class Calendar : CalendarBase

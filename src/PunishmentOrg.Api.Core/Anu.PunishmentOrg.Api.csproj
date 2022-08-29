@@ -29,10 +29,15 @@
     <ProjectReference Include="..\DataAccess\Anu.DataAccess\Anu.DataAccess.csproj" />
     <ProjectReference Include="..\DataAccess\Anu.UnitOfWork.DataAccess\Anu.UnitOfWork.DataAccess.csproj" />
     <ProjectReference Include="..\DataModel\Anu.PunishmentOrg.DataModel\Anu.PunishmentOrg.DataModel.csproj" />
+    <ProjectReference Include="..\ServiceModel\Anu.BaseInfo.ServiceModel\Anu.BaseInfo.ServiceModel.csproj" />
     <ProjectReference Include="..\ServiceModel\Anu.Constants.ServiceModel\Anu.Constants.ServiceModel.csproj" />
     <ProjectReference Include="..\ServiceModel\Anu.PunishmentOrg.ServiceModel\Anu.PunishmentOrg.ServiceModel.csproj" />
     <ProjectReference Include="..\Utility\Anu.Utility\Anu.Utility.csproj" />
     <ProjectReference Include="..\Validations\Anu.Commons.Validation\Anu.Commons.Validation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BaseInfo\" />
   </ItemGroup>
 
 </Project>

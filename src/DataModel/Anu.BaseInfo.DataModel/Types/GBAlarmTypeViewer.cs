@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.Types
 {
@@ -29,7 +29,7 @@ namespace Anu.BaseInfo.DataModel.Types
         [Column("VIEWERTYPE")]
         public virtual Anu.BaseInfo.Enumerations.AlarmViewerType? ViewerType { get; set; }
 
-    }
+        }
 
     [Table("GBALARMTYPEVIEWER")]
     public partial class GBAlarmTypeViewer : GBAlarmTypeViewerBase

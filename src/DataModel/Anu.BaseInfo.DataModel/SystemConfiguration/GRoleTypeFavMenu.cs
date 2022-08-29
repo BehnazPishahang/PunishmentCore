@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemConfiguration
 {
@@ -17,7 +17,7 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [ForeignKey("MENUSUBMENUID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.MenuSubMenu? TheMenuSubMenu { get; set; }
 
-    }
+        }
 
     [Table("GROLETYPEFAVMENU")]
     public partial class GRoleTypeFavMenu : GRoleTypeFavMenuBase

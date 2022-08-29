@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.SystemObject
 {
@@ -21,7 +21,7 @@ namespace Anu.BaseInfo.DataModel.SystemObject
         [Column("WEEKDAY")]
         public virtual Anu.BaseInfo.Enumerations.WeekDay? WeekDay { get; set; }
 
-    }
+        }
 
     [Table("CALENDARDAY")]
     public partial class CalendarDay : CalendarDayBase

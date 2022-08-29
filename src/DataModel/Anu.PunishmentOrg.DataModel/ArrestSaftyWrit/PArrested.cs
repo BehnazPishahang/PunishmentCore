@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
 {
@@ -59,7 +59,7 @@ namespace Anu.PunishmentOrg.DataModel.ArrestSaftyWrit
         [Column("WRITNO")]
         public virtual string? WritNo { get; set; }
 
-    }
+        }
 
     [Table("PARRESTED")]
     public partial class PArrested : PArrestedBase

@@ -3,6 +3,7 @@ using Anu.PunishmentOrg.ServiceModel.Gravamen;
 
 namespace Anu.PunishmentOrg.Api.Gravamen
 {
+    //! کل من علیها fun
     public abstract class PGravamenServiceControllerBase : Microsoft.AspNetCore.Mvc.ControllerBase
     {
     public PGravamenServiceControllerBase()

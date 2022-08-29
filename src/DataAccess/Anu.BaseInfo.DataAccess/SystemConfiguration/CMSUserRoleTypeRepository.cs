@@ -1,0 +1,24 @@
+﻿using Anu.BaseInfo.DataModel.SystemConfiguration;
+using Anu.BaseInfo.Domain.SystemConfiguration;
+using Anu.DataAccess.Repositories;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Anu.BaseInfo.DataAccess.SystemConfiguration
+{
+    public class CMSUserRoleTypeRepository : GenericRepository<Anu.BaseInfo.DataModel.SystemConfiguration.CMSUserRoleType>, ICMSUserRoleTypeRepository
+    {
+        public CMSUserRoleTypeRepository(Anu.DataAccess.ApplicationDbContext context) : base(context)
+        {
+        }
+
+        public async Task<CMSUserRoleType> GetByCode(string code)
+        {
+            return await _context.Set<Anu.BaseInfo.DataModel.SystemConfiguration.CMSUserRoleType>().Where(x => x.Code == code).FirstOrDefaultAsync();
+        }
+    }
+}

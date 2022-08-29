@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Accounting
 {
@@ -47,7 +47,7 @@ namespace Anu.PunishmentOrg.DataModel.Accounting
         [ForeignKey("SYSTEMFORMID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemForm? TheSystemForm { get; set; }
 
-    }
+        }
 
     [Table("PBILL4PAIDREASON")]
     public partial class PBill4PaidReason : PBill4PaidReasonBase

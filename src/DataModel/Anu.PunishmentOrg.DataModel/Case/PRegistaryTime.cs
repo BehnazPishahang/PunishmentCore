@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.Case
 {
@@ -49,7 +49,7 @@ namespace Anu.PunishmentOrg.DataModel.Case
         [Column("TIMETYPE")]
         public virtual Anu.PunishmentOrg.Enumerations.PURegisterTimeType? TimeType { get; set; }
 
-    }
+        }
 
     [Table("PREGISTARYTIME")]
     public partial class PRegistaryTime : PRegistaryTimeBase

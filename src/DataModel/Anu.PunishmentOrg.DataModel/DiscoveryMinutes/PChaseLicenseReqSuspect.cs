@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
 {
@@ -63,7 +63,7 @@ namespace Anu.PunishmentOrg.DataModel.DiscoveryMinutes
         [InverseProperty("ThePChaseLicenseReqSuspect")]
         public virtual List<Anu.PunishmentOrg.DataModel.DiscoveryMinutes.PChaseLicenseReqSuspectTyp>? ThePChaseLicenseReqSuspectTypList { get; set; }
 
-    }
+        }
 
     [Table("PCHASELICENSEREQSUSPECT")]
     public partial class PChaseLicenseReqSuspect : PChaseLicenseReqSuspectBase

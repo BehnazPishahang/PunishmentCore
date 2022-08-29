@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.ExchangeData
 {
@@ -31,7 +31,7 @@ namespace Anu.BaseInfo.DataModel.ExchangeData
         [Column("TITLE")]
         public virtual string? Title { get; set; }
 
-    }
+        }
 
     [Table("GMECHANIZEDLETTERTYPEFIELD")]
     public partial class GMechanizedLetterTypeField : GMechanizedLetterTypeFieldBase

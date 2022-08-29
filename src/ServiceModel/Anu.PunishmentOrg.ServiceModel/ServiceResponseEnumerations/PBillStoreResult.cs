@@ -15,9 +15,9 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
     /// </summary>
     public enum PBillStoreResult
     {
-        PBillStore_Duplicate_Bill = -30001,
-        PBillStore_NoProductListProvided = -30002,
-        PBillStore_BillNumber_IsTooLong = -30003,
-        PBillStore_Date_IsInvalid = -30004
+        PBillStore_Duplicate_Bill = -30081,
+        PBillStore_NoProductListProvided = -30082,
+        PBillStore_BillNumber_IsTooLong = -30083,
+        PBillStore_Date_IsInvalid = -30084
     }
 }

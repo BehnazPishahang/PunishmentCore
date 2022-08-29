@@ -32,40 +32,30 @@ namespace Anu.PunishmentOrg.Api.Notice
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<PNoticeInqueryResponse> InqueryPNoticeList([FromBody] PNoticeInqueryRequest request)
         {
-            try
+
+            request.PNoticePersonContract.NationalityCode.Null(PNoticeResult.NationalCodeIs_Required);
+
+            var pNotice = await _unitOfWork.Repositorey<PNoticeRepository>().GetAllPNoticeByNationalCode(request.PNoticePersonContract.NationalityCode.ToString(), request.Page);
+
+            pNotice.Null(PNoticeResult.PNotice_NotFound);
+
+
+            var pNoticeContractList = pNotice.Select(a => new PNoticeContract()
             {
-
-                request.PNoticePersonContract.NationalityCode.Null(PNoticeResult.NationalCodeIs_Required);
-
-                var pNotice = await _unitOfWork.Repositorey<PNoticeRepository>().GetAllPNoticeByNationalCode(request.PNoticePersonContract.NationalityCode.ToString(),request.Page);
-
-                pNotice.Null(PNoticeResult.PNotice_NotFound);
-
-
-                var pNoticeContractList = pNotice.Select(a => new PNoticeContract()
-                {
-                    CreateDateTime = a.CreateDateTime,
-                    No = a.No,
-                    NoticeDate = a.NoticeDate,
-                    NoticePersonFamily = a.NoticePersonFamily,
-                    NoticePersonName = a.NoticePersonName
-                }
-                ).ToList();
-
-                return new PNoticeInqueryResponse { 
-                    PNotice = new Page<List<PNoticeContract>> { Paged = request.Page, Data = pNoticeContractList }, 
-                    Result = AnuResult.Successful.GetResult() 
-                };
-
+                CreateDateTime = a.CreateDateTime,
+                No = a.No,
+                NoticeDate = a.NoticeDate,
+                NoticePersonFamily = a.NoticePersonFamily,
+                NoticePersonName = a.NoticePersonName
             }
-            catch (AnuExceptions ex)
+            ).ToList();
+
+            return new PNoticeInqueryResponse
             {
-                return new PNoticeInqueryResponse() { Result = ex.result };
-            }
-            catch (Exception ex)
-            {
-                return new PNoticeInqueryResponse() { Result = AnuResult.Error.GetResult(ex) };
-            }
+                PNotice = new Page<List<PNoticeContract>> { Paged = request.Page, Data = pNoticeContractList },
+                Result = AnuResult.Successful.GetResult()
+            };
+
 
         }
         #endregion Overrides

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.MechanizedLetter
 {
@@ -35,7 +35,7 @@ namespace Anu.BaseInfo.DataModel.MechanizedLetter
         [ForeignKey("UNITID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.Unit? TheUnit { get; set; }
 
-    }
+        }
 
     [Table("GMECHANIZEDLETTERCASE")]
     public partial class GMechanizedLetterCase : GMechanizedLetterCaseBase

@@ -1,7 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+
+
 
 namespace Anu.BaseInfo.DataModel.DynamicFormGen
 {
@@ -29,7 +29,7 @@ namespace Anu.BaseInfo.DataModel.DynamicFormGen
         [ForeignKey("JTABLEREPORTID")]
         public virtual Anu.BaseInfo.DataModel.DynamicFormGen.JTableReport? TheJTableReport { get; set; }
 
-    }
+        }
 
     [Table("JTABLEMATRIXCELL")]
     public partial class JTableMatrixCell : JTableMatrixCellBase
