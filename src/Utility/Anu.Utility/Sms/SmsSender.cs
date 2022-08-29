@@ -15,7 +15,7 @@ namespace Anu.Utility.Sms
             var Value = new SendSmsRequest() { senders = new[] { "300000135" }, recipients = new[] { phoneNumber }, messages = new[] { message } };
             var Authorization = new Dictionary<string, string>() { { "Username", "tazir_org/magfa" }, { "Password", "BIeJIGKBzNvMHAa4" } };
 
-            var Result = (await Url.CallApi<SendSmsRequest>(Value, AnuResult.HttpError_Send_Sms, authorization: Authorization)).JsonDeserialize<SendSmsResponse>();
+            var Result = (await Url.CallApi(Value, AnuResult.HttpError_Send_Sms, authorization: Authorization)).JsonDeserialize<SendSmsResponse>();
 
             if (Result.status != 0)
             {

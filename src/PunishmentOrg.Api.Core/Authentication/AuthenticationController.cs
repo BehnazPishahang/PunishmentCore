@@ -1,6 +1,7 @@
 ﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
 using Anu.BaseInfo.DataModel.FrontEndSecurity;
 using Anu.Commons.ServiceModel.ServiceAuthentication;
+using Anu.Commons.ServiceModel.ServiceAuthentication.Enumerations;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.DataAccess;
 using Anu.DataAccess.Repositories;
@@ -40,7 +41,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             request.UserName.IsValidNationalCode();
 
             var theGFESUser = (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>()
-                .Find(x => x.NationalityCode==request.UserName)).FirstOrDefault();
+                .Find(x => x.NationalityCode == request.UserName)).FirstOrDefault();
 
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
@@ -76,7 +77,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 return new FirstStepAuthResult() { Result = AnuResult.User_Is_Exist.GetResult() };
             }
 
-            await request.ShahkarAuthenticate();
+            await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName);
             await request.SabteahvalAuthenticate();
 
 
@@ -136,11 +137,17 @@ namespace Anu.PunishmentOrg.Api.Authentication
             var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            //check the database for how seconds pass and is the code valid
+
+            switch (request.LoginType)
+            {
+                case LoginType.LoginWithSms:
+                    //check the database for how seconds pass and is the code valid
+                    break;
+            }
 
             var jwtToken = GenerateJwtToken(theGFESUser);
 
-            return new AuthResult() { AccessToken=jwtToken, Result = AnuResult.Successful.GetResult() };
+            return new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() };
 
         }
 

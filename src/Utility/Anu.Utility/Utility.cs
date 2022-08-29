@@ -62,7 +62,7 @@ namespace Anu.Utility
             return JsonConvert.DeserializeObject<T>(content);
         }
 
-        public static async Task<string> CallApi<T>(this string apiUrl, object value,Enum errorIsFailedStatus, Dictionary<string, string> authorization = null, Dictionary<string, string> headers = null)
+        public static async Task<string> CallApi(this string apiUrl, object value,Enum errorIsFailedStatus, Dictionary<string, string> authorization = null, Dictionary<string, string> headers = null)
         {
             try
             {
