@@ -144,18 +144,18 @@
     
     private async Task getCodeBySms()
         {
-            AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.RegisterAddress, _registerUserModel);
+          //  AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.RegisterAddress, _registerUserModel);
 
-            if (result.Result.Code == (int)AnuResult.Successful)
-            {
-                SharedInfo.NationalCode = _registerUserModel.UserName;
-                _navigationManager.NavigateTo("/true");
-                errorMessage = "";
-            }
-            else
-            {
-                errorMessage = result.Result.Message;
-            }
+            //if (result.Result.Code == (int)AnuResult.Successful)
+            //{
+            //    SharedInfo.NationalCode = _registerUserModel.UserName;
+            //    _navigationManager.NavigateTo("/true");
+            //    errorMessage = "";
+            //}
+            //else
+            //{
+            //    errorMessage = result.Result.Message;
+            //}
         }
 
 
