@@ -141,6 +141,10 @@
     <value>فیلدهای ضروری پر نشده است</value>
     <comment>-30232</comment>
   </data>
+  <data name="LoginSuccessful_Sms_Send_To" xml:space="preserve">
+    <value>کد عبور برای شماره {0} ارسال شد .</value>
+    <comment>100013</comment>
+  </data>
   <data name="MechanizedLetter_CreatorUserName_Is_Null" xml:space="preserve">
     <value>كاربر ثبت كننده نامه را وارد کنید.</value>
     <comment>30131</comment>
@@ -208,6 +212,10 @@
   <data name="NationalCode_Must_Be_Number" xml:space="preserve">
     <value>کد ملی تشکیل شده از ده رقم عددی می‌باشد؛ لطفا کد ملی را صحیح وارد نمایید.</value>
     <comment>-10008</comment>
+  </data>
+  <data name="No_Is_Required" xml:space="preserve">
+    <value>شماره ابلاغ را وارد کنید.</value>
+    <comment>-50003</comment>
   </data>
   <data name="PBillStore_BillNumber_IsTooLong" xml:space="preserve">
     <value>شماره قبض بیش از اندازه مجاز می باشد</value>

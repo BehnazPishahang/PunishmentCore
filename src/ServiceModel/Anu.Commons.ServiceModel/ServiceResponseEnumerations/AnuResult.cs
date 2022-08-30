@@ -28,6 +28,7 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         PhoneNumber_Is_Not_Valid = -100010,
         User_Is_Exist = -100011,
         Error_Send_Sms = -100012,
-        HttpError_Send_Sms = -100012
+        HttpError_Send_Sms = -100012,
+        LoginSuccessful_Sms_Send_To = 100013
     }
 }

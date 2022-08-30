@@ -61,9 +61,12 @@ builder.Services.AddDbContext<Anu.DataAccess.ApplicationDbContext>(
 #region Repositories
 builder.Services.AddTransient(typeof(Anu.Domain.IGenericRepository<>), typeof(Anu.DataAccess.Repositories.GenericRepository<>));
 #endregion
+
 #region UnitOfWork
 builder.Services.AddTransient<Anu.DataAccess.IUnitOfWork, Anu.UnitOfWork.DataAccess.UnitOfWork>();
 #endregion
+
+
 
 builder.Services.AddAuthentication(options =>
 {
