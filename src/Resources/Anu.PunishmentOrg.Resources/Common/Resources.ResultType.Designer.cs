@@ -115,6 +115,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کد عبور برای شماره {0} ارسال شد ..
+        /// </summary>
+        public static string LoginSuccessful_Sms_Send_To {
+            get {
+                return ResourceManager.GetString("LoginSuccessful_Sms_Send_To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to كاربر ثبت كننده نامه را وارد کنید..
         /// </summary>
         public static string MechanizedLetter_CreatorUserName_Is_Null {

@@ -55,7 +55,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
             }
 
-            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.Successful.GetResult() };
+            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args:"09*****"+theGFESUser.MobileNumber4SMS.Substring(theGFESUser.MobileNumber4SMS.Length-4)) };
 
         }
 
@@ -115,8 +115,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             //insert password code and date time into table
 
-            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.Successful.GetResult() };
-
+            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: "09*****" + request.PhoneNumber.Substring(request.PhoneNumber.Length - 4)) };
 
         }
 
