@@ -1,16 +1,10 @@
 ﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
-using Anu.BaseInfo.DataAccess.SystemObject;
-using Anu.BaseInfo.DataModel.ExchangeData;
 using Anu.BaseInfo.DataModel.FrontEndSecurity;
-using Anu.BaseInfo.DataModel.SystemObject;
 using Anu.BaseInfo.Domain.FrontEndSecurity;
-using Anu.BaseInfo.Domain.SystemObject;
 using Anu.Commons.ServiceModel.ServiceLogin;
-using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.DataAccess;
 using Anu.DataAccess.Repositories;
-using Anu.PunishmentOrg.Domain.DiscoveryMinutes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -19,7 +13,6 @@ using System.Security.Claims;
 using System.Text;
 using Utility;
 using Utility.CalendarHelper;
-using Utility.Exceptions;
 using Utility.Guard;
 
 namespace Anu.PunishmentOrg.Api.Authentication
@@ -47,9 +40,12 @@ namespace Anu.PunishmentOrg.Api.Authentication
             request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
             //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
-            var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
-            var ObjectStateAll1 = _unitOfWork.Repositorey<IObjectStateRepository>().GetAll();
-            var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+            //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
+            //var ObjectStateAll1 = _unitOfWork.Repositorey<IObjectStateRepository>().GetAll();
+            //var theGFESUser1 = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+            //var theGeoLocationWithGenericRepositoryInterface = _unitOfWork.Repositorey<IGenericRepository<GeoLocation>>();
+
+            var theGFESUser = await _unitOfWork.Repositorey<IGFESUserRepository>()                .GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
             var jwtToken = GenerateJwtToken(theGFESUser);
@@ -65,9 +61,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
         {
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-                request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.PhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.PhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
 
             request.UserName.IsValidNationalCode();
             request.PhoneNumber.IsValidPhone();
@@ -77,7 +73,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 return new AuthResult() { AccessToken = "", RefreshToken = "", Result = AnuResult.User_Is_Exist.GetResult() };
             }
 
-                string passWordHash = MD5Core.GetHashString(request.Password);
+            string passWordHash = MD5Core.GetHashString(request.Password);
 
             var user = new GFESUser()
             {
@@ -103,8 +99,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
             }
 
 
-                var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
-                theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+            theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
             var jwtToken = GenerateJwtToken(theGFESUser);
 
