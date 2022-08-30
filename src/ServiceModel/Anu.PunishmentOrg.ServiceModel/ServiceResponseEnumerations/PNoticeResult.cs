@@ -10,5 +10,6 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
     {
         NationalCodeIs_Required = -50001,
         PNotice_NotFound = -50002,
+        No_Is_Required = -50003
     }
 }

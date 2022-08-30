@@ -268,6 +268,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شماره ابلاغ را وارد کنید..
+        /// </summary>
+        public static string No_Is_Required {
+            get {
+                return ResourceManager.GetString("No_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شماره قبض بیش از اندازه مجاز می باشد.
         /// </summary>
         public static string PBillStore_BillNumber_IsTooLong {

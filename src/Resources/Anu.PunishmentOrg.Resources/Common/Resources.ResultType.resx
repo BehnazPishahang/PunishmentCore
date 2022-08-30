@@ -209,6 +209,10 @@
     <value>کد ملی تشکیل شده از ده رقم عددی می‌باشد؛ لطفا کد ملی را صحیح وارد نمایید.</value>
     <comment>-10008</comment>
   </data>
+  <data name="No_Is_Required" xml:space="preserve">
+    <value>شماره ابلاغ را وارد کنید.</value>
+    <comment>-50003</comment>
+  </data>
   <data name="PBillStore_BillNumber_IsTooLong" xml:space="preserve">
     <value>شماره قبض بیش از اندازه مجاز می باشد</value>
     <comment>-30083</comment>
