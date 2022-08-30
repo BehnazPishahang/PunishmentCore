@@ -9,6 +9,7 @@ using Anu.PunishmentOrg.Report;
 using Anu.PunishmentOrg.ServiceModel.Notice;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Anu.Report;
+using Anu.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Utility;
 using Utility.Guard;
@@ -72,6 +73,8 @@ namespace Anu.PunishmentOrg.Api.Notice
             var pNotice = (await _unitOfWork.Repositorey<GenericRepository<PNotice>>().Find(x=>x.No == request.PNoticeNoContract.No)).FirstOrDefault();
 
             pNotice.Null(PNoticeResult.PNotice_NotFound);
+
+            pNotice.Description = pNotice.Description.StripRichTextFormat();
 
             return new PNoticeExportResponse()
             {

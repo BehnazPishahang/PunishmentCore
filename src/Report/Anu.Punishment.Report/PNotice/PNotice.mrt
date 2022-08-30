@@ -7,10 +7,13 @@
         <Alias>PNotice</Alias>
         <BusinessObjects isList="true" count="0" />
         <Category />
-        <Columns isList="true" count="3">
-          <value>DeliverName,System.String</value>
-          <value>CreateDateTime,System.String</value>
-          <value>NoticePersonAddress,System.String</value>
+        <Columns isList="true" count="6">
+          <value>ORIGINAL,No,No,No,System.String,ea2e5ad52b0c4e3894da49dd7745b8b5</value>
+          <value>InputStatistic,System.String</value>
+          <value>NoticePersonName,System.String</value>
+          <value>NoticeDate,System.String</value>
+          <value>NoticePersonFamily,System.String</value>
+          <value>Description,System.String</value>
         </Columns>
         <Dictionary isRef="1" />
         <Guid>f68eed0cf6e945b58a69fda81d531b21</Guid>
@@ -39,7 +42,7 @@
       <Components isList="true" count="2">
         <PageFooterBand2 Ref="4" type="PageFooterBand" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>0,1071,749,20</ClientRectangle>
+          <ClientRectangle>0,1507.4,749,20</ClientRectangle>
           <Components isList="true" count="1">
             <Text5 Ref="5" type="Text" isKey="true">
               <Border>None;[58:78:94];1;Solid;False;4;Black</Border>
@@ -70,41 +73,176 @@
         <Data Ref="6" type="DataBand" isKey="true">
           <Brush>Transparent</Brush>
           <BusinessObjectGuid>f68eed0cf6e945b58a69fda81d531b21</BusinessObjectGuid>
-          <ClientRectangle>0,20,749,100</ClientRectangle>
-          <Components isList="true" count="2">
-            <DataPNotice_DeliverName Ref="7" type="Text" isKey="true">
+          <ClientRectangle>0,20,749,1070</ClientRectangle>
+          <Components isList="true" count="10">
+            <DataPNotice_No Ref="7" type="Text" isKey="true">
               <Brush>Transparent</Brush>
               <CanGrow>True</CanGrow>
-              <ClientRectangle>0,0,370,90</ClientRectangle>
+              <ClientRectangle>240,0,510,50</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Arial,16</Font>
+              <Font>B Nazanin,16</Font>
+              <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
-              <Name>DataPNotice_DeliverName</Name>
+              <Name>DataPNotice_No</Name>
               <Page isRef="3" />
               <Parent isRef="6" />
-              <Text>{PNotice.NoticePersonAddress}</Text>
+              <Text> شماره ابلاغ : {PNotice.No} </Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
-              <Type>DataColumn</Type>
+              <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
-            </DataPNotice_DeliverName>
-            <DataPNotice_CreateDateTime Ref="8" type="Text" isKey="true">
+            </DataPNotice_No>
+            <DataPNotice_InputStatistic Ref="8" type="Text" isKey="true">
               <Brush>Transparent</Brush>
               <CanGrow>True</CanGrow>
-              <ClientRectangle>370,0,380,100</ClientRectangle>
+              <ClientRectangle>310,70,440,60</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Arial,16</Font>
+              <Font>B Nazanin,16</Font>
+              <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
-              <Name>DataPNotice_CreateDateTime</Name>
+              <Name>DataPNotice_InputStatistic</Name>
               <Page isRef="3" />
               <Parent isRef="6" />
-              <Text>{PNotice.CreateDateTime}</Text>
+              <Text> مهلت حضور : {PNotice.InputStatistic} </Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
-            </DataPNotice_CreateDateTime>
+            </DataPNotice_InputStatistic>
+            <DataPNotice_NoticePersonName Ref="9" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>240,150,510,60</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>B Nazanin,16</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataPNotice_NoticePersonName</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text> نام : {PNotice.NoticePersonName} </Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataPNotice_NoticePersonName>
+            <DataPNotice_NoticePersonFamily Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>240,220,510,60</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>B Nazanin,16</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataPNotice_NoticePersonFamily</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text> نام خانوادگی : {PNotice.NoticePersonFamily} </Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataPNotice_NoticePersonFamily>
+            <DataPNotice_Description Ref="11" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,340,750,730</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>B Nazanin,16</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataPNotice_Description</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text>{PNotice.Description}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+            </DataPNotice_Description>
+            <DataPNotice_NoticeDate Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,240,50</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>B Nazanin,16</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataPNotice_NoticeDate</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text> تاریخ ابلاغ : {PNotice.NoticeDate} </Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataPNotice_NoticeDate>
+            <Text1 Ref="13" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,290,750,50</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>B Nazanin,16,Bold</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <Text>متن ابلاغ :</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <HorizontalLinePrimitive1 Ref="14" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,60,750,1</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="15" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Expressions isList="true" count="0" />
+              <Name>HorizontalLinePrimitive1</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <StartCap Ref="16" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive1>
+            <HorizontalLinePrimitive2 Ref="17" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,140,750,1</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="18" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Expressions isList="true" count="0" />
+              <Name>HorizontalLinePrimitive2</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <StartCap Ref="19" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive2>
+            <HorizontalLinePrimitive3 Ref="20" type="HorizontalLinePrimitive" isKey="true">
+              <ClientRectangle>0,290,750,1</ClientRectangle>
+              <Color>Black</Color>
+              <Conditions isList="true" count="0" />
+              <EndCap Ref="21" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </EndCap>
+              <Expressions isList="true" count="0" />
+              <Name>HorizontalLinePrimitive3</Name>
+              <Page isRef="3" />
+              <Parent isRef="6" />
+              <StartCap Ref="22" type="Cap" isKey="true">
+                <Color>Black</Color>
+              </StartCap>
+            </HorizontalLinePrimitive3>
           </Components>
           <Conditions isList="true" count="0" />
           <DataSourceName isNull="true" />
@@ -137,11 +275,11 @@
   </ReferencedAssemblies>
   <ReportAlias>TwoSimpleLists</ReportAlias>
   <ReportAuthor>Stimulsoft</ReportAuthor>
-  <ReportChanged>8/28/2022 1:52:47 PM</ReportChanged>
+  <ReportChanged>8/30/2022 1:59:18 PM</ReportChanged>
   <ReportCreated>5/29/2004 10:59:00 AM</ReportCreated>
   <ReportDescription>This sample demonstrates how to create two simple list reports.</ReportDescription>
   <ReportFile>D:\Project\Anu\Punishment\src\Report\Anu.Punishment.Report\PNotice\PNotice.mrt</ReportFile>
-  <ReportGuid>0ceb4221adda4593869239c5679a8542</ReportGuid>
+  <ReportGuid>f164268a522a4ee4aa795f8f3247544b</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>HundredthsOfInch</ReportUnit>
   <ReportVersion>2022.1.1.0</ReportVersion>
@@ -170,7 +308,7 @@ namespace Reports
 }</Script>
   <ScriptLanguage>CSharp</ScriptLanguage>
   <Styles isList="true" count="6">
-    <Header1 Ref="9" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Header1 Ref="23" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Brush>Transparent</Brush>
       <Conditions isList="true" count="0" />
       <Font>Segoe UI,15.75,Bold,Point,False,204</Font>
@@ -179,7 +317,7 @@ namespace Reports
       <TextBrush>[96:125:139]</TextBrush>
       <VertAlignment>Center</VertAlignment>
     </Header1>
-    <Header2 Ref="10" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Header2 Ref="24" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Bottom;[158:158:158];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <Conditions isList="true" count="0" />
@@ -190,7 +328,7 @@ namespace Reports
       <TextBrush>[158:158:158]</TextBrush>
       <VertAlignment>Center</VertAlignment>
     </Header2>
-    <Header3 Ref="11" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Header3 Ref="25" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>Left, Right;White;1;Solid;False;4;Black</Border>
       <Brush>[77:182:172]</Brush>
       <Conditions isList="true" count="0" />
@@ -201,7 +339,7 @@ namespace Reports
       <TextBrush>[255:255:255]</TextBrush>
       <VertAlignment>Center</VertAlignment>
     </Header3>
-    <Data1 Ref="12" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Data1 Ref="26" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[182:182:182];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>
       <Conditions isList="true" count="0" />
@@ -211,7 +349,7 @@ namespace Reports
       <TextBrush>[74:74:74]</TextBrush>
       <VertAlignment>Center</VertAlignment>
     </Data1>
-    <Data2 Ref="13" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Data2 Ref="27" type="Stimulsoft.Report.StiStyle" isKey="true">
       <Border>None;[255:255:255];1;Solid;False;4;Black</Border>
       <Brush>[224:242:241]</Brush>
       <Conditions isList="true" count="0" />
@@ -220,7 +358,7 @@ namespace Reports
       <NegativeTextBrush>Red</NegativeTextBrush>
       <TextBrush>[74:74:74]</TextBrush>
     </Data2>
-    <Footer2 Ref="14" type="Stimulsoft.Report.StiStyle" isKey="true">
+    <Footer2 Ref="28" type="Stimulsoft.Report.StiStyle" isKey="true">
       <AllowUseBorderSides>False</AllowUseBorderSides>
       <Border>None;[58:78:94];1;Solid;False;4;Black</Border>
       <Brush>Transparent</Brush>

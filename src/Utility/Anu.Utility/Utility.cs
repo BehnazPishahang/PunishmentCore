@@ -1,7 +1,8 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Newtonsoft.Json;
-using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.RegularExpressions;
 using Utility.Exceptions;
 
 namespace Anu.Utility
@@ -62,7 +63,7 @@ namespace Anu.Utility
             return JsonConvert.DeserializeObject<T>(content);
         }
 
-        public static async Task<string> CallApi<T>(this string apiUrl, object value,Enum errorIsFailedStatus, Dictionary<string, string> authorization = null, Dictionary<string, string> headers = null)
+        public static async Task<string> CallApi<T>(this string apiUrl, object value, Enum errorIsFailedStatus, Dictionary<string, string> authorization = null, Dictionary<string, string> headers = null)
         {
             try
             {
@@ -104,8 +105,11 @@ namespace Anu.Utility
 
         public static string ConvertToBase64(this byte[] data)
         {
-            return Convert.ToBase64String(data,0,data.Length);
+            return Convert.ToBase64String(data, 0, data.Length);
         }
 
+
     }
+
+
 }
