@@ -39,12 +39,21 @@
                         </MudItem>
 
                         <MudItem xs="4">
-                            <MudButton Variant="Variant.Filled"  OnClick="GetAccessCode" Size="Size.Medium" Style="width: 100%;">دریافت رمز</MudButton>
+                            <MudButton Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" Size="Size.Medium" Style="width: 100%;"> 
+
+                        @if(hasSmsSend)
+                         {
+                                 <b> @ProgressValue ثانیه </b>
+                                 <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue"  />
+                        }
+                        else
+                        {
+                                <b>دریافت کد </b>
+                        }
+                            </MudButton>
                         </MudItem>
 
-                @*  <MudItem xs="12" Class="d-flex justify-center">
-                            <MudButton  Variant="Variant.Filled" Disabled="@(!Validated)" Color="Color.Primary" Size="Size.Large" Style="width: 100%;"  >ورود </MudButton>
-                        </MudItem>*@
+               
                         <MudItem xs="12">
                             <div class="d-flex justify-center">
                                 <MudText Color="Color.Error">@errorMessage </MudText>
@@ -54,7 +63,7 @@
  </DialogContent>
    <DialogActions>
         <MudItem xs="12" Class="d-flex justify-center">
-                           <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
+                           <MudButton Variant="Variant.Filled"  Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
                         </MudItem>
                         <MudItem xs="12" Class="d-flex justify-center">
                            <MudButton Variant="Variant.Filled" Color="Color.Warning" Href="/false" Size="Size.Large" Style="width: 100%;">برگشت</MudButton>
@@ -73,24 +82,56 @@
     private SecondStepUserLoginRequest _secondRequest = new();
     private bool Validated = true;
 
+    bool _disposed;
+    public void Dispose() => _disposed = true;
+
+    private int ProgressValue { get; set; }
+    private bool hasSmsSend = false;
+    public async void SimulateProgress()
+    {
+        ProgressValue = 120;
+        do
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            ProgressValue -= 1;
+            StateHasChanged();
+            await Task.Delay(1000);
+
+        } while (ProgressValue > 0);
+
+        hasSmsSend = false;
+        StateHasChanged();
+    }
+
+
     void GetAccessCode()
     {
         var ss=  _appConfiguration.BackendServerAddress;
+
         AuthResult  result= _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress , _appConfiguration.LoginAddress ,_tokenModel);
-        if (result.Result.Code == 1000)
+        if (result.Result.Code == 100013)
         {
+            hasSmsSend = true;
+            SimulateProgress();
             SharedInfo.NationalCode = _tokenModel.UserName;
-            errorMessage = "";
+             errorMessage = result.Result.Message;
+          
         }
         else
         {
             errorMessage = result.Result.Message;
+            hasSmsSend = false;
         }
     }
     void Submit()
     {
         var ss=  _appConfiguration.BackendServerAddress;
-        _secondRequest.PhoneNumber = _tokenModel.UserName;
+        _secondRequest.UserName = _tokenModel.UserName;
+       
         AuthResult  result= _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress , _appConfiguration.SecondStepLogin ,_secondRequest);
         if (result.Result.Code == 1000)
         {
