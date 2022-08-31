@@ -55,6 +55,11 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
             /// فراخواننده سرویس دریافت مکاتبات مکانیزه به سازمان تعزیرات
             /// </summary>
             public const string MechanizedLetterServices="024";
+
+            /// <summary>
+            /// فراخواننده سرويس دريافت درخواست مجوز تعقيب/بازرسي و پاسخ آن
+            /// </summary>
+            public const string SendPChaseLicenseReqList = "025";
         }
 
         public static class NajaUnit
