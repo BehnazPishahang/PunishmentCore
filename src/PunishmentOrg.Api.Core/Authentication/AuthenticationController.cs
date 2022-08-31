@@ -1,10 +1,11 @@
 ﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
 using Anu.BaseInfo.DataModel.FrontEndSecurity;
-using Anu.BaseInfo.Domain.FrontEndSecurity;
-using Anu.Commons.ServiceModel.ServiceLogin;
+using Anu.Commons.ServiceModel.ServiceAuthentication;
+using Anu.Commons.ServiceModel.ServiceAuthentication.Enumerations;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.DataAccess;
 using Anu.DataAccess.Repositories;
+using Anu.PunishmentOrg.Api.Authentication.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -35,16 +36,13 @@ namespace Anu.PunishmentOrg.Api.Authentication
         {
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-                request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-                request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
-            //var NAJAUnitsWithNullParent = _unitOfWork.Repositorey<GenericRepository<NAJAUnit>>().Find(x => x.TheParentUnit == null).Count();
-            //var ObjectStateAll = _unitOfWork.Repositorey<GenericRepository<ObjectState>>().GetAll();
-            //var ObjectStateAll1 = _unitOfWork.Repositorey<IObjectStateRepository>().GetAll();
-            //var theGFESUser1 = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
-            //var theGeoLocationWithGenericRepositoryInterface = _unitOfWork.Repositorey<IGenericRepository<GeoLocation>>();
+            request.UserName.IsValidNationalCode();
 
-            var theGFESUser = await _unitOfWork.Repositorey<IGFESUserRepository>()                .GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+            var theGFESUser = (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>()
+                .Find(x => x.NationalityCode == request.UserName)).FirstOrDefault();
+
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
             string password = await theGFESUser.MobileNumber4SMS.SendAuthenticateSms(6);
@@ -57,7 +55,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
             }
 
-            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args:"09*****"+theGFESUser.MobileNumber4SMS.Substring(theGFESUser.MobileNumber4SMS.Length-4)) };
+            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: "09*****" + theGFESUser.MobileNumber4SMS.Substring(theGFESUser.MobileNumber4SMS.Length - 4)) };
 
         }
 
@@ -69,7 +67,6 @@ namespace Anu.PunishmentOrg.Api.Authentication
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
             request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-            request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
             request.PhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
 
             request.UserName.IsValidNationalCode();
