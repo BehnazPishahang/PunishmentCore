@@ -29,6 +29,7 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         User_Is_Exist = -100011,
         Error_Send_Sms = -100012,
         HttpError_Send_Sms = -100012,
-        LoginSuccessful_Sms_Send_To = 100013
+        LoginSuccessful_Sms_Send_To = 100013,
+        Sms_Time_Is_Expired = -100014
     }
 }

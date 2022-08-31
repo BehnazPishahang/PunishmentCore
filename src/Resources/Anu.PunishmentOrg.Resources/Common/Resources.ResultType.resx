@@ -388,6 +388,10 @@
     <value>مرتب سازی ویژگی یافت نشد.</value>
     <comment>-10004</comment>
   </data>
+  <data name="Sms_Time_Is_Expired" xml:space="preserve">
+    <value>زمان انتظار ارسال کد به پایان رسیده است. لطفا مجدد اقدام به دریافت کد کنید .</value>
+    <comment>-100014</comment>
+  </data>
   <data name="Successful" xml:space="preserve">
     <value>عملیات با موفقیت انجام شد .</value>
     <comment>1000</comment>
