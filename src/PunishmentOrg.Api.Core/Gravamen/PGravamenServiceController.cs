@@ -2,6 +2,9 @@
 using Anu.BaseInfo.DataAccess.Unit;
 using Anu.BaseInfo.DataModel.Attachment;
 using Anu.BaseInfo.DataModel.GeoInfo;
+using Anu.BaseInfo.Domain.GeoInfo;
+using Anu.BaseInfo.Domain.OrganizationChart;
+using Anu.BaseInfo.Domain.SystemObject;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Commons.Validations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
@@ -9,6 +12,8 @@ using Anu.DataAccess.Repositories;
 using Anu.Domain;
 using Anu.PunishmentOrg.DataAccess.PGravamen;
 using Anu.PunishmentOrg.DataModel.Gravamen;
+using Anu.PunishmentOrg.Domain.BaseInfo;
+using Anu.PunishmentOrg.Domain.PGravamen;
 using Anu.PunishmentOrg.Enumerations;
 using Anu.PunishmentOrg.ServiceModel.Gravamen;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
@@ -142,7 +147,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
                     docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
 
-                    var attachmentType = await _unitOfWork.Repositorey<GenericRepository<Anu.BaseInfo.DataModel.Types.AttachmentType>>().GetById(gravamenAttachmentTypeId);
+                    var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<Anu.BaseInfo.DataModel.Types.AttachmentType>>().GetById(gravamenAttachmentTypeId);
 
 
 
@@ -174,7 +179,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 {
                     Id = Guid.NewGuid().ToString("N"),
                     Timestamp = 1,
-                    TheObjectState = await _unitOfWork.Repositorey<Anu.BaseInfo.DataAccess.SystemObject.ObjectStateRepository>().GetById(PunishmentOrgObjectState.PGravamen.Start),
+                    TheObjectState = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PGravamen.Start),
                     PetitionSubject = request.ThePGravamenContract.PetitionSubject,
                     PetitionDescription = request.ThePGravamenContract.PetitionDescription,
                     NoticeText = request.ThePGravamenContract.NoticeText,
@@ -191,11 +196,11 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     FollowUpNo = followupNumber,
                     HowDataType = PU135OrWebSite.WebSite,
                     GravamenOrReport = Anu.PunishmentOrg.Enumerations.GravamenOrReport.Gravamen,
-                    TheReceiveUnit = await FindRelatedUnit(await _unitOfWork.Repositorey<Anu.BaseInfo.DataAccess.GeoInfo.GeoLocationRepository>().GetGeoLocationWithLocationCode(request.ThePGravamenContract.TheGeoLocationContract!.LocationCode))
+                    TheReceiveUnit = await FindRelatedUnit(await _unitOfWork.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(request.ThePGravamenContract.TheGeoLocationContract!.LocationCode))
                 };
 
 
-                await _unitOfWork.Repositorey<PGravamenRepository>().Add(gravamen);
+                await _unitOfWork.Repositorey<IPGravamenRepository>().Add(gravamen);
                 _unitOfWork.Complete();
 
 
@@ -369,13 +374,13 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 List<string> gunit = new List<string>();
                 gunit.Add("003");
                 gunit.Add("004");
-                var Receiver = await _unitOfWork.Repositorey<Anu.BaseInfo.DataAccess.OrganizationChart.UnitRepository>().FindRelatedUnitToGeoLocation(theGeoLocation!.LocationCode, gunit);
+                var Receiver = await _unitOfWork.Repositorey<IUnitRepository>().FindRelatedUnitToGeoLocation(theGeoLocation!.LocationCode, gunit);
 
                 if (Receiver == null)
                 {
                     if (theGeoLocation.LocationType == Anu.BaseInfo.Enumerations.LocationType.Province)
                     {
-                        var pBCountyLocatedUnit = await _unitOfWork.Repositorey<Anu.PunishmentOrg.DataAccess.BaseInfo.PBCountyLocatedUnitRepository>()
+                        var pBCountyLocatedUnit = await _unitOfWork.Repositorey<IPBCountyLocatedUnitRepository>()
                             .GetRelatedPBCountyLocatedUnitToGeolocationWithLocationCode(theGeoLocation.LocationCode);
                         if (!pBCountyLocatedUnit.Null())
                         {

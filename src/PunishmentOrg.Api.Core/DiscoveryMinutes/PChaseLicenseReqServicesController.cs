@@ -17,6 +17,10 @@ using Utility.Guard;
 using Utility.CalendarHelper;
 using Anu.PunishmentOrg.DataAccess.BaseInfo;
 using Utility.Exceptions;
+using Anu.BaseInfo.Domain.GeoInfo;
+using Anu.BaseInfo.Domain.SystemObject;
+using Anu.PunishmentOrg.Domain.BaseInfo;
+using Anu.PunishmentOrg.Domain.DiscoveryMinutes;
 
 namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
 {
@@ -80,7 +84,7 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
                     ChaseTitle              = request.ThePChaseLicenseReqContract.ChaseTitle,
                     ConclusionRequest       = request.ThePChaseLicenseReqContract.ConclusionRequest,
                     CreateDateTime          = CalendarHelper.GetCurrentDateTime(),
-                    TheGeoLocation          = await _unitOfWork.Repositorey<GeoLocationRepository>().GetGeoLocationWithLocationCode(request.ThePChaseLicenseReqContract?.TheGeoLocation?.LocationCode),
+                    TheGeoLocation          = await _unitOfWork.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(request.ThePChaseLicenseReqContract?.TheGeoLocation?.LocationCode),
                     InstitutionCode         = request.ThePChaseLicenseReqContract.InstitutionCode,
                     InstitutionExporter     = request.ThePChaseLicenseReqContract.InstitutionExporter,
                     InstitutionTitle        = request.ThePChaseLicenseReqContract.InstitutionTitle,
@@ -88,8 +92,8 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
                     LetterRequestDateTime   = request.ThePChaseLicenseReqContract.LetterRequestDateTime,
                     LetterRequestNo         = request.ThePChaseLicenseReqContract.LetterRequestNo,
                     LicensorRequestText     = request.ThePChaseLicenseReqContract.LicensorRequestText,
-                    TheObjectState          = await _unitOfWork.Repositorey<ObjectStateRepository>().GetById("000770"),//ToDo n.kord //Use Constant
-                    ThePBExchangeUnit       = await _unitOfWork.Repositorey<PBExchangeUnitRepository>().GetById("007001000771"),//ToDo n.kord //Use Constant
+                    TheObjectState          = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById("000770"),//ToDo n.kord //Use Constant
+                    ThePBExchangeUnit       = await _unitOfWork.Repositorey<IPBExchangeUnitRepository>().GetById("007001000771"),//ToDo n.kord //Use Constant
                     ThePrvReq               = null,
                     ReceiveDateTime         = request.ThePChaseLicenseReqContract.ReceiveDateTime,
                     RepSendDateTime         = request.ThePChaseLicenseReqContract.RepSendDateTime,
@@ -227,7 +231,7 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
                     };
                 }
 
-                await _unitOfWork.Repositorey<PChaseLicenseReqRepository>().Add(onePChaseLicenseReq);
+                await _unitOfWork.Repositorey<IPChaseLicenseReqRepository>().Add(onePChaseLicenseReq);
                 _unitOfWork.Complete();
                 
                 #endregion Create PChaseLicenseReq

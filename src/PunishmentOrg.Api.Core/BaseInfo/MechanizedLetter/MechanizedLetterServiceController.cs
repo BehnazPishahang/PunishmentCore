@@ -1,14 +1,18 @@
-﻿using Anu.BaseInfo.DataAccess.ExchangeData;
-using Anu.BaseInfo.DataAccess.GMechanizedLetter;
+﻿using Anu.BaseInfo.DataAccess.GMechanizedLetter;
 using Anu.BaseInfo.DataAccess.OrganizationChart;
 using Anu.BaseInfo.DataAccess.SystemConfiguration;
 using Anu.BaseInfo.DataAccess.SystemObject;
 using Anu.BaseInfo.DataModel.MechanizedLetter;
+using Anu.BaseInfo.Domain.ExchangeData;
+using Anu.BaseInfo.Domain.MechanizedLetter;
+using Anu.BaseInfo.Domain.OrganizationChart;
+using Anu.BaseInfo.Domain.SystemConfiguration;
+using Anu.BaseInfo.Domain.SystemObject;
 using Anu.BaseInfo.ServiceModel.MechanizedLetter;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
-using Anu.PunishmentOrg.Api.Authentication;
 using Anu.PunishmentOrg.DataAccess.PCase;
+using Anu.PunishmentOrg.Domain.Case;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -50,10 +54,10 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 request.TheGMechanizedLetterContract.TheGMechanizedLetterTypeContract.Code.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_GMechanizedLetterTypeCode_Is_null);
                 request.TheGMechanizedLetterContract.TheNAJAUnitContract.Code.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_NAJAUnit_Is_Null);
 
-                var GMechanizedLetterType = await _unitOfWork.Repositorey<GMechanizedLetterTypeRepository>().GetByCode(request.TheGMechanizedLetterContract.TheGMechanizedLetterTypeContract.Code);
+                var GMechanizedLetterType = await _unitOfWork.Repositorey<IGMechanizedLetterTypeRepository>().GetByCode(request.TheGMechanizedLetterContract.TheGMechanizedLetterTypeContract.Code);
                 GMechanizedLetterType.Null(MechanizedLetterResult.MechanizedLetter_Request_Is_Null);
 
-                var NajaUnit = await _unitOfWork.Repositorey<NAJAUnitRepository>().GetByCode(request.TheGMechanizedLetterContract.TheNAJAUnitContract.Code);
+                var NajaUnit = await _unitOfWork.Repositorey<INAJAUnitRepository>().GetByCode(request.TheGMechanizedLetterContract.TheNAJAUnitContract.Code);
 
                 #region Validation
                 #region [CreatorUserName]
@@ -103,7 +107,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 {
                     if (item.TheCMSOrganizationContract.Code != null)
                     {
-                        var OneCMSOrganization = await _unitOfWork.Repositorey<CMSOrganizationRepository>().GetByCode(item.TheCMSOrganizationContract.Code);
+                        var OneCMSOrganization = await _unitOfWork.Repositorey<ICMSOrganizationRepository>().GetByCode(item.TheCMSOrganizationContract.Code);
 
                         if (OneCMSOrganization == null)
                         {
@@ -134,7 +138,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                     LetterText = request.TheGMechanizedLetterContract.LetterText,
                     IsSendByOuterOrg = Anu.BaseInfo.Enumerations.YesNo.Yes,
                     CreatorUserName = request.TheGMechanizedLetterContract.CreatorUserName,
-                    TheObjectState = await _unitOfWork.Repositorey<ObjectStateRepository>().GetById(PunishmentOrgObjectState.PMechanizeLetter.ConfirmedToSend),
+                    TheObjectState = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PMechanizeLetter.ConfirmedToSend),
                 };
 
                 #region GMechanizedLetterType 
@@ -151,9 +155,9 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
 
                 foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList)
                 {
-                    var ReceiverInnerOrg = await _unitOfWork.Repositorey<CMSOrganizationRepository>().GetByCode(item.TheCMSOrganizationContract.Code);
-                    var CMSUserRoleType = await _unitOfWork.Repositorey<CMSUserRoleTypeRepository>().GetByCode(item.TheCMSUserRoleTypeContract.Code);
-                    var MaxNo = await _unitOfWork.Repositorey<GMechanizedLetterRepository>().GetMaxNo(CalendarHelper.GetCurrentDate().Substring(0, 4), item.TheCMSOrganizationContract.Code);
+                    var ReceiverInnerOrg = await _unitOfWork.Repositorey<ICMSOrganizationRepository>().GetByCode(item.TheCMSOrganizationContract.Code);
+                    var CMSUserRoleType = await _unitOfWork.Repositorey<ICMSUserRoleTypeRepository>().GetByCode(item.TheCMSUserRoleTypeContract.Code);
+                    var MaxNo = await _unitOfWork.Repositorey<IGMechanizedLetterRepository>().GetMaxNo(CalendarHelper.GetCurrentDate().Substring(0, 4), item.TheCMSOrganizationContract.Code);
                     OneGMechanizedLetter.TheGMechanizedLetterReceiverList = new();
                     var oneGMechanizedLetterReceiver = new GMechanizedLetterReceiver()
                     {
@@ -164,7 +168,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                         ReceiverType = item.ReceiverType,
                         SendDateTime = CalendarHelper.GetCurrentDateTime(),
                         ViewDateTime = "9999/99/99-99:99",
-                        TheObjectState = await _unitOfWork.Repositorey<ObjectStateRepository>().GetById(PunishmentOrgObjectState.PMechanizeLetter.ReceivedByReceiverUnit),
+                        TheObjectState = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PMechanizeLetter.ReceivedByReceiverUnit),
                         TheReceiverInnerOrg = ReceiverInnerOrg is null ? null : ReceiverInnerOrg,
                         TheReceiverPost = CMSUserRoleType is null ? null : CMSUserRoleType
 
@@ -303,8 +307,8 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterCaseContractList)
                 {
                     OneGMechanizedLetter.TheGMechanizedLetterCaseList = new();
-                    var Unit = await _unitOfWork.Repositorey<UnitRepository>().GetByCode(item.TheunitContract.Code);
-                    var CaseList = await _unitOfWork.Repositorey<PCaseRepository>().GetPCaseByNo(item.RelatedCaseNo);
+                    var Unit = await _unitOfWork.Repositorey<IUnitRepository>().GetByCode(item.TheunitContract.Code);
+                    var CaseList = await _unitOfWork.Repositorey<IPCaseRepository>().GetPCaseByNo(item.RelatedCaseNo);
                     var OneCaseId = "";
                     foreach (var caseItem in CaseList)
                     {
@@ -321,8 +325,8 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                         RelatedCaseNo = item.RelatedCaseNo,
                         RelatedCaseTitle = item.RelatedCaseTitle,
                         CaseLocation = Anu.BaseInfo.Enumerations.MechanizedLetterCaseLocation.Destination,
-                        TheRelatedCaseClass = await _unitOfWork.Repositorey<SystemObjectRepository>().GetById("21c7d5f0a1524460898a56c0417e0755"),
-                        TheRelatedCaseForm = await _unitOfWork.Repositorey<SystemFormRepository>().GetById("5A1F4099A1B6437BA5E1D568000A751C"),
+                        TheRelatedCaseClass = await _unitOfWork.Repositorey<ISystemObjectRepository>().GetById("21c7d5f0a1524460898a56c0417e0755"),
+                        TheRelatedCaseForm = await _unitOfWork.Repositorey<ISystemFormRepository>().GetById("5A1F4099A1B6437BA5E1D568000A751C"),
                         RelatedCaseID = OneCaseId,
 
                     };
@@ -334,7 +338,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterRelLettersContractList)
                 {
                     OneGMechanizedLetter.TheRelLettersList = new();
-                    var GMechanizedLetterObj = await _unitOfWork.Repositorey<GMechanizedLetterRepository>().GetByNo(item.RelLetterNo);
+                    var GMechanizedLetterObj = await _unitOfWork.Repositorey<IGMechanizedLetterRepository>().GetByNo(item.RelLetterNo);
                     var oneGMechanizedLetterRelLetters = new GMechanizedLetterRelLetters()
                     {
                         Id = Guid.NewGuid().ToString("N"),
@@ -382,7 +386,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 #endregion
 
 
-                _unitOfWork.Repositorey<GMechanizedLetterRepository>().Add(OneGMechanizedLetter);
+                _unitOfWork.Repositorey<IGMechanizedLetterRepository>().Add(OneGMechanizedLetter);
                 _unitOfWork.Complete();
                 return Respond(AnuResult.Successful, OneGMechanizedLetter.No);
 

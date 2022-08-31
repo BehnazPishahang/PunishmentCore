@@ -81,10 +81,10 @@ namespace Anu.PunishmentOrg.Api.BillStore
             };
 
             //var pDiscoveryMinutes = await _unitOfWork.PDiscoveryMinutes.GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
-            var pDiscoveryMinutes = await _unitOfWork.Repositorey<PDiscoveryMinutesRepository>().GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
+            var pDiscoveryMinutes = await _unitOfWork.Repositorey<IPDiscoveryMinutesRepository>().GetPDiscoveryMinutesByUniqueNo(request.ProceedingNumber);
             pBillStore.ThePDiscoveryMinutes = (pDiscoveryMinutes is null) ? null : pDiscoveryMinutes;
 
-            pBillStore.TheObjectState = await _unitOfWork.Repositorey<ObjectStateRepository>().GetById(PunishmentOrgObjectState.PBillStore.Confirm);
+            pBillStore.TheObjectState = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PBillStore.Confirm);
 
             pBillStore.TheDiscoveryOrg = await GetDiscoveryOrganization(request.CodingDeviceDetector);
             pBillStore.id_shenaseResid = request.TrackingCodeStores;
@@ -134,7 +134,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
                 pBillStore.ThePBillStoreProductList.Add(pBillStoreProduct);
             }
 
-            _unitOfWork.Repositorey<PBillStoreRepository>().Add(pBillStore);
+            _unitOfWork.Repositorey<IPBillStoreRepository>().Add(pBillStore);
             _unitOfWork.Complete();
 
             return Respond(AnuResult.Successful, pBillStore.UniqueNo);
@@ -179,7 +179,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
         {
             var isDuplicate = false;
 
-            var billEntity = _unitOfWork.Repositorey<PBillStoreRepository>().GetByNumberDate(request.BillNumber, request.BillDate);
+            var billEntity = _unitOfWork.Repositorey<IPBillStoreRepository>().GetByNumberDate(request.BillNumber, request.BillDate);
 
             if (billEntity.Result.Count() != 0)
             {
@@ -248,7 +248,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
                     break;
 
             }
-            return await _unitOfWork.Repositorey<PBExchangeUnitRepository>().GetById(organizationId);
+            return await _unitOfWork.Repositorey<IPBExchangeUnitRepository>().GetById(organizationId);
         }
 
 
