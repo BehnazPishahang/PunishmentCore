@@ -1,6 +1,8 @@
-﻿namespace Anu.Commons.ServiceModel.ServiceLogin
+﻿using Anu.Commons.ServiceModel.ServiceAuthentication.Enumerations;
+
+namespace Anu.Commons.ServiceModel.ServiceAuthentication
 {
-    public class UserRegisterRequest
+    public class SecondStepUserLoginRequest
     {
         [System.ComponentModel.DataAnnotations.Required]
         public string? UserName { get; set; }
@@ -9,6 +11,6 @@
         public string? Password { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public string? PhoneNumber { get; set; }
+        public LoginType? LoginType { get; set; }
     }
 }

@@ -1,9 +1,6 @@
 using Anu.PunishmentOrg.Client;
-using Anu.PunishmentOrg.Client.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Services;
-using System.Configuration;
+using Recurop;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,16 +10,11 @@ builder.Services.AddServerSideBlazor();
 builder.Services.ManageIOC(builder.Configuration);
 
  
-//AppConfiguration.Instance= builder.Configuration.GetSection(AppConfiguration.ConfigurationPosition).Get<AppConfiguration>();
-
-//builder.Services.Configure<AppConfiguration>(Configuration.GetSection(AppConfiguration.ConfigurationPosition));
-
-//builder.Services.Configure<AppConfiguration>(Configuration.GetSection("BackendSetting").Get<AppConfiguration>());
-
 
 builder.Services.AddHttpClient();
 
 builder.Services.AddMudServices();
+builder.Services.AddRecurop();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

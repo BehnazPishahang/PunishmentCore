@@ -4,6 +4,7 @@ using Anu.PunishmentOrg.ServiceModel.Gravamen;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Security.AccessControl;
+using System.Text;
 
 namespace Anu.PunishmentOrg.ApiSample.PBillStore
 {
@@ -18,91 +19,92 @@ namespace Anu.PunishmentOrg.ApiSample.PBillStore
         public void Send()
         {
             var p1 = new PGravamenPersonContract()
+        {
+
+            Name = "Ali",
+            Family = "Pooyan",
+            Address = "Azadi St.",
+            BirthDate = "1370/02/25",
+            FatherName = "Hamid",
+            IdentityNumber = "1234567895",
+            MobilNumber = "09101112233",
+            NationalCode = "1234567895",
+            Nationality = Anu.BaseInfo.Enumerations.LNationality.Iranian,
+            PersonStartPost = Enumerations.PUPersonStartPost.PlaintiffPerson,
+            Sex = Anu.BaseInfo.Enumerations.SexType.Male,
+            PersonType = Anu.BaseInfo.Enumerations.PersonType.NaturalPerson,
+            PostCode = "",
+            TradeUnitName = "",
+            PersonPassword = "",
+        };
+        var p2 = new PGravamenPersonContract()
+        {
+
+            Name = "Haj Nemat",
+            Family = "",
+            Address = "",
+            BirthDate = "",
+            FatherName = "",
+            IdentityNumber = "",
+            MobilNumber = "",
+            NationalCode = "",
+            Nationality = Anu.BaseInfo.Enumerations.LNationality.Iranian,
+            PersonStartPost = Enumerations.PUPersonStartPost.OffendingPerson,
+            Sex = Anu.BaseInfo.Enumerations.SexType.Male,
+            PersonType = Anu.BaseInfo.Enumerations.PersonType.NaturalPerson,
+            PostCode = "",
+            TradeUnitName = "Nanvaii Haj Nemat",
+            PersonPassword = "",
+        };
+
+        var v = new PGravamenViolationContract()
+        {
+
+            RowNumber = 1,
+            SubjectTitle = "Geran Forooshi",
+            ViolationAddress = "Azadi St.",
+            ViolationDate = "1401/06/02",
+            ViolationDesc = "Geran Forooshi Ba Tozihat",
+            ViolationPrice = 10000,
+        };
+
+        var a = new DataModel.Gravamen.PGravamenAttachment()
+        {
+            FileExtension = Anu.BaseInfo.Enumerations.FileExtension.PDF,
+            TheAttachmentType = new Anu.BaseInfo.DataModel.Types.AttachmentType()
             {
-
-                Name = "",
-                Family = "",
-                Address = "",
-                BirthDate = "",
-                FatherName = "",
-                IdentityNumber = "",
-                MobilNumber = "",
-                NationalCode = "",
-                Nationality = BaseInfo.Enumerations.LNationality.Iranian,
-                PersonStartPost = Enumerations.PUPersonStartPost.PlaintiffPerson,
-                Sex = BaseInfo.Enumerations.SexType.Male,
-                PersonType =BaseInfo.Enumerations.PersonType.NaturalPerson,
-                PostCode = "",
-                TradeUnitName = "",
-                PersonPassword = "",
-            };
-            var p2 = new PGravamenPersonContract()
+                Code = "300",
+                Id = "300",
+                Title = "پيوست شكوائيه مردمي",
+                Timestamp = 1
+            },
+            TheGAttachmentData = new Anu.BaseInfo.DataModel.Attachment.GAttachmentData()
             {
+                DocFile = Encoding.ASCII.GetBytes("QW51IGNvcG9yYXRpb24=")
+            }
+        };
 
-                Name = "",
-                Family = "",
-                Address = "",
-                BirthDate = "",
-                FatherName = "",
-                IdentityNumber = "",
-                MobilNumber = "",
-                NationalCode = "",
-                Nationality = BaseInfo.Enumerations.LNationality.Iranian,
-                PersonStartPost = Enumerations.PUPersonStartPost.OffendingPerson,
-                Sex = BaseInfo.Enumerations.SexType.Male,
-                PersonType =BaseInfo.Enumerations.PersonType.NaturalPerson,
-                PostCode = "",
-                TradeUnitName = "KH",
-                PersonPassword = "",
-            };
+        var gravamen = new PGravamenContract()
+        {
 
-            var v = new PGravamenViolationContract()
-            {
-               
-                RowNumber = 1,
-                SubjectTitle = "a",
-                ViolationAddress = "b",
-                ViolationDate = "c",
-                ViolationDesc = "d",
-                ViolationPrice = 123,
-            };
+            PetitionSubject = "Petition Subject",
+            PetitionDescription = "Petition Description",
+            NoticeText = "Notice Text",
+            PetitionReasons = "PetitionReasons",
+            RejectReasonText = "Reject Reason Text",
+            ReporterName = "Ali",
+            ReporterFamily = "Pooyan",
+            ReporterMobilNumber = "09101112233",
+            
+            ThePGravamenPersonContractList = new List<PGravamenPersonContract>() { p1, p2 },
+            //TheGAttachmentContractList = (new List<DataModel.Gravamen.PGravamenAttachment>() { a }),
+            ThePGravamenViolationContractList = new List<PGravamenViolationContract>() { v },
 
-            var a = new GAttachmentContract()
-            {
-                FileExtension = BaseInfo.Enumerations.FileExtension.PDF,
-                TheAttachmentTypeContract = new AttachmentTypeContract()
-                {
-                    Code = "300",
-                    
-                    Title = "پيوست شكوائيه مردمي"
-                },
-                TheGAttachmentDataContract = new GAttachmentDataContract()
-                {
-                    DocFile = new byte[500]
-                }
-            };
-
-            var gravamen = new PGravamenContract()
-            {
-
-                PetitionSubject = "d",
-                PetitionDescription = "e",
-                NoticeText = "f",
-                PetitionReasons = "g",
-                RejectReasonText = "h",
-                ReporterName = "i",
-                ReporterFamily = "j",
-                ReporterMobilNumber = "k",
-
-                ThePGravamenPersonContractList = new List<PGravamenPersonContract>(){p1,p2},
-                //ThePGravamenAttachmentList=attachmentList,
-                ThePGravamenViolationContractList = new List<PGravamenViolationContract>(){v},
-
-                CreateDateTime = "l",
-                FollowUpNo = "m",
-                HowDataType = Enumerations.PU135OrWebSite.WebSite,
-                GravamenOrReport = Anu.PunishmentOrg.Enumerations.GravamenOrReport.Gravamen,
-            };
+            CreateDateTime = "1401/02/06",
+            FollowUpNo = "9995541",
+            HowDataType = Enumerations.PU135OrWebSite.WebSite,
+            GravamenOrReport = Anu.PunishmentOrg.Enumerations.GravamenOrReport.Gravamen,
+        };
 
 
 

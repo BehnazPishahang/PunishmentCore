@@ -188,5 +188,19 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
 
         }
 
+        public static class PGravamen
+    {
+        public const string Start = "000499";//شروع
+        public const string TemporaryRegisteredByApplicant = "000501";//پذیرش اولیه شده توسط متقاضی 
+        public const string PermanentRegisteredByApplicant = "000503";//پذیرش نهایی شده توسط متقاضی
+        public const string RegisterPlaintiff = "000498";//ثبت شده توسط شاکی
+        public const string RegisterInput = "000500";//ثبت ورود شده
+        public const string Referred = "000502";//ارجاع شده
+        public const string Failing = "000497";//نقص
+        public const string Failed = "000504";//رد شده
+        public const string Send = "000505";//ارسال شده
+        public const string RegisterCase = "000506";//تشکیل پرونده شده
+    }
+
     }
 }

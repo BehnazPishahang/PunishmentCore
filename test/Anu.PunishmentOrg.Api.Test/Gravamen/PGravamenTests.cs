@@ -33,14 +33,14 @@ public class PGravamenTests
         var p1 = new PGravamenPerson()
         {
 
-            Name = "",
-            Family = "",
-            Address = "",
-            BirthDate = "",
-            FatherName = "",
-            IdentityNumber = "",
-            MobilNumber = "",
-            NationalCode = "",
+            Name = "Ali",
+            Family = "Pooyan",
+            Address = "Azadi St.",
+            BirthDate = "1370/02/25",
+            FatherName = "Hamid",
+            IdentityNumber = "1234567895",
+            MobilNumber = "09101112233",
+            NationalCode = "1234567895",
             Nationality = Anu.BaseInfo.Enumerations.LNationality.Iranian,
             PersonStartPost = Enumerations.PUPersonStartPost.PlaintiffPerson,
             Sex = Anu.BaseInfo.Enumerations.SexType.Male,
@@ -52,7 +52,7 @@ public class PGravamenTests
         var p2 = new PGravamenPerson()
         {
 
-            Name = "",
+            Name = "Haj Nemat",
             Family = "",
             Address = "",
             BirthDate = "",
@@ -65,7 +65,7 @@ public class PGravamenTests
             Sex = Anu.BaseInfo.Enumerations.SexType.Male,
             PersonType = Anu.BaseInfo.Enumerations.PersonType.NaturalPerson,
             PostCode = "",
-            TradeUnitName = "KH",
+            TradeUnitName = "Nanvaii Haj Nemat",
             PersonPassword = "",
         };
 
@@ -73,11 +73,11 @@ public class PGravamenTests
         {
 
             RowNumber = 1,
-            SubjectTitle = "a",
-            ViolationAddress = "b",
-            ViolationDate = "c",
-            ViolationDesc = "d",
-            ViolationPrice = 123,
+            SubjectTitle = "Geran Forooshi",
+            ViolationAddress = "Azadi St.",
+            ViolationDate = "1401/06/02",
+            ViolationDesc = "Geran Forooshi Ba Tozihat",
+            ViolationPrice = 10000,
         };
 
         var a = new PGravamenAttachment()
@@ -99,21 +99,21 @@ public class PGravamenTests
         pGravamen = new PGravamen()
         {
 
-            PetitionSubject = "d",
-            PetitionDescription = "e",
-            NoticeText = "f",
-            PetitionReasons = "g",
-            RejectReasonText = "h",
-            ReporterName = "i",
-            ReporterFamily = "j",
-            ReporterMobilNumber = "k",
+            PetitionSubject = "Petition Subject",
+            PetitionDescription = "Petition Description",
+            NoticeText = "Notice Text",
+            PetitionReasons = "PetitionReasons",
+            RejectReasonText = "Reject Reason Text",
+            ReporterName = "Ali",
+            ReporterFamily = "Pooyan",
+            ReporterMobilNumber = "09101112233",
 
             ThePGravamenPersonList = new List<PGravamenPerson>() { p1, p2 },
             ThePGravamenAttachmentList = new List<PGravamenAttachment>() { a },
             ThePGravamenViolationList = new List<PGravamenViolation>() { v },
 
-            CreateDateTime = "l",
-            FollowUpNo = "m",
+            CreateDateTime = "1401/02/06",
+            FollowUpNo = "9995541",
             HowDataType = Enumerations.PU135OrWebSite.WebSite,
             GravamenOrReport = Anu.PunishmentOrg.Enumerations.GravamenOrReport.Gravamen,
         };

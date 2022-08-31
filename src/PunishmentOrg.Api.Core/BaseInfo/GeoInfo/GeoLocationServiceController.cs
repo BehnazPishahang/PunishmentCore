@@ -34,7 +34,7 @@ namespace Anu.BaseInfo.Api.GeoInfo
 
             if (this.IsRequestValid(request))
             {
-                return this.Respond(GeoLocationResult.GeoLocation_Request_IsNull);
+                return this.Respond(GeoLocationResult.GeoLocation_Request_NotValid);
             }
             #endregion Validation
 

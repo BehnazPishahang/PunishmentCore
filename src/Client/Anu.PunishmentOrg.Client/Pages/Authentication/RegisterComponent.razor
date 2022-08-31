@@ -1,0 +1,289 @@
+﻿@page "/register"
+@using Anu.BaseInfo.Enumerations
+@using Anu.Commons.ServiceModel.ServiceAuthentication
+@using Anu.Commons.ServiceModel.ServiceResponseEnumerations
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
+@using Anu.PunishmentOrg.Client.Infrastructure.Utitlities
+@using Blazored.FluentValidation
+@inject RecurringOperationsManager Recurop
+
+
+@layout MainLayout
+@attribute [AllowAnonymous]
+
+
+
+@inject IAnuAuthorizationService  _anuAuthorizationService;
+@inject AppConfiguration _appConfiguration;
+
+@using FluentValidation
+@using Recurop
+@using System.Timers
+
+<MudCard xs="8">
+@*<EditForm  Model="@_registerUserModel" OnValidSubmit="SubmitAsync">*@
+   	<MudForm Model="@_registerUserModel" @ref="@form"  ValidationDelay="0">
+		<MudCardContent> 
+                   <MudItem xs="4" sm="1" md="2">
+                    <div class="d-flex justify-center">
+                        <MudIcon Icon="@Icons.Filled.Balance" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
+                    </div>
+                </MudItem>
+                  <MudItem xs="4" sm="1" md="2">
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h4">ثبت نام</MudText>
+                    </div>
+                </MudItem>
+
+              <MudItem xs="4" sm="1" md="2">
+             
+                <InputPersianDatePicker Id="myInputDatePicker"
+                        @bind-Value="_registerUserModel.BirthDate"
+                       
+                        Name="myInputName"
+                        Visible="true"
+                        Disabled="false"
+                        PickerAlign="Blazor.PersianDatePicker.Align .Left"
+                        PickerOffsetTopPositionInPixels="0"
+                        InitialValue="false"
+                        CalendarType="Calendar.SingleModeJalali"
+                        DigitType="DigitType.BasedOnCalendar"
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                        MinDateSetOnToday="true"
+                        Placeholder="انتخاب تاریخ"
+               
+                        Theme="PickerTheme.Cheerup"
+                        OnChange="@(() => Console.WriteLine("OK"))" 
+                     
+                        />
+                </MudItem>
+              <MudItem xs="8" sm="2" md="4">
+                    <MudTextField  
+                            Mask="@nationalcodeMask"
+                            @bind-Value="_registerUserModel.UserName"
+                            Label="کدملی " 
+                            Variant="Variant.Outlined" 
+                            Placeholder="1467561088"  
+                            MaxLength="10"
+                            Required="true" 
+                            RequiredError="کد ملی باید 10 رقم باشد " />
+                </MudItem>
+
+                      <MudItem xs="8" sm="2" md="4">
+                         <MudTextField 
+                         @bind-Value="_registerUserModel.FirstName" 
+                         Label="نام " 
+                          Required="true" 
+                          
+                         Variant="Variant.Outlined" 
+                         />
+                </MudItem>
+
+                      <MudItem xs="8" sm="2" md="4">
+                    <MudTextField   Required="true"  For="@(() => _registerUserModel.LastName)" @bind-Value="_registerUserModel.LastName" Label="نام خانوادگی " Variant="Variant.Outlined" />
+                </MudItem>
+
+
+                 <MudItem xs="8" sm="2" md="4">
+                    
+                 <MudSelect   @bind-Value="_registerUserModel.Sex" Label="جسیت"    Required="true"   AdornmentColor="Color.Primary"  @onchange="DoStuff" Variant="Variant.Outlined" >
+                    @foreach (SexType item in Enum.GetValues(typeof(SexType)))
+                    {
+                   
+                        <MudSelectItem Value="@item">
+                           @if(item== SexType.Male)
+                            {
+                                <MudIcon Icon= "@Icons.Filled.Man"  Color="Color.Default" ></MudIcon>
+                            }
+
+                            @if(item== SexType.Female)
+                            {
+                                <MudIcon Icon= "@Icons.Filled.Woman" Color="Color.Primary"  ></MudIcon>
+                            }
+
+                         
+
+                            @item.GetEnumDescription()
+                            </MudSelectItem>
+                    }
+                 </MudSelect>
+                </MudItem>
+                 <MudItem xs="6" sm="2" md="3">
+                    <MudTextField T="string" Label="شماره تلفن "  Required="true"   Mask="@phoneMask" @bind-Value="_registerUserModel.PhoneNumber" For="@(() => _registerUserModel.PhoneNumber)" Variant="Variant.Outlined" Placeholder="09121111111" />
+                    </MudItem>
+                    <MudItem xs="4" sm="1" md="2" >
+                   <MudButton Variant="Variant.Outlined"   Required="true"   disabled="@(showPassword)"  Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await getCodeBySms())"> 
+                       @if(showPassword)
+                       {
+                         <b> @ProgressValue ثانیه </b>
+                         <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue"  />
+                        }
+                        else
+                        {
+                                <b>دریافت کد </b>
+                        }
+                </MudButton>
+                </MudItem>
+                @if(showPassword)
+                       {
+                             <MudItem xs="2" sm="1" md="1" >
+                                <MudTextField  T="string" Label="رمز ارسالی" Mask="@phoneMask"  @bind-Value="smsPassword" Variant="Variant.Outlined" Placeholder="111111"   MaxLength="6"  />
+                            </MudItem>
+                       }
+                   <MudItem xs="8" sm="2" md="4">
+
+                    <div class="d-flex justify-center">
+                        <MudText Color="Color.Error">@errorMessage </MudText>
+                    </div>
+
+                </MudItem>
+               </MudCardContent>
+             </MudForm>
+    <MudCardActions>
+        <MudButton Variant="Variant.Outlined" disabled="@(!showPassword)" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await getCodeBySms())"> ثبت نام  </MudButton>
+    </MudCardActions>
+</MudCard>
+@code {
+
+    private string genderIcon = @Icons.Filled.Man;
+    private bool showPassword = false;
+    private string smsPassword = "";
+    public int ProgressValue { get; set; } 
+    MudForm form;
+
+    UserRigesterFluentValidator registerValidator = new UserRigesterFluentValidator();
+
+    private FluentValidationValidator _fluentValidationValidator;
+    private bool Validated = true; 
+    private UserRegisterRequest _registerUserModel = new();
+    private string errorMessage = string.Empty;
+    bool _disposed;
+    public void Dispose() => _disposed = true;
+
+    public async void SimulateProgress()
+    {
+        ProgressValue = 120;
+        do
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            ProgressValue -= 1;
+            StateHasChanged();
+            await Task.Delay(1000);
+
+        } while (ProgressValue > 0);
+
+        showPassword = false;
+        StateHasChanged();
+    }
+
+
+    [Inject] ISnackbar Snackbar { get; set; }
+    private async Task Submit()
+    {
+        //await form.Validate();
+
+        if (form.IsValid)
+        {
+            Snackbar.Add("OKKKK");
+        }
+    }
+
+    private void DoStuff(ChangeEventArgs e)
+    {
+        string s = e.Value.ToString();
+        Console.WriteLine("*******: " + s);
+    }
+
+    private void onChangeDrpGender(ChangeEventArgs e)
+    {
+
+        string  SelectedString = e.Value.ToString();
+
+    }
+
+    private async Task getCodeBySms()
+    {
+
+        AuthResult result = _anuAuthorizationService.RegisterUser(_appConfiguration.BackendServerAddress, _appConfiguration.RegisterAddress, _registerUserModel);
+
+        if (result.Result.Code == (int)AnuResult.Successful)
+        {
+            showPassword = true;
+            SimulateProgress();
+
+        }
+        else
+        {
+            showPassword = false;
+            errorMessage = result.Result.Message;
+        }
+    }
+
+
+    private async Task SubmitAsync()
+    {
+        var secondStep= new SecondStepUserLoginRequest();
+        secondStep.UserName = _registerUserModel.UserName;
+        secondStep.Password = smsPassword;
+        AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.RegisterAddress, secondStep);
+
+        if (result.Result.Code == (int)AnuResult.Successful)
+        {
+            SharedInfo.NationalCode = _registerUserModel.UserName;
+            _navigationManager.NavigateTo("/true");
+            errorMessage = "";
+        }
+        else
+        {
+            errorMessage = result.Result.Message;
+             showPassword = true;
+        }
+    }
+
+    private bool _passwordVisibility;
+    private InputType _passwordInput = InputType.Password;
+
+
+
+
+    public PatternMask nationalcodeMask = new PatternMask("##########") { 
+        MaskChars = new[] { new MaskChar('#', @"[0-9]") } ,
+        Placeholder = '_',
+         CleanDelimiters = true
+    };
+
+    public PatternMask phoneMask = new PatternMask("###########") { 
+        MaskChars = new[] { new MaskChar('#', @"[0-9]") },
+        Placeholder = '_',
+        CleanDelimiters = true
+
+    };
+
+  
+    private static System.Timers.Timer aTimer;
+    private int counter = 60;
+    public void StartTimer()
+    {
+        aTimer = new System.Timers.Timer(1000);
+        aTimer.Elapsed += CountDownTimer;
+        aTimer.Enabled = true;
+    }
+    public void CountDownTimer(Object source, ElapsedEventArgs e)
+{
+    if (counter > 0)
+    {
+        counter -= 1;
+    }
+    else
+    {
+        aTimer.Enabled = false;
+    }
+    InvokeAsync(StateHasChanged);
+}
+
+}
+

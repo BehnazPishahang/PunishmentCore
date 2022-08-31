@@ -66,6 +66,8 @@ builder.Services.AddRepositories();
 builder.Services.AddTransient<Anu.DataAccess.IUnitOfWork, Anu.UnitOfWork.DataAccess.UnitOfWork>();
 builder.Services.AddSingleton<IDependencyResolver>(new DependencyResolver(builder.Services));
 
+
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

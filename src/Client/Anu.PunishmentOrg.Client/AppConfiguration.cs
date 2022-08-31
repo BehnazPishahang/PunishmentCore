@@ -8,6 +8,7 @@
         public string InqueryPNoticeList { get; set; }
         public string RegisterAddress { get; set; }
         public string LoginAddress { get; set; }
+        public string SecondStepLogin { get; set; }
 
         public static AppConfiguration Instance { get; set; }
     }

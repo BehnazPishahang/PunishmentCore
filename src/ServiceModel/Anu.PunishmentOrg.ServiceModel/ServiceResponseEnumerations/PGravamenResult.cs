@@ -16,13 +16,14 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
     /// </summary>
     public enum PGravamenResult
     {
-        PGravamen_Field_IsNullOrInvalid = -60001,
-        PGravamen_Request_IsNullOrCorrupt=-60002,
-        PGravamen_NecessaryPositions_AreNotAvailabe=-60003,
-        PGravamen_PlatiffNecessaryField_IsNullOrInvalid=-60004,
-        PGravamen_OffendingNecessaryField_IsNullOrInvalid=-60005,
-        PGravamen_NoAttachmentAvailable=-60006,
-        PGravamen_NoFileIsAttached=-60007,
-        PGravamen_FileIsLargerThanAllowedThreshold=-60008,
+        PGravamen_Field_IsNullOrInvalid = -30221,
+        PGravamen_Request_IsNullOrCorrupt=-30222,
+        PGravamen_NecessaryPositions_AreNotAvailabe=-30223,
+        PGravamen_PlatiffNecessaryField_IsNullOrInvalid=-30224,
+        PGravamen_OffendingNecessaryField_IsNullOrInvalid=-30225,
+        PGravamen_NoAttachmentAvailable=-30226,
+        PGravamen_NoFileIsAttached=-30227,
+        PGravamen_FileIsLargerThanAllowedThreshold=-30228,
+        PGravamen_TheGeoLocation_IsRequired=-30229,
     }
 }

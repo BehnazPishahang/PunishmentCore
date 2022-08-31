@@ -2,48 +2,30 @@
 using Anu.BaseInfo.ServiceModel.MechanizedLetter;
 using Anu.BaseInfo.ServiceModel.OrganizationChart;
 using Anu.BaseInfo.ServiceModel.SystemConfiguration;
-using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
-using Anu.PunishmentOrg.Api.BaseInfo;
-using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
-using Moq;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
-using Xunit;
 
-namespace Anu.PunishmentOrg.Api.Test.BaseInfo
+namespace Anu.PunishmentOrg.ApiSample.BaseInfo.MechanizedLetter
 {
-    public class MechanizedLetterTest
+    public class MechanizedLetterSample
     {
-        private readonly Mock<Anu.DataAccess.IUnitOfWork> _unitOfWork = new();
-
-        private readonly MechanizedLetterServiceController controller;
-
-        public MechanizedLetterTest()
+        #region Constructor
+        public MechanizedLetterSample()
         {
-            controller = new MechanizedLetterServiceController(_unitOfWork.Object);
+
         }
+        #endregion
 
-        [Fact]
-        public void MechanizedLetter_RequestIsNull_ShouldReturnRequestIsNullOrCorrupt()
+        #region Create Json And Call Related WebApi
+        public void Send()
         {
-            //Arrange
-            MechanizedLetterRequest request = null;
-
-            //Act
-            var result = controller.SendMechanizedLetter(request);
-
-            //Assert
-            Assert.Equal((int)MechanizedLetterResult.MechanizedLetter_Request_Is_Null, result.Result.Result.Code);
-        }
-
-        [Fact]
-        public void RecieveMechanizedLetter_SuccessfullyExecuted_ShouldReturnSuccessfulResult()
-        {
-            //Arrange
-            var request = new MechanizedLetterRequest()
+            var OneMechanizedLetterRequest = new MechanizedLetterRequest()
             {
 
                 TheGMechanizedLetterContract = new GMechanizedLetterContract()
@@ -114,12 +96,68 @@ namespace Anu.PunishmentOrg.Api.Test.BaseInfo
 
             };
 
-            //Act
-            var result = controller.SendMechanizedLetter(request);
+            var url = "http://localhost:93/api/v2/SendMechanizedLetter";
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(OneMechanizedLetterRequest, Formatting.Indented);
+            SaveJsonFileByCodeFile(json);
+            var PDiscoveryMinutesStateResult = this.CallApi<MechanizedLetterRequest>(url, OneMechanizedLetterRequest);
 
-            //Assert
-            Assert.Equal((int)AnuResult.Successful, result.Result.Result.Code);
+        }
+        #endregion Create Json And Call Related WebApi
+
+        #region CallApi
+        private async Task<T> CallApi<T>(string apiUrl, object value)
+        {
+            try
+            {
+                using (var client = new System.Net.Http.HttpClient())
+                {
+                    client.BaseAddress = new Uri(apiUrl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    var w = client.PostAsJsonAsync(apiUrl, value);
+                    w.Wait();
+                    HttpResponseMessage response = w.Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine("test");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return default(T);
+        }
+        #endregion CallApi
+
+        private static void SaveJsonFileByCodeFile(string json)
+        {
+            string path = GetCodeFilePath();
+
+            GrantWriteAccess(path);
+
+            File.WriteAllText(path + "/file.json", json);
         }
 
+        private static string GetCodeFilePath()
+        {
+            var currentNamespace = typeof(MechanizedLetterSample).Namespace;
+
+            var namespaceSections = currentNamespace.Split('.');
+
+            var path = string.Format("../../../{0}/{1}/{2}/{3}/{4}", namespaceSections[0], namespaceSections[1], namespaceSections[2], namespaceSections[3], namespaceSections[4]);
+
+            return path;
+        }
+        private static void GrantWriteAccess(string path)
+        {
+            var username = Environment.UserName;
+            var directoryInfo = new DirectoryInfo(path);
+            var directorySecurity = directoryInfo.GetAccessControl();
+            directorySecurity.AddAccessRule(new FileSystemAccessRule(username, FileSystemRights.FullControl, InheritanceFlags.ObjectInherit, PropagationFlags.InheritOnly, AccessControlType.Allow));
+            directoryInfo.Attributes &= ~FileAttributes.ReadOnly;
+            directoryInfo.SetAccessControl(directorySecurity);
+        }
     }
 }

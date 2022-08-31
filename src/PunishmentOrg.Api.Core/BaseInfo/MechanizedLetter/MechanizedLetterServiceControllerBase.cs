@@ -1,6 +1,6 @@
 ﻿using Anu.BaseInfo.ServiceModel.MechanizedLetter;
 
-namespace Anu.PunishmentOrg.Api.BaseInfo
+namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
 {
     public abstract class MechanizedLetterServiceControllerBase : Microsoft.AspNetCore.Mvc.ControllerBase
     {

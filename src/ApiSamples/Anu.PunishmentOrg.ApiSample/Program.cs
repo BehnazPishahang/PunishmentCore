@@ -1,5 +1,6 @@
 ﻿
 
+using Anu.PunishmentOrg.ApiSample.BaseInfo.MechanizedLetter;
 using Anu.PunishmentOrg.ApiSample.PBillStore;
 using Anu.PunishmentOrg.ApiSample.PDiscoveryMinutes;
 using Anu.PunishmentOrg.ApiSample.PInspectionReport;
@@ -18,8 +19,12 @@ class Program
 
         //var _SendPInspectionReportState = new SendPInspectionReportStateSample();
         //_SendPInspectionReportState.Send();
-        var recieveGravamenSample = new RecieveGravamenSample();
-        recieveGravamenSample.Send();
+
+        //var recieveGravamenSample = new RecieveGravamenSample();
+        //recieveGravamenSample.Send();
+
+        var _MechanizedLetterSample = new MechanizedLetterSample();
+        _MechanizedLetterSample.Send();
 
     }
 }
