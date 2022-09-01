@@ -1,17 +1,10 @@
-﻿
-using Anu.BaseInfo.DataAccess.Security;
-using Anu.BaseInfo.DataAccess.SystemConfiguration;
-using Anu.BaseInfo.DataAccess.Unit;
-using Anu.BaseInfo.DataModel.Attachment;
-using Anu.BaseInfo.DataModel.GeoInfo;
+﻿using Anu.BaseInfo.DataModel.Attachment;
 using Anu.BaseInfo.DataModel.Security.Role;
 using Anu.BaseInfo.DataModel.SystemConfiguration;
 using Anu.BaseInfo.DataModel.SystemObject;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
-using Anu.Commons.Validations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.DataAccess.Repositories;
-using Anu.Domain;
 using Anu.PunishmentOrg.DataAccess.PGravamen;
 using Anu.PunishmentOrg.DataModel.Gravamen;
 using Anu.PunishmentOrg.Enumerations;

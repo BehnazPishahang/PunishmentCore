@@ -8,11 +8,12 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
     {
         public Result Result { get; set; }
 
-        public PGravamenResponseContract ThePGravamenResponseContract {get;set;}
+        public PGravamenResponseContract ThePGravamenResponseContract { get; set; }
 
         public PGravamenServiceResponse()
         {
             Result = new Result();
+            ThePGravamenResponseContract = new();
         }
 
     }
