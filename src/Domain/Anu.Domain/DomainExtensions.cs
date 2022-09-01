@@ -4,47 +4,36 @@ namespace Anu.Domain
 {
     public static class DomainExtensions
     {
-        public static void AddRepositories(this IServiceCollection serviceCollection)
+        public static void AddRepositories(this IServiceCollection serviceCollection, params System.Reflection.Assembly[] assemblies)
         {
-            Dictionary<string, bool> assemblies = new Dictionary<string, bool>();
-            foreach (System.Reflection.Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (System.Reflection.Assembly assembly in assemblies)
             {
-                AddAssemblyRepositories(assembly, assemblies, serviceCollection);
+                AddAssemblyRepositories(assembly, serviceCollection);
             }
         }
 
-        private static void AddAssemblyRepositories(System.Reflection.Assembly assembly, Dictionary<string, bool> assemblies, IServiceCollection serviceCollection)
+        private static void AddAssemblyRepositories(System.Reflection.Assembly assembly, IServiceCollection serviceCollection)
         {
-            if (!assemblies.ContainsKey(assembly.FullName) && assembly.FullName.StartsWith("Anu."))
-            {
-                assemblies[assembly.FullName] = true;
-                foreach (Type repositoryClass in assembly.GetTypes().Where(a => a.Name.Contains("Repository")))
-                {
-                    if (repositoryClass.IsGenericType)
-                    {
-                        continue;
-                    }
 
-                    if (repositoryClass.IsAssignableTo(typeof(IGenericRepository)))
-                    {
-                        if (repositoryClass.IsClass)
-                        {
-                            var repositoryInterface = repositoryClass.GetInterfaces().Last();
-                            serviceCollection.AddTransient(repositoryInterface, repositoryClass);
-                        }
-                    }
+            foreach (Type repositoryClass in assembly.GetTypes().Where(a => a.Name.Contains("Repository")))
+            {
+                if (repositoryClass.IsGenericType)
+                {
+                    continue;
                 }
 
-                var referencedAssemblies = assembly.GetReferencedAssemblies();
-                foreach (var referencedAssembly in referencedAssemblies)
+                if (repositoryClass.IsAssignableTo(typeof(IGenericRepository)))
                 {
-                    if (!assemblies.ContainsKey(referencedAssembly.FullName) &&  assembly.FullName.StartsWith("Anu."))
+                    if (repositoryClass.IsClass)
                     {
-                        var asm = System.Reflection.Assembly.Load(referencedAssembly);
-                        AddAssemblyRepositories(asm, assemblies, serviceCollection);
+                        var repositoryInterface = repositoryClass.GetInterfaces().Last();
+                        serviceCollection.AddTransient(repositoryInterface, repositoryClass);
                     }
                 }
             }
+
+
+
         }
     }
 }
