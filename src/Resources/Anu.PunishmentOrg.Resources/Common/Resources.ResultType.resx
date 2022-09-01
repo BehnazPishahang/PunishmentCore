@@ -197,10 +197,6 @@
     <value>کد واحد گیرنده نامه معتبر نمی باشد.</value>
     <comment>301310</comment>
   </data>
-  <data name="NationalCodeIs_Required" xml:space="preserve">
-    <value>کد ملی را وارد کنید.</value>
-    <comment>-50001</comment>
-  </data>
   <data name="NationalCode_Is_Not_Valid" xml:space="preserve">
     <value>لطفا کد ملی را صحیح وارد نمایید.</value>
     <comment>-10006</comment>
@@ -212,10 +208,6 @@
   <data name="NationalCode_Must_Be_Number" xml:space="preserve">
     <value>کد ملی تشکیل شده از ده رقم عددی می‌باشد؛ لطفا کد ملی را صحیح وارد نمایید.</value>
     <comment>-10008</comment>
-  </data>
-  <data name="No_Is_Required" xml:space="preserve">
-    <value>شماره ابلاغ را وارد کنید.</value>
-    <comment>-50003</comment>
   </data>
   <data name="PBillStore_BillNumber_IsTooLong" xml:space="preserve">
     <value>شماره قبض بیش از اندازه مجاز می باشد</value>
@@ -380,9 +372,41 @@
     <value>رای صادر شده است.</value>
     <comment>200013</comment>
   </data>
-  <data name="PNotice_NotFound" xml:space="preserve">
+  <data name="PNotice_ExportPNotice_Description_NotFound" xml:space="preserve">
+    <value>متن ابلاغیه یافت نشد.</value>
+    <comment>-30215</comment>
+  </data>
+  <data name="PNotice_ExportPNotice_NotFound" xml:space="preserve">
     <value>ابلاغیه ای یافت نشد.</value>
-    <comment>-50002</comment>
+    <comment>-30214</comment>
+  </data>
+  <data name="PNotice_ExportPNotice_No_Is_Required" xml:space="preserve">
+    <value>شماره ابلاغ را وارد کنید.</value>
+    <comment>-30213</comment>
+  </data>
+  <data name="PNotice_ExportPNotice_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد.</value>
+    <comment>-30211</comment>
+  </data>
+  <data name="PNotice_ExportPNotice_ThePNoticeNoInputContract_Is_Required" xml:space="preserve">
+    <value>اطلاعات وارد شده نمی تواند خالی باشد.</value>
+    <comment>-30212</comment>
+  </data>
+  <data name="PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required" xml:space="preserve">
+    <value>کدملی/شناسه ملی درخواست نمی تواند خالی باشد.</value>
+    <comment>-30203</comment>
+  </data>
+  <data name="PNotice_GetPNoticeByNationalityCode_NotFound" xml:space="preserve">
+    <value>ابلاغیه ای یافت نشد.</value>
+    <comment>-30204</comment>
+  </data>
+  <data name="PNotice_GetPNoticeByNationalityCode_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد.</value>
+    <comment>-30201</comment>
+  </data>
+  <data name="PNotice_GetPNoticeByNationalityCode_ThePNoticePersonContract_Is_Required" xml:space="preserve">
+    <value>اطلاعات وارد شده نمی تواند خالی باشد.</value>
+    <comment>-30202</comment>
   </data>
   <data name="PropertyOrderNotFound" xml:space="preserve">
     <value>مرتب سازی ویژگی یافت نشد.</value>

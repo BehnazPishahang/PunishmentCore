@@ -268,24 +268,6 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to کد ملی را وارد کنید..
-        /// </summary>
-        public static string NationalCodeIs_Required {
-            get {
-                return ResourceManager.GetString("NationalCodeIs_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to شماره ابلاغ را وارد کنید..
-        /// </summary>
-        public static string No_Is_Required {
-            get {
-                return ResourceManager.GetString("No_Is_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to شماره قبض بیش از اندازه مجاز می باشد.
         /// </summary>
         public static string PBillStore_BillNumber_IsTooLong {
@@ -655,11 +637,83 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to متن ابلاغیه یافت نشد..
+        /// </summary>
+        public static string PNotice_ExportPNotice_Description_NotFound {
+            get {
+                return ResourceManager.GetString("PNotice_ExportPNotice_Description_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره ابلاغ را وارد کنید..
+        /// </summary>
+        public static string PNotice_ExportPNotice_No_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ExportPNotice_No_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ابلاغیه ای یافت نشد..
         /// </summary>
-        public static string PNotice_NotFound {
+        public static string PNotice_ExportPNotice_NotFound {
             get {
-                return ResourceManager.GetString("PNotice_NotFound", resourceCulture);
+                return ResourceManager.GetString("PNotice_ExportPNotice_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_ExportPNotice_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ExportPNotice_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اطلاعات وارد شده نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_ExportPNotice_ThePNoticeNoInputContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ExportPNotice_ThePNoticeNoInputContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدملی/شناسه ملی درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ابلاغیه ای یافت نشد..
+        /// </summary>
+        public static string PNotice_GetPNoticeByNationalityCode_NotFound {
+            get {
+                return ResourceManager.GetString("PNotice_GetPNoticeByNationalityCode_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_GetPNoticeByNationalityCode_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_GetPNoticeByNationalityCode_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اطلاعات وارد شده نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_GetPNoticeByNationalityCode_ThePNoticePersonContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_GetPNoticeByNationalityCode_ThePNoticePersonContract_Is_Required", resourceCulture);
             }
         }
         

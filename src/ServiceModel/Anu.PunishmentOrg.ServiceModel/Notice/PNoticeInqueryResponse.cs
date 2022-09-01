@@ -6,15 +6,16 @@ namespace Anu.PunishmentOrg.ServiceModel.Notice
     [System.ComponentModel.DisplayName("PNoticeInqueryResponse")]
     public class PNoticeInqueryResponse : IResponseMessage
     {
-        public Result Result { get; set; }
-
-        public Page<List<PNoticeContract>> PNotice { get; set; }
-
         public PNoticeInqueryResponse()
         {
             Result = new Result();
-            PNotice = new Page<List<PNoticeContract>>();
+            ThePNoticeContractList = new Page<List<Anu.PunishmentOrg.ServiceModel.Notice.PNoticeContract>>();
         }
 
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DisplayName("ابلاغنامه در سرویس")]
+        public Page<List<Anu.PunishmentOrg.ServiceModel.Notice.PNoticeContract>>? ThePNoticeContractList { get; set; }
+
+        public Result Result { get; set; }
     }
 }

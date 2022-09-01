@@ -32,10 +32,10 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Act
 
             var result = controller.InqueryPNoticeList(
-                new ServiceModel.Notice.PNoticeInqueryRequest() { PNoticePersonContract = new PNoticePersonContract() { NationalityCode = "23232322" } });
+                new ServiceModel.Notice.PNoticeInqueryRequest() { ThePNoticePersonContract = new PNoticePersonContract() { NationalityCode = "23232322" } });
 
             //Assert
-            Assert.Equal((int)PNoticeResult.PNotice_NotFound, result.Result.Result.Code);
+            Assert.Equal((int)ExportPNoticeResult.PNotice_ExportPNotice_NotFound, result.Result.Result.Code);
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Arrange
             var expectedResponse = new PNoticeInqueryResponse()
             {
-                PNotice = new Page<List<PNoticeContract>> { Data = new List<PNoticeContract>() { CreateRandomPNoticeContract("1"), CreateRandomPNoticeContract("2") } },
+                ThePNoticeContractList = new Page<List<PNoticeContract>> { Data = new List<PNoticeContract>() { CreateRandomPNoticeContract("1"), CreateRandomPNoticeContract("2") } },
                 Result = AnuResult.Successful.GetResult()
             };
 
@@ -58,7 +58,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             var result = controller.InqueryPNoticeList(
                new ServiceModel.Notice.PNoticeInqueryRequest()
                {
-                   PNoticePersonContract = new PNoticePersonContract() { NationalityCode = "23232322" },
+                   ThePNoticePersonContract = new PNoticePersonContract() { NationalityCode = "23232322" },
                    Page =
                 new Page() { PageNumber = 0, RowCountPerPage = 0, TotallPage = 0, TotalResult = 0, OrderPage = new OrderPage() { Property = "", Ascending = false } }
                });

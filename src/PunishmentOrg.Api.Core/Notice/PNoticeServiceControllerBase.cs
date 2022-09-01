@@ -10,12 +10,11 @@ namespace Anu.PunishmentOrg.Api.Notice
         {
         }
         [Microsoft.AspNetCore.Mvc.HttpPost]
-        [Microsoft.AspNetCore.Mvc.Route("api/v1/[controller]/[action]")]
+        [Microsoft.AspNetCore.Mvc.Route("api/v1/Notice/InqueryPNoticeList")]
         public abstract Task<PNoticeInqueryResponse> InqueryPNoticeList([Microsoft.AspNetCore.Mvc.FromBody] PNoticeInqueryRequest request);
-
         [Microsoft.AspNetCore.Mvc.HttpPost]
-        [Microsoft.AspNetCore.Mvc.Route("api/v1/[controller]/[action]")]
-        public abstract Task<PNoticeExportResponse> ExportPNotice([Microsoft.AspNetCore.Mvc.FromBody] PNoticeExportRequest request);
+        [Microsoft.AspNetCore.Mvc.Route("api/v1/Notice/ExportPNotice")]
+        public abstract Task<ExportPNoticeResponse> ExportPNotice([Microsoft.AspNetCore.Mvc.FromBody] ExportPNoticeRequest request);
 
     }
 }

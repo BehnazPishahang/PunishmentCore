@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Anu.PunishmentOrg.ServiceModel.Notice
 {
-    public class PNoticeExportRequest : IRequestMessage
+    public class ExportPNoticeRequest : IRequestMessage
     {
         public Request Request { get; set; }
-        public PNoticeNoInput PNoticeNoContract { get; set; }
+        public PNoticeNoInput ThePNoticeNoContract { get; set; }
 
-        public PNoticeExportRequest()
+        public ExportPNoticeRequest()
         {
             Request = new Request();
-            PNoticeNoContract = new PNoticeNoInput();
+            ThePNoticeNoContract = new PNoticeNoInput();
         }
 
     }
