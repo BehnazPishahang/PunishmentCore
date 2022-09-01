@@ -62,11 +62,12 @@ builder.Services.AddDbContext<Anu.DataAccess.ApplicationDbContext>(
                     );
                 });
 builder.Services.AddTransient(typeof(Anu.Domain.IGenericRepository<>), typeof(Anu.DataAccess.Repositories.GenericRepository<>));
+
+builder.Services.AddTransient<Anu.DataAccess.IUnitOfWork, Anu.UnitOfWork.DataAccess.UnitOfWork>();
+builder.Services.AddScoped<IDependencyResolver, DependencyResolver>();//(new DependencyResolver(builder.Services));
 builder.Services.AddRepositories(
     typeof(Anu.BaseInfo.DataAccess.Unit.UnitRepository).Assembly,
     typeof(Anu.PunishmentOrg.DataAccess.DiscoveryMinutes.PChaseLicenseReqRepository).Assembly);
-builder.Services.AddTransient<Anu.DataAccess.IUnitOfWork, Anu.UnitOfWork.DataAccess.UnitOfWork>();
-builder.Services.AddSingleton<IDependencyResolver>(new DependencyResolver(builder.Services));
 
 
 
