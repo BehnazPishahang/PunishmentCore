@@ -388,6 +388,34 @@
     <value>مرتب سازی ویژگی یافت نشد.</value>
     <comment>-10004</comment>
   </data>
+  <data name="SabteAhval_Data_Not_Match_Entered_Data" xml:space="preserve">
+    <value>اطلاعات وارد شده معتبر نمی باشد.</value>
+    <comment>-100021</comment>
+  </data>
+  <data name="SabteAhval_Not_Validate_NationalCode" xml:space="preserve">
+    <value>کدملی معتبر نمی باشد.</value>
+    <comment>-100020</comment>
+  </data>
+  <data name="SabteAhval_Unkhown_Error" xml:space="preserve">
+    <value>خطا ثبت احوال</value>
+    <comment>-100019</comment>
+  </data>
+  <data name="Shahkar_Could_Not_Inquiry" xml:space="preserve">
+    <value>امکان استعلام تطابق شماره تلفن و کد ملی وجود به شماره ملی {0} ندارد.</value>
+    <comment>-100016</comment>
+  </data>
+  <data name="Shahkar_NationalCode_PhoneNumber_Is_Not_Match" xml:space="preserve">
+    <value>عدم تطابق شماره تلفن همراه با کد ملی  به شماره ملی {0}</value>
+    <comment>-100015</comment>
+  </data>
+  <data name="Shahkar_NationalCode_PhoneNumber_Is_Not_Valid" xml:space="preserve">
+    <value>مقدار شماره تلفن همراه با کد ملی به شماره ملی {0}  نامعتبر است.</value>
+    <comment>-100017</comment>
+  </data>
+  <data name="Shahkar_Unkhown_Error" xml:space="preserve">
+    <value>خطا شاهکار</value>
+    <comment>-100018</comment>
+  </data>
   <data name="Sms_Time_Is_Expired" xml:space="preserve">
     <value>زمان انتظار ارسال کد به پایان رسیده است. لطفا مجدد اقدام به دریافت کد کنید .</value>
     <comment>-100014</comment>

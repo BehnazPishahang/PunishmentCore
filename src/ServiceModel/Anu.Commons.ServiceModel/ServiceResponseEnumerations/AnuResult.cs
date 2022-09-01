@@ -30,6 +30,13 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         Error_Send_Sms = -100012,
         HttpError_Send_Sms = -100012,
         LoginSuccessful_Sms_Send_To = 100013,
-        Sms_Time_Is_Expired = -100014
+        Sms_Time_Is_Expired = -100014,
+        Shahkar_NationalCode_PhoneNumber_Is_Not_Match=-100015,
+        Shahkar_Could_Not_Inquiry=-100016,
+        Shahkar_NationalCode_PhoneNumber_Is_Not_Valid=-100017,
+        Shahkar_Unkhown_Error=-100018,
+        SabteAhval_Unkhown_Error=-100019,
+        SabteAhval_Not_Validate_NationalCode = -100020,
+        SabteAhval_Data_Not_Match_Entered_Data = -100021
     }
 }

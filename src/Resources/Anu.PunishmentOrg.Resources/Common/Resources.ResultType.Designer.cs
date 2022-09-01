@@ -673,6 +673,69 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اطلاعات وارد شده معتبر نمی باشد..
+        /// </summary>
+        public static string SabteAhval_Data_Not_Match_Entered_Data {
+            get {
+                return ResourceManager.GetString("SabteAhval_Data_Not_Match_Entered_Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدملی معتبر نمی باشد..
+        /// </summary>
+        public static string SabteAhval_Not_Validate_NationalCode {
+            get {
+                return ResourceManager.GetString("SabteAhval_Not_Validate_NationalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to خطا ثبت احوال.
+        /// </summary>
+        public static string SabteAhval_Unkhown_Error {
+            get {
+                return ResourceManager.GetString("SabteAhval_Unkhown_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to امکان استعلام تطابق شماره تلفن و کد ملی وجود به شماره ملی {0} ندارد..
+        /// </summary>
+        public static string Shahkar_Could_Not_Inquiry {
+            get {
+                return ResourceManager.GetString("Shahkar_Could_Not_Inquiry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عدم تطابق شماره تلفن همراه با کد ملی  به شماره ملی {0}.
+        /// </summary>
+        public static string Shahkar_NationalCode_PhoneNumber_Is_Not_Match {
+            get {
+                return ResourceManager.GetString("Shahkar_NationalCode_PhoneNumber_Is_Not_Match", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مقدار شماره تلفن همراه با کد ملی به شماره ملی {0}  نامعتبر است..
+        /// </summary>
+        public static string Shahkar_NationalCode_PhoneNumber_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("Shahkar_NationalCode_PhoneNumber_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to خطا شاهکار.
+        /// </summary>
+        public static string Shahkar_Unkhown_Error {
+            get {
+                return ResourceManager.GetString("Shahkar_Unkhown_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to زمان انتظار ارسال کد به پایان رسیده است. لطفا مجدد اقدام به دریافت کد کنید ..
         /// </summary>
         public static string Sms_Time_Is_Expired {

@@ -2,8 +2,9 @@
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text;
-using System.Text.RegularExpressions;
+using System.Xml.Serialization;
 using Utility.Exceptions;
+using Utility.Guard;
 
 namespace Anu.Utility
 {
@@ -63,7 +64,24 @@ namespace Anu.Utility
             return JsonConvert.DeserializeObject<T>(content);
         }
 
-        public static async Task<string> CallApi(this string apiUrl, object value,Enum errorIsFailedStatus, Dictionary<string, string> authorization = null, Dictionary<string, string> headers = null)
+        public static string UTF8(this byte[] input)
+        {
+            return System.Text.Encoding.UTF8.GetString(input);
+        }
+
+        public static T XmlDeserialize<T>(this string content)
+        {
+            var serializer = new XmlSerializer(typeof(T));
+            T result;
+
+            using (TextReader reader = new StringReader(content))
+            {
+                result = (T)serializer.Deserialize(reader);
+            }
+            return result;
+        }
+
+        public static async Task<string> CallApi(this string apiUrl, object value,Enum errorIsFailedStatus, Dictionary<string, string> authorization = null, Dictionary<string, string> headers = null,bool IsJson=true)
         {
             try
             {
@@ -85,14 +103,20 @@ namespace Anu.Utility
                         client.DefaultRequestHeaders.Authorization = new BasicAuthenticationHeaderValue(authorization["Username"], authorization["Password"]);
                     }
 
-                    var w = client.PostAsJsonAsync(apiUrl, value);
-                    w.Wait();
-                    HttpResponseMessage response = w.Result;
+                    HttpResponseMessage response;
+                    if (IsJson)
+                        response = await client.PostAsJsonAsync(apiUrl, value);
+                    else
+                    {
+                        var httpContent = new StringContent(value.ToString(), Encoding.UTF8, "application/xml");
+                        response = await client.PostAsync(apiUrl, httpContent);
+                    }
+
                     if (!response.IsSuccessStatusCode)
                     {
                         throw new AnuExceptions(errorIsFailedStatus);
                     }
-                    return await response.Content.ReadAsStringAsync();
+                    return (await response.Content.ReadAsStringAsync()).Replace("'", "\"");
 
                 }
             }
@@ -108,6 +132,33 @@ namespace Anu.Utility
             return Convert.ToBase64String(data, 0, data.Length);
         }
 
+        public static byte[] ConvertToByte(this string data)
+        {
+            return Convert.FromBase64String(data);
+        }
+
+        public static string NormalizeTextChars(this string strText, bool persian2Arabic = true)
+        {
+            if (string.IsNullOrEmpty(strText)) return strText;
+            char arabicKaf = (char)1603;
+            char arabicYa = (char)1610;
+
+            char persianKaf = (char)1705;
+            char persianYa = (char)1740;
+
+            if (persian2Arabic)
+            {
+                string result = strText.Replace(persianKaf, arabicKaf);
+                result = result.Replace(persianYa, arabicYa);
+                return result;
+            }
+            else
+            {
+                string result = strText.Replace(arabicKaf, persianKaf);
+                result = result.Replace(arabicYa, persianYa);
+                return result;
+            }
+        }
 
     }
 
