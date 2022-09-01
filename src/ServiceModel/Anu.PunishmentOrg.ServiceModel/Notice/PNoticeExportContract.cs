@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Anu.PunishmentOrg.ServiceModel.Notice
 {
+    [System.ComponentModel.DisplayName("گزارش ابلاغ در سرویس")]
     public class PNoticeExportContract
     {
-        [System.ComponentModel.DisplayName("گزارش ابلاغ")]
+        public PNoticeExportContract()
+        {
+        }
+            
+            [System.ComponentModel.DisplayName("فایل")]
         public string? Pdf { get; set; }
+
+            
+
     }
-}
+    }

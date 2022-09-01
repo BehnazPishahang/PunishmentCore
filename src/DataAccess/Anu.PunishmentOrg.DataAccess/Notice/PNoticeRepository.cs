@@ -20,21 +20,33 @@ namespace Anu.PunishmentOrg.DataAccess.Notice
             page.PageChecker("NoticeDate");
 
             var query = _context.Set<PNoticePerson>()
-                .Include(a => a.ThePNotice)
-                .Include(a => a.ThePCasePerson)
-                .Where(a => a.ThePCasePerson.NationalCode == NationalCode)
-                .Select(a => a.ThePNotice);
+                                .Include(a => a.ThePNotice)
+                                .Include(a => a.ThePCasePerson)
+                                .Where(a => a.ThePCasePerson.NationalCode == NationalCode)
+                                .Select(a => a.ThePNotice);
 
             var AllCount = await query
                 .CountAsync();
 
             var notice = await query
                 .AnuPagination(page)
-                .ToListAsync();
+                                    .ToListAsync();
 
             page.CalculateAllPage(AllCount);
 
             return notice;
+        }
+
+        public async Task<DataModel.Notice.PNotice> GetPNoticeByNo(string no)
+        {
+            return await _context.Set<PNotice>()
+                                 .Where(a => a.No == no)
+                                 .Include(a => a.TheUnit)
+                                 .Include(a => a.TheGNoticeType)
+                                 .Include(a => a.ThePNoticePersonList)
+                                 .ThenInclude(a => a.ThePCasePerson)
+                                 .ThenInclude(a => a.ThePCase)
+                                 .FirstOrDefaultAsync();
         }
     }
 }
