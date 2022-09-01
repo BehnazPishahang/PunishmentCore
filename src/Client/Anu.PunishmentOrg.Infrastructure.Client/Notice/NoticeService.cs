@@ -34,6 +34,8 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
             var response =  client.PostAsJsonAsync(serviceName, inputData).Result;
 
             PNoticeInqueryResponse result = response.Content.ReadAsAsync<PNoticeInqueryResponse>().Result;
+            if(result == null)  
+                return null;
 
             if (result.Result == AnuResult.Successful.GetResult())
             {

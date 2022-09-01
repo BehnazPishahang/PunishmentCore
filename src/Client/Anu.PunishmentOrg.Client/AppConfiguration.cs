@@ -6,6 +6,7 @@
         
         public string BackendServerAddress { get; set; }
         public string InqueryPNoticeList { get; set; }
+        public string ExportPNotice { get; set; }
         public string RegisterAddress { get; set; }
         public string LoginAddress { get; set; }
         public string SecondStepLogin { get; set; }

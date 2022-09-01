@@ -4,6 +4,8 @@
 
 @inject IAnuAuthorizationService  _anuAuthorizationService;
 @inject AppConfiguration _appConfiguration;
+@inject ISnackbar Snackbar
+
 
 <EditForm Model="@_tokenModel" >
       <MudDialog>
@@ -34,8 +36,8 @@
                                           @bind-Value="_tokenModel.UserName" For="@(() => _tokenModel.UserName)" Validation="Validated.ToString()"/>
                         </MudItem>
                         <MudItem xs="8">
-                            <MudTextField T="string" Label="رمز پویا" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                         @bind-Value="_secondRequest.Password" For="@(() => _secondRequest.Password)"></MudTextField>
+                            <MudTextField T="string" Label=" کد ورود" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                         @bind-Value="_secondRequest.Password" ></MudTextField>
                         </MudItem>
 
                         <MudItem xs="4">
@@ -76,6 +78,7 @@
 
 
 @code {
+
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
     string errorMessage = "";
     private FirstStepUserLoginRequest _tokenModel = new();
@@ -110,16 +113,16 @@
 
     void GetAccessCode()
     {
-        var ss=  _appConfiguration.BackendServerAddress;
+        var ss = _appConfiguration.BackendServerAddress;
 
-        AuthResult  result= _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress , _appConfiguration.LoginAddress ,_tokenModel);
+        AuthResult result = _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _tokenModel);
         if (result.Result.Code == 100013)
         {
             hasSmsSend = true;
             SimulateProgress();
             SharedInfo.NationalCode = _tokenModel.UserName;
-             errorMessage = result.Result.Message;
-          
+            errorMessage = result.Result.Message;
+
         }
         else
         {
@@ -129,22 +132,31 @@
     }
     void Submit()
     {
-        var ss=  _appConfiguration.BackendServerAddress;
-        _secondRequest.UserName = _tokenModel.UserName;
-       
-        AuthResult  result= _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress , _appConfiguration.SecondStepLogin ,_secondRequest);
-        if (result.Result.Code == 1000)
-        {
-            _navigationManager.NavigateTo("/true");
-            errorMessage = "";
-        }
-        else
-        {
-            errorMessage = result.Result.Message;
-            Validated = false;
-        }
-    }
 
+        if (string.IsNullOrEmpty(_secondRequest.Password) || _secondRequest.Password.Length != 6)
+        {
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            Snackbar.Add("کد ارسال شده را وارد نمایید ",  Severity.Warning);
+            return;
+        }
+
+            var ss = _appConfiguration.BackendServerAddress;
+            
+            _secondRequest.UserName = _tokenModel.UserName;
+            _secondRequest.LoginType = Commons.ServiceModel.ServiceAuthentication.Enumerations.LoginType.LoginWithSms;
+            AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.SecondStepLogin, _secondRequest);
+            if (result.Result.Code == 1000)
+            {
+                _navigationManager.NavigateTo("/true");
+                errorMessage = "";
+                SharedInfo.NationalCode = _tokenModel.UserName;
+            }
+            else
+            {
+                errorMessage = result.Result.Message;
+                Validated = false;
+            }
+        }
 
    
 }
