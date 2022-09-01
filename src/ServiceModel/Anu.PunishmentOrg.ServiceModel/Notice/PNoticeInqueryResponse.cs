@@ -1,4 +1,5 @@
-﻿using Anu.Commons.ServiceModel.ServicePaging;
+﻿
+using Anu.Commons.ServiceModel.ServicePaging;
 using Anu.Commons.ServiceModel.ServiceResponse;
 
 namespace Anu.PunishmentOrg.ServiceModel.Notice
@@ -6,16 +7,15 @@ namespace Anu.PunishmentOrg.ServiceModel.Notice
     [System.ComponentModel.DisplayName("PNoticeInqueryResponse")]
     public class PNoticeInqueryResponse : IResponseMessage
     {
+        public Result Result { get; set; }
+
+        public Page<List<PNoticeContract>> PNotice { get; set; }
+
         public PNoticeInqueryResponse()
         {
             Result = new Result();
-            ThePNoticeContractList = new Page<List<Anu.PunishmentOrg.ServiceModel.Notice.PNoticeContract>>();
+            PNotice = new Page<List<PNoticeContract>>();
         }
 
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName("ابلاغنامه در سرویس")]
-        public Page<List<Anu.PunishmentOrg.ServiceModel.Notice.PNoticeContract>>? ThePNoticeContractList { get; set; }
-
-        public Result Result { get; set; }
     }
 }
