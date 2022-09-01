@@ -24,7 +24,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
     {
         private readonly IConfiguration _configuration;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly int _SecodeWait = 60;
+        private readonly int _SecodeWait = 120;
         private readonly int _CountCharacter = 6;
 
 
@@ -54,7 +54,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             string passWordHash = MD5Core.GetHashString(password);
 
             theGFESUser.Password = passWordHash;
-            theGFESUser.EndDate = DateTime.Now.AddSeconds(_SecodeWait).ToString();
+            theGFESUser.LastChangePassword = DateTime.Now.AddSeconds(_SecodeWait).ToString("MM/dd HH:mm:ss");
 
             if (_unitOfWork.Complete() < 0)
             {
@@ -98,10 +98,10 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 MobileNumber4SMS = request.PhoneNumber,
                 NationalityCode = request.UserName,
                 StartDate = CalendarHelper.GetCurrentDateTime(),
-                EndDate = DateTime.Now.AddSeconds(_SecodeWait).ToString(),
+                EndDate = CalendarHelper.MaxDateTime(),
                 Family = request.LastName,
                 FatherName = "b",
-                LastChangePassword = CalendarHelper.GetCurrentDateTime(),
+                LastChangePassword = DateTime.Now.AddSeconds(_SecodeWait).ToString("MM/dd HH:mm:ss"),
                 Name = request.FirstName,
                 Sex = request.Sex
             };
@@ -146,7 +146,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             switch (request.LoginType)
             {
                 case LoginType.LoginWithSms:
-                    if (theGFESUser.EndDate.ToDateTime()>DateTime.Now)
+                    if (("2022/"+theGFESUser.LastChangePassword).ToDateTime()<DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss").ToDateTime())
                     {
                         throw new AnuExceptions(AnuResult.Sms_Time_Is_Expired);
                     }
