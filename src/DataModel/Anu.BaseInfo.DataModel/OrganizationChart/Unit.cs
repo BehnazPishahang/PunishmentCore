@@ -42,6 +42,9 @@ namespace Anu.BaseInfo.DataModel.OrganizationChart
         [InverseProperty("TheUnit")]
         public virtual List<Anu.BaseInfo.DataModel.ExchangeData.GUnitRelatedNajaUnit>? TheGUnitRelatedNajaUnitList { get; set; }
 
+        [InverseProperty("TheUnit")]
+        public virtual List<Anu.BaseInfo.DataModel.SystemConfiguration.CMSOrganization>? TheCMSOrganizationList { get; set; }
+
         [ForeignKey("GUNITTYPEID")]
         public virtual Anu.BaseInfo.DataModel.OrganizationChart.GUnitType? TheGUnitType { get; set; }
 
