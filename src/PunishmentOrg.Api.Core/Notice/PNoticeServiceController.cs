@@ -1,10 +1,9 @@
 ﻿
 using Anu.Commons.ServiceModel.ServicePaging;
-using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
-using Anu.DataAccess.Repositories;
-using Anu.PunishmentOrg.DataAccess.Notice;
+using Anu.Domain;
 using Anu.PunishmentOrg.DataModel.Notice;
+using Anu.PunishmentOrg.Domain.Notice;
 using Anu.PunishmentOrg.Report;
 using Anu.PunishmentOrg.ServiceModel.Notice;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
@@ -40,7 +39,7 @@ namespace Anu.PunishmentOrg.Api.Notice
 
             request.PNoticePersonContract.NationalityCode.Null(PNoticeResult.NationalCodeIs_Required);
 
-            var pNotice = await _unitOfWork.Repositorey<PNoticeRepository>().GetAllPNoticeByNationalCode(request.PNoticePersonContract.NationalityCode.ToString(), request.Page);
+            var pNotice = await _unitOfWork.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(request.PNoticePersonContract.NationalityCode.ToString(), request.Page);
 
             pNotice.Null(PNoticeResult.PNotice_NotFound);
 
@@ -70,7 +69,7 @@ namespace Anu.PunishmentOrg.Api.Notice
             request.Null(PNoticeResult.No_Is_Required);
             request.PNoticeNoContract.No.NullOrWhiteSpace(PNoticeResult.No_Is_Required);
 
-            var pNotice = (await _unitOfWork.Repositorey<GenericRepository<PNotice>>().Find(x=>x.No == request.PNoticeNoContract.No)).FirstOrDefault();
+            var pNotice = (await _unitOfWork.Repositorey<IGenericRepository<PNotice>>().Find(x=>x.No == request.PNoticeNoContract.No)).FirstOrDefault();
 
             pNotice.Null(PNoticeResult.PNotice_NotFound);
 

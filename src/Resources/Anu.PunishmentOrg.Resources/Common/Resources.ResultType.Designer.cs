@@ -673,6 +673,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to زمان انتظار ارسال کد به پایان رسیده است. لطفا مجدد اقدام به دریافت کد کنید ..
+        /// </summary>
+        public static string Sms_Time_Is_Expired {
+            get {
+                return ResourceManager.GetString("Sms_Time_Is_Expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to عملیات با موفقیت انجام شد ..
         /// </summary>
         public static string Successful {

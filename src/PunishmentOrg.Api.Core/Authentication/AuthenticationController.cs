@@ -1,10 +1,11 @@
 ﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
 using Anu.BaseInfo.DataModel.FrontEndSecurity;
+using Anu.BaseInfo.Domain.FrontEndSecurity;
 using Anu.Commons.ServiceModel.ServiceAuthentication;
 using Anu.Commons.ServiceModel.ServiceAuthentication.Enumerations;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.DataAccess;
-using Anu.DataAccess.Repositories;
+using Anu.Domain;
 using Anu.PunishmentOrg.Api.Authentication.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ using System.Security.Claims;
 using System.Text;
 using Utility;
 using Utility.CalendarHelper;
+using Utility.Exceptions;
 using Utility.Guard;
 
 namespace Anu.PunishmentOrg.Api.Authentication
@@ -22,6 +24,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
     {
         private readonly IConfiguration _configuration;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly int _SecodeWait = 60;
+        private readonly int _CountCharacter = 6;
+
 
         public AuthenticationController(IConfiguration configuration, IUnitOfWork unitOfWork)
         {
@@ -40,22 +45,23 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             request.UserName.IsValidNationalCode();
 
-            var theGFESUser = (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>()
+            var theGFESUser = (await _unitOfWork.Repositorey<IGenericRepository<GFESUser>>()
                 .Find(x => x.NationalityCode == request.UserName)).FirstOrDefault();
 
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            string password = await theGFESUser.MobileNumber4SMS.SendAuthenticateSms(6);
+            string password = await theGFESUser.MobileNumber4SMS.SendAuthenticateSms(_CountCharacter);
             string passWordHash = MD5Core.GetHashString(password);
 
             theGFESUser.Password = passWordHash;
+            theGFESUser.EndDate = DateTime.Now.AddSeconds(_SecodeWait).ToString();
 
             if (_unitOfWork.Complete() < 0)
             {
                 return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
             }
 
-            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args:"09*****"+theGFESUser.MobileNumber4SMS.Substring(theGFESUser.MobileNumber4SMS.Length-4)) };
+            return new FirstStepAuthResult() { CountCharacter = _CountCharacter, SecondsWait = _SecodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args:  theGFESUser.MobileNumber4SMS.Substring(theGFESUser.MobileNumber4SMS.Length - 4) + "*****09") };
 
         }
 
@@ -72,7 +78,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             request.UserName.IsValidNationalCode();
             request.PhoneNumber.IsValidPhone();
 
-            if (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Exist(a => a.UserID == request.UserName))
+            if (await _unitOfWork.Repositorey<IGenericRepository<GFESUser>>().Exist(a => a.UserID == request.UserName))
             {
                 return new FirstStepAuthResult() { Result = AnuResult.User_Is_Exist.GetResult() };
             }
@@ -81,7 +87,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             await request.SabteahvalAuthenticate();
 
 
-            string password = await request.PhoneNumber.SendAuthenticateSms(6);
+            string password = await request.PhoneNumber.SendAuthenticateSms(_CountCharacter);
             string passWordHash = MD5Core.GetHashString(password);
 
             var user = new GFESUser()
@@ -92,7 +98,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 MobileNumber4SMS = request.PhoneNumber,
                 NationalityCode = request.UserName,
                 StartDate = CalendarHelper.GetCurrentDateTime(),
-                EndDate = CalendarHelper.MaxDateTime(),
+                EndDate = DateTime.Now.AddSeconds(_SecodeWait).ToString(),
                 Family = request.LastName,
                 FatherName = "b",
                 LastChangePassword = CalendarHelper.GetCurrentDateTime(),
@@ -100,7 +106,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 Sex = request.Sex
             };
 
-            await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Add(user);
+            await _unitOfWork.Repositorey<IGenericRepository<GFESUser>>().Add(user);
 
             if (_unitOfWork.Complete() < 0)
             {
@@ -115,7 +121,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             //insert password code and date time into table
 
-            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: "09*****" + request.PhoneNumber.Substring(request.PhoneNumber.Length - 4)) };
+            return new FirstStepAuthResult() { CountCharacter = _CountCharacter, SecondsWait = _SecodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args:  request.PhoneNumber.Substring(request.PhoneNumber.Length - 4) + "*****09") };
 
         }
 
@@ -133,14 +139,17 @@ namespace Anu.PunishmentOrg.Api.Authentication
             request.UserName.IsValidNationalCode();
 
 
-            var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+            var theGFESUser = await _unitOfWork.Repositorey<IGFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
 
             switch (request.LoginType)
             {
                 case LoginType.LoginWithSms:
-                    //check the database for how seconds pass and is the code valid
+                    if (theGFESUser.EndDate.ToDateTime()>DateTime.Now)
+                    {
+                        throw new AnuExceptions(AnuResult.Sms_Time_Is_Expired);
+                    }
                     break;
             }
 

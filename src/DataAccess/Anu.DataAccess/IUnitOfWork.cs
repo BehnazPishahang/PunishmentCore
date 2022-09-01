@@ -16,7 +16,7 @@ namespace Anu.DataAccess
         //Anu.PunishmentOrg.Domain.Notice.IPNoticeRepository PNotice { get; }
 
         //Anu.Domain.IGenericRepository<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUserAccess>
-        TRepository Repositorey<TRepository>() where TRepository : class;
+        TRepository Repositorey<TRepository>() where TRepository : Domain.IGenericRepository;
 
         int Complete();
     }
