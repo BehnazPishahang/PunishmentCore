@@ -42,11 +42,11 @@ namespace Anu.PunishmentOrg.Api.Notice
         {
             request.Null(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_Request_Is_Required);
 
-            request.ThePNoticePersonContract.Null(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_ThePNoticePersonContract_Is_Required);
+            request.PNoticePersonContract.Null(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_ThePNoticePersonContract_Is_Required);
 
-            request.ThePNoticePersonContract!.NationalityCode.NullOrWhiteSpace(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required);
+            request.PNoticePersonContract!.NationalityCode.NullOrWhiteSpace(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required);
 
-            var thePNoticeList = await _unitOfWork.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(request.ThePNoticePersonContract.NationalityCode!.Trim().ToString(), request.Page);
+            var thePNoticeList = await _unitOfWork.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(request.PNoticePersonContract.NationalityCode!.Trim().ToString(), request.Page);
 
             thePNoticeList.Null(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_NotFound);
 
@@ -62,7 +62,7 @@ namespace Anu.PunishmentOrg.Api.Notice
 
             return new PNoticeInqueryResponse
             {
-                ThePNoticeContractList = new Page<List<PNoticeContract>> 
+                PNotice = new Page<List<PNoticeContract>> 
                 { 
                     Paged = request.Page, 
                     Data  = thePNoticeContractList 
