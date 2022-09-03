@@ -54,6 +54,18 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
             _events.Insert(0, $"Event = SelectedItemsChanged, Data = {System.Text.Json.JsonSerializer.Serialize(items)}");
         }
 
+        void ShowPDF(PNoticeContract selectedRow)
+        {
+            string  pdf = _noticeService.GetNoticePDF(_appConfiguration.BackendServerAddress, _appConfiguration.ExportPNotice, selectedRow.No);
+
+            var parameters = new DialogParameters();
+            parameters.Add("showedPdfContent",pdf);
+            
+
+            var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large };
+
+            DialogService.Show<FrmNoticePrintComponent>("Delete", parameters, options);
+        }
         protected override async Task OnInitializedAsync()
         {
             string ncode = SharedInfo.NationalCode;

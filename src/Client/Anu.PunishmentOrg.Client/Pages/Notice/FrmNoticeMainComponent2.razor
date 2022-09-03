@@ -1,4 +1,4 @@
-﻿@page "/FrmNoticeMain2"
+﻿@page "/FrmNotice"
 @using System.Net.Http.Json
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice
 @using Anu.PunishmentOrg.Client.Infrastructure.Notice
@@ -7,9 +7,15 @@
 @inject HttpClient httpClient
 @inject INoticeService _noticeService
 @inject AppConfiguration _appConfiguration;
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
 
-<MudDataGrid T="PNoticeContract"  Bordered="true"  Hover="true" Dense="true" Striped="true" Items="@Elements" ColumnResizeMode="ResizeMode.Column" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
-    Hideable="true" RowClick="@RowClicked" SelectedItemsChanged="@SelectedItemsChanged">
+
+@*<MudDataGrid T="PNoticeContract"  Bordered="true"  Hover="true" Dense="true" Striped="true" Items="@Elements" ColumnResizeMode="ResizeMode.Column" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
+    Hideable="true" RowClick="@RowClicked" SelectedItemsChanged="@SelectedItemsChanged">*@
+    <MudDataGrid T="PNoticeContract" Items="@Elements"  EditMode="DataGridEditMode.Form"
+    
+    Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual">
     <ToolBarContent>
         <MudText Typo="Typo.h6"> ابلاغ </MudText>
         <MudSpacer />
@@ -17,14 +23,20 @@
             AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
     <Columns>
-        <SelectColumn T="PNoticeContract" />
-       
+        
+       <Column T="PNoticeContract"  CellClass="d-flex justify-end" >
+            <CellTemplate>
+              
+                <MudButton Variant="Variant.Filled" EndIcon="@Icons.Filled.Visibility" Color="Color.Primary"  OnClick="() => ShowPDF(context.Item)">مشاهده</MudButton>
+            </CellTemplate>
+           
+        </Column>
         <Column T="PNoticeContract" Field="CreateDateTime" Title="زمان ثبت" />
         <Column T="PNoticeContract" Field="No" Title="شماره " />
         <Column T="PNoticeContract" Field="NoticeDate"   Title="تاريخ ابلاغ " ortBy="@_sortBy" />
         <Column T="PNoticeContract" Field="NoticePersonName"   Title="نام  ابلاغ شونده " />
         <Column T="PNoticeContract" Field="NoticePersonFamily" Title="نام خانوادگي ابلاغ شوند" />
-        
+         
     </Columns>
     <PagerContent>
         <MudDataGridPager T="PNoticeContract" />

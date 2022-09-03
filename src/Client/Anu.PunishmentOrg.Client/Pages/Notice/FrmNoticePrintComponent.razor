@@ -1,12 +1,27 @@
 ﻿@using Anu.PunishmentOrg.Client.Infrastructure.Notice
 @using Anu.PunishmentOrg.ServiceModel.Notice
-<h3>FrmNoticePrintComponent</h3>
+
+
+
+<MudDialog>
+    <DialogContent>
+       <embed src="@showedPdfContent" visible="false" width="1100" height="730" type="application/pdf" />
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel"  Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Close" Color="Color.Error">بستن</MudButton>
+       <MudButton OnClick="Submit"  Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Print" Color="Color.Success">چاب</MudButton>
+    </DialogActions>
+</MudDialog>
+
+
 
 @code {
-    private IEnumerable<PNoticeContract> Elements;
+    [Parameter]
+    public string showedPdfContent { set; get; } = "";
 
-        private void HandleNoticeSearch(string nationalcode)
-        {
-           
-        }
+
+     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+     void Submit() => MudDialog.Close(DialogResult.Ok(true));
+     void Cancel() => MudDialog.Cancel();
 }

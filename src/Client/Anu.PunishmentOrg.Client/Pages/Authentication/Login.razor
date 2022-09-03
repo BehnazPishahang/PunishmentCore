@@ -113,11 +113,15 @@
 
     void GetAccessCode()
     {
+
+        
         var ss = _appConfiguration.BackendServerAddress;
 
         AuthResult result = _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _tokenModel);
         if (result.Result.Code == 100013)
         {
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            Snackbar.Add(result.Result.Message,  Severity.Success);
             hasSmsSend = true;
             SimulateProgress();
             SharedInfo.NationalCode = _tokenModel.UserName;

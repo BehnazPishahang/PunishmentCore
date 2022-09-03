@@ -9,6 +9,7 @@ using System.Net.Http;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Utility;
 using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice;
+using Anu.PunishmentOrg.Client.Infrastructure.Utitlities;
 
 namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
 {
@@ -49,6 +50,20 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
             }
 
 
+        }
+
+        public string  GetNoticePDF(String baseURl, string serviceName, string no)
+        {
+            ExportPNoticeRequest req = new();
+
+            req.ThePNoticeNoInputContract.No = no;
+
+             var client = new HttpClient();
+                client.BaseAddress = new Uri(baseURl);
+              var response = client.PostAsJsonAsync(serviceName, req).Result;
+              ExportPNoticeResponse result = response.Content.ReadAsAsync<ExportPNoticeResponse>().Result;
+                return PDFconvertor.ConvertToPdfContent(result.ThePNoticeExportContract.Pdf);
+            
         }
     }
 }
