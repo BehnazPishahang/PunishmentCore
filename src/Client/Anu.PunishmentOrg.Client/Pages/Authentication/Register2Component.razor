@@ -1,0 +1,311 @@
+﻿
+@page "/register2"
+
+@using Anu.BaseInfo.Enumerations
+@using Anu.Commons.ServiceModel.ServiceAuthentication
+@using Anu.Commons.ServiceModel.ServiceResponseEnumerations
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
+@using Anu.PunishmentOrg.Client.Infrastructure.Utitlities
+
+
+@layout MainLayout
+@attribute [AllowAnonymous]
+
+
+
+@inject IAnuAuthorizationService  _anuAuthorizationService;
+@inject AppConfiguration _appConfiguration;
+@inject ISnackbar Snackbar
+
+<MudCard >
+<MudForm  Model="@_registerUserModel" @ref="@form"  ValidationDelay="0" class="vh-100" style="background-color: #eee;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">ثبت نام</p>
+
+                <form class="mx-1 mx-md-4">
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <MudItem class="form-outline flex-fill mb-0">
+                        <InputPersianDatePicker Id="myInputDatePicker"
+                        @bind-Value="_registerUserModel.BirthDate"
+
+                        Name="myInputName"
+                        Visible="true"
+                        Disabled="false"
+                        PickerAlign="Blazor.PersianDatePicker.Align .Left"
+                        PickerOffsetTopPositionInPixels="0"
+                        InitialValue="false"
+                        CalendarType="Calendar.SingleModeJalali"
+                        DigitType="DigitType.BasedOnCalendar"
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                        MinDateSetOnToday="true"
+                        Placeholder=" تاریخ تولد "
+
+                        Theme="PickerTheme.Cheerup"
+                        OnChange="@(() => Console.WriteLine("OK"))" 
+
+                        />
+                    </MudItem>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                         <MudTextField  
+                            Mask="@nationalcodeMask"
+                            @bind-Value="_registerUserModel.UserName"
+                            Label="کدملی " 
+                            Variant="Variant.Outlined" 
+                            Placeholder="1467561088"  
+                            MaxLength="10"
+                            Required="true" 
+                            RequiredError="کد ملی باید 10 رقم باشد " />
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                         <MudTextField 
+                         @bind-Value="_registerUserModel.FirstName" 
+                         Label="نام " 
+                       
+                            Required="true" 
+                            RequiredError="نام را وارد نمایید " 
+                         Variant="Variant.Outlined"  
+                         />
+                 
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                     <MudTextField     @bind-Value="_registerUserModel.LastName" Label="نام خانوادگی "
+                       Required="true" 
+                            RequiredError="نام خانوادگی  را وارد نمایید  " 
+                            Variant="Variant.Outlined" />
+                    </div>
+                  </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                     <MudSelect   @bind-Value="_registerUserModel.Sex" Label="جسیت"      AdornmentColor="Color.Primary"  
+                       Required="true" 
+                            RequiredError="جنسیت را انتخاب نمایید " 
+                     Variant="Variant.Outlined" >
+                    @foreach (SexType item in Enum.GetValues(typeof(SexType)))
+                    {
+
+                            <MudSelectItem Value="@item">
+                            @if (item == SexType.Male)
+                        {
+                                    <MudIcon Icon= "@Icons.Filled.Man"  Color="Color.Default" ></MudIcon>
+                        }
+
+                        @if (item == SexType.Female)
+                        {
+                                    <MudIcon Icon= "@Icons.Filled.Woman" Color="Color.Primary"  ></MudIcon>
+                        }
+
+                        @item.GetEnumDescription()
+                            </MudSelectItem>
+                    }
+                 </MudSelect>
+
+                  </div>
+
+                       <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                <div class="row">
+
+                <div class="col-md-8 mb-4">
+
+                  <div class="form-outline ">
+                    <MudTextField T="string" Label="شماره تلفن "  Required="true"   Mask="@phoneMask" @bind-Value="_registerUserModel.PhoneNumber"  Variant="Variant.Outlined" Placeholder="09121111111" RequiredError="شماره تلفن  را وارد نمایید "  />
+                  </div>
+
+                </div>
+                <div class="col-md-4 mb-4">
+
+                    <MudButton Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" Size="Size.Large" Style="width: 100%;"> 
+
+                                    @if(hasSmsSend)
+                                     {
+                                             <b> @ProgressValue ثانیه </b>
+                                             <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue"  />
+                                    }
+                                    else
+                                    {
+                                            <b>دریافت کد </b>
+                                    }
+                            </MudButton>
+
+                </div>
+              </div>
+
+                </div>
+              </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                   <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    @*<div class="form-outline flex-fill mb-0">*@
+                      <div class="container-fluid col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                       
+                    </div>
+                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                          
+                                                
+                        @if (hasSmsSend)
+                        {
+                           
+                            <MudTextField  T="string" Label="رمز ارسالی" Mask="@phoneMask"  @bind-Value="smsPassword" Variant="Variant.Outlined" Placeholder="111111"   MaxLength="6"  />
+                         
+                        }
+                     </div>
+
+                    </div>
+                  </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                   <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                        <MudButton Variant="Variant.Outlined" disabled="@(!hasSmsSend)" Color="Color.Primary"  class="btn btn-warning btn-lg ms-2"  OnClick="Submit"> ثبت نام  </MudButton>
+                    </div>
+                  </div>
+
+                </form>
+
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+     
+</MudForm>
+</MudCard >
+@code {
+
+    private string genderIcon = @Icons.Filled.Man;
+    private bool showPassword = false;
+    private string smsPassword = "";
+    public int ProgressValue { get; set; }
+    MudForm form;
+
+    UserRigesterFluentValidator registerValidator = new UserRigesterFluentValidator();
+
+   
+    private bool Validated = true;
+    private UserRegisterRequest _registerUserModel = new();
+    private string errorMessage = string.Empty;
+    bool _disposed;
+    public void Dispose() => _disposed = true;
+    private bool hasSmsSend = false;
+
+    public async void SimulateProgress()
+    {
+        ProgressValue = 120;
+        do
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            ProgressValue -= 1;
+            StateHasChanged();
+            await Task.Delay(1000);
+
+        } while (ProgressValue > 0);
+
+        hasSmsSend = false;
+        StateHasChanged();
+    }
+
+     void GetAccessCode()
+    {
+         Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        if (string.IsNullOrEmpty(_registerUserModel.PhoneNumber) || _registerUserModel.PhoneNumber.Length != 11)
+        {
+            Snackbar.Add("شماره تلفن را درست وارد نمایید .",  MudBlazor.Severity.Warning);
+            return;
+
+        }
+        AuthResult result = _anuAuthorizationService.RegisterUser(_appConfiguration.BackendServerAddress, _appConfiguration.RegisterAddress, _registerUserModel);
+
+        if (result.Result.Code == (int)AnuResult.LoginSuccessful_Sms_Send_To)
+        {
+             Snackbar.Add(result.Result.Message, MudBlazor.Severity.Success);
+              hasSmsSend = true;
+              
+              SimulateProgress();
+        }
+        else
+        {
+            Snackbar.Add(result.Result.Message, MudBlazor.Severity.Error);
+            hasSmsSend = false;
+            errorMessage = result.Result.Message;
+        }
+    }
+
+
+    void Submit()
+    {
+        var secondStep = new SecondStepUserLoginRequest();
+        secondStep.UserName = _registerUserModel.UserName;
+        secondStep.Password = smsPassword;
+        AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.RegisterAddress, secondStep);
+
+        if (result.Result.Code == (int)AnuResult.Successful)
+        {
+            SharedInfo.NationalCode = _registerUserModel.UserName;
+            _navigationManager.NavigateTo("/true");
+            errorMessage = "";
+        }
+        else
+        {
+            errorMessage = result.Result.Message;
+            showPassword = true;
+        }
+    }
+
+    private bool _passwordVisibility;
+    private InputType _passwordInput = InputType.Password;
+
+
+
+
+    public PatternMask nationalcodeMask = new PatternMask("##########")
+        {
+            MaskChars = new[] { new MaskChar('#', @"[0-9]") },
+            Placeholder = '_',
+            CleanDelimiters = true
+        };
+
+    public PatternMask phoneMask = new PatternMask("###########")
+        {
+            MaskChars = new[] { new MaskChar('#', @"[0-9]") },
+            Placeholder = '_',
+            CleanDelimiters = true
+
+        };
+
+}

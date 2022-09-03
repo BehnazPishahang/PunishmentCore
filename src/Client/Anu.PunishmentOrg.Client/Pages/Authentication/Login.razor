@@ -43,15 +43,15 @@
                         <MudItem xs="4">
                             <MudButton Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" Size="Size.Medium" Style="width: 100%;"> 
 
-                        @if(hasSmsSend)
-                         {
-                                 <b> @ProgressValue ثانیه </b>
-                                 <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue"  />
-                        }
-                        else
-                        {
-                                <b>دریافت کد </b>
-                        }
+                                    @if(hasSmsSend)
+                                     {
+                                             <b> @ProgressValue ثانیه </b>
+                                             <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue"  />
+                                    }
+                                    else
+                                    {
+                                            <b>دریافت کد </b>
+                                    }
                             </MudButton>
                         </MudItem>
 
@@ -90,6 +90,7 @@
 
     private int ProgressValue { get; set; }
     private bool hasSmsSend = false;
+
     public async void SimulateProgress()
     {
         ProgressValue = 120;
