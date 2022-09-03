@@ -1,5 +1,5 @@
 ﻿
-@page "/register2"
+@page "/register"
 
 @using Anu.BaseInfo.Enumerations
 @using Anu.Commons.ServiceModel.ServiceAuthentication
@@ -137,7 +137,7 @@
                 </div>
                 <div class="col-md-4 mb-4">
 
-                    <MudButton Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" Size="Size.Large" Style="width: 100%;"> 
+                    <MudButton Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" class="btn  btn-lg ms-2"> 
 
                                     @if(hasSmsSend)
                                      {
@@ -180,7 +180,7 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                        <MudButton Variant="Variant.Outlined" disabled="@(!hasSmsSend)" Color="Color.Primary"  class="btn btn-warning btn-lg ms-2"  OnClick="Submit"> ثبت نام  </MudButton>
+                        <MudButton Variant="Variant.Outlined" disabled="@(!hasSmsSend)" Color="Color.Primary"  class="btn  btn-lg ms-2"  OnClick="Submit"> ثبت نام  </MudButton>
                     </div>
                   </div>
 
