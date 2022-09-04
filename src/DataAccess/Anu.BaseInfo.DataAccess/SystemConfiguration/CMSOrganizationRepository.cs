@@ -19,7 +19,10 @@ namespace Anu.BaseInfo.DataAccess.SystemConfiguration
 
         public async Task<CMSOrganization> GetByCode(string code)
         {
-            return await _context.Set<Anu.BaseInfo.DataModel.SystemConfiguration.CMSOrganization>().Where(x => x.Code == code).FirstOrDefaultAsync();
+            return await _context.Set<Anu.BaseInfo.DataModel.SystemConfiguration.CMSOrganization>()
+                .Where(x => x.Code == code)
+                .Include(x => x.TheUnit)
+                .FirstOrDefaultAsync();
         }
 
     }

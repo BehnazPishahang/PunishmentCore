@@ -124,11 +124,65 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کد واحد پرونده نامرتبط است..
+        /// </summary>
+        public static string MechanizedLetter_CaseHandlerUnitId_Is_Not_Sync_UnitId {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_CaseHandlerUnitId_Is_Not_Sync_UnitId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره پرونده نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_CaseNo_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_CaseNo_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره پرونده را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_CaseNo_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_CaseNo_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد واحد پرونده نامعتبر است.
+        /// </summary>
+        public static string MechanizedLetter_CaseUnit_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_CaseUnit_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد واحد پرونده را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_CaseUnit_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_CaseUnit_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to كاربر ثبت كننده نامه را وارد کنید..
         /// </summary>
         public static string MechanizedLetter_CreatorUserName_Is_Null {
             get {
                 return ResourceManager.GetString("MechanizedLetter_CreatorUserName_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد موضوع نامه نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_GMechanizedLetterTypeCode_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_GMechanizedLetterTypeCode_Is_Not_Valid", resourceCulture);
             }
         }
         
@@ -147,6 +201,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string MechanizedLetter_LetterText_Is_Null {
             get {
                 return ResourceManager.GetString("MechanizedLetter_LetterText_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مقدار نوع گيرنده از نطر گيرنده اصل نامه/رونوشت گيرنده معتبر نمی باشد..
+        /// </summary>
+        public static string MechanizedLetter_mainRcvOrTranscriptRcv_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_mainRcvOrTranscriptRcv_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع گيرنده از نطر گيرنده اصل نامه/رونوشت گيرنده را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_mainRcvOrTranscriptRcv_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_mainRcvOrTranscriptRcv_Is_Null", resourceCulture);
             }
         }
         
@@ -196,11 +268,83 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مقدار نوع گيرنده نامه/رونوشت از نظر واحدي/سمتي/کاربري نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_ReceiverType_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_ReceiverType_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع گيرنده نامه/رونوشت از نظر واحدي/سمتي/کاربري را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_ReceiverType_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_ReceiverType_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to وارد کردن اطلاعات حداقل یک گیرنده برای نامه اجباری می باشد..
         /// </summary>
         public static string MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null {
             get {
                 return ResourceManager.GetString("MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مقدار نوع نامه از نظر نامه بازگشتي یا پيروي نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_relationType_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_relationType_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع نامه از نظر نامه بازگشتي یا پيروي را وارد کنید..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_relationType_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_relationType_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع نامه از نظر مکانيزه بودن يا غيرمکانيزه بودن نامه بازگشتي یا پيروي نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_RelLetterGetType_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_RelLetterGetType_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع نامه از نظر مکانيزه بودن يا غيرمکانيزه بودن نامه بازگشتي یا پيروي را وارد کنید..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_RelLetterGetType_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_RelLetterGetType_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره نامه بازگشتي یا پيروي نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_RelLetterNo_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_RelLetterNo_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره نامه بازگشتي یا پيروي را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_RelLetterNo_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_RelLetterNo_Is_Null", resourceCulture);
             }
         }
         
@@ -237,6 +381,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string MechanizedLetter_TheReceiverInnerOrgCode_Is_Not_Valid {
             get {
                 return ResourceManager.GetString("MechanizedLetter_TheReceiverInnerOrgCode_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to واحد پرونده را مقدار دهی نمایید..
+        /// </summary>
+        public static string MechanizedLetter_TheUnit_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_TheUnit_Is_Null", resourceCulture);
             }
         }
         

@@ -16,5 +16,10 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                 .Where(a=>a.No==no)
                 .ToListAsync();
         }
+
+        public async Task<Anu.PunishmentOrg.DataModel.Case.PCase> GetOnePCaseByNo(string no)
+        {
+            return await _context.Set<Anu.PunishmentOrg.DataModel.Case.PCase>().Where(x => x.No == no).FirstOrDefaultAsync();
+        }
     }
 }
