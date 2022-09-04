@@ -1,9 +1,4 @@
-﻿using Anu.BaseInfo.DataAccess.GMechanizedLetter;
-using Anu.BaseInfo.DataAccess.OrganizationChart;
-using Anu.BaseInfo.DataAccess.SystemConfiguration;
-using Anu.BaseInfo.DataAccess.SystemObject;
-using Anu.BaseInfo.DataModel.MechanizedLetter;
-using Anu.BaseInfo.DataModel.Security.Role;
+﻿using Anu.BaseInfo.DataModel.MechanizedLetter;
 using Anu.BaseInfo.DataModel.SystemConfiguration;
 using Anu.BaseInfo.Domain.ExchangeData;
 using Anu.BaseInfo.Domain.MechanizedLetter;
@@ -14,8 +9,6 @@ using Anu.BaseInfo.Domain.SystemObject;
 using Anu.BaseInfo.ServiceModel.MechanizedLetter;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
-using Anu.Domain;
-using Anu.PunishmentOrg.DataAccess.PCase;
 using Anu.PunishmentOrg.Domain.Case;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Microsoft.AspNetCore.Mvc;
@@ -458,7 +451,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
             var baseRole = await _unitOfWork.Repositorey<IBaseRoleRepository>().GetById(baseRoleId);
 
             string TempNo = "";
-            Insert(
+            await _unitOfWork.Repositorey<IWorkFlowInstanceWorkItemRepository>().Insert(
             DateTime.Now.ToPersian().Substring(0, 10),
             baseRole.Id,
             baseRole.Name,
@@ -484,42 +477,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
 
         }
 
-        public async void Insert(string activateDate, string baseRoleId, string description, string maxDelayDate, string securityOrganizationId, string title,
-                           string relatedCaseId, string relatedCaseNo, string relatedSystemObjectCaseId,
-                           string relatedDocObjectId, string relatedDocId, string relatedDocNo, string RelatedDocFormId,
-                           Anu.BaseInfo.Enumerations.WorkFlowActivityInstanceState state, Anu.BaseInfo.Enumerations.WorkFlowWorkItemType type, Anu.BaseInfo.Enumerations.YesNo userCanDelay,
-                           string temp1, string temp2, string relatedCMSUserId = null, string RelatedCMSUserRoleTypeId = null, bool SameCaseServerForSenderAndReceiver = true, string ObjectId = null)
-        {
-            WorkFlowInstanceWorkItem workFlowInstanceWorkItem = new()
-            {
-                Id = Guid.NewGuid().ToString("N"),
-                Timestamp = 1,
-                MaxDelayDate = maxDelayDate,
-                CreateDateTime = CalendarHelper.GetCurrentDateTime(),
-                ActivateDate = activateDate,
-                Title = title,
-                TheBaseRole = await _unitOfWork.Repositorey<IBaseRoleRepository>().GetById(baseRoleId),
-                KeyField1 = temp1,
-                KeyField2 = temp2,
-                Description = description,
-                State = state,
-                Type = type,
-                UserCanDelay = userCanDelay,
-                TheRelatedSystemObjectCase = await _unitOfWork.Repositorey<ISystemObjectRepository>().GetById(relatedSystemObjectCaseId),
-                SecurityOrganizationId = securityOrganizationId,
-                RelatedCaseNo = relatedCaseNo,
-                RelatedCaseId = relatedCaseId,
-                TheRelatedDocObject = await _unitOfWork.Repositorey<ISystemObjectRepository>().GetById(relatedDocObjectId),
-                RelatedDocId = relatedDocId,
-                RelatedDocNo = relatedDocNo,
-                TheRelatedDocForm = await _unitOfWork.Repositorey<ISystemFormRepository>().GetById(RelatedDocFormId),
-                TheRelatedCMSUser = await _unitOfWork.Repositorey<ICMSUserRepository>().GetById(relatedCMSUserId),
-                TheRelatedCMSUserRoleType = await _unitOfWork.Repositorey<ICMSUserRoleTypeRepository>().GetById(RelatedCMSUserRoleTypeId)
-            };
-
-            await _unitOfWork.Repositorey<IGenericRepository<WorkFlowInstanceWorkItem>>().Add(workFlowInstanceWorkItem);
-        }
-
+        
 
 
         #endregion Methods
