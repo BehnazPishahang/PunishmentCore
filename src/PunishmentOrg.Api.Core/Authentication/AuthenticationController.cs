@@ -3,6 +3,7 @@ using Anu.BaseInfo.DataModel.FrontEndSecurity;
 using Anu.BaseInfo.Domain.FrontEndSecurity;
 using Anu.Commons.ServiceModel.ServiceAuthentication;
 using Anu.Commons.ServiceModel.ServiceAuthentication.Enumerations;
+using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.DataAccess;
 using Anu.Domain;
@@ -272,7 +273,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Route("api/v1/ChangePhoneNumber")]
         [HttpPost]
         [HttpPost]
-        public async Task<AuthResult> ChangePhoneNumber([FromBody] ChangePhoneNumberRequest request)
+        public async Task<Result> ChangePhoneNumber([FromBody] ChangePhoneNumberRequest request)
         {
 
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
@@ -299,7 +300,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             }
             if (lastRecordHistoryPerDay.ExpiredCodeDateTime.ToDateTime() == lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime())
             {
-                return new AuthResult() { Result = AnuResult.Login_Again.GetResult() };
+                return AnuResult.Login_Again.GetResult();
             }
 
             //await ShahkarAuthentication.ShahkarAuthenticate(request.NewPhoneNumber, request.UserName);
@@ -307,7 +308,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             
             if ((await _unitOfWork.Repositorey<IPunishmentOrg135UsersRepository>().UpdatePhoneNumber(punishmentOrg135Users.Id,request.NewPhoneNumber)) < 0)
             {
-                return new AuthResult() { Result = AnuResult.Error.GetResult() };
+                return AnuResult.Error.GetResult();
             }
 
             lastRecordHistoryPerDay.ExpiredCodeDateTime = lastRecordHistoryPerDay.SendCodeDateTime;
@@ -316,18 +317,15 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             if (_unitOfWork.Complete() < 0)
             {
-                return new AuthResult() { Result = AnuResult.Error.GetResult() };
+                return AnuResult.Error.GetResult();
             }
 
             if (IsExpierd)
             {
-                return new AuthResult() { AccessToken = null, Result = AnuResult.Sms_Time_Is_Expired.GetResult() };
+                return AnuResult.Sms_Time_Is_Expired.GetResult();
             }
 
-            jwtToken = GenerateJwtToken(punishmentOrg135Users);
-
-
-            return new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() };
+            return AnuResult.Successful.GetResult();
 
         }
 
