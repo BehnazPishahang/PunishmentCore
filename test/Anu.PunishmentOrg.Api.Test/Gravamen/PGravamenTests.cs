@@ -1,36 +1,38 @@
-﻿using Anu.PunishmentOrg.Api.Gravamen;
-using Anu.PunishmentOrg.DataAccess.PGravamen;
-using Anu.PunishmentOrg.DataModel.Gravamen;
+﻿using Anu.BaseInfo.DataModel.Types;
+using Anu.BaseInfo.Domain.GeoInfo;
+using Anu.BaseInfo.Domain.OrganizationChart;
+using Anu.BaseInfo.Domain.SystemObject;
+using Anu.BaseInfo.ServiceModel.Attachment;
+using Anu.BaseInfo.ServiceModel.GeoInfo;
+using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using Anu.Domain;
+using Anu.PunishmentOrg.Api.Gravamen;
+using Anu.PunishmentOrg.Enumerations;
 using Anu.PunishmentOrg.ServiceModel.Gravamen;
+using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Moq;
 using System.Collections.Generic;
-using Xunit;
-using FluentAssertions;
-using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
-using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
-using Anu.PunishmentOrg.Enumerations;
-using System;
 using System.Text;
+using Utility.Exceptions;
+using Xunit;
 
 namespace Anu.PunishmentOrg.Api.Test.Gravamen;
 
 public class PGravamenTests
 {
-    private readonly Mock<Anu.DataAccess.IUnitOfWork> _unitOfWork = new();
-    private readonly PGravamenServiceController controller;
-    private readonly PGravamen pGravamen;
+    private Mock<Anu.DataAccess.IUnitOfWork> _unitOfWork = new();
+    private PGravamenServiceController controller;
+    private PGravamenServiceRequest _request;
 
 
     /// xUnit uses the constructor for set up method
     public PGravamenTests()
     {
-        //    _unitOfWork.Setup(repo => repo.Repositorey<PGravamenRepository>().GetAll())
-        //        .ReturnsAsync((IEnumerable<PGravamen>)null);
 
         controller = new PGravamenServiceController(_unitOfWork.Object);
 
-        #region PGravamen Instatiation
-        var p1 = new PGravamenPerson()
+        #region PGravamen Instantiation
+        var p1 = new PGravamenPersonContract()
         {
 
             Name = "Ali",
@@ -49,7 +51,7 @@ public class PGravamenTests
             TradeUnitName = "",
             PersonPassword = "",
         };
-        var p2 = new PGravamenPerson()
+        var p2 = new PGravamenPersonContract()
         {
 
             Name = "Haj Nemat",
@@ -69,34 +71,25 @@ public class PGravamenTests
             PersonPassword = "",
         };
 
-        var v = new PGravamenViolation()
-        {
-
-            RowNumber = 1,
-            SubjectTitle = "Geran Forooshi",
-            ViolationAddress = "Azadi St.",
-            ViolationDate = "1401/06/02",
-            ViolationDesc = "Geran Forooshi Ba Tozihat",
-            ViolationPrice = 10000,
-        };
-
-        var a = new PGravamenAttachment()
+        var a = new GAttachmentContract()
         {
             FileExtension = Anu.BaseInfo.Enumerations.FileExtension.PDF,
-            TheAttachmentType = new Anu.BaseInfo.DataModel.Types.AttachmentType()
+            TheAttachmentTypeContract = new Anu.BaseInfo.ServiceModel.Types.AttachmentTypeContract()
             {
                 Code = "300",
-                Id = "300",
                 Title = "پيوست شكوائيه مردمي",
-                Timestamp = 1
+                State = Anu.BaseInfo.Enumerations.State.Valid,
+                UnitTypeAccess = "1"
             },
-            TheGAttachmentData = new Anu.BaseInfo.DataModel.Attachment.GAttachmentData()
+            TheGAttachmentDataContract = new GAttachmentDataContract()
             {
                 DocFile = Encoding.ASCII.GetBytes("QW51IGNvcG9yYXRpb24=")
             }
         };
 
-        pGravamen = new PGravamen()
+
+
+        var pGravamen = new PGravamenContract()
         {
 
             PetitionSubject = "Petition Subject",
@@ -108,53 +101,57 @@ public class PGravamenTests
             ReporterFamily = "Pooyan",
             ReporterMobilNumber = "09101112233",
 
-            ThePGravamenPersonList = new List<PGravamenPerson>() { p1, p2 },
-            ThePGravamenAttachmentList = new List<PGravamenAttachment>() { a },
-            ThePGravamenViolationList = new List<PGravamenViolation>() { v },
+            ThePGravamenPersonContractList = new List<PGravamenPersonContract>() { p1, p2 },
+            TheGAttachmentContractList = new List<GAttachmentContract>() { a },
+            TheGeoLocationContract = new GeoLocationContract()
+            {
+                LocationCode = "0507"
+            },
 
             CreateDateTime = "1401/02/06",
             FollowUpNo = "9995541",
             HowDataType = Enumerations.PU135OrWebSite.WebSite,
             GravamenOrReport = Anu.PunishmentOrg.Enumerations.GravamenOrReport.Gravamen,
         };
+
+
+
         #endregion
+
+        _request = new PGravamenServiceRequest()
+        {
+            ThePGravamenContract = pGravamen
+        };
     }
 
-    [Fact(Skip = "This scenario will be passed after all of the other scenarios have passed.", DisplayName = "Success Scenario")]
+    [Fact(DisplayName = "Success Scenario")]
     public void RecieveGravamen_SuccessfullyExecuted_ShouldReturnSuccessfulResult()
     {
         //Arrange
-        var request = new PGravamenServiceRequest()
-        {
-            ThePGravamenContract = new PGravamenContract()
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<AttachmentType>>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new AttachmentType()
             {
-                NoticeText = "متن شکوائیه از این قرار است",
-                PetitionDescription = "ت.ضاحات شکوائیه",
-                PetitionReasons = "",
-                PetitionSubject = "",
-                RejectReasonText = "",
-                ReporterName = "",
-                ReporterFamily = "",
-                ReporterMobilNumber = "",
-                ThePGravamenPersonContractList = new List<PGravamenPersonContract>()
-                {
-                    new PGravamenPersonContract()
-                    {
-                        Name ="Person1",
-                        PersonStartPost=PUPersonStartPost.PlaintiffPerson
-                    },
-                    new PGravamenPersonContract()
-                    {
-                        Name ="Person2",
-                        PersonStartPost=PUPersonStartPost.OffendingPerson
-                    },
-                }
-            }
+                Id = "300",
+                Code = "300",
+                Title = "Mock Attachemnt Type"
+            });
+        _unitOfWork.Setup(u => u.Repositorey<IObjectStateRepository>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new Anu.BaseInfo.DataModel.SystemObject.ObjectState());
 
-        };
+        _unitOfWork.Setup(u => u.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(It.IsAny<string>()))
+            .ReturnsAsync(new Anu.BaseInfo.DataModel.GeoInfo.GeoLocation());
+
+        //Todo: Setup this repo
+        //_unitOfWork.Setup(u => u.Repositorey<IUnitRepository>().FindRelatedUnitToGeoLocation(It.IsAny<string>(), It.IsAny<List<string>>())
+        //   .ReturnsAsync(new Anu.BaseInfo.DataModel.OrganizationChart.Unit());
+
+        //Todo: Setup this repo
+        //var pBCountyLocatedUnit = await _unitOfWork.Repositorey<IPBCountyLocatedUnitRepository>().GetRelatedPBCountyLocatedUnitToGeolocationWithLocationCode(theGeoLocation.LocationCode!);
+
+        //And hopefully we are ready to pass this test
 
         //Act
-        var result = controller.RecieveGravamen(request);
+        var result = controller.RecieveGravamen(_request);
 
         //Assert
         Assert.Equal((int)AnuResult.Successful, result.Result.Result.Code);
@@ -167,86 +164,35 @@ public class PGravamenTests
         PGravamenServiceRequest request = null;
 
         //Act
-        var result = controller.RecieveGravamen(request);
+        var result = Assert.ThrowsAnyAsync<AnuExceptions>(() => controller.RecieveGravamen(request));
 
         //Assert
-        Assert.Equal((int)PGravamenResult.PGravamen_Request_IsNullOrCorrupt, result.Result.Result.Code);
+        //Assert.Equal((int)PGravamenResult.PGravamen_Request_IsNullOrCorrupt, result.Result.Result.Code);
+        Assert.Equal((int)PGravamenResult.PGravamen_Request_IsNullOrCorrupt, result.Result.result.Code);
     }
 
     [Fact]
     public void RecieveGravamen_OneOfNecessaryFieldsIsMissing_ShouldReturnPGravamenFieldIsNullOrInvalid()
     {
         //Arrange
-        var request = new PGravamenServiceRequest()
-        {
-            ThePGravamenContract = new PGravamenContract()
-            {
-                NoticeText = "متن شکوائیه از این قرار است",
-                PetitionDescription = "ت.ضاحات شکوائیه",
-                //PetitionReasons = "",
-                PetitionSubject = "",
-                RejectReasonText = "",
-                ReporterName = "",
-                ReporterFamily = "",
-                ReporterMobilNumber = "",
-                ThePGravamenPersonContractList = new List<PGravamenPersonContract>()
-                {
-                    new PGravamenPersonContract()
-                    {
-                        Name ="Person1",
-                        PersonStartPost=PUPersonStartPost.PlaintiffPerson
-                    },
-                    new PGravamenPersonContract()
-                    {
-                        Name ="Person2",
-                        PersonStartPost=PUPersonStartPost.OffendingPerson
-                    },
-                }
-            }
-
-        };
+        _request.ThePGravamenContract!.PetitionReasons = null;
 
         //Act
-        var result = controller.RecieveGravamen(request);
+        var result = Assert.ThrowsAnyAsync<AnuExceptions>(() => controller.RecieveGravamen(_request));
 
         //Assert
-        Assert.Equal((int)PGravamenResult.PGravamen_Field_IsNullOrInvalid, result.Result.Result.Code);
+        Assert.Equal((int)PGravamenResult.PGravamen_Field_IsNullOrInvalid, result.Result.result.Code);
     }
     [Fact]
     public void RecieveGravamen_OneOfNecessaryPositionsIsMissing_ShouldReturnPGravamenNecessaryPositionsAreNotAvailabe()
     {
-        //Arrange
-        var request = new PGravamenServiceRequest()
-        {
-            ThePGravamenContract = new PGravamenContract()
-            {
-                NoticeText = "متن شکوائیه از این قرار است",
-                PetitionDescription = "ت.ضاحات شکوائیه",
-                PetitionReasons = "test",
-                PetitionSubject = "test",
-                RejectReasonText = "test",
-                ReporterName = "test",
-                ReporterFamily = "test",
-                ReporterMobilNumber = "test",
-                ThePGravamenPersonContractList = new List<PGravamenPersonContract>()
-                {
-                    new PGravamenPersonContract()
-                    {
-                        Name ="Person1",
-                        PersonStartPost=null
-                    },
-                    new PGravamenPersonContract()
-                    {
-                        Name ="Person2",
-                        PersonStartPost=PUPersonStartPost.OffendingPerson
-                    },
-                }
-            }
 
-        };
+        //Arrange
+        _request.ThePGravamenContract!.ThePGravamenPersonContractList![0].PersonStartPost = null;
 
         //Act
-        var result = controller.RecieveGravamen(request);
+        //var result = Assert.ThrowsAnyAsync<AnuExceptions>(() => controller.RecieveGravamen(_request));
+        var result = controller.RecieveGravamen(_request);
 
         //Assert
         Assert.Equal((int)PGravamenResult.PGravamen_NecessaryPositions_AreNotAvailabe, result.Result.Result.Code);
@@ -255,13 +201,53 @@ public class PGravamenTests
     [Fact]
     public void RecieveGravamen_OneOfPlaintiffPersonNecessaryFiledsIsMissing_ReturnsPGravamenPlatiffNecessaryFieldIsNullOrInvalid()
     {
-       
+        _request.ThePGravamenContract!.ThePGravamenPersonContractList![0].Name = null;
+
+        var result = Assert.ThrowsAnyAsync<AnuExceptions>(() => controller.RecieveGravamen(_request));
+
+        Assert.Equal((int)PGravamenResult.PGravamen_PlatiffNecessaryField_IsNullOrInvalid, result.Result.result.Code);
+    }
+
+    [Fact]
+    public void RecieveGravamen_OneOfOffendingPersonNecessaryFiledsIsMissing_ReturnsPGravamenPlatiffNecessaryFieldIsNullOrInvalid()
+    {
+        _request.ThePGravamenContract!.ThePGravamenPersonContractList![1].TradeUnitName = null;
+
+        var result = Assert.ThrowsAnyAsync<AnuExceptions>(() => controller.RecieveGravamen(_request));
+
+        Assert.Equal((int)PGravamenResult.PGravamen_OffendingNecessaryField_IsNullOrInvalid, result.Result.result.Code);
+    }
+
+    [Fact]
+    public void RecieveGravamen_DocFileIsEmpty_ReturnsPGravamen_NoFileIsAttached()
+    {
+        _request.ThePGravamenContract!.TheGAttachmentContractList![0].TheGAttachmentDataContract!.DocFile = null;
+
+        var result = Assert.ThrowsAnyAsync<AnuExceptions>(() => controller.RecieveGravamen(_request));
+
+        Assert.Equal((int)PGravamenResult.PGravamen_NoFileIsAttached, result.Result.result.Code);
+    }
+
+    [Fact]
+    public void RecieveGravamen_DocFileSize_IsMoreThan6MB_ReturnsPGravamen_FileIsLargerThanAllowedThreshold()
+    {
+        _request.ThePGravamenContract!.TheGAttachmentContractList![0].TheGAttachmentDataContract!.DocFile = new byte[60000000];
+
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<AttachmentType>>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new AttachmentType()
+            {
+                Id = "300",
+                Code = "300",
+                Title = "Mock Attachemnt Type"
+            });
+
+        controller = new PGravamenServiceController(_unitOfWork.Object);
+
+        var result = controller.RecieveGravamen(_request);
+
+        Assert.Equal((int)PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold, result.Result.Result.Code);
     }
 
 
-    ///xUnit uses the Dispose for tear down method
-    //public void Dispose()
-    //{
 
-    //}
 }
