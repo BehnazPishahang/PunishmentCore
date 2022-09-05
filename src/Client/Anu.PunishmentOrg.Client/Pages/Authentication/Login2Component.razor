@@ -1,4 +1,5 @@
-﻿@using Anu.Commons.ServiceModel.ServiceAuthentication
+﻿@page "/Login2"
+@using Anu.Commons.ServiceModel.ServiceAuthentication
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
 
 
@@ -7,37 +8,42 @@
 @inject ISnackbar Snackbar
 
 
-<EditForm Model="@_tokenModel" >
-      <MudDialog>
-        <TitleContent> 
-            <div class="d-flex justify-center">
-                                <MudIcon Icon="@Icons.Filled.Balance" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
-                            </div>
-         </TitleContent>
-    <DialogContent>
-                    <MudGrid>
-                        <MudItem xs="12">
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block" style=" object-fit: fill">
+              
+                <MudImage ObjectFit="@ImageFit" 
+                            Height="600"
+                            Width="450" 
+                            src="/pic/LoginArm.jpg" 
                             
-                        </MudItem>
-                        <DataAnnotationsValidator />
-                        <MudItem xs="12">
-                            <div class="d-flex justify-center">
-                                <MudText Typo="Typo.h4" Style="text-shadow: -2px 3px 3px grey;">ورود به سایت </MudText>
-                            </div>
-                        </MudItem>
-       
-                        <MudItem xs="12">
-                            <div class="d-flex justify-center">
-                                <MudText>آیا تا کنون در سایت ثبت نام نکرده اید؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
-                            </div>
-                        </MudItem>
-                        <MudItem xs="12">
-                            <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined" Margin="Margin.Dense"
+                            Elevation="25" 
+                            Class="rounded-lg"
+                             OnClick="@(() => SetImageFit(ObjectFit.Fill))"/>
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <MudForm Model="@_tokenModel">
+                      <MudText Typo="Typo.h4" Style="text-shadow: -2px 3px 3px grey;">ورود به پیشخان تعزیرات  </MudText>
+
+
+                  
+
+                  <div class="form-outline mb-4">
+                     <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined" Margin="Margin.Dense"
                                           @bind-Value="_tokenModel.UserName" For="@(() => _tokenModel.UserName)" Validation="Validated.ToString()"/>
-                        </MudItem>
-                        <MudItem xs="8">
+                  </div>
+
+                  <div class="form-outline mb-4">
+                      <MudItem Class="row">
+                    <MudItem xs="8">
                             <MudTextField T="string" Label=" کد ورود" Variant="Variant.Outlined" Margin="Margin.Dense"  Mask="@(new PatternMask("000000"))" MaxLength=6
-                                         @bind-Value="_secondRequest.Password" ></MudTextField>
+                                         @bind-Value="_secondRequest.Password"  ></MudTextField>
                         </MudItem>
 
                         <MudItem xs="4">
@@ -54,32 +60,40 @@
                                     }
                             </MudButton>
                         </MudItem>
-
-               
-                        <MudItem xs="12">
-                            <div class="d-flex justify-center">
-                                <MudText Color="Color.Error">@errorMessage </MudText>
-                            </div>
                         </MudItem>
-                    </MudGrid>
- </DialogContent>
-   <DialogActions>
-        <MudItem xs="12" Class="d-flex justify-center">
+                  </div>
+
+                  <MudItem class="row">
+                     <MudItem xs="6" Class="d-flex justify-center">
                            <MudButton Variant="Variant.Filled"  Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
                         </MudItem>
-                        <MudItem xs="12" Class="d-flex justify-center">
+                        <MudItem xs="6" Class="d-flex justify-center">
                            <MudButton Variant="Variant.Filled" Color="Color.Warning" Href="/false" Size="Size.Large" Style="width: 100%;">برگشت</MudButton>
                         </MudItem>
-      
-       
-    </DialogActions>
-</MudDialog>
-</EditForm>
+                  </MudItem>
+                  <br />
+                    <div class="d-flex justify-center">
+                                <MudText>آیا تا کنون در سایت ثبت نام نکرده اید؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
+                            </div>
+                </MudForm>
 
-
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 @code {
+     ObjectFit ImageFit = ObjectFit.Cover;
+    
+    void SetImageFit(ObjectFit value)
+    {
+        ImageFit = value;
+    }
 
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+      [CascadingParameter] MudDialogInstance MudDialog { get; set; }
     string errorMessage = "";
     private FirstStepUserLoginRequest _tokenModel = new();
     private SecondStepUserLoginRequest _secondRequest = new();
@@ -152,16 +166,15 @@
             AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.SecondStepLogin, _secondRequest);
             if (result.Result.Code == 1000)
             {
+                SharedInfo.NationalCode = _tokenModel.UserName;
                 _navigationManager.NavigateTo("/true");
                 errorMessage = "";
-                SharedInfo.NationalCode = _tokenModel.UserName;
+             
             }
             else
             {
-                errorMessage = result.Result.Message;
-                Validated = false;
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+                Snackbar.Add(result.Result.Message,  Severity.Warning);
             }
         }
-
-   
 }
