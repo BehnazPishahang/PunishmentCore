@@ -23,7 +23,6 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
         }
 
         public AuthResult LoginUser(String baseURl, string serviceName, FirstStepUserLoginRequest firstStepUserLoginRequest)
-
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(baseURl);

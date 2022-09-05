@@ -1,6 +1,9 @@
-﻿@using Anu.PunishmentOrg.Client.Infrastructure.Notice
+﻿@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice
+@using Anu.PunishmentOrg.Client.Infrastructure.Notice
 @using Anu.PunishmentOrg.ServiceModel.Notice
+@inject AppConfiguration _appConfiguration;
 
+@inject INoticeService _noticeService;
 
 
 <MudDialog>
@@ -20,8 +23,17 @@
     [Parameter]
     public string showedPdfContent { set; get; } = "";
 
+    [Parameter]
+    public string No { set; get; } = "";
 
-     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-     void Submit() => MudDialog.Close(DialogResult.Ok(true));
-     void Cancel() => MudDialog.Cancel();
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    void Cancel() => MudDialog.Cancel();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        string nnn = No;
+        var  NoticeInfo = _noticeService.ChangePNoticeViewByUserStatus(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePNoticeViewByUserStatus, No);
+        }
 }

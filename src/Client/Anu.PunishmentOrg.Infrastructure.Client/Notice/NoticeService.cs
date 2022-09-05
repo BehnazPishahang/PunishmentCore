@@ -14,6 +14,7 @@ using System.Text.Json;
 
 namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
 {
+
     public   class NoticeService: INoticeService
     {
 
@@ -69,14 +70,30 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
             
         }
 
-        public IEnumerable<PNoticeContract> ChangePNoticeViewByUserStatus(string baseURl, string serviceName, string no)
+        public ChangePNoticeViewByUserStatusResponse ChangePNoticeViewByUserStatus(string baseURl, string serviceName, string no)
         {
-            throw new NotImplementedException();
+            ChangePNoticeViewByUserStatusRequest req = new();   
+
+            req.ThePNoticeNoInputContract.No=no;
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(baseURl);
+            var response = client.PostAsJsonAsync(serviceName, req).Result;
+
+            ChangePNoticeViewByUserStatusResponse result = response.Content.ReadAsAsync<ChangePNoticeViewByUserStatusResponse>().Result;
+            return result;
         }
 
-        public IEnumerable<PNoticeContract> GetCountOfUnSeenPNoticeByUser(string baseURl, string serviceName, string nationalCode)
+        public GetCountOfUnSeenPNoticeByUserResponse GetCountOfUnSeenPNoticeByUser(string baseURl, string serviceName, string nationalCode)
         {
-            throw new NotImplementedException();
+            GetCountOfUnSeenPNoticeByUserRequest req = new();
+
+            req.ThePNoticePersonContract.NationalityCode = nationalCode;
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(baseURl);
+            var response = client.PostAsJsonAsync(serviceName, req).Result;
+
+            GetCountOfUnSeenPNoticeByUserResponse result = response.Content.ReadAsAsync<GetCountOfUnSeenPNoticeByUserResponse>().Result;
+            return result;
         }
     }
 }

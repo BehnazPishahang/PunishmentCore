@@ -54,10 +54,10 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
         void ShowPDF(PNoticeContract selectedRow)
         {
             string  pdf = _noticeService.GetNoticePDF(_appConfiguration.BackendServerAddress, _appConfiguration.ExportPNotice, selectedRow.No);
-
+            
             var parameters = new DialogParameters();
             parameters.Add("showedPdfContent",pdf);
-            
+            parameters.Add("No", selectedRow.No);
 
             var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large };
 
