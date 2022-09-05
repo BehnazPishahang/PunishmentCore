@@ -36,7 +36,7 @@
                                           @bind-Value="_tokenModel.UserName" For="@(() => _tokenModel.UserName)" Validation="Validated.ToString()"/>
                         </MudItem>
                         <MudItem xs="8">
-                            <MudTextField T="string" Label=" کد ورود" Variant="Variant.Outlined" Margin="Margin.Dense"
+                            <MudTextField T="string" Label=" کد ورود" Variant="Variant.Outlined" Margin="Margin.Dense"  Mask="@(new PatternMask("000000"))" MaxLength=6
                                          @bind-Value="_secondRequest.Password" ></MudTextField>
                         </MudItem>
 

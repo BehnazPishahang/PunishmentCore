@@ -42,8 +42,8 @@
                   <div class="form-outline mb-4">
                       <MudItem Class="row">
                     <MudItem xs="8">
-                            <MudTextField T="string" Label=" کد ورود" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                         @bind-Value="_secondRequest.Password" ></MudTextField>
+                            <MudTextField T="string" Label=" کد ورود" Variant="Variant.Outlined" Margin="Margin.Dense"  Mask="@(new PatternMask("000000"))" MaxLength=6
+                                         @bind-Value="_secondRequest.Password"  ></MudTextField>
                         </MudItem>
 
                         <MudItem xs="4">
@@ -71,7 +71,7 @@
                            <MudButton Variant="Variant.Filled" Color="Color.Warning" Href="/false" Size="Size.Large" Style="width: 100%;">برگشت</MudButton>
                         </MudItem>
                   </MudItem>
-
+                  <br />
                     <div class="d-flex justify-center">
                                 <MudText>آیا تا کنون در سایت ثبت نام نکرده اید؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
                             </div>
@@ -166,14 +166,15 @@
             AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.SecondStepLogin, _secondRequest);
             if (result.Result.Code == 1000)
             {
+                SharedInfo.NationalCode = _tokenModel.UserName;
                 _navigationManager.NavigateTo("/true");
                 errorMessage = "";
-                SharedInfo.NationalCode = _tokenModel.UserName;
+             
             }
             else
             {
-                errorMessage = result.Result.Message;
-                Validated = false;
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+                Snackbar.Add(result.Result.Message,  Severity.Warning);
             }
         }
 }

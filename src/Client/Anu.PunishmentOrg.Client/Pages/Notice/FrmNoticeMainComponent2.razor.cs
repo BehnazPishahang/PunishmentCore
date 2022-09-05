@@ -1,7 +1,4 @@
-﻿using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice;
-using Anu.PunishmentOrg.Client.Infrastructure.Notice;
-using Anu.PunishmentOrg.ServiceModel.Notice;
-using Microsoft.AspNetCore.Components;
+﻿using Anu.PunishmentOrg.ServiceModel.Notice;
 using MudBlazor;
 
 namespace Anu.PunishmentOrg.Client.Pages.Notice

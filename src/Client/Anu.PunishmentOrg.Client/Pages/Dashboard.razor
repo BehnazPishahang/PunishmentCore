@@ -1,8 +1,10 @@
 ﻿@page "/dashboard"
 @inherits MainLayout
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice
 @using Anu.PunishmentOrg.Client.Infrastructure.Settings
 @using Anu.PunishmentOrg.Client.Pages.Authentication
-
+@inject INoticeService _noticeService;
+@inject AppConfiguration _appConfiguration;
 <MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
     
 
@@ -268,7 +270,15 @@
 {
     
    public static MudBlazor.Color _iconColorDashboard = MainLayout.DarkMode ? Color.Success : Color.Info;
-        
+
+   string ncode = SharedInfo.NationalCode;
+
+    protected override async Task OnInitializedAsync()
+        {
+            string ncode = SharedInfo.NationalCode;
+            var   Elements = _noticeService.GetCountOfUnSeenPNoticeByUser(_appConfiguration.BackendServerAddress, _appConfiguration.GetCountOfUnSeenPNoticeByUser, ncode);
+        }
+       
      
     
 }
