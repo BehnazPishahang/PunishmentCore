@@ -48,5 +48,18 @@ namespace Anu.PunishmentOrg.DataAccess.Notice
                                  .ThenInclude(a => a.ThePCase)
                                  .FirstOrDefaultAsync();
         }
+
+        public async Task<IEnumerable<Anu.PunishmentOrg.DataModel.Notice.PNotice>> GetAllPNoticeByNationalCode(string nationalityCode)
+        {
+            var theNoticeListOfUser = await _context.Set<Anu.PunishmentOrg.DataModel.Notice.PNoticePerson>()
+                                .Include(a => a.ThePNotice)
+                                .Include(a => a.ThePCasePerson)
+                                .Where(a => a.ThePCasePerson.NationalCode == nationalityCode)
+                                .Select(a => a.ThePNotice).ToListAsync();
+
+
+            return theNoticeListOfUser;
+
+        }
     }
 }

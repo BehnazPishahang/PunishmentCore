@@ -22,4 +22,20 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
         PNotice_ExportPNotice_NotFound                              = -30214,
         PNotice_ExportPNotice_Description_NotFound                  = -30215,
     }
+
+    public enum ChangePNoticeViewByUserStatusResult
+    {
+        PNotice_ChangePNoticeViewByUserStatus_Request_Is_Required = -30241,
+        PNotice_ChangePNoticeViewByUserStatus_ThePNoticeNoInputContract_Is_Required = -30242,
+        PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required = -30243,
+        PNotice_ChangePNoticeViewByUserStatus_PNotice_NotFound = -30244,
+    }
+
+    public enum GetCountOfUnSeenPNoticeByUserResult
+    {
+        PNotice_GetCountOfUnSeenPNoticeByUser_Request_Is_Required = -30251,
+        PNotice_GetCountOfUnSeenPNoticeByUser_ThePNoticePersonContract_Is_Required = -30252,
+        PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required = -30253,
+        PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound = -30254,
+    }
 }

@@ -70,5 +70,14 @@ namespace Anu.Constants.ServiceModel.BaseInfo
             public const string RecieveMechanizedLetterSystemFormCode = "0048";
 
         }
+
+        public static class NoticeResultTypeCode
+        {
+            /// <summary>
+            /// ابلاغ از طریق میز خدمت سازمان تعزیرات انجام شده است
+            /// </summary>
+            public const string NotificationThroughTheSite = "026";
+
+        }
     }
 }

@@ -21,10 +21,10 @@ namespace Utility.Guard
         {
             if (input is null)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public static string NullOrEmpty(this string? input, Enum type, string args = null)
@@ -94,7 +94,7 @@ namespace Utility.Guard
             }
             if (String.IsNullOrWhiteSpace(input))
             {
-                return false;
+                return true;
             }
 
             return true;

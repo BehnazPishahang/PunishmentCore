@@ -790,6 +790,42 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ابلاغ مد نظر یافت نشد.
+        /// </summary>
+        public static string PNotice_ChangePNoticeViewByUserStatus_PNotice_NotFound {
+            get {
+                return ResourceManager.GetString("PNotice_ChangePNoticeViewByUserStatus_PNotice_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره ابلاغ نامعتبر میباشد.
+        /// </summary>
+        public static string PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string PNotice_ChangePNoticeViewByUserStatus_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ChangePNoticeViewByUserStatus_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string PNotice_ChangePNoticeViewByUserStatus_ThePNoticeNoInputContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ChangePNoticeViewByUserStatus_ThePNoticeNoInputContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to متن ابلاغیه یافت نشد..
         /// </summary>
         public static string PNotice_ExportPNotice_Description_NotFound {

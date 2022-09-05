@@ -440,6 +440,22 @@
     <value>رای صادر شده است.</value>
     <comment>200013</comment>
   </data>
+  <data name="PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required" xml:space="preserve">
+    <value>شماره ابلاغ نامعتبر میباشد</value>
+    <comment>-30243</comment>
+  </data>
+  <data name="PNotice_ChangePNoticeViewByUserStatus_PNotice_NotFound" xml:space="preserve">
+    <value>ابلاغ مد نظر یافت نشد</value>
+    <comment>-30244</comment>
+  </data>
+  <data name="PNotice_ChangePNoticeViewByUserStatus_Request_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30241</comment>
+  </data>
+  <data name="PNotice_ChangePNoticeViewByUserStatus_ThePNoticeNoInputContract_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30242</comment>
+  </data>
   <data name="PNotice_ExportPNotice_Description_NotFound" xml:space="preserve">
     <value>متن ابلاغیه یافت نشد.</value>
     <comment>-30215</comment>
