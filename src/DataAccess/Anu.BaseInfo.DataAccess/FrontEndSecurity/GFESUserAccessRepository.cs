@@ -22,10 +22,10 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
                     ).ToListAsync();
 
             return gfeUser.Where(a =>
-                    a.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.DateTimeNow() &&
-                    a.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.DateTimeNow() &&
-                    a.ToDateTime.ToDateTime() >= CalendarHelper.DateTimeNow() &&
-                    a.FromDateTime.ToDateTime() <= CalendarHelper.DateTimeNow());
+                    a.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.SahmsiDateNow() &&
+                    a.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.SahmsiDateNow() &&
+                    a.ToDateTime.ToDateTime() >= CalendarHelper.SahmsiDateNow() &&
+                    a.FromDateTime.ToDateTime() <= CalendarHelper.SahmsiDateNow());
         }
     }
 }

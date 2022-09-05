@@ -61,6 +61,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لطفا تاریخ تولد خود را وارد نمایید.
+        /// </summary>
+        public static string BirthDate_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("BirthDate_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاریخ تولد معتبر نمی باشد.
+        /// </summary>
+        public static string BirthDate_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("BirthDate_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to خطای غیر منتظره.
         /// </summary>
         public static string Error {
@@ -97,6 +115,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لطفا نام خود را وارد نمایید.
+        /// </summary>
+        public static string FirstName_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("FirstName_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to درخواست بدنه نمی‌تواند خالی باشد..
         /// </summary>
         public static string GeoLocation_Request_IsNull {
@@ -111,6 +138,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string GeoLocation_Request_NotValid {
             get {
                 return ResourceManager.GetString("GeoLocation_Request_NotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا نام خوانوادگی خود را وارد نمایید.
+        /// </summary>
+        public static string LastName_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("LastName_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا مجددا وارد شوید.
+        /// </summary>
+        public static string Login_Again {
+            get {
+                return ResourceManager.GetString("Login_Again", resourceCulture);
             }
         }
         
@@ -381,6 +426,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string MechanizedLetter_TheReceiverInnerOrgCode_Is_Not_Valid {
             get {
                 return ResourceManager.GetString("MechanizedLetter_TheReceiverInnerOrgCode_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا کد ملی را وارد نمایید..
+        /// </summary>
+        public static string NationalCode_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("NationalCode_Is_Not_Entered", resourceCulture);
             }
         }
         
@@ -916,6 +970,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to در خواست شما معتبر نمی باشد.
+        /// </summary>
+        public static string Request_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("Request_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اطلاعات وارد شده معتبر نمی باشد..
         /// </summary>
         public static string SabteAhval_Data_Not_Match_Entered_Data {
@@ -939,6 +1002,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string SabteAhval_Unkhown_Error {
             get {
                 return ResourceManager.GetString("SabteAhval_Unkhown_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا مجددا {0} دیگر تلاش کنید.
+        /// </summary>
+        public static string Send_Login_Request_After_x_Second {
+            get {
+                return ResourceManager.GetString("Send_Login_Request_After_x_Second", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to جنسیت معتبر نمی باشد.
+        /// </summary>
+        public static string Sex_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("Sex_Is_Not_Valid", resourceCulture);
             }
         }
         
@@ -975,6 +1056,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string Shahkar_Unkhown_Error {
             get {
                 return ResourceManager.GetString("Shahkar_Unkhown_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شما به محدودیت ارسال اس ام اس رسیده اید لطفا مجدد فردا مراجعه کنید..
+        /// </summary>
+        public static string Sms_Limit_Send {
+            get {
+                return ResourceManager.GetString("Sms_Limit_Send", resourceCulture);
             }
         }
         
