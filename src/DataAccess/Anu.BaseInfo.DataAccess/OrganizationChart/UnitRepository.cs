@@ -21,7 +21,9 @@ namespace Anu.BaseInfo.DataAccess.OrganizationChart
 
         public async Task<Anu.BaseInfo.DataModel.OrganizationChart.Unit> GetByCode(string code)
         {
-            return await _context.Set<Anu.BaseInfo.DataModel.OrganizationChart.Unit>().Where(x => x.Code == code).FirstOrDefaultAsync();
+            return await _context.Set<Anu.BaseInfo.DataModel.OrganizationChart.Unit>().Where(x => x.Code == code)
+                .Include(x=> x.TheGUnitType)
+                .FirstOrDefaultAsync();
         }
     }
 }

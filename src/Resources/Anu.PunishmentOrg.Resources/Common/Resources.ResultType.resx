@@ -145,9 +145,33 @@
     <value>کد عبور برای شماره {0} ارسال شد .</value>
     <comment>100013</comment>
   </data>
+  <data name="MechanizedLetter_CaseHandlerUnitId_Is_Not_Sync_UnitId" xml:space="preserve">
+    <value>کد واحد پرونده نامرتبط است.</value>
+    <comment>301318</comment>
+  </data>
+  <data name="MechanizedLetter_CaseNo_Is_Not_Valid" xml:space="preserve">
+    <value>شماره پرونده نامعتبر است.</value>
+    <comment>301314</comment>
+  </data>
+  <data name="MechanizedLetter_CaseNo_Is_Null" xml:space="preserve">
+    <value>شماره پرونده را وارد نمایید.</value>
+    <comment>301317</comment>
+  </data>
+  <data name="MechanizedLetter_CaseUnit_Is_Not_Valid" xml:space="preserve">
+    <value>کد واحد پرونده نامعتبر است</value>
+    <comment>301315</comment>
+  </data>
+  <data name="MechanizedLetter_CaseUnit_Is_Null" xml:space="preserve">
+    <value>کد واحد پرونده را وارد نمایید.</value>
+    <comment>301316</comment>
+  </data>
   <data name="MechanizedLetter_CreatorUserName_Is_Null" xml:space="preserve">
     <value>كاربر ثبت كننده نامه را وارد کنید.</value>
     <comment>30131</comment>
+  </data>
+  <data name="MechanizedLetter_GMechanizedLetterTypeCode_Is_Not_Valid" xml:space="preserve">
+    <value>کد موضوع نامه نامعتبر است.</value>
+    <comment>301324</comment>
   </data>
   <data name="MechanizedLetter_GMechanizedLetterTypeCode_Is_null" xml:space="preserve">
     <value>کد نوع موضوع نامه را انتخاب کنید.</value>
@@ -156,6 +180,14 @@
   <data name="MechanizedLetter_LetterText_Is_Null" xml:space="preserve">
     <value>متن نامه را وارد نمایید.</value>
     <comment>301311</comment>
+  </data>
+  <data name="MechanizedLetter_mainRcvOrTranscriptRcv_Is_Not_Valid" xml:space="preserve">
+    <value>مقدار نوع گيرنده از نطر گيرنده اصل نامه/رونوشت گيرنده معتبر نمی باشد.</value>
+    <comment>301321</comment>
+  </data>
+  <data name="MechanizedLetter_mainRcvOrTranscriptRcv_Is_Null" xml:space="preserve">
+    <value>نوع گيرنده از نطر گيرنده اصل نامه/رونوشت گيرنده را وارد نمایید.</value>
+    <comment>301320</comment>
   </data>
   <data name="MechanizedLetter_NAJAUnit_Is_Null" xml:space="preserve">
     <value>وارد کردن کد واحد فرستنده نامه اجباری می باشد.</value>
@@ -177,9 +209,41 @@
     <value>شماره نامه فرستنده را وارد نمایید.</value>
     <comment>30135</comment>
   </data>
+  <data name="MechanizedLetter_ReceiverType_Is_Not_Valid" xml:space="preserve">
+    <value>مقدار نوع گيرنده نامه/رونوشت از نظر واحدي/سمتي/کاربري نامعتبر است.</value>
+    <comment>301323</comment>
+  </data>
+  <data name="MechanizedLetter_ReceiverType_Is_Null" xml:space="preserve">
+    <value>نوع گيرنده نامه/رونوشت از نظر واحدي/سمتي/کاربري را وارد نمایید.</value>
+    <comment>301322</comment>
+  </data>
   <data name="MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null" xml:space="preserve">
     <value>وارد کردن اطلاعات حداقل یک گیرنده برای نامه اجباری می باشد.</value>
     <comment>30137</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_relationType_Is_Not_Valid" xml:space="preserve">
+    <value>مقدار نوع نامه از نظر نامه بازگشتي یا پيروي نامعتبر است.</value>
+    <comment>301326</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_relationType_Is_Null" xml:space="preserve">
+    <value>نوع نامه از نظر نامه بازگشتي یا پيروي را وارد کنید.</value>
+    <comment>301325</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_RelLetterGetType_Is_Not_Valid" xml:space="preserve">
+    <value>نوع نامه از نظر مکانيزه بودن يا غيرمکانيزه بودن نامه بازگشتي یا پيروي نامعتبر است.</value>
+    <comment>301328</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_RelLetterGetType_Is_Null" xml:space="preserve">
+    <value>نوع نامه از نظر مکانيزه بودن يا غيرمکانيزه بودن نامه بازگشتي یا پيروي را وارد کنید.</value>
+    <comment>301327</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_RelLetterNo_Is_Not_Valid" xml:space="preserve">
+    <value>شماره نامه بازگشتي یا پيروي نامعتبر است.</value>
+    <comment>301329</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_RelLetterNo_Is_Null" xml:space="preserve">
+    <value>شماره نامه بازگشتي یا پيروي را وارد نمایید.</value>
+    <comment>301330</comment>
   </data>
   <data name="MechanizedLetter_Request_Is_Null" xml:space="preserve">
     <value>وارد کردن پارامترهای ورودی اجباری می باشد.</value>
@@ -196,6 +260,10 @@
   <data name="MechanizedLetter_TheReceiverInnerOrgCode_Is_Not_Valid" xml:space="preserve">
     <value>کد واحد گیرنده نامه معتبر نمی باشد.</value>
     <comment>301310</comment>
+  </data>
+  <data name="MechanizedLetter_TheUnit_Is_Null" xml:space="preserve">
+    <value>واحد پرونده را مقدار دهی نمایید.</value>
+    <comment>301319</comment>
   </data>
   <data name="NationalCode_Is_Not_Valid" xml:space="preserve">
     <value>لطفا کد ملی را صحیح وارد نمایید.</value>
@@ -371,6 +439,22 @@
   <data name="PJudgment" xml:space="preserve">
     <value>رای صادر شده است.</value>
     <comment>200013</comment>
+  </data>
+  <data name="PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required" xml:space="preserve">
+    <value>شماره ابلاغ نامعتبر میباشد</value>
+    <comment>-30243</comment>
+  </data>
+  <data name="PNotice_ChangePNoticeViewByUserStatus_PNotice_NotFound" xml:space="preserve">
+    <value>ابلاغ مد نظر یافت نشد</value>
+    <comment>-30244</comment>
+  </data>
+  <data name="PNotice_ChangePNoticeViewByUserStatus_Request_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30241</comment>
+  </data>
+  <data name="PNotice_ChangePNoticeViewByUserStatus_ThePNoticeNoInputContract_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30242</comment>
   </data>
   <data name="PNotice_ExportPNotice_Description_NotFound" xml:space="preserve">
     <value>متن ابلاغیه یافت نشد.</value>

@@ -81,9 +81,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.PersianDatePicker", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report", "Report", "{7E1FC2B5-6E31-493A-98D8-6E76F0E6C1F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anu.Report", "src\Report\Anu.Report\Anu.Report.csproj", "{A6C32DE8-B55C-4AD8-A7A0-CCB290074BBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anu.Report", "src\Report\Anu.Report\Anu.Report.csproj", "{A6C32DE8-B55C-4AD8-A7A0-CCB290074BBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anu.PunishmentOrg.Report", "src\Report\Anu.Punishment.Report\Anu.PunishmentOrg.Report.csproj", "{74CBF672-D72A-486A-AAF4-A64A276B0D4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anu.PunishmentOrg.Report", "src\Report\Anu.Punishment.Report\Anu.PunishmentOrg.Report.csproj", "{74CBF672-D72A-486A-AAF4-A64A276B0D4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

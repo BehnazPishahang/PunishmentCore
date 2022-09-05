@@ -862,6 +862,13 @@ public class PunishmentOrgActivities
         /// </summary>
         public const string RegisterCase = "000424";
     }
+    public static class MechanizedLetter
+    {
+        /// <summary>
+        /// رويت و يا ارجاع/ارسال مكاتبه مكانيزه
+        /// </summary>
+        public const string ViewOrRefer = "000236";
+    }
 }
 
 

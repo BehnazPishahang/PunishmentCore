@@ -6,5 +6,7 @@ namespace Anu.PunishmentOrg.Domain.Notice
     {
         public Task<IEnumerable<DataModel.Notice.PNotice>> GetAllPNoticeByNationalCode(string NationalCode,Page Page);
         public Task<DataModel.Notice.PNotice> GetPNoticeByNo(string No);
+
+        public Task<IEnumerable<DataModel.Notice.PNotice>> GetAllPNoticeByNationalCode(string NationalCode);
     }
 }

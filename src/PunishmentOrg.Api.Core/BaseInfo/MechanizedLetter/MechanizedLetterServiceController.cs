@@ -1,17 +1,14 @@
-﻿using Anu.BaseInfo.DataAccess.GMechanizedLetter;
-using Anu.BaseInfo.DataAccess.OrganizationChart;
-using Anu.BaseInfo.DataAccess.SystemConfiguration;
-using Anu.BaseInfo.DataAccess.SystemObject;
-using Anu.BaseInfo.DataModel.MechanizedLetter;
+﻿using Anu.BaseInfo.DataModel.MechanizedLetter;
+using Anu.BaseInfo.DataModel.SystemConfiguration;
 using Anu.BaseInfo.Domain.ExchangeData;
 using Anu.BaseInfo.Domain.MechanizedLetter;
 using Anu.BaseInfo.Domain.OrganizationChart;
+using Anu.BaseInfo.Domain.Security;
 using Anu.BaseInfo.Domain.SystemConfiguration;
 using Anu.BaseInfo.Domain.SystemObject;
 using Anu.BaseInfo.ServiceModel.MechanizedLetter;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
-using Anu.PunishmentOrg.DataAccess.PCase;
 using Anu.PunishmentOrg.Domain.Case;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Microsoft.AspNetCore.Mvc;
@@ -49,17 +46,19 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
             try
             {
 
-                //request.Null(MechanizedLetterResult.MechanizedLetter_Request_Is_Null);
+                request.Null(MechanizedLetterResult.MechanizedLetter_Request_Is_Null);
 
-                request.TheGMechanizedLetterContract.TheGMechanizedLetterTypeContract.Code.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_GMechanizedLetterTypeCode_Is_null);
-                request.TheGMechanizedLetterContract.TheNAJAUnitContract.Code.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_NAJAUnit_Is_Null);
-
-                var GMechanizedLetterType = await _unitOfWork.Repositorey<IGMechanizedLetterTypeRepository>().GetByCode(request.TheGMechanizedLetterContract.TheGMechanizedLetterTypeContract.Code);
-                GMechanizedLetterType.Null(MechanizedLetterResult.MechanizedLetter_Request_Is_Null);
-
-                var NajaUnit = await _unitOfWork.Repositorey<INAJAUnitRepository>().GetByCode(request.TheGMechanizedLetterContract.TheNAJAUnitContract.Code);
 
                 #region Validation
+
+                #region GMechanizedLetterType
+
+                request.TheGMechanizedLetterContract.TheGMechanizedLetterTypeContract.Code.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_GMechanizedLetterTypeCode_Is_null);
+                var GMechanizedLetterType = await _unitOfWork.Repositorey<IGMechanizedLetterTypeRepository>().GetByCode(request.TheGMechanizedLetterContract.TheGMechanizedLetterTypeContract.Code);
+                GMechanizedLetterType.Null(MechanizedLetterResult.MechanizedLetter_GMechanizedLetterTypeCode_Is_Not_Valid);
+
+                #endregion
+
                 #region [CreatorUserName]
                 if (request.TheGMechanizedLetterContract.CreatorUserName == null || request.TheGMechanizedLetterContract.CreatorUserName == string.Empty)
                 {
@@ -68,13 +67,18 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 }
                 #endregion [CreatorUserName]
 
+                #region TheSenderOuterOrg
+                request.TheGMechanizedLetterContract.TheNAJAUnitContract.Code.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_NAJAUnit_Is_Null);
+                var NajaUnit = await _unitOfWork.Repositorey<INAJAUnitRepository>().GetByCode(request.TheGMechanizedLetterContract.TheNAJAUnitContract.Code);
+                NajaUnit.Null(MechanizedLetterResult.MechanizedLetter_SenderOuterOrgCode_Is_Not_Valid);
+                #endregion
+
                 #region [OuterOrgLetterDate]
 
                 request.TheGMechanizedLetterContract.OuterOrgLetterDate.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_OuterOrgLetterDate_Is_Null);
                 request.TheGMechanizedLetterContract.OuterOrgLetterDate.IsValidDate(MechanizedLetterResult.MechanizedLetter_OuterOrgLetterDate_Is_Not_ValidDate);
 
                 #endregion [OuterOrgLetterDate]
-
 
                 #region [OuterOrgLetterNo]
                 request.TheGMechanizedLetterContract.OuterOrgLetterNo.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_OuterOrgLetterNo_Is_Null, args: "شماره نامه فرستنده را وارد نمایید.");
@@ -83,24 +87,63 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 #endregion [OuterOrgLetterNo]
 
                 #region [TheGMechanizedLetterReceiverList]
-                if (request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList == null ||
-                    request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList != null && request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList.Count == 0)
+
+                request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList.Null(MechanizedLetterResult.MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null);
+
+                foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList)
                 {
-                    return Respond(MechanizedLetterResult.MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null);
+                    item.MainRcvOrTranscriptRcv.Null(MechanizedLetterResult.MechanizedLetter_mainRcvOrTranscriptRcv_Is_Null);
+                    item.ReceiverType.Null(MechanizedLetterResult.MechanizedLetter_ReceiverType_Is_Null);
+
+                    if (item.MainRcvOrTranscriptRcv != Anu.BaseInfo.Enumerations.MechanizedLetterMainRcvOrTranscriptRcv.MainReceiver && item.MainRcvOrTranscriptRcv != Anu.BaseInfo.Enumerations.MechanizedLetterMainRcvOrTranscriptRcv.TranscriptReceiver)
+                        return Respond(MechanizedLetterResult.MechanizedLetter_mainRcvOrTranscriptRcv_Is_Not_Valid);
+
+                    if (item.ReceiverType != Anu.BaseInfo.Enumerations.MechanizeRefererType.Unit
+                        && item.ReceiverType != Anu.BaseInfo.Enumerations.MechanizeRefererType.UserPost
+                        && item.ReceiverType != Anu.BaseInfo.Enumerations.MechanizeRefererType.PostRole)
+                        return Respond(MechanizedLetterResult.MechanizedLetter_ReceiverType_Is_Not_Valid);
                 }
                 #endregion [TheGMechanizedLetterReceiverList]
 
-                #region [TheSenderOuterOrg]
-
-                request.TheGMechanizedLetterContract.TheNAJAUnitContract.Code.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_SenderOuterOrgCode_Is_Null);
-
-
-                if (NajaUnit == null)
+                #region TheGMechanizedLetterCaseContractList
+                foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterCaseContractList)
                 {
-                    return Respond(MechanizedLetterResult.MechanizedLetter_SenderOuterOrgCode_Is_Not_Valid);
-                }
+                    item.RelatedCaseNo.Null(MechanizedLetterResult.MechanizedLetter_CaseNo_Is_Null);
+                    item.TheunitContract.Null(MechanizedLetterResult.MechanizedLetter_TheUnit_Is_Null);
+                    item.TheunitContract.Code.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_CaseUnit_Is_Null);
 
-                #endregion [TheSenderOuterOrg]
+                    var CaseObj = await _unitOfWork.Repositorey<IPCaseRepository>().GetPCaseByNo(item.RelatedCaseNo);
+                    CaseObj.Null(MechanizedLetterResult.MechanizedLetter_CaseNo_Is_Not_Valid);
+
+
+                    var UnitObj = await _unitOfWork.Repositorey<IUnitRepository>().GetByCode(item.TheunitContract.Code);
+                    UnitObj.Null(MechanizedLetterResult.MechanizedLetter_CaseUnit_Is_Not_Valid);
+
+
+                }
+                #endregion
+
+                foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterRelLettersContractList)
+                {
+                    item.RelationType.Null(MechanizedLetterResult.MechanizedLetter_RelLetters_relationType_Is_Null);
+                    item.RelLetterGetType.Null(MechanizedLetterResult.MechanizedLetter_RelLetters_RelLetterGetType_Is_Null);
+                    item.RelLetterNo.Null(MechanizedLetterResult.MechanizedLetter_RelLetters_RelLetterNo_Is_Null);
+
+                    if (item.RelationType != Anu.BaseInfo.Enumerations.MechanizedLetterRelType.Comeback &&
+                        item.RelationType != Anu.BaseInfo.Enumerations.MechanizedLetterRelType.Follower)
+                    {
+                        return Respond(MechanizedLetterResult.MechanizedLetter_RelLetters_relationType_Is_Not_Valid);
+                    }
+
+                    if (item.RelLetterGetType != Anu.BaseInfo.Enumerations.MechanizedLetterRelLetterGetType.NonMechanize
+                        && item.RelLetterGetType != Anu.BaseInfo.Enumerations.MechanizedLetterRelLetterGetType.Mechanize)
+                    {
+                        return Respond(MechanizedLetterResult.MechanizedLetter_RelLetters_RelLetterGetType_Is_Not_Valid);
+                    }
+
+                    var GMechanizedLetterObj = await _unitOfWork.Repositorey<IGMechanizedLetterRepository>().GetByNo(item.RelLetterNo);
+                    GMechanizedLetterObj.Null(MechanizedLetterResult.MechanizedLetter_RelLetters_RelLetterNo_Is_Not_Valid);
+                }
 
                 #region [TheReceiverInnerOrg]
                 foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList)
@@ -119,12 +162,11 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 #endregion [TheReceiverInnerOrg]
 
                 #region LetterText
-                if (request.TheGMechanizedLetterContract.LetterText == null || request.TheGMechanizedLetterContract.LetterText == string.Empty)
-                {
-                    return Respond(MechanizedLetterResult.MechanizedLetter_LetterText_Is_Null);
 
-                }
+                request.TheGMechanizedLetterContract.LetterText.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_LetterText_Is_Null);
+
                 #endregion
+
                 #endregion
 
                 #region CreateGMechanizedLetter
@@ -151,158 +193,6 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 OneGMechanizedLetter.TheSenderOuterOrg = NajaUnit is null ? null : NajaUnit;
                 #endregion
 
-                #region GMechanizedLetterReceiver
-
-                foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList)
-                {
-                    var ReceiverInnerOrg = await _unitOfWork.Repositorey<ICMSOrganizationRepository>().GetByCode(item.TheCMSOrganizationContract.Code);
-                    var CMSUserRoleType = await _unitOfWork.Repositorey<ICMSUserRoleTypeRepository>().GetByCode(item.TheCMSUserRoleTypeContract.Code);
-                    var MaxNo = await _unitOfWork.Repositorey<IGMechanizedLetterRepository>().GetMaxNo(CalendarHelper.GetCurrentDate().Substring(0, 4), item.TheCMSOrganizationContract.Code);
-                    OneGMechanizedLetter.TheGMechanizedLetterReceiverList = new();
-                    var oneGMechanizedLetterReceiver = new GMechanizedLetterReceiver()
-                    {
-                        Id = Guid.NewGuid().ToString("N"),
-                        IsMechanizeRelation = Anu.BaseInfo.Enumerations.YesNo.Yes,
-                        InnerOrOutterRcvType = Anu.BaseInfo.Enumerations.MechanizedLetterReceiverType.InnerOrg,
-                        MainRcvOrTranscriptRcv = item.MainRcvOrTranscriptRcv,
-                        ReceiverType = item.ReceiverType,
-                        SendDateTime = CalendarHelper.GetCurrentDateTime(),
-                        ViewDateTime = "9999/99/99-99:99",
-                        TheObjectState = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PMechanizeLetter.ReceivedByReceiverUnit),
-                        TheReceiverInnerOrg = ReceiverInnerOrg is null ? null : ReceiverInnerOrg,
-                        TheReceiverPost = CMSUserRoleType is null ? null : CMSUserRoleType
-
-                    };
-                    OneGMechanizedLetter.TheGMechanizedLetterReceiverList.Add(oneGMechanizedLetterReceiver);
-
-                    if (request.TheGMechanizedLetterContract.No == null)
-                    {
-
-                        OneGMechanizedLetter.No = MaxNo;
-
-                    }
-
-
-                    #region DefineWorkItemsForMechanizeLetter
-                    //string relatedCMSUserId = null;
-                    //string relatedCMSOrgId = null;
-                    //string OneNAJAUnit = null;
-                    //string relatedCMSUserRoleTypeId = null;
-                    //string vGUID = Guid.NewGuid().ToString().Replace("-", string.Empty);
-
-                    ////todo
-                    ////if (item.TheReceiverUserAndPost != null)
-                    ////    relatedCMSUserId = item.TheReceiverUserAndPost.TheCmsUserContract.id;
-
-                    //#region Inner
-                    //if (item.InnerOrOutterRcvType == Enumerations.MechanizedLetterReceiverType.InnerOrg)
-                    //{
-                    //    #region CMSOrganization
-                    //    var OneCMSOrganization = await _unitOfWork.CMSOrganization.GetByCode(item.TheCMSOrganizationContract.Code);
-                    //    relatedCMSOrgId = OneCMSOrganization.Id;
-                    //    #endregion
-
-                    //    #region CMSUserRoleType
-
-                    //    if (item.TheCMSUserRoleTypeContract.Code != null)
-                    //    {
-                    //        var OnerelatedCMSUserRoleType = await _unitOfWork.CMSUserRoleType.GetByCode(item.TheCMSUserRoleTypeContract.Code);
-                    //        relatedCMSUserRoleTypeId = OnerelatedCMSUserRoleType.Id;
-                    //    }
-
-                    //    #endregion
-
-                    //    #region CMSUser
-                    //    //todo
-                    //    //if (item.TheReceiverUserAndPost != null)
-                    //    //{
-                    //    //    var OnerelatedCMSUserRoleType = await _unitOfWork.CMSUserRoleType.GetByCode(item.TheCMSUserRoleTypeContract.Code);
-                    //    //    relatedCMSUserRoleTypeId = OnerelatedCMSUserRoleType.Id;
-                    //    //}
-                    //    //relatedCMSUserId = item.TheReceiverUserAndPost.TheCmsUserContract.ObjectId;
-
-                    //    #endregion
-
-                    //    #region واحد
-                    //    if (item.ReceiverType == Enumerations.MechanizeRefererType.Unit)
-                    //    {
-                    //        if (item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "005" ||
-                    //            item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "006" ||
-                    //            item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "007" ||
-                    //            item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "013" ||
-                    //            item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "014" ||
-                    //            item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "015")
-                    //            relatedCMSUserRoleTypeId = "0012";
-
-                    //        else if (item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "003" ||
-                    //            item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "004" ||
-                    //            item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "009" ||
-                    //            item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "016")
-                    //            relatedCMSUserRoleTypeId = "0010";
-
-                    //        else if (item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "008" ||
-                    //            item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "010" ||
-                    //            item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "011" ||
-                    //            item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "012")
-                    //            relatedCMSUserRoleTypeId = "0042";
-
-                    //        else if (item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "001")
-                    //            relatedCMSUserRoleTypeId = "0005";
-
-                    //        else if (item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "017")
-                    //            relatedCMSUserRoleTypeId = "0008";
-
-                    //        else if (item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "018")
-                    //            relatedCMSUserRoleTypeId = "0009";
-
-                    //        else if (item.TheCMSOrganizationContract.TheunitContract.GUnitTypeId == "019")
-                    //            relatedCMSUserRoleTypeId = "0013";
-
-                    //        DefineWorkItemsForMechanizeLetter("000236"//vCMSOrgMechanized.GetMechanizedDefaultBaseRole().Id
-                    //           , OneGMechanizedLetter
-                    //           , relatedCMSUserId
-                    //           , relatedCMSOrgId
-                    //           , "9003239250EA48C3A583FA2DAC0D0E2C"//systemform
-                    //           , relatedCMSUserRoleTypeId, true, vGUID, "8fc11d43c5a24efa8e209b3cc05ca450", oneGMechanizedLetterReceiver.Id);
-                    //    }
-                    //    #endregion
-
-                    //    #region سمت
-                    //    else if (item.ReceiverType == Enumerations.MechanizeRefererType.PostRole)
-                    //    {
-                    //        DefineWorkItemsForMechanizeLetter("000236"//vCMSOrgMechanized.GetMechanizedDefaultBaseRole().Id
-                    //            , OneGMechanizedLetter
-                    //            , relatedCMSUserId
-                    //            , relatedCMSOrgId
-                    //            , "9003239250EA48C3A583FA2DAC0D0E2C"//systemform
-                    //            , relatedCMSUserRoleTypeId, true, vGUID, "8fc11d43c5a24efa8e209b3cc05ca450", oneGMechanizedLetterReceiver.Id);
-                    //    }
-
-                    //    #endregion
-
-                    //    #region کاربر
-                    //    else if (item.ReceiverType == Enumerations.MechanizeRefererType.UserPost)
-                    //    {
-                    //        //relatedCMSUserId = item.TheReceiverUserAndPost.TheCmsUserContract.ObjectId;
-
-                    //        //DefineWorkItemsForMechanizeLetter("000236"//vCMSOrgMechanized.GetMechanizedDefaultBaseRole().Id
-                    //        //    , OneGMechanizedLetter
-                    //        //    , relatedCMSUserId
-                    //        //    , relatedCMSOrgId
-                    //        //    , "9003239250EA48C3A583FA2DAC0D0E2C"//systemform
-                    //        //    , relatedCMSUserRoleTypeId, true, vGUID, "8fc11d43c5a24efa8e209b3cc05ca450", oneGMechanizedLetterReceiver.Id);
-                    //    }
-                    //    #endregion
-                    //}
-                    //#endregion
-
-
-                    #endregion
-
-                }
-
-                #endregion
-
                 #region Case
                 foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterCaseContractList)
                 {
@@ -318,10 +208,11 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
 
                         }
                     }
+                    OneCaseId.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_CaseHandlerUnitId_Is_Not_Sync_UnitId);
                     var GMechanizedLetterCase = new GMechanizedLetterCase()
                     {
                         Id = Guid.NewGuid().ToString("N"),
-                        TheUnit = Unit is null ? null : Unit,
+                        TheUnit = Unit,
                         RelatedCaseNo = item.RelatedCaseNo,
                         RelatedCaseTitle = item.RelatedCaseTitle,
                         CaseLocation = Anu.BaseInfo.Enumerations.MechanizedLetterCaseLocation.Destination,
@@ -347,7 +238,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                         RelLetterGetType = item.RelLetterGetType,
                         RelLetterNo = item.RelLetterNo,
                         TheMainLetter = OneGMechanizedLetter,
-                        TheRelLetter = GMechanizedLetterObj is null ? null : GMechanizedLetterObj,
+                        TheRelLetter = GMechanizedLetterObj,
 
                     };
 
@@ -356,28 +247,6 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 #endregion
 
                 #region GMechanizedLetterFieldsContractList
-                int turn = 1;
-
-                switch (GMechanizedLetterType.Code)
-                {
-
-                    // معرفی نماینده حقوقی جهت شرکت در جلسه رسیدگی
-                    case "00027":
-
-                        break;
-
-                    //درخواست تجدید نظر از سمت سازمان حمایت
-                    case "00028":
-                        break;
-
-                    //پاسخ درخواست کارشناسی در خصوص پرونده
-                    case "00029":
-                        break;
-                    //سایر موضوعات مکاتبه در خصوص پرونده
-                    case "00030":
-                        break;
-
-                }
 
                 foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterFieldsContractList)
                 {
@@ -385,14 +254,127 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
 
                 #endregion
 
+                #region GMechanizedLetterReceiver
+
+                foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList)
+                {
+                    var ReceiverInnerOrg = await _unitOfWork.Repositorey<ICMSOrganizationRepository>().GetByCode(item.TheCMSOrganizationContract.Code);
+                    var CMSUserRoleType = await _unitOfWork.Repositorey<ICMSUserRoleTypeRepository>().GetByCode(item.TheCMSUserRoleTypeContract.Code);
+                    var MaxNo = await _unitOfWork.Repositorey<IGMechanizedLetterRepository>().GetMaxNo(CalendarHelper.GetCurrentDate().Substring(0, 4), item.TheCMSOrganizationContract.Code);
+                    OneGMechanizedLetter.TheGMechanizedLetterReceiverList = new();
+                    var oneGMechanizedLetterReceiver = new GMechanizedLetterReceiver()
+                    {
+                        Id = Guid.NewGuid().ToString("N"),
+                        IsMechanizeRelation = Anu.BaseInfo.Enumerations.YesNo.Yes,
+                        InnerOrOutterRcvType = Anu.BaseInfo.Enumerations.MechanizedLetterReceiverType.InnerOrg,
+                        MainRcvOrTranscriptRcv = item.MainRcvOrTranscriptRcv,
+                        ReceiverType = item.ReceiverType,
+                        SendDateTime = CalendarHelper.GetCurrentDateTime(),
+                        ViewDateTime = "9999/99/99-99:99",
+                        TheObjectState = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PMechanizeLetter.ReceivedByReceiverUnit),
+                        TheReceiverInnerOrg = ReceiverInnerOrg is null ? null : ReceiverInnerOrg,
+                        TheReceiverPost = CMSUserRoleType is null ? null : CMSUserRoleType
+
+                    };
+                    OneGMechanizedLetter.TheGMechanizedLetterReceiverList.Add(oneGMechanizedLetterReceiver);
+                    OneGMechanizedLetter.No = MaxNo;
+
+
+                    #region DefineWorkItemsForMechanizeLetter
+                    string relatedCMSUserId = null;
+                    string relatedCMSOrgId = null;
+                    string OneNAJAUnit = null;
+                    string relatedCMSUserRoleTypeId = null;
+                    string vGUID = Guid.NewGuid().ToString().Replace("-", string.Empty);
+
+                    //todo
+                    //if (item.TheReceiverUserAndPost != null)
+                    //    relatedCMSUserId = item.TheReceiverUserAndPost.TheCmsUserContract.id;
+
+                    #region Inner
+                    if (oneGMechanizedLetterReceiver.InnerOrOutterRcvType == Anu.BaseInfo.Enumerations.MechanizedLetterReceiverType.InnerOrg)
+                    {
+                        #region CMSOrganization
+                        var OneCMSOrganization = await _unitOfWork.Repositorey<ICMSOrganizationRepository>().GetByCode(item.TheCMSOrganizationContract.Code);
+                        relatedCMSOrgId = OneCMSOrganization.Id;
+                        #endregion
+
+                        #region CMSUserRoleType
+
+                        if (CMSUserRoleType != null)
+                            relatedCMSUserRoleTypeId = CMSUserRoleType.Id;
+
+                        #endregion
+
+                        #region CMSUser
+                        //todo
+                        //if (item.TheReceiverUserAndPost != null)
+                        //{
+                        //    var OnerelatedCMSUserRoleType = await _unitOfWork.CMSUserRoleType.GetByCode(item.TheCMSUserRoleTypeContract.Code);
+                        //    relatedCMSUserRoleTypeId = OnerelatedCMSUserRoleType.Id;
+                        //}
+                        //relatedCMSUserId = item.TheReceiverUserAndPost.TheCmsUserContract.ObjectId;
+
+                        #endregion
+
+                        #region واحد
+
+
+                        var Unit = await _unitOfWork.Repositorey<IUnitRepository>().GetByCode(ReceiverInnerOrg.TheUnit.Code);
+
+                        if (item.ReceiverType == Anu.BaseInfo.Enumerations.MechanizeRefererType.Unit)
+                        {
+
+                            DefineWorkItemsForMechanizeLetter(Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgActivities.MechanizedLetter.ViewOrRefer
+                               , OneGMechanizedLetter
+                               , relatedCMSUserId
+                               , relatedCMSOrgId
+                               , Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.SystemFormId.RecieveMechanizedLetterSystemFormId
+                               , relatedCMSUserRoleTypeId, true, vGUID, Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.SystemObjectId.RecieveMechanizedLetterSystemObjectId, oneGMechanizedLetterReceiver.Id);
+                        }
+                        #endregion
+
+                        #region سمت
+                        else if (item.ReceiverType == Anu.BaseInfo.Enumerations.MechanizeRefererType.PostRole)
+                        {
+
+                            DefineWorkItemsForMechanizeLetter(Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgActivities.MechanizedLetter.ViewOrRefer
+                                , OneGMechanizedLetter
+                                , relatedCMSUserId
+                                , relatedCMSOrgId
+                                , Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.SystemFormId.RecieveMechanizedLetterSystemFormId
+                                , relatedCMSUserRoleTypeId, true, vGUID, Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.SystemObjectId.RecieveMechanizedLetterSystemObjectId, oneGMechanizedLetterReceiver.Id);
+                        }
+
+                        #endregion
+
+                        #region کاربر
+                        else if (item.ReceiverType == Anu.BaseInfo.Enumerations.MechanizeRefererType.UserPost)
+                        {
+                            //relatedCMSUserId = item.TheReceiverUserAndPost.TheCmsUserContract.ObjectId;
+
+                            //DefineWorkItemsForMechanizeLetter(Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgActivities.MechanizedLetter.ViewOrRefer
+                            //    , OneGMechanizedLetter
+                            //    , relatedCMSUserId
+                            //    , relatedCMSOrgId
+                            //    , "9003239250EA48C3A583FA2DAC0D0E2C"//systemform
+                            //    , relatedCMSUserRoleTypeId, true, vGUID, "8fc11d43c5a24efa8e209b3cc05ca450", oneGMechanizedLetterReceiver.Id);
+                        }
+                        #endregion
+                    }
+                    #endregion
+
+
+                    #endregion
+
+                }
+
+                #endregion
 
                 _unitOfWork.Repositorey<IGMechanizedLetterRepository>().Add(OneGMechanizedLetter);
                 _unitOfWork.Complete();
                 return Respond(AnuResult.Successful, OneGMechanizedLetter.No);
 
-                //OneMechanizedLetterResponse.Result.Description = OneGMechanizedLetter.No;
-                //OneMechanizedLetterResponse.Result.Code = 1000;
-                //OneMechanizedLetterResponse.Result.Message = "عملیات با موفقیت انجام شد .";
                 #endregion
 
 
@@ -438,135 +420,64 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
             return response;
         }
 
-        //public async void DefineWorkItemsForMechanizeLetter(string baseRoleId
-        //   , Anu.BaseInfo.DataModel.MechanizedLetter.GMechanizedLetter MechanizedLetterObject
-        //   , string RelatedCMSUserId = null
-        //   , string RelatedOrganizationId = null
-        //   , string SystemFormId = null
-        //   , string RelatedCMSUserRoleTypeId = null
-        //   , bool SameCaseServerForSenderAndReceiver = true
-        //   , string WorkFlowInstanceWorkItemId = null
-        //   , string RelatedDocObjectId = null
-        //   , string RelatedDocId = null)
-        //{
+        public async void DefineWorkItemsForMechanizeLetter(string baseRoleId
+           , Anu.BaseInfo.DataModel.MechanizedLetter.GMechanizedLetter MechanizedLetterObject
+           , string RelatedCMSUserId = null
+           , string RelatedOrganizationId = null
+           , string SystemFormId = null
+           , string RelatedCMSUserRoleTypeId = null
+           , bool SameCaseServerForSenderAndReceiver = true
+           , string WorkFlowInstanceWorkItemId = null
+           , string RelatedDocObjectId = null
+           , string RelatedDocId = null)
+        {
 
-        //    string CaseId = null;
-        //    string CaseNo = null;
-        //    string CaseSystemObjectId = null;
+            string CaseId = null;
+            string CaseNo = null;
+            string CaseSystemObjectId = null;
 
-        //    if (MechanizedLetterObject.TheGMechanizedLetterCaseList.Count > 0)
-        //    {
-        //        CaseNo = MechanizedLetterObject.TheGMechanizedLetterCaseList[0].RelatedCaseNo;
-        //        if (CaseNo.Length > 19)
-        //            CaseNo = CaseNo.Substring(0, 19);
+            if (MechanizedLetterObject.TheGMechanizedLetterCaseList.Count > 0)
+            {
+                CaseNo = MechanizedLetterObject.TheGMechanizedLetterCaseList[0].RelatedCaseNo;
+                if (CaseNo.Length > 19)
+                    CaseNo = CaseNo.Substring(0, 19);
 
-        //        CaseId = MechanizedLetterObject.TheGMechanizedLetterCaseList[0].RelatedCaseID;
+                CaseId = MechanizedLetterObject.TheGMechanizedLetterCaseList[0].RelatedCaseID;
 
-        //        CaseSystemObjectId = "b40dcb897f584550a24460272ced792f";//systemObject
+                CaseSystemObjectId = "b40dcb897f584550a24460272ced792f";//systemObject
 
-        //    }
+            }
 
-        //    var baseRole = _unitOfWork.BaseRole.GetById(baseRoleId);
+            var baseRole = await _unitOfWork.Repositorey<IBaseRoleRepository>().GetById(baseRoleId);
 
-        //    if (string.IsNullOrEmpty(RelatedOrganizationId))
-        //    {
-        //        //todo
-        //        RelatedOrganizationId = "Anu.BaseInfoContext.Instance.CurrentCMSOrganization.ObjectId";
+            string TempNo = "";
+            await _unitOfWork.Repositorey<IWorkFlowInstanceWorkItemRepository>().Insert(
+            DateTime.Now.ToPersian().Substring(0, 10),
+            baseRole.Id,
+            baseRole.Name,
+            "9999/99/99",
+            RelatedOrganizationId,
+            baseRole.Name,
+            CaseId,
+            CaseNo,
+            CaseSystemObjectId,
+            RelatedDocObjectId,
+            RelatedDocId,
+            MechanizedLetterObject.No,
+            SystemFormId,
+            Anu.BaseInfo.Enumerations.WorkFlowActivityInstanceState.Processing,
+            Anu.BaseInfo.Enumerations.WorkFlowWorkItemType.NonWorkFlow,
+            Anu.BaseInfo.Enumerations.YesNo.Yes,
+            TempNo,
+            "",
+            RelatedCMSUserId,
+            RelatedCMSUserRoleTypeId,
+            SameCaseServerForSenderAndReceiver,
+            WorkFlowInstanceWorkItemId);
 
-        //    }
+        }
 
-        //    string TempNo = "";
-        //    Insert(
-        //    CalendarHelper.GetCurrentDate(),
-        //    baseRole.Id,
-        //    baseRole.Name,
-        //    "9999/99/99",
-        //    RelatedOrganizationId,
-        //    baseRole.Name,
-        //    CaseId,
-        //    CaseNo,
-        //    CaseSystemObjectId,
-        //    RelatedDocObjectId,
-        //    RelatedDocId,
-        //    MechanizedLetterObject.No,
-        //    SystemFormId,
-        //    Enumerations.WorkFlowActivityInstanceState.Processing,
-        //    Enumerations.WorkFlowWorkItemType.NonWorkFlow,
-        //    Enumerations.YesNo.Yes,
-        //    TempNo,
-        //    "",
-        //    RelatedCMSUserId,
-        //    RelatedCMSUserRoleTypeId,
-        //    SameCaseServerForSenderAndReceiver,
-        //    WorkFlowInstanceWorkItemId);
-
-        //    //IGMechanizedLetterReceiver ReferObject = (IGMechanizedLetterReceiver)MechanizedLetterObject.TheGMechanizedLetterReceiverList[MechanizedLetterObject.TheGMechanizedLetterReceiverList.Count - 1];
-
-        //    //if (!SameCaseServerForSenderAndReceiver)
-        //    //{
-        //    //    Anu.DBLoging.IDataNotSend newDataNotSend = Anu.InstanceBuilder.NewEntity<Anu.DBLoging.IDataNotSend>();
-        //    //    newDataNotSend.TransactionOrderNo = GetNewTransactionSequence();
-
-        //    //    newDataNotSend.TheSenderCMSOrganization = MechanizedLetterObject.TheSenderInnerOrg;
-        //    //    newDataNotSend.TheReceiverServer = ReferObject.TheReceiverInnerOrg.TheCaseServer;
-        //    //    newDataNotSend.ReceiverServerType = Anu.Enumerations.ReceiverServerType.CMSServer;
-        //    //    newDataNotSend.ChangeDateTime = Anu.BaseInfoContext.Instance.CurrentDateTime;
-        //    //    newDataNotSend.CommandType = Anu.Enumerations.CommandType.Insert;
-        //    //    newDataNotSend.DataObjectId = newWorkItemObject.ObjectId;
-        //    //    newDataNotSend.TheSystemObject = newWorkItemObject.GetSystemObject();
-        //    //}
-        //}
-
-        //public async void Insert(string activateDate, string baseRoleId, string description, string maxDelayDate, string securityOrganizationId, string title,
-        //                   string relatedCaseId, string relatedCaseNo, string relatedSystemObjectCaseId,
-        //                   string relatedDocObjectId, string relatedDocId, string relatedDocNo, string RelatedDocFormId,
-        //                   Enumerations.WorkFlowActivityInstanceState state, Enumerations.WorkFlowWorkItemType type, Enumerations.YesNo userCanDelay,
-        //                   string temp1, string temp2, string relatedCMSUserId = null, string RelatedCMSUserRoleTypeId = null, bool SameCaseServerForSenderAndReceiver = true, string ObjectId = null)
-        //{
-        //    WorkFlowInstanceWorkItem workFlowInstanceWorkItem = null;
-        //    //todo
-        //    //if (!string.IsNullOrEmpty(ObjectId))
-        //    //{
-        //    //    workFlowInstanceWorkItem = Anu.InstanceBuilder.NewEntity<IWorkFlowInstanceWorkItem>(ObjectId);
-        //    //}
-        //    //else
-        //    //{
-        //    //    workFlowInstanceWorkItem = Anu.InstanceBuilder.NewEntity<IWorkFlowInstanceWorkItem>();
-        //    //}
-
-        //    workFlowInstanceWorkItem.MaxDelayDate = maxDelayDate;
-        //    workFlowInstanceWorkItem.CreateDateTime = CalendarHelper.GetCurrentDateTime();
-        //    workFlowInstanceWorkItem.ActivateDate = activateDate;
-
-        //    //todo
-        //    //if (SameCaseServerForSenderAndReceiver == true)
-        //    //workFlowInstanceWorkItem.TheCreatorUser = Anu.BaseInfoContext.Instance.CurrentUser;
-
-        //    workFlowInstanceWorkItem.Title = title;
-        //    workFlowInstanceWorkItem.TheBaseRole = _unitOfWork.BaseRole.GetById(baseRoleId);
-        //    workFlowInstanceWorkItem.KeyField1 = temp1;
-        //    workFlowInstanceWorkItem.KeyField2 = temp2;
-
-        //    if (string.IsNullOrEmpty(description))
-        //        workFlowInstanceWorkItem.Description = workFlowInstanceWorkItem.TheBaseRole.Name;
-        //    else
-        //        workFlowInstanceWorkItem.Description = description;
-
-        //    workFlowInstanceWorkItem.State = state;
-        //    workFlowInstanceWorkItem.Type = type;
-        //    workFlowInstanceWorkItem.UserCanDelay = userCanDelay;
-        //    workFlowInstanceWorkItem.TheRelatedSystemObjectCase = _unitOfWork.SystemObject.GetById(relatedSystemObjectCaseId);
-        //    workFlowInstanceWorkItem.SecurityOrganizationId = securityOrganizationId;
-        //    workFlowInstanceWorkItem.RelatedCaseNo = relatedCaseNo;
-        //    workFlowInstanceWorkItem.RelatedCaseId = relatedCaseId;
-        //    workFlowInstanceWorkItem.TheRelatedDocObject = _unitOfWork.SystemObject.GetById(relatedDocObjectId);
-        //    workFlowInstanceWorkItem.RelatedDocId = relatedDocId;
-        //    workFlowInstanceWorkItem.RelatedDocNo = relatedDocNo;
-        //    workFlowInstanceWorkItem.TheRelatedDocForm = _unitOfWork.SystemForm.GetById(RelatedDocFormId);
-        //    workFlowInstanceWorkItem.TheRelatedCMSUser = _unitOfWork.CMSUser.GetById(relatedCMSUserId);
-        //    workFlowInstanceWorkItem.TheRelatedCMSUserRoleType = _unitOfWork.CMSUserRoleType.GetById(RelatedCMSUserRoleTypeId);
-        //}
-
+        
 
 
         #endregion Methods

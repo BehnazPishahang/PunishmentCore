@@ -98,39 +98,95 @@ namespace Anu.PunishmentOrg.Api.Notice
             };
         }
 
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public override async Task<ChangePNoticeViewByUserStatusResponse> ChangePNoticeViewByUserStatus([FromBody] ChangePNoticeViewByUserStatusRequest request)
+        {
+            #region Validation
+            request.Null(ChangePNoticeViewByUserStatusResult.PNotice_ChangePNoticeViewByUserStatus_Request_Is_Required);
+            request.ThePNoticeNoInputContract.Null(ChangePNoticeViewByUserStatusResult.PNotice_ChangePNoticeViewByUserStatus_ThePNoticeNoInputContract_Is_Required);
+            request!.ThePNoticeNoInputContract!.No!.IsDigit(ChangePNoticeViewByUserStatusResult.PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required);
+            request!.ThePNoticeNoInputContract!.No.NullOrWhiteSpace(ChangePNoticeViewByUserStatusResult.PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required);
+            #endregion Validation
+
+            var thePNotice = await _unitOfWork.Repositorey<IPNoticeRepository>().GetPNoticeByNo(request.ThePNoticeNoInputContract.No!);
+
+            thePNotice.Null(ChangePNoticeViewByUserStatusResult.PNotice_ChangePNoticeViewByUserStatus_PNotice_NotFound);
+
+            if (thePNotice.NoticeDate.NullOrWhiteSpace())
+            {
+                thePNotice.NoticeDate = DateTime.Now.ToPersian().ToString().Substring(0,10);
+                thePNotice.IsViewedOnSite = YesNo.Yes;
+                thePNotice.TheNoticeResultType = await _unitOfWork.Repositorey<Anu.BaseInfo.Domain.Types.INoticeResultTypeRepository>().
+                    GetNoticeResultTypeWithCode(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.NoticeResultTypeCode.NotificationThroughTheSite);
+            }
+
+            _unitOfWork.Complete();
+
+            return new ChangePNoticeViewByUserStatusResponse()
+            {
+                Result = AnuResult.Successful.GetResult()
+            };
+
+
+
+
+        }
+        
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public override async Task<GetCountOfUnSeenPNoticeByUserResponse> GetCountOfUnSeenPNoticeByUser([FromBody] GetCountOfUnSeenPNoticeByUserRequest request)
+        {
+            #region Validation
+            request.Null(GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_Request_Is_Required);
+            request.ThePNoticePersonContract.Null(GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_ThePNoticePersonContract_Is_Required);
+            request!.ThePNoticePersonContract!.NationalityCode!.IsDigit(GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required);
+            request!.ThePNoticePersonContract!.NationalityCode.NullOrWhiteSpace(GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required);
+            #endregion Validation
+
+            var thePNoticelistByUserNationalityCode = await _unitOfWork.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(request.ThePNoticePersonContract.NationalityCode!);
+
+            return new GetCountOfUnSeenPNoticeByUserResponse()
+            {
+                Result = AnuResult.Successful.GetResult(),
+                TheGetCountOfUnSeenPNoticeByUserContract = CountOfUnSeenPNoticeByUserCalculater(thePNoticelistByUserNationalityCode, request.ThePNoticePersonContract.NationalityCode)
+            };
+        }
+
+        #endregion Overrides
+
+        #region Methods
         private PNoticeForStimul GetPNoticeForStimul(PNotice thePNotice)
         {
             PNoticeForStimul thePNoticeForStimul = new PNoticeForStimul()
             {
                 NoticeCreateDate = thePNotice.CreateDateTime.Substring(0, 10),
-                NoticeNo         = thePNotice.No,
-                UnitName         = thePNotice.TheUnit?.UnitName,
-                Address          = thePNotice.NoticePersonAddress,
-                NoticeType       = thePNotice.TheGNoticeType?.Title,
-                PersonAddress    = thePNotice.TheUnit.Address,
-                NoticeDate       = thePNotice.NoticeDate ?? CalendarHelper.GetCurrentDate(),
+                NoticeNo = thePNotice.No,
+                UnitName = thePNotice.TheUnit?.UnitName,
+                Address = thePNotice.NoticePersonAddress,
+                NoticeType = thePNotice.TheGNoticeType?.Title,
+                PersonAddress = thePNotice.TheUnit.Address,
+                NoticeDate = thePNotice.NoticeDate ?? CalendarHelper.GetCurrentDate(),
             };
 
             foreach (PNoticePerson PNoticePerson in thePNotice.ThePNoticePersonList)
             {
                 if (PNoticePerson.ThePCasePerson != null)
                 {
-                    thePNoticeForStimul.PersonName         = PNoticePerson.ThePCasePerson.Name;
-                    thePNoticeForStimul.PersonFamily       = PNoticePerson.ThePCasePerson.Family;
-                    thePNoticeForStimul.PersonFatherName   = PNoticePerson.ThePCasePerson.FatherName;
+                    thePNoticeForStimul.PersonName = PNoticePerson.ThePCasePerson.Name;
+                    thePNoticeForStimul.PersonFamily = PNoticePerson.ThePCasePerson.Family;
+                    thePNoticeForStimul.PersonFatherName = PNoticePerson.ThePCasePerson.FatherName;
                     thePNoticeForStimul.PersonNationalCode = PNoticePerson.ThePCasePerson.NationalCode;
-                    thePNoticeForStimul.MobilNumber        = PNoticePerson.ThePCasePerson.MobilNumber;
-                    thePNoticeForStimul.TradeUnitName      = PNoticePerson.ThePCasePerson.TradeUnitName;
+                    thePNoticeForStimul.MobilNumber = PNoticePerson.ThePCasePerson.MobilNumber;
+                    thePNoticeForStimul.TradeUnitName = PNoticePerson.ThePCasePerson.TradeUnitName;
                     break;
                 }
                 if (PNoticePerson.TheExpertMan != null)
                 {
-                    thePNoticeForStimul.PersonName         = PNoticePerson.TheExpertMan.Name;
-                    thePNoticeForStimul.PersonFamily       = PNoticePerson.TheExpertMan.Family;
-                    thePNoticeForStimul.PersonFatherName   = PNoticePerson.TheExpertMan.FatherName;
+                    thePNoticeForStimul.PersonName = PNoticePerson.TheExpertMan.Name;
+                    thePNoticeForStimul.PersonFamily = PNoticePerson.TheExpertMan.Family;
+                    thePNoticeForStimul.PersonFatherName = PNoticePerson.TheExpertMan.FatherName;
                     thePNoticeForStimul.PersonNationalCode = PNoticePerson.TheExpertMan.NationalityCode;
-                    thePNoticeForStimul.PhoneNumber        = PNoticePerson.TheExpertMan.Tel;
-                    thePNoticeForStimul.MobilNumber        = PNoticePerson.TheExpertMan.MobileNumber4SMS;
+                    thePNoticeForStimul.PhoneNumber = PNoticePerson.TheExpertMan.Tel;
+                    thePNoticeForStimul.MobilNumber = PNoticePerson.TheExpertMan.MobileNumber4SMS;
                     break;
                 }
             }
@@ -227,10 +283,34 @@ namespace Anu.PunishmentOrg.Api.Notice
             }
             return thePNoticeForStimul;
         }
-        #endregion Overrides
 
-        #region Methods
+        private GetCountOfUnSeenPNoticeByUserContract CountOfUnSeenPNoticeByUserCalculater(IEnumerable<Anu.PunishmentOrg.DataModel.Notice.PNotice> pNotices, string nationalityCode)
+        {
+            int TotalNoticeCount = 0;
+            int UnSeenNoticeCount = 0;
+            int SeenNoticeCount = 0;
 
+            #region TotalNumberOfPersonNotice
+            TotalNoticeCount = pNotices.Count();
+            #endregion TotalNumberOfPersonNotice
+
+            #region NumberOfUnSeenPersonNotice
+            UnSeenNoticeCount = pNotices.Where(x => x.IsViewedOnSite == Anu.BaseInfo.Enumerations.YesNo.No || x.IsViewedOnSite == Anu.BaseInfo.Enumerations.YesNo.None
+            || x.IsViewedOnSite == null).Count();
+            #endregion NumberOfUnSeenPersonNotice
+
+            #region NumberOfSeenPersonNotice
+            SeenNoticeCount = TotalNoticeCount - UnSeenNoticeCount;
+            #endregion NumberOfSeenPersonNotice
+
+            return new GetCountOfUnSeenPNoticeByUserContract()
+            {
+                TotalCountPNoticeOfUser = TotalNoticeCount,
+                CountSeenedOfPNoticeByUser = SeenNoticeCount,
+                CountUnSeenPNoticeByUser = UnSeenNoticeCount,
+                NoticePersonNationalityCode = nationalityCode,
+            };
+        }
         #endregion Methods
     }
 
