@@ -500,6 +500,22 @@
     <value>اطلاعات وارد شده نمی تواند خالی باشد.</value>
     <comment>-30212</comment>
   </data>
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required" xml:space="preserve">
+    <value>کدملی معتبر نمی باشد.</value>
+    <comment>-30253</comment>
+  </data>
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound" xml:space="preserve">
+    <value>ابلاغی یافت نشد</value>
+    <comment>-30254</comment>
+  </data>
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد.</value>
+    <comment>-30251</comment>
+  </data>
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_ThePNoticePersonContract_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30252</comment>
+  </data>
   <data name="PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required" xml:space="preserve">
     <value>کدملی/شناسه ملی درخواست نمی تواند خالی باشد.</value>
     <comment>-30203</comment>
