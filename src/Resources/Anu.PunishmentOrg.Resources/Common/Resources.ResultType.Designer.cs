@@ -871,6 +871,42 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کدملی معتبر نمی باشد..
+        /// </summary>
+        public static string PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ابلاغی یافت نشد.
+        /// </summary>
+        public static string PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound {
+            get {
+                return ResourceManager.GetString("PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_GetCountOfUnSeenPNoticeByUser_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_GetCountOfUnSeenPNoticeByUser_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string PNotice_GetCountOfUnSeenPNoticeByUser_ThePNoticePersonContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_GetCountOfUnSeenPNoticeByUser_ThePNoticePersonContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کدملی/شناسه ملی درخواست نمی تواند خالی باشد..
         /// </summary>
         public static string PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required {
