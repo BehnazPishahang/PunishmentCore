@@ -1,4 +1,8 @@
-﻿using Anu.BaseInfo.DataModel.Types;
+﻿using Anu.BaseInfo.DataModel.GeoInfo;
+using Anu.BaseInfo.DataModel.Security.Role;
+using Anu.BaseInfo.DataModel.SystemConfiguration;
+using Anu.BaseInfo.DataModel.SystemObject;
+using Anu.BaseInfo.DataModel.Types;
 using Anu.BaseInfo.Domain.GeoInfo;
 using Anu.BaseInfo.Domain.OrganizationChart;
 using Anu.BaseInfo.Domain.SystemObject;
@@ -7,6 +11,7 @@ using Anu.BaseInfo.ServiceModel.GeoInfo;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Domain;
 using Anu.PunishmentOrg.Api.Gravamen;
+using Anu.PunishmentOrg.Domain.PGravamen;
 using Anu.PunishmentOrg.Enumerations;
 using Anu.PunishmentOrg.ServiceModel.Gravamen;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
@@ -129,26 +134,34 @@ public class PGravamenTests
     {
         //Arrange
         _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<AttachmentType>>().GetById(It.IsAny<string>()))
-            .ReturnsAsync(new AttachmentType()
-            {
-                Id = "300",
-                Code = "300",
-                Title = "Mock Attachemnt Type"
-            });
+            .ReturnsAsync(new AttachmentType());
+
         _unitOfWork.Setup(u => u.Repositorey<IObjectStateRepository>().GetById(It.IsAny<string>()))
-            .ReturnsAsync(new Anu.BaseInfo.DataModel.SystemObject.ObjectState());
+            .ReturnsAsync(new ObjectState());
 
         _unitOfWork.Setup(u => u.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(It.IsAny<string>()))
-            .ReturnsAsync(new Anu.BaseInfo.DataModel.GeoInfo.GeoLocation());
+            .ReturnsAsync(new GeoLocation());
 
-        //Todo: Setup this repo
-        //_unitOfWork.Setup(u => u.Repositorey<IUnitRepository>().FindRelatedUnitToGeoLocation(It.IsAny<string>(), It.IsAny<List<string>>())
-        //   .ReturnsAsync(new Anu.BaseInfo.DataModel.OrganizationChart.Unit());
+        _unitOfWork.Setup(u => u.Repositorey<IUnitRepository>().FindRelatedUnitToGeoLocation(It.IsAny<string>(), It.IsAny<List<string>>())).ReturnsAsync(new Anu.BaseInfo.DataModel.OrganizationChart.Unit()
+        {
+            TheCMSOrganizationList=new List<CMSOrganization>()
+            {
+                new CMSOrganization{Id="11"}
+            }
+        });
 
-        //Todo: Setup this repo
-        //var pBCountyLocatedUnit = await _unitOfWork.Repositorey<IPBCountyLocatedUnitRepository>().GetRelatedPBCountyLocatedUnitToGeolocationWithLocationCode(theGeoLocation.LocationCode!);
+        _unitOfWork.Setup(u => u.Repositorey<IPGravamenRepository>().Add(It.IsAny<DataModel.Gravamen.PGravamen>()));
 
-        //And hopefully we are ready to pass this test
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<BaseRole>>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new BaseRole());
+
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<SystemObject>>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new SystemObject());
+
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<SystemForm>>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new SystemForm());
+
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<WorkFlowInstanceWorkItem>>().Add(It.IsAny<WorkFlowInstanceWorkItem>()));
 
         //Act
         var result = controller.RecieveGravamen(_request);
@@ -247,7 +260,6 @@ public class PGravamenTests
 
         Assert.Equal((int)PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold, result.Result.Result.Code);
     }
-
 
 
 }
