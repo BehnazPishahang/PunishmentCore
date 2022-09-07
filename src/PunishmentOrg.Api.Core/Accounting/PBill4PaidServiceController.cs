@@ -31,6 +31,8 @@ namespace Anu.PunishmentOrg.Api.Accounting
 
             request.ThePBill4PaidFishNoContract!.FishNo.NullOrWhiteSpace(GetPaymentInfoResult.PBill4Paid_GetPaymentInfo_FishNo_Is_Required);
 
+            request.ThePBill4PaidFishNoContract!.FishNo!.IsDigit(GetPaymentInfoResult.PBill4Paid_GetPaymentInfo_FishNo_Is_Required);
+
             return new GetPaymentInfoResponse(){ };
         }
 

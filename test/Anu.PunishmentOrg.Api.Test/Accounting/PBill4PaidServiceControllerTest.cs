@@ -65,16 +65,19 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
             Assert.Equal((int)GetPaymentInfoResult.PBill4Paid_GetPaymentInfo_ThePBill4PaidFishNoContract_Is_Required, exception.result.Code);
         }
 
-        [Fact]
-        public async Task GetPaymentInfo_FishNoIsNull_ShouldReturn_Error30263()
+        [Theory]
+        [InlineData(null)]
+        [InlineData(" ")]
+        [InlineData("test")]
+        public async Task GetPaymentInfo_FishNo_IsNull_Or_Invalid_ShouldReturn_Error30263(string fishNo)
         {
             //Arrange
 
             GetPaymentInfoRequest localGetPaymentInfoRequest = new GetPaymentInfoRequest()
             {
-                ThePBill4PaidFishNoContract = new PBill4PaidFishNoContract() 
-                { 
-                    FishNo = null,
+                ThePBill4PaidFishNoContract = new PBill4PaidFishNoContract()
+                {
+                    FishNo = fishNo,
                 },
             };
 
@@ -86,31 +89,6 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
 
             Assert.Equal((int)GetPaymentInfoResult.PBill4Paid_GetPaymentInfo_FishNo_Is_Required, exception.result.Code);
         }
-
-        //[Theory]
-        //[InlineData("test")]
-        //[InlineData(" ")]
-        //[InlineData(null)]
-        //public async Task ChangePNoticeViewByUserStatus_NoIsNotValid_Should_Return_Error30243(string invalidNo)
-        //{
-        //    //Arrange
-
-        //    ChangePNoticeViewByUserStatusRequest localChangePNoticeViewByUserStatusRequest = new ChangePNoticeViewByUserStatusRequest()
-        //    {
-        //        ThePNoticeNoInputContract = new PNoticeNoInputContract()
-        //        {
-        //            No = invalidNo,
-        //        }
-        //    };
-
-        //    //Act
-
-        //    var exception = Assert.ThrowsAsync<AnuExceptions>(async () => await _pNoticeServiceController.ChangePNoticeViewByUserStatus(localChangePNoticeViewByUserStatusRequest)).Result;
-
-        //    //Assert
-
-        //    Assert.Equal((int)ChangePNoticeViewByUserStatusResult.PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required, exception.result.Code);
-        //}
 
         //[Fact]
         //public async Task GetPaymentInfo_PBill4Paid_NotFound_ShouldReturn_Error30264()
