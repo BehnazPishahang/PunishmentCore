@@ -12,6 +12,7 @@
         public string SecondStepLogin { get; set; }
         public string ChangePNoticeViewByUserStatus { get; set; }
         public string GetCountOfUnSeenPNoticeByUser { get; set; }
+        public string GetGeoLocationList { get; set; }
         public static AppConfiguration Instance { get; set; }
     }
 }
