@@ -21,120 +21,129 @@
 @using System.Timers
 
 <MudCard xs="8">
-    @*<EditForm  Model="@_registerUserModel" OnValidSubmit="SubmitAsync">*@
-    <MudForm Model="@_registerUserModel" @ref="@form" ValidationDelay="0">
-        <MudCardContent>
-            <MudItem xs="4" sm="1" md="2">
-                <div class="d-flex justify-center">
-                    <MudIcon Icon="@Icons.Filled.Balance" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
-                </div>
-            </MudItem>
-            <MudItem xs="4" sm="1" md="2">
-                <div class="d-flex justify-center">
-                    <MudText Typo="Typo.h4">ثبت نام</MudText>
-                </div>
-            </MudItem>
+@*<EditForm  Model="@_registerUserModel" OnValidSubmit="SubmitAsync">*@
+   	<MudForm Model="@_registerUserModel" @ref="@form"  ValidationDelay="0">
+		<MudCardContent> 
+                   <MudItem xs="4" sm="1" md="2">
+                    <div class="d-flex justify-center">
+                        <MudIcon Icon="@Icons.Filled.Balance" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
+                    </div>
+                </MudItem>
+                  <MudItem xs="4" sm="1" md="2">
+                    <div class="d-flex justify-center">
+                        <MudText Typo="Typo.h4">ثبت نام</MudText>
+                    </div>
+                </MudItem>
 
-            <MudItem xs="4" sm="1" md="2">
+              <MudItem xs="4" sm="1" md="2">
 
                 <InputPersianDatePicker Id="myInputDatePicker"
-                                        @bind-Value="_registerUserModel.BirthDate"
-                                        Name="myInputName"
-                                        Visible="true"
-                                        Disabled="false"
-                                        PickerAlign="Blazor.PersianDatePicker.Align .Left"
-                                        PickerOffsetTopPositionInPixels="0"
-                                        InitialValue="false"
-                                        CalendarType="Calendar.SingleModeJalali"
-                                        DigitType="DigitType.BasedOnCalendar"
-                                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
-                                        MinDateSetOnToday="true"
-                                        Placeholder="انتخاب تاریخ"
-                                        Theme="PickerTheme.Cheerup"
-                                        OnChange="@(() => Console.WriteLine("OK"))" />
-            </MudItem>
-            <MudItem xs="8" sm="2" md="4">
-                <MudTextField Mask="@nationalcodeMask"
-                              @bind-Value="_registerUserModel.UserName"
-                              Label="کدملی "
-                              Variant="Variant.Outlined"
-                              Placeholder="1467561088"
-                              MaxLength="10"
-                              Required="true"
-                              RequiredError="کد ملی باید 10 رقم باشد " />
-            </MudItem>
+                        @bind-Value="_registerUserModel.BirthDate"
 
-            <MudItem xs="8" sm="2" md="4">
-                <MudTextField @bind-Value="_registerUserModel.FirstName"
-                              Label="نام "
-                              Required="true"
-                              Variant="Variant.Outlined" />
-            </MudItem>
+                        Name="myInputName"
+                        Visible="true"
+                        Disabled="false"
+                        PickerAlign="Blazor.PersianDatePicker.Align .Left"
+                        PickerOffsetTopPositionInPixels="0"
+                        InitialValue="false"
+                        CalendarType="Calendar.SingleModeJalali"
+                        DigitType="DigitType.BasedOnCalendar"
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+                        MinDateSetOnToday="true"
+                        Placeholder=" تاریخ تولد "
 
-            <MudItem xs="8" sm="2" md="4">
-                <MudTextField Required="true" For="@(() => _registerUserModel.LastName)" @bind-Value="_registerUserModel.LastName" Label="نام خانوادگی " Variant="Variant.Outlined" />
-            </MudItem>
+                        Theme="PickerTheme.Cheerup"
+                        OnChange="@(() => Console.WriteLine("OK"))" 
+
+                        />
+                </MudItem>
+              <MudItem xs="8" sm="2" md="4">
+                    <MudTextField  
+                            Mask="@nationalcodeMask"
+                            @bind-Value="_registerUserModel.UserName"
+                            Label="کدملی " 
+                            Variant="Variant.Outlined" 
+                            Placeholder="1467561088"  
+                            MaxLength="10"
+                            Required="true" 
+                            RequiredError="کد ملی باید 10 رقم باشد " />
+                </MudItem>
+
+                      <MudItem xs="8" sm="2" md="4">
+                         <MudTextField 
+                         @bind-Value="_registerUserModel.FirstName" 
+                         Label="نام " 
+                          Required="true" 
+
+                         Variant="Variant.Outlined" 
+                         />
+                </MudItem>
+
+                      <MudItem xs="8" sm="2" md="4">
+                    <MudTextField   Required="true"  For="@(() => _registerUserModel.LastName)" @bind-Value="_registerUserModel.LastName" Label="نام خانوادگی " Variant="Variant.Outlined" />
+                </MudItem>
 
 
-            <MudItem xs="8" sm="2" md="4">
+                 <MudItem xs="8" sm="2" md="4">
 
-                <MudSelect @bind-Value="_registerUserModel.Sex" Label="جسیت" Required="true" AdornmentColor="Color.Primary" @onchange="DoStuff" Variant="Variant.Outlined">
+                 <MudSelect   @bind-Value="_registerUserModel.Sex" Label="جسیت"    Required="true"   AdornmentColor="Color.Primary"  @onchange="DoStuff" Variant="Variant.Outlined" >
                     @foreach (SexType item in Enum.GetValues(typeof(SexType)))
                     {
 
-                        <MudSelectItem Value="@item">
+                            <MudSelectItem Value="@item">
                             @if (item == SexType.Male)
-                            {
-                            <MudIcon Icon="@Icons.Filled.Man" Color="Color.Default"></MudIcon>
-                            }
+                        {
+                                    <MudIcon Icon= "@Icons.Filled.Man"  Color="Color.Default" ></MudIcon>
+                        }
 
                         @if (item == SexType.Female)
-                            {
-                            <MudIcon Icon="@Icons.Filled.Woman" Color="Color.Primary"></MudIcon>
-                            }
+                        {
+                                    <MudIcon Icon= "@Icons.Filled.Woman" Color="Color.Primary"  ></MudIcon>
+                        }
 
 
 
                         @item.GetEnumDescription()
-                    </MudSelectItem>
+                            </MudSelectItem>
                     }
-                </MudSelect>
-            </MudItem>
-            <MudItem xs="6" sm="2" md="3">
-                <MudTextField T="string" Label="شماره تلفن " Required="true" Mask="@phoneMask" @bind-Value="_registerUserModel.PhoneNumber" For="@(() => _registerUserModel.PhoneNumber)" Variant="Variant.Outlined" Placeholder="09121111111" />
-            </MudItem>
-            <MudItem xs="4" sm="1" md="2">
-                <MudButton Variant="Variant.Outlined" Required="true" disabled="@(showPassword)" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await getCodeBySms())">
+                 </MudSelect>
+                </MudItem>
+                 <MudItem xs="6" sm="2" md="3">
+                    <MudTextField T="string" Label="شماره تلفن "  Required="true"   Mask="@phoneMask" @bind-Value="_registerUserModel.PhoneNumber" For="@(() => _registerUserModel.PhoneNumber)" Variant="Variant.Outlined" Placeholder="09121111111" />
+                    </MudItem>
+                    <MudItem xs="4" sm="1" md="2" >
+                   <MudButton Variant="Variant.Outlined"   Required="true"   disabled="@(showPassword)"  Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await getCodeBySms())"> 
                     @if (showPassword)
                     {
-                        <b> @ProgressValue ثانیه </b>
-                        <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue" />
+                             <b> @ProgressValue ثانیه </b>
+                             <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue"  />
                     }
                     else
                     {
-                        <b>دریافت کد </b>
+                                    <b>دریافت کد </b>
                     }
                 </MudButton>
-            </MudItem>
-            @if (showPassword)
-            {
-                <MudItem xs="2" sm="1" md="1">
-                    <MudTextField T="string" Label="رمز ارسالی" Mask="@phoneMask" @bind-Value="smsPassword" Variant="Variant.Outlined" Placeholder="111111" MaxLength="6" />
                 </MudItem>
-            }
-            <MudItem xs="8" sm="2" md="4">
+                        @if (showPassword)
+                        {
+                                             <MudItem xs="2" sm="1" md="1" >
+                                                <MudTextField  T="string" Label="رمز ارسالی" Mask="@phoneMask"  @bind-Value="smsPassword" Variant="Variant.Outlined" Placeholder="111111"   MaxLength="6"  />
+                                            </MudItem>
+                        }
+                   <MudItem xs="8" sm="2" md="4">
 
-                <div class="d-flex justify-center">
-                    <MudText Color="Color.Error">@errorMessage </MudText>
-                </div>
+                    <div class="d-flex justify-center">
+                        <MudText Color="Color.Error">@errorMessage </MudText>
+                    </div>
 
-            </MudItem>
-        </MudCardContent>
-    </MudForm>
+                </MudItem>
+               </MudCardContent>
+             </MudForm>
     <MudCardActions>
-        <MudButton Variant="Variant.Outlined" disabled="@(!showPassword)" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await getCodeBySms())"> ثبت نام  </MudButton>
+        <MudButton Variant="Variant.Outlined" disabled="@(!showPassword)" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await SubmitAsync())"> ثبت نام  </MudButton>
     </MudCardActions>
 </MudCard>
+
 @code {
 
     private string genderIcon = @Icons.Filled.Man;

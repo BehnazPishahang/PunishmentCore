@@ -22,7 +22,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
             var script = q.ToQueryString();
             var prt =await  q.ToListAsync();
 
-            return prt.Where(a => a.ThePRegistaryTime.RegisterDate.ToDateTime() >= CalendarHelper.DateTimeNow());
+            return prt.Where(a => a.ThePRegistaryTime.RegisterDate.ToDateTime() >= CalendarHelper.SahmsiDateNow());
         }
     }
 }

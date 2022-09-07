@@ -1,11 +1,15 @@
 ﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
 using Anu.BaseInfo.DataModel.FrontEndSecurity;
+using Anu.BaseInfo.Domain.FrontEndSecurity;
 using Anu.Commons.ServiceModel.ServiceAuthentication;
 using Anu.Commons.ServiceModel.ServiceAuthentication.Enumerations;
+using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.DataAccess;
-using Anu.DataAccess.Repositories;
+using Anu.Domain;
 using Anu.PunishmentOrg.Api.Authentication.Utility;
+using Anu.PunishmentOrg.DataModel.BaseInfo;
+using Anu.PunishmentOrg.Domain.BaseInfo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -14,6 +18,7 @@ using System.Security.Claims;
 using System.Text;
 using Utility;
 using Utility.CalendarHelper;
+using Utility.Exceptions;
 using Utility.Guard;
 
 namespace Anu.PunishmentOrg.Api.Authentication
@@ -22,6 +27,11 @@ namespace Anu.PunishmentOrg.Api.Authentication
     {
         private readonly IConfiguration _configuration;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly int _SecodeWait = 60;
+        private readonly int _CountCharacter = 6;
+        private readonly int _LimitSendDayCodePerDay = 4;
+        private readonly string _NotVerify = "|NotVerify";
+
 
         public AuthenticationController(IConfiguration configuration, IUnitOfWork unitOfWork)
         {
@@ -29,10 +39,10 @@ namespace Anu.PunishmentOrg.Api.Authentication
             _unitOfWork = unitOfWork;
         }
 
-        [Route("api/v1/Login")]
+        [Route("api/v1/SendSmsAuth")]
         [HttpPost]
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<FirstStepAuthResult> Login([FromBody] FirstStepUserLoginRequest request)
+        public async Task<FirstStepAuthResult> SendSmsAuth([FromBody] FirstStepUserLoginRequest request)
         {
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
@@ -40,22 +50,57 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             request.UserName.IsValidNationalCode();
 
-            var theGFESUser = (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>()
+            var punishmentOrg135Users = (await _unitOfWork.Repositorey<IGenericRepository<PunishmentOrg135Users>>()
                 .Find(x => x.NationalityCode == request.UserName)).FirstOrDefault();
+            punishmentOrg135Users.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IUsers135LoginHistoryRepository>().LastRecordHistoryPerDay(punishmentOrg135Users.Id, DateTime.Now.DateToString());
 
-            string password = await theGFESUser.MobileNumber4SMS.SendAuthenticateSms(6);
+            if (lastRecordHistoryPerDay != null)
+            {
+                var difDateSecond = (DateTime.Now - lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime()).TotalSeconds;
+                if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime!=lastRecordHistoryPerDay.ExpiredCodeDateTime)
+                {
+                    return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: (_SecodeWait - difDateSecond).ToString()) };
+                }
+
+                if (lastRecordHistoryPerDay.SendCodePerDay >= _LimitSendDayCodePerDay)
+                {
+                    return new FirstStepAuthResult() { Result = AnuResult.Sms_Limit_Send.GetResult() };
+                }
+            }
+
+            string password = await punishmentOrg135Users.MobileNumber4SMS.SendAuthenticateSms(_CountCharacter);
             string passWordHash = MD5Core.GetHashString(password);
 
-            theGFESUser.Password = passWordHash;
+            if ((await _unitOfWork.Repositorey<IPunishmentOrg135UsersRepository>().UpdateDynamicPassword(punishmentOrg135Users.Id,passWordHash)) < 0)
+            {
+                return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
+            }            
+
+            var currentDateTime = DateTime.Now;
+            var user = new Users135LoginHistory()
+            {
+                Id = Guid.NewGuid().ToString("N"),
+                SmsCode = passWordHash,
+                SendCodeDateTime = currentDateTime.DateTimeToString(),
+                ExpiredCodeDateTime = currentDateTime.AddSeconds(_SecodeWait).DateTimeToString(),
+                SendCodePerDay = lastRecordHistoryPerDay == null ? 1 : lastRecordHistoryPerDay.SendCodePerDay + 1,
+                ThePunishmentOrg135Users = punishmentOrg135Users
+            };
+            await _unitOfWork.Repositorey<IGenericRepository<Users135LoginHistory>>().Add(user);
 
             if (_unitOfWork.Complete() < 0)
             {
                 return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
             }
 
-            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args:"09*****"+theGFESUser.MobileNumber4SMS.Substring(theGFESUser.MobileNumber4SMS.Length-4)) };
+            return new FirstStepAuthResult()
+            {
+                CountCharacter = _CountCharacter,
+                SecondsWait = _SecodeWait,
+                Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: punishmentOrg135Users.MobileNumber4SMS.Substring(punishmentOrg135Users.MobileNumber4SMS.Length - 4) + "*****09")
+            };
 
         }
 
@@ -66,63 +111,102 @@ namespace Anu.PunishmentOrg.Api.Authentication
         {
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.UserName.NullOrWhiteSpace(AnuResult.NationalCode_Is_Not_Entered);
             request.PhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
+            request.FirstName.NullOrWhiteSpace(AnuResult.FirstName_Is_Not_Entered);
+            request.LastName.NullOrWhiteSpace(AnuResult.LastName_Is_Not_Entered);
+
+            request.BirthDate.NullOrWhiteSpace(AnuResult.BirthDate_Is_Not_Entered);
+            request.BirthDate.IsValidDate(AnuResult.BirthDate_Is_Not_Valid);
+
+            if (request.Sex != Anu.BaseInfo.Enumerations.SexType.Female && request.Sex != Anu.BaseInfo.Enumerations.SexType.Male)
+            {
+                return new FirstStepAuthResult() { Result = AnuResult.Sex_Is_Not_Valid.GetResult() };
+            }
 
             request.UserName.IsValidNationalCode();
             request.PhoneNumber.IsValidPhone();
 
-            if (await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Exist(a => a.UserID == request.UserName))
+
+            var punishmentOrg135Users = (await _unitOfWork.Repositorey<IGenericRepository<PunishmentOrg135Users>>().Find(a => a.UserID == request.UserName)).FirstOrDefault();
+
+            if (punishmentOrg135Users != null)
             {
-                return new FirstStepAuthResult() { Result = AnuResult.User_Is_Exist.GetResult() };
+                //var lastRecordHistory = await _unitOfWork.Repositorey<IUsers135LoginHistoryRepository>().LastRecordHistory(punishmentOrg135Users.Id);
+                if (!punishmentOrg135Users.SendDynomicPassword.Substring(punishmentOrg135Users.SendDynomicPassword.Length - _NotVerify.Length).Equals(_NotVerify))
+                {
+                    return new FirstStepAuthResult() { Result = AnuResult.User_Is_Exist.GetResult() };
+                }
+                else
+                {
+                    if ((await _unitOfWork.Repositorey<IPunishmentOrg135UsersRepository>().DeleteUser(punishmentOrg135Users.Id)) < 0)
+                    {
+                        return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
+                    }
+                }
             }
 
-            await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName);
-            await request.SabteahvalAuthenticate();
 
 
-            string password = await request.PhoneNumber.SendAuthenticateSms(6);
+
+
+            //await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName);
+            //await SabteahvalAuthentication.SabteahvalAuthenticate(request);
+
+
+            string password = await request.PhoneNumber.SendAuthenticateSms(_CountCharacter);
             string passWordHash = MD5Core.GetHashString(password);
 
-            var user = new GFESUser()
+            var user = new PunishmentOrg135Users()
             {
                 Id = System.Guid.NewGuid().ToString("N"),
                 UserID = request.UserName,
                 Password = passWordHash,
+                DynomicPassword = passWordHash,
+                SendDynomicPassword = passWordHash + _NotVerify,
                 MobileNumber4SMS = request.PhoneNumber,
                 NationalityCode = request.UserName,
                 StartDate = CalendarHelper.GetCurrentDateTime(),
                 EndDate = CalendarHelper.MaxDateTime(),
                 Family = request.LastName,
-                FatherName = "b",
-                LastChangePassword = CalendarHelper.GetCurrentDateTime(),
+                FatherName = request.BirthDate,
                 Name = request.FirstName,
-                Sex = request.Sex
+                Sex = request.Sex,
+                LastChangePassword = CalendarHelper.GetCurrentDateTime()
             };
 
-            await _unitOfWork.Repositorey<GenericRepository<GFESUser>>().Add(user);
+            await _unitOfWork.Repositorey<IGenericRepository<PunishmentOrg135Users>>().Add(user);
 
             if (_unitOfWork.Complete() < 0)
             {
                 return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
             }
 
+            var currentDateTime = DateTime.Now;
+            await _unitOfWork.Repositorey<IGenericRepository<Users135LoginHistory>>().Add(new Users135LoginHistory()
+            {
+                Id = Guid.NewGuid().ToString("N"),
+                SmsCode = passWordHash,
+                SendCodeDateTime = currentDateTime.DateTimeToString(),
+                ExpiredCodeDateTime = currentDateTime.AddSeconds(_SecodeWait).DateTimeToString(),
+                SendCodePerDay = 1,
+                ThePunishmentOrg135Users = user
+            });
 
-            //var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, password);
-            //theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            if (_unitOfWork.Complete() < 0)
+            {
+                return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
+            }
 
-            //var jwtToken = GenerateJwtToken(theGFESUser);
-
-            //insert password code and date time into table
-
-            return new FirstStepAuthResult() { CountCharacter = 6, SecondsWait = 120, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: "09*****" + request.PhoneNumber.Substring(request.PhoneNumber.Length - 4)) };
+            return new FirstStepAuthResult() { CountCharacter = _CountCharacter, SecondsWait = _SecodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: request.PhoneNumber.Substring(request.PhoneNumber.Length - 4) + "*****09") };
 
         }
 
-        [Route("api/v1/SecondStepLogin")]
+
+        [Route("api/v1/Login")]
         [HttpPost]
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<AuthResult> SecondStepLogin([FromBody] SecondStepUserLoginRequest request)
+        public async Task<AuthResult> Login([FromBody] SecondStepUserLoginRequest request)
         {
 
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
@@ -131,22 +215,117 @@ namespace Anu.PunishmentOrg.Api.Authentication
             request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
             request.UserName.IsValidNationalCode();
+            if (request.LoginType == LoginType.LoginWithSms)
+            {
+                request.Password.IsDigit(AnuResult.UserName_Or_PassWord_Is_Not_Valid, length: _CountCharacter);
+            }
 
-
-            var theGFESUser = await _unitOfWork.Repositorey<GFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
-            theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
-
+            string jwtToken = null;
 
             switch (request.LoginType)
             {
                 case LoginType.LoginWithSms:
-                    //check the database for how seconds pass and is the code valid
+                    var punishmentOrg135Users = await _unitOfWork.Repositorey<IPunishmentOrg135UsersRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+                    punishmentOrg135Users.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+                    var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IUsers135LoginHistoryRepository>().LastRecordHistoryPerDay(punishmentOrg135Users.Id, DateTime.Now.DateToString());
+                    lastRecordHistoryPerDay.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+                    bool IsExpierd = false;
+                    if (lastRecordHistoryPerDay.ExpiredCodeDateTime.ToDateTime() < DateTime.Now.DateTimeToString().ToDateTime())
+                    {
+                        IsExpierd = true;
+                    }
+                    if (lastRecordHistoryPerDay.ExpiredCodeDateTime.ToDateTime() == lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime())
+                    {
+                        return new AuthResult() { Result = AnuResult.Login_Again.GetResult() };
+                    }
+
+                    lastRecordHistoryPerDay.ExpiredCodeDateTime = lastRecordHistoryPerDay.SendCodeDateTime;
+
+                    if (_unitOfWork.Complete() < 0)
+                    {
+                        return new AuthResult() { Result = AnuResult.Error.GetResult() };
+                    }
+
+                    if (IsExpierd)
+                    {
+                        return new AuthResult() { AccessToken = null, Result = AnuResult.Sms_Time_Is_Expired.GetResult() };
+                    }
+
+                    jwtToken = GenerateJwtToken(punishmentOrg135Users);
+                    break;
+                case LoginType.LoginWithUserAndPass:
+
+                    var theGFESUser = await _unitOfWork.Repositorey<IGFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+                    theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+                    jwtToken = GenerateJwtToken(theGFESUser);
                     break;
             }
 
-            var jwtToken = GenerateJwtToken(theGFESUser);
 
             return new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() };
+
+        }
+
+
+        [Route("api/v1/ChangePhoneNumber")]
+        [HttpPost]
+        [HttpPost]
+        public async Task<Result> ChangePhoneNumber([FromBody] ChangePhoneNumberRequest request)
+        {
+
+            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.NewPhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
+            request.Password.IsDigit(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+
+            request.UserName.IsValidNationalCode();
+            request.NewPhoneNumber.IsValidPhone();
+
+            string jwtToken = null;
+
+            var punishmentOrg135Users = await _unitOfWork.Repositorey<IPunishmentOrg135UsersRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+            punishmentOrg135Users.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IUsers135LoginHistoryRepository>().LastRecordHistoryPerDay(punishmentOrg135Users.Id, DateTime.Now.DateToString());
+            lastRecordHistoryPerDay.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            bool IsExpierd = false;
+            if (lastRecordHistoryPerDay.ExpiredCodeDateTime.ToDateTime() < DateTime.Now.DateTimeToString().ToDateTime())
+            {
+                IsExpierd = true;
+            }
+            if (lastRecordHistoryPerDay.ExpiredCodeDateTime.ToDateTime() == lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime())
+            {
+                return AnuResult.Login_Again.GetResult();
+            }
+
+            //await ShahkarAuthentication.ShahkarAuthenticate(request.NewPhoneNumber, request.UserName);
+
+            
+            if ((await _unitOfWork.Repositorey<IPunishmentOrg135UsersRepository>().UpdatePhoneNumber(punishmentOrg135Users.Id,request.NewPhoneNumber)) < 0)
+            {
+                return AnuResult.Error.GetResult();
+            }
+
+            lastRecordHistoryPerDay.ExpiredCodeDateTime = lastRecordHistoryPerDay.SendCodeDateTime;
+
+
+
+            if (_unitOfWork.Complete() < 0)
+            {
+                return AnuResult.Error.GetResult();
+            }
+
+            if (IsExpierd)
+            {
+                return AnuResult.Sms_Time_Is_Expired.GetResult();
+            }
+
+            return AnuResult.Successful.GetResult();
 
         }
 

@@ -1,6 +1,5 @@
 ﻿
 using Anu.PunishmentOrg.ServiceModel.InspectionReport;
-using Anu.PunishmentOrg.ServiceModel.InspectionReport;
 
 namespace Anu.PunishmentOrg.Api.InspectionReport
 {
@@ -11,7 +10,7 @@ namespace Anu.PunishmentOrg.Api.InspectionReport
     }
         [Microsoft.AspNetCore.Mvc.HttpPost]
             [Microsoft.AspNetCore.Mvc.Route("api/v1/[controller]/[action]")]
-        public abstract Task<PInspectionReportStateResponse> SendPInspectionReportState([Microsoft.AspNetCore.Mvc.FromBody]PInspectionReportStateRequest request);
+        public abstract Task<PInspectionReportStateResponse> SendPInspectionReportState([Microsoft.AspNetCore.Mvc.FromBody] PInspectionReportStateRequest request);
 
     }
     }

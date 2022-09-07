@@ -61,6 +61,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لطفا تاریخ تولد خود را وارد نمایید.
+        /// </summary>
+        public static string BirthDate_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("BirthDate_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاریخ تولد معتبر نمی باشد.
+        /// </summary>
+        public static string BirthDate_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("BirthDate_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to خطای غیر منتظره.
         /// </summary>
         public static string Error {
@@ -97,6 +115,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لطفا نام خود را وارد نمایید.
+        /// </summary>
+        public static string FirstName_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("FirstName_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to درخواست بدنه نمی‌تواند خالی باشد..
         /// </summary>
         public static string GeoLocation_Request_IsNull {
@@ -115,6 +142,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لطفا نام خوانوادگی خود را وارد نمایید.
+        /// </summary>
+        public static string LastName_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("LastName_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا مجددا وارد شوید.
+        /// </summary>
+        public static string Login_Again {
+            get {
+                return ResourceManager.GetString("Login_Again", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کد عبور برای شماره {0} ارسال شد ..
         /// </summary>
         public static string LoginSuccessful_Sms_Send_To {
@@ -124,11 +169,65 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کد واحد پرونده نامرتبط است..
+        /// </summary>
+        public static string MechanizedLetter_CaseHandlerUnitId_Is_Not_Sync_UnitId {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_CaseHandlerUnitId_Is_Not_Sync_UnitId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره پرونده نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_CaseNo_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_CaseNo_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره پرونده را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_CaseNo_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_CaseNo_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد واحد پرونده نامعتبر است.
+        /// </summary>
+        public static string MechanizedLetter_CaseUnit_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_CaseUnit_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد واحد پرونده را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_CaseUnit_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_CaseUnit_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to كاربر ثبت كننده نامه را وارد کنید..
         /// </summary>
         public static string MechanizedLetter_CreatorUserName_Is_Null {
             get {
                 return ResourceManager.GetString("MechanizedLetter_CreatorUserName_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد موضوع نامه نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_GMechanizedLetterTypeCode_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_GMechanizedLetterTypeCode_Is_Not_Valid", resourceCulture);
             }
         }
         
@@ -147,6 +246,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string MechanizedLetter_LetterText_Is_Null {
             get {
                 return ResourceManager.GetString("MechanizedLetter_LetterText_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مقدار نوع گيرنده از نطر گيرنده اصل نامه/رونوشت گيرنده معتبر نمی باشد..
+        /// </summary>
+        public static string MechanizedLetter_mainRcvOrTranscriptRcv_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_mainRcvOrTranscriptRcv_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع گيرنده از نطر گيرنده اصل نامه/رونوشت گيرنده را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_mainRcvOrTranscriptRcv_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_mainRcvOrTranscriptRcv_Is_Null", resourceCulture);
             }
         }
         
@@ -196,11 +313,83 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مقدار نوع گيرنده نامه/رونوشت از نظر واحدي/سمتي/کاربري نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_ReceiverType_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_ReceiverType_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع گيرنده نامه/رونوشت از نظر واحدي/سمتي/کاربري را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_ReceiverType_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_ReceiverType_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to وارد کردن اطلاعات حداقل یک گیرنده برای نامه اجباری می باشد..
         /// </summary>
         public static string MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null {
             get {
                 return ResourceManager.GetString("MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مقدار نوع نامه از نظر نامه بازگشتي یا پيروي نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_relationType_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_relationType_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع نامه از نظر نامه بازگشتي یا پيروي را وارد کنید..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_relationType_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_relationType_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع نامه از نظر مکانيزه بودن يا غيرمکانيزه بودن نامه بازگشتي یا پيروي نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_RelLetterGetType_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_RelLetterGetType_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع نامه از نظر مکانيزه بودن يا غيرمکانيزه بودن نامه بازگشتي یا پيروي را وارد کنید..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_RelLetterGetType_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_RelLetterGetType_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره نامه بازگشتي یا پيروي نامعتبر است..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_RelLetterNo_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_RelLetterNo_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره نامه بازگشتي یا پيروي را وارد نمایید..
+        /// </summary>
+        public static string MechanizedLetter_RelLetters_RelLetterNo_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_RelLetters_RelLetterNo_Is_Null", resourceCulture);
             }
         }
         
@@ -241,6 +430,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to واحد پرونده را مقدار دهی نمایید..
+        /// </summary>
+        public static string MechanizedLetter_TheUnit_Is_Null {
+            get {
+                return ResourceManager.GetString("MechanizedLetter_TheUnit_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا کد ملی را وارد نمایید..
+        /// </summary>
+        public static string NationalCode_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("NationalCode_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to لطفا کد ملی را صحیح وارد نمایید..
         /// </summary>
         public static string NationalCode_Is_Not_Valid {
@@ -264,24 +471,6 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string NationalCode_Must_Be_Number {
             get {
                 return ResourceManager.GetString("NationalCode_Must_Be_Number", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to کد ملی را وارد کنید..
-        /// </summary>
-        public static string NationalCodeIs_Required {
-            get {
-                return ResourceManager.GetString("NationalCodeIs_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to شماره ابلاغ را وارد کنید..
-        /// </summary>
-        public static string No_Is_Required {
-            get {
-                return ResourceManager.GetString("No_Is_Required", resourceCulture);
             }
         }
         
@@ -655,11 +844,155 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ابلاغ مد نظر یافت نشد.
+        /// </summary>
+        public static string PNotice_ChangePNoticeViewByUserStatus_PNotice_NotFound {
+            get {
+                return ResourceManager.GetString("PNotice_ChangePNoticeViewByUserStatus_PNotice_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره ابلاغ نامعتبر میباشد.
+        /// </summary>
+        public static string PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string PNotice_ChangePNoticeViewByUserStatus_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ChangePNoticeViewByUserStatus_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string PNotice_ChangePNoticeViewByUserStatus_ThePNoticeNoInputContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ChangePNoticeViewByUserStatus_ThePNoticeNoInputContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to متن ابلاغیه یافت نشد..
+        /// </summary>
+        public static string PNotice_ExportPNotice_Description_NotFound {
+            get {
+                return ResourceManager.GetString("PNotice_ExportPNotice_Description_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره ابلاغ را وارد کنید..
+        /// </summary>
+        public static string PNotice_ExportPNotice_No_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ExportPNotice_No_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ابلاغیه ای یافت نشد..
         /// </summary>
-        public static string PNotice_NotFound {
+        public static string PNotice_ExportPNotice_NotFound {
             get {
-                return ResourceManager.GetString("PNotice_NotFound", resourceCulture);
+                return ResourceManager.GetString("PNotice_ExportPNotice_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_ExportPNotice_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ExportPNotice_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اطلاعات وارد شده نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_ExportPNotice_ThePNoticeNoInputContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_ExportPNotice_ThePNoticeNoInputContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدملی معتبر نمی باشد..
+        /// </summary>
+        public static string PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ابلاغی یافت نشد.
+        /// </summary>
+        public static string PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound {
+            get {
+                return ResourceManager.GetString("PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_GetCountOfUnSeenPNoticeByUser_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_GetCountOfUnSeenPNoticeByUser_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string PNotice_GetCountOfUnSeenPNoticeByUser_ThePNoticePersonContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_GetCountOfUnSeenPNoticeByUser_ThePNoticePersonContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدملی/شناسه ملی درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_InqueryPNoticeList_NationalityCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_InqueryPNoticeList_NationalityCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ابلاغیه ای یافت نشد..
+        /// </summary>
+        public static string PNotice_InqueryPNoticeList_NotFound {
+            get {
+                return ResourceManager.GetString("PNotice_InqueryPNoticeList_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_InqueryPNoticeList_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_InqueryPNoticeList_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اطلاعات وارد شده نمی تواند خالی باشد..
+        /// </summary>
+        public static string PNotice_InqueryPNoticeList_ThePNoticePersonContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PNotice_InqueryPNoticeList_ThePNoticePersonContract_Is_Required", resourceCulture);
             }
         }
         
@@ -669,6 +1002,114 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string PropertyOrderNotFound {
             get {
                 return ResourceManager.GetString("PropertyOrderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to در خواست شما معتبر نمی باشد.
+        /// </summary>
+        public static string Request_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("Request_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اطلاعات وارد شده معتبر نمی باشد..
+        /// </summary>
+        public static string SabteAhval_Data_Not_Match_Entered_Data {
+            get {
+                return ResourceManager.GetString("SabteAhval_Data_Not_Match_Entered_Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدملی معتبر نمی باشد..
+        /// </summary>
+        public static string SabteAhval_Not_Validate_NationalCode {
+            get {
+                return ResourceManager.GetString("SabteAhval_Not_Validate_NationalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to خطا ثبت احوال.
+        /// </summary>
+        public static string SabteAhval_Unkhown_Error {
+            get {
+                return ResourceManager.GetString("SabteAhval_Unkhown_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا مجددا {0} دیگر تلاش کنید.
+        /// </summary>
+        public static string Send_Login_Request_After_x_Second {
+            get {
+                return ResourceManager.GetString("Send_Login_Request_After_x_Second", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to جنسیت معتبر نمی باشد.
+        /// </summary>
+        public static string Sex_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("Sex_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to امکان استعلام تطابق شماره تلفن و کد ملی وجود به شماره ملی {0} ندارد..
+        /// </summary>
+        public static string Shahkar_Could_Not_Inquiry {
+            get {
+                return ResourceManager.GetString("Shahkar_Could_Not_Inquiry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عدم تطابق شماره تلفن همراه با کد ملی  به شماره ملی {0}.
+        /// </summary>
+        public static string Shahkar_NationalCode_PhoneNumber_Is_Not_Match {
+            get {
+                return ResourceManager.GetString("Shahkar_NationalCode_PhoneNumber_Is_Not_Match", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مقدار شماره تلفن همراه با کد ملی به شماره ملی {0}  نامعتبر است..
+        /// </summary>
+        public static string Shahkar_NationalCode_PhoneNumber_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("Shahkar_NationalCode_PhoneNumber_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to خطا شاهکار.
+        /// </summary>
+        public static string Shahkar_Unkhown_Error {
+            get {
+                return ResourceManager.GetString("Shahkar_Unkhown_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شما به محدودیت ارسال اس ام اس رسیده اید لطفا مجدد فردا مراجعه کنید..
+        /// </summary>
+        public static string Sms_Limit_Send {
+            get {
+                return ResourceManager.GetString("Sms_Limit_Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to زمان انتظار ارسال کد به پایان رسیده است. لطفا مجدد اقدام به دریافت کد کنید ..
+        /// </summary>
+        public static string Sms_Time_Is_Expired {
+            get {
+                return ResourceManager.GetString("Sms_Time_Is_Expired", resourceCulture);
             }
         }
         

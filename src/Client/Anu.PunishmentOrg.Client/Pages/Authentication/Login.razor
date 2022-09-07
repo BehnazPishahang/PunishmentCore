@@ -2,77 +2,83 @@
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
 
 
-@inject IAnuAuthorizationService _anuAuthorizationService;
+@inject IAnuAuthorizationService  _anuAuthorizationService;
 @inject AppConfiguration _appConfiguration;
+@inject ISnackbar Snackbar
 
-<EditForm Model="@_tokenModel">
-    <MudDialog>
-        <TitleContent>
+
+<EditForm Model="@_tokenModel" >
+      <MudDialog>
+        <TitleContent> 
             <div class="d-flex justify-center">
-                <MudIcon Icon="@Icons.Filled.Balance" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
-            </div>
-        </TitleContent>
-        <DialogContent>
-            <MudGrid>
-                <MudItem xs="12">
+                                <MudIcon Icon="@Icons.Filled.Balance" Color="Color.Primary" Size="Size.Large" ViewBox="0 0 500 500" Style="width: 100px; height: 100px;" />
+                            </div>
+         </TitleContent>
+    <DialogContent>
+                    <MudGrid>
+                        <MudItem xs="12">
+                            
+                        </MudItem>
+                        <DataAnnotationsValidator />
+                        <MudItem xs="12">
+                            <div class="d-flex justify-center">
+                                <MudText Typo="Typo.h4" Style="text-shadow: -2px 3px 3px grey;">ورود به سایت </MudText>
+                            </div>
+                        </MudItem>
+       
+                        <MudItem xs="12">
+                            <div class="d-flex justify-center">
+                                <MudText>آیا تا کنون در سایت ثبت نام نکرده اید؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
+                            </div>
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                          @bind-Value="_tokenModel.UserName" For="@(() => _tokenModel.UserName)" Validation="Validated.ToString()"/>
+                        </MudItem>
+                        <MudItem xs="8">
+                            <MudTextField T="string" Label=" کد ورود" Variant="Variant.Outlined" Margin="Margin.Dense"  Mask="@(new PatternMask("000000"))" MaxLength=6
+                                         @bind-Value="_secondRequest.Password" ></MudTextField>
+                        </MudItem>
 
-                </MudItem>
-                <DataAnnotationsValidator />
-                <MudItem xs="12">
-                    <div class="d-flex justify-center">
-                        <MudText Typo="Typo.h4" Style="text-shadow: -2px 3px 3px grey;">ورود به سایت </MudText>
-                    </div>
-                </MudItem>
+                        <MudItem xs="4">
+                            <MudButton Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" Size="Size.Medium" Style="width: 100%;"> 
 
-                <MudItem xs="12">
-                    <div class="d-flex justify-center">
-                        <MudText>آیا تا کنون در سایت ثبت نام نکرده اید؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
-                    </div>
-                </MudItem>
-                <MudItem xs="12">
-                    <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                  @bind-Value="_tokenModel.UserName" For="@(() => _tokenModel.UserName)" Validation="Validated.ToString()" />
-                </MudItem>
-                <MudItem xs="8">
-                    <MudTextField T="string" Label="رمز پویا" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                  @bind-Value="_secondRequest.Password" For="@(() => _secondRequest.Password)"></MudTextField>
-                </MudItem>
+                                    @if(hasSmsSend)
+                                     {
+                                             <b> @ProgressValue ثانیه </b>
+                                             <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue"  />
+                                    }
+                                    else
+                                    {
+                                            <b>دریافت کد </b>
+                                    }
+                            </MudButton>
+                        </MudItem>
 
-                <MudItem xs="4">
-                    <MudButton Variant="Variant.Filled" disabled="@(hasSmsSend)" OnClick="GetAccessCode" Size="Size.Medium" Style="width: 100%;">
-
-                        @if (hasSmsSend)
-                        {
-                            <b> @ProgressValue ثانیه </b>
-                            <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue" />
-                        }
-                        else
-                        {
-                            <b>دریافت کد </b>
-                        }
-                    </MudButton>
-                </MudItem>
-
-
-                <MudItem xs="12">
-                    <div class="d-flex justify-center">
-                        <MudText Color="Color.Error">@errorMessage </MudText>
-                    </div>
-                </MudItem>
-            </MudGrid>
-        </DialogContent>
-        <DialogActions>
-            <MudItem xs="12" Class="d-flex justify-center">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
-            </MudItem>
- 
-
-        </DialogActions>
-    </MudDialog>
+               
+                        <MudItem xs="12">
+                            <div class="d-flex justify-center">
+                                <MudText Color="Color.Error">@errorMessage </MudText>
+                            </div>
+                        </MudItem>
+                    </MudGrid>
+ </DialogContent>
+   <DialogActions>
+        <MudItem xs="12" Class="d-flex justify-center">
+                           <MudButton Variant="Variant.Filled"  Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
+                        </MudItem>
+                        <MudItem xs="12" Class="d-flex justify-center">
+                           <MudButton Variant="Variant.Filled" Color="Color.Warning" Href="/false" Size="Size.Large" Style="width: 100%;">برگشت</MudButton>
+                        </MudItem>
+      
+       
+    </DialogActions>
+</MudDialog>
 </EditForm>
 
 
 @code {
+
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
     string errorMessage = "";
     private FirstStepUserLoginRequest _tokenModel = new();
@@ -84,6 +90,7 @@
 
     private int ProgressValue { get; set; }
     private bool hasSmsSend = false;
+
     public async void SimulateProgress()
     {
         ProgressValue = 120;
@@ -107,11 +114,15 @@
 
     void GetAccessCode()
     {
+
+        
         var ss = _appConfiguration.BackendServerAddress;
 
         AuthResult result = _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _tokenModel);
         if (result.Result.Code == 100013)
         {
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            Snackbar.Add(result.Result.Message,  Severity.Success);
             hasSmsSend = true;
             SimulateProgress();
             SharedInfo.NationalCode = _tokenModel.UserName;
@@ -126,22 +137,31 @@
     }
     void Submit()
     {
-        var ss = _appConfiguration.BackendServerAddress;
-        _secondRequest.UserName = _tokenModel.UserName;
 
-        AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.SecondStepLogin, _secondRequest);
-        if (result.Result.Code == 1000)
+        if (string.IsNullOrEmpty(_secondRequest.Password) || _secondRequest.Password.Length != 6)
         {
-            _navigationManager.NavigateTo("/true");
-            errorMessage = "";
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            Snackbar.Add("کد ارسال شده را وارد نمایید ",  Severity.Warning);
+            return;
         }
-        else
-        {
-            errorMessage = result.Result.Message;
-            Validated = false;
+
+            var ss = _appConfiguration.BackendServerAddress;
+            
+            _secondRequest.UserName = _tokenModel.UserName;
+            _secondRequest.LoginType = Commons.ServiceModel.ServiceAuthentication.Enumerations.LoginType.LoginWithSms;
+            AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.SecondStepLogin, _secondRequest);
+            if (result.Result.Code == 1000)
+            {
+                _navigationManager.NavigateTo("/true");
+                errorMessage = "";
+                SharedInfo.NationalCode = _tokenModel.UserName;
+            }
+            else
+            {
+                errorMessage = result.Result.Message;
+                Validated = false;
+            }
         }
-    }
 
-
-
+   
 }

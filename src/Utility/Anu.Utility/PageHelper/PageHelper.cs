@@ -13,15 +13,15 @@ namespace Anu.Utility.Pagination
 
         public static Page PageChecker(this Page page,string defualtOrderProperty)
         {
-            if (!page.OrderPage.Null() || !page.OrderPage.Property.NullOrWhiteSpace())
+            if (page.OrderPage.Null() || page.OrderPage.Property.NullOrWhiteSpace())
             {
                 page.OrderPage = new OrderPage() { Property = defualtOrderProperty, Ascending = true };
             }
-            if (!page.RowCountPerPage.Null() || page.RowCountPerPage == 0)
+            if (page.RowCountPerPage.Null() || page.RowCountPerPage == 0)
             {
                 page.RowCountPerPage = 10;
             }
-            if (!page.PageNumber.Null() || page.PageNumber == 0)
+            if (page.PageNumber.Null() || page.PageNumber == 0)
             {
                 page.PageNumber = 1;
             }

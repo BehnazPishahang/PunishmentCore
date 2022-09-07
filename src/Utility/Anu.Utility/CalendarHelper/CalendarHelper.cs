@@ -6,12 +6,24 @@ namespace Utility.CalendarHelper
     public static class CalendarHelper
     {
         /// <summary>
-        ///  get dateTime Now with shamsi
+        ///  get date Now with shamsi
         /// </summary>
-        /// <returns></returns>
-        public static DateTime DateTimeNow()
+        /// <returns>
+        /// date Now with shamsi
+        /// </returns>
+        public static DateTime SahmsiDateNow()
         {
             return DateTime.Now.ToPersianDate();
+        }
+
+        public static string DateTimeToString(this DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy/MM/dd HH:mm:ss");
+        }
+
+        public static string DateToString(this DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy/MM/dd");
         }
 
         public static string ToPersian(this DateTime dateTime)
@@ -26,6 +38,20 @@ namespace Utility.CalendarHelper
             DateTime PersianDateTime = new DateTime(year, month, day, hour, min, 0);
 
             return PersianDateTime.ToString("yyyy/MM/dd HH:mm");
+        }
+
+        public static string ToPersianDateString(this DateTime dateTime)
+        {
+            PersianCalendar pc = new PersianCalendar();
+            int year = pc.GetYear(dateTime);
+            int month = pc.GetMonth(dateTime);
+            int day = pc.GetDayOfMonth(dateTime);
+            int hour = pc.GetHour(dateTime);
+            int min = pc.GetMinute(dateTime);
+
+            DateTime PersianDateTime = new DateTime(year, month, day, hour, min, 0);
+
+            return PersianDateTime.ToString("yyyy/MM/dd");
         }
 
         public static DateTime ToPersianDateTime(this DateTime dateTime)
@@ -53,7 +79,7 @@ namespace Utility.CalendarHelper
         public static DateTime ToMiladi(this DateTime dateTime)
         {
             PersianCalendar pc = new PersianCalendar();
-            return pc.ToDateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, 0, 0);
+            return pc.ToDateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, 0);
         }
 
         public static DateTime ToDateTime(this string dateTime)

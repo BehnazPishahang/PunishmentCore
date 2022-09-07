@@ -10,18 +10,20 @@ namespace Anu.BaseInfo.DataAccess.OrganizationChart
 
         }
 
-        public async Task<DataModel.OrganizationChart.Unit> FindRelatedUnitToGeoLocation(string locationCode , List<string> gUnitTypes)
+        public async Task<DataModel.OrganizationChart.Unit> FindRelatedUnitToGeoLocation(string locationCode, List<string> gUnitTypes)
         {
-            return await _context.Set<Anu.BaseInfo.DataModel.OrganizationChart.Unit>().
-                Where(x =>  x.TheGeoLocation.LocationCode == locationCode
+            //to
+            return await _context.Set<Anu.BaseInfo.DataModel.OrganizationChart.Unit>()
+                .Where(x => x.TheGeoLocation.LocationCode == locationCode
                       && x.State == Anu.BaseInfo.Enumerations.State.Valid
-                      && gUnitTypes.Contains(x.TheGUnitType.Code))
-                .FirstOrDefaultAsync();
+                      && gUnitTypes.Contains(x.TheGUnitType.Code)).Include(u => u.TheCMSOrganizationList).FirstOrDefaultAsync();
         }
 
         public async Task<Anu.BaseInfo.DataModel.OrganizationChart.Unit> GetByCode(string code)
         {
-            return await _context.Set<Anu.BaseInfo.DataModel.OrganizationChart.Unit>().Where(x => x.Code == code).FirstOrDefaultAsync();
+            return await _context.Set<Anu.BaseInfo.DataModel.OrganizationChart.Unit>().Where(x => x.Code == code)
+                .Include(x=> x.TheGUnitType)
+                .FirstOrDefaultAsync();
         }
     }
 }

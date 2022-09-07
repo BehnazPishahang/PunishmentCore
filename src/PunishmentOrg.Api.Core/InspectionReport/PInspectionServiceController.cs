@@ -5,6 +5,8 @@ using Anu.PunishmentOrg.DataAccess.InspectionReport;
 using Anu.PunishmentOrg.DataAccess.PCase;
 using Anu.PunishmentOrg.DataAccess.Terminate;
 using Anu.PunishmentOrg.Domain.Case;
+using Anu.PunishmentOrg.Domain.InspectionReport;
+using Anu.PunishmentOrg.Domain.Terminate;
 using Anu.PunishmentOrg.Enumerations;
 using Anu.PunishmentOrg.ServiceModel.InspectionReport;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
@@ -37,7 +39,7 @@ namespace Anu.PunishmentOrg.Api.InspectionReport
             request.ThePInspectionReportStateInputContract.UniqueNo.NullOrWhiteSpace(PInspectionReportResult.Error_UniqueNo_Is_Required, "مکانیزه گزارش بازرسی");
             request.ThePInspectionReportStateInputContract.UniqueNo.IsDigit(PInspectionReportResult.Error_UniqueNo_Is_Required, args: "مکانیزه گزارش بازرسی");
 
-            var thePInspectionReport = await _unitOfWork.Repositorey<PInspectionReportRepository>().GetPInspectionReportByUniqueNo(request.ThePInspectionReportStateInputContract.UniqueNo);
+            var thePInspectionReport = await _unitOfWork.Repositorey<IPInspectionReportRepository>().GetPInspectionReportByUniqueNo(request.ThePInspectionReportStateInputContract.UniqueNo);
             thePInspectionReport.Null(PInspectionReportResult.PInspectionReport_No_Is_NotValid);
             thePInspectionReport.TheObjectState.Null(PInspectionReportResult.Error_to_Find_State, "گزارش بازرسی");
 
@@ -127,7 +129,7 @@ namespace Anu.PunishmentOrg.Api.InspectionReport
             Revision.Add("014");
             Revision.Add("015");
 
-            var pCaseCollection = await _unitOfWork.Repositorey<PCaseRepository>().GetPCaseByNo(thePInspectionReport.ThePCase.No);
+            var pCaseCollection = await _unitOfWork.Repositorey<IPCaseRepository>().GetPCaseByNo(thePInspectionReport.ThePCase.No);
 
             #region وقت رسیدگی
 
@@ -172,7 +174,7 @@ namespace Anu.PunishmentOrg.Api.InspectionReport
             #endregion اجرای احکام
 
             #region بررسی اینکه رای صادر شده یا نه
-            var thePJudgmentCase = await _unitOfWork.Repositorey<PJudgmentCaseRepository>().GetPJudgmentCaseByObjectID(thePInspectionReport.ThePCase.SourceObjectId);
+            var thePJudgmentCase = await _unitOfWork.Repositorey<IPJudgmentCaseRepository>().GetPJudgmentCaseByObjectID(thePInspectionReport.ThePCase.SourceObjectId);
             if (thePJudgmentCase.Count() != 0)
             {
                 sendPInspectionReportStateResponse.Result = PInspectionReportResult.PInspectionReport_PJudgment.GetResult();

@@ -23,8 +23,15 @@ class Program
         //var recieveGravamenSample = new RecieveGravamenSample();
         //recieveGravamenSample.Send();
 
-        var _MechanizedLetterSample = new MechanizedLetterSample();
-        _MechanizedLetterSample.Send();
+        //var _MechanizedLetterSample = new MechanizedLetterSample();
+        //_MechanizedLetterSample.Send();
+
+        //var requestIdClass = new Helper.HelperMethods();
+        //while (true)
+        //{
+        //    var requestId = requestIdClass.CreateRequestIdForShahkarService();
+        //}
+        
 
     }
 }

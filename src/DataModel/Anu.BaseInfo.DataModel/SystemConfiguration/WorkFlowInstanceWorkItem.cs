@@ -86,9 +86,6 @@ namespace Anu.BaseInfo.DataModel.SystemConfiguration
         [ForeignKey("RELATEDSYSTEMOBJECTCASEID")]
         public virtual Anu.BaseInfo.DataModel.SystemObject.SystemObject? TheRelatedSystemObjectCase { get; set; }
 
-        [ForeignKey("WFACINSTANCEID")]
-        public virtual Anu.BaseInfo.DataModel.WorkFlow.WFExec.WFACInstance? TheWFACInstance { get; set; }
-
         [Unicode(false)]
         [Column("TITLE")]
         public virtual string? Title { get; set; }
