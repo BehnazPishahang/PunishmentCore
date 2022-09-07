@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Gravamen\**" />
+    <EmbeddedResource Remove="Gravamen\**" />
+    <None Remove="Gravamen\**" />
+  </ItemGroup>
+
 
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
@@ -23,11 +29,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\ServiceModel\Anu.PunishmentOrg.ServiceModel\Anu.PunishmentOrg.ServiceModel.csproj" />
 	  <ProjectReference Include="..\..\Utility\Anu.Utility\Anu.Utility.csproj" />
-	</ItemGroup>
-
-
-	<ItemGroup>
-	  <Folder Include="Gravamen\" />
 	</ItemGroup>
 	
 </Project>
