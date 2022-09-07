@@ -516,19 +516,19 @@
     <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
     <comment>-30252</comment>
   </data>
-  <data name="PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required" xml:space="preserve">
+  <data name="PNotice_InqueryPNoticeList_NationalityCode_Is_Required" xml:space="preserve">
     <value>کدملی/شناسه ملی درخواست نمی تواند خالی باشد.</value>
     <comment>-30203</comment>
   </data>
-  <data name="PNotice_GetPNoticeByNationalityCode_NotFound" xml:space="preserve">
+  <data name="PNotice_InqueryPNoticeList_NotFound" xml:space="preserve">
     <value>ابلاغیه ای یافت نشد.</value>
     <comment>-30204</comment>
   </data>
-  <data name="PNotice_GetPNoticeByNationalityCode_Request_Is_Required" xml:space="preserve">
+  <data name="PNotice_InqueryPNoticeList_Request_Is_Required" xml:space="preserve">
     <value>درخواست نمی تواند خالی باشد.</value>
     <comment>-30201</comment>
   </data>
-  <data name="PNotice_GetPNoticeByNationalityCode_ThePNoticePersonContract_Is_Required" xml:space="preserve">
+  <data name="PNotice_InqueryPNoticeList_ThePNoticePersonContract_Is_Required" xml:space="preserve">
     <value>اطلاعات وارد شده نمی تواند خالی باشد.</value>
     <comment>-30202</comment>
   </data>

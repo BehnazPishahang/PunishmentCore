@@ -41,15 +41,15 @@ namespace Anu.PunishmentOrg.Api.Notice
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<PNoticeInqueryResponse> InqueryPNoticeList([FromBody] PNoticeInqueryRequest request)
         {
-            request.Null(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_Request_Is_Required);
+            request.Null(InqueryPNoticeListResult.PNotice_InqueryPNoticeList_Request_Is_Required);
 
-            request.PNoticePersonContract.Null(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_ThePNoticePersonContract_Is_Required);
+            request.PNoticePersonContract.Null(InqueryPNoticeListResult.PNotice_InqueryPNoticeList_ThePNoticePersonContract_Is_Required);
 
-            request.PNoticePersonContract!.NationalityCode.NullOrWhiteSpace(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required);
+            request.PNoticePersonContract!.NationalityCode.NullOrWhiteSpace(InqueryPNoticeListResult.PNotice_InqueryPNoticeList_NationalityCode_Is_Required);
 
             var thePNoticeList = await _unitOfWork.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(request.PNoticePersonContract.NationalityCode!.Trim().ToString(), request.Page);
 
-            thePNoticeList.Null(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_NotFound);
+            thePNoticeList.Null(InqueryPNoticeListResult.PNotice_InqueryPNoticeList_NotFound);
 
             var thePNoticeContractList = thePNoticeList.Select(a => new PNoticeContract()
             {
