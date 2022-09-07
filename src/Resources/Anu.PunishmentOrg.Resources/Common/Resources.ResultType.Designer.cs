@@ -430,20 +430,20 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to لطفا کد ملی را وارد نمایید..
-        /// </summary>
-        public static string NationalCode_Is_Not_Entered {
-            get {
-                return ResourceManager.GetString("NationalCode_Is_Not_Entered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to واحد پرونده را مقدار دهی نمایید..
         /// </summary>
         public static string MechanizedLetter_TheUnit_Is_Null {
             get {
                 return ResourceManager.GetString("MechanizedLetter_TheUnit_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا کد ملی را وارد نمایید..
+        /// </summary>
+        public static string NationalCode_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("NationalCode_Is_Not_Entered", resourceCulture);
             }
         }
         
@@ -963,36 +963,36 @@ namespace Anu.PunishmentOrg.Resources.Common {
         /// <summary>
         ///   Looks up a localized string similar to کدملی/شناسه ملی درخواست نمی تواند خالی باشد..
         /// </summary>
-        public static string PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required {
+        public static string PNotice_InqueryPNoticeList_NationalityCode_Is_Required {
             get {
-                return ResourceManager.GetString("PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required", resourceCulture);
+                return ResourceManager.GetString("PNotice_InqueryPNoticeList_NationalityCode_Is_Required", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to ابلاغیه ای یافت نشد..
         /// </summary>
-        public static string PNotice_GetPNoticeByNationalityCode_NotFound {
+        public static string PNotice_InqueryPNoticeList_NotFound {
             get {
-                return ResourceManager.GetString("PNotice_GetPNoticeByNationalityCode_NotFound", resourceCulture);
+                return ResourceManager.GetString("PNotice_InqueryPNoticeList_NotFound", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
         /// </summary>
-        public static string PNotice_GetPNoticeByNationalityCode_Request_Is_Required {
+        public static string PNotice_InqueryPNoticeList_Request_Is_Required {
             get {
-                return ResourceManager.GetString("PNotice_GetPNoticeByNationalityCode_Request_Is_Required", resourceCulture);
+                return ResourceManager.GetString("PNotice_InqueryPNoticeList_Request_Is_Required", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to اطلاعات وارد شده نمی تواند خالی باشد..
         /// </summary>
-        public static string PNotice_GetPNoticeByNationalityCode_ThePNoticePersonContract_Is_Required {
+        public static string PNotice_InqueryPNoticeList_ThePNoticePersonContract_Is_Required {
             get {
-                return ResourceManager.GetString("PNotice_GetPNoticeByNationalityCode_ThePNoticePersonContract_Is_Required", resourceCulture);
+                return ResourceManager.GetString("PNotice_InqueryPNoticeList_ThePNoticePersonContract_Is_Required", resourceCulture);
             }
         }
         
