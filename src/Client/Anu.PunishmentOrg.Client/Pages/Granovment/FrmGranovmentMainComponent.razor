@@ -3,15 +3,18 @@
 @using Anu.BaseInfo.Enumerations
 @using Anu.Commons.ServiceModel.ServiceResponseEnumerations
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.BaseInfo.GeoLocation
+@using Anu.PunishmentOrg.Client.Infrastructure.Granovment
 @using Anu.PunishmentOrg.ServiceModel.Gravamen;
 @using Anu.BaseInfo.ServiceModel.Attachment;
 @using Anu.PunishmentOrg.Client.Infrastructure.Utitlities
 
 @inject IGeoLoactionService _geoLoactionService
-@inject AppConfiguration _appConfiguration;
+@inject AppConfiguration _appConfiguration
+@inject ISnackbar Snackbar
 
 @layout MainLayout
 @using FluentValidation
+@using Newtonsoft.Json
 
 <style>
     .selected {
@@ -31,25 +34,27 @@
         font-weight: 300;
 </style>
 
-<h3>ثبت شکوائیه</h3>
+<div class="jumbotron text-center border-info border-2 oi-header">
+    <h3>ثبت شکایت نامه</h3>
+</div>
 
 <MudForm Model="@_pGravamenContract" @ref="@form" ValidationDelay="0">
     <MudExpansionPanels MultiExpansion="true" DisableBorders="false">
         <MudExpansionPanel Text="اطلاعات اولیه" IsExpanded="true">
             <div class="row">
-                <div class=col-sm-4>
+                <div class="col-sm-4">
                     <MudTextField Class="form-control" @bind-Value="_pGravamenContract.ReporterName" id="ReporterName" Label="نام شکایت کننده" Variant="Variant.Outlined"
                                   Margin="Margin.Dense" AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error"
                                   Adornment="Adornment.End" IconSize="Size.Small" Required="true" RequiredError="نام تنظیم کننده شکایت نامه را وارد نمایید"></MudTextField>
                 </div>
-                <div class=col-sm-4>
+                <div class="col-sm-4">
                     <MudTextField Class="form-control" @bind-Value="_pGravamenContract.ReporterFamily" id="ReporterFamily" Label="نام خانوادگی شکایت کننده" Variant="Variant.Outlined"
                                   Margin="Margin.Dense" AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error"
                                   Adornment="Adornment.End" IconSize="Size.Small" Required="true" RequiredError="نام خانوادگی شکایت کننده  را وارد نمایید"></MudTextField>
                 </div>
-                <div class=col-sm-4>
+                <div class="col-sm-4">
                     <MudTextField Class="form-control" @bind-Value="_pGravamenContract.ReporterMobilNumber " id="ReporterMobilNumber" Label="شماره همراه شکایت کننده" Variant="Variant.Outlined"
-                                  Margin="Margin.Dense" AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error"
+                                  Margin="Margin.Dense" AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error" MaxLength="11" Placeholder="09********"
                                   Adornment="Adornment.End" IconSize="Size.Small" Required="true" RequiredError="شماره همراه شکایت کننده را وارد نمایید"></MudTextField>
                 </div>
                 <div class="col-sm-4">
@@ -98,31 +103,31 @@
         </MudExpansionPanel>
         <MudExpansionPanel Text="اطلاعات شاکی/شاکیان">
             <MudForm Model="@_reporter" @ref="@FormReporter">
-                <div class="row">
-                    <div class="col col-sm-4">
+                <div class="row table-responsive-sm">
+                    <div class="col-sm-4">
                         <MudTextField Class="form-control" @bind-Value="_reporter.Name" id="Name" Label="نام" Variant="Variant.Outlined"
                                       Margin="Margin.Dense" AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error"
                                       Adornment="Adornment.End" IconSize="Size.Small" Required="true" RequiredError="نام شاکی را وارد نمایید"></MudTextField>
                     </div>
-                    <div class="col col-sm-4">
+                    <div class="col-sm-4">
                         <MudTextField Class="form-control" @bind-Value="_reporter.Family" id="Family" Label="نام خانوادگی" Variant="Variant.Outlined"
                                       Margin="Margin.Dense" Required="true" AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error"
                                       Adornment="Adornment.End" IconSize="Size.Small" RequiredError="نام خانوادگی شاکی را وارد نمایید"></MudTextField>
                     </div>
-                    <div class="col col-sm-4">
+                    <div class="col-sm-4">
                         <MudTextField Class="form-control" @bind-Value="_reporter.FatherName" id="FatherName" Label="نام پدر" Variant="Variant.Outlined"
                                       Margin="Margin.Dense"></MudTextField>
                     </div>
-                    <div class="col col-sm-4">
+                    <div class="col-sm-4">
                         <MudTextField Class="form-control" @bind-Value="_reporter.IdentityNumber" id="IdentityNumber" Label="شماره شناسنامه" Variant="Variant.Outlined"
                                       Margin="Margin.Dense"></MudTextField>
                     </div>
-                    <div class="col col-sm-4">
+                    <div class="col-sm-4">
                         <MudTextField Class="form-control" @bind-Value="_reporter.NationalCode" id="NationalCode" Label="شماره ملی" Placeholder="1467561088"
                                       MaxLength="10" Variant="Variant.Outlined" Margin="Margin.Dense" Required="true" AdornmentIcon="@Icons.Outlined.NoiseControlOff"
                                       AdornmentColor="Color.Error" IconSize="Size.Small" Adornment="Adornment.End" RequiredError="شماره ملی را وارد نمایید"></MudTextField>
                     </div>
-                    <div class="col col-sm-4">
+                    <div class="col-sm-4">
                         <MudTextField Class="form-control" @bind-Value="_reporter.MobilNumber" id="MobilNumber" Label="شماره همراه" Placeholder="09********"
                                       MaxLength="11" Variant="Variant.Outlined" Margin="Margin.Dense" Required="true" AdornmentIcon="@Icons.Outlined.NoiseControlOff"
                                       AdornmentColor="Color.Error" IconSize="Size.Small" Adornment="Adornment.End" RequiredError="شماره همراه را وارد نمایید"></MudTextField>
@@ -211,12 +216,12 @@
             <MudForm Model="@_accuser" @ref="@Formaccuser">
                 <div class="row">
                     <div class="col-sm-4">
-                        <MudTextField @bind-Value="_accuser.SubjectTitle" id="Name" Label="نام واحد صنفی متهم" Variant="Variant.Outlined" Margin="Margin.Dense"
+                        <MudTextField @bind-Value="_accuser.Name" id="Name" Label="نام واحد صنفی متهم" Variant="Variant.Outlined" Margin="Margin.Dense"
                                       AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error" Adornment="Adornment.End"
                                       IconSize="Size.Small" Required="true" Class="form-control" RequiredError="نام واحد صنفی متهم را وارد نمائید"></MudTextField>
                     </div>
                     <div class="col-sm-8">
-                        <MudTextField @bind-Value="_accuser.ViolationAddress" id="Address" Label="نشانی واحد صنفی متهم" Variant="Variant.Outlined" Margin="Margin.Dense"
+                        <MudTextField @bind-Value="_accuser.Address" id="Address" Label="نشانی واحد صنفی متهم" Variant="Variant.Outlined" Margin="Margin.Dense"
                                       AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error" Adornment="Adornment.End"
                                       IconSize="Size.Small" Required="true" Class="form-control" RequiredError="نشانی واحد صنفی متهم را وارد نمایید"></MudTextField>
                     </div>
@@ -234,14 +239,14 @@
                 </div>
                 <div class="row">
                     <MudTable Items="@accusers" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudTableaccuser" 
-                              T="PGravamenViolationContract" Dense="true" @bind-SelectedItem="_accuser" RowClassFunc="@accuserSelectedRowClassFunc">
+                              T="PGravamenPersonContract" Dense="true" @bind-SelectedItem="_accuser" RowClassFunc="@accuserSelectedRowClassFunc">
                         <HeaderContent>
                             <MudTh Style="width:150px">نام واحد متهم</MudTh>
                             <MudTh Style="width:450px">نشانی واحد متهم</MudTh>
                         </HeaderContent>
                         <RowTemplate>
-                            <MudTd DataLabel="نام واحد متهم">@context.SubjectTitle</MudTd>
-                            <MudTd DataLabel="نشانی واحد متهم">@context.ViolationAddress</MudTd>
+                            <MudTd DataLabel="نام واحد متهم">@context.Name</MudTd>
+                            <MudTd DataLabel="نشانی واحد متهم">@context.Address</MudTd>
                         </RowTemplate>
 
                     </MudTable>
@@ -297,120 +302,142 @@
                 </div>
             </MudForm>
         </MudExpansionPanel>
-        <MudExpansionPanel Text="خلاصه شکوائیه">
-            <div class="row">
-                <MudCard>
-                    <MudCardContent>
-                        <MudText Class="grvTitle">شاکی/شاکیان</MudText>
-                        <div class="col-sm-12">
-                            <MudList Class="form-control">
-                                @foreach (var item in reporters)
-                                {
-                                    <MudListItem Icon="@Icons.Filled.Man" IconColor="Color.Primary" @key="@item">@item.Name @item.Family به شماره ملی @item.NationalCode ساکن @item.Address</MudListItem>
-                                }
-                            </MudList>
-                        </div>
-                    </MudCardContent>
-                </MudCard>
-            </div>
-            <div class="row">
-                <MudCard>
-                    <MudCardContent>
-                        <MudText Class="grvTitle">متهم/متهمان</MudText>
-                        <div class="col-sm-12">
-                            <MudList Class="form-control">
-                                @foreach (var item in accusers)
-                                {
-                                    <MudListItem Icon="@Icons.Filled.Man" IconColor="Color.Secondary" @key="@item">@item.SubjectTitle به نشانی @item.ViolationAddress</MudListItem>
-                                }
-                            </MudList>
-                        </div>
-                    </MudCardContent>
-                </MudCard>
-            </div>
-            <div class="row">
-                <MudCard>
-                    <MudCardContent>
-                        <MudText  Class="grvTitle">موضوع شکایت</MudText>
-                        <MudTextField T="string" Text="@_pGravamenContract.PetitionSubject"></MudTextField>
-                    </MudCardContent>
-                </MudCard>
-            </div>
-            <div class="row">
-                <MudCard>
-                    <MudCardContent>
-                        <MudText  Class="grvTitle">شرح شکوائیه</MudText>
-                        <MudTextField T="string" Text="@_pGravamenContract.PetitionDescription" Lines="5"></MudTextField>
-                    </MudCardContent>
-                </MudCard>
-            </div>
-            <div class="row">
-                <MudCheckBox  Label="موارد مندرج در شکوائیه مورد تائید می باشد" LabelPosition="LabelPosition.Start" Color="Color.Secondary" @bind-Checked="AcceptInfo" ></MudCheckBox>
-            </div>
-        </MudExpansionPanel>
     </MudExpansionPanels>
-    <div class="row" style="margin-top:20px">
+    <div class="row">
+        <MudCheckBox Label="موارد مندرج در شکوائیه مورد تائید می باشد" LabelPosition="LabelPosition.Start" Color="Color.Secondary" 
+                     @bind-Checked="AcceptInfo" style="margin-top:5px;margin-left:10px;"></MudCheckBox>
+    </div>
+    <div class="row" style="margin-top:5px;margin-left:10px;">
         <div class="col-sm-2" style="margin-right:15px;">
-            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info"
-                                   Size="Size.Medium" Class="form-control" OnClick="SaveGranovment">ذخیره</MudButton>
+            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info"  Disabled="@(!AcceptInfo)"
+                                   Size="Size.Medium" Class="form-control" OnClick="SaveGranovment" >ذخیره</MudButton>
         </div>
     </div>
 </MudForm>
 
 
 @code {
-    public bool? AcceptInfo { get; set; } = false;
+    public bool AcceptInfo { get; set; } = false;
     string StringValue { set; get; } = "";
     GeoLocationContract selectedState,selectedProvince;
     List<GeoLocationContract> States = new();
     List<GeoLocationContract> province = new();
     List<PGravamenPersonContract> reporters = new();
-    List<PGravamenViolationContract> accusers = new();
+    List<PGravamenPersonContract> accusers = new();
     List<GAttachmentContract> attachments = new();
     PGravamenPersonContract _reporter = new();
-    PGravamenViolationContract _accuser = new();
+    PGravamenPersonContract _accuser = new();
     PGravamenContract _pGravamenContract = new();
     GAttachmentContract _attachment = new();
     private List<string> _events = new();
     MudForm form, FormReporter,Formaccuser,Formattachment;
     private MudTable<PGravamenPersonContract> mudTable;
-    private MudTable<PGravamenViolationContract> mudTableaccuser;
+    private MudTable<PGravamenPersonContract> mudTableaccuser;
     private MudTable<GAttachmentContract> mudTableAttach;
     private string[] reason = { "گران فروشی", "کم فروشی", "عدم درج قیمت", "تقلب در کسب", "عدم صدور صورتحساب (فاکتور)" };
 
     private void SaveGranovment()
     {
         form.Validate();
-        if (form.IsValid)
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        if (form.Errors.Count() > 0)
         {
-            _pGravamenContract.GravamenOrReport = Enumerations.GravamenOrReport.Gravamen;
-            _pGravamenContract.HowDataType = Enumerations.PU135OrWebSite.WebSite;
-            _pGravamenContract.ThePGravamenPersonContractList.AddRange(reporters);
-            _pGravamenContract.ThePGravamenViolationContractList.AddRange(accusers);
-            _pGravamenContract.TheGAttachmentContractList.AddRange(attachments);
-            _pGravamenContract.TheGeoLocationContract = selectedProvince;
-
+            foreach (string str in form.Errors)
+            {
+                Snackbar.Add(str, MudBlazor.Severity.Error);
+            }
+            SimulateProgress();
         }
 
+        _pGravamenContract.GravamenOrReport = Enumerations.GravamenOrReport.Gravamen;
+        _pGravamenContract.HowDataType = Enumerations.PU135OrWebSite.WebSite;
+        _pGravamenContract.ThePGravamenPersonContractList.AddRange(reporters);
+        _pGravamenContract.ThePGravamenPersonContractList.AddRange(accusers);
+        _pGravamenContract.TheGAttachmentContractList.AddRange(attachments);
+        _pGravamenContract.TheGeoLocationContract = selectedProvince;
+        _pGravamenContract.PetitionReasons = _pGravamenContract.PetitionSubject;
+        _pGravamenContract.NoticeText = "nothing";
+        _pGravamenContract.RejectReasonText="nothing";
+        var json = Newtonsoft.Json.JsonConvert.SerializeObject(_pGravamenContract, Formatting.Indented);
+        PGravamenServiceRequest pGravamenRequest = new PGravamenServiceRequest();
+        pGravamenRequest.ThePGravamenContract = _pGravamenContract;
+        PGravamenService pService = new ();
+        PGravamenServiceResponse pGravamenrespons= pService.RecieveGravamen(_appConfiguration.BackendServerAddress,_appConfiguration.RecieveGravamen,pGravamenRequest);
+        if(pGravamenrespons.Result.Code == 1000)
+        {
+            string strMessage = "درخواست شما با شماره پیگیری " + pGravamenrespons.ThePGravamenResponseContract.FollowUpNo + "در سامانه ثبت گردید";
+            Snackbar.Add(strMessage, MudBlazor.Severity.Success);
+        }
+        else
+        {
+            Snackbar.Add(pGravamenrespons.Result.Message + " " + pGravamenrespons.Result.Code, MudBlazor.Severity.Error);
+        }
     }
 
     private void Addattachment()
     {
         Formattachment.Validate();
+
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        if (Formattachment.Errors.Count() > 0)
+        {
+            foreach (string str in Formattachment.Errors)
+            {
+                Snackbar.Add(str, MudBlazor.Severity.Error);
+            }
+            SimulateProgress();
+        }
+
         if (Formattachment.IsValid)
         {
+            _attachment.FileExtension = FileExtension.PDF;
             attachments.Add(_attachment);
             _attachment = new();
         }
     }
 
+    bool _disposed;
+    public void Dispose() => _disposed = true;
+    private int ProgressValue { get; set; }
+    public async void SimulateProgress()
+    {
+        ProgressValue = 120;
+        do
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            ProgressValue -= 1;
+            StateHasChanged();
+            await Task.Delay(500);
+
+        } while (ProgressValue > 0);
+
+        StateHasChanged();
+    }
     private void AddReporter()
     {
         FormReporter.Validate();
+
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        if (FormReporter.Errors.Count() > 0)
+        {
+            foreach (string str in FormReporter.Errors)
+            {
+                Snackbar.Add(str, MudBlazor.Severity.Error);
+            }
+            SimulateProgress();
+        }
+
         if (FormReporter.IsValid)
         {
             _reporter.Nationality = LNationality.Iranian;
             _reporter.PersonType = PersonType.NaturalPerson;
+            _reporter.PersonPassword="Aa123";
+            _reporter.PersonStartPost = Enumerations.PUPersonStartPost.PlaintiffPerson;
+            _reporter.TradeUnitName="";
             //فعلا تا درست شدن بایندینگ
             _reporter.Sex = SexType.Male;
             reporters.Add(_reporter);
@@ -421,10 +448,23 @@
     private void Addaccuser()
     {
         Formaccuser.Validate();
+
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        if (Formaccuser.Errors.Count() > 0)
+        {
+            foreach (string str in Formaccuser.Errors)
+            {
+                Snackbar.Add(str, MudBlazor.Severity.Error);
+            }
+            SimulateProgress();
+        }
+
         if (Formaccuser.IsValid)
         {
+            _accuser.PersonStartPost = Enumerations.PUPersonStartPost.OffendingPerson;
+            _accuser.TradeUnitName = _accuser.Name;
             accusers.Add(_accuser);
-            _accuser = new PGravamenViolationContract();
+            _accuser = new PGravamenPersonContract();
         }
     }
 
@@ -486,7 +526,7 @@
     }
         private int selectedRowNumber = -1;
         
-    private string accuserSelectedRowClassFunc(PGravamenViolationContract element, int rowNumber)
+    private string accuserSelectedRowClassFunc(PGravamenPersonContract element, int rowNumber)
     {
         if (selectedRowNumber == rowNumber)
         {
