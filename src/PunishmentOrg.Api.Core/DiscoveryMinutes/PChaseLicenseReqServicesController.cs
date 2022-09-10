@@ -39,6 +39,8 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
         #endregion Properties
 
         #region Overrides
+        bool HasChaseLicensePlace;
+        string UniqueNo = "-1";
         //[PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.SendPChaseLicenseReqList)]
         [AllowAnonymous]
         public override async Task<PChaseLicenseReqResponse> SendPChaseLicenseReqList([FromBody] PChaseLicenseReqRequest request)
@@ -48,12 +50,12 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
             {
                 response.ThePChaseLicenseReqContract = new PChaseLicenseReqContract()
                 {
-                    UniqueNo = "-1"
+                    UniqueNo = UniqueNo
                 };
 
                 #region Validation
 
-                //request.ThePChaseLicenseReqContract.Null(PChaseLicenseReqResult.PChaseLicenseReq_IsNull);
+                request.ThePChaseLicenseReqContract.Null(PChaseLicenseReqResult.PChaseLicenseReq_IsNull);
                 request.ThePChaseLicenseReqContract?.ChaseTitle.NullOrWhiteSpace(PChaseLicenseReqResult.PChaseLicenseReq_ChaseTitle_IsNull);
                 request.ThePChaseLicenseReqContract?.ChaseLicenseRequestText.NullOrWhiteSpace(PChaseLicenseReqResult.PChaseLicenseReq_ChaseLicenseRequestText_IsNull);
                 request.ThePChaseLicenseReqContract?.ThePChaseLicenseReqSuspectContractList.Null(PChaseLicenseReqResult.PChaseLicenseReq_PChaseLicenseReqSuspectList_IsNull);
@@ -73,170 +75,10 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
 
                 #endregion Validation
 
-                #region Create PChaseLicenseReq
-
-                PChaseLicenseReq onePChaseLicenseReq = new()
-                {
-                    Id                      = Guid.NewGuid().ToString("N"),
-                    Timestamp               = 1,
-                    ChaseLicenseRequestText = request.ThePChaseLicenseReqContract.ChaseLicenseRequestText,
-                    ChaseResult             = request.ThePChaseLicenseReqContract.ChaseResult,
-                    ChaseTitle              = request.ThePChaseLicenseReqContract.ChaseTitle,
-                    ConclusionRequest       = request.ThePChaseLicenseReqContract.ConclusionRequest,
-                    CreateDateTime          = CalendarHelper.GetCurrentDateTime(),
-                    TheGeoLocation          = await _unitOfWork.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(request.ThePChaseLicenseReqContract?.TheGeoLocation?.LocationCode),
-                    InstitutionCode         = request.ThePChaseLicenseReqContract.InstitutionCode,
-                    InstitutionExporter     = request.ThePChaseLicenseReqContract.InstitutionExporter,
-                    InstitutionTitle        = request.ThePChaseLicenseReqContract.InstitutionTitle,
-                    TheJudicialUnit         = null,
-                    LetterRequestDateTime   = request.ThePChaseLicenseReqContract.LetterRequestDateTime,
-                    LetterRequestNo         = request.ThePChaseLicenseReqContract.LetterRequestNo,
-                    LicensorRequestText     = request.ThePChaseLicenseReqContract.LicensorRequestText,
-                    TheObjectState          = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById("000770"),//ToDo n.kord //Use Constant
-                    ThePBExchangeUnit       = await _unitOfWork.Repositorey<IPBExchangeUnitRepository>().GetById("007001000771"),//ToDo n.kord //Use Constant
-                    ThePrvReq               = null,
-                    ReceiveDateTime         = request.ThePChaseLicenseReqContract.ReceiveDateTime,
-                    RepSendDateTime         = request.ThePChaseLicenseReqContract.RepSendDateTime,
-                    RepText                 = request.ThePChaseLicenseReqContract.RepText,
-                    SendDateTime            = request.ThePChaseLicenseReqContract.SendDateTime,
-                    SubNo                   = 1,
-                    UniqueNo                = GetRandomNumber(18),
-                    TheUnit                 = null,
-                    ValidityDays            = request.ThePChaseLicenseReqContract.ValidityDays,
-                    WrittenOrOral           = request.ThePChaseLicenseReqContract.WrittenOrOral
-                };
-
-                foreach(var onePChaseLicenseReqPlacesContract in request.ThePChaseLicenseReqContract.ThePChaseLicenseReqPlacesContractList)
-                {
-                    onePChaseLicenseReq.ThePChaseLicenseReqPlacesList = new();
-
-                    PChaseLicenseReqPlaces onePChaseLicenseReqPlaces = new()
-                    {
-                        Id            = Guid.NewGuid().ToString("N"),
-                        Timestamp     = 1,
-                        PlaceAddress  = onePChaseLicenseReqPlacesContract.PlaceAddress,
-                        PlacePhoneNum = onePChaseLicenseReqPlacesContract.PlacePhoneNum,
-                        PlacePlaque   = onePChaseLicenseReqPlacesContract.PlacePlaque,
-                        PlacePostCode = onePChaseLicenseReqPlacesContract.PlacePostCode,
-                        PlaceUnitName = onePChaseLicenseReqPlacesContract.PlaceUnitName,
-                        RowNumber     = onePChaseLicenseReqPlacesContract.RowNumber, //ToDo n.kord //What should I do with this?
-                    };
-
-                    onePChaseLicenseReq.ThePChaseLicenseReqPlacesList.Add(onePChaseLicenseReqPlaces);
-                }
-
-                if(onePChaseLicenseReq.ThePChaseLicenseReqPlacesList == null)
-                {
-                    PChaseLicenseReqType onePChaseLicenseReqType = new()
-                    {
-                         ChaseLicenseType = Enumerations.PUChaseLicenseType.ChaseLicensePlace
-                    };
-                }
-
-                foreach(var onePChaseLicenseReqSuspectContract in request.ThePChaseLicenseReqContract.ThePChaseLicenseReqSuspectContractList)
-                {
-                    onePChaseLicenseReq.ThePChaseLicenseReqSuspectList = new();
-
-                    PChaseLicenseReqSuspect onePChaseLicenseReqSuspect = new()
-                    {
-                        Id             = Guid.NewGuid().ToString("N"),
-                        Timestamp      = 1,
-                        Address        = onePChaseLicenseReqSuspectContract.Address,
-                        BirthDate      = onePChaseLicenseReqSuspectContract.BirthDate,
-                        Family         = onePChaseLicenseReqSuspectContract.Family,
-                        FatherName     = onePChaseLicenseReqSuspectContract.FatherName,
-                        IdentityNumber = onePChaseLicenseReqSuspectContract.IdentityNumber,
-                        MobilNumber    = onePChaseLicenseReqSuspectContract.MobilNumber,
-                        Name           = onePChaseLicenseReqSuspectContract.Name,
-                        NationalCode   = onePChaseLicenseReqSuspectContract.NationalCode,
-                        Nationality    = onePChaseLicenseReqSuspectContract.Nationality,
-                        PassportNo     = onePChaseLicenseReqSuspectContract.PassportNo,
-                        PhoneNumber    = onePChaseLicenseReqSuspectContract.PhoneNumber,
-                        PostType       = onePChaseLicenseReqSuspectContract.PostType
-                    };
-
-                    onePChaseLicenseReq.ThePChaseLicenseReqSuspectList.Add(onePChaseLicenseReqSuspect);
-                }
-
-                if (onePChaseLicenseReq.ThePChaseLicenseReqSuspectList == null)
-                {
-                    PChaseLicenseReqType onePChaseLicenseReqType = new()
-                    {
-                        ChaseLicenseType = Enumerations.PUChaseLicenseType.ChaseLicensePerson
-                    };
-                }
-
-                foreach (var onePChaseLicenseReqVehicleContract in request.ThePChaseLicenseReqContract.ThePChaseLicenseReqVehicleContractList)
-                {
-                    onePChaseLicenseReq.ThePChaseLicenseReqVehicleList = new();
-
-                    PChaseLicenseReqVehicle onePChaseLicenseReqVehicle = new()
-                    {
-                        Id               = Guid.NewGuid().ToString("N"),
-                        Timestamp        = 1,
-                        Color            = onePChaseLicenseReqVehicleContract.Color,
-                        DriverFamily     = onePChaseLicenseReqVehicleContract.DriverFamily,
-                        DriverName       = onePChaseLicenseReqVehicleContract.DriverName,
-                        IranNumber       = onePChaseLicenseReqVehicleContract.IranNumber,
-                        Model            = onePChaseLicenseReqVehicleContract.Model,
-                        OtherInfo        = onePChaseLicenseReqVehicleContract.OtherInfo,
-                        OwnerFamily      = onePChaseLicenseReqVehicleContract.OwnerFamily,
-                        OwnerName        = onePChaseLicenseReqVehicleContract.OwnerName,
-                        PlaqueNumber     = onePChaseLicenseReqVehicleContract.PlaqueNumber,
-                        PlaqueScript     = onePChaseLicenseReqVehicleContract.PlaqueScript,
-                        PlaqueThreeDigit = onePChaseLicenseReqVehicleContract.PlaqueThreeDigit,
-                        PlaqueTwoDigit   = onePChaseLicenseReqVehicleContract.PlaqueTwoDigit,
-                        PlaqueType       = onePChaseLicenseReqVehicleContract.PlaqueType,
-                        RowNumber        = onePChaseLicenseReqVehicleContract.RowNumber, //ToDo n.kord //What should I do with this?
-                        VehicleType      = onePChaseLicenseReqVehicleContract.VehicleType
-                    };
-
-                    onePChaseLicenseReq.ThePChaseLicenseReqVehicleList.Add(onePChaseLicenseReqVehicle);
-                }
-
-                if (onePChaseLicenseReq.ThePChaseLicenseReqVehicleList == null)
-                {
-                    PChaseLicenseReqType onePChaseLicenseReqType = new()
-                    {
-                        ChaseLicenseType = Enumerations.PUChaseLicenseType.ChaseLicensePerson
-                    };
-                }
-
-                foreach(var onePChaseLicenseReqDocContract in request.ThePChaseLicenseReqContract.ThePChaseLicenseReqDocContractList)
-                {
-                    onePChaseLicenseReq.ThePChaseLicenseReqDocList = new();
-
-                    PChaseLicenseReqDoc onePChaseLicenseReqDoc = new()
-                    {
-                        Id                = Guid.NewGuid().ToString("N"),
-                        Timestamp         = 1,
-                        //ConclusionRequest = onePChaseLicenseReqDocContract.ConclusionRequest, //ToDo n.kord //What should I do with this?
-                        RowNumber         = onePChaseLicenseReqDocContract.RowNumber, //ToDo n.kord //What should I do with this?
-                        DocNo             = onePChaseLicenseReqDocContract.DocNo,
-                        DocTitle          = onePChaseLicenseReqDocContract.DocTitle,
-                        DocDate           = onePChaseLicenseReqDocContract.DocDate,
-                        IssuerUnit        = onePChaseLicenseReqDocContract.IssuerUnit,
-                        IssueType         = onePChaseLicenseReqDocContract.IssueType,
-                        OwnershipType     = onePChaseLicenseReqDocContract.OwnershipType
-                    };
-
-                    onePChaseLicenseReq.ThePChaseLicenseReqDocList.Add(onePChaseLicenseReqDoc);
-                }
-
-                if (onePChaseLicenseReq.ThePChaseLicenseReqDocList == null)
-                {
-                    PChaseLicenseReqType onePChaseLicenseReqType = new()
-                    {
-                        ChaseLicenseType = Enumerations.PUChaseLicenseType.ChaseLicensePerson
-                    };
-                }
-
-                await _unitOfWork.Repositorey<IPChaseLicenseReqRepository>().Add(onePChaseLicenseReq);
+                SavePChaseLicenseReq(request);
                 _unitOfWork.Complete();
-                
-                #endregion Create PChaseLicenseReq
                
-                return Respond(AnuResult.Successful, onePChaseLicenseReq.UniqueNo);
+                return Respond(AnuResult.Successful,UniqueNo);
             }
             catch (AnuExceptions ex)
             {
@@ -249,6 +91,7 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
                 return response;
             }
         }
+
         #endregion Overrides
 
         #region Methods
@@ -269,6 +112,191 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
             };
             return response;
         }
+
+        #region Save Methods
+        private async void SavePChaseLicenseReq(PChaseLicenseReqRequest request)
+        {
+            PChaseLicenseReq onePChaseLicenseReq = new()
+            {
+                Id                             = Guid.NewGuid().ToString("N"),
+                Timestamp                      = 1,
+                ChaseLicenseRequestText        = request.ThePChaseLicenseReqContract?.ChaseLicenseRequestText,
+                ChaseResult                    = request.ThePChaseLicenseReqContract?.ChaseResult,
+                ChaseTitle                     = request.ThePChaseLicenseReqContract?.ChaseTitle,
+                ConclusionRequest              = request.ThePChaseLicenseReqContract?.ConclusionRequest,
+                CreateDateTime                 = CalendarHelper.GetCurrentDateTime(),
+                TheGeoLocation                 = await _unitOfWork.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(request.ThePChaseLicenseReqContract?.TheGeoLocation?.LocationCode),
+                InstitutionCode                = request.ThePChaseLicenseReqContract?.InstitutionCode,
+                InstitutionExporter            = request.ThePChaseLicenseReqContract?.InstitutionExporter,
+                InstitutionTitle               = request.ThePChaseLicenseReqContract?.InstitutionTitle,
+                TheJudicialUnit                = null,
+                LetterRequestDateTime          = request.ThePChaseLicenseReqContract?.LetterRequestDateTime,
+                LetterRequestNo                = request.ThePChaseLicenseReqContract?.LetterRequestNo,
+                LicensorRequestText            = request.ThePChaseLicenseReqContract?.LicensorRequestText,
+                TheObjectState                 = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById("000770"),//ToDo n.kord //Use Constant
+                ThePBExchangeUnit              = await _unitOfWork.Repositorey<IPBExchangeUnitRepository>().GetById("007001000771"),//ToDo n.kord //Use Constant
+                ThePrvReq                      = null,
+                ReceiveDateTime                = request.ThePChaseLicenseReqContract?.ReceiveDateTime,
+                RepSendDateTime                = request.ThePChaseLicenseReqContract?.RepSendDateTime,
+                RepText                        = request.ThePChaseLicenseReqContract?.RepText,
+                SendDateTime                   = request.ThePChaseLicenseReqContract?.SendDateTime,
+                SubNo                          = 1,
+                UniqueNo                       = GetRandomNumber(18),
+                TheUnit                        = null,
+                ValidityDays                   = request.ThePChaseLicenseReqContract?.ValidityDays,
+                WrittenOrOral                  = request.ThePChaseLicenseReqContract?.WrittenOrOral,
+                ThePChaseLicenseReqPlacesList  = SavePChaseLicenseReqPlacesList(request.ThePChaseLicenseReqContract),
+                ThePChaseLicenseReqSuspectList = SavePChaseLicenseReqSuspectList(request.ThePChaseLicenseReqContract),
+                ThePChaseLicenseReqVehicleList = SavePChaseLicenseReqVehicleList(request.ThePChaseLicenseReqContract),
+                ThePChaseLicenseReqDocList     = SavaPChaseLicenseReqDocList(request.ThePChaseLicenseReqContract),
+                ThePChaseLicenseReqTypeList    = SavePChaseLicenseReqType(request)
+            };
+
+            UniqueNo = onePChaseLicenseReq.UniqueNo;
+
+            await _unitOfWork.Repositorey<IPChaseLicenseReqRepository>().Add(onePChaseLicenseReq);
+        }
+
+        private List<PChaseLicenseReqType> SavePChaseLicenseReqType(PChaseLicenseReqRequest request)
+        {
+            var thePChaseLicenseReqType = new List<PChaseLicenseReqType>();
+
+            if (HasChaseLicensePlace)
+            {
+                PChaseLicenseReqType onePChaseLicenseReqType = new()
+                {
+                    Id               = Guid.NewGuid().ToString("N"),
+                    ChaseLicenseType = Enumerations.PUChaseLicenseType.ChaseLicensePlace
+                };
+
+                thePChaseLicenseReqType.Add(onePChaseLicenseReqType);
+            }
+
+            return thePChaseLicenseReqType;
+        }
+
+        private List<PChaseLicenseReqDoc> SavaPChaseLicenseReqDocList(PChaseLicenseReqContract? thePChaseLicenseReqContract)
+        {
+            var thePChaseLicenseReqDoc = new List<PChaseLicenseReqDoc>();
+
+            foreach (var onePChaseLicenseReqDocContract in thePChaseLicenseReqContract.ThePChaseLicenseReqDocContractList)
+            {
+                PChaseLicenseReqDoc onePChaseLicenseReqDoc = new()
+                {
+                    Id                  = Guid.NewGuid().ToString("N"),
+                    Timestamp           = 1,
+                    //ConclusionRequest = onePChaseLicenseReqDocContract.ConclusionRequest, //ToDo n.kord
+                    RowNumber           = onePChaseLicenseReqDocContract.RowNumber,
+                    DocNo               = onePChaseLicenseReqDocContract.DocNo,
+                    DocTitle            = onePChaseLicenseReqDocContract.DocTitle,
+                    DocDate             = onePChaseLicenseReqDocContract.DocDate,
+                    IssuerUnit          = onePChaseLicenseReqDocContract.IssuerUnit,
+                    IssueType           = onePChaseLicenseReqDocContract.IssueType,
+                    OwnershipType       = onePChaseLicenseReqDocContract.OwnershipType
+                };
+
+                thePChaseLicenseReqDoc.Add(onePChaseLicenseReqDoc);
+            }
+
+            HasChaseLicensePlace = thePChaseLicenseReqDoc.Count == 0 ? true : false;
+
+            return thePChaseLicenseReqDoc;
+        }
+
+        private List<PChaseLicenseReqVehicle> SavePChaseLicenseReqVehicleList(PChaseLicenseReqContract? thePChaseLicenseReqContract)
+        { 
+            var thePChaseLicenseReqVehicle = new List<PChaseLicenseReqVehicle>();
+
+            foreach (var onePChaseLicenseReqVehicleContract in thePChaseLicenseReqContract.ThePChaseLicenseReqVehicleContractList)
+            {
+                PChaseLicenseReqVehicle onePChaseLicenseReqVehicle = new()
+                {
+                    Id               = Guid.NewGuid().ToString("N"),
+                    Timestamp        = 1,
+                    Color            = onePChaseLicenseReqVehicleContract.Color,
+                    DriverFamily     = onePChaseLicenseReqVehicleContract.DriverFamily,
+                    DriverName       = onePChaseLicenseReqVehicleContract.DriverName,
+                    IranNumber       = onePChaseLicenseReqVehicleContract.IranNumber,
+                    Model            = onePChaseLicenseReqVehicleContract.Model,
+                    OtherInfo        = onePChaseLicenseReqVehicleContract.OtherInfo,
+                    OwnerFamily      = onePChaseLicenseReqVehicleContract.OwnerFamily,
+                    OwnerName        = onePChaseLicenseReqVehicleContract.OwnerName,
+                    PlaqueNumber     = onePChaseLicenseReqVehicleContract.PlaqueNumber,
+                    PlaqueScript     = onePChaseLicenseReqVehicleContract.PlaqueScript,
+                    PlaqueThreeDigit = onePChaseLicenseReqVehicleContract.PlaqueThreeDigit,
+                    PlaqueTwoDigit   = onePChaseLicenseReqVehicleContract.PlaqueTwoDigit,
+                    PlaqueType       = onePChaseLicenseReqVehicleContract.PlaqueType,
+                    RowNumber        = onePChaseLicenseReqVehicleContract.RowNumber,
+                    VehicleType      = onePChaseLicenseReqVehicleContract.VehicleType
+                };
+
+                thePChaseLicenseReqVehicle.Add(onePChaseLicenseReqVehicle);
+            }
+
+            HasChaseLicensePlace = thePChaseLicenseReqVehicle.Count == 0 ? true : false;
+
+            return thePChaseLicenseReqVehicle;
+        }
+
+        private List<PChaseLicenseReqSuspect> SavePChaseLicenseReqSuspectList(PChaseLicenseReqContract? thePChaseLicenseReqContract)
+        {
+            var thePChaseLicenseReqSuspect = new List<PChaseLicenseReqSuspect>();
+
+            foreach (var onePChaseLicenseReqSuspectContract in thePChaseLicenseReqContract.ThePChaseLicenseReqSuspectContractList)
+            {
+                PChaseLicenseReqSuspect onePChaseLicenseReqSuspect = new()
+                {
+                    Id             = Guid.NewGuid().ToString("N"),
+                    Timestamp      = 1,
+                    Address        = onePChaseLicenseReqSuspectContract.Address,
+                    BirthDate      = onePChaseLicenseReqSuspectContract.BirthDate,
+                    Family         = onePChaseLicenseReqSuspectContract.Family,
+                    FatherName     = onePChaseLicenseReqSuspectContract.FatherName,
+                    IdentityNumber = onePChaseLicenseReqSuspectContract.IdentityNumber,
+                    MobilNumber    = onePChaseLicenseReqSuspectContract.MobilNumber,
+                    Name           = onePChaseLicenseReqSuspectContract.Name,
+                    NationalCode   = onePChaseLicenseReqSuspectContract.NationalCode,
+                    Nationality    = onePChaseLicenseReqSuspectContract.Nationality,
+                    PassportNo     = onePChaseLicenseReqSuspectContract.PassportNo,
+                    PhoneNumber    = onePChaseLicenseReqSuspectContract.PhoneNumber,
+                    PostType       = onePChaseLicenseReqSuspectContract.PostType
+                };
+
+                thePChaseLicenseReqSuspect.Add(onePChaseLicenseReqSuspect);
+            }
+
+            HasChaseLicensePlace = thePChaseLicenseReqSuspect.Count == 0 ? true : false;
+
+            return thePChaseLicenseReqSuspect;
+        }
+
+        private List<PChaseLicenseReqPlaces> SavePChaseLicenseReqPlacesList(PChaseLicenseReqContract? thePChaseLicenseReqContract)
+        {
+            var thePChaseLicenseReqPlaces = new List<PChaseLicenseReqPlaces>();
+
+            foreach (var onePChaseLicenseReqPlacesContract in thePChaseLicenseReqContract.ThePChaseLicenseReqPlacesContractList)
+            {
+                PChaseLicenseReqPlaces onePChaseLicenseReqPlaces = new()
+                {
+                    Id            = Guid.NewGuid().ToString("N"),
+                    Timestamp     = 1,
+                    PlaceAddress  = onePChaseLicenseReqPlacesContract.PlaceAddress,
+                    PlacePhoneNum = onePChaseLicenseReqPlacesContract.PlacePhoneNum,
+                    PlacePlaque   = onePChaseLicenseReqPlacesContract.PlacePlaque,
+                    PlacePostCode = onePChaseLicenseReqPlacesContract.PlacePostCode,
+                    PlaceUnitName = onePChaseLicenseReqPlacesContract.PlaceUnitName,
+                    RowNumber     = onePChaseLicenseReqPlacesContract.RowNumber,
+                };
+
+                thePChaseLicenseReqPlaces.Add(onePChaseLicenseReqPlaces);
+            }
+
+            HasChaseLicensePlace = thePChaseLicenseReqPlaces.Count == 0 ? true : false;
+
+            return thePChaseLicenseReqPlaces;
+        }
+
+        #endregion Save Methods
 
         public string GetRandomNumber(int length)
         {

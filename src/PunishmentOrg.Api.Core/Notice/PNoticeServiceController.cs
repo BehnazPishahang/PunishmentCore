@@ -25,30 +25,31 @@ namespace Anu.PunishmentOrg.Api.Notice
         protected readonly Anu.DataAccess.IUnitOfWork _unitOfWork;
 
         #region Constructor
+
         public PNoticeServiceController(Anu.DataAccess.IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-       
         #endregion Constructor
 
         #region Properties
         #endregion Properties
 
         #region Overrides
+
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<PNoticeInqueryResponse> InqueryPNoticeList([FromBody] PNoticeInqueryRequest request)
         {
-            request.Null(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_Request_Is_Required);
+            request.Null(InqueryPNoticeListResult.PNotice_InqueryPNoticeList_Request_Is_Required);
 
-            request.PNoticePersonContract.Null(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_ThePNoticePersonContract_Is_Required);
+            request.PNoticePersonContract.Null(InqueryPNoticeListResult.PNotice_InqueryPNoticeList_ThePNoticePersonContract_Is_Required);
 
-            request.PNoticePersonContract!.NationalityCode.NullOrWhiteSpace(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required);
+            request.PNoticePersonContract!.NationalityCode.NullOrWhiteSpace(InqueryPNoticeListResult.PNotice_InqueryPNoticeList_NationalityCode_Is_Required);
 
             var thePNoticeList = await _unitOfWork.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(request.PNoticePersonContract.NationalityCode!.Trim().ToString(), request.Page);
 
-            thePNoticeList.Null(InqueryPNoticeListResult.PNotice_GetPNoticeByNationalityCode_NotFound);
+            thePNoticeList.Null(InqueryPNoticeListResult.PNotice_InqueryPNoticeList_NotFound);
 
             var thePNoticeContractList = thePNoticeList.Select(a => new PNoticeContract()
             {
@@ -86,13 +87,13 @@ namespace Anu.PunishmentOrg.Api.Notice
 
             thePNotice.Description.Null(ExportPNoticeResult.PNotice_ExportPNotice_Description_NotFound);
 
-            var theStimulPNotice = this.GetPNoticeForStimul(thePNotice);
+            PNoticeForStimul thePNoticeForStimul = this.GetPNoticeForStimul(thePNotice);
 
             return new ExportPNoticeResponse()
             {
                 ThePNoticeExportContract = new PNoticeExportContract()
                 {
-                    Pdf = PunishmentOrgConstants.PNotice.PNoticePrint.ExportPdf("PNotice", theStimulPNotice) 
+                    Pdf = PunishmentOrgConstants.PNotice.PNoticePrint.ExportPdf("PNotice", thePNoticeForStimul)
                 },
                 Result = AnuResult.Successful.GetResult()
             };
@@ -126,10 +127,6 @@ namespace Anu.PunishmentOrg.Api.Notice
             {
                 Result = AnuResult.Successful.GetResult()
             };
-
-
-
-
         }
         
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
@@ -154,92 +151,55 @@ namespace Anu.PunishmentOrg.Api.Notice
         #endregion Overrides
 
         #region Methods
+
         private PNoticeForStimul GetPNoticeForStimul(PNotice thePNotice)
         {
             PNoticeForStimul thePNoticeForStimul = new PNoticeForStimul()
             {
-                NoticeCreateDate = thePNotice.CreateDateTime.Substring(0, 10),
-                NoticeNo = thePNotice.No,
-                UnitName = thePNotice.TheUnit?.UnitName,
-                Address = thePNotice.NoticePersonAddress,
-                NoticeType = thePNotice.TheGNoticeType?.Title,
-                PersonAddress = thePNotice.TheUnit.Address,
-                NoticeDate = thePNotice.NoticeDate ?? CalendarHelper.GetCurrentDate(),
+                NoticeCreateDate = thePNotice.CreateDateTime?.Substring(0, 10),
+                NoticeNo         = thePNotice.No,
+                UnitName         = thePNotice.TheUnit?.UnitName,
+                Address          = thePNotice.NoticePersonAddress,
+                NoticeType       = thePNotice.TheGNoticeType?.Title,
+                PersonAddress    = thePNotice.TheUnit?.Address,
+                NoticeDate       = thePNotice.NoticeDate ?? CalendarHelper.GetCurrentDate(),
+                Description      = thePNotice.Description.StripRichTextFormat(),
+                CaseArchiveNo    = this.GetCaseArchiveNo(thePNotice),
+                Violation        = this.GetViolation(thePNotice),
+                PersonType       = this.GetPersonType(thePNotice),
+                presenceTime     = this.GetPresenceTime(thePNotice),
+                CaseNo           = this.GetCaseNo(thePNotice),
             };
 
             foreach (PNoticePerson PNoticePerson in thePNotice.ThePNoticePersonList)
             {
                 if (PNoticePerson.ThePCasePerson != null)
                 {
-                    thePNoticeForStimul.PersonName = PNoticePerson.ThePCasePerson.Name;
-                    thePNoticeForStimul.PersonFamily = PNoticePerson.ThePCasePerson.Family;
-                    thePNoticeForStimul.PersonFatherName = PNoticePerson.ThePCasePerson.FatherName;
+                    thePNoticeForStimul.PersonName         = PNoticePerson.ThePCasePerson.Name;
+                    thePNoticeForStimul.PersonFamily       = PNoticePerson.ThePCasePerson.Family;
+                    thePNoticeForStimul.PersonFatherName   = PNoticePerson.ThePCasePerson.FatherName;
                     thePNoticeForStimul.PersonNationalCode = PNoticePerson.ThePCasePerson.NationalCode;
-                    thePNoticeForStimul.MobilNumber = PNoticePerson.ThePCasePerson.MobilNumber;
-                    thePNoticeForStimul.TradeUnitName = PNoticePerson.ThePCasePerson.TradeUnitName;
-                    break;
+                    thePNoticeForStimul.MobilNumber        = PNoticePerson.ThePCasePerson.MobilNumber;
+                    thePNoticeForStimul.TradeUnitName      = PNoticePerson.ThePCasePerson.TradeUnitName;
                 }
                 if (PNoticePerson.TheExpertMan != null)
                 {
-                    thePNoticeForStimul.PersonName = PNoticePerson.TheExpertMan.Name;
-                    thePNoticeForStimul.PersonFamily = PNoticePerson.TheExpertMan.Family;
-                    thePNoticeForStimul.PersonFatherName = PNoticePerson.TheExpertMan.FatherName;
+                    thePNoticeForStimul.PersonName         = PNoticePerson.TheExpertMan.Name;
+                    thePNoticeForStimul.PersonFamily       = PNoticePerson.TheExpertMan.Family;
+                    thePNoticeForStimul.PersonFatherName   = PNoticePerson.TheExpertMan.FatherName;
                     thePNoticeForStimul.PersonNationalCode = PNoticePerson.TheExpertMan.NationalityCode;
-                    thePNoticeForStimul.PhoneNumber = PNoticePerson.TheExpertMan.Tel;
-                    thePNoticeForStimul.MobilNumber = PNoticePerson.TheExpertMan.MobileNumber4SMS;
-                    break;
+                    thePNoticeForStimul.PhoneNumber        = PNoticePerson.TheExpertMan.Tel;
+                    thePNoticeForStimul.MobilNumber        = PNoticePerson.TheExpertMan.MobileNumber4SMS;
                 }
             }
 
-            //bool hasJudgment = thePNotice.ThePNoticeDocList.Any(x => x.TheSystemObject.Code == );
+            return thePNoticeForStimul;
+        }
 
-            thePNoticeForStimul.Description = thePNotice.Description.StripRichTextFormat();
-            if (thePNotice.InputStatistic != null)
-            {
-                thePNoticeForStimul.presenceTime = thePNotice.InputStatistic + " روز پس از رویت";
-            }
-            if (thePNotice.PresenceDate != null)
-            {
-                thePNoticeForStimul.presenceTime = "در تاریخ " + thePNotice.PresenceDate + " در ساعت " + thePNotice.PresenceTime;
-            }
-            if (thePNotice.ThePNoticePersonList.Count > 0)
-            {
-                int counter = 0;
-                foreach (PNoticePerson onePNoticePerson in thePNotice.ThePNoticePersonList)
-                {
-                    counter++;
-                    var RelatedCaseNo = onePNoticePerson.ThePCase.No;
-                    thePNoticeForStimul.CaseNo += RelatedCaseNo;
-                    if (thePNotice.ThePNoticePersonList.Count > 1 && counter < thePNotice.ThePNoticePersonList.Count)
-                    {
-                        thePNoticeForStimul.CaseNo += " و ";
-                    }
-                }
-            }
-            if (thePNoticeForStimul.CaseNo == null)
-            {
-                thePNoticeForStimul.CaseNo = "";
-            }
-
-            if (thePNotice.ThePNoticePersonList.Count > 0)
-            {
-                int counter = 0;
-                foreach (PNoticePerson onePNoticePerson in thePNotice.ThePNoticePersonList)
-                {
-                    counter++;
-                    var ANo = onePNoticePerson.ThePCase.ArchiveNo;
-                    thePNoticeForStimul.CaseArchiveNo += ANo;
-                    if (thePNotice.ThePNoticePersonList.Count > 1 && counter < thePNotice.ThePNoticePersonList.Count)
-                    {
-                        thePNoticeForStimul.CaseArchiveNo += " و ";
-                    }
-                }
-            }
-            if (thePNoticeForStimul.CaseArchiveNo == null)
-            {
-                thePNoticeForStimul.CaseArchiveNo = "";
-            }
+        private string GetViolation(PNotice thePNotice)
+        {
             Collection<PBViolationType> HashViolation = new Collection<PBViolationType>();
+            string violation = string.Empty;
 
             //foreach (PNoticePerson onePNoticePerson in thePNotice.ThePNoticePersonList)
             //{
@@ -251,39 +211,85 @@ namespace Anu.PunishmentOrg.Api.Notice
             //        }
             //}
 
-            string Violation = "";
-            int counter1 = 0;
-            //todo
             foreach (PBViolationType item in HashViolation)
             {
+                if (!string.IsNullOrWhiteSpace(violation))
+                {
+                    violation += " و ";
+                }
+                violation += item.Title;
+            }
 
-                counter1++;
-                Violation = item.Title;
-                thePNoticeForStimul.Violation += Violation;
-                if (HashViolation.Count > 1 && counter1 < HashViolation.Count)
-                {
-                    thePNoticeForStimul.Violation += " و ";
-                }
-            }
-            if (thePNoticeForStimul.Violation == null)
-            {
-                thePNoticeForStimul.Violation = "";
-            }
-            foreach (PNoticePerson item in thePNotice.ThePNoticePersonList)
-            {
-                if (item.ThePCasePerson != null)
-                {
-                    if (item.ThePCasePerson.PersonType == PersonType.NaturalPerson)
-                        thePNoticeForStimul.PersonType = "مشخصات ابلاغ شونده حقیقی";
-                    else if (item.ThePCasePerson.PersonType == PersonType.Legal)
-                        thePNoticeForStimul.PersonType = "مشخصات ابلاغ شونده حقوقی";
-                }
-                else
-                    thePNoticeForStimul.PersonType = "";
-            }
-            return thePNoticeForStimul;
+            return violation;
         }
 
+        private string GetPersonType(PNotice thePNotice)
+        {
+            string personType = string.Empty;
+
+            foreach (PNoticePerson onePNoticePerson in thePNotice.ThePNoticePersonList)
+            {
+                if (onePNoticePerson.ThePCasePerson?.PersonType == PersonType.NaturalPerson)
+                {
+                    personType = "مشخصات ابلاغ شونده حقیقی";
+                }
+                else if (onePNoticePerson.ThePCasePerson?.PersonType == PersonType.Legal)
+                {
+                    personType = "مشخصات ابلاغ شونده حقوقی";
+                }
+            }
+
+            return personType;
+        }
+
+        private string GetCaseArchiveNo(PNotice thePNotice)
+        {
+            string caseArchiveNo = string.Empty;
+
+            foreach (PNoticePerson onePNoticePerson in thePNotice.ThePNoticePersonList)
+            {
+                if (string.IsNullOrWhiteSpace(caseArchiveNo))
+                {
+                    caseArchiveNo += " و ";
+                }
+                caseArchiveNo += onePNoticePerson.ThePCase?.ArchiveNo; ;
+            }
+
+            return caseArchiveNo;
+        }
+
+        private string GetPresenceTime(PNotice thePNotice)
+        {
+            string presenceTime = string.Empty;
+
+            if (thePNotice.InputStatistic != null)
+            {
+                presenceTime = thePNotice.InputStatistic + " روز پس از رویت";
+            }
+            if (thePNotice.PresenceDate != null)
+            {
+                presenceTime = "در تاریخ " + thePNotice.PresenceDate + " در ساعت " + thePNotice.PresenceTime;
+            }
+
+            return presenceTime;
+        }
+
+        private string GetCaseNo(PNotice thePNotice)
+        {
+            string caseNo = string.Empty;
+
+            foreach (PNoticePerson onePNoticePerson in thePNotice.ThePNoticePersonList)
+            {
+                if (!string.IsNullOrWhiteSpace(caseNo))
+                {
+                    caseNo += " و ";
+                }
+
+                caseNo += onePNoticePerson.ThePCase?.No;
+            }
+
+            return caseNo;
+        }
         private GetCountOfUnSeenPNoticeByUserContract CountOfUnSeenPNoticeByUserCalculater(IEnumerable<Anu.PunishmentOrg.DataModel.Notice.PNotice> pNotices, string nationalityCode)
         {
             int TotalNoticeCount = 0;
@@ -311,6 +317,7 @@ namespace Anu.PunishmentOrg.Api.Notice
                 NoticePersonNationalityCode = nationalityCode,
             };
         }
+
         #endregion Methods
     }
 

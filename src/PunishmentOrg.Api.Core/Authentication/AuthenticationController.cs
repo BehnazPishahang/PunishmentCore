@@ -61,7 +61,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
             }
 
-            return new FirstStepAuthResult() { CountCharacter = _CountCharacter, SecondsWait = _SecodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args:  theGFESUser.MobileNumber4SMS.Substring(theGFESUser.MobileNumber4SMS.Length - 4) + "*****09") };
+            return new FirstStepAuthResult() { CountCharacter = _CountCharacter, SecondsWait = _SecodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: theGFESUser.MobileNumber4SMS.Substring(theGFESUser.MobileNumber4SMS.Length - 4) + "*****09") };
 
         }
 
@@ -121,7 +121,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             //insert password code and date time into table
 
-            return new FirstStepAuthResult() { CountCharacter = _CountCharacter, SecondsWait = _SecodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args:  request.PhoneNumber.Substring(request.PhoneNumber.Length - 4) + "*****09") };
+            return new FirstStepAuthResult() { CountCharacter = _CountCharacter, SecondsWait = _SecodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: request.PhoneNumber.Substring(request.PhoneNumber.Length - 4) + "*****09") };
 
         }
 
@@ -146,7 +146,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             switch (request.LoginType)
             {
                 case LoginType.LoginWithSms:
-                    if (("2022/"+theGFESUser.LastChangePassword).ToDateTime()<DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss").ToDateTime())
+                    if (("2022/" + theGFESUser.LastChangePassword).ToDateTime() < DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss").ToDateTime())
                     {
                         throw new AnuExceptions(AnuResult.Sms_Time_Is_Expired);
                     }

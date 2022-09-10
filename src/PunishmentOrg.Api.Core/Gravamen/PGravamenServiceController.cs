@@ -136,9 +136,10 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             {
                 var docFile = attachment.TheGAttachmentDataContract!.DocFile;
 
+                docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
+
                 docFilesLength += docFile!.Length;
 
-                docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
 
                 var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<AttachmentType>>().GetById(gravamenAttachmentTypeId);
 
@@ -162,7 +163,11 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     }
                 };
                 attachedFile.TheAttachmentType = attachmentType;
-                ValidateDocFilesSize(docFilesLength);
+
+                if (!IsDocFileSizeValid(docFilesLength))
+                {
+                    return Respond(PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold);
+                }
 
                 attachmentList.Add(attachedFile);
             }
@@ -259,14 +264,12 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             return false;
         }
-        private PGravamenServiceResponse? ValidateDocFilesSize(int totalSize)
+        private bool IsDocFileSizeValid(int totalSize)
         {
-            if (!(totalSize / 1000 > 6000))
-            {
-                return null;
-            }
+            if (totalSize / 1000 > 6000)
+                return false;
 
-            return Respond(PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold);
+            return true;
         }
         private string GenerateFollowUpNo(PU135OrWebSite howDataType)
         {

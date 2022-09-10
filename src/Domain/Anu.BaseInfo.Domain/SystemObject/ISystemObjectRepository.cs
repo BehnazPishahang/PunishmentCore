@@ -8,5 +8,6 @@ namespace Anu.BaseInfo.Domain.SystemObject
 {
     public interface ISystemObjectRepository : Anu.Domain.IGenericRepository<Anu.BaseInfo.DataModel.SystemObject.SystemObject>
     {
+        public Task<IEnumerable<DataModel.SystemObject.SystemObject>> GetSystemObjectByCode(string code);
     }
 }

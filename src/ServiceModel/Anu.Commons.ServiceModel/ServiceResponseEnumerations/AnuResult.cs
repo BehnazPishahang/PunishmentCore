@@ -37,6 +37,16 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         Shahkar_Unkhown_Error=-100018,
         SabteAhval_Unkhown_Error=-100019,
         SabteAhval_Not_Validate_NationalCode = -100020,
-        SabteAhval_Data_Not_Match_Entered_Data = -100021
+        SabteAhval_Data_Not_Match_Entered_Data = -100021,
+        Sms_Limit_Send = -100022,
+        Send_Login_Request_After_x_Second = -100023,
+        NationalCode_Is_Not_Entered = -100024,
+        FirstName_Is_Not_Entered = -100025,
+        LastName_Is_Not_Entered = -100026,
+        BirthDate_Is_Not_Entered = -100027,
+        Sex_Is_Not_Valid = -100028,
+        BirthDate_Is_Not_Valid = -100029,
+        Login_Again = -100030,
+        Request_Is_Not_Valid=-100031
     }
 }
