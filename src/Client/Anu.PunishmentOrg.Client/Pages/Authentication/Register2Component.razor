@@ -169,7 +169,7 @@
                         @if (hasSmsSend)
                         {
                            
-                            <MudTextField  T="string" Label="رمز ارسالی" Mask="@phoneMask"  @bind-Value="smsPassword" Variant="Variant.Outlined" Placeholder="111111"   MaxLength="6"  />
+                            <MudTextField  T="string" Label="رمز ارسالی"Mask="@(new PatternMask("000000"))"  @bind-Value="smsPassword" Variant="Variant.Outlined" Placeholder="111111"   MaxLength="6"  />
                          
                         }
                      </div>
@@ -272,7 +272,7 @@
         var secondStep = new SecondStepUserLoginRequest();
         secondStep.UserName = _registerUserModel.UserName;
         secondStep.Password = smsPassword;
-        AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.RegisterAddress, secondStep);
+        AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.SecondStepLogin, secondStep);
 
         if (result.Result.Code == (int)AnuResult.Successful)
         {
@@ -284,6 +284,8 @@
         {
             errorMessage = result.Result.Message;
             showPassword = true;
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            Snackbar.Add(result.Result.Message,  Severity.Warning);
         }
     }
 

@@ -2,6 +2,7 @@
 using Anu.Commons.ServiceModel.ServiceAuthentication;
 
 using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization;
+using System.Text.Json;
 
 namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
 {
@@ -15,7 +16,10 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
 
             var client = new HttpClient();
             client.BaseAddress = new Uri(baseURl);
+            string jsonString = JsonSerializer.Serialize(UserRegisterinfo);
+
             var response = client.PostAsJsonAsync(serviceName, UserRegisterinfo).Result;
+
 
             AuthResult result = response.Content.ReadAsAsync<AuthResult>().Result;
             return result;
@@ -27,6 +31,8 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(baseURl);
+
+            string jsonString = JsonSerializer.Serialize(secondStepUserLoginRequest);
             var response = client.PostAsJsonAsync(serviceName, secondStepUserLoginRequest).Result;
 
             AuthResult result = response.Content.ReadAsAsync<AuthResult>().Result;
