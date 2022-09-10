@@ -30,6 +30,7 @@
                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">ثبت نام</p>
 
                 <form class="mx-1 mx-md-4">
+          @******************************************@
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
@@ -55,6 +56,7 @@
                         />
                     </MudItem>
                   </div>
+          @******************************************@
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
@@ -70,6 +72,7 @@
                             RequiredError="کد ملی باید 10 رقم باشد " />
                     </div>
                   </div>
+          @******************************************@
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
@@ -86,6 +89,7 @@
                     </div>
                   </div>
 
+          @******************************************@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
@@ -95,6 +99,7 @@
                             Variant="Variant.Outlined" />
                     </div>
                   </div>
+          @******************************************@
 
                     <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-key fa-lg me-3 fa-fw"></i>
@@ -123,21 +128,22 @@
 
                   </div>
 
-                       <div class="d-flex flex-row align-items-center mb-4">
+          @******************************************@
+         <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                <div class="row">
+          <div class="row">
 
-                <div class="col-md-8 mb-4">
+                <div class="col-md-7 mb-3">
 
                   <div class="form-outline ">
                     <MudTextField T="string" Label="شماره تلفن "  Required="true"   Mask="@phoneMask" @bind-Value="_registerUserModel.PhoneNumber"  Variant="Variant.Outlined" Placeholder="09121111111" RequiredError="شماره تلفن  را وارد نمایید "  />
                   </div>
 
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-5 mb-9" style=" text-align: center;margin-top: 18px !important;">
 
-                    <MudButton Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" class="btn  btn-lg ms-2"> 
+                    <MudButton Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" class="btn  btn-lg ms-2" style="color: black !important;"> 
 
                                     @if(hasSmsSend)
                                      {
@@ -154,36 +160,36 @@
               </div>
 
                 </div>
-              </div>
+          </div>
 
-                    <div class="d-flex flex-row align-items-center mb-4">
-                   <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                    @*<div class="form-outline flex-fill mb-0">*@
-                      <div class="container-fluid col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
-                       
-                    </div>
-                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-                          
-                                                
-                        @if (hasSmsSend)
+          @******************************************@
+                   <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+          <div class="row">
+
+                <div class="col-md-7 mb-3">
+
+                  <div class="form-outline ">
+                       @if (hasSmsSend)
                         {
                            
                             <MudTextField  T="string" Label="رمز ارسالی"Mask="@(new PatternMask("000000"))"  @bind-Value="smsPassword" Variant="Variant.Outlined" Placeholder="111111"   MaxLength="6"  />
                          
                         }
-                     </div>
-
-                    </div>
                   </div>
 
-                    <div class="d-flex flex-row align-items-center mb-4">
-                   <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                        <MudButton Variant="Variant.Outlined" disabled="@(!hasSmsSend)" Color="Color.Primary"  class="btn  btn-lg ms-2"  OnClick="Submit"> ثبت نام  </MudButton>
-                    </div>
-                  </div>
+                </div>
+                <div class="col-md-5 mb-9" style=" text-align: center;margin-top: 18px !important;">
 
+                    <MudButton Variant="Variant.Outlined"  disabled="@(!hasSmsSend)"  Color="Color.Primary"  class="btn  btn-lg ms-2"  OnClick="Submit"  > ثبت نام  </MudButton>
+                   
+                </div>
+              </div>
+
+                </div>
+          </div>
+          @******************************************@
                 </form>
 
               </div>
