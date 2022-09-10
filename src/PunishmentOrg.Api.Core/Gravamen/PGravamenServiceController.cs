@@ -128,43 +128,43 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 rownumber++;
             }
 
-            var attachmentList = new List<PGravamenAttachment>();
+            //var attachmentList = new List<PGravamenAttachment>();
 
-            int docFilesLength = 0;
-            foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
-            {
-                var docFile = attachment.TheGAttachmentDataContract!.DocFile;
+            //int docFilesLength = 0;
+            //foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
+            //{
+            //    var docFile = attachment.TheGAttachmentDataContract!.DocFile;
 
-                docFilesLength += docFile!.Length;
+            //    docFilesLength += docFile!.Length;
 
-                docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
+            //    docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
 
-                var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<AttachmentType>>().GetById(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId);
+            //    var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<AttachmentType>>().GetById(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId);
 
 
 
-                var attachedFile = new PGravamenAttachment()
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    Timestamp = 1,
-                    FileExtension = attachment.FileExtension,
-                    SaveAttachmentType = Anu.BaseInfo.Enumerations.SaveAttachmentType.SaveInDataBase,
-                    CreateDateTime = DateTime.Now.ToPersian().ToString(),
-                    //TheAttachmentType = attachmentType,
+            //    var attachedFile = new PGravamenAttachment()
+            //    {
+            //        Id = Guid.NewGuid().ToString("N"),
+            //        Timestamp = 1,
+            //        FileExtension = attachment.FileExtension,
+            //        SaveAttachmentType = Anu.BaseInfo.Enumerations.SaveAttachmentType.SaveInDataBase,
+            //        CreateDateTime = DateTime.Now.ToPersian().ToString(),
+            //        //TheAttachmentType = attachmentType,
 
-                    TheGAttachmentData = new GAttachmentData()
-                    {
-                        Id = Guid.NewGuid().ToString("N"),
-                        Timestamp = 1,
-                        DocFile = attachment.TheGAttachmentDataContract!.DocFile
+            //        TheGAttachmentData = new GAttachmentData()
+            //        {
+            //            Id = Guid.NewGuid().ToString("N"),
+            //            Timestamp = 1,
+            //            DocFile = attachment.TheGAttachmentDataContract!.DocFile
 
-                    }
-                };
-                attachedFile.TheAttachmentType = attachmentType;
-                ValidateDocFilesSize(docFilesLength);
+            //        }
+            //    };
+            //    attachedFile.TheAttachmentType = attachmentType;
+            //    ValidateDocFilesSize(docFilesLength);
 
-                attachmentList.Add(attachedFile);
-            }
+            //    attachmentList.Add(attachedFile);
+            //}
 
             var gravamen = new PGravamen()
             {
@@ -181,7 +181,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 ReporterMobilNumber = string.Empty,
 
                 ThePGravamenPersonList = personList,
-                ThePGravamenAttachmentList = attachmentList,
+                //ThePGravamenAttachmentList = attachmentList,
 
                 CreateDateTime = DateTime.Now.ToPersian().ToString(),
                 FollowUpNo = followupNumber,
