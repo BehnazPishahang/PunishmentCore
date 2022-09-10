@@ -92,9 +92,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
             {
                 return new FirstStepAuthResult() { Result = AnuResult.User_Is_Exist.GetResult() };
             }
-            
-            await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName);
-            await SabteahvalAuthentication.SabteahvalAuthenticate(request);
+
+            //await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName);
+            //await SabteahvalAuthentication.SabteahvalAuthenticate(request);
 
 
             string password = await request.PhoneNumber.SendAuthenticateSms(_CountCharacter);
@@ -184,12 +184,11 @@ namespace Anu.PunishmentOrg.Api.Authentication
             request.UserName.IsValidNationalCode();
             #endregion
 
-            #region ValidateUserHistory
             var pBPuoUsers = (await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>()
                 .Find(x => x.NationalityCode == request.UserName)).FirstOrDefault();
             pBPuoUsers.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IPBPuoUsersHistoryRepository>().LastRecordHistoryPerDay(pBPuoUsers.Id, DateTime.Now.DateToString());
+            var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IUsers135LoginHistoryRepository>().LastRecordHistoryPerDay(pBPuoUsers.Id, DateTime.Now.DateToString());
 
             if (lastRecordHistoryPerDay != null && !Anu.Utility.Utility.IsDevelopment())
             {
@@ -206,12 +205,15 @@ namespace Anu.PunishmentOrg.Api.Authentication
             }
             #endregion
 
-            #region SendAndSubmitPassword
             string password = await pBPuoUsers.MobileNumber4SMS.SendAuthenticateSms(_CountCharacter);
             string passWordHash = MD5Core.GetHashString(password);
 
+            //if ((await _unitOfWork.Repositorey<IPunishmentOrg135UsersRepository>().UpdateDynamicPassword(pBPuoUsers.Id,passWordHash)) < 0)
+            //{
+            //    return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
+            //}            
+
             pBPuoUsers.DynomicPassword = passWordHash;
-            _unitOfWork.Repositorey<IPBPuoUsersRepository>().UpdateParent(pBPuoUsers);
 
             var currentDateTime = DateTime.Now;
             var userHistory = new PBPuoUsersHistory()
@@ -220,7 +222,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 DynomicPassword = passWordHash,
                 SendCodeDateTime = currentDateTime.DateTimeToString(),
                 ExpiredCodeDateTime = currentDateTime.AddSeconds(_SecodeWait).DateTimeToString(),
-                CountCodePerDay = lastRecordHistoryPerDay == null ? 1 : lastRecordHistoryPerDay.CountCodePerDay + 1,
+                CountCodePerDay = lastRecordHistoryPerDay == null ? 1 : lastRecordHistoryPerDay.SendCodePerDay + 1,
                 ThePBPuoUsers = pBPuoUsers
             };
             await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsersHistory>>().Add(userHistory);
