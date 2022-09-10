@@ -41,11 +41,19 @@
                         <MudAvatar Color="@Theme135._iconColor">ورود</MudAvatar>
                 </ActivatorContent>
 
-                <ChildContent  >
+                <ChildContent   >
                     <UserCard Class="mt-n2" />
                     <MudDivider Class="mb-2" />
-                    <MudListItem Text="ورود " Icon="@Icons.Material.Outlined.Person"  Href="/login2" />
-                    <MudListItem Text="ثبت نام " Href="/register" Icon="@Icons.Material.Filled.AppRegistration" />
+                    @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
+                    {
+                            <MudListItem Text="ورود " Icon="@Icons.Filled.Logout"  Href="/login2" />
+                        <MudListItem Text="ثبت نام " Href="/register" Icon="@Icons.Material.Filled.AppRegistration" />
+                    }
+                    else
+                    {
+                         <MudListItem Text="خروج" Href="/register" Icon="@Icons.Filled.Logout"  OnClick="Logout" />
+                    }
+
                 </ChildContent>
             </MudMenu>
             </MudAppBar>
@@ -124,7 +132,7 @@
 
     private bool _Day = false;
     private bool _Night = true;
- 
+
     public EventCallback OnDarkModeToggle { get; set; }
     bool _drawerOpen = true;
 
@@ -142,6 +150,14 @@
             _menuIcons = Icons.Material.Filled.Menu;
 
     }
+
+    public void Logout()
+    {
+        SharedInfo.NationalCode = string.Empty;
+        _navigationManager.NavigateTo("/DashboardPublic");    
+    }
+
+
     public void onDarkMode()
     {
     

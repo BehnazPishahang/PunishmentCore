@@ -36,12 +36,13 @@
 
                   <div class="form-outline mb-4">
                      <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined" Margin="Margin.Dense"
-                        Mask="@(new PatternMask("0000000000"))"
+                           Immediate="true"
                             MaxLength="10"
                             Required="true" 
                             RequiredError="کد ملی باید 10 رقم باشد "
-                          Placeholder="1467561088" 
-                                          @bind-Value="_tokenModel.UserName"  />
+                           Placeholder="1467561088" 
+                           OnKeyDown="onLoginTextKeyPress"
+                           @bind-Value="_tokenModel.UserName"  />
 
                           
 
@@ -50,8 +51,8 @@
                   <div class="form-outline mb-4">
                       <MudItem Class="row">
                     <MudItem xs="8">
-                            <MudTextField T="string" Label=" کد ورود" Variant="Variant.Outlined" Margin="Margin.Dense"  Mask="@(new PatternMask("000000"))" MaxLength=6
-                                         @bind-Value="_secondRequest.Password"  ></MudTextField>
+                            <MudTextField T="string" Label=" کد ورود" Variant="Variant.Outlined" Margin="Margin.Dense"  MaxLength=6
+                                         @bind-Value="_secondRequest.Password"   ></MudTextField>
                         </MudItem>
 
                         <MudItem xs="4">
@@ -94,14 +95,14 @@
   </div>
 </section>
 @code {
-     ObjectFit ImageFit = ObjectFit.Cover;
-    
+    ObjectFit ImageFit = ObjectFit.Cover;
+
     void SetImageFit(ObjectFit value)
     {
         ImageFit = value;
     }
 
-      [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
     string errorMessage = "";
     private FirstStepUserLoginRequest _tokenModel = new();
     private SecondStepUserLoginRequest _secondRequest = new();
@@ -137,9 +138,9 @@
     private  async Task GetAccessCode()
     {
 
-        
+
         var ss = _appConfiguration.BackendServerAddress;
-         hasSmsSend = true;
+        hasSmsSend = true;
         AuthResult result =await _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _tokenModel);
         if (result.Result.Code == 100013)
         {
@@ -159,6 +160,12 @@
             Snackbar.Add(errorMessage,  Severity.Warning);
         }
     }
+
+    private void onLoginTextKeyPress()
+    { 
+        if(hasSmsSend)
+            hasSmsSend = false;
+    }
     void Submit()
     {
 
@@ -169,22 +176,27 @@
             return;
         }
 
-            var ss = _appConfiguration.BackendServerAddress;
-            
-            _secondRequest.UserName = _tokenModel.UserName;
-            _secondRequest.LoginType = Commons.ServiceModel.ServiceAuthentication.Enumerations.LoginType.LoginWithSms;
-            AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.SecondStepLogin, _secondRequest);
-            if (result.Result.Code == 1000)
-            {
-                SharedInfo.NationalCode = _tokenModel.UserName;
-                _navigationManager.NavigateTo("/true");
-                errorMessage = "";
-             
-            }
-            else
-            {
-                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-                Snackbar.Add(result.Result.Message,  Severity.Warning);
-            }
+        var ss = _appConfiguration.BackendServerAddress;
+
+        _secondRequest.UserName = _tokenModel.UserName;
+        _secondRequest.LoginType = Commons.ServiceModel.ServiceAuthentication.Enumerations.LoginType.LoginWithSms;
+        AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.SecondStepLogin, _secondRequest);
+        if (result.Result.Code == 1000)
+        {
+            SharedInfo.NationalCode = _tokenModel.UserName;
+            _navigationManager.NavigateTo("/true");
+            errorMessage = "";
+
         }
+        else
+        {
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            Snackbar.Add(result.Result.Message,  Severity.Warning);
+        }
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        hasSmsSend = false;
+    }
 }
