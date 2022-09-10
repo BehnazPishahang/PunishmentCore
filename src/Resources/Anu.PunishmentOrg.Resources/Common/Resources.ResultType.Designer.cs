@@ -646,7 +646,7 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} خالی یا نامعتبر می باشد.
+        ///   Looks up a localized string similar to فیلد {0} خالی یا نامعتبر می باشد.
         /// </summary>
         public static string PGravamen_Field_IsNullOrInvalid {
             get {

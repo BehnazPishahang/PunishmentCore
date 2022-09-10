@@ -357,7 +357,7 @@
     <comment>200012</comment>
   </data>
   <data name="PGravamen_Field_IsNullOrInvalid" xml:space="preserve">
-    <value>{0} خالی یا نامعتبر می باشد</value>
+    <value>فیلد {0} خالی یا نامعتبر می باشد</value>
     <comment>-30221</comment>
   </data>
   <data name="PGravamen_FileIsLargerThanAllowedThreshold" xml:space="preserve">
