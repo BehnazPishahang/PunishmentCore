@@ -1,10 +1,13 @@
 ﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
+using Anu.BaseInfo.DataModel.ExchangeData;
 using Anu.BaseInfo.DataModel.FrontEndSecurity;
+using Anu.BaseInfo.Domain.ExchangeData;
 using Anu.BaseInfo.Domain.FrontEndSecurity;
 using Anu.Commons.ServiceModel.ServiceAuthentication;
 using Anu.Commons.ServiceModel.ServiceAuthentication.Enumerations;
 using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.DataAccess;
 using Anu.Domain;
 using Anu.PunishmentOrg.Api.Authentication.Utility;
@@ -188,10 +191,10 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IPBPuoUsersHistoryRepository>().LastRecordHistoryPerDay(pBPuoUsers.Id, DateTime.Now.DateToString());
 
-            if (lastRecordHistoryPerDay != null)
+            if (lastRecordHistoryPerDay != null && !Anu.Utility.Utility.IsDevelopment())
             {
                 var difDateSecond = (DateTime.Now - lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime()).TotalSeconds;
-                if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime!=lastRecordHistoryPerDay.ExpiredCodeDateTime)
+                if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
                 {
                     return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_SecodeWait - difDateSecond)).ToString()) };
                 }
@@ -205,7 +208,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             #region SendAndSubmitPassword
             string password = await pBPuoUsers.MobileNumber4SMS.SendAuthenticateSms(_CountCharacter);
-            string passWordHash = MD5Core.GetHashString(password);       
+            string passWordHash = MD5Core.GetHashString(password);
 
             pBPuoUsers.DynomicPassword = passWordHash;
             _unitOfWork.Repositorey<IPBPuoUsersRepository>().UpdateParent(pBPuoUsers);
@@ -274,7 +277,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 else
                 {
                     await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsersHistory>>().RemoveRange(
-                        await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsersHistory>>().Find(a=>a.ThePBPuoUsers.Id== pBPuoUsers.Id)
+                        await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsersHistory>>().Find(a => a.ThePBPuoUsers.Id == pBPuoUsers.Id)
                         );
 
                     await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>().Remove(pBPuoUsers);
@@ -319,6 +322,29 @@ namespace Anu.PunishmentOrg.Api.Authentication
             };
 
             await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>().Add(user);
+
+
+
+            var accessType = (await _unitOfWork.Repositorey<IGenericRepository<GFESUserAccessType>>().Find(a => a.Code == PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)).SingleOrDefault();
+            accessType.Null(AnuResult.Can_Not_Find_AccessType);
+
+            var najaUnit = (await _unitOfWork.Repositorey<INAJAUnitRepository>().GetByCode(PunishmentOrgConstants.NajaUnit.PunishmentOrg));
+            najaUnit.Null(AnuResult.Can_Not_Find_AccessType);
+
+            var userAccess = new GFESUserAccess()
+            {
+                Id = System.Guid.NewGuid().ToString("N"),
+                FromDateTime = CalendarHelper.MinDateTime(),
+                ToDateTime = CalendarHelper.MaxDateTime(),
+                SignText = "کاربر سامانه ی 135 تازیرات",
+                TheGFESUser = user,
+                TheGFESUserAccessType = accessType,
+                TheNAJAUnit = najaUnit
+            };
+
+            await _unitOfWork.Repositorey<IGenericRepository<GFESUserAccess>>().Add(userAccess);
+
+
 
             var currentDateTime = DateTime.Now;
             await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsersHistory>>().Add(new PBPuoUsersHistory()
@@ -387,7 +413,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         [Route("api/v1/ChangePhoneNumber")]
         [HttpPost]
-        [HttpPost]
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
         public async Task<Result> ChangePhoneNumber([FromBody] ChangePhoneNumberRequest request)
         {
             #region ValidateInput
@@ -420,10 +446,15 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         }
 
-        private async Task<PBPuoUsers> ValidateSenedSmsCode(string userName,string password)
+        private async Task<PBPuoUsers> ValidateSenedSmsCode(string userName, string password)
         {
             var pBPuoUsers = await _unitOfWork.Repositorey<IPBPuoUsersRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(userName, password);
             pBPuoUsers.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            if (pBPuoUsers.TheGFESUserAccessList==null || pBPuoUsers.TheGFESUserAccessList.Count==0)
+            {
+                throw new AnuExceptions(AnuResult.UserName_Or_PassWord_Is_Not_Valid);                
+            }
 
             var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IPBPuoUsersHistoryRepository>().LastRecordHistoryPerDay(pBPuoUsers.Id, DateTime.Now.DateToString());
             lastRecordHistoryPerDay.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
@@ -458,7 +489,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             {
                 throw new AnuExceptions(AnuResult.Sms_Time_Is_Expired);
             }
-            
+
             return pBPuoUsers;
         }
         private string GenerateJwtToken(GFESUser theGFESUser)

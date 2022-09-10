@@ -54,18 +54,17 @@ public class PBPuoUsersRepository : GenericRepository<DataModel.BaseInfo.PBPuoUs
 
         if (pBPuoUsers.TheGFESUserAccessList != null && pBPuoUsers.TheGFESUserAccessList.Count() > 0)
         {
-            var theGFESUser = pBPuoUsers.TheGFESUserAccessList
+            var theGFESUserAccessList = pBPuoUsers.TheGFESUserAccessList
                                      .Where(userAccess =>
-                                            userAccess.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.SahmsiDateNow() &&
-                                            userAccess.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.SahmsiDateNow() &&
-                                            userAccess.ToDateTime.ToDateTime() >= CalendarHelper.SahmsiDateNow() &&
-                                            userAccess.FromDateTime.ToDateTime() <= CalendarHelper.SahmsiDateNow())
-                                     .Select(s => s.TheGFESUser)
+                                            userAccess.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.SahmsiDateTimeNow() &&
+                                            userAccess.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.SahmsiDateTimeNow() &&
+                                            userAccess.ToDateTime.ToDateTime() >= CalendarHelper.SahmsiDateTimeNow() &&
+                                            userAccess.FromDateTime.ToDateTime() <= CalendarHelper.SahmsiDateTimeNow())
                                      .FirstOrDefault();
 
             return await _context.Set<PBPuoUsers>()
                                   .Where(user =>
-                                         user.Id == theGFESUser.Id
+                                         user.Id == theGFESUserAccessList.TheGFESUser.Id
                                        )
                                   .SingleOrDefaultAsync();
         }

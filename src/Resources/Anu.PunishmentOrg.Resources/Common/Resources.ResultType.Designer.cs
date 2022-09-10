@@ -79,6 +79,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مشکلی در سیستم بابت دسترسی ها بوجود آمده است لطفا با پشتیبانی تماس حاصل فرمایید..
+        /// </summary>
+        public static string Can_Not_Find_AccessType {
+            get {
+                return ResourceManager.GetString("Can_Not_Find_AccessType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to خطای غیر منتظره.
         /// </summary>
         public static string Error {
@@ -138,6 +147,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string GeoLocation_Request_NotValid {
             get {
                 return ResourceManager.GetString("GeoLocation_Request_NotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to برای استفاده از خدمت نیاز به ورود دارید..
+        /// </summary>
+        public static string JwtTokenIsNotValid {
+            get {
+                return ResourceManager.GetString("JwtTokenIsNotValid", resourceCulture);
             }
         }
         
