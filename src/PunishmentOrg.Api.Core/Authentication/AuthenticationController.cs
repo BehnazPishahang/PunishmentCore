@@ -208,9 +208,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public async Task<AuthResult> Login([FromBody] SecondStepUserLoginRequest request)
         {
+           
 
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
-
             request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
             request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
@@ -222,47 +222,55 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             string jwtToken = null;
 
-            switch (request.LoginType)
+            var loginProvider = Factory.GetInstance(LoginType.LoginWithSms);
+            var loginResult = await loginProvider.VerifyAsync(request);
+            if (loginResult.Result.Code == 1000)
             {
-                case LoginType.LoginWithSms:
-                    var punishmentOrg135Users = await _unitOfWork.Repositorey<IPunishmentOrg135UsersRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
-                    punishmentOrg135Users.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-                    var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IUsers135LoginHistoryRepository>().LastRecordHistoryPerDay(punishmentOrg135Users.Id, DateTime.Now.DateToString());
-                    lastRecordHistoryPerDay.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
-
-                    bool IsExpierd = false;
-                    if (lastRecordHistoryPerDay.ExpiredCodeDateTime.ToDateTime() < DateTime.Now.DateTimeToString().ToDateTime())
-                    {
-                        IsExpierd = true;
-                    }
-                    if (lastRecordHistoryPerDay.ExpiredCodeDateTime.ToDateTime() == lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime())
-                    {
-                        return new AuthResult() { Result = AnuResult.Login_Again.GetResult() };
-                    }
-
-                    lastRecordHistoryPerDay.ExpiredCodeDateTime = lastRecordHistoryPerDay.SendCodeDateTime;
-
-                    if (_unitOfWork.Complete() < 0)
-                    {
-                        return new AuthResult() { Result = AnuResult.Error.GetResult() };
-                    }
-
-                    if (IsExpierd)
-                    {
-                        return new AuthResult() { AccessToken = null, Result = AnuResult.Sms_Time_Is_Expired.GetResult() };
-                    }
-
-                    jwtToken = GenerateJwtToken(punishmentOrg135Users);
-                    break;
-                case LoginType.LoginWithUserAndPass:
-
-                    var theGFESUser = await _unitOfWork.Repositorey<IGFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
-                    theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
-
-                    jwtToken = GenerateJwtToken(theGFESUser);
-                    break;
             }
+
+
+            //switch (request.LoginType)
+            //{
+            //    case LoginType.LoginWithSms:
+            //        var punishmentOrg135Users = await _unitOfWork.Repositorey<IPunishmentOrg135UsersRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+            //        punishmentOrg135Users.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            //        var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IUsers135LoginHistoryRepository>().LastRecordHistoryPerDay(punishmentOrg135Users.Id, DateTime.Now.DateToString());
+            //        lastRecordHistoryPerDay.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            //        bool IsExpierd = false;
+            //        if (lastRecordHistoryPerDay.ExpiredCodeDateTime.ToDateTime() < DateTime.Now.DateTimeToString().ToDateTime())
+            //        {
+            //            IsExpierd = true;
+            //        }
+            //        if (lastRecordHistoryPerDay.ExpiredCodeDateTime.ToDateTime() == lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime())
+            //        {
+            //            return new AuthResult() { Result = AnuResult.Login_Again.GetResult() };
+            //        }
+
+            //        lastRecordHistoryPerDay.ExpiredCodeDateTime = lastRecordHistoryPerDay.SendCodeDateTime;
+
+            //        if (_unitOfWork.Complete() < 0)
+            //        {
+            //            return new AuthResult() { Result = AnuResult.Error.GetResult() };
+            //        }
+
+            //        if (IsExpierd)
+            //        {
+            //            return new AuthResult() { AccessToken = null, Result = AnuResult.Sms_Time_Is_Expired.GetResult() };
+            //        }
+
+            //        jwtToken = GenerateJwtToken(punishmentOrg135Users);
+            //        break;
+            //    case LoginType.LoginWithUserAndPass:
+
+            //        var theGFESUser = await _unitOfWork.Repositorey<IGFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+            //        theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            //        jwtToken = GenerateJwtToken(theGFESUser);
+            //        break;
+            //}
 
 
             return new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() };
@@ -439,6 +447,79 @@ namespace Anu.PunishmentOrg.Api.Authentication
             }
 
             return false;
+        }
+    }
+
+    public static class Factory
+    {
+        private static Dictionary<LoginType, Type> _loginTypesDictionary = new Dictionary<LoginType, Type>()
+        {
+            { LoginType.LoginWithSms        , typeof(LogInProviderWithSMS)},
+            { LoginType.LoginWithUserAndPass, typeof(LogInProviderWithUserAndPass)}
+        };
+
+        public static ILogInProvider GetInstance(LoginType logInType)
+        {
+            return (ILogInProvider)Activator.CreateInstance(_loginTypesDictionary[logInType]);
+        }
+    }
+
+    public interface ILogInProvider
+    {
+        Task<AuthResult> VerifyAsync(SecondStepUserLoginRequest secondStepUserLoginRequest);
+    }
+
+    public abstract class LogInProvider : ILogInProvider
+    {
+        public virtual async Task<AuthResult> VerifyAsync(SecondStepUserLoginRequest secondStepUserLoginRequest)
+        {
+            return await Task.FromResult(new AuthResult() 
+            { 
+                AccessToken = "", 
+                RefreshToken = "LogInProvider", 
+                Result = new Commons.ServiceModel.ServiceResponse.Result() 
+                { 
+                    Code = 1000,
+                    Message = "LogInProvider",
+                    Description = "LogInProvider",
+                } 
+            });
+        }
+    }
+
+    public class LogInProviderWithUserAndPass : LogInProvider
+    {
+        public override async Task<AuthResult> VerifyAsync(SecondStepUserLoginRequest secondStepUserLoginRequest)
+        {
+            return await Task.FromResult(new AuthResult()
+            {
+                AccessToken = "",
+                RefreshToken = "LogInProviderWithUserAndPass",
+                Result = new Commons.ServiceModel.ServiceResponse.Result()
+                {
+                    Code = 1000,
+                    Message = "LogInProviderWithUserAndPass",
+                    Description = "LogInProviderWithUserAndPass",
+                }
+            });
+        }
+    }
+
+    public class LogInProviderWithSMS : LogInProvider
+    {
+        public override async Task<AuthResult> VerifyAsync(SecondStepUserLoginRequest secondStepUserLoginRequest)
+        {
+            return await Task.FromResult(new AuthResult()
+            {
+                AccessToken = "",
+                RefreshToken = "LogInProviderWithSMS",
+                Result = new Commons.ServiceModel.ServiceResponse.Result()
+                {
+                    Code = 1000,
+                    Message = "LogInProviderWithSMS",
+                    Description = "LogInProviderWithSMS",
+                }
+            });
         }
     }
 }
