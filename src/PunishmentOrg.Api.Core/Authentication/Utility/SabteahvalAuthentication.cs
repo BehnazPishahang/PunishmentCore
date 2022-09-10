@@ -11,6 +11,11 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
     {
         public static async Task SabteahvalAuthenticate(UserRegisterRequest request)
         {
+            if (Anu.Utility.Utility.IsDevelopment())
+            {
+                return;
+            }
+
             var result = await CallSabteAhval(request.UserName, request.BirthDate);
 
             if (!result.name.ConvertToByte().UTF8().NormalizeTextChars().Trim().Equals(request.FirstName.NormalizeTextChars()))

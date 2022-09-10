@@ -553,7 +553,7 @@
     <comment>-100019</comment>
   </data>
   <data name="Send_Login_Request_After_x_Second" xml:space="preserve">
-    <value>لطفا مجددا {0} دیگر تلاش کنید</value>
+    <value>لطفا مجددا {0} ثانیه دیگر تلاش کنید</value>
     <comment>-100023</comment>
   </data>
   <data name="Sex_Is_Not_Valid" xml:space="preserve">

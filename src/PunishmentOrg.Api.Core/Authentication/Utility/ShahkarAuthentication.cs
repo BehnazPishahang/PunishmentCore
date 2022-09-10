@@ -13,6 +13,10 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
 
         public static async Task<Result> ShahkarAuthenticate(string phoneNumber, string nationalCode)
         {
+            if (Anu.Utility.Utility.IsDevelopment())
+            {
+                return AnuResult.Successful.GetResult();
+            }
 
             string url = "https://gsbservices.iran.gov.ir/sazmantanzim/shahkar/ServiceIDmatching";
 

@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Anu.PunishmentOrg.Api.PunishmnetOrg.BaseInfo
 {
-    public abstract class PunishmentOrg135UsersControllerBase : ControllerBase
+    public abstract class PBPuoUsersControllerBase : ControllerBase
     {
-        public PunishmentOrg135UsersControllerBase()
+        public PBPuoUsersControllerBase()
         {
         }
         [Microsoft.AspNetCore.Mvc.HttpPost]
         [Microsoft.AspNetCore.Mvc.Route("api/v1/[controller]/[action]")]
-        public abstract Task<PunishmentOrg135UsersResponse> GetProfile([Microsoft.AspNetCore.Mvc.FromBody] PunishmentOrg135UsersRequest request);
+        public abstract Task<PBPuoUsersResponse> GetProfile([Microsoft.AspNetCore.Mvc.FromBody] PBPuoUsersRequest request);
     }
 }
