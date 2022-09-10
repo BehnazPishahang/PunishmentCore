@@ -29,7 +29,7 @@ namespace Utility.Guard
 
         public static string NullOrEmpty(this string? input, Enum type, string args = null)
         {
-            input.Null(type);
+            input.Null(type,args);
             if (input == string.Empty)
             {
                 throw new AnuExceptions(type, args);
@@ -77,7 +77,7 @@ namespace Utility.Guard
 
         public static string NullOrWhiteSpace(this string? input, Enum type, string args = null)
         {
-            input.NullOrEmpty(type);
+            input.NullOrEmpty(type,args);
             if (string.IsNullOrWhiteSpace(input))
             {
                 throw new AnuExceptions(type, args);

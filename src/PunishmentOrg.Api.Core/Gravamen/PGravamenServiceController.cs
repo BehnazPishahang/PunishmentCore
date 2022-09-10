@@ -9,6 +9,7 @@ using Anu.BaseInfo.Domain.SystemObject;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.Domain;
+using Anu.PunishmentOrg.Api.Authentication.Utility;
 using Anu.PunishmentOrg.DataModel.Gravamen;
 using Anu.PunishmentOrg.Domain.BaseInfo;
 using Anu.PunishmentOrg.Domain.PGravamen;
@@ -100,13 +101,12 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                             Id = Guid.NewGuid().ToString("N"),
                             Timestamp = 1,
                             RowNumber = rownumber,
-                            Name = person.Name,
+                            Name = "متخلف",
                             TradeUnitName = person.TradeUnitName,
                             PersonType = Anu.BaseInfo.Enumerations.PersonType.Legal,
                             PersonStartPost = PUPersonStartPost.OffendingPerson,
-
                             Family = string.Empty,
-                            Address = string.Empty,
+                            Address = person.Address,
                             BirthDate = string.Empty,
                             FatherName = string.Empty,
                             IdentityNumber = string.Empty,
@@ -129,7 +129,6 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             }
 
             var attachmentList = new List<PGravamenAttachment>();
-            var gravamenAttachmentTypeId = "300";
 
             int docFilesLength = 0;
             foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
@@ -140,7 +139,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
                 docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
 
-                var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<AttachmentType>>().GetById(gravamenAttachmentTypeId);
+                var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<AttachmentType>>().GetById(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId);
 
 
 
@@ -216,10 +215,8 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             var req = request.ThePGravamenContract;
             var errorResult = PGravamenResult.PGravamen_Field_IsNullOrInvalid;
 
-            req!.PetitionSubject.NullOrWhiteSpace(errorResult, "موضوع شکوائیه");
+            req!.PetitionSubject.NullOrWhiteSpace(errorResult, "موضوع شکایت");
             req!.PetitionDescription.NullOrWhiteSpace(errorResult, "شرح شکوائیه");
-            req!.RejectReasonText.NullOrWhiteSpace(errorResult, "علت رد/نقص شکوائیه");
-            req!.NoticeText.NullOrWhiteSpace(errorResult, "متن آخرين ابلاغيه در مورد شکوائيه");
             req!.TheGeoLocationContract.Null(PGravamenResult.PGravamen_TheGeoLocation_IsRequired);
             req!.TheGAttachmentContractList.NullOrEmpty(PGravamenResult.PGravamen_NoAttachmentAvailable);
             req!.ThePGravamenPersonContractList.NullOrEmpty(PGravamenResult.PGravamen_Field_IsNullOrInvalid);
@@ -444,8 +441,8 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
                 case PUPersonStartPost.OffendingPerson:
                     errorCode = PGravamenResult.PGravamen_OffendingNecessaryField_IsNullOrInvalid;
-                    person.Name.NullOrWhiteSpace(errorCode, "نام");
-                    person.TradeUnitName.NullOrWhiteSpace(errorCode, "نام واحد صنفی");
+                    person.Address.NullOrWhiteSpace(errorCode, "آدرس متخلف");
+                    person.TradeUnitName.NullOrWhiteSpace(errorCode, "نام واحد صنفی متخلف");
                     break;
             }
         }
