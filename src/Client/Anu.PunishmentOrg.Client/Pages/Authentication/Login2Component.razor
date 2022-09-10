@@ -36,7 +36,15 @@
 
                   <div class="form-outline mb-4">
                      <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                          @bind-Value="_tokenModel.UserName" For="@(() => _tokenModel.UserName)" Validation="Validated.ToString()"/>
+                        Mask="@(new PatternMask("0000000000"))"
+                            MaxLength="10"
+                            Required="true" 
+                            RequiredError="کد ملی باید 10 رقم باشد "
+                          Placeholder="1467561088" 
+                                          @bind-Value="_tokenModel.UserName"  />
+
+                          
+
                   </div>
 
                   <div class="form-outline mb-4">
