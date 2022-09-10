@@ -79,5 +79,14 @@ namespace Anu.Constants.ServiceModel.BaseInfo
             public const string NotificationThroughTheSite = "026";
 
         }
+
+        public static class AttachmentTypeId
+        {
+            /// <summary>
+            /// ابلاغ از طریق میز خدمت سازمان تعزیرات انجام شده است
+            /// </summary>
+            public const string GravamenAttachmentTypeId = "300";
+
+        }
     }
 }
