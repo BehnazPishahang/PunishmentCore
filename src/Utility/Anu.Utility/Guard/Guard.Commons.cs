@@ -40,17 +40,17 @@ namespace Utility.Guard
 
         public static bool NullOrEmpty(this string? input)
         {
-            if (!input.Null())
+            if (input.Null())
             {
-                return false;
+                return true;
             }
 
             if (input == string.Empty)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public static Guid NullOrEmpty(this Guid? input, Enum type, string args = null)
@@ -78,7 +78,7 @@ namespace Utility.Guard
         public static string NullOrWhiteSpace(this string? input, Enum type, string args = null)
         {
             input.NullOrEmpty(type);
-            if (String.IsNullOrWhiteSpace(input))
+            if (string.IsNullOrWhiteSpace(input))
             {
                 throw new AnuExceptions(type, args);
             }
@@ -88,16 +88,16 @@ namespace Utility.Guard
 
         public static bool NullOrWhiteSpace(this string? input)
         {
-            if (!input.NullOrEmpty())
+            if (input.NullOrEmpty())
             {
-                return false;
+                return true;
             }
-            if (String.IsNullOrWhiteSpace(input))
+            if (string.IsNullOrWhiteSpace(input))
             {
                 return true;
             }
 
-            return true;
+            return false;
         }
 
         public static T Default<T>(this T input, Enum type, string args = null)
@@ -129,6 +129,7 @@ namespace Utility.Guard
             }
             return value;
         }
+
         public static string Length(this string? input, Enum type, int length, string args = null)
         {
             if (input.Length != length)
@@ -149,6 +150,7 @@ namespace Utility.Guard
             return input;
         }
 
+        //todo: it should be reviewed by s.kavianimehr 
         public static string IsValidNationalCode(this string nationalCode)
         {
             ////در صورتی که کد ملی وارد شده تهی باشد
@@ -171,6 +173,7 @@ namespace Utility.Guard
             return "";
         }
 
+        //todo it should be reviewed by s.kavianimehr 
         public static bool IsValidDate(this string? dateString, Enum type, string args = null)
         {
             if (string.IsNullOrEmpty(dateString))
