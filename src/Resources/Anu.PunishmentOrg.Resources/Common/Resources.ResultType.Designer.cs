@@ -475,6 +475,51 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شناسه پرداخت معتبر نمی باشد..
+        /// </summary>
+        public static string PBill4Paid_GetPaymentInfo_FishNo_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_FishNo_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to قبضی یافت نشد..
+        /// </summary>
+        public static string PBill4Paid_GetPaymentInfo_PBill4Paid_NotFound {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_PBill4Paid_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to وضعیت قبض نامعتبر است..
+        /// </summary>
+        public static string PBill4Paid_GetPaymentInfo_PBill4Paid_TheObjectState_Is_Null {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_PBill4Paid_TheObjectState_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PBill4Paid_GetPaymentInfo_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string PBill4Paid_GetPaymentInfo_ThePBill4PaidFishNoContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_ThePBill4PaidFishNoContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شماره قبض بیش از اندازه مجاز می باشد.
         /// </summary>
         public static string PBillStore_BillNumber_IsTooLong {

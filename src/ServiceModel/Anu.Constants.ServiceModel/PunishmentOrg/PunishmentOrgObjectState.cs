@@ -202,5 +202,50 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
         public const string RegisterCase = "000506";//تشکیل پرونده شده
     }
 
+        /// <summary>
+        /// قبض جهت پرداخت وجه
+        /// </summary>
+        public static class PBill4Cash
+        {
+            /// <summary>
+            /// شروع
+            /// </summary>
+            public const string Start = "000560";
+            /// <summary>
+            /// ثبت شده جهت تایید
+            /// </summary>
+            public const string Registered = "000562";
+            /// <summary>
+            ///  تایید شده
+            /// </summary>
+            public const string Confirmed = "000564";
+            /// <summary>
+            /// برگشت داده شده به ثبت کننده جهت رفع ایراد
+            /// </summary>
+            public const string ReturnToConfirmer = "000566";
+            /// <summary>
+            /// پیش نویس شده
+            /// </summary>
+            public const string Draft = "000568";
+            /// <summary>
+            /// ابطال شده
+            /// </summary>        
+            public const string Expired = "000570";
+            /// <summary>
+            /// وجه قبض پرداخت شده
+            /// </summary>
+            public const string Paid = "000569";
+            /// <summary>
+            /// صدور دريافت وجه شده
+            /// </summary>
+            public const string CreatedPcash = "000567";
+            /// <summary>
+            /// پرداخت رويت شده
+            /// </summary>
+            public const string View = "000565";
+
+
+
+        }
     }
 }
