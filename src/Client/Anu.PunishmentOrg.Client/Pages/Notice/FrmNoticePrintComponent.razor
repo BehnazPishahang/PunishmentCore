@@ -12,7 +12,7 @@
 
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel"  Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Close" Color="Color.Error">بستن</MudButton>
+        <MudButton OnClick="Cancel"  Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Close" Color="Color.Error">بازگشت</MudButton>
        <MudButton OnClick="Submit"  Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Print" Color="Color.Success">چاب</MudButton>
     </DialogActions>
 </MudDialog>
@@ -28,7 +28,11 @@
 
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
     void Submit() => MudDialog.Close(DialogResult.Ok(true));
-    void Cancel() => MudDialog.Cancel();
+    void Cancel()
+    { 
+       _navigationManager.NavigateTo("/");
+        _navigationManager.NavigateTo("/FrmNotice");
+    }
 
 
     protected override async Task OnInitializedAsync()

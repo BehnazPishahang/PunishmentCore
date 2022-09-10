@@ -10,7 +10,7 @@
     
 
     <MudGrid>
-        <MudItem xs="12" sm="6" md="6"  >
+        <MudItem xs="12" sm="6" md="6" class="rounded" >
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
@@ -27,14 +27,21 @@
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
                     <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> ابلاغ</MudText>
                    </div>
-                   <div >
-                       <div class="col-xl-1 col-sm-1 col-md-1 col-1 mt-1  @MainLayout._class" style="background-color:green">
-                      <MudText xs="1" sm="1" md="1" Class="text-center mt-2"   >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser</MudText>
-                   </div>
-                   <div class="col-xl-1 col-sm-2 col-md-1 col-1 mt-1  @MainLayout._class" style="background-color:red" >
-                      <MudText xs="1" sm="1" md="1" Class="text-center mt-2"   >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser</MudText>
-                   </div>
-                   </div>
+               
+                @*  <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined" OverrideStyles="true">
+                            <MudButton  Color="Color.Success" Icon="@Icons.Filled.Visibility"  onclick="ShowSeenedPNoticeList" >  @NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser </MudButton>
+                          
+                            <MudButton  Color="Color.Error" Icon="@Icons.Filled.VisibilityOff" IconColor="Color.Success" onclick="ShowUnseenedPNoticeList" > @NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser </MudButton>
+                        </MudButtonGroup>*@
+                  
+                       
+                        <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
+                            <MudButton Color="Color.Success" StartIcon="@Icons.Filled.Visibility" IconColor="Color.Success" Variant="Variant.Filled" OnClick="ShowSeenedPNoticeList"  >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser</MudButton>
+                            <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPNoticeList" >  تمامی ابلاغ ها : @NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.TotalCountPNoticeOfUser</MudButton>
+                            <MudButton Color="Color.Error" StartIcon="@Icons.Filled.VisibilityOff"  OnClick="ShowUnseenedPNoticeList"   Variant="Variant.Filled" IconColor="Color.Error" >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser</MudButton>
+                        </MudButtonGroup>  
+                          
+             
                 </div>
             </MudPaper>
             </MudElement>
@@ -116,7 +123,7 @@
         </MudItem>
 
 
-  <MudItem xs="12" sm="6" md="6">
+  <MudItem xs="12" sm="6" md="6"  class=" rounded">
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
@@ -132,10 +139,10 @@
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
                     <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  ">  درخواست تجدید نظر خواهی </MudText>
                    </div>
-                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
-                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">7</MudText>
-                   </div>
+                    
                 </div>
+              
+                
             </MudPaper>
  
             </MudElement>
@@ -281,11 +288,26 @@
     GetCountOfUnSeenPNoticeByUserResponse NoticeInfo;
     string ncode = SharedInfo.NationalCode;
 
+
+    private void ShowUnseenedPNoticeList()
+    {
+        SharedInfo.LoadAllNoticeList = false;
+        _navigationManager.NavigateTo("/FrmNotice");
+    }
+
+    private void ShowSeenedPNoticeList()
+    {
+         SharedInfo.LoadAllNoticeList = true;
+          _navigationManager.NavigateTo("/FrmNotice");
+    }
+    private void ShowAllPNoticeList()
+    {
+         SharedInfo.LoadAllNoticeList = null;
+          _navigationManager.NavigateTo("/FrmNotice");
+    }
     protected override async Task OnInitializedAsync()
         {
             string ncode = SharedInfo.NationalCode;
-
-
                NoticeInfo = _noticeService.GetCountOfUnSeenPNoticeByUser(_appConfiguration.BackendServerAddress, _appConfiguration.GetCountOfUnSeenPNoticeByUser, ncode);
         }
        

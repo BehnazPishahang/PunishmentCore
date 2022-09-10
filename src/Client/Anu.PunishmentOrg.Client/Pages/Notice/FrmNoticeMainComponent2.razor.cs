@@ -66,7 +66,16 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
         protected override async Task OnInitializedAsync()
         {
             string ncode = SharedInfo.NationalCode;
-            Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode);
+
+            bool? ss = SharedInfo.LoadAllNoticeList;
+
+            if (!SharedInfo.LoadAllNoticeList.HasValue)
+                Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode);
+
+            if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == true)
+                Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode).Where(t => !string.IsNullOrEmpty(t.NoticeDate));
+            if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == false)
+                Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode).Where(t=> string.IsNullOrEmpty( t.NoticeDate));
         }
 
     }
