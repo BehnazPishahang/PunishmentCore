@@ -14,12 +14,12 @@
       <div class="col col-xl-10">
         <div class="card" style="border-radius: 1rem;">
           <div class="row g-0">
-            <div class="col-md-6 col-lg-5 d-none d-md-block" style=" object-fit: fill">
+            <div class="col-md-6 col-lg-5 d-none d-md-block" >
               
                 <MudImage ObjectFit="@ImageFit" 
                             Height="600"
                             Width="450" 
-                            src="/pic/LoginArm.jpg" 
+                            src="/pic/LoginArm.png" 
                             
                             Elevation="25" 
                             Class="rounded-lg"
@@ -29,9 +29,9 @@
               <div class="card-body p-4 p-lg-5 text-black">
 
                 <MudForm Model="@_tokenModel">
-                      <MudText Typo="Typo.h4" Style="text-shadow: -2px 3px 3px grey;">ورود به پیشخان تعزیرات  </MudText>
+                      <MudText align-center  Typo="Typo.h4" Style="text-shadow: -2px 3px 3px grey;">ورود به پیشخوان تعزیرات  </MudText>
 
-
+                     <br/>
                   
 
                   <div class="form-outline mb-4">
@@ -47,7 +47,7 @@
                         </MudItem>
 
                         <MudItem xs="4">
-                            <MudButton Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" Size="Size.Medium" Style="width: 100%;"> 
+                            <MudButton Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="@(async () => await GetAccessCode())" Size="Size.Medium" Style="width: 100%;"> 
 
                                     @if(hasSmsSend)
                                      {
@@ -126,13 +126,13 @@
     }
 
 
-    void GetAccessCode()
+    private  async Task GetAccessCode()
     {
 
         
         var ss = _appConfiguration.BackendServerAddress;
-
-        AuthResult result = _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _tokenModel);
+         hasSmsSend = true;
+        AuthResult result =await _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _tokenModel);
         if (result.Result.Code == 100013)
         {
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;

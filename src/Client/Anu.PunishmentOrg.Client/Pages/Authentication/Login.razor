@@ -118,7 +118,7 @@
         
         var ss = _appConfiguration.BackendServerAddress;
 
-        AuthResult result = _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _tokenModel);
+        AuthResult result = _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _tokenModel).Result;
         if (result.Result.Code == 100013)
         {
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;

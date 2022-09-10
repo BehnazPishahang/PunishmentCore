@@ -6,7 +6,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
     {
         public AuthResult RegisterUser(String baseURl, string serviceName, UserRegisterRequest UserRegisterinfo);
 
-        public AuthResult LoginUser(String baseURl, string serviceName, FirstStepUserLoginRequest loginInfo);
+       public  Task<AuthResult> LoginUser(String baseURl, string serviceName, FirstStepUserLoginRequest loginInfo);
 
         public AuthResult SecondStepLogin(String baseURl, string serviceName, SecondStepUserLoginRequest secondStepUserLoginRequest);
 

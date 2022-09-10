@@ -22,21 +22,22 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
 
         }
 
-        public AuthResult LoginUser(String baseURl, string serviceName, FirstStepUserLoginRequest firstStepUserLoginRequest)
-        {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(baseURl);
-            var response = client.PostAsJsonAsync(serviceName, firstStepUserLoginRequest).Result;
-
-            AuthResult result = response.Content.ReadAsAsync<AuthResult>().Result;
-            return result;
-        }
-
+       
         public AuthResult SecondStepLogin(string baseURl, string serviceName, SecondStepUserLoginRequest secondStepUserLoginRequest)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri(baseURl);
             var response = client.PostAsJsonAsync(serviceName, secondStepUserLoginRequest).Result;
+
+            AuthResult result = response.Content.ReadAsAsync<AuthResult>().Result;
+            return result;
+        }
+
+        public async Task<AuthResult> LoginUser(string baseURl, string serviceName, FirstStepUserLoginRequest loginInfo)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(baseURl);
+            var response = await client.PostAsJsonAsync(serviceName, loginInfo);
 
             AuthResult result = response.Content.ReadAsAsync<AuthResult>().Result;
             return result;
