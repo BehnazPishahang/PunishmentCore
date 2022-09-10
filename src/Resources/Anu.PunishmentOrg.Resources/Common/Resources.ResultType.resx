@@ -117,6 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BirthDate_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا تاریخ تولد خود را وارد نمایید</value>
+    <comment>-100027</comment>
+  </data>
+  <data name="BirthDate_Is_Not_Valid" xml:space="preserve">
+    <value>تاریخ تولد معتبر نمی باشد</value>
+    <comment>-100029</comment>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>خطای غیر منتظره</value>
     <comment>-10001</comment>
@@ -133,6 +141,10 @@
     <value>به واحد اجرای احکام ارجاع شده</value>
     <comment>20003</comment>
   </data>
+  <data name="FirstName_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا نام خود را وارد نمایید</value>
+    <comment>-100025</comment>
+  </data>
   <data name="GeoLocation_Request_IsNull" xml:space="preserve">
     <value>درخواست بدنه نمی‌تواند خالی باشد.</value>
     <comment>-30231</comment>
@@ -141,9 +153,17 @@
     <value>فیلدهای ضروری پر نشده است</value>
     <comment>-30232</comment>
   </data>
+  <data name="LastName_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا نام خوانوادگی خود را وارد نمایید</value>
+    <comment>-100026</comment>
+  </data>
   <data name="LoginSuccessful_Sms_Send_To" xml:space="preserve">
     <value>کد عبور برای شماره {0} ارسال شد .</value>
     <comment>100013</comment>
+  </data>
+  <data name="Login_Again" xml:space="preserve">
+    <value>لطفا مجددا وارد شوید</value>
+    <comment>-100030</comment>
   </data>
   <data name="MechanizedLetter_CaseHandlerUnitId_Is_Not_Sync_UnitId" xml:space="preserve">
     <value>کد واحد پرونده نامرتبط است.</value>
@@ -260,6 +280,10 @@
   <data name="MechanizedLetter_TheReceiverInnerOrgCode_Is_Not_Valid" xml:space="preserve">
     <value>کد واحد گیرنده نامه معتبر نمی باشد.</value>
     <comment>301310</comment>
+  </data>
+  <data name="NationalCode_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا کد ملی را وارد نمایید.</value>
+    <comment>-100024</comment>
   </data>
   <data name="MechanizedLetter_TheUnit_Is_Null" xml:space="preserve">
     <value>واحد پرونده را مقدار دهی نمایید.</value>
@@ -476,25 +500,45 @@
     <value>اطلاعات وارد شده نمی تواند خالی باشد.</value>
     <comment>-30212</comment>
   </data>
-  <data name="PNotice_GetPNoticeByNationalityCode_NationalityCode_Is_Required" xml:space="preserve">
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required" xml:space="preserve">
+    <value>کدملی معتبر نمی باشد.</value>
+    <comment>-30253</comment>
+  </data>
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound" xml:space="preserve">
+    <value>ابلاغی یافت نشد</value>
+    <comment>-30254</comment>
+  </data>
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد.</value>
+    <comment>-30251</comment>
+  </data>
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_ThePNoticePersonContract_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30252</comment>
+  </data>
+  <data name="PNotice_InqueryPNoticeList_NationalityCode_Is_Required" xml:space="preserve">
     <value>کدملی/شناسه ملی درخواست نمی تواند خالی باشد.</value>
     <comment>-30203</comment>
   </data>
-  <data name="PNotice_GetPNoticeByNationalityCode_NotFound" xml:space="preserve">
+  <data name="PNotice_InqueryPNoticeList_NotFound" xml:space="preserve">
     <value>ابلاغیه ای یافت نشد.</value>
     <comment>-30204</comment>
   </data>
-  <data name="PNotice_GetPNoticeByNationalityCode_Request_Is_Required" xml:space="preserve">
+  <data name="PNotice_InqueryPNoticeList_Request_Is_Required" xml:space="preserve">
     <value>درخواست نمی تواند خالی باشد.</value>
     <comment>-30201</comment>
   </data>
-  <data name="PNotice_GetPNoticeByNationalityCode_ThePNoticePersonContract_Is_Required" xml:space="preserve">
+  <data name="PNotice_InqueryPNoticeList_ThePNoticePersonContract_Is_Required" xml:space="preserve">
     <value>اطلاعات وارد شده نمی تواند خالی باشد.</value>
     <comment>-30202</comment>
   </data>
   <data name="PropertyOrderNotFound" xml:space="preserve">
     <value>مرتب سازی ویژگی یافت نشد.</value>
     <comment>-10004</comment>
+  </data>
+  <data name="Request_Is_Not_Valid" xml:space="preserve">
+    <value>در خواست شما معتبر نمی باشد</value>
+    <comment>-100031</comment>
   </data>
   <data name="SabteAhval_Data_Not_Match_Entered_Data" xml:space="preserve">
     <value>اطلاعات وارد شده معتبر نمی باشد.</value>
@@ -507,6 +551,14 @@
   <data name="SabteAhval_Unkhown_Error" xml:space="preserve">
     <value>خطا ثبت احوال</value>
     <comment>-100019</comment>
+  </data>
+  <data name="Send_Login_Request_After_x_Second" xml:space="preserve">
+    <value>لطفا مجددا {0} دیگر تلاش کنید</value>
+    <comment>-100023</comment>
+  </data>
+  <data name="Sex_Is_Not_Valid" xml:space="preserve">
+    <value>جنسیت معتبر نمی باشد</value>
+    <comment>-100028</comment>
   </data>
   <data name="Shahkar_Could_Not_Inquiry" xml:space="preserve">
     <value>امکان استعلام تطابق شماره تلفن و کد ملی وجود به شماره ملی {0} ندارد.</value>
@@ -523,6 +575,10 @@
   <data name="Shahkar_Unkhown_Error" xml:space="preserve">
     <value>خطا شاهکار</value>
     <comment>-100018</comment>
+  </data>
+  <data name="Sms_Limit_Send" xml:space="preserve">
+    <value>شما به محدودیت ارسال اس ام اس رسیده اید لطفا مجدد فردا مراجعه کنید.</value>
+    <comment>-100022</comment>
   </data>
   <data name="Sms_Time_Is_Expired" xml:space="preserve">
     <value>زمان انتظار ارسال کد به پایان رسیده است. لطفا مجدد اقدام به دریافت کد کنید .</value>
