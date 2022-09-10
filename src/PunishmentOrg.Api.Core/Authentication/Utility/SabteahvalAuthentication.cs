@@ -9,17 +9,9 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
 {
     public static class SabteahvalAuthentication
     {
-        private static IConfiguration _configuration;
-
-        public static void GetConfiguration(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public static async Task SabteahvalAuthenticate(UserRegisterRequest request)
         {
-            var SabtAhvalCanUsed = _configuration.GetSection("StatusServices:SabtAhval").Value;
-            if (!Convert.ToBoolean(SabtAhvalCanUsed))
+            if (Anu.Utility.Utility.IsDevelopment())
             {
                 return;
             }
