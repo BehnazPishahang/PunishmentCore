@@ -2,7 +2,7 @@
 
 namespace Anu.PunishmentOrg.ServiceModel.BaseInfo
 {
-    public class PunishmentOrg135UsersContract
+    public class PBPuoUsersContract
     {
         public string? NationalCode { get; set; }
         public string? PhoneNumber { get; set; }

@@ -1087,7 +1087,7 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to لطفا مجددا {0} دیگر تلاش کنید.
+        ///   Looks up a localized string similar to لطفا مجددا {0} ثانیه دیگر تلاش کنید.
         /// </summary>
         public static string Send_Login_Request_After_x_Second {
             get {
