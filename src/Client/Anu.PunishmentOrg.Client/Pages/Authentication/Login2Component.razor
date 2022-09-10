@@ -147,6 +147,8 @@
         {
             errorMessage = result.Result.Message;
             hasSmsSend = false;
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            Snackbar.Add(errorMessage,  Severity.Warning);
         }
     }
     void Submit()
