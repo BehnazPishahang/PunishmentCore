@@ -71,7 +71,7 @@ namespace Anu.PunishmentOrg.Api.Notice
                 Result = AnuResult.Successful.GetResult()
             };
         }
-
+        
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<ExportPNoticeResponse> ExportPNotice([FromBody] ExportPNoticeRequest request)
         {
