@@ -60,6 +60,11 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
             /// فراخواننده سرويس دريافت درخواست مجوز تعقيب/بازرسي و پاسخ آن
             /// </summary>
             public const string SendPChaseLicenseReqList = "025";
+
+            /// <summary>
+            /// کاربر سامانه 135 تعزیرات
+            /// </summary>
+            public const string Tazirat135Users = "026";
         }
 
         public static class NajaUnit
@@ -128,6 +133,12 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
             /// ستاد مركزي سازمان غذا و دارو
             /// </summary>
             public const string FoodDrugOrganization = "280000";
+
+            /// <summary>
+            /// سازمان تعزیرات حکومتی
+            /// این ناجا یونیت برای کاربران سامانه ی 135 تعزیرات استفاده شده است
+            /// </summary>
+            public const string PunishmentOrg = "00006";
         }
 
         public enum NajaUnitCode

@@ -624,4 +624,12 @@
     <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
     <comment>-30272</comment>
   </data>
+  <data name="JwtTokenIsNotValid" xml:space="preserve">
+    <value>برای استفاده از خدمت نیاز به ورود دارید.</value>
+    <comment>-10005</comment>
+  </data>
+  <data name="Can_Not_Find_AccessType" xml:space="preserve">
+    <value>مشکلی در سیستم بابت دسترسی ها بوجود آمده است لطفا با پشتیبانی تماس حاصل فرمایید.</value>
+    <comment>-100032</comment>
+  </data>
 </root>
