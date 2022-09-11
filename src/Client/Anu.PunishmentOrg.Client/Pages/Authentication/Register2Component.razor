@@ -49,10 +49,10 @@
                         DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
                         MinDateSetOnToday="true"
                         Placeholder=" تاریخ تولد "
-
+                        
                         Theme="PickerTheme.Cheerup"
                         OnChange="@(() => Console.WriteLine("OK"))" 
-
+                      
                         />
                     </MudItem>
                   </div>
@@ -218,7 +218,7 @@
 
     UserRigesterFluentValidator registerValidator = new UserRigesterFluentValidator();
 
-   
+
     private bool Validated = true;
     private UserRegisterRequest _registerUserModel = new();
     private string errorMessage = string.Empty;
@@ -246,9 +246,21 @@
         StateHasChanged();
     }
 
-     void GetAccessCode()
+    void GetAccessCode()
     {
-         Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        form.Validate();
+
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        if (form.Errors.Count() > 0)
+        {
+            foreach (string str in form.Errors)
+            {
+                Snackbar.Add(str, MudBlazor.Severity.Error);
+            }
+            return;
+        }
+
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
         if (string.IsNullOrEmpty(_registerUserModel.PhoneNumber) || _registerUserModel.PhoneNumber.Length != 11)
         {
             Snackbar.Add("شماره تلفن را درست وارد نمایید .",  MudBlazor.Severity.Warning);
@@ -275,6 +287,19 @@
 
     void Submit()
     {
+
+         form.Validate();
+
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        if (form.Errors.Count() > 0)
+        {
+            foreach (string str in form.Errors)
+            {
+                Snackbar.Add(str, MudBlazor.Severity.Error);
+            }
+            return;
+        }
+
         var secondStep = new SecondStepUserLoginRequest();
         secondStep.UserName = _registerUserModel.UserName;
         secondStep.Password = smsPassword;
