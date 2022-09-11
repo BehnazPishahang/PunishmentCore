@@ -15,7 +15,30 @@ namespace Anu.UnitOfWork.DataAccess
 
         public int Complete()
         {
+            ValidateContext();
             return _context.SaveChanges();
+        }
+
+        private void ValidateContext()
+        {
+            var entries = _context.ChangeTracker.Entries();
+            foreach (var entry in entries)
+            {
+                if (entry.State == Microsoft.EntityFrameworkCore.EntityState.Modified
+                    || entry.State == Microsoft.EntityFrameworkCore.EntityState.Added)
+                {
+                    var entity = entry.Entity;
+                    var validatorType = typeof(FluentValidation.IValidator<>);
+                    validatorType = validatorType.MakeGenericType(entity.GetType());
+                    var validator = _dependencyResolver.Resolve(validatorType);
+                    if (validator != null)
+                    {
+
+                        var method = validatorType.GetMethod("Validate");
+                        var validateResult = (FluentValidation.Results.ValidationResult?)method?.Invoke(validator, new object[] { entity });
+                    }
+                }
+            }
         }
 
         public void Dispose()
@@ -24,12 +47,12 @@ namespace Anu.UnitOfWork.DataAccess
         }
 
         public object GetService(System.Type type)
-        { 
+        {
             return _dependencyResolver.Resolve(type);
         }
 
         public T GetService<T>(System.Type type)
-        { 
+        {
             return _dependencyResolver.Resolve<T>(type);
         }
 

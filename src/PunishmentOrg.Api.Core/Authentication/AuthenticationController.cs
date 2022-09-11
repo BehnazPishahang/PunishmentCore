@@ -373,6 +373,12 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public async Task<AuthResult> V2Login([FromBody] SecondStepUserLoginRequest request)
         {
+
+            var thePcase = await _unitOfWork.Repositorey<Domain.Case.IPCaseRepository>().GetById("796300c13bbe4fde959be9bb851dd429");
+            thePcase.ArchiveNo = "15000000011500000001";
+            var result = _unitOfWork.Complete();
+
+
             #region ValidateInput
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
