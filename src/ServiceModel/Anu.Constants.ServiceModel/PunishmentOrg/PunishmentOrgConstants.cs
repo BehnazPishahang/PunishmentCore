@@ -258,7 +258,7 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
             "IR720100004001012808001503",
             "IR060100004001012801015393",
             "IR900100004001000901027400"
-        }
+        };
             }
         }
     }

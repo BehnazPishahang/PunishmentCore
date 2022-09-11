@@ -16,6 +16,7 @@ namespace Anu.UnitOfWork.DataAccess
 
         public int Complete()
         {
+            ValidateContext();
             return _context.SaveChanges();
         }
 

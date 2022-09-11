@@ -1,6 +1,7 @@
 using Anu.DataAccess;
 using Anu.Domain;
 using Anu.PunishmentOrg.Api.Authentication;
+using Anu.Validation;
 using Anu.PunishmentOrg.Api.Authentication.Utility;
 using Anu.Utility.Sms;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -73,6 +74,9 @@ builder.Services.AddScoped<IDependencyResolver, DependencyResolver>();//(new Dep
 builder.Services.AddRepositories(
     typeof(Anu.BaseInfo.DataAccess.Unit.UnitRepository).Assembly,
     typeof(Anu.PunishmentOrg.DataAccess.DiscoveryMinutes.PChaseLicenseReqRepository).Assembly);
+
+builder.Services.AddValidators(
+    typeof(Anu.PunishmentOrg.Validation.Case.PCaseValidator).Assembly);
 
 
 
