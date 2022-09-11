@@ -62,7 +62,7 @@
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
                          <MudTextField  
-                            Mask="@nationalcodeMask"
+                           
                             @bind-Value="_registerUserModel.UserName"
                             Label="کدملی " 
                             Variant="Variant.Outlined" 
@@ -137,7 +137,7 @@
                 <div class="col-md-7 mb-3">
 
                   <div class="form-outline ">
-                    <MudTextField T="string" Label="شماره تلفن "  Required="true"   Mask="@phoneMask" @bind-Value="_registerUserModel.PhoneNumber"  Variant="Variant.Outlined" Placeholder="09121111111" RequiredError="شماره تلفن  را وارد نمایید "  />
+                    <MudTextField T="string" Label="شماره تلفن "  Required="true"   @bind-Value="_registerUserModel.PhoneNumber"  Variant="Variant.Outlined" Placeholder="09121111111" RequiredError="شماره تلفن  را وارد نمایید "  MaxLength="11" />
                   </div>
 
                 </div>
@@ -174,7 +174,7 @@
                        @if (hasSmsSend)
                         {
                            
-                            <MudTextField  T="string" Label="رمز ارسالی"Mask="@(new PatternMask("000000"))"  @bind-Value="smsPassword" Variant="Variant.Outlined" Placeholder="111111"   MaxLength="6"  />
+                            <MudTextField  T="string" Label="رمز ارسالی"  @bind-Value="smsPassword" Variant="Variant.Outlined" Placeholder="111111"   MaxLength="6"  />
                          
                         }
                   </div>
