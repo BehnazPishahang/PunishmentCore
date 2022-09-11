@@ -141,47 +141,41 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             int docFilesLength = 0;
             foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
             {
-                //todo: should be fix this bug in client and then in the backend should be refactore this section
-                if (!attachment.TheGAttachmentDataContract.Null())
-                {
-                    if (!attachment!.TheGAttachmentDataContract!.DocFile.Null())
-                    {
-                        var docFile = attachment.TheGAttachmentDataContract!.DocFile;
-                        docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
+                var docFile = attachment.TheGAttachmentDataContract!.DocFile;
 
                         docFilesLength += docFile!.Length;
 
-                        var validateDocFilesSize = ValidateDocFilesSize(docFilesLength);
-                        if (!validateDocFilesSize.Null())
-                        {
-                            return validateDocFilesSize;
-                        }
+                var validateDocFilesSize = ValidateDocFilesSize(docFilesLength);
+                if (!validateDocFilesSize.Null())
+                {
+                    return validateDocFilesSize;
+                }
+                
 
 
                         var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<AttachmentType>>().GetById(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId);
 
 
 
-                        var attachedFile = new PGravamenAttachment()
-                        {
-                            Id = Guid.NewGuid().ToString("N"),
-                            Timestamp = 1,
-                            FileExtension = attachment.FileExtension,
-                            SaveAttachmentType = Anu.BaseInfo.Enumerations.SaveAttachmentType.SaveInDataBase,
-                            CreateDateTime = DateTime.Now.ToPersian().ToString(),
-                            TheAttachmentType = attachmentType,
-                            Title = attachment.Title,
-                            SecondMili = attachment.SecondMili,
-                            TheGAttachmentData = new GAttachmentData()
-                            {
-                                Id = Guid.NewGuid().ToString("N"),
-                                Timestamp = 1,
-                                DocFile = attachment.TheGAttachmentDataContract!.DocFile
+                var attachedFile = new PGravamenAttachment()
+                {
+                    Id = Guid.NewGuid().ToString("N"),
+                    Timestamp = 1,
+                    FileExtension = attachment.FileExtension,
+                    SaveAttachmentType = Anu.BaseInfo.Enumerations.SaveAttachmentType.SaveInDataBase,
+                    CreateDateTime = DateTime.Now.ToPersian().ToString(),
+                    TheAttachmentType = attachmentType,
 
-                            }
-                        };
-                        attachedFile.TheAttachmentType = attachmentType;
+                    TheGAttachmentData = new GAttachmentData()
+                    {
+                        Id = Guid.NewGuid().ToString("N"),
+                        Timestamp = 1,
+                        DocFile = attachment.TheGAttachmentDataContract!.DocFile
 
+                    }
+                };
+                attachedFile.TheAttachmentType = attachmentType;
+                
 
                         attachmentList.Add(attachedFile);
                     }
