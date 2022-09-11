@@ -29,8 +29,8 @@
                  @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
                      
               <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
-                    <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="@Theme135._LogoColor" />
-                    <MudText Typo="Typo.h5" Class="mr-3" Color="@Theme135._LogoColor">  فناوران اطلاعات آنو    </MudText>
+                    <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="Color.Tertiary" />
+                    <MudText Typo="Typo.h5" Class="mr-3" Color="Color.Default"> میز خدمت تعزیرات حکومتی   </MudText>
                 <MudSpacer />
        
               <MudIconButton Icon="@_dayNightIcons" Color="@Theme135._iconColor" @onclick="onDarkMode" />
@@ -51,7 +51,9 @@
                     }
                     else
                     {
-                         <MudListItem Text="خروج" Href="/register" Icon="@Icons.Filled.Logout"  OnClick="Logout" />
+                        <MudListItem Text="پروفایل کاربر " Icon="@Icons.Filled.Person"   />
+                        <MudListItem Text=" تغییر شماره تلفن "  Icon="@Icons.Filled.PhonelinkSetup"   />
+                         <MudListItem Text="خروج"  Icon="@Icons.Filled.Logout"  OnClick="Logout" />
                     }
 
                 </ChildContent>

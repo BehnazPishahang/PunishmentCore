@@ -74,7 +74,7 @@
 
                   <MudItem class="row">
                      <MudItem xs="6" Class="d-flex justify-center">
-                           <MudButton Variant="Variant.Filled"  Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
+                           <MudButton Variant="Variant.Filled"  disabled="@(!hasSmsSend)" Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
                         </MudItem>
                         <MudItem xs="6" Class="d-flex justify-center">
                            <MudButton Variant="Variant.Filled" Color="Color.Warning" Href="/false" Size="Size.Large" Style="width: 100%;">برگشت</MudButton>
