@@ -117,8 +117,10 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
             Assert.Equal((int)GetPaymentInfoResult.PBill4Paid_GetPaymentInfo_PBill4Paid_NotFound, exception.result.Code);
         }
 
-        [Fact]
-        public async Task GetPaymentInfo_State_Confirmed_ShouldReturn_CanPay_True()
+        [Theory]
+        [InlineData(PBill4Cash.Confirmed, true)]
+        [InlineData(PBill4Cash.Paid, false)]
+        public async Task GetPaymentInfo_When_State_Is_InputState_Then_OutputCanPay_Should_Be_Returned(string inputState, bool outputCanPay)
         {
             //Arrange
 
@@ -136,7 +138,7 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
                        { 
                             TheObjectState = new()
                             { 
-                                Code = PBill4Cash.Confirmed,
+                                Code = inputState,
                             }
                        });
             //Act
@@ -147,9 +149,9 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
 
             Assert.NotNull(result.ThePBill4PaidInfoContract);
             Assert.NotNull(result.ThePBill4PaidInfoContract!.Desc);
-            Assert.IsType(typeof(bool), result.ThePBill4PaidInfoContract!.CanPay);
-            Assert.IsType(typeof(string), result.ThePBill4PaidInfoContract!.Desc);
-            Assert.True(result.ThePBill4PaidInfoContract!.CanPay);
+            Assert.IsType(typeof(bool), result.ThePBill4PaidInfoContract.CanPay);
+            Assert.IsType(typeof(string), result.ThePBill4PaidInfoContract.Desc);
+            Assert.Equal(outputCanPay, result.ThePBill4PaidInfoContract.CanPay);
         }
 
         [Fact]
