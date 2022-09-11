@@ -57,7 +57,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             }
 
             var followupNumber = GenerateFollowUpNo(PU135OrWebSite.WebSite);
-            string plaintiffMobileNumber = string.Empty;
+            List<string> plaintiffMobileNumber = new List<string>();
 
             var personList = new List<PGravamenPerson>();
             foreach (var person in request.ThePGravamenContract!.ThePGravamenPersonContractList!)
@@ -90,7 +90,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                             TradeUnitName = string.Empty,
                         };
 
-                        plaintiffMobileNumber = person!.MobilNumber!;
+                        plaintiffMobileNumber.Add(person!.MobilNumber!);
 
                         break;
 
@@ -134,10 +134,16 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
             {
                 var docFile = attachment.TheGAttachmentDataContract!.DocFile;
+                docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
 
                 docFilesLength += docFile!.Length;
 
-                docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
+                var validateDocFilesSize = ValidateDocFilesSize(docFilesLength);
+                if (!validateDocFilesSize.Null())
+                {
+                    return validateDocFilesSize;
+                }
+                
 
                 var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<AttachmentType>>().GetById(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId);
 
@@ -150,7 +156,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     FileExtension = attachment.FileExtension,
                     SaveAttachmentType = Anu.BaseInfo.Enumerations.SaveAttachmentType.SaveInDataBase,
                     CreateDateTime = DateTime.Now.ToPersian().ToString(),
-                    //TheAttachmentType = attachmentType,
+                    TheAttachmentType = attachmentType,
 
                     TheGAttachmentData = new GAttachmentData()
                     {
@@ -161,7 +167,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     }
                 };
                 attachedFile.TheAttachmentType = attachmentType;
-                ValidateDocFilesSize(docFilesLength);
+                
 
                 attachmentList.Add(attachedFile);
             }
@@ -198,7 +204,11 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             _unitOfWork.Complete();
 
-            await SendConfirmationSms(plaintiffMobileNumber, gravamen.FollowUpNo);
+            foreach (var item in plaintiffMobileNumber)
+            {
+                await SendConfirmationSms(item, gravamen.FollowUpNo);
+            }
+            
 
             return Respond(AnuResult.Successful, followupNumber);
 
