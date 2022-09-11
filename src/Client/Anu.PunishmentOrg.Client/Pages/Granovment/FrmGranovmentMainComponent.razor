@@ -43,21 +43,6 @@
         <MudExpansionPanel Text="اطلاعات اولیه" IsExpanded="true">
             <div class="row">
                 <div class="col-sm-4">
-                    <MudTextField Class="form-control" @bind-Value="_pGravamenContract.ReporterName" id="ReporterName" Label="نام شکایت کننده" Variant="Variant.Outlined"
-                                  Margin="Margin.Dense" AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error"
-                                  Adornment="Adornment.End" IconSize="Size.Small" Required="true" RequiredError="نام تنظیم کننده شکایت نامه را وارد نمایید"></MudTextField>
-                </div>
-                <div class="col-sm-4">
-                    <MudTextField Class="form-control" @bind-Value="_pGravamenContract.ReporterFamily" id="ReporterFamily" Label="نام خانوادگی شکایت کننده" Variant="Variant.Outlined"
-                                  Margin="Margin.Dense" AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error"
-                                  Adornment="Adornment.End" IconSize="Size.Small" Required="true" RequiredError="نام خانوادگی شکایت کننده  را وارد نمایید"></MudTextField>
-                </div>
-                <div class="col-sm-4">
-                    <MudTextField Class="form-control" @bind-Value="_pGravamenContract.ReporterMobilNumber " id="ReporterMobilNumber" Label="شماره همراه شکایت کننده" Variant="Variant.Outlined"
-                                  Margin="Margin.Dense" AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error" MaxLength="11" Placeholder="09********"
-                                  Adornment="Adornment.End" IconSize="Size.Small" Required="true" RequiredError="شماره همراه شکایت کننده را وارد نمایید"></MudTextField>
-                </div>
-                <div class="col-sm-4">
                     <MudSelect @bind-Value="selectedState" Margin="Margin.Dense" T="GeoLocationContract" Label="استان" Required="true"
                                Variant="Variant.Outlined" id="cmbstate" SelectedValuesChanged="@Statevaluechanged"
                                AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error"
@@ -144,7 +129,7 @@
                                                 DigitType="DigitType.Persian"
                                                 DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
                                                 MinDateSetOnToday="false"
-                                                Placeholder="انتخاب تاریخ"
+                                                Placeholder="تاریخ تولد "
                                                 Theme="PickerTheme.Cheerup"
                                                 OnChange="@(() => Console.WriteLine("OK"))"
                                                 @bind-Value="_reporter.BirthDate" />
@@ -187,26 +172,26 @@
                         <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info"
                                    Size="Size.Medium" Class="form-control" OnClick="AddReporter">اضافه به لیست</MudButton>
                     </div>
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-2">
-                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error"
-                                   Size="Size.Medium" Class="form-control" OnClick="RemoveReporter">حذف از لیست</MudButton>
-                    </div>
                 </div>
                 <div class="row">
-                    <MudTable Items="@reporters" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudTable" 
-                              T="PGravamenPersonContract" Dense="true" @bind-SelectedItem="@_reporter" RowClassFunc="@ReporterSelectedRowClassFunc">
+                    <MudTable Items="@reporters" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudTable"
+                              T="PGravamenPersonContract" Dense="true" RowClassFunc="@ReporterSelectedRowClassFunc">
                         <HeaderContent>
                             <MudTh Style="width:150px">نام</MudTh>
                             <MudTh Style="width:250px">نام خانوادگی</MudTh>
                             <MudTh Style="width:100px">شماره ملی</MudTh>
                             <MudTh Style="width:100px">شماره همراه</MudTh>
+                            <MudTh Style="width:10px"></MudTh>
                         </HeaderContent>
                         <RowTemplate>
                             <MudTd DataLabel="نام">@context.Name</MudTd>
                             <MudTd DataLabel="نام خانوادگی">@context.Family</MudTd>
                             <MudTd DataLabel="شماره ملی">@context.NationalCode</MudTd>
                             <MudTd DataLabel="شماره همراه">@context.MobilNumber</MudTd>
+                            <MudTd>
+                                <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete"  Size="Size.Small" OnClick="() => RemoveReporter(context)"></MudIconButton>
+                                <MudIconButton Icon="@Icons.Material.Filled.Edit" aria-label="delete" Size="Size.Small" Style="margin-right:5px" OnClick="() => EditReporter(context) "></MudIconButton>
+                            </MudTd>
                         </RowTemplate>
                     </MudTable>
                 </div>
@@ -231,22 +216,22 @@
                         <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info"
                                    Size="Size.Medium" Class="form-control" OnClick="Addaccuser">اضافه به لیست</MudButton>
                     </div>
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-2">
-                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error"
-                                   Size="Size.Medium" Class="form-control" OnClick="Removeaccuser">حذف از لیست</MudButton>
-                    </div>
                 </div>
                 <div class="row">
                     <MudTable Items="@accusers" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudTableaccuser" 
-                              T="PGravamenPersonContract" Dense="true" @bind-SelectedItem="_accuser" RowClassFunc="@accuserSelectedRowClassFunc">
+                              T="PGravamenPersonContract" Dense="true" RowClassFunc="@accuserSelectedRowClassFunc">
                         <HeaderContent>
                             <MudTh Style="width:150px">نام واحد متهم</MudTh>
                             <MudTh Style="width:450px">نشانی واحد متهم</MudTh>
+                            <MudTh Style="width:10px"></MudTh>
                         </HeaderContent>
                         <RowTemplate>
                             <MudTd DataLabel="نام واحد متهم">@context.Name</MudTd>
                             <MudTd DataLabel="نشانی واحد متهم">@context.Address</MudTd>
+                            <MudTd>
+                                <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete"  Size="Size.Small" OnClick="()=> Removeaccuser(context)"></MudIconButton>
+                                <MudIconButton Icon="@Icons.Material.Filled.Edit" aria-label="delete" Size="Size.Small" Style="margin-right:5px" OnClick="()=> Editaccuser(context)"></MudIconButton>
+                            </MudTd>
                         </RowTemplate>
 
                     </MudTable>
@@ -299,6 +284,7 @@
                             <MudTd DataLabel="عنوان مدرک">@context.Title</MudTd>
                         </RowTemplate>
                     </MudTable>
+                    
                 </div>
             </MudForm>
         </MudExpansionPanel>
@@ -317,6 +303,9 @@
 
 
 @code {
+
+    // متغیرها
+    #region variables
     public bool AcceptInfo { get; set; } = false;
     string StringValue { set; get; } = "";
     GeoLocationContract selectedState,selectedProvince;
@@ -335,138 +324,8 @@
     private MudTable<PGravamenPersonContract> mudTableaccuser;
     private MudTable<GAttachmentContract> mudTableAttach;
     private string[] reason = { "گران فروشی", "کم فروشی", "عدم درج قیمت", "تقلب در کسب", "عدم صدور صورتحساب (فاکتور)" };
-
-    private void SaveGranovment()
-    {
-        form.Validate();
-        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-        if (form.Errors.Count() > 0)
-        {
-            foreach (string str in form.Errors)
-            {
-                Snackbar.Add(str, MudBlazor.Severity.Error);
-            }
-            SimulateProgress();
-        }
-
-        _pGravamenContract.GravamenOrReport = Enumerations.GravamenOrReport.Gravamen;
-        _pGravamenContract.HowDataType = Enumerations.PU135OrWebSite.WebSite;
-        _pGravamenContract.ThePGravamenPersonContractList.AddRange(reporters);
-        _pGravamenContract.ThePGravamenPersonContractList.AddRange(accusers);
-        _pGravamenContract.TheGAttachmentContractList.AddRange(attachments);
-        _pGravamenContract.TheGeoLocationContract = selectedProvince;
-        _pGravamenContract.PetitionReasons = _pGravamenContract.PetitionSubject;
-        _pGravamenContract.NoticeText = "nothing";
-        _pGravamenContract.RejectReasonText="nothing";
-        var json = Newtonsoft.Json.JsonConvert.SerializeObject(_pGravamenContract, Formatting.Indented);
-        PGravamenServiceRequest pGravamenRequest = new PGravamenServiceRequest();
-        pGravamenRequest.ThePGravamenContract = _pGravamenContract;
-        PGravamenService pService = new ();
-        PGravamenServiceResponse pGravamenrespons= pService.RecieveGravamen(_appConfiguration.BackendServerAddress,_appConfiguration.RecieveGravamen,pGravamenRequest);
-        if(pGravamenrespons.Result.Code == 1000)
-        {
-            string strMessage = "درخواست شما با شماره پیگیری " + pGravamenrespons.ThePGravamenResponseContract.FollowUpNo + "در سامانه ثبت گردید";
-            Snackbar.Add(strMessage, MudBlazor.Severity.Success);
-        }
-        else
-        {
-            Snackbar.Add(pGravamenrespons.Result.Message + " " + pGravamenrespons.Result.Code, MudBlazor.Severity.Error);
-        }
-    }
-
-    private void Addattachment()
-    {
-        Formattachment.Validate();
-
-        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-        if (Formattachment.Errors.Count() > 0)
-        {
-            foreach (string str in Formattachment.Errors)
-            {
-                Snackbar.Add(str, MudBlazor.Severity.Error);
-            }
-            SimulateProgress();
-        }
-
-        if (Formattachment.IsValid)
-        {
-            _attachment.FileExtension = FileExtension.PDF;
-            attachments.Add(_attachment);
-            _attachment = new();
-        }
-    }
-
-    bool _disposed;
-    public void Dispose() => _disposed = true;
-    private int ProgressValue { get; set; }
-    public async void SimulateProgress()
-    {
-        ProgressValue = 120;
-        do
-        {
-            if (_disposed)
-            {
-                return;
-            }
-
-            ProgressValue -= 1;
-            StateHasChanged();
-            await Task.Delay(500);
-
-        } while (ProgressValue > 0);
-
-        StateHasChanged();
-    }
-    private void AddReporter()
-    {
-        FormReporter.Validate();
-
-        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-        if (FormReporter.Errors.Count() > 0)
-        {
-            foreach (string str in FormReporter.Errors)
-            {
-                Snackbar.Add(str, MudBlazor.Severity.Error);
-            }
-            SimulateProgress();
-        }
-
-        if (FormReporter.IsValid)
-        {
-            _reporter.Nationality = LNationality.Iranian;
-            _reporter.PersonType = PersonType.NaturalPerson;
-            _reporter.PersonPassword="Aa123";
-            _reporter.PersonStartPost = Enumerations.PUPersonStartPost.PlaintiffPerson;
-            _reporter.TradeUnitName="";
-            //فعلا تا درست شدن بایندینگ
-            _reporter.Sex = SexType.Male;
-            reporters.Add(_reporter);
-            _reporter = new PGravamenPersonContract();
-        }
-    }
-
-    private void Addaccuser()
-    {
-        Formaccuser.Validate();
-
-        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-        if (Formaccuser.Errors.Count() > 0)
-        {
-            foreach (string str in Formaccuser.Errors)
-            {
-                Snackbar.Add(str, MudBlazor.Severity.Error);
-            }
-            SimulateProgress();
-        }
-
-        if (Formaccuser.IsValid)
-        {
-            _accuser.PersonStartPost = Enumerations.PUPersonStartPost.OffendingPerson;
-            _accuser.TradeUnitName = _accuser.Name;
-            accusers.Add(_accuser);
-            _accuser = new PGravamenPersonContract();
-        }
-    }
+    private int selectedRowNumber = -1;
+    #endregion
 
     protected override void OnInitialized()
     {
@@ -490,16 +349,6 @@
         province = _geoLoactionService.GetProvicesList(_appConfiguration.BackendServerAddress, _appConfiguration.GetGeoLocationList, input);
     }
 
-    IList<IBrowserFile> files = new List<IBrowserFile>();
-    private void UploadFiles(InputFileChangeEventArgs e)
-    {
-        foreach (var file in e.GetMultipleFiles())
-        {
-            files.Add(file);
-        }
-        //TODO upload the files to the server
-    }
-
     private void DoStuff(ChangeEventArgs e)
     {
         string s = e.Value.ToString();
@@ -513,35 +362,148 @@
 
     }
 
-    private void RemoveReporter()
+    private void SaveGranovment()
     {
-        if (_reporter != null)
-            reporters.Remove(_reporter);
-    }
+        //form.Validate();
+        if (!isFormValid())
+            return;
 
-    private void Removeaccuser()
-    {
-        if (_accuser != null)
-            accusers.Remove(_accuser);
-    }
-        private int selectedRowNumber = -1;
-        
-    private string accuserSelectedRowClassFunc(PGravamenPersonContract element, int rowNumber)
-    {
-        if (selectedRowNumber == rowNumber)
+
+
+
+
+        _pGravamenContract.GravamenOrReport = Enumerations.GravamenOrReport.Gravamen;
+        _pGravamenContract.HowDataType = Enumerations.PU135OrWebSite.WebSite;
+        _pGravamenContract.ThePGravamenPersonContractList.AddRange(reporters);
+        _pGravamenContract.ThePGravamenPersonContractList.AddRange(accusers);
+        _pGravamenContract.TheGAttachmentContractList.AddRange(attachments);
+        _pGravamenContract.TheGeoLocationContract = selectedProvince;
+        _pGravamenContract.PetitionReasons = _pGravamenContract.PetitionSubject;
+        _pGravamenContract.NoticeText = "nothing";
+        _pGravamenContract.RejectReasonText="nothing";
+        var json = Newtonsoft.Json.JsonConvert.SerializeObject(_pGravamenContract, Formatting.Indented);
+        PGravamenServiceRequest pGravamenRequest = new PGravamenServiceRequest();
+        pGravamenRequest.ThePGravamenContract = _pGravamenContract;
+        PGravamenService pService = new ();
+        PGravamenServiceResponse pGravamenrespons= pService.RecieveGravamen(_appConfiguration.BackendServerAddress,_appConfiguration.RecieveGravamen,pGravamenRequest);
+        if(pGravamenrespons.Result.Code == 1000)
         {
-            selectedRowNumber = -1;
-            return string.Empty;
-        }
-        else if (mudTable.SelectedItem != null && mudTableaccuser.SelectedItem.Equals(element))
-        {
-            selectedRowNumber = rowNumber;
-            return "selected";
+            string strMessage = "درخواست شما با شماره پیگیری " + pGravamenrespons.ThePGravamenResponseContract.FollowUpNo + "در سامانه ثبت گردید";
+            Snackbar.Add(strMessage, MudBlazor.Severity.Success);
+            _pGravamenContract = new PGravamenContract();
+            _accuser=new PGravamenPersonContract();
+            _attachment=new GAttachmentContract();
+            reporters.Clear();
+            accusers.Clear();
+            attachments.Clear();
+            _navigationManager.NavigateTo("/");
+
         }
         else
         {
-            return string.Empty;
+            Snackbar.Add(pGravamenrespons.Result.Message + " " + pGravamenrespons.Result.Code, MudBlazor.Severity.Error);
         }
+    }
+
+
+    private bool isFormValid()
+    {
+        bool result = true;
+
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+
+        if (selectedProvince ==null)
+        {
+             Snackbar.Add("شهرتان را انتخاب نمایید ", MudBlazor.Severity.Error);
+            result = false;
+        }
+
+          if (selectedState  ==null)
+        {
+             Snackbar.Add("استان را انتخاب نمایید ", MudBlazor.Severity.Error);
+            result = false;
+        }
+
+            if (string.IsNullOrEmpty( _pGravamenContract.PetitionDescription))
+        {
+             Snackbar.Add("اطلاعات شکواییه را وارد نمایید  ", MudBlazor.Severity.Error);
+            result = false;
+        }
+        if (string.IsNullOrEmpty( _pGravamenContract.PetitionSubject))
+        {
+             Snackbar.Add("موضوع  شکواییه را وارد نمایید  ", MudBlazor.Severity.Error);
+            result = false;
+        }
+
+    
+
+        if(accusers.Count== 0)
+        {
+            Snackbar.Add("اطلاعات  متهم را وارد نمایید.", MudBlazor.Severity.Error);
+            result = false;
+
+        }
+
+
+
+        if(reporters.Count == 0)
+        {
+             Snackbar.Add("اطلاعات  شاکی  را وارد نمایید.", MudBlazor.Severity.Error);
+            result = false; 
+        }
+
+         if(attachments.Count== 0)
+        {
+            Snackbar.Add("مدارک پیوست را بارگزاری نمایید ", MudBlazor.Severity.Error);
+            result = false;
+
+        }
+
+        return result;
+    }
+    //شاکی/شاکیان
+    #region reporter
+
+      private void AddReporter()
+    {
+        FormReporter.Validate();
+
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        if (FormReporter.Errors.Count() > 0)
+        {
+            foreach (string str in FormReporter.Errors)
+            {
+                Snackbar.Add(str, MudBlazor.Severity.Error);
+            }
+            SimulateProgress();
+        }
+
+        if (FormReporter.IsValid)
+        {
+            _reporter.Nationality = LNationality.Iranian;
+            _reporter.PersonType = PersonType.NaturalPerson;
+            _reporter.PersonPassword = "Aa123";
+            _reporter.PersonStartPost = Enumerations.PUPersonStartPost.PlaintiffPerson;
+            _reporter.TradeUnitName = "";
+            //فعلا تا درست شدن بایندینگ
+            _reporter.Sex = SexType.Male;
+            reporters.Add(_reporter);
+            _reporter = new PGravamenPersonContract();
+        }
+    }
+
+
+
+    void EditReporter(PGravamenPersonContract selectedPGravamenPersonContractForEdit)
+    {
+        _reporter = selectedPGravamenPersonContractForEdit;
+    }
+
+  
+
+     void RemoveReporter(PGravamenPersonContract selectedPGravamenPersonContractForDelete)
+    {
+            reporters.Remove(selectedPGravamenPersonContractForDelete);
     }
 
     private string ReporterSelectedRowClassFunc(PGravamenPersonContract element, int rowNumber)
@@ -561,5 +523,121 @@
             return string.Empty;
         }
     }
+    #endregion
+
+    //متهم / متهمان
+    #region accuser
+    private void Addaccuser()
+    {
+        Formaccuser.Validate();
+
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        if (Formaccuser.Errors.Count() > 0)
+        {
+            foreach (string str in Formaccuser.Errors)
+            {
+                Snackbar.Add(str, MudBlazor.Severity.Error);
+            }
+            SimulateProgress();
+        }
+
+        if (Formaccuser.IsValid)
+        {
+            _accuser.PersonStartPost = Enumerations.PUPersonStartPost.OffendingPerson;
+            _accuser.TradeUnitName = _accuser.Name;
+            accusers.Add(_accuser);
+            _accuser = new PGravamenPersonContract();
+        }
+    }
+    private void Removeaccuser(PGravamenPersonContract selectedItem)
+    {
+            accusers.Remove(selectedItem);
+    }
+    private void Editaccuser(PGravamenPersonContract selectedItem)
+    {
+         _accuser = selectedItem;
+    }        
+    private string accuserSelectedRowClassFunc(PGravamenPersonContract element, int rowNumber)
+    {
+        if (selectedRowNumber == rowNumber)
+        {
+            selectedRowNumber = -1;
+            return string.Empty;
+        }
+        else if (mudTable.SelectedItem != null && mudTableaccuser.SelectedItem.Equals(element))
+        {
+            selectedRowNumber = rowNumber;
+            return "selected";
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+    #endregion
+
+    //مدارک و مستندات
+    #region attachment
+    private void Addattachment()
+    {
+        Formattachment.Validate();
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+        if (Formattachment.Errors.Count() > 0)
+        {
+            foreach (string str in Formattachment.Errors)
+            {
+                Snackbar.Add(str, MudBlazor.Severity.Error);
+            }
+            SimulateProgress();
+        }
+
+        if (Formattachment.IsValid)
+        {
+            _attachment.FileExtension = FileExtension.PDF;
+/*            GAttachmentDataContract gattachDataContract=new();
+            gattachDataContract.DocFile = System.IO.File.ReadAllBytes(files[0]);
+            _attachment.TheGAttachmentDataContract = gattachDataContract;
+*/            attachments.Add(_attachment);
+            _attachment = new();
+        }
+    }
+    IList<IBrowserFile> files = new List<IBrowserFile>();
+    private void UploadFiles(InputFileChangeEventArgs e)
+    {
+        foreach (var file in e.GetMultipleFiles())
+        {
+            files.Add(file);
+        }
+        //TODO upload the files to the server
+    }
+
+    #endregion
+
+    //اطلاع رسانی
+    #region Snacker
+    bool _disposed;
+    public void Dispose() => _disposed = true;
+    private int ProgressValue { get; set; }
+    public async void SimulateProgress()
+    {
+        ProgressValue = 120;
+        do
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            ProgressValue -= 1;
+            StateHasChanged();
+            await Task.Delay(500);
+
+        } while (ProgressValue > 0);
+
+        StateHasChanged();
+    }
+    #endregion
+
+   
 
 }
