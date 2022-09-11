@@ -48,29 +48,24 @@ public class PGravamenTests
             IdentityNumber = "1234567895",
             MobilNumber = "09101112233",
             NationalCode = "1234567895",
-            Nationality = Anu.BaseInfo.Enumerations.LNationality.Iranian,
             PersonStartPost = Enumerations.PUPersonStartPost.PlaintiffPerson,
             Sex = Anu.BaseInfo.Enumerations.SexType.Male,
-            PersonType = Anu.BaseInfo.Enumerations.PersonType.NaturalPerson,
-            PostCode = "",
+            PostCode = "123456",
             TradeUnitName = "",
             PersonPassword = "",
         };
         var p2 = new PGravamenPersonContract()
         {
 
-            Name = "Haj Nemat",
+            Name = "",
             Family = "",
-            Address = "",
+            Address = "Address",
             BirthDate = "",
             FatherName = "",
             IdentityNumber = "",
             MobilNumber = "",
             NationalCode = "",
-            Nationality = Anu.BaseInfo.Enumerations.LNationality.Iranian,
             PersonStartPost = Enumerations.PUPersonStartPost.OffendingPerson,
-            Sex = Anu.BaseInfo.Enumerations.SexType.Male,
-            PersonType = Anu.BaseInfo.Enumerations.PersonType.NaturalPerson,
             PostCode = "",
             TradeUnitName = "Nanvaii Haj Nemat",
             PersonPassword = "",
@@ -81,7 +76,7 @@ public class PGravamenTests
             FileExtension = Anu.BaseInfo.Enumerations.FileExtension.PDF,
             TheAttachmentTypeContract = new Anu.BaseInfo.ServiceModel.Types.AttachmentTypeContract()
             {
-                Code = "300",
+                Code = Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId,
                 Title = "پيوست شكوائيه مردمي",
                 State = Anu.BaseInfo.Enumerations.State.Valid,
                 UnitTypeAccess = "1"
@@ -99,24 +94,12 @@ public class PGravamenTests
 
             PetitionSubject = "Petition Subject",
             PetitionDescription = "Petition Description",
-            NoticeText = "Notice Text",
-            PetitionReasons = "PetitionReasons",
-            RejectReasonText = "Reject Reason Text",
-            ReporterName = "Ali",
-            ReporterFamily = "Pooyan",
-            ReporterMobilNumber = "09101112233",
-
             ThePGravamenPersonContractList = new List<PGravamenPersonContract>() { p1, p2 },
             TheGAttachmentContractList = new List<GAttachmentContract>() { a },
             TheGeoLocationContract = new GeoLocationContract()
             {
                 LocationCode = "0507"
             },
-
-            CreateDateTime = "1401/02/06",
-            FollowUpNo = "9995541",
-            HowDataType = Enumerations.PU135OrWebSite.WebSite,
-            GravamenOrReport = Anu.PunishmentOrg.Enumerations.GravamenOrReport.Gravamen,
         };
 
 
@@ -188,7 +171,7 @@ public class PGravamenTests
     public void RecieveGravamen_OneOfNecessaryFieldsIsMissing_ShouldReturnPGravamenFieldIsNullOrInvalid()
     {
         //Arrange
-        _request.ThePGravamenContract!.PetitionReasons = null;
+        _request.ThePGravamenContract!.PetitionDescription = null;
 
         //Act
         var result = Assert.ThrowsAnyAsync<AnuExceptions>(() => controller.RecieveGravamen(_request));
@@ -196,6 +179,7 @@ public class PGravamenTests
         //Assert
         Assert.Equal((int)PGravamenResult.PGravamen_Field_IsNullOrInvalid, result.Result.result.Code);
     }
+
     [Fact]
     public void RecieveGravamen_OneOfNecessaryPositionsIsMissing_ShouldReturnPGravamenNecessaryPositionsAreNotAvailabe()
     {
@@ -249,8 +233,8 @@ public class PGravamenTests
         _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<AttachmentType>>().GetById(It.IsAny<string>()))
             .ReturnsAsync(new AttachmentType()
             {
-                Id = "300",
-                Code = "300",
+                Id = Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId,
+                Code = Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId,
                 Title = "Mock Attachemnt Type"
             });
 
