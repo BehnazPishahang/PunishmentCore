@@ -47,6 +47,7 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         Sex_Is_Not_Valid = -100028,
         BirthDate_Is_Not_Valid = -100029,
         Login_Again = -100030,
-        Request_Is_Not_Valid=-100031
+        Request_Is_Not_Valid=-100031,
+        Can_Not_Find_AccessType=-100032
     }
 }

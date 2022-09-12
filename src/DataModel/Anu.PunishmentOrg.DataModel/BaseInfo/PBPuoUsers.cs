@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-
+using Anu.BaseInfo.DataModel.FrontEndSecurity;
 
 
 namespace Anu.PunishmentOrg.DataModel.BaseInfo
 {
-    public abstract class PunishmentOrg135UsersBase : Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUser
+    public abstract class PBPuoUsersBase : GFESUser
     {
 
         [Unicode(false)]
@@ -17,17 +17,17 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
         [Column("SENDDYNOMICPASSWORD")]
         public virtual string? SendDynomicPassword { get; set; }
 
-        [InverseProperty("ThePunishmentOrg135Users")]
-        public virtual List<Anu.PunishmentOrg.DataModel.BaseInfo.Users135LoginHistory>? TheUsers135LoginHistoryList { get; set; }
+        [InverseProperty("ThePBPuoUsers")]
+        public virtual List<Anu.PunishmentOrg.DataModel.BaseInfo.PBPuoUsersHistory>? ThePBPuoUsersHistoryList { get; set; }
 
+    
         [Column("TIMESTAMP")]
         [ConcurrencyCheck]
         public long PTimestamp { get { return base.Timestamp; } set { } }
-
     }
 
-    [Table("PUNISHMENTORG135USERS")]
-    public partial class PunishmentOrg135Users : PunishmentOrg135UsersBase
+    [Table("PBPUOUSERS")]
+    public partial class PBPuoUsers : PBPuoUsersBase
     {
     }
     }

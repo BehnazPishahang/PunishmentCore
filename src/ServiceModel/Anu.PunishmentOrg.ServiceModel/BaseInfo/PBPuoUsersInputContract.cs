@@ -1,6 +1,6 @@
 ﻿namespace Anu.PunishmentOrg.ServiceModel.BaseInfo
 {
-    public class PunishmentOrg135UsersInputContract
+    public class PBPuoUsersInputContract
     {
         public string? NationalCode { get; set; }
     }

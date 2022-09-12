@@ -553,7 +553,7 @@
     <comment>-100019</comment>
   </data>
   <data name="Send_Login_Request_After_x_Second" xml:space="preserve">
-    <value>لطفا مجددا {0} دیگر تلاش کنید</value>
+    <value>لطفا مجددا {0} ثانیه دیگر تلاش کنید</value>
     <comment>-100023</comment>
   </data>
   <data name="Sex_Is_Not_Valid" xml:space="preserve">
@@ -603,5 +603,33 @@
   <data name="User_Is_Exist" xml:space="preserve">
     <value>کاربر وجود دارد.</value>
     <comment>-100011</comment>
+  </data>
+  <data name="PBill4Paid_GetPaymentInfo_FishNo_Is_Required" xml:space="preserve">
+    <value>شناسه پرداخت معتبر نمی باشد.</value>
+    <comment>-30273</comment>
+  </data>
+  <data name="PBill4Paid_GetPaymentInfo_PBill4Paid_NotFound" xml:space="preserve">
+    <value>قبضی یافت نشد.</value>
+    <comment>-30274</comment>
+  </data>
+  <data name="PBill4Paid_GetPaymentInfo_PBill4Paid_TheObjectState_Is_Null" xml:space="preserve">
+    <value>وضعیت قبض نامعتبر است.</value>
+    <comment>-30275</comment>
+  </data>
+  <data name="PBill4Paid_GetPaymentInfo_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد.</value>
+    <comment>-30271</comment>
+  </data>
+  <data name="PBill4Paid_GetPaymentInfo_ThePBill4PaidFishNoContract_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30272</comment>
+  </data>
+  <data name="JwtTokenIsNotValid" xml:space="preserve">
+    <value>برای استفاده از خدمت نیاز به ورود دارید.</value>
+    <comment>-10005</comment>
+  </data>
+  <data name="Can_Not_Find_AccessType" xml:space="preserve">
+    <value>مشکلی در سیستم بابت دسترسی ها بوجود آمده است لطفا با پشتیبانی تماس حاصل فرمایید.</value>
+    <comment>-100032</comment>
   </data>
 </root>
