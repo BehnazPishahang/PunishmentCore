@@ -30,9 +30,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
     {
         private readonly IConfiguration _configuration;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly int _SecodeWait = 60;
+        private readonly int _SecodeWait = 120;
         private readonly int _CountCharacter = 6;
-        private readonly int _LimitSendDayCodePerDay = 4;
+        private readonly int _LimitSendDayCodePerDay = 20;
         private readonly string _NotVerify = "|NotVerify";
 
 
