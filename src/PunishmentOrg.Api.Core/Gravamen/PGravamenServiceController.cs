@@ -135,45 +135,50 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             int docFilesLength = 0;
             foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
             {
-                if (!attachment.TheGAttachmentDataContract.DocFile.Null())
+                //todo: should be fix this bug in client and then in the backend should be refactore this section
+                if (!attachment.TheGAttachmentDataContract.Null())
                 {
-                    var docFile = attachment.TheGAttachmentDataContract!.DocFile;
-                    docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
-
-                    docFilesLength += docFile!.Length;
-
-                    var validateDocFilesSize = ValidateDocFilesSize(docFilesLength);
-                    if (!validateDocFilesSize.Null())
+                    if (!attachment!.TheGAttachmentDataContract!.DocFile.Null())
                     {
-                        return validateDocFilesSize;
-                    }
+                        var docFile = attachment.TheGAttachmentDataContract!.DocFile;
+                        docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
+
+                        docFilesLength += docFile!.Length;
+
+                        var validateDocFilesSize = ValidateDocFilesSize(docFilesLength);
+                        if (!validateDocFilesSize.Null())
+                        {
+                            return validateDocFilesSize;
+                        }
 
 
-                    var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<AttachmentType>>().GetById(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId);
+                        var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<AttachmentType>>().GetById(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId);
 
 
 
-                    var attachedFile = new PGravamenAttachment()
-                    {
-                        Id = Guid.NewGuid().ToString("N"),
-                        Timestamp = 1,
-                        FileExtension = attachment.FileExtension,
-                        SaveAttachmentType = Anu.BaseInfo.Enumerations.SaveAttachmentType.SaveInDataBase,
-                        CreateDateTime = DateTime.Now.ToPersian().ToString(),
-                        TheAttachmentType = attachmentType,
-                        Title = attachment.Title,
-                        TheGAttachmentData = new GAttachmentData()
+                        var attachedFile = new PGravamenAttachment()
                         {
                             Id = Guid.NewGuid().ToString("N"),
                             Timestamp = 1,
-                            DocFile = attachment.TheGAttachmentDataContract!.DocFile
+                            FileExtension = attachment.FileExtension,
+                            SaveAttachmentType = Anu.BaseInfo.Enumerations.SaveAttachmentType.SaveInDataBase,
+                            CreateDateTime = DateTime.Now.ToPersian().ToString(),
+                            TheAttachmentType = attachmentType,
+                            Title = attachment.Title,
+                            TheGAttachmentData = new GAttachmentData()
+                            {
+                                Id = Guid.NewGuid().ToString("N"),
+                                Timestamp = 1,
+                                DocFile = attachment.TheGAttachmentDataContract!.DocFile
 
-                        }
-                    };
-                    attachedFile.TheAttachmentType = attachmentType;
+                            }
+                        };
+                        attachedFile.TheAttachmentType = attachmentType;
 
 
-                    attachmentList.Add(attachedFile);
+                        attachmentList.Add(attachedFile);
+                    }
+
                 }
             }
 
@@ -192,7 +197,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 ReporterMobilNumber = string.Empty,
 
                 ThePGravamenPersonList = personList,
-                ThePGravamenAttachmentList = attachmentList.Count ==0 ? null : attachmentList,
+                ThePGravamenAttachmentList = attachmentList.Count == 0 ? null : attachmentList,
 
                 CreateDateTime = DateTime.Now.ToPersian().ToString(),
                 FollowUpNo = followupNumber,
@@ -213,7 +218,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             {
                 await SendConfirmationSms(item, gravamen.FollowUpNo);
             }
-            
+
 
             return Respond(AnuResult.Successful, followupNumber);
 
