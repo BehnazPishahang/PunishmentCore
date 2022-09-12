@@ -60,7 +60,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            string password = await theGFESUser.MobileNumber4SMS.SendAuthenticateSms(_CountCharacter);
+            var SendSmsCandUsed = _configuration.GetSection("StatusServices:SendSms").Value;
+            string password = await theGFESUser.MobileNumber4SMS.SendAuthenticateSms(_CountCharacter, Convert.ToBoolean(SendSmsCandUsed));
             string passWordHash = MD5Core.GetHashString(password);
 
             theGFESUser.Password = passWordHash;
@@ -92,12 +93,14 @@ namespace Anu.PunishmentOrg.Api.Authentication
             {
                 return new FirstStepAuthResult() { Result = AnuResult.User_Is_Exist.GetResult() };
             }
+            var ShakarServiceCanUsed = _configuration.GetSection("StatusServices:ShakarService").Value;
+            var SabtAhvalCanUsed = _configuration.GetSection("StatusServices:SabtAhval").Value;
+            await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName, Convert.ToBoolean(ShakarServiceCanUsed));
+            await SabteahvalAuthentication.SabteahvalAuthenticate(request, Convert.ToBoolean(SabtAhvalCanUsed));
 
-            //await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName);
-            //await SabteahvalAuthentication.SabteahvalAuthenticate(request);
 
-
-            string password = await request.PhoneNumber.SendAuthenticateSms(_CountCharacter);
+            var SendSmsCanUsed = _configuration.GetSection("StatusServices:SendSms").Value;
+            string password = await request.PhoneNumber.SendAuthenticateSms(_CountCharacter, Convert.ToBoolean(SendSmsCanUsed));
             string passWordHash = MD5Core.GetHashString(password);
 
             var user = new GFESUser()
@@ -207,7 +210,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
             #endregion
 
             #region SendAndSubmitPassword
-            string password = await pBPuoUsers.MobileNumber4SMS.SendAuthenticateSms(_CountCharacter);
+            var SendSmsCanUsed = _configuration.GetSection("StatusServices:SendSms").Value;
+            string password = await pBPuoUsers.MobileNumber4SMS.SendAuthenticateSms(_CountCharacter, Convert.ToBoolean(SendSmsCanUsed));
             string passWordHash = MD5Core.GetHashString(password);
 
             pBPuoUsers.DynomicPassword = passWordHash;
@@ -280,7 +284,13 @@ namespace Anu.PunishmentOrg.Api.Authentication
                         await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsersHistory>>().Find(a => a.ThePBPuoUsers.Id == pBPuoUsers.Id)
                         );
 
-                    await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>().Remove(pBPuoUsers);
+                    await _unitOfWork.Repositorey<IGenericRepository<GFESUserAccess>>().Remove(
+                        (await _unitOfWork.Repositorey<IGenericRepository<GFESUserAccess>>().Find(a => a.TheGFESUser.Id == pBPuoUsers.Id)).FirstOrDefault()
+                        );
+
+                    await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>().Remove(
+                        (await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>().Find(a => a.Id == pBPuoUsers.Id)).FirstOrDefault()
+                        );
 
                     await _unitOfWork.Repositorey<IGenericRepository<GFESUser>>().Remove(
                         (await _unitOfWork.Repositorey<IGenericRepository<GFESUser>>().Find(a => a.Id == pBPuoUsers.Id)).FirstOrDefault()
@@ -295,12 +305,15 @@ namespace Anu.PunishmentOrg.Api.Authentication
             #endregion
 
             #region ValidateShahkarAndSabteHval
-            await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName);
-            await SabteahvalAuthentication.SabteahvalAuthenticate(request);
+            var shahkarCanUsed = _configuration.GetSection("StatusServices:ShakarService").Value;
+            var SabtAhvalCanUsed = _configuration.GetSection("StatusServices:SabtAhval").Value;
+            await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName, Convert.ToBoolean(shahkarCanUsed) );
+            await SabteahvalAuthentication.SabteahvalAuthenticate(request, Convert.ToBoolean(SabtAhvalCanUsed));
             #endregion
 
             #region Register
-            string password = await request.PhoneNumber.SendAuthenticateSms(_CountCharacter);
+            var SendSmsCanUsed = _configuration.GetSection("StatusServices:SendSms").Value;
+            string password = await request.PhoneNumber.SendAuthenticateSms(_CountCharacter, Convert.ToBoolean(SendSmsCanUsed));
             string passWordHash = MD5Core.GetHashString(password);
 
             var user = new PBPuoUsers()
@@ -430,8 +443,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
             string jwtToken = null;
 
             var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.Password);
-
-            await ShahkarAuthentication.ShahkarAuthenticate(request.NewPhoneNumber, request.UserName);
+            var shahkarCanUsed = _configuration.GetSection("StatusServices:ShakarService").Value;
+            await ShahkarAuthentication.ShahkarAuthenticate(request.NewPhoneNumber, request.UserName, Convert.ToBoolean(shahkarCanUsed));
 
             pBPuoUsers.MobileNumber4SMS = request.NewPhoneNumber;
 
@@ -451,9 +464,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
             var pBPuoUsers = await _unitOfWork.Repositorey<IPBPuoUsersRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(userName, password);
             pBPuoUsers.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            if (pBPuoUsers.TheGFESUserAccessList==null || pBPuoUsers.TheGFESUserAccessList.Count==0)
+            if (pBPuoUsers.TheGFESUserAccessList == null || pBPuoUsers.TheGFESUserAccessList.Count == 0)
             {
-                throw new AnuExceptions(AnuResult.UserName_Or_PassWord_Is_Not_Valid);                
+                throw new AnuExceptions(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
             }
 
             var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IPBPuoUsersHistoryRepository>().LastRecordHistoryPerDay(pBPuoUsers.Id, DateTime.Now.DateToString());

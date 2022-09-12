@@ -1,5 +1,7 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.Domain;
+using Anu.PunishmentOrg.Api.Authentication;
 using Anu.PunishmentOrg.DataModel.BaseInfo;
 using Anu.PunishmentOrg.ServiceModel.BaseInfo;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +17,8 @@ namespace Anu.PunishmentOrg.Api.PunishmnetOrg.BaseInfo
         {
             _unitOfWork = unitOfWork;
         }
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
         public override async Task<PBPuoUsersResponse> GetProfile([FromBody] PBPuoUsersRequest request)
         {
             request.Null(AnuResult.Request_Is_Not_Valid);

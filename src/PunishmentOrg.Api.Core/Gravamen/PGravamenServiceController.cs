@@ -28,12 +28,14 @@ namespace Anu.PunishmentOrg.Api.Gravamen
     public class PGravamenServiceController : PGravamenServiceControllerBase
     {
         protected readonly Anu.DataAccess.IUnitOfWork _unitOfWork;
+        private readonly IConfiguration _configuration;
 
         #region Constructor
 
-        public PGravamenServiceController(Anu.DataAccess.IUnitOfWork unitOfWork)
+        public PGravamenServiceController(Anu.DataAccess.IUnitOfWork unitOfWork, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
+            _configuration = configuration;
         }
 
         #endregion Constructor
@@ -133,43 +135,46 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             int docFilesLength = 0;
             foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
             {
-                var docFile = attachment.TheGAttachmentDataContract!.DocFile;
-                docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
-
-                docFilesLength += docFile!.Length;
-
-                var validateDocFilesSize = ValidateDocFilesSize(docFilesLength);
-                if (!validateDocFilesSize.Null())
+                if (!attachment.TheGAttachmentDataContract.DocFile.Null())
                 {
-                    return validateDocFilesSize;
-                }
-                
+                    var docFile = attachment.TheGAttachmentDataContract!.DocFile;
+                    docFile.NullOrEmpty(PGravamenResult.PGravamen_NoFileIsAttached);
 
-                var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<AttachmentType>>().GetById(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId);
+                    docFilesLength += docFile!.Length;
+
+                    var validateDocFilesSize = ValidateDocFilesSize(docFilesLength);
+                    if (!validateDocFilesSize.Null())
+                    {
+                        return validateDocFilesSize;
+                    }
+
+
+                    var attachmentType = await _unitOfWork.Repositorey<IGenericRepository<AttachmentType>>().GetById(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId);
 
 
 
-                var attachedFile = new PGravamenAttachment()
-                {
-                    Id = Guid.NewGuid().ToString("N"),
-                    Timestamp = 1,
-                    FileExtension = attachment.FileExtension,
-                    SaveAttachmentType = Anu.BaseInfo.Enumerations.SaveAttachmentType.SaveInDataBase,
-                    CreateDateTime = DateTime.Now.ToPersian().ToString(),
-                    TheAttachmentType = attachmentType,
-
-                    TheGAttachmentData = new GAttachmentData()
+                    var attachedFile = new PGravamenAttachment()
                     {
                         Id = Guid.NewGuid().ToString("N"),
                         Timestamp = 1,
-                        DocFile = attachment.TheGAttachmentDataContract!.DocFile
+                        FileExtension = attachment.FileExtension,
+                        SaveAttachmentType = Anu.BaseInfo.Enumerations.SaveAttachmentType.SaveInDataBase,
+                        CreateDateTime = DateTime.Now.ToPersian().ToString(),
+                        TheAttachmentType = attachmentType,
+                        Title = attachment.Title,
+                        TheGAttachmentData = new GAttachmentData()
+                        {
+                            Id = Guid.NewGuid().ToString("N"),
+                            Timestamp = 1,
+                            DocFile = attachment.TheGAttachmentDataContract!.DocFile
 
-                    }
-                };
-                attachedFile.TheAttachmentType = attachmentType;
-                
+                        }
+                    };
+                    attachedFile.TheAttachmentType = attachmentType;
 
-                attachmentList.Add(attachedFile);
+
+                    attachmentList.Add(attachedFile);
+                }
             }
 
             var gravamen = new PGravamen()
@@ -187,7 +192,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 ReporterMobilNumber = string.Empty,
 
                 ThePGravamenPersonList = personList,
-                ThePGravamenAttachmentList = attachmentList,
+                ThePGravamenAttachmentList = attachmentList.Count ==0 ? null : attachmentList,
 
                 CreateDateTime = DateTime.Now.ToPersian().ToString(),
                 FollowUpNo = followupNumber,
@@ -397,7 +402,12 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         private async Task SendConfirmationSms(string reporterMobileNo, string followupNo)
         {
             var smsText = string.Format("کاربر گرامی، شکوائیه شما با شماره {0} ثبت گردید", followupNo);
-            await SmsSender.SendSms(reporterMobileNo, smsText);
+
+            var SendSmsCanUsed = _configuration.GetSection("StatusServices:SendSms").Value;
+            if (Convert.ToBoolean(SendSmsCanUsed))
+            {
+                await SmsSender.SendSms(reporterMobileNo, smsText);
+            }
         }
 
         private string GetRandomNumber(int length)

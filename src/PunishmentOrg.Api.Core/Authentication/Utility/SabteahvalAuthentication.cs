@@ -9,9 +9,9 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
 {
     public static class SabteahvalAuthentication
     {
-        public static async Task SabteahvalAuthenticate(UserRegisterRequest request)
+        public static async Task SabteahvalAuthenticate(UserRegisterRequest request, bool callable)
         {
-            if (Anu.Utility.Utility.IsDevelopment())
+            if (!callable)
             {
                 return;
             }
