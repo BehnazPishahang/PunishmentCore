@@ -2,13 +2,7 @@
 using Anu.DataAccess.Repositories;
 using Anu.PunishmentOrg.DataModel.Accounting;
 using Anu.PunishmentOrg.Domain.Accounting;
-using Anu.PunishmentOrg.Domain.PBillStore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Anu.PunishmentOrg.DataAccess.Accounting
 {
@@ -24,6 +18,18 @@ namespace Anu.PunishmentOrg.DataAccess.Accounting
                                  .Where(a => a.FishNo == fishNo)
                                  .Include(a => a.TheObjectState)
                                  .FirstOrDefaultAsync();
+        }
+    }
+
+    public class PBill4PaidRepositoryNew : GenericRepository<DataModel.Accounting.PBill4Paid>//, IPBill4PaidRepository
+    {
+        public PBill4PaidRepositoryNew(ApplicationDbContext context) : base(context)
+        {
+        }
+
+        public Task<PBill4Paid> GetPBill4PaidByFishNo(string fishNo)
+        {
+            throw new NotImplementedException();
         }
     }
 }
