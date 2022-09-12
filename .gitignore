@@ -344,3 +344,4 @@ healthchecksdb
 /**/wwwroot/js
 /**/wwwroot/css
 /src/PunishmentOrg.Api.Core/.config/dotnet-tools.json
+/src/Client/Anu.PunishmentOrg.Client/.config/dotnet-tools.json
