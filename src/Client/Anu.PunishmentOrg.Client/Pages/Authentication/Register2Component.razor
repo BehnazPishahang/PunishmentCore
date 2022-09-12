@@ -106,7 +106,8 @@
                      <MudSelect   @bind-Value="_registerUserModel.Sex" Label="جسیت"      AdornmentColor="Color.Primary"  
                        Required="true" 
                             RequiredError="جنسیت را انتخاب نمایید " 
-                     Variant="Variant.Outlined" >
+                     Variant="Variant.Outlined"
+                     AnchorOrigin="Origin.BottomCenter"   Clearable >
                     @foreach (SexType item in Enum.GetValues(typeof(SexType)))
                     {
 
@@ -118,7 +119,7 @@
 
                         @if (item == SexType.Female)
                         {
-                                    <MudIcon Icon= "@Icons.Filled.Woman" Color="Color.Primary"  ></MudIcon>
+                                    <MudIcon Icon= "@Icons.Filled.Woman" Color="Color.Error"  ></MudIcon>
                         }
 
                         @item.GetEnumDescription()
@@ -208,8 +209,19 @@
      
 </MudForm>
 </MudCard >
-@code {
 
+<MudMessageBox @ref="mbox" Title="ثبت کاربر" >
+    <MessageContent>
+       <MudIcon Icon="@Icons.Filled.AddTask" Color="Color.Success" Size="Size.Large" />
+       کاربری شما با موفقیت در سیستم ثبت گردید
+    </MessageContent>
+    <YesButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Close">بستن!</MudButton>
+    </YesButton>
+</MudMessageBox>
+
+@code {
+    MudMessageBox mbox { get; set; }
     private string genderIcon = @Icons.Filled.Man;
     private bool showPassword = false;
     private string smsPassword = "";
@@ -246,8 +258,9 @@
         StateHasChanged();
     }
 
-    void GetAccessCode()
+    async void GetAccessCode()
     {
+
         form.Validate();
 
         Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
@@ -271,10 +284,10 @@
 
         if (result.Result.Code == (int)AnuResult.LoginSuccessful_Sms_Send_To)
         {
-             Snackbar.Add(result.Result.Message, MudBlazor.Severity.Success);
-              hasSmsSend = true;
-              
-              SimulateProgress();
+            Snackbar.Add(result.Result.Message, MudBlazor.Severity.Success);
+            hasSmsSend = true;
+
+            SimulateProgress();
         }
         else
         {
@@ -285,10 +298,10 @@
     }
 
 
-    void Submit()
+    async void Submit()
     {
 
-         form.Validate();
+        form.Validate();
 
         Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
         if (form.Errors.Count() > 0)
@@ -308,8 +321,9 @@
         if (result.Result.Code == (int)AnuResult.Successful)
         {
             SharedInfo.NationalCode = _registerUserModel.UserName;
-            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-            Snackbar.Add(result.Result.Message,  Severity.Success);
+            _registerUserModel = new();
+            hasSmsSend = false;
+            bool? resultx = await mbox.Show();
            
         }
         else

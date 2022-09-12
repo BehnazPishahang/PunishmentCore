@@ -44,8 +44,8 @@
             <div class="row">
                 <div class="col-sm-4">
                     <MudSelect @bind-Value="selectedState" Margin="Margin.Dense" T="GeoLocationContract" Label="استان" Required="true"
-                               Variant="Variant.Outlined" id="cmbstate" SelectedValuesChanged="@Statevaluechanged"
-                               AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error"
+                               AnchorOrigin="Origin.BottomCenter"   Variant="Variant.Outlined" Clearable id="cmbstate" SelectedValuesChanged="@Statevaluechanged"
+                                AdornmentColor="Color.Error"
                                Adornment="Adornment.End" IconSize="Size.Small" Class="form-control" RequiredError="استان را مشخص نمایید">
                         @foreach (GeoLocationContract item in States.OrderBy(a => a.LocationName))
                         {
@@ -56,8 +56,8 @@
                 <div class="col-sm-4">
                 </div>
                 <div class="col-sm-4">
-                    <MudSelect Margin="Margin.Dense" Label="شهرستان" Variant="Variant.Outlined"
-                               id="cmbprovince" AdornmentIcon="@Icons.Outlined.NoiseControlOff"
+                    <MudSelect Margin="Margin.Dense" Label="شهرستان" AnchorOrigin="Origin.BottomCenter"   Variant="Variant.Outlined" Clearable
+                               id="cmbprovince" 
                                AdornmentColor="Color.Error" Adornment="Adornment.End" IconSize="Size.Small" 
                                Required="true" Class="form-control" RequiredError="شهرستان را مشخص نمایید" T="GeoLocationContract" @bind-Value="selectedProvince">
                         @foreach (GeoLocationContract item in province.OrderBy(a => a.LocationName))
@@ -68,10 +68,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-4">
                     <MudSelect @bind-Value="_pGravamenContract.PetitionSubject" T="string" Label="موضوع شکوائیه"
                                MultiSelection="true"
-                               Variant="Variant.Outlined" Class="form-contrl"
+                               AnchorOrigin="Origin.BottomCenter"   Variant="Variant.Outlined" Clearable
+                               SelectAll="true" SelectAllText="انتخاب همه "
+                               Class="form-contrl"
                                Dense="true" Margin="Margin.Dense" AdornmentColor="Color.Error"
                                Adornment="Adornment.End" IconSize="Size.Small" Required="true" RequiredError="موضوع شکوائیه/گزارش را مشخص نمایید">
                         @foreach (var item in @reason)
@@ -135,27 +137,30 @@
                                                 @bind-Value="_reporter.BirthDate" />
                     </div>
                     <div class="col-sm-4">
-                        <MudSelect T="string" Label="جنسیت" @onchange="DoStuff"
-                                   Variant="Variant.Outlined"
-                                   Margin="Margin.Dense" Required="true" AdornmentIcon="@Icons.Outlined.NoiseControlOff"
-                                   AdornmentColor="Color.Error" IconSize="Size.Small" Adornment="Adornment.End" RequiredError="جنسیت را مشخص نمایید">
-                            @foreach (SexType item in Enum.GetValues(typeof(SexType)))
-                            {
+                
+                         <MudSelect  Class="form-control"  @bind-Value="_reporter.Sex" Label="جسیت"        AnchorOrigin="Origin.BottomCenter"   Variant="Variant.Outlined"   AdornmentColor="Color.Primary"  
+                       Required="true" 
+                            RequiredError="جنسیت را انتخاب نمایید " 
+                             Dense="true" Margin="Margin.Dense"
+                      >
+                    @foreach (SexType item in Enum.GetValues(typeof(SexType)))
+                    {
 
-                                <MudSelectItem Value="@item.ToString()">
-                                    @if (item == SexType.Male)
-                                    {
-                                    <MudIcon Icon="@Icons.Filled.Man" Color="Color.Default"></MudIcon>
-                                    }
+                            <MudSelectItem Value="@item">
+                            @if (item == SexType.Male)
+                        {
+                                    <MudIcon Icon= "@Icons.Filled.Man"  Color="Color.Default" ></MudIcon>
+                        }
 
-                                @if (item == SexType.Female)
-                                    {
-                                    <MudIcon Icon="@Icons.Filled.Woman" Color="Color.Primary"></MudIcon>
-                                    }
-                                @item.GetEnumDescription()
+                        @if (item == SexType.Female)
+                        {
+                                    <MudIcon Icon= "@Icons.Filled.Woman" Color="Color.Primary"  ></MudIcon>
+                        }
+
+                        @item.GetEnumDescription()
                             </MudSelectItem>
-                            }
-                        </MudSelect>
+                    }
+                 </MudSelect>
                     </div>
                     <div class="col-sm-4">
                         <MudTextField @bind-Value="_reporter.PostCode" id="PostCode" Label="کدپستی" Variant="Variant.Outlined"
@@ -309,6 +314,7 @@
     public bool AcceptInfo { get; set; } = false;
     string StringValue { set; get; } = "";
     GeoLocationContract selectedState,selectedProvince;
+    SexType sexType;
     List<GeoLocationContract> States = new();
     List<GeoLocationContract> province = new();
     List<PGravamenPersonContract> reporters = new();

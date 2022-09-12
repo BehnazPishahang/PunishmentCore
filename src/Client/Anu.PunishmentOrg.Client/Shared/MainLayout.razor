@@ -35,10 +35,20 @@
        
               <MudIconButton Icon="@_dayNightIcons" Color="@Theme135._iconColor" @onclick="onDarkMode" />
               <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme"  />
-               
-             <MudMenu Direction="Direction.Right" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+           
+              <MudMenu Direction="Direction.Right" OffsetX="true" Dense="true" Class="mt-1 ml-4" ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+
                 <ActivatorContent>
-                        <MudAvatar Color="@Theme135._iconColor">ورود</MudAvatar>
+                     @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
+                    {
+                        <MudChip Icon="@Icons.Material.Filled.Person" Color="Color.Primary">ورود</MudChip>
+
+                    }
+                    else
+                    {
+                         <MudChip Icon="@Icons.Material.Filled.Person" Color="Color.Primary">@SharedInfo.NationalCode</MudChip>
+
+                    }
                 </ActivatorContent>
 
                 <ChildContent   >

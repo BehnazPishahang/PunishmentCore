@@ -13,30 +13,31 @@
 
 @*<MudDataGrid T="PNoticeContract"  Bordered="true"  Hover="true" Dense="true" Striped="true" Items="@Elements" ColumnResizeMode="ResizeMode.Column" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
     Hideable="true" RowClick="@RowClicked" SelectedItemsChanged="@SelectedItemsChanged">*@
-    <MudDataGrid T="PNoticeContract" Items="@Elements"  EditMode="DataGridEditMode.Form"
-    
-    Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual">
-    <ToolBarContent>
-        <MudText Typo="Typo.h6"> ابلاغ </MudText>
+    <MudDataGrid T="PNoticeContract" Items="@Elements"  
+    QuickFilter="@_quickFilter"
+    Bordered="true" Dense="true" 
+    >
+   <ToolBarContent>
+        <MudText Typo="Typo.h6">ابلاغیه ها  </MudText>
         <MudSpacer />
-        <MudTextField @bind-Value="_searchString" Placeholder="جستجو" Adornment="Adornment.Start" Immediate="true"
+        <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
             AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
     <Columns>
         
-       <Column T="PNoticeContract"  CellClass="d-flex justify-end" >
+      
+        <Column T="PNoticeContract" Field="CreateDateTime" Title="زمان ثبت" />
+        <Column T="PNoticeContract" Field="No" Title="شماره " />
+        <Column T="PNoticeContract" Field="NoticeDate"   Title="تاريخ ابلاغ " ortBy="@_sortBy" />
+        <Column T="PNoticeContract" Field="NoticePersonName"   Title="نام  ابلاغ شونده " />
+        <Column T="PNoticeContract" Field="NoticePersonFamily" Title="نام خانوادگي ابلاغ شوند" />
+          <Column T="PNoticeContract"  CellClass="d-flex justify-end" >
             <CellTemplate>
               
                 <MudButton Variant="Variant.Filled" EndIcon="@Icons.Filled.Visibility" Color="Color.Primary"  OnClick="() => ShowPDF(context.Item)">مشاهده</MudButton>
             </CellTemplate>
            
         </Column>
-        <Column T="PNoticeContract" Field="CreateDateTime" Title="زمان ثبت" />
-        <Column T="PNoticeContract" Field="No" Title="شماره " />
-        <Column T="PNoticeContract" Field="NoticeDate"   Title="تاريخ ابلاغ " ortBy="@_sortBy" />
-        <Column T="PNoticeContract" Field="NoticePersonName"   Title="نام  ابلاغ شونده " />
-        <Column T="PNoticeContract" Field="NoticePersonFamily" Title="نام خانوادگي ابلاغ شوند" />
-         
     </Columns>
     <PagerContent>
         <MudDataGridPager T="PNoticeContract" />
