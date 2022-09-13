@@ -266,7 +266,7 @@ public class PGravamenTests
 
         //Assert
 
-        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamen_Request_Is_Required, exception.result.Code);
+        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_Request_Is_Required, exception.result.Code);
     }
 
     [Fact]
@@ -285,7 +285,7 @@ public class PGravamenTests
 
         //Assert
 
-        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamen_ThePGravamenContract_Is_Required, exception.result.Code);
+        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required, exception.result.Code);
     }
 
     [Theory]
@@ -310,7 +310,7 @@ public class PGravamenTests
 
         //Assert
 
-        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamen_FollowUpNo_Is_Required, exception.result.Code);
+        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required, exception.result.Code);
     }
 
     [Fact]
@@ -334,11 +334,11 @@ public class PGravamenTests
 
         //Assert
 
-        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamen_PGravamen_NotFound, exception.result.Code);
+        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_PGravamen_NotFound, exception.result.Code);
     }
 
     //[Theory]
-    //[InlineData(PBill4Cash.Confirmed, true)]
+    //[InlineData(.Confirmed, true)]
     //[InlineData(PBill4Cash.Paid, false)]
     //public async Task GetPGravamenInfo_When_State_Is_InputState_Then_OutputCanPay_Should_Be_Returned(string inputState, bool outputCanPay)
     //{

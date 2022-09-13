@@ -227,17 +227,17 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         {
             GetPGravamenInfoResponse theGetPGravamenInfoResponse = new GetPGravamenInfoResponse();
 
-            request.Null(GetPGravamenInfoResult.PGravamen_GetPGravamen_Request_Is_Required);
+            request.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_Request_Is_Required);
 
-            request.ThePGravamenContract.Null(GetPGravamenInfoResult.PGravamen_GetPGravamen_ThePGravamenContract_Is_Required);
+            request.ThePGravamenContract.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required);
 
-            request.ThePGravamenContract!.FollowUpNo.NullOrWhiteSpace(GetPGravamenInfoResult.PGravamen_GetPGravamen_FollowUpNo_Is_Required);
+            request.ThePGravamenContract!.FollowUpNo.NullOrWhiteSpace(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
 
-            request.ThePGravamenContract!.FollowUpNo!.IsDigit(GetPGravamenInfoResult.PGravamen_GetPGravamen_FollowUpNo_Is_Required);
+            request.ThePGravamenContract!.FollowUpNo!.IsDigit(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
 
             var thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByFollowUpNo(request.ThePGravamenContract.FollowUpNo);
 
-            thePGravamen.Null(GetPGravamenInfoResult.PGravamen_GetPGravamen_PGravamen_NotFound);
+            thePGravamen.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_PGravamen_NotFound);
 
             theGetPGravamenInfoResponse.ThePGravamenInfoContract = new PGravamenInfoContract()
             {

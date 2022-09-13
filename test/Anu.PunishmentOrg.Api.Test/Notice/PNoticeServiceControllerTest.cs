@@ -628,7 +628,9 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
                 No = $"140000000000000000{noPostFix}",
                 NoticeDate = DateTime.Now.ToString("yyyy/MM/dd"),
                 NoticePersonFamily = "km",
-                NoticePersonName = "soheil"
+                NoticePersonName = "soheil",
+                ThePNoticePersonList = new List<PNoticePerson>(),
+                
             };
         }
 
@@ -640,7 +642,11 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
                 No = $"140000000000000000{noPostFix}",
                 NoticeDate = DateTime.Now.ToString("yyyy/MM/dd"),
                 NoticePersonFamily = "km",
-                NoticePersonName = "soheil"
+                NoticePersonName = "soheil",
+                ThePCase = new PCaseContract() 
+                { 
+                    No = "11111111111111",
+                }
             };
         }
 

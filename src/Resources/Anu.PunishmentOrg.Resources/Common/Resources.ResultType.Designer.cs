@@ -682,6 +682,42 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شماره پیگیری معتبر نمی باشد..
+        /// </summary>
+        public static string PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شکوائیه مورد نظر یافت نشد..
+        /// </summary>
+        public static string PGravamen_GetPGravamenInfo_PGravamen_NotFound {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenInfo_PGravamen_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PGravamen_GetPGravamenInfo_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenInfo_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to یک یا هر دو جایگاه ضروری در شکوائیه، وجود ندارد.
         /// </summary>
         public static string PGravamen_NecessaryPositions_AreNotAvailabe {
