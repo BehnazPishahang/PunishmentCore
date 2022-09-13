@@ -1,6 +1,7 @@
 ﻿using Anu.PunishmentOrg.Api.Accounting;
 using Anu.PunishmentOrg.Api.Notice;
 using Anu.PunishmentOrg.DataModel.Accounting;
+using Anu.PunishmentOrg.Domain.Accounting;
 using Anu.PunishmentOrg.ServiceModel.Accounting;
 using Anu.PunishmentOrg.ServiceModel.Notice;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 using Utility.CalendarHelper;
 using Utility.Exceptions;
 using Xunit;
+using static Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgObjectState;
 
 namespace Anu.PunishmentOrg.Api.Test.Accounting
 {
@@ -90,22 +92,100 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
             Assert.Equal((int)GetPaymentInfoResult.PBill4Paid_GetPaymentInfo_FishNo_Is_Required, exception.result.Code);
         }
 
-        //[Fact]
-        //public async Task GetPaymentInfo_PBill4Paid_NotFound_ShouldReturn_Error30264()
-        //{
-        //    //Arrange
+        [Fact]
+        public async Task GetPaymentInfo_PBill4Paid_NotFound_ShouldReturn_Error30264()
+        {
+            //Arrange
+            GetPaymentInfoRequest localGetPaymentInfoRequest = new GetPaymentInfoRequest()
+            {
+                ThePBill4PaidFishNoContract = new PBill4PaidFishNoContract()
+                {
+                    FishNo = "123"
+                }
+            };
 
 
+            _unitOfWork.Setup(x => x.Repositorey<IPBill4PaidRepository>()
+                                    .GetPBill4PaidByFishNo(It.IsAny<string>()))
+                       .ReturnsAsync((PBill4Paid)null);
+            //Act
 
-        //    //Act
+            var exception = Assert.ThrowsAsync<AnuExceptions>(async () => await _pBill4PaidServiceController.GetPaymentInfo(localGetPaymentInfoRequest)).Result;
 
-        //    var exception = Assert.ThrowsAsync<AnuExceptions>(async () => await _pBill4PaidServiceController.GetPaymentInfo(localGetPaymentInfoRequest)).Result;
+            //Assert
 
-        //    //Assert
+            Assert.Equal((int)GetPaymentInfoResult.PBill4Paid_GetPaymentInfo_PBill4Paid_NotFound, exception.result.Code);
+        }
 
-        //    Assert.Equal((int)GetPaymentInfoResult.PBill4Paid_GetPaymentInfo_FishNo_Is_Required, exception.result.Code);
-        //}
+        [Fact]
+        public async Task GetPaymentInfo_State_Confirmed_ShouldReturn_CanPay_True()
+        {
+            //Arrange
 
+            GetPaymentInfoRequest localGetPaymentInfoRequest = new GetPaymentInfoRequest()
+            {
+                ThePBill4PaidFishNoContract = new PBill4PaidFishNoContract()
+                {
+                    FishNo = "123"
+                }
+            };
+
+            _unitOfWork.Setup(x => x.Repositorey<IPBill4PaidRepository>()
+                                    .GetPBill4PaidByFishNo(It.IsAny<string>()))
+                       .ReturnsAsync(new PBill4Paid()
+                       { 
+                            TheObjectState = new()
+                            { 
+                                Code = PBill4Cash.Confirmed,
+                            }
+                       });
+            //Act
+
+            var result = await _pBill4PaidServiceController.GetPaymentInfo(localGetPaymentInfoRequest);
+
+            //Assert
+
+            Assert.NotNull(result.ThePBill4PaidInfoContract);
+            Assert.NotNull(result.ThePBill4PaidInfoContract!.Desc);
+            Assert.IsType(typeof(bool), result.ThePBill4PaidInfoContract!.CanPay);
+            Assert.IsType(typeof(string), result.ThePBill4PaidInfoContract!.Desc);
+            Assert.True(result.ThePBill4PaidInfoContract!.CanPay);
+        }
+
+        [Fact]
+        public async Task GetPaymentInfo_State_NotConfirmed_ShouldReturn__CanPay_False()
+        {
+            //Arrange
+
+            GetPaymentInfoRequest localGetPaymentInfoRequest = new GetPaymentInfoRequest()
+            {
+                ThePBill4PaidFishNoContract = new PBill4PaidFishNoContract()
+                {
+                    FishNo = "123"
+                }
+            };
+
+            _unitOfWork.Setup(x => x.Repositorey<IPBill4PaidRepository>()
+                                    .GetPBill4PaidByFishNo(It.IsAny<string>()))
+                       .ReturnsAsync(new PBill4Paid()
+                       {
+                           TheObjectState = new()
+                           {
+                               Code = It.IsAny<string>(),
+                           }
+                       });
+            //Act
+
+            var result = await _pBill4PaidServiceController.GetPaymentInfo(localGetPaymentInfoRequest);
+
+            //Assert
+
+            Assert.NotNull(result.ThePBill4PaidInfoContract);
+            Assert.NotNull(result.ThePBill4PaidInfoContract!.Desc);
+            Assert.IsType(typeof(bool), result.ThePBill4PaidInfoContract.CanPay);
+            Assert.IsType(typeof(string), result.ThePBill4PaidInfoContract.Desc);
+            Assert.False(result.ThePBill4PaidInfoContract!.CanPay);
+        }
         #endregion GetPaymentInfo
 
 

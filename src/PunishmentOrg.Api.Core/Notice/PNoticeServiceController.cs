@@ -71,7 +71,7 @@ namespace Anu.PunishmentOrg.Api.Notice
                 Result = AnuResult.Successful.GetResult()
             };
         }
-
+        
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<ExportPNoticeResponse> ExportPNotice([FromBody] ExportPNoticeRequest request)
         {
@@ -302,7 +302,7 @@ namespace Anu.PunishmentOrg.Api.Notice
 
             #region NumberOfUnSeenPersonNotice
             UnSeenNoticeCount = pNotices.Where(x => x.IsViewedOnSite == Anu.BaseInfo.Enumerations.YesNo.No || x.IsViewedOnSite == Anu.BaseInfo.Enumerations.YesNo.None
-            || x.IsViewedOnSite == null).Count();
+            || x.IsViewedOnSite == null && x.NoticeDate.NullOrWhiteSpace()).Count();
             #endregion NumberOfUnSeenPersonNotice
 
             #region NumberOfSeenPersonNotice

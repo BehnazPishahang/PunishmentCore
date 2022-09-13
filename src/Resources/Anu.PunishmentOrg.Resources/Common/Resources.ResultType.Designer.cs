@@ -79,6 +79,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to مشکلی در سیستم بابت دسترسی ها بوجود آمده است لطفا با پشتیبانی تماس حاصل فرمایید..
+        /// </summary>
+        public static string Can_Not_Find_AccessType {
+            get {
+                return ResourceManager.GetString("Can_Not_Find_AccessType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to خطای غیر منتظره.
         /// </summary>
         public static string Error {
@@ -138,6 +147,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string GeoLocation_Request_NotValid {
             get {
                 return ResourceManager.GetString("GeoLocation_Request_NotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to برای استفاده از خدمت نیاز به ورود دارید..
+        /// </summary>
+        public static string JwtTokenIsNotValid {
+            get {
+                return ResourceManager.GetString("JwtTokenIsNotValid", resourceCulture);
             }
         }
         
@@ -471,6 +489,51 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string NationalCode_Must_Be_Number {
             get {
                 return ResourceManager.GetString("NationalCode_Must_Be_Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شناسه پرداخت معتبر نمی باشد..
+        /// </summary>
+        public static string PBill4Paid_GetPaymentInfo_FishNo_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_FishNo_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to قبضی یافت نشد..
+        /// </summary>
+        public static string PBill4Paid_GetPaymentInfo_PBill4Paid_NotFound {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_PBill4Paid_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to وضعیت قبض نامعتبر است..
+        /// </summary>
+        public static string PBill4Paid_GetPaymentInfo_PBill4Paid_TheObjectState_Is_Null {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_PBill4Paid_TheObjectState_Is_Null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PBill4Paid_GetPaymentInfo_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string PBill4Paid_GetPaymentInfo_ThePBill4PaidFishNoContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_ThePBill4PaidFishNoContract_Is_Required", resourceCulture);
             }
         }
         
@@ -1042,7 +1105,7 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to لطفا مجددا {0} دیگر تلاش کنید.
+        ///   Looks up a localized string similar to لطفا مجددا {0} ثانیه دیگر تلاش کنید.
         /// </summary>
         public static string Send_Login_Request_After_x_Second {
             get {

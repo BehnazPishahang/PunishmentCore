@@ -16,6 +16,11 @@ namespace Utility.CalendarHelper
             return DateTime.Now.ToPersianDate();
         }
 
+        public static DateTime SahmsiDateTimeNow()
+        {
+            return DateTime.Now.ToPersianDateTime();
+        }
+
         public static string DateTimeToString(this DateTime dateTime)
         {
             return dateTime.ToString("yyyy/MM/dd HH:mm:ss");

@@ -160,6 +160,11 @@ namespace Anu.Utility
             }
         }
 
+        public static bool IsDevelopment()
+        {
+            bool isDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
+            return isDevelopment;
+        }
     }
 
 
