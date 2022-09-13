@@ -26,4 +26,13 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
         PGravamen_FileIsLargerThanAllowedThreshold=-30228,
         PGravamen_TheGeoLocation_IsRequired=-30229,
     }
+
+    public enum GetPGravamenInfoResult
+    {
+        PGravamen_GetPGravamen_Request_Is_Required              = -30281,
+        PGravamen_GetPGravamen_ThePGravamenContract_Is_Required = -30282,
+        PGravamen_GetPGravamen_FollowUpNo_Is_Required           = -30283,
+        PGravamen_GetPGravamen_PGravamen_NotFound               = -30284,
+    }
+
 }

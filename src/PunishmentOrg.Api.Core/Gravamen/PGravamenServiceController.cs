@@ -6,12 +6,16 @@ using Anu.BaseInfo.DataModel.Types;
 using Anu.BaseInfo.Domain.GeoInfo;
 using Anu.BaseInfo.Domain.OrganizationChart;
 using Anu.BaseInfo.Domain.SystemObject;
+using Anu.BaseInfo.ServiceModel.Attachment;
+using Anu.BaseInfo.ServiceModel.GeoInfo;
+using Anu.BaseInfo.ServiceModel.Types;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.Domain;
 using Anu.PunishmentOrg.Api.Authentication.Utility;
 using Anu.PunishmentOrg.DataModel.Gravamen;
 using Anu.PunishmentOrg.Domain.BaseInfo;
+using Anu.PunishmentOrg.Domain.Notice;
 using Anu.PunishmentOrg.Domain.PGravamen;
 using Anu.PunishmentOrg.Enumerations;
 using Anu.PunishmentOrg.ServiceModel.Gravamen;
@@ -19,6 +23,9 @@ using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Anu.Utility.Sms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Net.Mail;
+using System.Text;
 using Utility;
 using Utility.CalendarHelper;
 using Utility.Guard;
@@ -174,26 +181,26 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             var gravamen = new PGravamen()
             {
-                Id = Guid.NewGuid().ToString("N"),
-                Timestamp = 1,
-                TheObjectState = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PGravamen.Start),
-                PetitionSubject = request.ThePGravamenContract.PetitionSubject,
+                Id                  = Guid.NewGuid().ToString("N"),
+                Timestamp           = 1,
+                TheObjectState      = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PGravamen.Start),
+                PetitionSubject     = request.ThePGravamenContract.PetitionSubject,
                 PetitionDescription = request.ThePGravamenContract.PetitionDescription,
-                NoticeText = request.ThePGravamenContract.NoticeText,
-                PetitionReasons = request.ThePGravamenContract.PetitionReasons,
-                RejectReasonText = request.ThePGravamenContract.RejectReasonText,
-                ReporterName = string.Empty,
-                ReporterFamily = string.Empty,
+                NoticeText          = request.ThePGravamenContract.NoticeText,
+                PetitionReasons     = request.ThePGravamenContract.PetitionReasons,
+                RejectReasonText    = request.ThePGravamenContract.RejectReasonText,
+                ReporterName        = string.Empty,
+                ReporterFamily      = string.Empty,
                 ReporterMobilNumber = string.Empty,
 
-                ThePGravamenPersonList = personList,
+                ThePGravamenPersonList     = personList,
                 ThePGravamenAttachmentList = attachmentList,
 
-                CreateDateTime = DateTime.Now.ToPersian().ToString(),
-                FollowUpNo = followupNumber,
-                HowDataType = PU135OrWebSite.WebSite,
+                CreateDateTime   = DateTime.Now.ToPersian().ToString(),
+                FollowUpNo       = followupNumber,
+                HowDataType      = PU135OrWebSite.WebSite,
                 GravamenOrReport = Anu.PunishmentOrg.Enumerations.GravamenOrReport.Gravamen,
-                TheReceiveUnit = await FindRelatedUnit(await _unitOfWork.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(request.ThePGravamenContract.TheGeoLocationContract!.LocationCode!)),
+                TheReceiveUnit   = await FindRelatedUnit(await _unitOfWork.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(request.ThePGravamenContract.TheGeoLocationContract!.LocationCode!)),
 
             };
 
@@ -215,10 +222,80 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
         }
 
+        [AllowAnonymous]
+        public async override Task<GetPGravamenInfoResponse> GetPGravamenInfo([FromBody] GetPGravamenInfoRequest request)
+        {
+            GetPGravamenInfoResponse theGetPGravamenInfoResponse = new GetPGravamenInfoResponse();
+
+            request.Null(GetPGravamenInfoResult.PGravamen_GetPGravamen_Request_Is_Required);
+
+            request.ThePGravamenContract.Null(GetPGravamenInfoResult.PGravamen_GetPGravamen_ThePGravamenContract_Is_Required);
+
+            request.ThePGravamenContract!.FollowUpNo.NullOrWhiteSpace(GetPGravamenInfoResult.PGravamen_GetPGravamen_FollowUpNo_Is_Required);
+
+            request.ThePGravamenContract!.FollowUpNo!.IsDigit(GetPGravamenInfoResult.PGravamen_GetPGravamen_FollowUpNo_Is_Required);
+
+            var thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByFollowUpNo(request.ThePGravamenContract.FollowUpNo);
+
+            thePGravamen.Null(GetPGravamenInfoResult.PGravamen_GetPGravamen_PGravamen_NotFound);
+
+            theGetPGravamenInfoResponse.ThePGravamenInfoContract = new PGravamenInfoContract()
+            {
+                State               = this.GetState(thePGravamen),
+                FilingCaseDesc      = this.GetFilingCaseDesc(thePGravamen),
+                InitialCreationDesc = this.GetInitialCreationDesc(thePGravamen),
+                RejectReasonDesc    = this.GetRejectReasonDesc(thePGravamen),
+                ReviewDesc          = this.GetReviewDesc(thePGravamen),
+            };
+
+            return theGetPGravamenInfoResponse;
+        }
 
         #endregion Overrides
 
         #region Methods
+        private string GetState(PGravamen thePGravamen)
+        {
+            return thePGravamen.TheObjectState?.Title;
+        }
+
+        private string GetReviewDesc(PGravamen thePGravamen)
+        {
+            if (thePGravamen.TheObjectState?.Code == PunishmentOrgObjectState.PGravamen.Failed ||
+                thePGravamen.TheObjectState?.Code == PunishmentOrgObjectState.PGravamen.RegisterCase) 
+            {
+                return string.Empty;
+            }
+
+            return $"شکوائیه شماره {thePGravamen.FollowUpNo} در شعبه {thePGravamen.TheReceiveUnit?.UnitName} در حال بررسی است..";
+        }
+
+        private string GetRejectReasonDesc(PGravamen thePGravamen)
+        {
+            if (thePGravamen.TheObjectState?.Code != PunishmentOrgObjectState.PGravamen.Failed)
+            {
+                return string.Empty;
+            }
+
+            string rejectReason = thePGravamen.ThePGravamenRejectOrDefectRSList.OfType<PGravamenRejectOrDefectRS>()?.FirstOrDefault()?.ThePBGravamenRejectDefectType?.Title;
+
+            return $"شکوائیه شماره {thePGravamen.FollowUpNo} به دلیل {rejectReason} رد شده است.";
+        }
+
+        private string GetInitialCreationDesc(PGravamen thePGravamen)
+        {
+            return $"شکوائیه شماره {thePGravamen.FollowUpNo} در تاریخ  {thePGravamen.CreateDateTime?.Substring(0,10)}  ثبت شده است. ";
+        }
+
+        private string GetFilingCaseDesc(PGravamen thePGravamen)
+        {
+            if (thePGravamen.TheObjectState?.Code != PunishmentOrgObjectState.PGravamen.RegisterCase)
+            {
+                return string.Empty;
+            }
+
+            return $"شکوائیه شماره {thePGravamen.FollowUpNo} در شعبه {thePGravamen.TheReceiveUnit?.UnitName} تشکیل پرونده شده است.";
+        }
 
         private void NullCheckNecessaryRequestFields(PGravamenServiceRequest request)
         {

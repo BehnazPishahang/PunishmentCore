@@ -33,7 +33,7 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
         #region GetPaymentInfo
 
         [Fact]
-        public async Task GetPaymentInfo_RequestIsNull_ShouldReturn_Error30261()
+        public async Task GetPaymentInfo_RequestIsNull_ShouldReturn_Error30271()
         {
             //Arrange
 
@@ -49,7 +49,7 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
         }
 
         [Fact]
-        public async Task GetPaymentInfo_PBill4PaidFishNoContractIsNull_ShouldReturn_Error30262()
+        public async Task GetPaymentInfo_PBill4PaidFishNoContractIsNull_ShouldReturn_Error30272()
         {
             //Arrange
 
@@ -71,7 +71,7 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
         [InlineData(null)]
         [InlineData(" ")]
         [InlineData("test")]
-        public async Task GetPaymentInfo_FishNo_IsNull_Or_Invalid_ShouldReturn_Error30263(string fishNo)
+        public async Task GetPaymentInfo_FishNo_IsNull_Or_Invalid_ShouldReturn_Error30273(string fishNo)
         {
             //Arrange
 
@@ -93,7 +93,7 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
         }
 
         [Fact]
-        public async Task GetPaymentInfo_PBill4Paid_NotFound_ShouldReturn_Error30264()
+        public async Task GetPaymentInfo_PBill4Paid_NotFound_ShouldReturn_Error30274()
         {
             //Arrange
             GetPaymentInfoRequest localGetPaymentInfoRequest = new GetPaymentInfoRequest()
