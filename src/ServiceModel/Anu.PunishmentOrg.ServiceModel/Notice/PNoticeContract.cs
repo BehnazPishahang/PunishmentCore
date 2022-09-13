@@ -1,5 +1,5 @@
 ﻿
-using Anu.PunishmentOrg.ServiceModel.Case;
+using Anu.PunishmentOrg.DataModel.Case;
 
 namespace Anu.PunishmentOrg.ServiceModel.Notice
 {
@@ -8,6 +8,7 @@ namespace Anu.PunishmentOrg.ServiceModel.Notice
     {
         public PNoticeContract()
         {
+            ThePCase = new PCaseContract();
         }
             
                 [System.ComponentModel.DataAnnotations.Required]
@@ -36,13 +37,9 @@ namespace Anu.PunishmentOrg.ServiceModel.Notice
             [System.ComponentModel.DisplayName("نام ابلاغ شونده")]
         public string? NoticePersonName { get; set; }
 
-            
-            
-                [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("پرونده در سرویس")]
-        public PCaseContract? ThePCaseContract { get; set; }
-
-            
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DisplayName("نام ابلاغ شونده")]
+        public PCaseContract? ThePCase { get; set; }
 
     }
     }

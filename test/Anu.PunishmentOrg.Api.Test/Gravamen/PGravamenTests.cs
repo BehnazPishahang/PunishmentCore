@@ -126,12 +126,12 @@ public class PGravamenTests
         };
     }
 
-    // [Fact(DisplayName = "Success Scenario")]
-    //public void RecieveGravamen_SuccessfullyExecuted_ShouldReturnSuccessfulResult()
-    //{
-    //    //Arrange
-    //    _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<AttachmentType>>().GetById(It.IsAny<string>()))
-    //        .ReturnsAsync(new AttachmentType());
+     [Fact(DisplayName = "Success Scenario")]
+    public void RecieveGravamen_SuccessfullyExecuted_ShouldReturnSuccessfulResult()
+    {
+        //Arrange
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<AttachmentType>>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new AttachmentType());
 
     //    _unitOfWork.Setup(u => u.Repositorey<IObjectStateRepository>().GetById(It.IsAny<string>()))
     //        .ReturnsAsync(new ObjectState());
@@ -275,7 +275,7 @@ public class PGravamenTests
 
         //Assert
 
-        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_Request_Is_Required, exception.result.Code);
+        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamen_Request_Is_Required, exception.result.Code);
     }
 
     [Fact]
@@ -285,8 +285,7 @@ public class PGravamenTests
 
         GetPGravamenInfoRequest localGetPGravamenInfoRequest = new GetPGravamenInfoRequest()
         {
-            //ThePGravamenContract = null,
-            TheGetPGravamenInfoContract = null,
+            ThePGravamenContract = null,
         };
 
         //Act
@@ -295,7 +294,7 @@ public class PGravamenTests
 
         //Assert
 
-        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required, exception.result.Code);
+        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamen_ThePGravamenContract_Is_Required, exception.result.Code);
     }
 
     [Theory]
@@ -308,7 +307,7 @@ public class PGravamenTests
 
         GetPGravamenInfoRequest localGetPGravamenInfoRequest = new GetPGravamenInfoRequest()
         {
-            TheGetPGravamenInfoContract = new GetPGravamenInfoContract()
+            ThePGravamenContract = new PGravamenContract()
             {
                 FollowUpNo = followUpNo,
             },
@@ -320,7 +319,7 @@ public class PGravamenTests
 
         //Assert
 
-        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required, exception.result.Code);
+        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamen_FollowUpNo_Is_Required, exception.result.Code);
     }
 
     [Fact]
@@ -329,7 +328,7 @@ public class PGravamenTests
         //Arrange
         GetPGravamenInfoRequest localGetPGravamenInfoRequest = new GetPGravamenInfoRequest()
         {
-            TheGetPGravamenInfoContract = new GetPGravamenInfoContract()
+            ThePGravamenContract = new PGravamenContract()
             {
                 FollowUpNo = "123",
             },
@@ -344,8 +343,80 @@ public class PGravamenTests
 
         //Assert
 
-        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_PGravamen_NotFound, exception.result.Code);
+        Assert.Equal((int)GetPGravamenInfoResult.PGravamen_GetPGravamen_PGravamen_NotFound, exception.result.Code);
     }
+
+    //[Theory]
+    //[InlineData(PBill4Cash.Confirmed, true)]
+    //[InlineData(PBill4Cash.Paid, false)]
+    //public async Task GetPGravamenInfo_When_State_Is_InputState_Then_OutputCanPay_Should_Be_Returned(string inputState, bool outputCanPay)
+    //{
+    //    //Arrange
+
+    //    GetPGravamenInfoRequest localGetPGravamenInfoRequest = new GetPGravamenInfoRequest()
+    //    {
+    //        ThePGravamenFishNoContract = new PGravamenFishNoContract()
+    //        {
+    //            FishNo = "123"
+    //        }
+    //    };
+
+    //    _unitOfWork.Setup(x => x.Repositorey<IPGravamenRepository>()
+    //                            .GetPGravamenByFishNo(It.IsAny<string>()))
+    //               .ReturnsAsync(new PGravamen()
+    //               {
+    //                   TheObjectState = new()
+    //                   {
+    //                       Code = inputState,
+    //                   }
+    //               });
+    //    //Act
+
+    //    var result = await controller.GetPGravamenInfo(localGetPGravamenInfoRequest);
+
+    //    //Assert
+
+    //    Assert.NotNull(result.ThePGravamenInfoContract);
+    //    Assert.NotNull(result.ThePGravamenInfoContract!.Desc);
+    //    Assert.IsType(typeof(bool), result.ThePGravamenInfoContract.CanPay);
+    //    Assert.IsType(typeof(string), result.ThePGravamenInfoContract.Desc);
+    //    Assert.Equal(outputCanPay, result.ThePGravamenInfoContract.CanPay);
+    //}
+
+    //[Fact]
+    //public async Task GetPGravamenInfo_State_NotConfirmed_ShouldReturn__CanPay_False()
+    //{
+    //    //Arrange
+
+    //    GetPGravamenInfoRequest localGetPGravamenInfoRequest = new GetPGravamenInfoRequest()
+    //    {
+    //        ThePGravamenFishNoContract = new PGravamenFishNoContract()
+    //        {
+    //            FishNo = "123"
+    //        }
+    //    };
+
+    //    _unitOfWork.Setup(x => x.Repositorey<IPGravamenRepository>()
+    //                            .GetPGravamenByFishNo(It.IsAny<string>()))
+    //               .ReturnsAsync(new PGravamen()
+    //               {
+    //                   TheObjectState = new()
+    //                   {
+    //                       Code = It.IsAny<string>(),
+    //                   }
+    //               });
+    //    //Act
+
+    //    var result = await controller.GetPGravamenInfo(localGetPGravamenInfoRequest);
+
+    //    //Assert
+
+    //    Assert.NotNull(result.ThePGravamenInfoContract);
+    //    Assert.NotNull(result.ThePGravamenInfoContract!.Desc);
+    //    Assert.IsType(typeof(bool), result.ThePGravamenInfoContract.CanPay);
+    //    Assert.IsType(typeof(string), result.ThePGravamenInfoContract.Desc);
+    //    Assert.False(result.ThePGravamenInfoContract!.CanPay);
+    //}
     #endregion GetPGravamenInfo
 
 }

@@ -93,18 +93,17 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
             Assert.Equal((int)GetPBill4PaidByFishNoResult.PBill4Paid_GetPBill4PaidByFishNo_FishNo_Is_Required, exception.result.Code);
         }
 
-        //[Fact]
-        //public async Task GetPaymentInfo_PBill4Paid_NotFound_ShouldReturn_Error30274()
-        //{
-        //    //Arrange
-        //    GetPBill4PaidListByFishNoRequest localGetPaymentInfoRequest = new GetPBill4PaidListByFishNoRequest()
-        //    {
-        //        ThePBill4PaidFishNoContract = new PBill4PaidFishNoContract()
-        //        {
-        //            FishNo = "123"
-        //        }
-        //    };
-
+        [Fact]
+        public async Task GetPaymentInfo_PBill4Paid_NotFound_ShouldReturn_Error30274()
+        {
+            //Arrange
+            GetPaymentInfoRequest localGetPaymentInfoRequest = new GetPaymentInfoRequest()
+            {
+                ThePBill4PaidFishNoContract = new PBill4PaidFishNoContract()
+                {
+                    FishNo = "123"
+                }
+            };
 
         //    _unitOfWork.Setup(x => x.Repositorey<IPBill4PaidRepository>()
         //                            .Get_PBill4PaidList_By_FishNo(It.IsAny<string>()))

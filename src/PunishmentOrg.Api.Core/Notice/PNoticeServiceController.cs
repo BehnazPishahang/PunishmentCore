@@ -59,7 +59,7 @@ namespace Anu.PunishmentOrg.Api.Notice
                 NoticeDate         = a.NoticeDate,
                 NoticePersonFamily = a.NoticePersonFamily,
                 NoticePersonName   = a.NoticePersonName,
-                ThePCaseContract = new PCaseContract() 
+                ThePCase = new PCaseContract() 
                 { 
                     No = a.ThePNoticePersonList.OfType<PNoticePerson>()?.FirstOrDefault()?.ThePCase?.No,
                 }
