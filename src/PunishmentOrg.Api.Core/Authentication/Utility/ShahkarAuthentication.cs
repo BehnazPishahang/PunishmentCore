@@ -10,10 +10,9 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
 {
     public static class ShahkarAuthentication
     {
-
-        public static async Task<Result> ShahkarAuthenticate(string phoneNumber, string nationalCode)
+        public static async Task<Result> ShahkarAuthenticate(string phoneNumber, string nationalCode, bool callable)
         {
-            if (Anu.Utility.Utility.IsDevelopment())
+            if (!callable)
             {
                 return AnuResult.Successful.GetResult();
             }
