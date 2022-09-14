@@ -141,7 +141,7 @@
 
         var ss = _appConfiguration.BackendServerAddress;
         hasSmsSend = true;
-        AuthResult result =await _anuAuthorizationService.LoginUser(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _tokenModel);
+        FirstStepAuthResult result =await _anuAuthorizationService.SendSmsAuth(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsAuth, _tokenModel);
         if (result.Result.Code == 100013)
         {
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
@@ -180,11 +180,12 @@
 
         _secondRequest.UserName = _tokenModel.UserName;
         _secondRequest.LoginType = Commons.ServiceModel.ServiceAuthentication.Enumerations.LoginType.LoginWithSms;
-        AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.SecondStepLogin, _secondRequest);
+        AuthResult result = _anuAuthorizationService.V2Login(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _secondRequest).Result;
         if (result.Result.Code == 1000)
         {
             SharedInfo.NationalCode = _tokenModel.UserName;
-            _navigationManager.NavigateTo("/true");
+            SharedInfo.AccessToken = result.AccessToken;
+            _navigationManager.NavigateTo("/");
             errorMessage = "";
 
         }

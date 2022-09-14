@@ -36,23 +36,34 @@
               <MudIconButton Icon="@_dayNightIcons" Color="@Theme135._iconColor" @onclick="onDarkMode" />
               <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme"  />
                
-             <MudMenu Direction="Direction.Right" OffsetX="true" Dense="true" Class="mt-1 ml-4">
-                <ActivatorContent>
-                        <MudAvatar Color="@Theme135._iconColor">ورود</MudAvatar>
-                </ActivatorContent>
 
+                    <MudMenu ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomLeft" >
+                    <ActivatorContent>
+                         @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
+                         {
+                            <MudChip Icon="@Icons.Material.Filled.Person" Color="Color.Primary">ورود </MudChip>
+                         }
+                        else
+                        {
+                            <MudChip Icon="@Icons.Material.Filled.Person" Color="Color.Primary"> </MudChip>
+                        }
+
+                    </ActivatorContent>
+   
                 <ChildContent   >
-                    <UserCard Class="mt-n2" />
-                    <MudDivider Class="mb-2" />
+                
+                  
                     @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
                     {
                             <MudListItem Text="ورود " Icon="@Icons.Filled.Logout"  Href="/login2" />
+                              <MudDivider Class="mb-2" />
                         <MudListItem Text="ثبت نام " Href="/register" Icon="@Icons.Material.Filled.AppRegistration" />
                     }
                     else
                     {
-                        <MudListItem Text="پروفایل کاربر " Icon="@Icons.Filled.Person"   />
+                        <MudListItem Text="پروفایل کاربر "   Href="/Profile" Icon="@Icons.Filled.Person"   />
                         <MudListItem Text=" تغییر شماره تلفن "  Icon="@Icons.Filled.PhonelinkSetup"   />
+                          <MudDivider Class="mb-2" />
                          <MudListItem Text="خروج"  Icon="@Icons.Filled.Logout"  OnClick="Logout" />
                     }
 
@@ -138,11 +149,7 @@
     public EventCallback OnDarkModeToggle { get; set; }
     bool _drawerOpen = true;
 
-    void showlogin()
-    {
-        var options = new DialogOptions { CloseOnEscapeKey = true };
-        DialogService.Show<Login>("Simple Dialog", options);
-    }
+  
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;

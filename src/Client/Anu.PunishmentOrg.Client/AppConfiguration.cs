@@ -7,9 +7,12 @@
         public string BackendServerAddress { get; set; }
         public string InqueryPNoticeList { get; set; }
         public string ExportPNotice { get; set; }
-        public string RegisterAddress { get; set; }
-        public string LoginAddress { get; set; }
-        public string SecondStepLogin { get; set; }
+
+        public string   SendSmsAuth{ get; set; }
+        public string RegisterAddress{ get; set; }
+        public string  LoginAddress { get; set; }
+        public string ChangePhoneNumber { get; set; }
+        public string GetProfile { get; set; }
         public string ChangePNoticeViewByUserStatus { get; set; }
         public string GetCountOfUnSeenPNoticeByUser { get; set; }
         public string GetGeoLocationList { get; set; }

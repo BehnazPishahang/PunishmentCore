@@ -1,14 +1,15 @@
 ﻿@page "/"
 @page "/{isLogedId:bool}"
- @if(!isLogedId)
+@if(String.IsNullOrEmpty(SharedInfo.NationalCode))
 {
   <DashboardPublic>
-
-    </DashboardPublic>
+  </DashboardPublic>
 }
 else
 {
-<Dashboard></Dashboard>    
+   <Dashboard>
+
+   </Dashboard>    
 }
 
 @code

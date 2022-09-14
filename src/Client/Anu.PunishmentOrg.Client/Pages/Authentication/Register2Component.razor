@@ -45,7 +45,7 @@
                         PickerOffsetTopPositionInPixels="0"
                         InitialValue="false"
                         CalendarType="Calendar.SingleModeJalali"
-                        DigitType="DigitType.BasedOnCalendar"
+                        DigitType="DigitType.English"
                         DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
                         MinDateSetOnToday="true"
                         Placeholder=" تاریخ تولد "
@@ -106,7 +106,9 @@
                      <MudSelect   @bind-Value="_registerUserModel.Sex" Label="جسیت"      AdornmentColor="Color.Primary"  
                        Required="true" 
                             RequiredError="جنسیت را انتخاب نمایید " 
-                     Variant="Variant.Outlined" >
+                     Variant="Variant.Outlined"
+                     AnchorOrigin="Origin.BottomCenter" 
+                     Clearable>
                     @foreach (SexType item in Enum.GetValues(typeof(SexType)))
                     {
 
@@ -118,7 +120,7 @@
 
                         @if (item == SexType.Female)
                         {
-                                    <MudIcon Icon= "@Icons.Filled.Woman" Color="Color.Primary"  ></MudIcon>
+                                    <MudIcon Icon= "@Icons.Filled.Woman" Color="Color.Error"  ></MudIcon>
                         }
 
                         @item.GetEnumDescription()
@@ -267,14 +269,19 @@
             return;
 
         }
+        _registerUserModel.BirthDate = _registerUserModel.BirthDate.GetUTF8();
+        _registerUserModel.FirstName = _registerUserModel.FirstName.GetUTF8();
+        _registerUserModel.LastName = _registerUserModel.LastName.GetUTF8();
+       
+
         AuthResult result = _anuAuthorizationService.RegisterUser(_appConfiguration.BackendServerAddress, _appConfiguration.RegisterAddress, _registerUserModel);
 
         if (result.Result.Code == (int)AnuResult.LoginSuccessful_Sms_Send_To)
         {
-             Snackbar.Add(result.Result.Message, MudBlazor.Severity.Success);
-              hasSmsSend = true;
-              
-              SimulateProgress();
+            Snackbar.Add(result.Result.Message, MudBlazor.Severity.Success);
+            hasSmsSend = true;
+
+            SimulateProgress();
         }
         else
         {
@@ -284,11 +291,16 @@
         }
     }
 
+    [Inject] private IDialogService DialogService { get; set; }
 
-    void Submit()
+    async void   Submit()
     {
+        bool? resulXt = await DialogService.ShowMessageBox(
+            "تبریک", 
+            "کاربری شما با موفقیط ثبت گردید", 
+            yesText:"بستن!");
 
-         form.Validate();
+        form.Validate();
 
         Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
         if (form.Errors.Count() > 0)
@@ -303,11 +315,13 @@
         var secondStep = new SecondStepUserLoginRequest();
         secondStep.UserName = _registerUserModel.UserName;
         secondStep.Password = smsPassword;
-        AuthResult result = _anuAuthorizationService.SecondStepLogin(_appConfiguration.BackendServerAddress, _appConfiguration.SecondStepLogin, secondStep);
+        secondStep.LoginType = Commons.ServiceModel.ServiceAuthentication.Enumerations.LoginType.LoginWithSms;
+        AuthResult result = _anuAuthorizationService.V2Login(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, secondStep).Result;
 
         if (result.Result.Code == (int)AnuResult.Successful)
         {
             SharedInfo.NationalCode = _registerUserModel.UserName;
+            SharedInfo.AccessToken = result.AccessToken;
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
             Snackbar.Add(result.Result.Message,  Severity.Success);
            
@@ -324,22 +338,5 @@
     private bool _passwordVisibility;
     private InputType _passwordInput = InputType.Password;
 
-
-
-
-    public PatternMask nationalcodeMask = new PatternMask("##########")
-        {
-            MaskChars = new[] { new MaskChar('#', @"[0-9]") },
-            Placeholder = '_',
-            CleanDelimiters = true
-        };
-
-    public PatternMask phoneMask = new PatternMask("###########")
-        {
-            MaskChars = new[] { new MaskChar('#', @"[0-9]") },
-            Placeholder = '_',
-            CleanDelimiters = true
-
-        };
 
 }
