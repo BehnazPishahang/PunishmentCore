@@ -17,12 +17,9 @@ namespace Anu.PunishmentOrg.DataAccess.Accounting
         {
         }
 
-        public async Task<PBill4Paid> Get_PBill4Paid_By_FishNo(string fishNo)
+        public Task<PTreasuryRandomNum> Get_PTreasuryRandomNum_By_TreasuryNumber(string treasuryNumber)
         {
-            return await _context.Set<PBill4Paid>()
-                                 .Where(a => a.FishNo == fishNo)
-                                 .Include(a => a.TheObjectState)
-                                 .FirstOrDefaultAsync();
+            throw new NotImplementedException();
         }
     }
 }
