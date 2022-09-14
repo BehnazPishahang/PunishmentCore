@@ -333,7 +333,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 {
                     NullCheckNecessaryPersonFields(person, PUPersonStartPost.PlaintiffPerson);
 
-                    //await ShahkarAuthentication.ShahkarAuthenticate(person!.MobilNumber!, person!.NationalCode!);
+                    await ShahkarAuthentication.ShahkarAuthenticate(person!.MobilNumber!, person!.NationalCode!);
 
                     availablePositions[plaintiffIndex] = true;
                 }

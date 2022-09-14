@@ -1,6 +1,8 @@
 using Anu.DataAccess;
 using Anu.Domain;
 using Anu.PunishmentOrg.Api.Authentication;
+using Anu.PunishmentOrg.Api.Authentication.Utility;
+using Anu.Utility.Sms;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -112,6 +114,8 @@ builder.Services.AddAuthentication(options =>
 });
 
 var app = builder.Build();
+SmsSender.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
+ShahkarAuthentication.GetConfiguration(app.Services.GetRequiredService<IConfiguration>()); 
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
