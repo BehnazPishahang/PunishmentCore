@@ -234,7 +234,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
 
         #region Methods
 
-        public string GetSignedData(string terminalId, string orderId, long amount, string merchantKey)
+        private string GetSignedData(string terminalId, string orderId, long amount, string merchantKey)
         {
             string data = string.Empty;
             try
@@ -258,7 +258,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
             return data;
         }
 
-        string check(string TreasuryNumber)
+        private string check(string TreasuryNumber)
         {
             //Criteria criteria = new Criteria();
             //criteria.AddLike(Anu.PunishmentOrgQuery.PTreasuryRandomNum.TreasuryNumber, "%" + TreasuryNumber);
@@ -273,7 +273,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
             return "";
         }
 
-        string GetRandomNumber(int length)
+        private string GetRandomNumber(int length)
         {
             string AllowChars = "0123456789";
             char[] chars = new char[length];
@@ -285,16 +285,16 @@ namespace Anu.PunishmentOrg.Api.Accounting
             return this.check(new string(chars));
         }
 
-        string GetPayId(PBill4Paid thePBill4Paid)
+        private string GetPayId(PBill4Paid thePBill4Paid)
         {
             string thePBill4PaidAmount = thePBill4Paid.TotalPaidCost.ToString().PadLeft(15, '0');
             string randomNumber        = GetRandomNumber(13);
 
             string data = $"2{thePBill4Paid.TheAccounts!.TreasuryID}{randomNumber}{thePBill4PaidAmount}";
-            string result_b1 = VerhoeffData.Verhoeff.generateVerhoeff(data);
+            string result_b1 = Verhoeff.generateVerhoeff(data);
 
-            string data2 = VerhoeffData.Verhoeff.Reverse($"2{thePBill4Paid.TheAccounts!.TreasuryID}{randomNumber}") + VerhoeffData.Verhoeff.Reverse(thePBill4PaidAmount);
-            string result_b2 = VerhoeffData.Verhoeff.generateVerhoeff(data2);
+            string data2 = Verhoeff.Reverse($"2{thePBill4Paid.TheAccounts!.TreasuryID}{randomNumber}") + Verhoeff.Reverse(thePBill4PaidAmount);
+            string result_b2 = Verhoeff.generateVerhoeff(data2);
 
             return $"2{result_b1}{result_b2}{thePBill4Paid.TheAccounts!.TreasuryID}{randomNumber}";
         }
@@ -474,11 +474,6 @@ namespace Anu.PunishmentOrg.Api.Accounting
         public string Description { get; set; }
     }
 
-    /// <summary>
-    /// For more information cf. http://en.wikipedia.org/wiki/Verhoeff_algorithm
-    /// Dihedral Group stuff: http://en.wikipedia.org/wiki/Dihedral_group
-    /// Dihedral Group order 10: http://mathworld.wolfram.com/DihedralGroupD5.html
-    /// </summary>
     public static class Verhoeff
     {
 
