@@ -193,7 +193,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
                 OrderId           = Convert.ToInt64(request.ThePBill4PaidFishNoContract.FishNo),
                 LocalDateTime     = DateTime.Now,
                 ReturnUrl         = string.Concat(SADAD_RETURNURL_WEB_API_t135, thePBill4Paid.Id),
-                SignData          = Anu.Utility.Utility.GetSignedData(TerminalId_t135, thePBill4Paid.FishNo!, Convert.ToInt64(thePBill4Paid.TotalPaidCost), Merchantkey_t135),
+                SignData          = this.GetSignedData(TerminalId_t135, thePBill4Paid.FishNo!, Convert.ToInt64(thePBill4Paid.TotalPaidCost), Merchantkey_t135),
                 MultiIdentityData = new MultiIdentityData()
                 {
                     Type              = MultiIdentityData.MultiplexingType.Amount,
@@ -233,6 +233,30 @@ namespace Anu.PunishmentOrg.Api.Accounting
         #endregion Overrides
 
         #region Methods
+
+        public string GetSignedData(string terminalId, string orderId, long amount, string merchantKey)
+        {
+            string data = string.Empty;
+            try
+            {
+                var dataBytes = System.Text.Encoding.UTF8.GetBytes(string.Format("{0};{1};{2}", terminalId, orderId, amount));
+                var symmetric = System.Security.Cryptography.SymmetricAlgorithm.Create("TripleDes");
+                symmetric.Mode    = System.Security.Cryptography.CipherMode.ECB;
+                symmetric.Padding = System.Security.Cryptography.PaddingMode.PKCS7;
+                var encryptor = symmetric.CreateEncryptor(Convert.FromBase64String(merchantKey), new byte[8]);
+                data              = Convert.ToBase64String(encryptor.TransformFinalBlock(dataBytes, 0, dataBytes.Length));
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToCompleteString());
+                data = string.Empty;
+            }
+            finally
+            {
+                Console.WriteLine(":)");
+            }
+            return data;
+        }
 
         string check(string TreasuryNumber)
         {
@@ -326,7 +350,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
         #endregion Methods
     }
     public class PaymentRequest
-{
+    {
 
     //public PaymentRequest()
     //{
@@ -370,7 +394,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
     // public string PurchasePage { get; set; }
 }
 
-public class MultiIdentityData
+    public class MultiIdentityData
 {
     public MultiIdentityData()
     {

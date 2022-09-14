@@ -9,68 +9,6 @@ namespace Anu.Utility
 {
     public static class Utility
     {
-        //public static async Task<T> CallApi<T>(string apiUrl, object value)
-        //{
-        //    var json = Newtonsoft.Json.JsonConvert.SerializeObject(value, Formatting.Indented);
-        //    System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Ssl3;
-
-        //    using (var client = new System.Net.Http.HttpClient())
-
-        //    {
-
-        //        client.BaseAddress = new Uri(apiUrl);
-
-        //        client.DefaultRequestHeaders.Accept.Clear();
-
-
-
-        //        var w = client.PostAsJsonAsync(apiUrl, value);
-
-        //        w.Wait();
-
-        //        HttpResponseMessage response = w.Result;
-
-        //        if (response.IsSuccessStatusCode)
-
-        //        {
-
-        //            var result = response.Content.ReadAsAsync<T>();
-
-        //            result.Wait();
-
-        //            return result.Result;
-
-        //        }
-
-        //        return default(T);
-
-        //    }
-        //}
-
-        public static string GetSignedData(string terminalId, string orderId, long amount, string merchantKey)
-        {
-            string data = string.Empty;
-            try
-            {
-                var dataBytes     = System.Text.Encoding.UTF8.GetBytes(string.Format("{0};{1};{2}", terminalId, orderId, amount));
-                var symmetric     = System.Security.Cryptography.SymmetricAlgorithm.Create("TripleDes");
-                symmetric.Mode    = System.Security.Cryptography.CipherMode.ECB;
-                symmetric.Padding = System.Security.Cryptography.PaddingMode.PKCS7;
-                var encryptor     = symmetric.CreateEncryptor(Convert.FromBase64String(merchantKey), new byte[8]);
-                data              = Convert.ToBase64String(encryptor.TransformFinalBlock(dataBytes, 0, dataBytes.Length));
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.ToCompleteString());
-                data = string.Empty;
-            }
-            finally
-            {
-                Console.WriteLine(":)");
-            }
-            return data;
-        }
-
         public static string ToCompleteString(this System.Exception ex)
         {
             if (ex == null) return string.Empty;
