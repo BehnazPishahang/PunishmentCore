@@ -1,5 +1,6 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Newtonsoft.Json;
+using System.ComponentModel;
 using System.Net.Http.Json;
 using System.Text;
 using System.Xml.Serialization;
@@ -9,6 +10,15 @@ namespace Anu.Utility
 {
     public static class Utility
     {
+        public static string GetDescription(this Enum enumValue)
+        {
+            var fieldInfo = enumValue.GetType().GetField(enumValue.ToString());
+
+            var descriptionAttributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            return descriptionAttributes.Length > 0 ? descriptionAttributes[0].Description : enumValue.ToString();
+        }
+
         public static string ToCompleteString(this System.Exception ex)
         {
             if (ex == null) return string.Empty;

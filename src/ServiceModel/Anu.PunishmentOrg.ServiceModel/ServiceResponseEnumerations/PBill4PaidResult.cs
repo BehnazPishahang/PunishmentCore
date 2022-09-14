@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
 {
-    public enum GetPaymentInfoResult
+    public enum GetPBill4PaidListByFishNoResult
     {
-        PBill4Paid_GetPaymentInfo_Request_Is_Required                     = -30271,
-        PBill4Paid_GetPaymentInfo_ThePBill4PaidFishNoContract_Is_Required = -30272,
-        PBill4Paid_GetPaymentInfo_FishNo_Is_Required                      = -30273,
-        PBill4Paid_GetPaymentInfo_PBill4Paid_NotFound                     = -30274,
-        PBill4Paid_GetPaymentInfo_PBill4Paid_TheObjectState_Is_Null       = -30275,
+        PBill4Paid_GetPBill4PaidListByFishNo_Request_Is_Required                     = -30271,
+        PBill4Paid_GetPBill4PaidListByFishNo_ThePBill4PaidFishNoContract_Is_Required = -30272,
+        PBill4Paid_GetPBill4PaidListByFishNo_FishNo_Is_Required                      = -30273,
+        PBill4Paid_GetPBill4PaidListByFishNo_PBill4Paid_NotFound                     = -30274,
+        PBill4Paid_GetPBill4PaidListByFishNo_PBill4Paid_TheObjectState_Is_Null       = -30275,
     }
 
     public enum SendPaymentRequestToSadadResult
@@ -27,5 +27,21 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
         PBill4Paid_SendPaymentRequestToSadad_TotalPaidCost_NotFound                      = -30298,
         PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError                       = -30298,
         PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError                           = -30298,
+    }
+
+    public enum GetPBill4PaidListByNationalCodeResult
+    {
+        PBill4Paid_GetPBill4PaidListByNationalCode_Request_Is_Required                           = -30301,
+        PBill4Paid_GetPBill4PaidListByNationalCode_ThePBill4PaidNationalCodeContract_Is_Required = -30302,
+        PBill4Paid_GetPBill4PaidListByNationalCode_NationalCode_Is_Required                      = -30303,
+        PBill4Paid_GetPBill4PaidListByNationalCode_PBill4Paid_NotFound                           = -30304,
+    }
+
+    public enum GetCountOfPaidPBill4PaidByNationalCodeResult
+    {
+        PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_Request_Is_Required                           = -30311,
+        PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_ThePBill4PaidNationalCodeContract_Is_Required = -30312,
+        PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_NationalCode_Is_Required                      = -30313,
+        PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_PBill4Paid_NotFound                           = -30314,
     }
 }

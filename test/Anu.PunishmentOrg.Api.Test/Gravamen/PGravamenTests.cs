@@ -43,7 +43,7 @@ public class PGravamenTests
     public PGravamenTests()
     {
 
-        controller = new PGravamenServiceController(_unitOfWork.Object, _configuration.Object);
+        controller = new PGravamenServiceController(_unitOfWork.Object);
         //_configuration.Setup(u => u.GetSection(""))
         //              .Returns(new ConfigurationSection(new ConfigurationRoot(new List<IConfigurationProvider>() {  }), It.IsAny<string>()) 
         //              { 
@@ -252,7 +252,7 @@ public class PGravamenTests
                 Title = "Mock Attachemnt Type"
             });
 
-        controller = new PGravamenServiceController(_unitOfWork.Object, _configuration.Object);
+        controller = new PGravamenServiceController(_unitOfWork.Object);
 
         var result = controller.RecieveGravamen(_request);
 
