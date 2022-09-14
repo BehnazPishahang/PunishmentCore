@@ -106,7 +106,7 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
 
 
             _unitOfWork.Setup(x => x.Repositorey<IPBill4PaidRepository>()
-                                    .GetPBill4PaidByFishNo(It.IsAny<string>()))
+                                    .Get_PBill4Paid_By_FishNo(It.IsAny<string>()))
                        .ReturnsAsync((PBill4Paid)null);
             //Act
 
@@ -133,7 +133,7 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
             };
 
             _unitOfWork.Setup(x => x.Repositorey<IPBill4PaidRepository>()
-                                    .GetPBill4PaidByFishNo(It.IsAny<string>()))
+                                    .Get_PBill4Paid_By_FishNo(It.IsAny<string>()))
                        .ReturnsAsync(new PBill4Paid()
                        { 
                             TheObjectState = new()
@@ -168,7 +168,7 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
             };
 
             _unitOfWork.Setup(x => x.Repositorey<IPBill4PaidRepository>()
-                                    .GetPBill4PaidByFishNo(It.IsAny<string>()))
+                                    .Get_PBill4Paid_By_FishNo(It.IsAny<string>()))
                        .ReturnsAsync(new PBill4Paid()
                        {
                            TheObjectState = new()

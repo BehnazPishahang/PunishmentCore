@@ -13,5 +13,8 @@ namespace Anu.PunishmentOrg.Api.Accounting
             [Microsoft.AspNetCore.Mvc.Route("api/v1/PBill4Paid/GetPaymentInfo")]
         public abstract Task<GetPaymentInfoResponse> GetPaymentInfo([Microsoft.AspNetCore.Mvc.FromBody]GetPaymentInfoRequest request);
 
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [Microsoft.AspNetCore.Mvc.Route("api/v1/PBill4Paid/SendPaymentRequestToSadad")]
+        public abstract Task<SendPaymentRequestToSadadResponse> SendPaymentRequestToSadad([Microsoft.AspNetCore.Mvc.FromBody] SendPaymentRequestToSadadRequest request);
     }
     }

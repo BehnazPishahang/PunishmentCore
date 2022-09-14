@@ -18,11 +18,20 @@ namespace Anu.PunishmentOrg.DataAccess.Accounting
         {
         }
 
-        public async Task<PBill4Paid> GetPBill4PaidByFishNo(string fishNo)
+        public async Task<PBill4Paid> Get_PBill4Paid_By_FishNo(string fishNo)
         {
             return await _context.Set<PBill4Paid>()
                                  .Where(a => a.FishNo == fishNo)
                                  .Include(a => a.TheObjectState)
+                                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<PBill4Paid> Get_PBill4Paid_By_FishNo_With_ValidAccount(string fishNo)
+        {
+            return await _context.Set<PBill4Paid>()
+                                 .Where(a => a.FishNo == fishNo &&
+                                             a.TheAccounts.State == Anu.BaseInfo.Enumerations.State.Valid)
+                                 .Include(a => a.TheAccounts)
                                  .FirstOrDefaultAsync();
         }
     }
