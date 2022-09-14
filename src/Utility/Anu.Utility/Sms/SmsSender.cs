@@ -18,7 +18,7 @@ namespace Anu.Utility.Sms
         public static async Task SendSms(string phoneNumber,string message)
         {
             var SendSmsCanUsed = _configuration.GetSection("StatusServices:SendSms").Value;
-            if (!Convert.ToBoolean(SendSmsCanUsed))
+            if (Convert.ToBoolean(SendSmsCanUsed))
             {
                 return;
             }

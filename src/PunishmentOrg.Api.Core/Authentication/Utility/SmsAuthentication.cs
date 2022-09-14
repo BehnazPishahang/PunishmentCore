@@ -10,10 +10,9 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
             string message = @"Code: {0} " + Environment.NewLine + @" کد ورود شما به پیشخوان تعزیرات";
             message = string.Format(message, code);
 
-            if (!Anu.Utility.Utility.IsDevelopment())
-            {
-                await SmsSender.SendSms(phoneNumber, message);
-            }
+
+            await SmsSender.SendSms(phoneNumber, message);
+
             Console.WriteLine(message);
 
             return code;

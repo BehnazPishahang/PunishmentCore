@@ -10,10 +10,17 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
 {
     public static class ShahkarAuthentication
     {
+        private static IConfiguration _configuration;
+
+        public static void GetConfiguration(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         public static async Task<Result> ShahkarAuthenticate(string phoneNumber, string nationalCode)
         {
-            if (Anu.Utility.Utility.IsDevelopment())
+            var ShakarServiceCanUsed = _configuration.GetSection("StatusServices:ShakarService").Value;
+            if (!Convert.ToBoolean(ShakarServiceCanUsed))
             {
                 return AnuResult.Successful.GetResult();
             }

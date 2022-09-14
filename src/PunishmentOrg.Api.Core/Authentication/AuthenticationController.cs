@@ -92,9 +92,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
             {
                 return new FirstStepAuthResult() { Result = AnuResult.User_Is_Exist.GetResult() };
             }
-
-            //await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName);
-            //await SabteahvalAuthentication.SabteahvalAuthenticate(request);
+            
+            await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName);
+            await SabteahvalAuthentication.SabteahvalAuthenticate(request);
 
 
             string password = await request.PhoneNumber.SendAuthenticateSms(_CountCharacter);
@@ -431,7 +431,6 @@ namespace Anu.PunishmentOrg.Api.Authentication
             string jwtToken = null;
 
             var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.Password);
-
             await ShahkarAuthentication.ShahkarAuthenticate(request.NewPhoneNumber, request.UserName);
 
             pBPuoUsers.MobileNumber4SMS = request.NewPhoneNumber;
