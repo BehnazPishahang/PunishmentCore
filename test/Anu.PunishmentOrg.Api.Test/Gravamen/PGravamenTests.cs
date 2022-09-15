@@ -285,7 +285,8 @@ public class PGravamenTests
 
         GetPGravamenInfoRequest localGetPGravamenInfoRequest = new GetPGravamenInfoRequest()
         {
-            ThePGravamenContract = null,
+            //ThePGravamenContract = null,
+            TheGetPGravamenInfoContract = null,
         };
 
         //Act
@@ -307,7 +308,7 @@ public class PGravamenTests
 
         GetPGravamenInfoRequest localGetPGravamenInfoRequest = new GetPGravamenInfoRequest()
         {
-            ThePGravamenContract = new PGravamenContract()
+            TheGetPGravamenInfoContract = new GetPGravamenInfoContract()
             {
                 FollowUpNo = followUpNo,
             },
@@ -328,7 +329,7 @@ public class PGravamenTests
         //Arrange
         GetPGravamenInfoRequest localGetPGravamenInfoRequest = new GetPGravamenInfoRequest()
         {
-            ThePGravamenContract = new PGravamenContract()
+            TheGetPGravamenInfoContract = new GetPGravamenInfoContract()
             {
                 FollowUpNo = "123",
             },

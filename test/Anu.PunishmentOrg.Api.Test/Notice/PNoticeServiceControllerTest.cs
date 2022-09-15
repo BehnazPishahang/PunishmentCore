@@ -643,7 +643,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
                 NoticeDate = DateTime.Now.ToString("yyyy/MM/dd"),
                 NoticePersonFamily = "km",
                 NoticePersonName = "soheil",
-                ThePCaseContract = new PCaseContract() 
+                ThePCaseContract = new ServiceModel.Case.PCaseContract() 
                 { 
                     No = "11111111111111",
                 }
