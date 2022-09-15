@@ -42,14 +42,14 @@ namespace Anu.PunishmentOrg.DataAccess.Accounting
             return notice;
         }
 
-        public async Task<List<PBill4Paid>> Get_PBill4PaidList_By_FishNo(string fishNo)
+        public async Task<PBill4Paid> Get_PBill4Paid_By_FishNo(string fishNo)
         {
             return await _context.Set<PBill4Paid>()
                                  .Where(a => a.FishNo == fishNo)
                                  .Include(a => a.TheObjectState)
                                  .Include(a => a.TheUnit)
                                  .Include(a => a.ThePCasePerson)
-                                 .ToListAsync();
+                                 .FirstOrDefaultAsync();
         }
 
         public async Task<List<PBill4Paid>> Get_PBill4PaidList_By_NationalCode(string nationalCode, Page page)
@@ -76,9 +76,6 @@ namespace Anu.PunishmentOrg.DataAccess.Accounting
         {
             return await _context.Set<PBill4Paid>()
                                  .Where(a => a.ThePCasePerson.NationalCode == nationalCode)
-                                 .Include(a => a.TheObjectState)
-                                 .Include(a => a.TheUnit)
-                                 .Include(a => a.ThePCasePerson)
                                  .ToListAsync();
         }
 

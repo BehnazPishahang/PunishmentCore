@@ -139,45 +139,45 @@ namespace Anu.PunishmentOrg.Api.Accounting
         #region Overrides
 
         [AllowAnonymous]
-        public override async Task<GetPBill4PaidListByFishNoResponse> GetPBill4PaidListByFishNo([FromBody] GetPBill4PaidListByFishNoRequest request)
+        public override async Task<GetPBill4PaidByFishNoResponse> GetPBill4PaidByFishNo([FromBody] GetPBill4PaidByFishNoRequest request)
         {
-            request.Null(GetPBill4PaidListByFishNoResult.PBill4Paid_GetPBill4PaidListByFishNo_Request_Is_Required);
+            request.Null(GetPBill4PaidByFishNoResult.PBill4Paid_GetPBill4PaidByFishNo_Request_Is_Required);
 
-            request.ThePBill4PaidFishNoContract.Null(GetPBill4PaidListByFishNoResult.PBill4Paid_GetPBill4PaidListByFishNo_ThePBill4PaidFishNoContract_Is_Required);
+            request.ThePBill4PaidFishNoContract.Null(GetPBill4PaidByFishNoResult.PBill4Paid_GetPBill4PaidByFishNo_ThePBill4PaidFishNoContract_Is_Required);
 
-            request.ThePBill4PaidFishNoContract!.FishNo.NullOrWhiteSpace(GetPBill4PaidListByFishNoResult.PBill4Paid_GetPBill4PaidListByFishNo_FishNo_Is_Required);
+            request.ThePBill4PaidFishNoContract!.FishNo.NullOrWhiteSpace(GetPBill4PaidByFishNoResult.PBill4Paid_GetPBill4PaidByFishNo_FishNo_Is_Required);
 
-            request.ThePBill4PaidFishNoContract!.FishNo!.IsDigit(GetPBill4PaidListByFishNoResult.PBill4Paid_GetPBill4PaidListByFishNo_FishNo_Is_Required);
+            request.ThePBill4PaidFishNoContract!.FishNo!.IsDigit(GetPBill4PaidByFishNoResult.PBill4Paid_GetPBill4PaidByFishNo_FishNo_Is_Required);
 
-            List<PBill4Paid> thePBill4PaidList = await _unitOfWork.Repositorey<IPBill4PaidRepository>().Get_PBill4PaidList_By_FishNo(request.ThePBill4PaidFishNoContract.FishNo!);
+            PBill4Paid thePBill4Paid = await _unitOfWork.Repositorey<IPBill4PaidRepository>().Get_PBill4Paid_By_FishNo(request.ThePBill4PaidFishNoContract.FishNo!);
 
-            thePBill4PaidList.Null(GetPBill4PaidListByFishNoResult.PBill4Paid_GetPBill4PaidListByFishNo_PBill4Paid_NotFound);
+            thePBill4Paid.Null(GetPBill4PaidByFishNoResult.PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_NotFound);
 
 
-            var thePBill4PaidInfoContractList = thePBill4PaidList.Select(x => new PBill4PaidInfoContract()
+            PBill4PaidInfoContract thePBill4PaidInfoContract = new PBill4PaidInfoContract()
             {
-                FishNo        = x.FishNo,
-                Billtype      = x.Billtype?.GetDescription(),
-                CasesNoSubno  = x.CasesNoSubno,
-                TotalPaidCost = x.TotalPaidCost,
+                FishNo        = thePBill4Paid.FishNo,
+                Billtype      = thePBill4Paid.Billtype?.GetDescription(),
+                CasesNoSubno  = thePBill4Paid.CasesNoSubno,
+                TotalPaidCost = thePBill4Paid.TotalPaidCost,
                 ThePCasePersonContract = new PCasePersonContract()
                 {
-                    NationalCode = x.ThePCasePerson?.NationalCode,
+                    NationalCode = thePBill4Paid.ThePCasePerson?.NationalCode,
                 },
                 TheUnitContract = new unitContract()
                 {
-                    UnitName = x.TheUnit?.UnitName,
+                    UnitName = thePBill4Paid.TheUnit?.UnitName,
                 },
                 TheObjectStateContract = new ObjectStateContract()
                 {
-                    Code  = x.TheObjectState?.Code,
-                    Title = x.TheObjectState?.Title,
+                    Code  = thePBill4Paid.TheObjectState?.Code,
+                    Title = thePBill4Paid.TheObjectState?.Title,
                 },
-            }).ToList();
+            };
 
-            return new GetPBill4PaidListByFishNoResponse()
+            return new GetPBill4PaidByFishNoResponse()
             {
-                ThePBill4PaidInfoContract = thePBill4PaidInfoContractList,
+                ThePBill4PaidInfoContract = thePBill4PaidInfoContract,
             };
         }
 
@@ -205,7 +205,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
                 TotalPaidCost = x.TotalPaidCost,
                 ThePCasePersonContract = new PCasePersonContract()
                 {
-                    NationalCode = x.ThePCasePerson.NationalCode,
+                    NationalCode = x.ThePCasePerson!.NationalCode,
                 },
                 TheUnitContract = new unitContract()
                 {
@@ -319,9 +319,9 @@ namespace Anu.PunishmentOrg.Api.Accounting
 
             request.ThePBill4PaidNationalCodeContract!.NationalCode!.IsDigit(GetCountOfPaidPBill4PaidByNationalCodeResult.PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_NationalCode_Is_Required);
 
-            var totalCountOfPBill4Paid   = thePBill4PaidList.Count;
-            var countOfPaidPBill4Paid    = thePBill4PaidList.Count(x => x.TheObjectState?.Code == PBill4Cash.Paid);
-            var countOfNotPaidPBill4Paid = totalCountOfPBill4Paid - countOfPaidPBill4Paid;
+            int totalCountOfPBill4Paid   = thePBill4PaidList.Count;
+            int countOfPaidPBill4Paid    = thePBill4PaidList.Count(x => x.TheObjectState?.Code == PBill4Cash.Paid);
+            int countOfNotPaidPBill4Paid = totalCountOfPBill4Paid - countOfPaidPBill4Paid;
 
             return new GetCountOfPaidPBill4PaidByNationalCodeResponse()
             {

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
 {
-    public enum GetPBill4PaidListByFishNoResult
+    public enum GetPBill4PaidByFishNoResult
     {
-        PBill4Paid_GetPBill4PaidListByFishNo_Request_Is_Required                     = -30271,
-        PBill4Paid_GetPBill4PaidListByFishNo_ThePBill4PaidFishNoContract_Is_Required = -30272,
-        PBill4Paid_GetPBill4PaidListByFishNo_FishNo_Is_Required                      = -30273,
-        PBill4Paid_GetPBill4PaidListByFishNo_PBill4Paid_NotFound                     = -30274,
-        PBill4Paid_GetPBill4PaidListByFishNo_PBill4Paid_TheObjectState_Is_Null       = -30275,
+        PBill4Paid_GetPBill4PaidByFishNo_Request_Is_Required                     = -30271,
+        PBill4Paid_GetPBill4PaidByFishNo_ThePBill4PaidFishNoContract_Is_Required = -30272,
+        PBill4Paid_GetPBill4PaidByFishNo_FishNo_Is_Required                      = -30273,
+        PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_NotFound                     = -30274,
+        PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_TheObjectState_Is_Null       = -30275,
     }
 
     public enum SendPaymentRequestToSadadResult
@@ -25,8 +25,8 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
         PBill4Paid_SendPaymentRequestToSadad_IBAN_NotValid                               = -30296,
         PBill4Paid_SendPaymentRequestToSadad_TreasuryID_NotFound                         = -30297,
         PBill4Paid_SendPaymentRequestToSadad_TotalPaidCost_NotFound                      = -30298,
-        PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError                       = -30298,
-        PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError                           = -30298,
+        PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError                       = -30299,
+        PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError                           = -30300,
     }
 
     public enum GetPBill4PaidListByNationalCodeResult

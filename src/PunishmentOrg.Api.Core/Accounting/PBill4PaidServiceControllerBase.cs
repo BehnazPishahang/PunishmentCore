@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
     }
         [Microsoft.AspNetCore.Mvc.HttpPost]
             [Microsoft.AspNetCore.Mvc.Route("api/v1/PBill4Paid/GetPBill4PaidListByFishNo")]
-        public abstract Task<GetPBill4PaidListByFishNoResponse> GetPBill4PaidListByFishNo([Microsoft.AspNetCore.Mvc.FromBody]GetPBill4PaidListByFishNoRequest request);
+        public abstract Task<GetPBill4PaidByFishNoResponse> GetPBill4PaidByFishNo([Microsoft.AspNetCore.Mvc.FromBody]GetPBill4PaidByFishNoRequest request);
 
         [Microsoft.AspNetCore.Mvc.HttpPost]
         [Microsoft.AspNetCore.Mvc.Route("api/v1/PBill4Paid/GetPBill4PaidListByNationalCode")]

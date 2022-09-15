@@ -5,17 +5,17 @@ using Anu.PunishmentOrg.ServiceModel.Notice;
 
 namespace Anu.PunishmentOrg.ServiceModel.Accounting
 {
-    [System.ComponentModel.DisplayName("GetPBill4PaidListByFishNo")]
-    public class GetPBill4PaidListByFishNoResponse
+    [System.ComponentModel.DisplayName("GetPBill4PaidByFishNo")]
+    public class GetPBill4PaidByFishNoResponse
     {
-        public GetPBill4PaidListByFishNoResponse()
+        public GetPBill4PaidByFishNoResponse()
         {
-            ThePBill4PaidInfoContract = new List<PBill4PaidInfoContract>();
+            ThePBill4PaidInfoContract = new PBill4PaidInfoContract();
         }
 
         [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("وضعیت پرداخت در سرویس")]
-        public List<PBill4PaidInfoContract>? ThePBill4PaidInfoContract { get; set; }
+        public PBill4PaidInfoContract? ThePBill4PaidInfoContract { get; set; }
 
             
 

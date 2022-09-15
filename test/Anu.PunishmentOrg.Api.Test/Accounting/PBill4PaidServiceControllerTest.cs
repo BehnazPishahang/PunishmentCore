@@ -38,15 +38,15 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
         {
             //Arrange
 
-            GetPBill4PaidListByFishNoRequest localGetPaymentInfoRequest = null;
+            GetPBill4PaidByFishNoRequest localGetPaymentInfoRequest = null;
 
             //Act
 
-            var exception = Assert.ThrowsAsync<AnuExceptions>(async () => await _pBill4PaidServiceController.GetPBill4PaidListByFishNo(localGetPaymentInfoRequest)).Result;
+            var exception = Assert.ThrowsAsync<AnuExceptions>(async () => await _pBill4PaidServiceController.GetPBill4PaidByFishNo(localGetPaymentInfoRequest)).Result;
 
             //Assert
 
-            Assert.Equal((int)GetPBill4PaidListByFishNoResult.PBill4Paid_GetPBill4PaidListByFishNo_Request_Is_Required, exception.result.Code);
+            Assert.Equal((int)GetPBill4PaidByFishNoResult.PBill4Paid_GetPBill4PaidByFishNo_Request_Is_Required, exception.result.Code);
         }
 
         [Fact]
@@ -54,18 +54,18 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
         {
             //Arrange
 
-            GetPBill4PaidListByFishNoRequest localGetPaymentInfoRequest = new GetPBill4PaidListByFishNoRequest()
+            GetPBill4PaidByFishNoRequest localGetPaymentInfoRequest = new GetPBill4PaidByFishNoRequest()
             { 
                 ThePBill4PaidFishNoContract = null,
             };
 
             //Act
 
-            var exception = Assert.ThrowsAsync<AnuExceptions>(async () => await _pBill4PaidServiceController.GetPBill4PaidListByFishNo(localGetPaymentInfoRequest)).Result;
+            var exception = Assert.ThrowsAsync<AnuExceptions>(async () => await _pBill4PaidServiceController.GetPBill4PaidByFishNo(localGetPaymentInfoRequest)).Result;
 
             //Assert
 
-            Assert.Equal((int)GetPBill4PaidListByFishNoResult.PBill4Paid_GetPBill4PaidListByFishNo_ThePBill4PaidFishNoContract_Is_Required, exception.result.Code);
+            Assert.Equal((int)GetPBill4PaidByFishNoResult.PBill4Paid_GetPBill4PaidByFishNo_ThePBill4PaidFishNoContract_Is_Required, exception.result.Code);
         }
 
         [Theory]
@@ -76,7 +76,7 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
         {
             //Arrange
 
-            GetPBill4PaidListByFishNoRequest localGetPaymentInfoRequest = new GetPBill4PaidListByFishNoRequest()
+            GetPBill4PaidByFishNoRequest localGetPaymentInfoRequest = new GetPBill4PaidByFishNoRequest()
             {
                 ThePBill4PaidFishNoContract = new PBill4PaidFishNoContract()
                 {
@@ -86,11 +86,11 @@ namespace Anu.PunishmentOrg.Api.Test.Accounting
 
             //Act
 
-            var exception = Assert.ThrowsAsync<AnuExceptions>(async () => await _pBill4PaidServiceController.GetPBill4PaidListByFishNo(localGetPaymentInfoRequest)).Result;
+            var exception = Assert.ThrowsAsync<AnuExceptions>(async () => await _pBill4PaidServiceController.GetPBill4PaidByFishNo(localGetPaymentInfoRequest)).Result;
 
             //Assert
 
-            Assert.Equal((int)GetPBill4PaidListByFishNoResult.PBill4Paid_GetPBill4PaidListByFishNo_FishNo_Is_Required, exception.result.Code);
+            Assert.Equal((int)GetPBill4PaidByFishNoResult.PBill4Paid_GetPBill4PaidByFishNo_FishNo_Is_Required, exception.result.Code);
         }
 
         //[Fact]

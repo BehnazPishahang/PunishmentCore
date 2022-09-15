@@ -11,7 +11,7 @@ namespace Anu.PunishmentOrg.Domain.Accounting
     {
         abstract Task<List<PBill4Paid>> Get_PBill4PaidList_By_FishNo(string fishNo, Commons.ServiceModel.ServicePaging.Page page);
 
-        abstract Task<List<PBill4Paid>> Get_PBill4PaidList_By_FishNo(string fishNo);
+        abstract Task<PBill4Paid> Get_PBill4Paid_By_FishNo(string fishNo);
         
         abstract Task<List<PBill4Paid>> Get_PBill4PaidList_By_NationalCode(string nationalCode, Commons.ServiceModel.ServicePaging.Page page);
 
