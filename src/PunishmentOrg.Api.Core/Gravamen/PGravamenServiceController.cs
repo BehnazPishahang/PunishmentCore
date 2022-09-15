@@ -34,14 +34,12 @@ namespace Anu.PunishmentOrg.Api.Gravamen
     public class PGravamenServiceController : PGravamenServiceControllerBase
     {
         protected readonly Anu.DataAccess.IUnitOfWork _unitOfWork;
-        private readonly IConfiguration _configuration;
 
         #region Constructor
 
         public PGravamenServiceController(Anu.DataAccess.IUnitOfWork unitOfWork, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
-            _configuration = configuration;
         }
 
         #endregion Constructor
@@ -190,26 +188,26 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             var gravamen = new PGravamen()
             {
-                Id                  = Guid.NewGuid().ToString("N"),
-                Timestamp           = 1,
-                TheObjectState      = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PGravamen.Start),
-                PetitionSubject     = request.ThePGravamenContract.PetitionSubject,
+                Id = Guid.NewGuid().ToString("N"),
+                Timestamp = 1,
+                TheObjectState = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PGravamen.Start),
+                PetitionSubject = request.ThePGravamenContract.PetitionSubject,
                 PetitionDescription = request.ThePGravamenContract.PetitionDescription,
-                NoticeText          = request.ThePGravamenContract.NoticeText,
-                PetitionReasons     = request.ThePGravamenContract.PetitionReasons,
-                RejectReasonText    = request.ThePGravamenContract.RejectReasonText,
-                ReporterName        = string.Empty,
-                ReporterFamily      = string.Empty,
+                NoticeText = request.ThePGravamenContract.NoticeText,
+                PetitionReasons = request.ThePGravamenContract.PetitionReasons,
+                RejectReasonText = request.ThePGravamenContract.RejectReasonText,
+                ReporterName = string.Empty,
+                ReporterFamily = string.Empty,
                 ReporterMobilNumber = string.Empty,
 
                 ThePGravamenPersonList = personList,
                 ThePGravamenAttachmentList = attachmentList.Count == 0 ? null : attachmentList,
 
-                CreateDateTime   = DateTime.Now.ToPersian().ToString(),
-                FollowUpNo       = followupNumber,
-                HowDataType      = PU135OrWebSite.WebSite,
+                CreateDateTime = DateTime.Now.ToPersian().ToString(),
+                FollowUpNo = followupNumber,
+                HowDataType = PU135OrWebSite.WebSite,
                 GravamenOrReport = Anu.PunishmentOrg.Enumerations.GravamenOrReport.Gravamen,
-                TheReceiveUnit   = await FindRelatedUnit(await _unitOfWork.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(request.ThePGravamenContract.TheGeoLocationContract!.LocationCode!)),
+                TheReceiveUnit = await FindRelatedUnit(await _unitOfWork.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(request.ThePGravamenContract.TheGeoLocationContract!.LocationCode!)),
 
             };
 
@@ -250,11 +248,11 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             theGetPGravamenInfoResponse.ThePGravamenInfoContract = new PGravamenInfoContract() 
             {
-                State               = this.GetState(thePGravamen),
-                FilingCaseDesc      = this.GetFilingCaseDesc(thePGravamen),
+                State = this.GetState(thePGravamen),
+                FilingCaseDesc = this.GetFilingCaseDesc(thePGravamen),
                 InitialCreationDesc = this.GetInitialCreationDesc(thePGravamen),
-                RejectReasonDesc    = this.GetRejectReasonDesc(thePGravamen),
-                ReviewDesc          = this.GetReviewDesc(thePGravamen),
+                RejectReasonDesc = this.GetRejectReasonDesc(thePGravamen),
+                ReviewDesc = this.GetReviewDesc(thePGravamen),
             };
 
             return theGetPGravamenInfoResponse;
@@ -334,7 +332,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         private string GetReviewDesc(PGravamen thePGravamen)
         {
             if (thePGravamen.TheObjectState?.Code == PunishmentOrgObjectState.PGravamen.Failed ||
-                thePGravamen.TheObjectState?.Code == PunishmentOrgObjectState.PGravamen.RegisterCase) 
+                thePGravamen.TheObjectState?.Code == PunishmentOrgObjectState.PGravamen.RegisterCase)
             {
                 return string.Empty;
             }
@@ -356,7 +354,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
         private string GetInitialCreationDesc(PGravamen thePGravamen)
         {
-            return $"شکوائیه شماره {thePGravamen.FollowUpNo} در تاریخ  {thePGravamen.CreateDateTime?.Substring(0,10)}  ثبت شده است. ";
+            return $"شکوائیه شماره {thePGravamen.FollowUpNo} در تاریخ  {thePGravamen.CreateDateTime?.Substring(0, 10)}  ثبت شده است. ";
         }
 
         private string GetFilingCaseDesc(PGravamen thePGravamen)
@@ -395,7 +393,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 {
                     NullCheckNecessaryPersonFields(person, PUPersonStartPost.PlaintiffPerson);
 
-                    //await ShahkarAuthentication.ShahkarAuthenticate(person!.MobilNumber!, person!.NationalCode!);
+                    await ShahkarAuthentication.ShahkarAuthenticate(person!.MobilNumber!, person!.NationalCode!);
 
                     availablePositions[plaintiffIndex] = true;
                 }
@@ -547,11 +545,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         {
             var smsText = string.Format("کاربر گرامی، شکوائیه شما با شماره {0} ثبت گردید", followupNo);
 
-            var SendSmsCanUsed = _configuration.GetSection("StatusServices:SendSms").Value;
-            if (Convert.ToBoolean(SendSmsCanUsed))
-            {
-                await SmsSender.SendSms(reporterMobileNo, smsText);
-            }
+            await SmsSender.SendSms(reporterMobileNo, smsText);
         }
 
         private string GetRandomNumber(int length)

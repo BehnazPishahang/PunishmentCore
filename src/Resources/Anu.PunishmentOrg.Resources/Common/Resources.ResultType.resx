@@ -604,23 +604,23 @@
     <value>کاربر وجود دارد.</value>
     <comment>-100011</comment>
   </data>
-  <data name="PBill4Paid_GetPaymentInfo_FishNo_Is_Required" xml:space="preserve">
+  <data name="PBill4Paid_GetPBill4PaidByFishNo_FishNo_Is_Required" xml:space="preserve">
     <value>شناسه پرداخت معتبر نمی باشد.</value>
     <comment>-30273</comment>
   </data>
-  <data name="PBill4Paid_GetPaymentInfo_PBill4Paid_NotFound" xml:space="preserve">
+  <data name="PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_NotFound" xml:space="preserve">
     <value>قبضی یافت نشد.</value>
     <comment>-30274</comment>
   </data>
-  <data name="PBill4Paid_GetPaymentInfo_PBill4Paid_TheObjectState_Is_Null" xml:space="preserve">
+  <data name="PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_TheObjectState_Is_Null" xml:space="preserve">
     <value>وضعیت قبض نامعتبر است.</value>
     <comment>-30275</comment>
   </data>
-  <data name="PBill4Paid_GetPaymentInfo_Request_Is_Required" xml:space="preserve">
+  <data name="PBill4Paid_GetPBill4PaidByFishNo_Request_Is_Required" xml:space="preserve">
     <value>درخواست نمی تواند خالی باشد.</value>
     <comment>-30271</comment>
   </data>
-  <data name="PBill4Paid_GetPaymentInfo_ThePBill4PaidFishNoContract_Is_Required" xml:space="preserve">
+  <data name="PBill4Paid_GetPBill4PaidByFishNo_ThePBill4PaidFishNoContract_Is_Required" xml:space="preserve">
     <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
     <comment>-30272</comment>
   </data>
@@ -647,5 +647,77 @@
   <data name="PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required" xml:space="preserve">
     <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
     <comment>-30282</comment>
+  </data>
+  <data name="PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_NationalCode_Is_Required" xml:space="preserve">
+    <value>کدملی شخص مربوط به قبض معتبر نمی باشد.</value>
+    <comment>-30313</comment>
+  </data>
+  <data name="PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_PBill4Paid_NotFound" xml:space="preserve">
+    <value>قبض مربوطه یافت نشد.</value>
+    <comment>-30314</comment>
+  </data>
+  <data name="PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_Request_Is_Required" xml:space="preserve">
+    <value>درخواست معتبر نمی باشد.</value>
+    <comment>-30311</comment>
+  </data>
+  <data name="PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_ThePBill4PaidNationalCodeContract_Is_Required" xml:space="preserve">
+    <value>ورودی درخواست نمی تواند خالی باشد.</value>
+    <comment>-30312</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidListByNationalCode_NationalCode_Is_Required" xml:space="preserve">
+    <value>کدملی شخص مربوط به قبض معتبر نمی باشد.</value>
+    <comment>-30303</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidListByNationalCode_PBill4Paid_NotFound" xml:space="preserve">
+    <value>قبض مربوطه یافت نشد.</value>
+    <comment>-30304</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidListByNationalCode_Request_Is_Required" xml:space="preserve">
+    <value>درخواست معتبر نمی باشد.</value>
+    <comment>-30301</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidListByNationalCode_ThePBill4PaidNationalCodeContract_Is_Required" xml:space="preserve">
+    <value>ورودی درخواست نمی تواند خالی باشد.</value>
+    <comment>-30302</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError" xml:space="preserve">
+    <value>فراخوانی سرویس سداد با خطا مواجه شد.</value>
+    <comment>-30299</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_FishNo_Is_Required" xml:space="preserve">
+    <value>شناسه پرداخت معتبر نمی باشد.</value>
+    <comment>-30293</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError" xml:space="preserve">
+    <value>خطای برگشتی از سرویس سداد.</value>
+    <comment>-30300</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_IBAN_NotFound" xml:space="preserve">
+    <value>شبای قبض یافت نشد.</value>
+    <comment>-30295</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_IBAN_NotValid" xml:space="preserve">
+    <value>شبای قبض معتبر نیست.</value>
+    <comment>-30296</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_PBill4Paid_NotFound" xml:space="preserve">
+    <value>قبض مورد نظر یافت نشد.</value>
+    <comment>-30294</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد</value>
+    <comment>-30291</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_ThePBill4PaidFishNoContract_Is_Required" xml:space="preserve">
+    <value>ورودی درخواست نمی تواند خالی باشد</value>
+    <comment>-30292</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_TotalPaidCost_NotFound" xml:space="preserve">
+    <value>مجموع مبلغ قبض معتبر نمی باشد.</value>
+    <comment>-30298</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_TreasuryID_NotFound" xml:space="preserve">
+    <value>شناسه واریزی قبض معتبر نمی باشد.</value>
+    <comment>-30297</comment>
   </data>
 </root>

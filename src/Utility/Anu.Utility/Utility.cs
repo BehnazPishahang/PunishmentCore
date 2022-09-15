@@ -1,15 +1,40 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Newtonsoft.Json;
+using System.ComponentModel;
 using System.Net.Http.Json;
 using System.Text;
 using System.Xml.Serialization;
 using Utility.Exceptions;
-using Utility.Guard;
 
 namespace Anu.Utility
 {
     public static class Utility
     {
+        public static string GetDescription(this Enum enumValue)
+        {
+            var fieldInfo = enumValue.GetType().GetField(enumValue.ToString());
+
+            var descriptionAttributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            return descriptionAttributes.Length > 0 ? descriptionAttributes[0].Description : enumValue.ToString();
+        }
+
+        public static string ToCompleteString(this System.Exception ex)
+        {
+            if (ex == null) return string.Empty;
+            StringBuilder sb = new StringBuilder();
+            System.Exception ex1 = ex;
+            while (ex1 != null)
+            {
+                sb.Append("Message: ").Append(ex1.Message).AppendLine();
+                sb.Append("Source: ").Append(ex1.Source).AppendLine();
+                sb.Append("StackTrace: ").Append(ex1.StackTrace).AppendLine();
+                sb.Append("----------------------------------------------------").AppendLine();
+                ex1 = ex1.InnerException;
+
+            }
+            return sb.ToString();
+        }
 
         public static int ToInt(this string text)
         {
