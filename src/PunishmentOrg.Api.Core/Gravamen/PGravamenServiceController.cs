@@ -6,7 +6,6 @@ using Anu.BaseInfo.DataModel.Types;
 using Anu.BaseInfo.Domain.GeoInfo;
 using Anu.BaseInfo.Domain.OrganizationChart;
 using Anu.BaseInfo.Domain.SystemObject;
-using Anu.BaseInfo.ServiceModel.Attachment;
 using Anu.BaseInfo.ServiceModel.GeoInfo;
 using Anu.BaseInfo.ServiceModel.Types;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
@@ -248,7 +247,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             thePGravamen.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_PGravamen_NotFound);
 
-            theGetPGravamenInfoResponse = new GetPGravamenInfoResponse()
+            theGetPGravamenInfoResponse.ThePGravamenInfoContract = new PGravamenInfoContract() 
             {
                 ThePGravamenInfoContract = new PGravamenInfoContract()
                 {
@@ -378,6 +377,69 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             };
 
             return theGetPGravamenInfoResponse;
+        }
+
+        [AllowAnonymous]
+        public async override Task<GetPGravamenByIdResponse> GetPGravamenById([FromBody] GetPGravamenByIdRequest request)
+        {
+            request.Null(GetPGravamenByIdResult.PGravamen_GetPGravamenById_Request_Is_Required);
+
+            request.ThePGravamenByIdContract.Null(GetPGravamenByIdResult.PGravamen_GetPGravamenById_ThePGravamenByIdContract_Is_Required);
+
+            request.ThePGravamenByIdContract!.Id.NullOrWhiteSpace(GetPGravamenByIdResult.PGravamen_GetPGravamenById_Id_Is_Required);
+
+            var thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenById(request.ThePGravamenByIdContract.Id!);
+
+            thePGravamen.Null(GetPGravamenByIdResult.PGravamen_GetPGravamenById_PGravamen_NotFound);
+
+            return new GetPGravamenByIdResponse()
+            {
+                ThePGravamenContract = new PGravamenContract()
+                {
+                    PetitionSubject                = thePGravamen.PetitionSubject     ,
+                    PetitionDescription            = thePGravamen.PetitionDescription ,
+                    NoticeText                     = thePGravamen.NoticeText          ,
+                    PetitionReasons                = thePGravamen.PetitionReasons     ,
+                    RejectReasonText               = thePGravamen.RejectReasonText    ,
+                    CreateDateTime                 = thePGravamen.CreateDateTime      ,
+                    FollowUpNo                     = thePGravamen.FollowUpNo          ,
+                    HowDataType                    = thePGravamen.HowDataType         ,
+                    GravamenOrReport               = thePGravamen.GravamenOrReport    ,
+                    ThePGravamenPersonContractList = thePGravamen.ThePGravamenPersonList?.Select(x => new PGravamenPersonContract()
+                    {
+                        Name            = x.Name           , 
+                        Family          = x.Family         , 
+                        Address         = x.Address        , 
+                        BirthDate       = x.BirthDate      , 
+                        FatherName      = x.FatherName     , 
+                        IdentityNumber  = x.IdentityNumber , 
+                        MobilNumber     = x.MobilNumber    , 
+                        NationalCode    = x.NationalCode   , 
+                        Nationality     = x.Nationality    ,
+                        PersonStartPost = x.PersonStartPost,
+                        Sex             = x.Sex            ,
+                        PersonType      = x.PersonType     ,
+                        PostCode        = x.PostCode       ,
+                        PersonPassword  = x.PersonPassword ,
+                        TradeUnitName   = x.TradeUnitName  , 
+
+                    }).ToList(),
+                    TheGAttachmentContractList = thePGravamen.ThePGravamenAttachmentList?.Select(x => new Anu.BaseInfo.ServiceModel.Attachment.GAttachmentContract() 
+                    {
+                        FileExtension = x.FileExtension       ,
+                        CreateDateTime = x.CreateDateTime     ,
+                        TheAttachmentTypeContract = new AttachmentTypeContract() 
+                        {
+                            Code  = x.TheAttachmentType?.Code  ,
+                            Title = x.TheAttachmentType?.Title ,
+                        }, 
+                        TheGAttachmentDataContract = new Anu.BaseInfo.ServiceModel.Attachment.GAttachmentDataContract()
+                        {
+                            DocFile = x.TheGAttachmentData?.DocFile
+                        },
+                    }).ToList(),
+                }
+            };
         }
 
         #endregion Overrides

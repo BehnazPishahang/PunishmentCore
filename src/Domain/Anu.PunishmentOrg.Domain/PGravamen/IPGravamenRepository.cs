@@ -8,4 +8,6 @@ namespace Anu.PunishmentOrg.Domain.PGravamen;
 public interface IPGravamenRepository : Anu.Domain.IGenericRepository<DataModel.Gravamen.PGravamen>
 {
     public Task<DataModel.Gravamen.PGravamen> GetPGravamenByFollowUpNo(string followUpNo);
+
+    public Task<DataModel.Gravamen.PGravamen> GetPGravamenById(string id);
 }
