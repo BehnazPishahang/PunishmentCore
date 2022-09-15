@@ -112,7 +112,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"theBaseInfoServiceContract\": {\r\n    \"code\": \"6147\",\r\n    \"title\": \"تست عنوان\",\r\n    \"theSystemObjectContract\": {\r\n      \"code\": \"4803\"\r\n    }\r\n  }\r\n}",
+									"raw": "{\r\n  \"theBaseInfoServiceContract\": {\r\n    \"code\": \"6142\",\r\n    \"title\": \"تست عنوان\",\r\n    \"theSystemObjectContract\": {\r\n      \"code\": \"4803\"\r\n    }\r\n  }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -214,7 +214,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"thePNoticeNoInputContract\": {\r\n    \"no\": \"139901221043002811\"\r\n  }\r\n}",
+									"raw": "{\r\n  \"thePNoticeNoInputContract\": {\r\n    \"no\": \"139801221006002571\"\r\n  }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -273,7 +273,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"thePNoticeNoInputContract\": {\r\n    \"no\": \"139901221043002811\"\r\n  }\r\n}",
+									"raw": "{\r\n  \"thePNoticeNoInputContract\": {\r\n    \"no\": \"139901221043002897\"\r\n  }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -281,11 +281,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{Host}}Notice/ChangePNoticeViewByUserStatus",
+									"raw": "{{Host}}api/v1/Notice/ChangePNoticeViewByUserStatus",
 									"host": [
-										"{{Host}}Notice"
+										"{{Host}}api"
 									],
 									"path": [
+										"v1",
+										"Notice",
 										"ChangePNoticeViewByUserStatus"
 									]
 								}
@@ -305,7 +307,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0Rpc2FibGUiOiJ0cnVlIiwicGVybWlzc2lvbnMiOiIwMjYiLCJVc2VyTmFtZSI6IjI3NDA5ODE0MjIiLCJzdWIiOiIyNzQwOTgxNDIyIiwiZW1haWwiOiIyNzQwOTgxNDIyIiwianRpIjoiYjg3OGUzNjYtZTEwZS00NWJjLWI2MDktODNmNjA1ZWE2MThlIiwiaWF0IjoxNjYzMjM1MDEwLCJuYmYiOjE2NjMyMzUwMTAsImV4cCI6MTY2MzMyMTQxMH0.O_XOmYzO1LBpzYc6znSH8Og2xMcbyLLzG2tOhhyGyBU",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0Rpc2FibGUiOiJ0cnVlIiwicGVybWlzc2lvbnMiOiIwMjYiLCJVc2VyTmFtZSI6IjI3NDA5ODE0MjIiLCJzdWIiOiIyNzQwOTgxNDIyIiwiZW1haWwiOiIyNzQwOTgxNDIyIiwianRpIjoiY2MxZDRhNDItMzdhYS00MzAwLWJmMjQtZmVlMTBkZmRkOGYwIiwiaWF0IjoxNjYzMjY1NDAwLCJuYmYiOjE2NjMyNjU0MDAsImV4cCI6MTY2MzM1MTgwMH0.NrCuLKYiR6wyg-mBDSKBUVvAQAcVj1gZrk4mq6IIEhg",
 											"type": "string"
 										}
 									]
@@ -355,14 +357,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{Host}}api/v1/PBill4Paid/GetPBill4PaidListByFishNo",
+									"raw": "{{Host}}api/v1/PBill4Paid/GetPBill4PaidByFishNo",
 									"host": [
 										"{{Host}}api"
 									],
 									"path": [
 										"v1",
 										"PBill4Paid",
-										"GetPBill4PaidListByFishNo"
+										"GetPBill4PaidByFishNo"
 									]
 								}
 							},
@@ -684,7 +686,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"userName\": \"2740981422\",\r\n  \"password\": \"352628\",\r\n  \"loginType\": 1\r\n}",
+							"raw": "{\r\n  \"userName\": \"2740981422\",\r\n  \"password\": \"440918\",\r\n  \"loginType\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -712,7 +714,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0Rpc2FibGUiOiJ0cnVlIiwicGVybWlzc2lvbnMiOiIwMjYiLCJVc2VyTmFtZSI6IjI3NDA5ODE0MjIiLCJzdWIiOiIyNzQwOTgxNDIyIiwiZW1haWwiOiIyNzQwOTgxNDIyIiwianRpIjoiYjg3OGUzNjYtZTEwZS00NWJjLWI2MDktODNmNjA1ZWE2MThlIiwiaWF0IjoxNjYzMjM1MDEwLCJuYmYiOjE2NjMyMzUwMTAsImV4cCI6MTY2MzMyMTQxMH0.O_XOmYzO1LBpzYc6znSH8Og2xMcbyLLzG2tOhhyGyBU",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0Rpc2FibGUiOiJ0cnVlIiwicGVybWlzc2lvbnMiOiIwMjYiLCJVc2VyTmFtZSI6IjI3NDA5ODE0MjIiLCJzdWIiOiIyNzQwOTgxNDIyIiwiZW1haWwiOiIyNzQwOTgxNDIyIiwianRpIjoiY2MxZDRhNDItMzdhYS00MzAwLWJmMjQtZmVlMTBkZmRkOGYwIiwiaWF0IjoxNjYzMjY1NDAwLCJuYmYiOjE2NjMyNjU0MDAsImV4cCI6MTY2MzM1MTgwMH0.NrCuLKYiR6wyg-mBDSKBUVvAQAcVj1gZrk4mq6IIEhg",
 									"type": "string"
 								}
 							]
@@ -721,7 +723,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"userName\": \"2740981422\",\r\n  \"newPhoneNumber\": \"09375880960\",\r\n  \"password\": \"075827\"\r\n}",
+							"raw": "{\r\n  \"userName\": \"2740981422\",\r\n  \"newPhoneNumber\": \"09375880960\",\r\n  \"password\": \"817148\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
