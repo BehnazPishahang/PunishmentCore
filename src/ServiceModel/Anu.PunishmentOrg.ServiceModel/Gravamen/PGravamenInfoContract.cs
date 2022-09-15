@@ -7,6 +7,7 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         public PGravamenInfoContract()
         {
         }
+
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("توضیحات تشکیل پرونده")]
         public string? FilingCaseDesc { get; set; }
@@ -47,6 +48,23 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         [System.ComponentModel.DisplayName("موضوع شکايت")]
         public string? PetitionSubject { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DisplayName("پرونده تعزیرات")]
+        public Anu.PunishmentOrg.ServiceModel.Case.PCaseContract ThePCase { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DisplayName("واحد تعزيرات دريافت کننده اوليه شکوائيه")]
+
+        public Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract TheReceiveUnit { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DisplayName("شعبه ارجاع شونده")]
+        public Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract TheReferUnit { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DisplayName("علت رد/نقص شکوائيه")]
+        public string? RejectReasonText { get; set; }
+        
 
 
     }

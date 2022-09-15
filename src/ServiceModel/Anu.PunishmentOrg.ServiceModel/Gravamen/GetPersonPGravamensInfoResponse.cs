@@ -4,14 +4,14 @@ using Anu.Commons.ServiceModel.ServiceResponse;
 
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
-    [System.ComponentModel.DisplayName("GetPersonPGravamenInfoResponse")]
-    public class GetPersonPGravamenInfoResponse : IResponseMessage
+    [System.ComponentModel.DisplayName("GetPersonPGravamensInfoResponse")]
+    public class GetPersonPGravamensInfoResponse : IResponseMessage
     {
         public Result Result { get; set; }
 
         public Page<List<PGravamenInfoContract>> PNotice { get; set; }
 
-        public GetPersonPGravamenInfoResponse()
+        public GetPersonPGravamensInfoResponse()
         {
             Result = new Result();
             PNotice = new Page<List<PGravamenInfoContract>>();

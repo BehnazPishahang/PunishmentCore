@@ -3,13 +3,13 @@ using Anu.Commons.ServiceModel.ServicePaging;
 
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
-    [System.ComponentModel.DisplayName("GetPersonPGravamenInfoRequest")]
-    public class GetPersonPGravamenInfoRequest : IPaging
+    [System.ComponentModel.DisplayName("GetPersonPGravamensInfoRequest")]
+    public class GetPersonPGravamensInfoRequest : IPaging
     {
         public GetPersonPGravamenInfoContract TheGetPersonPGravamenInfoContract { get; set; }
         public Page Page { get; set; }
 
-        public GetPersonPGravamenInfoRequest()
+        public GetPersonPGravamensInfoRequest()
         {
             TheGetPersonPGravamenInfoContract = new GetPersonPGravamenInfoContract();
             Page = new Page();

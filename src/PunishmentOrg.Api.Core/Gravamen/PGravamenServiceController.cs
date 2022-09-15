@@ -248,22 +248,50 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             thePGravamen.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_PGravamen_NotFound);
 
-            theGetPGravamenInfoResponse.ThePGravamenInfoContract = new PGravamenInfoContract() 
+            theGetPGravamenInfoResponse = new GetPGravamenInfoResponse()
             {
-                State = this.GetState(thePGravamen),
-                FilingCaseDesc = this.GetFilingCaseDesc(thePGravamen),
-                InitialCreationDesc = this.GetInitialCreationDesc(thePGravamen),
-                RejectReasonDesc = this.GetRejectReasonDesc(thePGravamen),
-                ReviewDesc = this.GetReviewDesc(thePGravamen),
+                ThePGravamenInfoContract = new PGravamenInfoContract()
+                {
+                    State = this.GetState(thePGravamen),
+                    FilingCaseDesc = this.GetFilingCaseDesc(thePGravamen),
+                    InitialCreationDesc = this.GetInitialCreationDesc(thePGravamen),
+                    RejectReasonDesc = this.GetRejectReasonDesc(thePGravamen),
+                    ReviewDesc = this.GetReviewDesc(thePGravamen),
+                    CreateDateTime = thePGravamen.CreateDateTime,
+                    FollowUpNo = thePGravamen.FollowUpNo,
+                    PetitionDescription = thePGravamen.PetitionDescription,
+                    PetitionSubject = thePGravamen.PetitionSubject,
+                    RejectReasonText = thePGravamen.RejectReasonText,
+                    TheObjectState = new Anu.BaseInfo.ServiceModel.SystemObject.ObjectStateContract() 
+                    {
+                        Title = thePGravamen.TheObjectState?.Title,
+                        Code = thePGravamen.TheObjectState?.Code
+                    }, 
+                    ThePCase = new ServiceModel.Case.PCaseContract()
+                    {
+                        No = thePGravamen.ThePCase?.No
+                    },
+                    TheReceiveUnit = new Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract()
+                    {
+                        UnitName = thePGravamen.TheReceiveUnit?.UnitName,
+                        UnitNo = thePGravamen.TheReceiveUnit?.UnitNo
+                    },
+                    TheReferUnit = new Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract()
+                    {
+                        UnitName = thePGravamen.TheReferUnit?.UnitName
+                    }
+                    
+                },
+                Result = AnuResult.Successful.GetResult(),
+
             };
+                
 
             return theGetPGravamenInfoResponse;
         }
 
-        //[PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
-        [AllowAnonymous]
-
-        public async override Task<GetPersonPGravamenInfoResponse> GetPersonPGravamenInfo([FromBody] GetPersonPGravamenInfoRequest request)
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        public async override Task<GetPersonPGravamensInfoResponse> GetPersonPGravamensInfo([FromBody] GetPersonPGravamensInfoRequest request)
         {
             request.Null(GetPersonPGravamenInfoResult.PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required);
 
@@ -282,7 +310,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             }
             ).ToList();
 
-            return new GetPersonPGravamenInfoResponse
+            return new GetPersonPGravamensInfoResponse
             {
                 PNotice = new Page<List<PGravamenInfoContract>>
                 {
