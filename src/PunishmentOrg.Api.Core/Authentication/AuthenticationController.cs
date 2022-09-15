@@ -376,10 +376,24 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             var thePcase = await _unitOfWork.Repositorey<Domain.Case.IPCaseRepository>().GetById("59b4ae28ba42490fa9f6b482a0553d1a");
             thePcase.ArchiveNo = "12000000011200000001" + System.DateTime.UtcNow.Ticks;
-            var resu = _unitOfWork.Validate();
-            if (resu != null)
-            { 
+            var validateResult = _unitOfWork.Validate();
+            if (!validateResult.IsValid)
+            {
+                return validateResult.Errors
+                                     .GroupBy(x => x.Severity)
+                                     .Select(error => new AuthResult
+                                     {
+                                         AccessToken = "",
+                                         RefreshToken = "",
+                                         Result = new Result()
+                                         {
+                                             Code = -1,
+                                             Message = error.Aggregate("", (current, next) => current + Environment.NewLine + next),
+                                             Description = error.Aggregate("", (current, next) => current + Environment.NewLine + next),
+                                         }
+                                     }).First();
             }
+
             var result = _unitOfWork.Complete();
 
 
