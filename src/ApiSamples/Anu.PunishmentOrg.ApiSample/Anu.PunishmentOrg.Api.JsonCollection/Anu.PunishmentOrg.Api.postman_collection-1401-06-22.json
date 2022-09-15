@@ -1,0 +1,869 @@
+{
+	"info": {
+		"_postman_id": "35f1a160-2d4b-471b-9a56-9d8f4d1a124e",
+		"name": "Anu.PunishmentOrg.Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11041620"
+	},
+	"item": [
+		{
+			"name": "BaseInfo",
+			"item": [
+				{
+					"name": "GeoLocation",
+					"item": [
+						{
+							"name": "GetGeoLocationList-GetState",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"theGeoLocationContract\": {\r\n    \"childLocationType\": 2,\r\n    \"fullLocationName\": \"string\",\r\n    \"locationCode\": \"002\",\r\n    \"locationName\": \"string\",\r\n    \"locationType\": 0,\r\n    \"state\": 0\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/GeoInfo/GetGeoLocationList",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"GeoInfo",
+										"GetGeoLocationList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetGeoLocationList-GetProvice",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"theGeoLocationContract\": {\r\n    \"childLocationType\": 3,\r\n    \"fullLocationName\": \"string\",\r\n    \"locationCode\": \"06\",\r\n    \"locationName\": \"string\",\r\n    \"locationType\": 2,\r\n    \"state\": 0\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/GeoInfo/GetGeoLocationList",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"GeoInfo",
+										"GetGeoLocationList"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "MechanizedLetter",
+					"item": [
+						{
+							"name": "SendMechanizedLetter",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"request\": {\r\n        \"userName\": \"string\",\r\n        \"passWord\": \"string\"\r\n    },\r\n    \"theGMechanizedLetterContract\": {\r\n        \"no\":\"14019860300000041\",\r\n        \"creatorUserName\": \"creatorUserName\",\r\n        \"letterText\": \"test\",\r\n        \"outerOrgLetterDate\": \"1398/01/01\",\r\n        \"outerOrgLetterNo\": \"123456789\",\r\n        \"theGMechanizedLetterCaseContractList\": [\r\n            {\r\n                \"relatedCaseNo\": \"139400118012001925\",\r\n                \"relatedCaseTitle\": \"relatedCaseTitle\",\r\n                \"theunitContract\": {\r\n                    \"code\": \"18066\"\r\n                }\r\n            }\r\n        ],\r\n        \"theGMechanizedLetterReceiverContractList\": [\r\n            {\r\n                \"mainRcvOrTranscriptRcv\": 1,\r\n                \"receiverType\": 1,\r\n                \"theCMSOrganizationContract\": {\r\n                    \"code\": \"03000\"\r\n                },\r\n                \"theCMSUserRoleTypeContract\": {\r\n                    \"code\": \"0006\"\r\n                }\r\n            }\r\n        ],\r\n        \"theGMechanizedLetterRelLettersContractList\": [\r\n            {\r\n                \"relationType\": 2,\r\n                \"relLetterDate\": \"1395/03/20\",\r\n                \"relLetterGetType\": 2,\r\n                \"relLetterNo\": \"139404718012000332\"\r\n                \r\n            }\r\n        ],\r\n        \"theGMechanizedLetterTypeContract\": {\r\n            \"code\": \"00004\"\r\n        },\r\n        \"theNAJAUnitContract\": {\r\n            \"code\": \"00025\"\r\n        }\r\n       \r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v2/SendMechanizedLetter",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v2",
+										"SendMechanizedLetter"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SystemObject",
+					"item": [
+						{
+							"name": "SendBaseInfo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"theBaseInfoServiceContract\": {\r\n    \"code\": \"6048\",\r\n    \"title\": \"تست عنوان\",\r\n    \"theSystemObjectContract\": {\r\n      \"code\": \"4803\"\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/BaseInfo/SendBaseInfo",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"BaseInfo",
+										"SendBaseInfo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PunishmentOrg",
+			"item": [
+				{
+					"name": "PGravamen",
+					"item": [
+						{
+							"name": "RecieveGravamen",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ThePGravamenContract\": {\r\n        \"TheGeoLocationContract\": {\r\n            \"LocationCode\": \"0507\"\r\n        },\r\n        \"PetitionDescription\": \"PetitionDescription\",\r\n        \"PetitionSubject\": \"Petition Subject\",\r\n        \"ThePGravamenPersonContractList\": [\r\n            {\r\n                \"Address\": \"Azadi St.\",\r\n                \"BirthDate\": \"1370/02/03\",\r\n                \"Family\": \"Pooyan\",\r\n                \"FatherName\": \"Badr\",\r\n                \"IdentityNumber\": \"1234567895\",\r\n                \"MobilNumber\": \"09375880960\",\r\n                \"Name\": \"Ali\",\r\n                \"NationalCode\": \"1234567895\",\r\n                \"PersonStartPost\": 1,\r\n                \"PostCode\": \"1234567899\",\r\n                \"Sex\": 2\r\n            },\r\n            {\r\n                \"Address\": \"Address\",\r\n                \r\n                \"PersonStartPost\": 2,\r\n                \"TradeUnitName\": \"Nanavii Haj Nemat\"\r\n            }\r\n        ],\r\n        \"TheGAttachmentContractList\": [\r\n            {\r\n                \"FileExtension\": 1,\r\n                \"TheGAttachmentDataContract\": {\r\n                    \"DocFile\": \"QW51IGNvcG9yYXRpb24=\"\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/PGravamenService/RecieveGravamen",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"PGravamenService",
+										"RecieveGravamen"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Notice",
+					"item": [
+						{
+							"name": "InqueryPNoticeList",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"request\": {\r\n    \"userName\": \"string\",\r\n    \"passWord\": \"string\"\r\n  },\r\n  \"pNoticePersonContract\": {\r\n    \"nationalityCode\": \"4420385839\"\r\n  },\r\n  \"page\": {\r\n    \"totallPage\": 0,\r\n    \"totalResult\": 0,\r\n    \"rowCountPerPage\": 3,\r\n    \"pageNumber\": 0,\r\n    \"orderPage\": {\r\n      \"property\": \"NoticeDate\",\r\n      \"ascending\": true\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/Notice/InqueryPNoticeList",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"Notice",
+										"InqueryPNoticeList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ExportPNotice",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"thePNoticeNoInputContract\": {\r\n    \"no\": \"139901221043002811\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/Notice/ExportPNotice",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"Notice",
+										"ExportPNotice"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetCountOfUnSeenPNoticeByUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"thePNoticePersonContract\": {\r\n    \"nationalityCode\": \"4420385839\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/Notice/GetCountOfUnSeenPNoticeByUser",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"Notice",
+										"GetCountOfUnSeenPNoticeByUser"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ChangePNoticeViewByUserStatus",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"thePNoticeNoInputContract\": {\r\n    \"no\": \"139901221043002811\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/Notice/ChangePNoticeViewByUserStatus",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"Notice",
+										"ChangePNoticeViewByUserStatus"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BaseInfo",
+					"item": [
+						{
+							"name": "GetProfile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0Rpc2FibGUiOiJ0cnVlIiwicGVybWlzc2lvbnMiOiIwMjYiLCJVc2VyTmFtZSI6IjI3NDA5ODE0MjIiLCJzdWIiOiIyNzQwOTgxNDIyIiwiZW1haWwiOiIyNzQwOTgxNDIyIiwianRpIjoiYTU1OTZjYmQtOTljMS00MzdiLTgzMTMtODVlMGM2MTc1ODk4IiwiaWF0IjoxNjYzMDkwNjA1LCJuYmYiOjE2NjMwOTA2MDUsImV4cCI6MTY2MzE3NzAwNX0.lNmxBCgBeHYyJqQ4A37nsjh3dTbQVF6OZEDJdxClzKY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"pbPuoUsersInputContract\": {\r\n    \"nationalCode\": \"2740981422\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/PBPuoUsers/GetProfile",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"PBPuoUsers",
+										"GetProfile"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Accounting",
+					"item": [
+						{
+							"name": "GetPaymentInfo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ThePBill4PaidFishNoContract\": {\r\n        \"FishNo\": \"98166296\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/PBill4Paid/GetPaymentInfo",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"PBill4Paid",
+										"GetPaymentInfo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BillSotre",
+					"item": [
+						{
+							"name": "SendPBillStore",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v2/BillStore/InquiryByNo",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v2",
+										"BillStore",
+										"InquiryByNo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ReceivePBillStoreFromScms",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/PBillStoreService/ReceivePBillStoreFromScms",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"PBillStoreService",
+										"ReceivePBillStoreFromScms"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DiscoveryMinutes",
+					"item": [
+						{
+							"name": "SendPChaseLicenseReqList",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/DiscoveryMinutes/SendPChaseLicenseReqList",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"DiscoveryMinutes",
+										"SendPChaseLicenseReqList"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SendPDiscoveryMinutesState",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"thePDiscoveryMinutesInputContract\": {\r\n    \"uniqueNo\": \"string\"\r\n  },\r\n  \"request\": {\r\n    \"userName\": \"string\",\r\n    \"passWord\": \"string\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/PDiscoveryMinutesService/SendPDiscoveryMinutesState",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"PDiscoveryMinutesService",
+										"SendPDiscoveryMinutesState"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PInspection",
+					"item": [
+						{
+							"name": "SendPInspectionReportState",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"thePInspectionReportStateInputContract\": {\r\n    \"uniqueNo\": \"string\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://192.168.1.62:83/api/v1/PInspectionService/SendPInspectionReportState",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"62"
+									],
+									"port": "83",
+									"path": [
+										"api",
+										"v1",
+										"PInspectionService",
+										"SendPInspectionReportState"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"2740981422\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.1.62:83/api/v1/Login",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"62"
+							],
+							"port": "83",
+							"path": [
+								"api",
+								"v1",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"2740981422\",\r\n  \"phoneNumber\": \"09375880960\",\r\n  \"firstName\": \"پویا\",\r\n  \"lastName\": \"رضائیه\",\r\n  \"birthDate\": \"1374/02/26\",\r\n  \"sex\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.1.62:83/api/v1/Register",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"62"
+							],
+							"port": "83",
+							"path": [
+								"api",
+								"v1",
+								"Register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SecondStepLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"2740981422\",\r\n  \"password\": \"575161\",\r\n  \"loginType\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.1.62:83/api/v1/SecondStepLogin",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"62"
+							],
+							"port": "83",
+							"path": [
+								"api",
+								"v1",
+								"SecondStepLogin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "V2Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"2740981422\",\r\n  \"phoneNumber\": \"09375880960\",\r\n  \"firstName\": \"پویا\",\r\n  \"lastName\": \"رضائیه\",\r\n  \"birthDate\": \"1374/02/26\",\r\n  \"sex\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.1.62:83/api/v2/Register",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"62"
+							],
+							"port": "83",
+							"path": [
+								"api",
+								"v2",
+								"Register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SendSmsAuth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"2740981422\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.1.62:83/api/v1/SendSmsAuth",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"62"
+							],
+							"port": "83",
+							"path": [
+								"api",
+								"v1",
+								"SendSmsAuth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "V2Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"2740981422\",\r\n  \"password\": \"811960\",\r\n  \"loginType\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.1.62:83/api/v2/Login",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"62"
+							],
+							"port": "83",
+							"path": [
+								"api",
+								"v2",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ChangePhoneNumber",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJc0Rpc2FibGUiOiJ0cnVlIiwicGVybWlzc2lvbnMiOiIwMjYiLCJVc2VyTmFtZSI6IjI3NDA5ODE0MjIiLCJzdWIiOiIyNzQwOTgxNDIyIiwiZW1haWwiOiIyNzQwOTgxNDIyIiwianRpIjoiYTU1OTZjYmQtOTljMS00MzdiLTgzMTMtODVlMGM2MTc1ODk4IiwiaWF0IjoxNjYzMDkwNjA1LCJuYmYiOjE2NjMwOTA2MDUsImV4cCI6MTY2MzE3NzAwNX0.lNmxBCgBeHYyJqQ4A37nsjh3dTbQVF6OZEDJdxClzKY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"2740981422\",\r\n  \"newPhoneNumber\": \"09375880961\",\r\n  \"password\": \"551770\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.1.62:83/api/v1/ChangePhoneNumber",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"1",
+								"62"
+							],
+							"port": "83",
+							"path": [
+								"api",
+								"v1",
+								"ChangePhoneNumber"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
