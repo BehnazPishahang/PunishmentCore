@@ -185,11 +185,34 @@ namespace Anu.Utility
             }
         }
 
+        public static string Args(this string strText, object? arg0)
+        {
+            return string.Format(strText, arg0);
+        }
+
+        public static string Args(this string strText, object? arg0, object? arg1)
+        {
+            return string.Format(strText, arg0, arg1);
+        }
+
+        public static string Args(this string strText, object? arg0, object? arg1, object? arg2)
+        {
+            return string.Format(strText, arg0, arg1, arg2);
+        }
+
+        public static string AddNewLine(this string strText)
+        {
+            return strText += Environment.NewLine;
+        }
+
+
         public static bool IsDevelopment()
         {
             bool isDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
             return isDevelopment;
         }
+
+
     }
 
 
