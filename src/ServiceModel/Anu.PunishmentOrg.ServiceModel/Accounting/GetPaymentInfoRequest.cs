@@ -2,9 +2,9 @@
 namespace Anu.PunishmentOrg.ServiceModel.Accounting
 {
     [System.ComponentModel.DisplayName("GetPaymentInfoRequest")]
-    public class GetPaymentInfoRequest
+    public class GetPBill4PaidByFishNoRequest
     {
-        public GetPaymentInfoRequest()
+        public GetPBill4PaidByFishNoRequest()
         {
         }
             

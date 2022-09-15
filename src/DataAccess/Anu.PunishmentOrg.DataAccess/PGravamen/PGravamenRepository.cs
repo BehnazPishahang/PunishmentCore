@@ -19,8 +19,26 @@ public class PGravamenRepository : GenericRepository<DataModel.Gravamen.PGravame
                                          a.GravamenOrReport == Enumerations.GravamenOrReport.Gravamen)
                              .Include(a => a.TheObjectState)
                              .Include(a => a.TheReceiveUnit)
+                             .Include(a => a.ThePGravamenAttachmentList)
+                             .ThenInclude(a => a.TheGAttachmentData)
+                             .Include(a => a.ThePGravamenPersonList)
+                             .Include(a => a.ThePGravamenViolationList)
                              .Include(a => a.ThePGravamenRejectOrDefectRSList)
                              .ThenInclude(a => a.ThePBGravamenRejectDefectType)
+                             .FirstOrDefaultAsync();
+    }
+
+    public async Task<DataModel.Gravamen.PGravamen> GetPGravamenById(string id)
+    {
+        return await _context.Set<DataModel.Gravamen.PGravamen>()
+                             .Where(a => a.FollowUpNo == id &&
+                                         a.GravamenOrReport == Enumerations.GravamenOrReport.Gravamen)
+                             .Include(a => a.ThePGravamenAttachmentList)
+                             .ThenInclude(a => a.TheGAttachmentData)
+                             .Include(a => a.ThePGravamenAttachmentList)
+                             .ThenInclude(a => a.TheAttachmentType)
+                             .Include(a => a.ThePGravamenPersonList)
+                             .Include(a => a.ThePGravamenViolationList)
                              .FirstOrDefaultAsync();
     }
 }
