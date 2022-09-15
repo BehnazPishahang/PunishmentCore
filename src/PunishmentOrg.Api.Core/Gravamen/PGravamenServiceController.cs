@@ -291,7 +291,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         }
 
         [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
-        public async override Task<GetPersonPGravamensInfoResponse> GetPersonPGravamensInfo([FromBody] GetPersonPGravamensInfoRequest request)
+        public async override Task<GetPersonPGravamensInfoResponse> GetPersonPGravamenInfo([FromBody] GetPersonPGravamensInfoRequest request)
         {
             request.Null(GetPersonPGravamenInfoResult.PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required);
 
