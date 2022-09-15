@@ -35,6 +35,12 @@ namespace Anu.PunishmentOrg.ServiceModel.Notice
         public string? NoticePersonName { get; set; }
 
             
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("پرونده در سرویس")]
+        public Anu.PunishmentOrg.ServiceModel.Notice.PCaseContract? ThePCaseContract { get; set; }
+
+            
 
     }
     }

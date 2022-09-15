@@ -21,7 +21,10 @@ namespace Anu.PunishmentOrg.DataAccess.Notice
 
             var query = _context.Set<PNoticePerson>()
                                 .Include(a => a.ThePNotice)
-                                .Include(a => a.ThePCasePerson)
+                                .ThenInclude(a => a.ThePNoticePersonList)
+                                .ThenInclude(a => a.ThePCase)
+                                //.Include(a => a.ThePCase)
+                                //.Include(a => a.ThePCasePerson)
                                 .Where(a => a.ThePCasePerson.NationalCode == NationalCode)
                                 .Select(a => a.ThePNotice);
 
