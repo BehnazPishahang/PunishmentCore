@@ -115,7 +115,8 @@ builder.Services.AddAuthentication(options =>
 
 var app = builder.Build();
 SmsSender.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
-ShahkarAuthentication.GetConfiguration(app.Services.GetRequiredService<IConfiguration>()); 
+ShahkarAuthentication.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
+SabteahvalAuthentication.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
