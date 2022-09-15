@@ -62,7 +62,7 @@
                     else
                     {
                         <MudListItem Text="پروفایل کاربر "   Href="/Profile" Icon="@Icons.Filled.Person"   />
-                        <MudListItem Text=" تغییر شماره تلفن "  Icon="@Icons.Filled.PhonelinkSetup"   />
+                        <MudListItem Text=" تغییر شماره تلفن " Href="/ChangeNumber" Icon="@Icons.Filled.PhonelinkSetup"   />
                           <MudDivider Class="mb-2" />
                          <MudListItem Text="خروج"  Icon="@Icons.Filled.Logout"  OnClick="Logout" />
                     }
@@ -76,7 +76,7 @@
                            @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
                             {
                                 <MudNavMenu Color="Color.Primary">
-                                <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
+                                <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Filled.Home"  IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
  
     
                                         <MudNavLink Href="/Granovment" Icon="@Icons.Filled.AddIcCall" IconColor="@Theme135._iconColor">
@@ -89,7 +89,7 @@
                             }
                             else
                                {
-                                    <MudNavLink Href="/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard"  IconColor = "@Theme135._iconColor"  > خدمات الکترونیکی تعزیرات </MudNavLink>
+                                    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Filled.Home"  IconColor = "@Theme135._iconColor"  > خدمات الکترونیکی تعزیرات </MudNavLink>
      
                                               <MudNavLink id="FrmNoticeMain" Href="/FrmNotice" Icon="@Icons.Filled.ManageSearch"   IconColor = "@Theme135._iconColor" >
                                                         جستجوی ابلاغ
