@@ -6,12 +6,16 @@ using Anu.BaseInfo.DataModel.Types;
 using Anu.BaseInfo.Domain.GeoInfo;
 using Anu.BaseInfo.Domain.OrganizationChart;
 using Anu.BaseInfo.Domain.SystemObject;
+using Anu.BaseInfo.ServiceModel.Attachment;
+using Anu.BaseInfo.ServiceModel.GeoInfo;
+using Anu.BaseInfo.ServiceModel.Types;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.Domain;
 using Anu.PunishmentOrg.Api.Authentication.Utility;
 using Anu.PunishmentOrg.DataModel.Gravamen;
 using Anu.PunishmentOrg.Domain.BaseInfo;
+using Anu.PunishmentOrg.Domain.Notice;
 using Anu.PunishmentOrg.Domain.PGravamen;
 using Anu.PunishmentOrg.Enumerations;
 using Anu.PunishmentOrg.ServiceModel.Gravamen;
@@ -19,6 +23,9 @@ using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Anu.Utility.Sms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Net.Mail;
+using System.Text;
 using Utility;
 using Utility.CalendarHelper;
 using Utility.Guard;
@@ -28,14 +35,12 @@ namespace Anu.PunishmentOrg.Api.Gravamen
     public class PGravamenServiceController : PGravamenServiceControllerBase
     {
         protected readonly Anu.DataAccess.IUnitOfWork _unitOfWork;
-        private readonly IConfiguration _configuration;
 
         #region Constructor
 
         public PGravamenServiceController(Anu.DataAccess.IUnitOfWork unitOfWork, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
-            _configuration = configuration;
         }
 
         #endregion Constructor
@@ -178,7 +183,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
                         attachmentList.Add(attachedFile);
                     }
-                    
+
                 }
             }
 
@@ -197,7 +202,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 ReporterMobilNumber = string.Empty,
 
                 ThePGravamenPersonList = personList,
-                ThePGravamenAttachmentList = attachmentList.Count ==0 ? null : attachmentList,
+                ThePGravamenAttachmentList = attachmentList.Count == 0 ? null : attachmentList,
 
                 CreateDateTime = DateTime.Now.ToPersian().ToString(),
                 FollowUpNo = followupNumber,
@@ -218,17 +223,87 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             {
                 await SendConfirmationSms(item, gravamen.FollowUpNo);
             }
-            
+
 
             return Respond(AnuResult.Successful, followupNumber);
 
 
         }
 
+        [AllowAnonymous]
+        public async override Task<GetPGravamenInfoResponse> GetPGravamenInfo([FromBody] GetPGravamenInfoRequest request)
+        {
+            GetPGravamenInfoResponse theGetPGravamenInfoResponse = new GetPGravamenInfoResponse();
+
+            request.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_Request_Is_Required);
+
+            request.ThePGravamenContract.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required);
+
+            request.ThePGravamenContract!.FollowUpNo.NullOrWhiteSpace(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
+
+            request.ThePGravamenContract!.FollowUpNo!.IsDigit(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
+
+            var thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByFollowUpNo(request.ThePGravamenContract.FollowUpNo);
+
+            thePGravamen.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_PGravamen_NotFound);
+
+            theGetPGravamenInfoResponse.ThePGravamenInfoContract = new PGravamenInfoContract()
+            {
+                State = this.GetState(thePGravamen),
+                FilingCaseDesc = this.GetFilingCaseDesc(thePGravamen),
+                InitialCreationDesc = this.GetInitialCreationDesc(thePGravamen),
+                RejectReasonDesc = this.GetRejectReasonDesc(thePGravamen),
+                ReviewDesc = this.GetReviewDesc(thePGravamen),
+            };
+
+            return theGetPGravamenInfoResponse;
+        }
 
         #endregion Overrides
 
         #region Methods
+        private string GetState(PGravamen thePGravamen)
+        {
+            return thePGravamen.TheObjectState?.Title;
+        }
+
+        private string GetReviewDesc(PGravamen thePGravamen)
+        {
+            if (thePGravamen.TheObjectState?.Code == PunishmentOrgObjectState.PGravamen.Failed ||
+                thePGravamen.TheObjectState?.Code == PunishmentOrgObjectState.PGravamen.RegisterCase)
+            {
+                return string.Empty;
+            }
+
+            return $"شکوائیه شماره {thePGravamen.FollowUpNo} در شعبه {thePGravamen.TheReceiveUnit?.UnitName} در حال بررسی است..";
+        }
+
+        private string GetRejectReasonDesc(PGravamen thePGravamen)
+        {
+            if (thePGravamen.TheObjectState?.Code != PunishmentOrgObjectState.PGravamen.Failed)
+            {
+                return string.Empty;
+            }
+
+            string rejectReason = thePGravamen.ThePGravamenRejectOrDefectRSList.OfType<PGravamenRejectOrDefectRS>()?.FirstOrDefault()?.ThePBGravamenRejectDefectType?.Title;
+
+            return $"شکوائیه شماره {thePGravamen.FollowUpNo} به دلیل {rejectReason} رد شده است.";
+        }
+
+        private string GetInitialCreationDesc(PGravamen thePGravamen)
+        {
+            return $"شکوائیه شماره {thePGravamen.FollowUpNo} در تاریخ  {thePGravamen.CreateDateTime?.Substring(0, 10)}  ثبت شده است. ";
+        }
+
+        private string GetFilingCaseDesc(PGravamen thePGravamen)
+        {
+            if (thePGravamen.TheObjectState?.Code != PunishmentOrgObjectState.PGravamen.RegisterCase)
+            {
+                return string.Empty;
+            }
+
+            return $"شکوائیه شماره {thePGravamen.FollowUpNo} در شعبه {thePGravamen.TheReceiveUnit?.UnitName} تشکیل پرونده شده است.";
+        }
 
         private void NullCheckNecessaryRequestFields(PGravamenServiceRequest request)
         {
@@ -256,7 +331,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 {
                     NullCheckNecessaryPersonFields(person, PUPersonStartPost.PlaintiffPerson);
 
-                    //await ShahkarAuthentication.ShahkarAuthenticate(person!.MobilNumber!, person!.NationalCode!);
+                    await ShahkarAuthentication.ShahkarAuthenticate(person!.MobilNumber!, person!.NationalCode!);
 
                     availablePositions[plaintiffIndex] = true;
                 }
@@ -408,11 +483,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         {
             var smsText = string.Format("کاربر گرامی، شکوائیه شما با شماره {0} ثبت گردید", followupNo);
 
-            var SendSmsCanUsed = _configuration.GetSection("StatusServices:SendSms").Value;
-            if (Convert.ToBoolean(SendSmsCanUsed))
-            {
-                await SmsSender.SendSms(reporterMobileNo, smsText);
-            }
+            await SmsSender.SendSms(reporterMobileNo, smsText);
         }
 
         private string GetRandomNumber(int length)

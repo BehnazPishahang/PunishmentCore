@@ -1,14 +1,27 @@
 ﻿
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Utility.Sms.ServiceModel;
+using Microsoft.Extensions.Configuration;
 using Utility.Exceptions;
 
 namespace Anu.Utility.Sms
 {
     public static class SmsSender
     {
+        private static IConfiguration _configuration;
+
+        public static void GetConfiguration(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public static async Task SendSms(string phoneNumber,string message)
         {
+            var SendSmsCanUsed = _configuration.GetSection("StatusServices:SendSms").Value;
+            if (!Convert.ToBoolean(SendSmsCanUsed))
+            {
+                return;
+            }
             string BaseUrl = "https://sms.magfa.com/api/http/sms/v2";
             string Url = BaseUrl + "/send";
 
