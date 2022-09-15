@@ -24,19 +24,27 @@
     </ToolBarContent>
     <Columns>
         
-       <Column T="PNoticeContract"  CellClass="d-flex justify-end" >
+      
+     
+        <Column T="PNoticeContract"  Field="CreateDateTime" Title="زمان ثبت" />
+        <Column T="PNoticeContract" Field="No" Title="شماره ابلاغیه " />
+          <Column T="PNoticeContract"   title="شماره پرونده" >
+            <CellTemplate>
+                <MudText Variant="Variant.Filled" >@context.Item.ThePCaseContract.No</MudText>
+            </CellTemplate>
+           
+        </Column>
+        <Column T="PNoticeContract" Field="NoticeDate"   Title="تاريخ ابلاغ " ortBy="@_sortBy" />
+        <Column T="PNoticeContract" Field="NoticePersonName"   Title="نام  ابلاغ شونده " />
+        <Column T="PNoticeContract" Field="NoticePersonFamily" Title="نام خانوادگي ابلاغ شوند" />
+      
+         <Column T="PNoticeContract"  CellClass="d-flex justify-end" >
             <CellTemplate>
               
                 <MudButton Variant="Variant.Filled" EndIcon="@Icons.Filled.Visibility" Color="Color.Primary"  OnClick="() => ShowPDF(context.Item)">مشاهده</MudButton>
             </CellTemplate>
            
         </Column>
-        <Column T="PNoticeContract" Field="CreateDateTime" Title="زمان ثبت" />
-        <Column T="PNoticeContract" Field="No" Title="شماره " />
-        <Column T="PNoticeContract" Field="NoticeDate"   Title="تاريخ ابلاغ " ortBy="@_sortBy" />
-        <Column T="PNoticeContract" Field="NoticePersonName"   Title="نام  ابلاغ شونده " />
-        <Column T="PNoticeContract" Field="NoticePersonFamily" Title="نام خانوادگي ابلاغ شوند" />
-         
     </Columns>
     <PagerContent>
         <MudDataGridPager T="PNoticeContract" />

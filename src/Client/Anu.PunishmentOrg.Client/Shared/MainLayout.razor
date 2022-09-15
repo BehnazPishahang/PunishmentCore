@@ -29,8 +29,10 @@
                  @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
                      
               <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
-                    <MudIcon Icon="@Icons.Filled.Balance" Size="Size.Large" Color="Color.Tertiary" />
-                    <MudText Typo="Typo.h5" Class="mr-3" Color="Color.Default"> میز خدمت تعزیرات حکومتی   </MudText>
+                   
+                    <MudIconButton Icon="@Icons.Filled.Balance" Size="Size.Large" Href="/" Color="Color.Tertiary" ></MudIconButton>
+                    <MudLink Href="/" Typo="Typo.h5" Color="Color.Default" Class="mr-3">پیشخوان خدمات تعزیرات </MudLink>
+
                 <MudSpacer />
        
               <MudIconButton Icon="@_dayNightIcons" Color="@Theme135._iconColor" @onclick="onDarkMode" />
@@ -76,7 +78,7 @@
                            @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
                             {
                                 <MudNavMenu Color="Color.Primary">
-                                <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Filled.Home"  IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
+                                <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Filled.Home"  IconColor="@Theme135._iconColor"> پیشخوان خدمات تعزیرات  </MudNavLink>
  
     
                                         <MudNavLink Href="/Granovment" Icon="@Icons.Filled.AddIcCall" IconColor="@Theme135._iconColor">
@@ -89,7 +91,7 @@
                             }
                             else
                                {
-                                    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Filled.Home"  IconColor = "@Theme135._iconColor"  > خدمات الکترونیکی تعزیرات </MudNavLink>
+                                    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Filled.Home"  IconColor = "@Theme135._iconColor"  > پیشخوان خدمات تعزیرات  </MudNavLink>
      
                                               <MudNavLink id="FrmNoticeMain" Href="/FrmNotice" Icon="@Icons.Filled.ManageSearch"   IconColor = "@Theme135._iconColor" >
                                                         جستجوی ابلاغ
@@ -149,7 +151,7 @@
     public EventCallback OnDarkModeToggle { get; set; }
     bool _drawerOpen = true;
 
-  
+
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
@@ -163,9 +165,15 @@
     public void Logout()
     {
         SharedInfo.NationalCode = string.Empty;
-        _navigationManager.NavigateTo("/DashboardPublic");    
+        _navigationManager.NavigateTo("/");    
     }
 
+
+    void GoHome()
+    {
+        _navigationManager.NavigateTo("/");    
+
+    }
 
     public void onDarkMode()
     {
