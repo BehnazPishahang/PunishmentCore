@@ -15,9 +15,8 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
 {
     public class PCaseRepository : Anu.DataAccess.Repositories.GenericRepository<Anu.PunishmentOrg.DataModel.Case.PCase>, Domain.Case.IPCaseRepository
     {
-        string[] gUnitTypeCodes = new string[] { "005", "013", "008", "010", "011",
-            "012", "006","014","007","015","016" };
-        string[] badviType = new string[] { "005", "013", "006", "014", "007", "015", "016" };
+        string[] gUnitTypeCodes = new string[] { "005", "013", "008", "010", "011", "012" };
+        string[] badviType = new string[] { "005", "013" };
         string[] ejraType = new string[] { "008", "010", "011", "012" };
 
         public PCaseRepository(Anu.DataAccess.ApplicationDbContext context) : base(context)
@@ -41,21 +40,9 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
         public async Task<Statistic> GetStatistic(string nationalCode)
         {
             var pCase = await GetAllPCaseWithNationalCode(nationalCode);
-            if (pCase == null || pCase.Count() == 0)
-            {
-                return new Statistic() { CountTotal = 0, CountSeen = 0, CountUnSeen = 0 };
-            }
-            var totalPcase = pCase.Count();
-
-            var countParvandeJari = await _context.Set<Anu.PunishmentOrg.DataModel.Case.PCasePerson>()
-                .Include(a => a.ThePCase)
-                .Where(a => a.NationalCode == nationalCode && a.ThePCase.CaseArchiveState == PUCaseArchiveState.Active)
-                .GroupBy(a => a.ThePCase.No)
-                .CountAsync();
 
 
-
-            return new Statistic() { CountTotal = totalPcase, CountSeen = totalPcase - countParvandeJari, CountUnSeen = countParvandeJari };
+            return new Statistic() { CountTotal = pCase.Count(), CountSeen = 0, CountUnSeen = 0 };
         }
 
         public async Task<IEnumerable<DataModel.Case.PCase>> GetAllPCaseWithNationalCode(string nationalCode)
@@ -72,11 +59,6 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
             query = query.Include(a => a.TheHandlerUnit).ThenInclude(a => a.TheGUnitType);
 
             var pCase = await query.ToListAsync();
-
-            if (pCase == null || pCase.Count() == 0)
-            {
-                return null;
-            }
 
             return pCase;
         }
@@ -95,10 +77,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
             var queryNew = query.Include(a => a.TheHandlerUnit).ThenInclude(a => a.TheGUnitType);
 
             var pCase = await queryNew.ToListAsync();
-            if (pCase == null || pCase.Count() == 0)
-            {
-                return null;
-            }
+
 
             string createPcase = "پرونده در شعبه {0} در تاریخ {1} ثبت گردید .";
             string handlingPcaseWithPRegiterTimeCase = "برای پرونده در تاریخ {0} ساعت {1} وقت رسیدگی تعیین شده است.";

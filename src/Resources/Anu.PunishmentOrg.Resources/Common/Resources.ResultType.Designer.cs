@@ -520,43 +520,6 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to کدملی شخص مربوط به قبض معتبر نمی باشد..
-        /// </summary>
-        public static string PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_NationalCode_Is_Required {
-            get {
-                return ResourceManager.GetString("PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_NationalCode_Is_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to قبض مربوطه یافت نشد..
-        /// </summary>
-        public static string PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_PBill4Paid_NotFound {
-            get {
-                return ResourceManager.GetString("PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_PBill4Paid_NotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to درخواست معتبر نمی باشد..
-        /// </summary>
-        public static string PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_Request_Is_Required {
-            get {
-                return ResourceManager.GetString("PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_Request_Is_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ورودی درخواست نمی تواند خالی باشد..
-        /// </summary>
-        public static string PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_ThePBill4PaidNationalCodeContract_Is_Required {
-            get {
-                return ResourceManager.GetString("PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_ThePBill4PaidNationalCodeContra" +
-                        "ct_Is_Required", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to شناسه پرداخت معتبر نمی باشد..
         /// </summary>
         public static string PBill4Paid_GetPBill4PaidByFishNo_FishNo_Is_Required {
@@ -1581,51 +1544,6 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string UserName_Or_PassWord_Is_Not_Valid {
             get {
                 return ResourceManager.GetString("UserName_Or_PassWord_Is_Not_Valid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to تاریخ تولد شخص نامعتبر می‌باشد.
-        /// </summary>
-        public static string V2ChangePhoneNumber_BirthDay_Is_Not_Entered {
-            get {
-                return ResourceManager.GetString("V2ChangePhoneNumber_BirthDay_Is_Not_Entered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to شماره تلفن همراه کاربر به کد ملی {0} تکراری است.
-        /// </summary>
-        public static string V2ChangePhoneNumber_Mobile_Number_is_Repetitive {
-            get {
-                return ResourceManager.GetString("V2ChangePhoneNumber_Mobile_Number_is_Repetitive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to شماره موبایل جدید نا معتبر می‌باشد.
-        /// </summary>
-        public static string V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered {
-            get {
-                return ResourceManager.GetString("V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to درخواست معتبر نمی باشد..
-        /// </summary>
-        public static string V2ChangePhoneNumber_request_Is_Not_Valid {
-            get {
-                return ResourceManager.GetString("V2ChangePhoneNumber_request_Is_Not_Valid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to نام کاربری یا کد ارسالی نا معتبر می‌باشد..
-        /// </summary>
-        public static string V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered {
-            get {
-                return ResourceManager.GetString("V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered", resourceCulture);
             }
         }
         
