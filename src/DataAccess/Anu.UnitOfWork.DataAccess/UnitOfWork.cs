@@ -1,4 +1,5 @@
 ﻿using Anu.DataAccess;
+using FluentValidation.Results;
 
 namespace Anu.UnitOfWork.DataAccess
 {
@@ -15,12 +16,17 @@ namespace Anu.UnitOfWork.DataAccess
 
         public int Complete()
         {
-            ValidateContext();
             return _context.SaveChanges();
         }
 
-        private void ValidateContext()
+        public ValidationResult Validate()
         {
+            return ValidateContext();
+        }
+
+        private FluentValidation.Results.ValidationResult ValidateContext()
+        {
+            FluentValidation.Results.ValidationResult validationResult = null;
             var entries = _context.ChangeTracker.Entries();
             foreach (var entry in entries)
             {
@@ -35,10 +41,12 @@ namespace Anu.UnitOfWork.DataAccess
                     {
 
                         var method = validatorType.GetMethod("Validate");
-                        var validateResult = (FluentValidation.Results.ValidationResult?)method?.Invoke(validator, new object[] { entity });
+                        validationResult = (FluentValidation.Results.ValidationResult?)method?.Invoke(validator, new object[] { entity });
                     }
                 }
             }
+
+            return validationResult;
         }
 
         public void Dispose()

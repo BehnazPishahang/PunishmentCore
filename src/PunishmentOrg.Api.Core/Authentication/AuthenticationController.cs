@@ -374,8 +374,12 @@ namespace Anu.PunishmentOrg.Api.Authentication
         public async Task<AuthResult> V2Login([FromBody] SecondStepUserLoginRequest request)
         {
 
-            var thePcase = await _unitOfWork.Repositorey<Domain.Case.IPCaseRepository>().GetById("796300c13bbe4fde959be9bb851dd429");
-            thePcase.ArchiveNo = "15000000011500000001";
+            var thePcase = await _unitOfWork.Repositorey<Domain.Case.IPCaseRepository>().GetById("59b4ae28ba42490fa9f6b482a0553d1a");
+            thePcase.ArchiveNo = "12000000011200000001" + System.DateTime.UtcNow.Ticks;
+            var resu = _unitOfWork.Validate();
+            if (resu != null)
+            { 
+            }
             var result = _unitOfWork.Complete();
 
 
