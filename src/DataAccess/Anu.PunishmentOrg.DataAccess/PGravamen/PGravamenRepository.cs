@@ -31,7 +31,7 @@ public class PGravamenRepository : GenericRepository<DataModel.Gravamen.PGravame
     public async Task<DataModel.Gravamen.PGravamen> GetPGravamenById(string id)
     {
         return await _context.Set<DataModel.Gravamen.PGravamen>()
-                             .Where(a => a.FollowUpNo == id &&
+                             .Where(a => a.Id == id &&
                                          a.GravamenOrReport == Enumerations.GravamenOrReport.Gravamen)
                              .Include(a => a.ThePGravamenAttachmentList)
                              .ThenInclude(a => a.TheGAttachmentData)
