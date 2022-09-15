@@ -22,7 +22,9 @@ namespace Anu.PunishmentOrg.Api.Case
             _unitOfWork = unitOfWork;
         }
 
-        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        //[PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+
         public override async Task<ExportInqueryPCaseResponse> ExportInqueryPCase([FromBody] ExportInqueryPCaseRequest request)
         {
             request.Null(AnuResult.In_Valid_Input);
@@ -33,9 +35,11 @@ namespace Anu.PunishmentOrg.Api.Case
             request.ExportInqueryPCaseInputContract.No.IsDigit(PCaseResult.No_Is_Not_Entered);
             request.ExportInqueryPCaseInputContract.NationalCode.IsValidNationalCode();
 
+            var text = await _unitOfWork.Repositorey<IPCaseRepository>().ExportInqueryPCase(
+                request.ExportInqueryPCaseInputContract.NationalCode, request.ExportInqueryPCaseInputContract.No);
+            text.Null(PCaseResult.You_Do_Not_Have_Any_Case);
 
-            Stimul Text = new Stimul(){Text=await _unitOfWork.Repositorey<IPCaseRepository>().ExportInqueryPCase(
-                request.ExportInqueryPCaseInputContract.NationalCode, request.ExportInqueryPCaseInputContract.No) ,
+            Stimul Text = new Stimul(){Text=text ,
                 No="شماره پرونده :"+request.ExportInqueryPCaseInputContract.No
             };
 
@@ -51,7 +55,9 @@ namespace Anu.PunishmentOrg.Api.Case
 
         }
 
-        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        //[PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+
         public override async Task<GetAllPCaseResponse> GetAllPCase([FromBody] GetAllPCaseRequest request)
         {
             request.Null(AnuResult.In_Valid_Input);
@@ -80,7 +86,9 @@ namespace Anu.PunishmentOrg.Api.Case
 
         }
 
-        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        //[PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+
         public override async Task<GetStatisticPCaseResponse> GetStatisticPCase([FromBody] GetStatisticPCaseRequest request)
         {
             request.Null(AnuResult.In_Valid_Input);

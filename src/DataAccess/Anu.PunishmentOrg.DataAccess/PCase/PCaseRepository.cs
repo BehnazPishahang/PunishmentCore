@@ -40,7 +40,10 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
         public async Task<Statistic> GetStatistic(string nationalCode)
         {
             var pCase = await GetAllPCaseWithNationalCode(nationalCode);
-
+            if (pCase == null || pCase.Count() == 0)
+            {
+                return new Statistic() { CountTotal = 0, CountSeen = 0, CountUnSeen = 0 };
+            }
 
             return new Statistic() { CountTotal = pCase.Count(), CountSeen = 0, CountUnSeen = 0 };
         }
@@ -60,6 +63,11 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
 
             var pCase = await query.ToListAsync();
 
+            if (pCase==null || pCase.Count()==0)
+            {
+                return null;
+            }
+
             return pCase;
         }
 
@@ -77,7 +85,10 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
             var queryNew = query.Include(a => a.TheHandlerUnit).ThenInclude(a => a.TheGUnitType);
 
             var pCase = await queryNew.ToListAsync();
-
+            if (pCase == null || pCase.Count() == 0)
+            {
+                return null;
+            }
 
             string createPcase = "پرونده در شعبه {0} در تاریخ {1} ثبت گردید .";
             string handlingPcaseWithPRegiterTimeCase = "برای پرونده در تاریخ {0} ساعت {1} وقت رسیدگی تعیین شده است.";
