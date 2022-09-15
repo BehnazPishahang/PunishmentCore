@@ -648,4 +648,20 @@
     <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
     <comment>-30282</comment>
   </data>
+  <data name="In_Valid_Input" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-100033</comment>
+  </data>
+  <data name="No_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا شماره پرونده را وارد کنید</value>
+    <comment>-770001</comment>
+  </data>
+  <data name="No_Is_Not_Valid" xml:space="preserve">
+    <value>شماره پرونده معتبر نمی باشد.</value>
+    <comment>-770002</comment>
+  </data>
+  <data name="You_Do_Not_Have_Any_Case" xml:space="preserve">
+    <value>شما هیچ پرونده ای ندارید.</value>
+    <comment>-770003</comment>
+  </data>
 </root>

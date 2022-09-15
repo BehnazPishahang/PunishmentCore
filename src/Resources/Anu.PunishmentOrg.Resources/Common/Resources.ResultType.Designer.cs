@@ -151,6 +151,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string In_Valid_Input {
+            get {
+                return ResourceManager.GetString("In_Valid_Input", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to برای استفاده از خدمت نیاز به ورود دارید..
         /// </summary>
         public static string JwtTokenIsNotValid {
@@ -489,6 +498,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string NationalCode_Must_Be_Number {
             get {
                 return ResourceManager.GetString("NationalCode_Must_Be_Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا شماره پرونده را وارد کنید.
+        /// </summary>
+        public static string No_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("No_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره پرونده معتبر نمی باشد..
+        /// </summary>
+        public static string No_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("No_Is_Not_Valid", resourceCulture);
             }
         }
         
@@ -1254,6 +1281,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string UserName_Or_PassWord_Is_Not_Valid {
             get {
                 return ResourceManager.GetString("UserName_Or_PassWord_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شما هیچ پرونده ای ندارید..
+        /// </summary>
+        public static string You_Do_Not_Have_Any_Case {
+            get {
+                return ResourceManager.GetString("You_Do_Not_Have_Any_Case", resourceCulture);
             }
         }
     }
