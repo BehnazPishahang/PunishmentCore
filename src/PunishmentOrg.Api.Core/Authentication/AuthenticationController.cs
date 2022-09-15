@@ -451,6 +451,42 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         }
 
+        [Route("api/v2/ChangePhoneNumber")]
+        [HttpPost]
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        public async Task<Result> V2ChangePhoneNumber([FromBody] ChangePhoneNumberRequest request)
+        {
+            #region ValidateInput
+            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.NewPhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
+            //todo: should be complete this section
+            request.BirthDay.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
+            request.Password.IsDigit(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+
+            request.UserName.IsValidNationalCode();
+            request.NewPhoneNumber.IsValidPhone();
+            #endregion
+
+            string jwtToken = null;
+
+            var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.Password);
+            await ShahkarAuthentication.ShahkarAuthenticate(request.NewPhoneNumber, request.UserName);
+
+            pBPuoUsers.MobileNumber4SMS = request.NewPhoneNumber;
+
+            _unitOfWork.Repositorey<IPBPuoUsersRepository>().UpdateParent(pBPuoUsers);
+
+            if (_unitOfWork.Complete() < 0)
+            {
+                return AnuResult.Error.GetResult();
+            }
+
+            return AnuResult.Successful.GetResult();
+
+        }
+
         private async Task<PBPuoUsers> ValidateSenedSmsCode(string userName, string password)
         {
             var pBPuoUsers = await _unitOfWork.Repositorey<IPBPuoUsersRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(userName, password);

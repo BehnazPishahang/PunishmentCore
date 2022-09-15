@@ -7,12 +7,12 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         public GetPGravamenInfoRequest()
         {
         }
-            
-                [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("شکوائیه/گزارش مردمی در سرویس")]
-        public Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenContract? ThePGravamenContract { get; set; }
 
-            
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DisplayName("شکوائیه/گزارش مردمی در سرویس")]
+        public Anu.PunishmentOrg.ServiceModel.Gravamen.GetPGravamenInfoContract? TheGetPGravamenInfoContract { get; set; }
+
+
 
     }
-    }
+}

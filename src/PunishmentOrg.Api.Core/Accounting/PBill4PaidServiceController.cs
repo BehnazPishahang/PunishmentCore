@@ -164,7 +164,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
                 {
                     NationalCode = thePBill4Paid.ThePCasePerson?.NationalCode,
                 },
-                TheUnitContract = new unitContract()
+                TheUnitContract = new UnitContract()
                 {
                     UnitName = thePBill4Paid.TheUnit?.UnitName,
                 },
@@ -207,7 +207,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
                 {
                     NationalCode = x.ThePCasePerson!.NationalCode,
                 },
-                TheUnitContract = new unitContract()
+                TheUnitContract = new UnitContract()
                 {
                     UnitName = x.TheUnit?.UnitName,
                 },

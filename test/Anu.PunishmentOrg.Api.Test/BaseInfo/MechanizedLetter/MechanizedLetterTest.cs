@@ -105,7 +105,7 @@ namespace Anu.PunishmentOrg.Api.Test.BaseInfo.MechanizedLetter
                         {
                           RelatedCaseNo = "139400118012001925",
                           RelatedCaseTitle = "relatedCaseTitle",
-                            TheunitContract = new unitContract
+                            TheUnitContract = new UnitContract
                             {
                                 Code= "18066"
 

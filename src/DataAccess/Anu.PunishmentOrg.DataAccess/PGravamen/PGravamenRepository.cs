@@ -1,5 +1,8 @@
-﻿using Anu.DataAccess.Repositories;
+﻿using Anu.Commons.ServiceModel.ServicePaging;
+using Anu.DataAccess.Repositories;
 using Anu.PunishmentOrg.Domain.PGravamen;
+using Anu.Utility.Linq;
+using Anu.Utility.Pagination;
 using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataAccess.PGravamen;
@@ -40,6 +43,28 @@ public class PGravamenRepository : GenericRepository<DataModel.Gravamen.PGravame
                              .Include(a => a.ThePGravamenPersonList)
                              .Include(a => a.ThePGravamenViolationList)
                              .FirstOrDefaultAsync();
+    }
+
+    public async Task<IEnumerable<DataModel.Gravamen.PGravamen>> GetPGravamenByPersonNationalCode(string nationalityCode , Page page)
+    {
+        page.PageChecker("CreateDateTime");
+
+        var query = _context.Set<DataModel.Gravamen.PGravamenPerson>()
+                            .Include(a => a.ThePGravamen)
+                            .ThenInclude(a => a.TheObjectState)
+                            .Include(a => a.ThePGravamen)
+                            .Where(a => a.NationalCode == nationalityCode)
+                            .Select(a => a.ThePGravamen);
+
+        var AllCount = await query
+            .CountAsync();
+
+        var pGravaments = await query
+            .AnuPagination(page).ToListAsync();
+
+        page.CalculateAllPage(AllCount);
+
+        return pGravaments;
     }
 }
 

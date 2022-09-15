@@ -8,9 +8,11 @@ using Anu.BaseInfo.Domain.OrganizationChart;
 using Anu.BaseInfo.Domain.SystemObject;
 using Anu.BaseInfo.ServiceModel.GeoInfo;
 using Anu.BaseInfo.ServiceModel.Types;
+using Anu.Commons.ServiceModel.ServicePaging;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.Domain;
+using Anu.PunishmentOrg.Api.Authentication;
 using Anu.PunishmentOrg.Api.Authentication.Utility;
 using Anu.PunishmentOrg.DataModel.Gravamen;
 using Anu.PunishmentOrg.Domain.BaseInfo;
@@ -236,13 +238,13 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             request.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_Request_Is_Required);
 
-            request.ThePGravamenContract.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required);
+            request.TheGetPGravamenInfoContract.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required);
 
-            request.ThePGravamenContract!.FollowUpNo.NullOrWhiteSpace(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
+            request.TheGetPGravamenInfoContract!.FollowUpNo.NullOrWhiteSpace(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
 
-            request.ThePGravamenContract!.FollowUpNo!.IsDigit(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
+            request.TheGetPGravamenInfoContract!.FollowUpNo!.IsDigit(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
 
-            var thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByFollowUpNo(request.ThePGravamenContract.FollowUpNo);
+            var thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByFollowUpNo(request.TheGetPGravamenInfoContract.FollowUpNo);
 
             thePGravamen.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_PGravamen_NotFound);
 
@@ -256,6 +258,39 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             };
 
             return theGetPGravamenInfoResponse;
+        }
+
+        //[PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        [AllowAnonymous]
+
+        public async override Task<GetPersonPGravamenInfoResponse> GetPersonPGravamenInfo([FromBody] GetPersonPGravamenInfoRequest request)
+        {
+            request.Null(GetPersonPGravamenInfoResult.PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required);
+
+            request.TheGetPersonPGravamenInfoContract.Null(GetPersonPGravamenInfoResult.PGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoContract_Is_Required);
+
+            request.TheGetPersonPGravamenInfoContract!.NationalityCode.NullOrWhiteSpace(GetPersonPGravamenInfoResult.PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Is_Required);
+
+            var thePGravamenList = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByPersonNationalCode(request.TheGetPersonPGravamenInfoContract.NationalityCode!.Trim().ToString(), request.Page);
+
+            thePGravamenList.Null(GetPersonPGravamenInfoResult.PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound);
+
+            var thePNoticeContractList = thePGravamenList.Select(a => new PGravamenInfoContract()
+            {
+                CreateDateTime = a.CreateDateTime,
+                TheObjectState = new Anu.BaseInfo.ServiceModel.SystemObject.ObjectStateContract() { Code = a.TheObjectState.Code, Title = a.TheObjectState.Title },
+            }
+            ).ToList();
+
+            return new GetPersonPGravamenInfoResponse
+            {
+                PNotice = new Page<List<PGravamenInfoContract>>
+                {
+                    Paged = request.Page,
+                    Data = thePNoticeContractList
+                },
+                Result = AnuResult.Successful.GetResult()
+            };
         }
 
         [AllowAnonymous]
@@ -544,7 +579,6 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         private async Task SendConfirmationSms(string reporterMobileNo, string followupNo)
         {
             var smsText = string.Format("کاربر گرامی، شکوائیه شما با شماره {0} ثبت گردید", followupNo);
-
             await SmsSender.SendSms(reporterMobileNo, smsText);
         }
 
@@ -604,6 +638,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     break;
             }
         }
+
 
         #endregion Methods
 

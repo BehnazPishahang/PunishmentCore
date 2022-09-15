@@ -42,4 +42,13 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
         PGravamen_GetPGravamenById_Id_Is_Required                       = -30323,
         PGravamen_GetPGravamenById_PGravamen_NotFound                   = -30324,
     }
+    public enum GetPersonPGravamenInfoResult
+    {
+        PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required = -30301,
+        PGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoContract_Is_Required = -30302,
+        PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Is_Required = -30303,
+        PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Not_Valid = -30304,
+        PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound = -30305,
+    }
+
 }
