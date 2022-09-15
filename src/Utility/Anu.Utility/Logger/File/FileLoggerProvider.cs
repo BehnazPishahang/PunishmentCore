@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,13 @@ namespace Anu.Utility.Logger.File
     public class FileLoggerProvider : ILoggerProvider
     {
 
-        internal FileLoggerOptions Options { get; init; }
-        public FileLoggerProvider(IOptions<FileLoggerOptions> options)
+        internal FileLoggerOptions Options { get; }
+        internal IConfiguration Configuration { get; }
+
+        public FileLoggerProvider(IOptions<FileLoggerOptions> options, IConfiguration configuration)
         {
             Options = options.Value;
+            Configuration = configuration;
         }
         public ILogger CreateLogger(string categoryName)
         {

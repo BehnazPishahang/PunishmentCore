@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Utility;
+using Anu.Utility.Logger.File;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -113,6 +114,14 @@ builder.Services.AddAuthentication(options =>
             await context.Response.WriteAsync(responseMessagestring);
         }
     };
+});
+
+builder.Host.ConfigureLogging((context, logging) =>
+{
+    logging.AddFileLogger(options =>
+    {
+        context.Configuration.GetSection("Logging").GetSection("File").GetSection("Options").Bind(options);
+    });
 });
 
 var app = builder.Build();

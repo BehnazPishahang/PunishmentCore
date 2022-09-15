@@ -10,7 +10,7 @@ namespace Anu.Utility.Logger.File
 {
     public static class FileLoggerExtensions
     {
-        public static ILoggingBuilder AddDbLogger(this ILoggingBuilder builder, Action<FileLoggerOptions> configure)
+        public static ILoggingBuilder AddFileLogger(this ILoggingBuilder builder, Action<FileLoggerOptions> configure)
         {
             builder.Services.AddSingleton<ILoggerProvider, FileLoggerProvider>();
             builder.Services.Configure(configure);
