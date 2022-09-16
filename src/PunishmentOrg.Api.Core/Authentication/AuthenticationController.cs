@@ -465,7 +465,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             request.UserName.NullOrWhiteSpace(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
             request.MobileNumber.NullOrWhiteSpace(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
-
+            request.MobileNumber.IsDigit(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
             request!.UserName!.IsValidNationalCode();
             #endregion
 
