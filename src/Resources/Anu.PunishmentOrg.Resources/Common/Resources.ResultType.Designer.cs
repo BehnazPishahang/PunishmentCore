@@ -937,6 +937,42 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شماره پیگیری یا شناسه واحد شکوائیه نمی توانند هر دو خالی باشند.
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_Id_FollowUpNo_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_Id_FollowUpNo_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شکوائیه یافت نشد..
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_PGravamen_NotFound {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_PGravamen_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد.
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ورودی درخواست نمی تواند خالی باشد.
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_ThePGravamenByIdContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_ThePGravamenByIdContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شماره پیگیری معتبر نمی باشد..
         /// </summary>
         public static string PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required {

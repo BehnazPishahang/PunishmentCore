@@ -706,7 +706,7 @@
   </data>
   <data name="PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError" xml:space="preserve">
     <value>خطای برگشتی از سرویس سداد.</value>
-    <comment>-30300</comment>
+    <comment>-302910</comment>
   </data>
   <data name="PBill4Paid_SendPaymentRequestToSadad_IBAN_NotFound" xml:space="preserve">
     <value>شبای قبض یافت نشد.</value>
@@ -763,5 +763,21 @@
   <data name="PGravamen_GetPersonPGravamenStatisticResult_TheNationalityCode_Is_Required" xml:space="preserve">
     <value>شماره ملی شخص نامعتبر یا خالی می‌باشد</value>
     <comment>-30142</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenById_Id_FollowUpNo_Is_Required" xml:space="preserve">
+    <value>شماره پیگیری یا شناسه واحد شکوائیه نمی توانند هر دو خالی باشند</value>
+    <comment>-30323</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenById_PGravamen_NotFound" xml:space="preserve">
+    <value>شکوائیه یافت نشد.</value>
+    <comment>-30324</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenById_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد</value>
+    <comment>-30321</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenById_ThePGravamenByIdContract_Is_Required" xml:space="preserve">
+    <value>ورودی درخواست نمی تواند خالی باشد</value>
+    <comment>-30322</comment>
   </data>
 </root>
