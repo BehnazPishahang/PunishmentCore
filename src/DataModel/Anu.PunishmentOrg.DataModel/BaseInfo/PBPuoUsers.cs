@@ -10,6 +10,10 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
     {
 
         [Unicode(false)]
+        [Column("BIRTHDAY")]
+        public virtual string? BirthDay { get; set; }
+
+        [Unicode(false)]
         [Column("DYNOMICPASSWORD")]
         public virtual string? DynomicPassword { get; set; }
 
@@ -23,7 +27,7 @@ namespace Anu.PunishmentOrg.DataModel.BaseInfo
     
         [Column("TIMESTAMP")]
         [ConcurrencyCheck]
-        public long PTimestamp { get { return base.Timestamp; } set { } }
+        public long PTimestamp { get { return base.Timestamp; } set {} }
     }
 
     [Table("PBPUOUSERS")]

@@ -1441,6 +1441,33 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کاربر در سامانه ثبت نام نکرده است.
+        /// </summary>
+        public static string SendSmsForChangePhoneNumber_Not_Find_User {
+            get {
+                return ResourceManager.GetString("SendSmsForChangePhoneNumber_Not_Find_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد..
+        /// </summary>
+        public static string SendSmsForChangePhoneNumber_request_Not_Valid {
+            get {
+                return ResourceManager.GetString("SendSmsForChangePhoneNumber_request_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره تلفن یا کد ملی معتبر نمی‌باشد.
+        /// </summary>
+        public static string SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid {
+            get {
+                return ResourceManager.GetString("SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to جنسیت معتبر نمی باشد.
         /// </summary>
         public static string Sex_Is_Not_Valid {
@@ -1545,6 +1572,42 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string UserName_Or_PassWord_Is_Not_Valid {
             get {
                 return ResourceManager.GetString("UserName_Or_PassWord_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاریخ تولد شخص نامعتبر می‌باشد.
+        /// </summary>
+        public static string V2ChangePhoneNumber_BirthDay_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_BirthDay_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره موبایل جدید نا معتبر می‌باشد.
+        /// </summary>
+        public static string V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد..
+        /// </summary>
+        public static string V2ChangePhoneNumber_request_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_request_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نام کاربری یا کد ارسالی نا معتبر می‌باشد..
+        /// </summary>
+        public static string V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered", resourceCulture);
             }
         }
         

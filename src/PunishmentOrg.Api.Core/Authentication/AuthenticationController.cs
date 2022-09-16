@@ -322,6 +322,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 EndDate = CalendarHelper.MaxDateTime(),
                 Family = request.LastName,
                 FatherName = request.BirthDate,
+                BirthDay = request.BirthDate,
                 Name = request.FirstName,
                 Sex = request.Sex,
                 LastChangePassword = CalendarHelper.GetCurrentDateTime()
@@ -451,28 +452,98 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         }
 
+
+        #region Change Phone Number WithOut Login
+
+        [Route("api/v1/SendSmsForChangePhoneNumber")]
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public async Task<FirstStepAuthResult> SendSmsForChangePhoneNumber([FromBody] FirstStepUserLoginRequest request)
+        {
+            #region ValidateInput
+            request.Null(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_request_Not_Valid);
+
+            request.UserName.NullOrWhiteSpace(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
+            request.MobileNumber.NullOrWhiteSpace(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
+
+            request!.UserName!.IsValidNationalCode();
+            #endregion
+
+            #region ValidateUserHistory
+            var pBPuoUsers = (await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>()
+                .Find(x => x.NationalityCode == request.UserName)).FirstOrDefault();
+            pBPuoUsers.Null(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_Not_Find_User);
+
+            var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IPBPuoUsersHistoryRepository>().LastRecordHistoryPerDay(pBPuoUsers.Id, DateTime.Now.DateToString());
+
+            if (lastRecordHistoryPerDay != null && !Anu.Utility.Utility.IsDevelopment())
+            {
+                var difDateSecond = (DateTime.Now - lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime()).TotalSeconds;
+                if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
+                {
+                    return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_SecodeWait - difDateSecond)).ToString()) };
+                }
+
+                if (lastRecordHistoryPerDay.CountCodePerDay >= _LimitSendDayCodePerDay)
+                {
+                    return new FirstStepAuthResult() { Result = AnuResult.Sms_Limit_Send.GetResult() };
+                }
+            }
+            #endregion ValidateUserHistory
+
+            #region SendAndSubmitPassword
+            string password = await request.MobileNumber.SendAuthenticateSms(_CountCharacter);
+            string passWordHash = MD5Core.GetHashString(password);
+
+            pBPuoUsers.DynomicPassword = passWordHash;
+            _unitOfWork.Repositorey<IPBPuoUsersRepository>().UpdateParent(pBPuoUsers);
+
+            var currentDateTime = DateTime.Now;
+            var userHistory = new PBPuoUsersHistory()
+            {
+                Id = Guid.NewGuid().ToString("N"),
+                DynomicPassword = passWordHash,
+                SendCodeDateTime = currentDateTime.DateTimeToString(),
+                ExpiredCodeDateTime = currentDateTime.AddSeconds(_SecodeWait).DateTimeToString(),
+                CountCodePerDay = lastRecordHistoryPerDay == null ? 1 : lastRecordHistoryPerDay.CountCodePerDay + 1,
+                ThePBPuoUsers = pBPuoUsers
+            };
+            await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsersHistory>>().Add(userHistory);
+
+            if (_unitOfWork.Complete() < 0)
+            {
+                return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
+            }
+            #endregion
+
+            return new FirstStepAuthResult()
+            {
+                CountCharacter = _CountCharacter,
+                SecondsWait = _SecodeWait,
+                Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: request!.MobileNumber!.Substring(request.MobileNumber.Length - 4) + "*****09")
+            };
+        }
+
         [Route("api/v2/ChangePhoneNumber")]
         [HttpPost]
-        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public async Task<Result> V2ChangePhoneNumber([FromBody] ChangePhoneNumberRequest request)
         {
             #region ValidateInput
-            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-            request.NewPhoneNumber.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
-            //todo: should be complete this section
-            request.BirthDay.NullOrWhiteSpace(AnuResult.PhoneNumber_Is_Not_Entered);
-            request.Password.IsDigit(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.Null(V2ChangePhoneNumberResult.V2ChangePhoneNumber_request_Is_Not_Valid);
+            request.UserName.NullOrWhiteSpace(V2ChangePhoneNumberResult.V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered);
+            request.Password!.IsDigit(V2ChangePhoneNumberResult.V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered);
+            request!.NewPhoneNumber.NullOrWhiteSpace(V2ChangePhoneNumberResult.V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered);
+            request.BirthDay.NullOrWhiteSpace(V2ChangePhoneNumberResult.V2ChangePhoneNumber_BirthDay_Is_Not_Entered);
 
-            request.UserName.IsValidNationalCode();
+            request.UserName!.IsValidNationalCode();
             request.NewPhoneNumber.IsValidPhone();
-            #endregion
 
-            string jwtToken = null;
+            #endregion ValidateInput
 
-            var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.Password);
-            await ShahkarAuthentication.ShahkarAuthenticate(request.NewPhoneNumber, request.UserName);
+            var pBPuoUsers = await ValidateSenedSmsCode(request!.UserName, request!.Password);
+            await ShahkarAuthentication.ShahkarAuthenticate(request!.NewPhoneNumber, request.UserName);
 
             pBPuoUsers.MobileNumber4SMS = request.NewPhoneNumber;
 
@@ -486,6 +557,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
             return AnuResult.Successful.GetResult();
 
         }
+
+        #endregion Change Phone Number WithOut Login
 
         private async Task<PBPuoUsers> ValidateSenedSmsCode(string userName, string password)
         {
@@ -533,6 +606,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             return pBPuoUsers;
         }
+
         private string GenerateJwtToken(GFESUser theGFESUser)
         {
             var jwtTokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
