@@ -8,6 +8,8 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
     {
         public Result Result { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DisplayName("شماره پیگیری شکوائیه/گزارش در سرویس")]
         public PGravamenResponseContract ThePGravamenResponseContract { get; set; }
 
         public PGravamenServiceResponse()

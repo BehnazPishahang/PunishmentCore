@@ -2,11 +2,11 @@
 namespace Anu.BaseInfo.ServiceModel.OrganizationChart
 {
     [System.ComponentModel.DisplayName("واحد سازماني در سرویس")]
-    public class unitContract
+    public class UnitContract
     {
-        public unitContract()
+        public UnitContract()
         {
-            TheChildUnitsList = new List<Anu.BaseInfo.ServiceModel.OrganizationChart.unitContract>();
+            TheChildUnitsList = new List<Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract>();
 
             TheGUnitRelatedNajaUnitContractList = new List<Anu.BaseInfo.ServiceModel.ExchangeData.GUnitRelatedNajaUnitContract>();
 
@@ -41,7 +41,7 @@ namespace Anu.BaseInfo.ServiceModel.OrganizationChart
 
 
         [System.ComponentModel.DisplayName("واحدهاي زيردست")]
-        public List<Anu.BaseInfo.ServiceModel.OrganizationChart.unitContract>? TheChildUnitsList { get; set; }
+        public List<Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract>? TheChildUnitsList { get; set; }
 
 
 
@@ -68,7 +68,7 @@ namespace Anu.BaseInfo.ServiceModel.OrganizationChart
 
 
         [System.ComponentModel.DisplayName("واحد بالادست")]
-        public Anu.BaseInfo.ServiceModel.OrganizationChart.unitContract? TheParentUnit { get; set; }
+        public Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract? TheParentUnit { get; set; }
 
 
 

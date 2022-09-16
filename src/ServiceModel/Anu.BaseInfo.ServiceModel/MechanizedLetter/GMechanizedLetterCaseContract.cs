@@ -51,7 +51,7 @@ namespace Anu.BaseInfo.ServiceModel.MechanizedLetter
 
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("واحد مربوط به پرونده(يا مدرک اصلي مشابه) مربوطه")]
-        public Anu.BaseInfo.ServiceModel.OrganizationChart.unitContract? TheunitContract { get; set; }
+        public Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract? TheUnitContract { get; set; }
 
 
 

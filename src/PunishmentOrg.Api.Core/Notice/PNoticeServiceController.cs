@@ -8,6 +8,7 @@ using Anu.PunishmentOrg.DataModel.Case;
 using Anu.PunishmentOrg.DataModel.Notice;
 using Anu.PunishmentOrg.Domain.Notice;
 using Anu.PunishmentOrg.Report;
+using Anu.PunishmentOrg.ServiceModel.Case;
 using Anu.PunishmentOrg.ServiceModel.Notice;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Anu.Report;

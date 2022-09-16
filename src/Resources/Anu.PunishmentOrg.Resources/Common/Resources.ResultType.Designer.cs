@@ -151,6 +151,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string In_Valid_Input {
+            get {
+                return ResourceManager.GetString("In_Valid_Input", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to برای استفاده از خدمت نیاز به ورود دارید..
         /// </summary>
         public static string JwtTokenIsNotValid {
@@ -489,6 +498,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string NationalCode_Must_Be_Number {
             get {
                 return ResourceManager.GetString("NationalCode_Must_Be_Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا شماره پرونده را وارد کنید.
+        /// </summary>
+        public static string No_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("No_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره پرونده معتبر نمی باشد..
+        /// </summary>
+        public static string No_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("No_Is_Not_Valid", resourceCulture);
             }
         }
         
@@ -842,6 +869,106 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string PGravamen_FileIsLargerThanAllowedThreshold {
             get {
                 return ResourceManager.GetString("PGravamen_FileIsLargerThanAllowedThreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد ملی شخص نا معتبر میباشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد ملی شخص نا معتبر میباشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Not_Valid {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شکوائیه ای برای شخص یافت نشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اطلاعات شخص نا معتبر میباشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoCoPGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoCoPGravamen_GetPe" +
+                        "rsonPGravamenInfoResult_TheGetPersonPGravamenInfoContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  درخواست ورودی نامعتبر یا خالی می‌باشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenStatisticResult_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenStatisticResult_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره ملی شخص نامعتبر یا خالی می‌باشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenStatisticResult_TheNationalityCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenStatisticResult_TheNationalityCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره پیگیری یا شناسه واحد شکوائیه نمی توانند هر دو خالی باشند.
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_Id_FollowUpNo_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_Id_FollowUpNo_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شکوائیه یافت نشد..
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_PGravamen_NotFound {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_PGravamen_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد.
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ورودی درخواست نمی تواند خالی باشد.
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_ThePGravamenByIdContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_ThePGravamenByIdContract_Is_Required", resourceCulture);
             }
         }
         
@@ -1314,6 +1441,33 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کاربر در سامانه ثبت نام نکرده است.
+        /// </summary>
+        public static string SendSmsForChangePhoneNumber_Not_Find_User {
+            get {
+                return ResourceManager.GetString("SendSmsForChangePhoneNumber_Not_Find_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد..
+        /// </summary>
+        public static string SendSmsForChangePhoneNumber_request_Not_Valid {
+            get {
+                return ResourceManager.GetString("SendSmsForChangePhoneNumber_request_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره تلفن یا کد ملی معتبر نمی‌باشد.
+        /// </summary>
+        public static string SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid {
+            get {
+                return ResourceManager.GetString("SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to جنسیت معتبر نمی باشد.
         /// </summary>
         public static string Sex_Is_Not_Valid {
@@ -1418,6 +1572,51 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string UserName_Or_PassWord_Is_Not_Valid {
             get {
                 return ResourceManager.GetString("UserName_Or_PassWord_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاریخ تولد شخص نامعتبر می‌باشد.
+        /// </summary>
+        public static string V2ChangePhoneNumber_BirthDay_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_BirthDay_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره موبایل جدید نا معتبر می‌باشد.
+        /// </summary>
+        public static string V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد..
+        /// </summary>
+        public static string V2ChangePhoneNumber_request_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_request_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نام کاربری یا کد ارسالی نا معتبر می‌باشد..
+        /// </summary>
+        public static string V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شما هیچ پرونده ای ندارید..
+        /// </summary>
+        public static string You_Do_Not_Have_Any_Case {
+            get {
+                return ResourceManager.GetString("You_Do_Not_Have_Any_Case", resourceCulture);
             }
         }
     }

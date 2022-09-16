@@ -27,6 +27,6 @@ namespace Anu.PunishmentOrg.ServiceModel.Accounting
         public long? TotalPaidCost { get; set; }
         public ObjectStateContract TheObjectStateContract { get; set; }
         public PCasePersonContract ThePCasePersonContract { get; set; }
-        public unitContract TheUnitContract { get; set; }
+        public UnitContract TheUnitContract { get; set; }
     }
     }

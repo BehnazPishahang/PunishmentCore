@@ -26,7 +26,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
         PBill4Paid_SendPaymentRequestToSadad_TreasuryID_NotFound                         = -30297,
         PBill4Paid_SendPaymentRequestToSadad_TotalPaidCost_NotFound                      = -30298,
         PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError                       = -30299,
-        PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError                           = -30300,
+        PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError                           = -302910,
     }
 
     public enum GetPBill4PaidListByNationalCodeResult

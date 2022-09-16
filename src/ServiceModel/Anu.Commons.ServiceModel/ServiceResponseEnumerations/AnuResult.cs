@@ -48,6 +48,22 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         BirthDate_Is_Not_Valid = -100029,
         Login_Again = -100030,
         Request_Is_Not_Valid=-100031,
-        Can_Not_Find_AccessType=-100032
+        Can_Not_Find_AccessType=-100032,
+        In_Valid_Input=-100033
+    }
+
+    public enum SendSmsForChangePhoneNumberResult
+    {
+        SendSmsForChangePhoneNumber_request_Not_Valid = -30141,
+        SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid = -30142,
+        SendSmsForChangePhoneNumber_Not_Find_User = -30143
+    }
+
+    public enum V2ChangePhoneNumberResult
+    {
+        V2ChangePhoneNumber_request_Is_Not_Valid = -30151,
+        V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered = -30152,
+        V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered = -30153,
+        V2ChangePhoneNumber_BirthDay_Is_Not_Entered = -30154
     }
 }
