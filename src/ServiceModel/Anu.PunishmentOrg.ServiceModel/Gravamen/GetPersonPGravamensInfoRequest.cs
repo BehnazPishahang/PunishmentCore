@@ -6,7 +6,9 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
     [System.ComponentModel.DisplayName("GetPersonPGravamensInfoRequest")]
     public class GetPersonPGravamensInfoRequest : IPaging
     {
-        public GetPersonPGravamenInfoContract TheGetPersonPGravamenInfoContract { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DisplayName("اطلاعات ابلاغیه")]
+        public GetPersonPGravamenInfoContract? TheGetPersonPGravamenInfoContract { get; set; }
         public Page Page { get; set; }
 
         public GetPersonPGravamensInfoRequest()
