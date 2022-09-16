@@ -386,7 +386,11 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             request.ThePGravamenByIdContract.Null(GetPGravamenByIdResult.PGravamen_GetPGravamenById_ThePGravamenByIdContract_Is_Required);
 
-            request.ThePGravamenByIdContract!.Id.NullOrWhiteSpace(GetPGravamenByIdResult.PGravamen_GetPGravamenById_Id_Is_Required);
+            if (string.IsNullOrEmpty(request.ThePGravamenByIdContract!.Id) &&
+                string.IsNullOrEmpty(request.ThePGravamenByIdContract!.FollowUpNo))
+            {
+                request.ThePGravamenByIdContract!.Id.NullOrWhiteSpace(GetPGravamenByIdResult.PGravamen_GetPGravamenById_Id_FollowUpNo_Is_Required);
+            }
 
             var thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenById(request.ThePGravamenByIdContract.Id!);
 
