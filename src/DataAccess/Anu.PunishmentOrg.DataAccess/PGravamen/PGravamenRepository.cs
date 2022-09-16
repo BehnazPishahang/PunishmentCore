@@ -23,6 +23,8 @@ public class PGravamenRepository : GenericRepository<DataModel.Gravamen.PGravame
                              .Include(a => a.TheReceiveUnit)
                              .Include(a => a.ThePGravamenAttachmentList)
                              .ThenInclude(a => a.TheGAttachmentData)
+                             .Include(a => a.ThePGravamenAttachmentList)
+                             .ThenInclude(a => a.TheAttachmentType)
                              .Include(a => a.ThePGravamenPersonList)
                              .Include(a => a.ThePGravamenViolationList)
                              .Include(a => a.ThePGravamenRejectOrDefectRSList)
