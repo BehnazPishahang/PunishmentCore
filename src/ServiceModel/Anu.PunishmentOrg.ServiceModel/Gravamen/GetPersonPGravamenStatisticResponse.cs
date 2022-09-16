@@ -14,9 +14,7 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 
         public Result Result { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName("اطلاعات شکوائیه/گزارش در سرویس")]
-        public Anu.PunishmentOrg.ServiceModel.Gravamen.GetPersonPGravamenStatisticContract? TheGetPersonPGravamenStatisticContract { get; set; }
+        public Anu.PunishmentOrg.ServiceModel.Gravamen.GetPersonPGravamenStatisticContract TheGetPersonPGravamenStatisticContract { get; set; }
 
 
     }
