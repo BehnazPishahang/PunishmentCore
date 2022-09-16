@@ -846,6 +846,70 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to کد ملی شخص نا معتبر میباشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد ملی شخص نا معتبر میباشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Not_Valid {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شکوائیه ای برای شخص یافت نشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اطلاعات شخص نا معتبر میباشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoCoPGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoCoPGravamen_GetPe" +
+                        "rsonPGravamenInfoResult_TheGetPersonPGravamenInfoContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  درخواست ورودی نامعتبر یا خالی می‌باشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenStatisticResult_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenStatisticResult_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره ملی شخص نامعتبر یا خالی می‌باشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenStatisticResult_TheNationalityCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenStatisticResult_TheNationalityCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شماره پیگیری معتبر نمی باشد..
         /// </summary>
         public static string PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required {

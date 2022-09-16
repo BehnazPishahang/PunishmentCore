@@ -26,5 +26,9 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         [Microsoft.AspNetCore.Mvc.Route("api/v1/Gravamen/GetPersonPGravamenInfo")]
         public abstract Task<GetPersonPGravamensInfoResponse> GetPersonPGravamenInfo([Microsoft.AspNetCore.Mvc.FromBody] GetPersonPGravamensInfoRequest request);
 
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        [Microsoft.AspNetCore.Mvc.Route("api/v1/Gravamen/GetPersonPGravamenStatistic")]
+        public abstract Task<GetPersonPGravamenStatisticResponse> GetPersonPGravamenStatistic([Microsoft.AspNetCore.Mvc.FromBody] GetPersonPGravamenStatisticRequest request);
+
     }
 }

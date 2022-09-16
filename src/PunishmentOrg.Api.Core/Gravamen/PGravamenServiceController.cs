@@ -262,11 +262,11 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     PetitionDescription = thePGravamen.PetitionDescription,
                     PetitionSubject = thePGravamen.PetitionSubject,
                     RejectReasonText = thePGravamen.RejectReasonText,
-                    TheObjectState = new Anu.BaseInfo.ServiceModel.SystemObject.ObjectStateContract() 
+                    TheObjectState = new Anu.BaseInfo.ServiceModel.SystemObject.ObjectStateContract()
                     {
                         Title = thePGravamen.TheObjectState?.Title,
                         Code = thePGravamen.TheObjectState?.Code
-                    }, 
+                    },
                     ThePCase = new ServiceModel.Case.PCaseContract()
                     {
                         No = thePGravamen.ThePCase?.No
@@ -280,12 +280,12 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     {
                         UnitName = thePGravamen.TheReferUnit?.UnitName
                     }
-                    
+
                 },
                 Result = AnuResult.Successful.GetResult(),
 
             };
-                
+
 
             return theGetPGravamenInfoResponse;
         }
@@ -299,6 +299,8 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             request.TheGetPersonPGravamenInfoContract!.NationalityCode.NullOrWhiteSpace(GetPersonPGravamenInfoResult.PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Is_Required);
 
+            request.TheGetPersonPGravamenInfoContract!.NationalityCode!.IsDigit(GetPersonPGravamenInfoResult.PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Not_Valid);
+
             var thePGravamenList = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByPersonNationalCode(request.TheGetPersonPGravamenInfoContract.NationalityCode!.Trim().ToString(), request.Page);
 
             thePGravamenList.Null(GetPersonPGravamenInfoResult.PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound);
@@ -306,7 +308,34 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             var thePNoticeContractList = thePGravamenList.Select(a => new PGravamenInfoContract()
             {
                 CreateDateTime = a.CreateDateTime,
-                TheObjectState = new Anu.BaseInfo.ServiceModel.SystemObject.ObjectStateContract() { Code = a.TheObjectState.Code, Title = a.TheObjectState.Title },
+                TheObjectState = new Anu.BaseInfo.ServiceModel.SystemObject.ObjectStateContract()
+                {
+                    Code = a.TheObjectState.Code,
+                    Title = a.TheObjectState.Title
+                },
+                State = this.GetState(a),
+                FilingCaseDesc = this.GetFilingCaseDesc(a),
+                InitialCreationDesc = this.GetInitialCreationDesc(a),
+                RejectReasonDesc = this.GetRejectReasonDesc(a),
+                ReviewDesc = this.GetReviewDesc(a),
+                FollowUpNo = a.FollowUpNo,
+                PetitionDescription = a.PetitionDescription,
+                PetitionSubject = a.PetitionSubject,
+                RejectReasonText = a.RejectReasonText,
+                ThePCase = new ServiceModel.Case.PCaseContract()
+                {
+                    No = a.ThePCase?.No
+                },
+                TheReceiveUnit = new Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract()
+                {
+                    UnitName = a.TheReceiveUnit?.UnitName,
+                    UnitNo = a.TheReceiveUnit?.UnitNo
+                },
+                TheReferUnit = new Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract()
+                {
+                    UnitName = a.TheReferUnit?.UnitName
+                }
+
             }
             ).ToList();
 
@@ -338,49 +367,69 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             {
                 ThePGravamenContract = new PGravamenContract()
                 {
-                    PetitionSubject                = thePGravamen.PetitionSubject     ,
-                    PetitionDescription            = thePGravamen.PetitionDescription ,
-                    NoticeText                     = thePGravamen.NoticeText          ,
-                    PetitionReasons                = thePGravamen.PetitionReasons     ,
-                    RejectReasonText               = thePGravamen.RejectReasonText    ,
-                    CreateDateTime                 = thePGravamen.CreateDateTime      ,
-                    FollowUpNo                     = thePGravamen.FollowUpNo          ,
-                    HowDataType                    = thePGravamen.HowDataType         ,
-                    GravamenOrReport               = thePGravamen.GravamenOrReport    ,
+                    PetitionSubject = thePGravamen.PetitionSubject,
+                    PetitionDescription = thePGravamen.PetitionDescription,
+                    NoticeText = thePGravamen.NoticeText,
+                    PetitionReasons = thePGravamen.PetitionReasons,
+                    RejectReasonText = thePGravamen.RejectReasonText,
+                    CreateDateTime = thePGravamen.CreateDateTime,
+                    FollowUpNo = thePGravamen.FollowUpNo,
+                    HowDataType = thePGravamen.HowDataType,
+                    GravamenOrReport = thePGravamen.GravamenOrReport,
                     ThePGravamenPersonContractList = thePGravamen.ThePGravamenPersonList?.Select(x => new PGravamenPersonContract()
                     {
-                        Name            = x.Name           , 
-                        Family          = x.Family         , 
-                        Address         = x.Address        , 
-                        BirthDate       = x.BirthDate      , 
-                        FatherName      = x.FatherName     , 
-                        IdentityNumber  = x.IdentityNumber , 
-                        MobilNumber     = x.MobilNumber    , 
-                        NationalCode    = x.NationalCode   , 
-                        Nationality     = x.Nationality    ,
+                        Name = x.Name,
+                        Family = x.Family,
+                        Address = x.Address,
+                        BirthDate = x.BirthDate,
+                        FatherName = x.FatherName,
+                        IdentityNumber = x.IdentityNumber,
+                        MobilNumber = x.MobilNumber,
+                        NationalCode = x.NationalCode,
+                        Nationality = x.Nationality,
                         PersonStartPost = x.PersonStartPost,
-                        Sex             = x.Sex            ,
-                        PersonType      = x.PersonType     ,
-                        PostCode        = x.PostCode       ,
-                        PersonPassword  = x.PersonPassword ,
-                        TradeUnitName   = x.TradeUnitName  , 
+                        Sex = x.Sex,
+                        PersonType = x.PersonType,
+                        PostCode = x.PostCode,
+                        PersonPassword = x.PersonPassword,
+                        TradeUnitName = x.TradeUnitName,
 
                     }).ToList(),
-                    TheGAttachmentContractList = thePGravamen.ThePGravamenAttachmentList?.Select(x => new Anu.BaseInfo.ServiceModel.Attachment.GAttachmentContract() 
+                    TheGAttachmentContractList = thePGravamen.ThePGravamenAttachmentList?.Select(x => new Anu.BaseInfo.ServiceModel.Attachment.GAttachmentContract()
                     {
-                        FileExtension = x.FileExtension       ,
-                        CreateDateTime = x.CreateDateTime     ,
-                        TheAttachmentTypeContract = new AttachmentTypeContract() 
+                        FileExtension = x.FileExtension,
+                        CreateDateTime = x.CreateDateTime,
+                        TheAttachmentTypeContract = new AttachmentTypeContract()
                         {
-                            Code  = x.TheAttachmentType?.Code  ,
-                            Title = x.TheAttachmentType?.Title ,
-                        }, 
+                            Code = x.TheAttachmentType?.Code,
+                            Title = x.TheAttachmentType?.Title,
+                        },
                         TheGAttachmentDataContract = new Anu.BaseInfo.ServiceModel.Attachment.GAttachmentDataContract()
                         {
                             DocFile = x.TheGAttachmentData?.DocFile
                         },
                     }).ToList(),
                 }
+            };
+        }
+
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        public async override Task<GetPersonPGravamenStatisticResponse> GetPersonPGravamenStatistic([Microsoft.AspNetCore.Mvc.FromBody] GetPersonPGravamenStatisticRequest request)
+        {
+            #region Validation
+            request.Null(GetPersonPGravamenStatisticResult.PGravamen_GetPersonPGravamenStatisticResult_Request_Is_Required);
+            request.TheGetPersonPGravamenInfoContract.Null(GetPersonPGravamenStatisticResult.PGravamen_GetPersonPGravamenStatisticResult_Request_Is_Required);
+            request!.TheGetPersonPGravamenInfoContract!.NationalityCode.NullOrWhiteSpace(GetPersonPGravamenStatisticResult.PGravamen_GetPersonPGravamenStatisticResult_TheNationalityCode_Is_Required);
+            request!.TheGetPersonPGravamenInfoContract!.NationalityCode!.IsDigit(GetPersonPGravamenStatisticResult.PGravamen_GetPersonPGravamenStatisticResult_TheNationalityCode_Is_Required);
+
+            #endregion Validation
+
+            var thePGravamenlistByPersonNationalityCode = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenListByNationalCode(request.TheGetPersonPGravamenInfoContract.NationalityCode!);
+
+            return new GetPersonPGravamenStatisticResponse()
+            {
+                Result = AnuResult.Successful.GetResult(),
+                TheGetPersonPGravamenStatisticContract = CountOfUnSeenPNoticeByUserCalculater(thePGravamenlistByPersonNationalityCode, request.TheGetPersonPGravamenInfoContract.NationalityCode)
             };
         }
 
@@ -667,7 +716,40 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             }
         }
 
+        private GetPersonPGravamenStatisticContract CountOfUnSeenPNoticeByUserCalculater(IEnumerable<Anu.PunishmentOrg.DataModel.Gravamen.PGravamen> pGravamen, string nationalityCode)
+        {
+            int totalCountPGravamenPerson = 0;
+            int countRejectedPGravamenPerson = 0;
+            int countPendingPGravamenPerson = 0;
 
+            #region TotalCountPGravamenPerson
+            totalCountPGravamenPerson = pGravamen.Count();
+            #endregion TotalCountPGravamenPerson
+
+            #region CountRejectedPGravamenPerson
+            countRejectedPGravamenPerson = pGravamen.Where(x => x.TheObjectState.Code == PunishmentOrgObjectState.PGravamen.Failed
+                                                            || x.TheObjectState.Code == PunishmentOrgObjectState.PGravamen.Failing).Count();
+            #endregion CountRejectedPGravamenPerson
+
+            #region CountPendingPGravamenPerson
+            countPendingPGravamenPerson = pGravamen.Where(x => x.TheObjectState.Code == PunishmentOrgObjectState.PGravamen.Start
+                                                        || x.TheObjectState.Code == PunishmentOrgObjectState.PGravamen.TemporaryRegisteredByApplicant
+                                                        || x.TheObjectState.Code == PunishmentOrgObjectState.PGravamen.PermanentRegisteredByApplicant
+                                                        || x.TheObjectState.Code == PunishmentOrgObjectState.PGravamen.RegisterPlaintiff
+                                                        || x.TheObjectState.Code == PunishmentOrgObjectState.PGravamen.RegisterInput
+                                                        || x.TheObjectState.Code == PunishmentOrgObjectState.PGravamen.Referred
+                                                        || x.TheObjectState.Code == PunishmentOrgObjectState.PGravamen.Send
+                                                        || x.TheObjectState.Code == PunishmentOrgObjectState.PGravamen.RegisterCase).Count(); 
+            #endregion CountPendingPGravamenPerson
+
+            return new GetPersonPGravamenStatisticContract()
+            {
+                TotalCountPGravamenPerson = totalCountPGravamenPerson,
+                CountPendingPGravamenPerson = countPendingPGravamenPerson,
+                CountRejectedPGravamenPerson = countRejectedPGravamenPerson,
+                PersonNationalityCode = nationalityCode,
+            };
+        }
         #endregion Methods
 
     }
