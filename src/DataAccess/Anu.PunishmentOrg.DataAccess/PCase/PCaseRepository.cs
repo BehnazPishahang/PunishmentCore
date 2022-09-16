@@ -15,8 +15,9 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
 {
     public class PCaseRepository : Anu.DataAccess.Repositories.GenericRepository<Anu.PunishmentOrg.DataModel.Case.PCase>, Domain.Case.IPCaseRepository
     {
-        string[] gUnitTypeCodes = new string[] { "005", "013", "008", "010", "011", "012" };
-        string[] badviType = new string[] { "005", "013" };
+        string[] gUnitTypeCodes = new string[] { "005", "013", "008", "010", "011",
+            "012", "006","014","007","015","016" };
+        string[] badviType = new string[] { "005", "013", "006", "014", "007", "015", "016" };
         string[] ejraType = new string[] { "008", "010", "011", "012" };
 
         public PCaseRepository(Anu.DataAccess.ApplicationDbContext context) : base(context)
@@ -44,8 +45,17 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
             {
                 return new Statistic() { CountTotal = 0, CountSeen = 0, CountUnSeen = 0 };
             }
+            var totalPcase = pCase.Count();
 
-            return new Statistic() { CountTotal = pCase.Count(), CountSeen = 0, CountUnSeen = 0 };
+            var countParvandeJari = await _context.Set<Anu.PunishmentOrg.DataModel.Case.PCasePerson>()
+                .Include(a => a.ThePCase)
+                .Where(a => a.NationalCode == nationalCode && a.ThePCase.CaseArchiveState == PUCaseArchiveState.Active)
+                .GroupBy(a => a.ThePCase.No)
+                .CountAsync();
+
+
+
+            return new Statistic() { CountTotal = totalPcase, CountSeen = totalPcase - countParvandeJari, CountUnSeen = countParvandeJari };
         }
 
         public async Task<IEnumerable<DataModel.Case.PCase>> GetAllPCaseWithNationalCode(string nationalCode)
@@ -63,7 +73,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
 
             var pCase = await query.ToListAsync();
 
-            if (pCase==null || pCase.Count()==0)
+            if (pCase == null || pCase.Count() == 0)
             {
                 return null;
             }

@@ -23,6 +23,7 @@ namespace Anu.PunishmentOrg.Api.Case
         }
 
         [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        //[Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<ExportInqueryPCaseResponse> ExportInqueryPCase([FromBody] ExportInqueryPCaseRequest request)
         {
             request.Null(AnuResult.In_Valid_Input);
@@ -54,6 +55,7 @@ namespace Anu.PunishmentOrg.Api.Case
         }
 
         [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        //[Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<GetAllPCaseResponse> GetAllPCase([FromBody] GetAllPCaseRequest request)
         {
             request.Null(AnuResult.In_Valid_Input);
@@ -70,7 +72,7 @@ namespace Anu.PunishmentOrg.Api.Case
             var theGetAllPCaseContract = pCase.Select(a => new GetAllPCaseContract()
             {
                 No = a.No,
-                CreateDateTime = a.CreateDateTime,
+                CreateDateTime = a.CreateDateTime.Substring(0,10),
                 UnitName = a.TheHandlerUnit.UnitName
             }).ToList();
 
@@ -83,6 +85,7 @@ namespace Anu.PunishmentOrg.Api.Case
         }
 
         [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        //[Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<GetStatisticPCaseResponse> GetStatisticPCase([FromBody] GetStatisticPCaseRequest request)
         {
             request.Null(AnuResult.In_Valid_Input);
