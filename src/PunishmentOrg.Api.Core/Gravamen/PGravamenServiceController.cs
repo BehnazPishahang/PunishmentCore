@@ -171,6 +171,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                             CreateDateTime = DateTime.Now.ToPersian().ToString(),
                             TheAttachmentType = attachmentType,
                             Title = attachment.Title,
+                            SecondMili = attachment.SecondMili,
                             TheGAttachmentData = new GAttachmentData()
                             {
                                 Id = Guid.NewGuid().ToString("N"),
