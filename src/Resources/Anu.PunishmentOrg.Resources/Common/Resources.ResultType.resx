@@ -736,4 +736,32 @@
     <value>شناسه واریزی قبض معتبر نمی باشد.</value>
     <comment>-30297</comment>
   </data>
+  <data name="PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Is_Required" xml:space="preserve">
+    <value>کد ملی شخص نا معتبر میباشد</value>
+    <comment>-30123</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Not_Valid" xml:space="preserve">
+    <value>کد ملی شخص نا معتبر میباشد</value>
+    <comment>-30124</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound" xml:space="preserve">
+    <value>شکوائیه ای برای شخص یافت نشد</value>
+    <comment>-30125</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required" xml:space="preserve">
+    <value>درخواست معتبر نمی باشد</value>
+    <comment>-30121</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoCoPGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoContract_Is_Required" xml:space="preserve">
+    <value>اطلاعات شخص نا معتبر میباشد</value>
+    <comment>-30122</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenStatisticResult_Request_Is_Required" xml:space="preserve">
+    <value> درخواست ورودی نامعتبر یا خالی می‌باشد</value>
+    <comment>-30141</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenStatisticResult_TheNationalityCode_Is_Required" xml:space="preserve">
+    <value>شماره ملی شخص نامعتبر یا خالی می‌باشد</value>
+    <comment>-30142</comment>
+  </data>
 </root>
