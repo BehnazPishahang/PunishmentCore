@@ -1,7 +1,7 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.PunishmentOrg.ServiceModel.Gravamen;
 
-namespace Anu.PunishmentOrg.Api.Gravamen
+namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
     [System.ComponentModel.DisplayName("GetPGravamenByIdResponse")]
     public class GetPGravamenByIdResponse : IResponseMessage
