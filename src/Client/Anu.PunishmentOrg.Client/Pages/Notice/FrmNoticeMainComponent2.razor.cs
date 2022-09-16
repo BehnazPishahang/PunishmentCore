@@ -53,7 +53,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
 
         void ShowPDF(PNoticeContract selectedRow)
         {
-            string  pdf = _noticeService.GetNoticePDF(_appConfiguration.BackendServerAddress, _appConfiguration.ExportPNotice, selectedRow.No);
+            string  pdf = _noticeService.GetNoticePDF(_appConfiguration.BackendServerAddress, _appConfiguration.ExportPNotice, selectedRow.No , SharedInfo.AccessToken);
             
             var parameters = new DialogParameters();
             parameters.Add("showedPdfContent",pdf);
@@ -69,13 +69,12 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
 
             bool? ss = SharedInfo.LoadAllNoticeList;
 
-            if (!SharedInfo.LoadAllNoticeList.HasValue)
-                Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode);
+          Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode, SharedInfo.AccessToken);
 
             if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == true)
-                Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode).Where(t => !string.IsNullOrEmpty(t.NoticeDate));
+                Elements = Elements.Where(t => !string.IsNullOrEmpty(t.NoticeDate));
             if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == false)
-                Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode).Where(t=> string.IsNullOrEmpty( t.NoticeDate));
+                Elements = Elements.Where(t=> string.IsNullOrEmpty( t.NoticeDate));
         }
 
     }

@@ -15,7 +15,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
         protected override async Task OnInitializedAsync()
         {
             string ncode = SharedInfo.NationalCode;
-            Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode);
+            Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode ,SharedInfo.AccessToken);
         }
 
     }

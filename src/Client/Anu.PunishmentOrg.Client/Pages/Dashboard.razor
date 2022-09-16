@@ -308,7 +308,7 @@
     protected override async Task OnInitializedAsync()
         {
             string ncode = SharedInfo.NationalCode;
-               NoticeInfo = _noticeService.GetCountOfUnSeenPNoticeByUser(_appConfiguration.BackendServerAddress, _appConfiguration.GetCountOfUnSeenPNoticeByUser, ncode);
+               NoticeInfo = _noticeService.GetCountOfUnSeenPNoticeByUser(_appConfiguration.BackendServerAddress, _appConfiguration.GetCountOfUnSeenPNoticeByUser, ncode , SharedInfo.AccessToken);
         }
        
      
