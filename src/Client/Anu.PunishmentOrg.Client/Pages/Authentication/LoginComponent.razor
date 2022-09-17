@@ -1,4 +1,4 @@
-﻿@page "/Login2"
+﻿@page "/Login"
 @using Anu.Commons.ServiceModel.ServiceAuthentication
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
 
@@ -73,12 +73,14 @@
                   </div>
 
                   <MudItem class="row">
+                       <MudItem xs="6" Class="d-flex justify-center">
+                           <MudButton Color="Color.Error"  Variant="Variant.Outlined"
+           StartIcon="@Icons.Custom.Brands.GitHub" Href="/ChangeMobileNumber" >تغییر شماره</MudButton>
+                        </MudItem>
                      <MudItem xs="6" Class="d-flex justify-center">
                            <MudButton Variant="Variant.Filled"  disabled="@(!hasSmsSend)" Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
                         </MudItem>
-                        <MudItem xs="6" Class="d-flex justify-center">
-                           <MudButton Variant="Variant.Filled" Color="Color.Warning" Href="/false" Size="Size.Large" Style="width: 100%;">برگشت</MudButton>
-                        </MudItem>
+                       
                   </MudItem>
                   <br />
                     <div class="d-flex justify-center">
