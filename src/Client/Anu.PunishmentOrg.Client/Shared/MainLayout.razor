@@ -1,45 +1,44 @@
 ﻿@using Anu.PunishmentOrg.Client.Infrastructure.Settings
 @using Anu.PunishmentOrg.Client.Pages.Authentication
+@using MudBlazor.ThemeManager.Models
+@using MudBlazor.ThemeManager
+@using MudBlazor
 @inherits LayoutComponentBase
 @inject IDialogService DialogService
 
-<MudRTLProvider RightToLeft="true">
-        <MudThemeProvider Theme="_theme" @bind-IsDarkMode="@_isDarkMode" />
-    
-          <MudDrawer @bind-Open="_drawerOpen" ClipMode="_themeManager.DrawerClipMode" Elevation="_themeManager.DrawerElevation" Style="padding: 1vw"></MudDrawer>
-
-        <MudDialogProvider
-                FullWidth="true"
-                MaxWidth="MaxWidth.ExtraSmall"
-                CloseButton="true"
-                DisableBackdropClick="true"
-                NoHeader="true"
-                Position="DialogPosition.Center"
-                CloseOnEscapeKey="true"
-            />
-        <MudSnackbarProvider />
-
-        <MudLayout  >
-            
-           
-           @* <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit"OnClick="@((e) => OpenThemeManager(true))" />*@
-            <MudAppBar Elevation="1">
-                 
-              <MudIconButton Icon="@_menuIcons" Color="@Theme135._iconColor" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-                 @*  <MudImage Src="/pic/Anulogo.png"  Elevation="25" Class="rounded-lg"/>*@
-                     
-              <MudThemeManagerButton OnClick="@((e) => OpenThemeManager(true))" />
-                   
-                    <MudIconButton Icon="@Icons.Filled.Balance" Size="Size.Large" Href="/" Color="Color.Tertiary" ></MudIconButton>
-                    <MudLink Href="/" Typo="Typo.h5" Color="Color.Default" Class="mr-3">پیشخوان خدمات تعزیرات </MudLink>
-
-                <MudSpacer />
-       
-              <MudIconButton Icon="@_dayNightIcons" Color="@Theme135._iconColor" @onclick="onDarkMode" />
-              <MudThemeManager Open="_themeManagerOpen" OpenChanged="OpenThemeManager" Theme="_themeManager" ThemeChanged="UpdateTheme"  />
-               
-
-                    <MudMenu ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomLeft" >
+<MudRTLProvider RightToLeft="true"> 
+<MudThemeProvider Theme="_theme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+<MudLayout>
+     <MudAppBar Color="Color.Primary"  Elevation="1">
+        <MudIconButton Color="Color.Inherit"
+                       Edge="Edge.Start"
+                       Icon="@_menuIcons"
+                       OnClick="@DrawerToggle" />
+                       @*OnClick="@(() => _drawerOpen = !_drawerOpen)" />*@
+         <MudIcon Icon="@MudBlazor.Icons.Filled.Balance" Size="Size.Large" Color="Color.Inherit" />
+          <MudText Typo="Typo.h5" Class="mr-3 mud-bold" Color="Color.Surface"> میز خدمت تعزیرات حکومتی   </MudText>
+        <MudSpacer />
+@*        <div>
+            <MudSelect Class="mx-4"
+                       Dense="true"
+                       Label="تنظیمات نمایشی"
+                       Style="max-width: 250px"
+                       T="string"
+                       Value="_themeManagerConfiguration.Key"
+                       ValueChanged="ThemeManagerConfigChanged">
+                @foreach (var config in _themeManagerConfigurations)
+                {
+                    <MudSelectItem T="string"  
+                                   Value="config.Key" />
+                }
+            </MudSelect>
+        </div>*@
+       @* <MudIconButton Color="Color.Inherit"
+                       Edge="Edge.End"
+                       Icon="@Icons.Filled.Accessible" />*@
+                                           <MudMenu ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomLeft" >
                     <ActivatorContent>
                          @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
                          {
@@ -71,10 +70,22 @@
 
                 </ChildContent>
             </MudMenu>
-            </MudAppBar>
-            <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-                   @* <NavMenu />*@
-                    <MudNavMenu Color="@Theme135._iconColor">
+    </MudAppBar>
+
+     <MudDrawer @bind-Open="@_drawerOpen"
+               Elevation="1">
+@*        <MudText Class="pt-2 px-4"
+                 Typo="Typo.h6">
+            منوی سامانه تعزیرات
+        </MudText>*@
+                  <h6 class="pt-2 px-10 mud-nav-link-text"> 
+            منوی سامانه تعزیرات
+        </h6>
+        <MudText Class="mud-text-secondary px-4"
+                 Typo="Typo.body2">
+            ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+        </MudText>
+           <MudNavMenu Color="@Theme135._iconColor">
                            @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
                             {
                                 <MudNavMenu Color="Color.Primary">
@@ -128,13 +139,23 @@
                                                      ثبت اعتراض  
                                                     </MudNavLink>
                                  }
-        
-                </MudNavMenu>
-            </MudDrawer>
-            <MudMainContent >  
-                @Body
-            </MudMainContent>
-        </MudLayout>
+           </MudNavMenu>
+        <NavMenu />
+    </MudDrawer>
+        <MudThemeManager @bind-Open="_themeManagerOpen"
+                     @bind-Theme="_theme"
+                     Configuration="_themeManagerConfiguration.Value" />
+    <MudThemeManagerButton OnClick="@(e => _themeManagerOpen = true)" />
+ 
+     <MudMainContent>
+        <MudContainer Class="mt-16 px-16"
+                      MaxWidth="MaxWidth.False">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+ 
+
+</MudLayout>
 
 </MudRTLProvider>
 
@@ -147,15 +168,45 @@
     public static string _style ="height:100px;background-color:#ede3e3";
     public static string _class ="Circle_night";
     public static bool DarkMode = true;
-    private MudTheme _theme = Theme135.DefaultTheme;
+    private MudTheme _theme1 = Theme135.DefaultTheme;
 
     private bool _Day = false;
     private bool _Night = true;
 
     public EventCallback OnDarkModeToggle { get; set; }
-    bool _drawerOpen = true;
 
 
+    /*********************************************/
+     private readonly Dictionary<string, ThemeManagerConfiguration> _themeManagerConfigurations = new()
+    {
+        {"تم اول", ThemeManagerPresetConfigurations.GetPresetConfigOne()},
+        {"تم دوم", ThemeManagerPresetConfigurations.GetPresetConfigTwo()}
+    };
+
+    private MudTheme _theme = new()
+    {
+        Palette = new Palette
+        {
+            Primary = Colors.Blue.Default,
+            Secondary = Colors.BlueGrey.Lighten1
+        }
+    };
+
+    private KeyValuePair<string, ThemeManagerConfiguration> _themeManagerConfiguration;
+
+    private bool _drawerOpen = true ;
+    private bool _themeManagerOpen;
+
+    protected override void OnInitialized()
+    {
+        _themeManagerConfiguration = _themeManagerConfigurations.First();
+    }
+
+    private void ThemeManagerConfigChanged(string key)
+    {
+        _themeManagerConfiguration = _themeManagerConfigurations.FirstOrDefault(x => x.Key == key);
+    }
+    /*********************************************/
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
@@ -221,16 +272,16 @@ void OpenThemeManager(bool value)
     _themeManagerOpen = value;
 }
 
-void UpdateTheme(ThemeManagerTheme value)
-{
-    _themeManager = value;
-    StateHasChanged();
-}
 
-protected override void OnInitialized()
-{
-    StateHasChanged();
-}
+
+    //private ThemeManagerTheme _themeManager = new ThemeManagerTheme();
+    public bool tr = true;
+    public bool _themeManagerOpen1 = false;
+
+    //void OpenThemeManager( bool value)
+    //{
+    //    _themeManagerOpen1 = value;
+    //}
 
     
 }
