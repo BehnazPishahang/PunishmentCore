@@ -7,18 +7,19 @@
 @using Anu.PunishmentOrg.ServiceModel.Gravamen;
 @using Anu.BaseInfo.ServiceModel.Attachment;
 @using Anu.PunishmentOrg.Client.Infrastructure.Utitlities
-
+@using BlazorDownloadFile;
 
 @using System 
 @using System.IO
 @using Microsoft.AspNetCore.Hosting
 @using Microsoft.Extensions.Logging
 
-@inject IWebHostEnvironment Environment
-
+@inject IDialogService DialogService
+@inject IBlazorDownloadFileService BlazorDownloadFileService;
 @inject IGeoLoactionService _geoLoactionService
 @inject AppConfiguration _appConfiguration
 @inject ISnackbar Snackbar
+
 
 @layout MainLayout
 @using FluentValidation
@@ -40,7 +41,17 @@
     .grvTitle {
         color: red;
         font-size: 1.1em;
-        font-weight: 300;
+        font-weight: 300;}
+    ul{
+        list-style-type:square
+    }
+
+    li {
+        color: red;
+        padding: 5px;
+        margin: 10px;
+        font-size: 1.3em;
+    }
 </style>
 
 <div class="jumbotron text-center border-info border-2 oi-header">
@@ -48,14 +59,14 @@
 </div>
 
 <MudForm Model="@_pGravamenContract" @ref="@form" ValidationDelay="0">
-    <MudExpansionPanels MultiExpansion="true" DisableBorders="false">
-        <MudExpansionPanel Text="اطلاعات اولیه" IsExpanded="true">
+    <MudExpansionPanels MultiExpansion="true" DisableBorders="false" Style="">
+        <MudExpansionPanel Text="اطلاعات اولیه" IsExpanded="true" b>
             <div class="row">
                 <div class="col-sm-4">
                     <MudSelect @bind-Value="selectedState" Margin="Margin.Dense" T="GeoLocationContract" Label="استان" Required="true"
                                Variant="Variant.Outlined" id="cmbstate" SelectedValuesChanged="@Statevaluechanged"
-                               AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error"
-                               Adornment="Adornment.End" IconSize="Size.Small" Class="form-control" RequiredError="استان را مشخص نمایید">
+                               AdornmentIcon="@Icons.Outlined.NoiseControlOff" AdornmentColor="Color.Error" AnchorOrigin="Origin.BottomCenter"
+                               Adornment="Adornment.End" IconSize="Size.Small" Class="form-control" RequiredError="استان را مشخص نمایید" Clearable>
                         @foreach (GeoLocationContract item in States.OrderBy(a => a.LocationName))
                         {
                             <MudSelectItem T="GeoLocationContract" Value="@item">@item.LocationName</MudSelectItem>
@@ -66,9 +77,9 @@
                 </div>
                 <div class="col-sm-4">
                     <MudSelect Margin="Margin.Dense" Label="شهرستان" Variant="Variant.Outlined"
-                               id="cmbprovince" AdornmentIcon="@Icons.Outlined.NoiseControlOff"
+                               id="cmbprovince" AdornmentIcon="@Icons.Outlined.NoiseControlOff" AnchorOrigin="Origin.BottomCenter"
                                AdornmentColor="Color.Error" Adornment="Adornment.End" IconSize="Size.Small"
-                               Required="true" Class="form-control" RequiredError="شهرستان را مشخص نمایید" T="GeoLocationContract" @bind-Value="selectedProvince">
+                               Required="true" Class="form-control" RequiredError="شهرستان را مشخص نمایید" T="GeoLocationContract" @bind-Value="selectedProvince" Clearable>
                         @foreach (GeoLocationContract item in province.OrderBy(a => a.LocationName))
                         {
                             <MudSelectItem T="GeoLocationContract" Value="@item">@item.LocationName</MudSelectItem>
@@ -77,9 +88,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <MudSelect @bind-Value="_pGravamenContract.PetitionSubject" T="string" Label="موضوع شکوائیه"
                                MultiSelection="true"
+                               AnchorOrigin="Origin.BottomCenter" Clearable
+                               SelectAll="true" SelectAllText="انتخاب همه "
                                Variant="Variant.Outlined" Class="form-contrl"
                                Dense="true" Margin="Margin.Dense" AdornmentColor="Color.Error"
                                Adornment="Adornment.End" IconSize="Size.Small" Required="true" RequiredError="موضوع شکوائیه/گزارش را مشخص نمایید">
@@ -135,7 +148,7 @@
                                                 PickerOffsetTopPositionInPixels="0"
                                                 InitialValue="false"
                                                 CalendarType="Calendar.SingleModeJalali"
-                                                DigitType="DigitType.Persian"
+                                                DigitType="DigitType.English"
                                                 DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
                                                 MinDateSetOnToday="false"
                                                 Placeholder="تاریخ تولد "
@@ -144,14 +157,20 @@
                                                 @bind-Value="_reporter.BirthDate" />
                     </div>
                     <div class="col-sm-4">
-                        <MudSelect T="string" Label="جنسیت" @onchange="DoStuff"
-                                   Variant="Variant.Outlined"
-                                   Margin="Margin.Dense" Required="true" AdornmentIcon="@Icons.Outlined.NoiseControlOff"
-                                   AdornmentColor="Color.Error" IconSize="Size.Small" Adornment="Adornment.End" RequiredError="جنسیت را مشخص نمایید">
+                  
+
+                     <MudSelect   @bind-Value="_reporter.Sex" Label="جسیت"      AdornmentColor="Color.Primary"  
+                       Required="true"  
+                       Dense="true"
+                        RequiredError="جنسیت را انتخاب نمایید " 
+                     Variant="Variant.Outlined"
+                     AnchorOrigin="Origin.BottomCenter" 
+                     Clearable>
+
                             @foreach (SexType item in Enum.GetValues(typeof(SexType)))
                             {
 
-                                <MudSelectItem Value="@item.ToString()">
+                                <MudSelectItem Value="@item">
                                     @if (item == SexType.Male)
                                     {
                                     <MudIcon Icon="@Icons.Filled.Man" Color="Color.Default"></MudIcon>
@@ -159,7 +178,7 @@
 
                                 @if (item == SexType.Female)
                                     {
-                                    <MudIcon Icon="@Icons.Filled.Woman" Color="Color.Primary"></MudIcon>
+                                    <MudIcon Icon="@Icons.Filled.Woman" Color="Color.Error"></MudIcon>
                                     }
                                 @item.GetEnumDescription()
                             </MudSelectItem>
@@ -269,7 +288,12 @@
                     <div class="col-sm-2">
                         <MudText Typo="Typo.button" Style="direction:ltr;">@uploadedFileInfo</MudText>
                     </div>
-                    <div style="margin-top:10px"><label class="control-label" style="color: red;">عکس واحد صنفی - فاکتور - کالا - فیش/رسید پرداختی و ... در پیوست اضافه گردد.</label></div>
+                    <ul>
+                        <li>عکس واحد صنفی - فاکتور - کالا - فیش/رسید پرداختی و ... در پیوست اضافه گردد.</li>
+                        <li>حجم فایل جهت بارگذاری کمتر از 200 کیلوبایت باشد</li>
+                    </ul>
+                    <div style="margin-top:10px"><label class="control-label" style="color: red;"></label></div>
+                    <div style="margin-top:10px"><label class="control-label" style="color: red;"></label></div>
                 </div>
                 <div class="row">
                     <MudPaper Elevation="25">
@@ -282,13 +306,14 @@
                         <HeaderContent>
                             <MudTh Style="width:150px;">عنوان مدرک</MudTh>
                             <MudTh Style="width:100px;">نام فایل</MudTh>
-                            <MudTh Style="width:20px;"></MudTh>
+                            <MudTh Style="width:10px;"></MudTh>
                         </HeaderContent>
                         <RowTemplate>
                             <MudTd DataLabel="عنوان مدرک">@context.Title</MudTd>
                             <MudTd DataLabel="نام فایل">@context.PathAndFileName</MudTd>
                             <MudTd>
                                 <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" Size="Size.Small" Color="Color.Error" OnClick="()=> Removeattachment(context)"></MudIconButton>
+                                <MudIconButton Icon="@Icons.Material.Filled.Download" aria-label="delete" Size="Size.Small" Color="Color.Success" Style="margin-right:4px" OnClick="()=>Downloadattachment(context)"></MudIconButton>
                             </MudTd>
                         </RowTemplate>
                     </MudTable>
@@ -301,7 +326,7 @@
         <MudCheckBox Label="موارد مندرج در شکوائیه مورد تائید می باشد" LabelPosition="LabelPosition.Start" Color="Color.Secondary"
                      @bind-Checked="AcceptInfo" style="margin-top:5px;margin-left:10px;"></MudCheckBox>
     </div>
-    <div class="row" style="margin-top:5px;margin-left:10px;">
+    <div class="row" style="margin-top:5px;margin-left:10px;">  
         <div class="col-sm-2" style="margin-right:15px;">
             <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info" Disabled="@(!AcceptInfo)"
                        Size="Size.Medium" Class="form-control" OnClick="SaveGranovment">ذخیره</MudButton>
@@ -334,10 +359,20 @@
     private MudTable<GAttachmentContract> mudTableAttach;
     private string[] reason = { "گران فروشی", "کم فروشی", "عدم درج قیمت", "تقلب در کسب", "عدم صدور صورتحساب (فاکتور)" };
     private int selectedRowNumber = -1;
+    string contentType;
+    bool validfilesize=true;
     #endregion
 
     //
     #region main
+
+    private void OpenDialog()
+    {
+        //CloseOnEscapeKey = true ,
+        var options = new DialogOptions { MaxWidth = MaxWidth.Medium, FullWidth = true};
+        DialogService.Show<GranovmentLawDialog>("Simple Dialog", options);
+    }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -347,30 +382,27 @@
         GeoContract.LocationCode = "002";
         input.TheGeoLocationContract = GeoContract;
         States = _geoLoactionService.GetProvicesList(_appConfiguration.BackendServerAddress, _appConfiguration.GetGeoLocationList, input);
-
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if(firstRender)
+            OpenDialog();
+    }
+
+  
     private void Statevaluechanged()
     {
-        GeoLocationRequest input = new();
-        GeoLocationContract GeoContract = new();
-        GeoContract.ChildLocationType = BaseInfo.Enumerations.LocationType.Province;
-        GeoContract.LocationCode = selectedState.LocationCode;
-        input.TheGeoLocationContract = GeoContract;
-        province = _geoLoactionService.GetProvicesList(_appConfiguration.BackendServerAddress, _appConfiguration.GetGeoLocationList, input);
-    }
-
-    private void DoStuff(ChangeEventArgs e)
-    {
-        string s = e.Value.ToString();
-        Console.WriteLine("*******: " + s);
-    }
-
-    private void onChangeDrpGender(ChangeEventArgs e)
-    {
-
-        string SelectedString = e.Value.ToString();
-
+        if (selectedState != null)
+        {
+            GeoLocationRequest input = new();
+            GeoLocationContract GeoContract = new();
+            GeoContract.ChildLocationType = BaseInfo.Enumerations.LocationType.Province;
+            GeoContract.LocationCode = selectedState.LocationCode;
+            input.TheGeoLocationContract = GeoContract;
+            province = _geoLoactionService.GetProvicesList(_appConfiguration.BackendServerAddress, _appConfiguration.GetGeoLocationList, input);
+        }
     }
 
     private void SaveGranovment()
@@ -378,6 +410,10 @@
         //form.Validate();
         if (!isFormValid())
             return;
+
+        _pGravamenContract.ThePGravamenPersonContractList.Clear();
+        _pGravamenContract.ThePGravamenPersonContractList.Clear();
+        _pGravamenContract.TheGAttachmentContractList.Clear();
 
         _pGravamenContract.GravamenOrReport = Enumerations.GravamenOrReport.Gravamen;
         _pGravamenContract.HowDataType = Enumerations.PU135OrWebSite.WebSite;
@@ -397,13 +433,13 @@
         {
             string strMessage = "درخواست شما با شماره پیگیری " + pGravamenrespons.ThePGravamenResponseContract.FollowUpNo + "در سامانه ثبت گردید";
             Snackbar.Add(strMessage, MudBlazor.Severity.Success);
-            _pGravamenContract = new PGravamenContract();
+            _pGravamenContract = new();
             _accuser = new PGravamenPersonContract();
             _attachment = new GAttachmentContract();
             reporters.Clear();
             accusers.Clear();
             attachments.Clear();
-            _navigationManager.NavigateTo("/");
+            _navigationManager.NavigateTo($"/GranovmentSummary/{_pGravamenContract}");
 
         }
         else
@@ -599,18 +635,24 @@
             }
             SimulateProgress();
         }
+        if(validfilesize){
+            if (Formattachment.IsValid)
+            {
+                _attachment.PathAndFileName = uploadedFileInfo;
 
-        if (Formattachment.IsValid)
-        {
-            _attachment.PathAndFileName = uploadedFileInfo;
+                GAttachmentDataContract gattachDataContract = new();
+                gattachDataContract.DocFile = uploadedFile;
+                _attachment.SecondMili = contentType;
+                _attachment.TheGAttachmentDataContract = gattachDataContract;
 
-            GAttachmentDataContract gattachDataContract = new();
-            gattachDataContract.DocFile = uploadedFile;
-            _attachment.TheGAttachmentDataContract = gattachDataContract;
-
-            attachments.Add(_attachment);
-            uploadedFileInfo = "";
+                attachments.Add(_attachment);
+                uploadedFileInfo = "";
+                _attachment = new();
+            }
+        }
+        else{
             _attachment = new();
+            Snackbar.Add("حجم فایل نباید بیشتر از 200 کیلو بایت باشد", MudBlazor.Severity.Error);
         }
     }
 
@@ -619,13 +661,28 @@
         attachments.Remove(context);
     }
 
+    private async Task Downloadattachment(GAttachmentContract context)
+    {
+        //"application/octet-stream"
+        await BlazorDownloadFileService.DownloadFile(context.Title, context.TheGAttachmentDataContract.DocFile, context.SecondMili );
+    }
+
+
     byte[] uploadedFile;
     private async Task UploadFiles(InputFileChangeEventArgs e)
     {
-        MemoryStream ms = new MemoryStream();
-        await e.File.OpenReadStream().CopyToAsync(ms);
-        uploadedFile= ms.ToArray();
-        uploadedFileInfo = e.File.Name;
+        if(e.File.Size <=200000)
+        {
+            long size = e.File.Size;
+            contentType = e.File.ContentType;
+            uploadedFileInfo = e.File.Name;
+            MemoryStream ms = new MemoryStream();
+            await e.File.OpenReadStream().CopyToAsync(ms);
+            uploadedFile= ms.ToArray();
+        }
+        else{
+            validfilesize=false;
+        }
     }
 
     #endregion
@@ -654,7 +711,4 @@
         StateHasChanged();
     }
     #endregion
-
-
-
 }

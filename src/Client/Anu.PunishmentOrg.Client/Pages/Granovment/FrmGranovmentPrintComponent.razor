@@ -1,0 +1,93 @@
+﻿@page "/GranovmentSummary/{_pGravamen}"
+
+@using Anu.PunishmentOrg.Client.Infrastructure.Granovment
+@using Anu.PunishmentOrg.ServiceModel.Gravamen
+
+@inject AppConfiguration _appConfiguration
+
+<div class="jumbotron text-center border-info border-2 oi-header">
+    <h3>خلاصه شکایت نامه</h3>
+</div>
+
+<MudForm Model="@_pGravamenContract">
+    <MudCard Style="margin:10px;">
+        <MudCardContent>
+            <MudText Typo="Typo.h6">موضوع شکایت نامه</MudText>
+            <MudText Typo="Typo.subtitle2" Style="margin: 25px 50px;">@_pGravamenContract.PetitionSubject</MudText>
+        </MudCardContent>
+    </MudCard>
+    <MudCard  Style="margin:10px;">
+        <MudCardContent>
+            <MudText Typo="Typo.h6">خلاصه شکایت نامه</MudText>
+            <MudText Typo="Typo.subtitle2" Align="MudBlazor.Align.Justify" Style="margin: 25px 50px;">@_pGravamenContract.PetitionDescription</MudText>
+        </MudCardContent>
+    </MudCard>
+    <MudCard Style="margin:10px;">
+        <MudCardContent>
+            <MudText Typo="Typo.h6">شاکی/شاکیان</MudText>    
+            <MudList>
+                @foreach (var item in _pGravamenContract.ThePGravamenPersonContractList)
+                {
+                    @if (item.PersonStartPost == Enumerations.PUPersonStartPost.PlaintiffPerson)
+                    {
+                        <MudListItem  Icon="@Icons.Filled.Man" IconColor="Color.Primary">@item.Name @item.Family  به شماره ملی @item.NationalCode به نشانی @item.Address شماره تماس @item.MobilNumber </MudListItem>
+                    }
+                }
+            </MudList>
+        </MudCardContent>
+    </MudCard>
+    <MudCard Style="margin:10px;">
+        <MudCardContent>
+            <MudText Typo="Typo.h6">متهم/متهمان</MudText>    
+            <MudList>
+                @foreach (var item in _pGravamenContract.ThePGravamenPersonContractList)
+                {
+                    @if (item.PersonStartPost == Enumerations.PUPersonStartPost.OffendingPerson)
+                    {
+                        <MudListItem Icon="@Icons.Filled.Man" IconColor="Color.Error">@item.Name به نشانی @item.Address</MudListItem>
+                    }
+                }
+            </MudList>
+        </MudCardContent>
+    </MudCard>
+    <MudList>
+            <MudText Typo="Typo.h6">مدارک و مستندات</MudText>    
+        @foreach (var item in _pGravamenContract.TheGAttachmentContractList)
+        {
+            <MudListItem Icon="@Icons.Filled.Man" IconColor="Color.Primary">@item.TheAttachmentTypeContract.Title</MudListItem>
+        }
+    </MudList>
+</MudForm>
+
+@code {
+    [Parameter]
+    public string _pGravamen { get; set; }
+
+    PGravamenContract? _pGravamenContract ;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        try
+        {
+            PGravamenByIdContract _pGravamenByIdContract = new();
+            _pGravamenByIdContract.FollowUpNo = _pGravamen;
+
+            PGravamenService pService = new();
+            GetPGravamenByIdRequest request = new();
+            request.ThePGravamenByIdContract = _pGravamenByIdContract;
+            GetPGravamenByIdResponse response = pService.GetGravamenByFollowingNo(_appConfiguration.BackendServerAddress, _appConfiguration.GetGravamenByFollowingNo, request);
+            if (response.Result.Code == 1000)
+                _pGravamenContract = response.ThePGravamenContract;
+        }
+        catch
+        {
+            
+        }
+    }
+}

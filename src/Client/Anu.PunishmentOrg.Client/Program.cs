@@ -1,4 +1,5 @@
 using Anu.PunishmentOrg.Client;
+using BlazorDownloadFile;
 using MudBlazor.Services;
 using Recurop;
 
@@ -12,7 +13,7 @@ builder.Services.ManageIOC(builder.Configuration);
  
 
 builder.Services.AddHttpClient();
-
+builder.Services.AddBlazorDownloadFile();
 builder.Services.AddMudServices();
 builder.Services.AddRecurop();
 var app = builder.Build();
