@@ -8,6 +8,7 @@ using Anu.PunishmentOrg.DataModel.Case;
 using Anu.PunishmentOrg.DataModel.Notice;
 using Anu.PunishmentOrg.Domain.Notice;
 using Anu.PunishmentOrg.Report;
+using Anu.PunishmentOrg.ServiceModel.Case;
 using Anu.PunishmentOrg.ServiceModel.Notice;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Anu.Report;
@@ -57,7 +58,11 @@ namespace Anu.PunishmentOrg.Api.Notice
                 No                 = a.No,
                 NoticeDate         = a.NoticeDate,
                 NoticePersonFamily = a.NoticePersonFamily,
-                NoticePersonName   = a.NoticePersonName
+                NoticePersonName   = a.NoticePersonName,
+                ThePCaseContract = new PCaseContract() 
+                { 
+                    No = a.ThePNoticePersonList.OfType<PNoticePerson>()?.FirstOrDefault()?.ThePCase?.No,
+                }
             }
             ).ToList();
 

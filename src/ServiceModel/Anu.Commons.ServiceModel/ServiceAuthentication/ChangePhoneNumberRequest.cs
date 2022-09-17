@@ -10,6 +10,9 @@
 
         [System.ComponentModel.DataAnnotations.Required]
         public string? Password { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string? BirthDay { get; set; }
     }
 
     

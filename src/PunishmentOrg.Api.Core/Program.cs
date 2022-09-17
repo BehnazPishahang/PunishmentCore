@@ -1,6 +1,8 @@
 using Anu.DataAccess;
 using Anu.Domain;
 using Anu.PunishmentOrg.Api.Authentication;
+using Anu.PunishmentOrg.Api.Authentication.Utility;
+using Anu.Utility.Sms;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -55,7 +57,8 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddDbContext<Anu.DataAccess.ApplicationDbContext>(
                 options =>
                 {
-                    options.UseOracle("Password=ali;Persist Security Info=True;User ID=puo;Data Source=192.168.1.11/anu", (oracleOptions) =>
+                    
+                    options.UseOracle(builder.Configuration.GetConnectionString("Local"), (oracleOptions) =>
                     {
                         oracleOptions.UseOracleSQLCompatibility("11");
                     }
@@ -112,6 +115,9 @@ builder.Services.AddAuthentication(options =>
 });
 
 var app = builder.Build();
+SmsSender.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
+ShahkarAuthentication.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
+SabteahvalAuthentication.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

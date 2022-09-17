@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="PNotice\Default.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="PNotice\PNotice.mrt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

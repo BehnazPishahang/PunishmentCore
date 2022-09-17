@@ -46,7 +46,7 @@ namespace Anu.BaseInfo.ServiceModel.SystemConfiguration
 
 
         [System.ComponentModel.DisplayName("واحد سازماني در سرویس")]
-        public Anu.BaseInfo.ServiceModel.OrganizationChart.unitContract? TheunitContract { get; set; }
+        public Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract? TheUnitContract { get; set; }
 
 
 

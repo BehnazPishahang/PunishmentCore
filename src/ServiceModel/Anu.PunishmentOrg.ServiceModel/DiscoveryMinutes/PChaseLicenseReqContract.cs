@@ -205,12 +205,12 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             
             [System.ComponentModel.DisplayName("شعبه اي که صورتجلسه جهت رسيدگي به آن ارجاع شده")]
-        public Anu.BaseInfo.ServiceModel.OrganizationChart.unitContract? TheReferUnit { get; set; }
+        public Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract? TheReferUnit { get; set; }
 
             
             
             [System.ComponentModel.DisplayName("واحد تعزيراتي اعطا کننده مجوز")]
-        public Anu.BaseInfo.ServiceModel.OrganizationChart.unitContract? TheUnit { get; set; }
+        public Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract? TheUnit { get; set; }
 
             
             

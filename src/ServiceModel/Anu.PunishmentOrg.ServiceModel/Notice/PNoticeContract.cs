@@ -1,4 +1,6 @@
 ﻿
+using Anu.PunishmentOrg.ServiceModel.Case;
+
 namespace Anu.PunishmentOrg.ServiceModel.Notice
 {
     [System.ComponentModel.DisplayName("ابلاغنامه در سرویس")]
@@ -33,6 +35,12 @@ namespace Anu.PunishmentOrg.ServiceModel.Notice
                 [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نام ابلاغ شونده")]
         public string? NoticePersonName { get; set; }
+
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("پرونده در سرویس")]
+        public PCaseContract? ThePCaseContract { get; set; }
 
             
 

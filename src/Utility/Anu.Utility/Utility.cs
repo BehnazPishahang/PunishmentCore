@@ -1,15 +1,40 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Newtonsoft.Json;
+using System.ComponentModel;
 using System.Net.Http.Json;
 using System.Text;
 using System.Xml.Serialization;
 using Utility.Exceptions;
-using Utility.Guard;
 
 namespace Anu.Utility
 {
     public static class Utility
     {
+        public static string GetDescription(this Enum enumValue)
+        {
+            var fieldInfo = enumValue.GetType().GetField(enumValue.ToString());
+
+            var descriptionAttributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            return descriptionAttributes.Length > 0 ? descriptionAttributes[0].Description : enumValue.ToString();
+        }
+
+        public static string ToCompleteString(this System.Exception ex)
+        {
+            if (ex == null) return string.Empty;
+            StringBuilder sb = new StringBuilder();
+            System.Exception ex1 = ex;
+            while (ex1 != null)
+            {
+                sb.Append("Message: ").Append(ex1.Message).AppendLine();
+                sb.Append("Source: ").Append(ex1.Source).AppendLine();
+                sb.Append("StackTrace: ").Append(ex1.StackTrace).AppendLine();
+                sb.Append("----------------------------------------------------").AppendLine();
+                ex1 = ex1.InnerException;
+
+            }
+            return sb.ToString();
+        }
 
         public static int ToInt(this string text)
         {
@@ -160,10 +185,44 @@ namespace Anu.Utility
             }
         }
 
+        public static string Args(this string strText, object? arg0)
+        {
+            return string.Format(strText, arg0);
+        }
+
+        public static string Args(this string strText, object? arg0, object? arg1)
+        {
+            return string.Format(strText, arg0, arg1);
+        }
+
+        public static string Args(this string strText, object? arg0, object? arg1, object? arg2)
+        {
+            return string.Format(strText, arg0, arg1, arg2);
+        }
+
+        public static string AddNewLine(this string strText)
+        {
+            return strText += Environment.NewLine;
+        }
+
         public static bool IsDevelopment()
         {
             bool isDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
             return isDevelopment;
+        }
+        public static string ToCommaString(this long value)
+        {
+            return value.ToString("n0");
+        }
+        public static string ToCommaString(this long? value)
+        {
+            if (value.HasValue) return value.Value.ToCommaString();
+            return null;
+        }
+        
+        public static int GetEnumCode(this Enum value)
+        {
+            return (int)Convert.ChangeType(value, value.GetTypeCode());
         }
     }
 

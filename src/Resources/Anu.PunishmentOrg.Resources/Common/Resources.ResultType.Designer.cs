@@ -151,6 +151,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string In_Valid_Input {
+            get {
+                return ResourceManager.GetString("In_Valid_Input", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to برای استفاده از خدمت نیاز به ورود دارید..
         /// </summary>
         public static string JwtTokenIsNotValid {
@@ -493,47 +502,229 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لطفا شماره پرونده را وارد کنید.
+        /// </summary>
+        public static string No_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("No_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره پرونده معتبر نمی باشد..
+        /// </summary>
+        public static string No_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("No_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدملی شخص مربوط به قبض معتبر نمی باشد..
+        /// </summary>
+        public static string PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_NationalCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_NationalCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to قبض مربوطه یافت نشد..
+        /// </summary>
+        public static string PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_PBill4Paid_NotFound {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_PBill4Paid_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد..
+        /// </summary>
+        public static string PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ورودی درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_ThePBill4PaidNationalCodeContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_ThePBill4PaidNationalCodeContra" +
+                        "ct_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شناسه پرداخت معتبر نمی باشد..
         /// </summary>
-        public static string PBill4Paid_GetPaymentInfo_FishNo_Is_Required {
+        public static string PBill4Paid_GetPBill4PaidByFishNo_FishNo_Is_Required {
             get {
-                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_FishNo_Is_Required", resourceCulture);
+                return ResourceManager.GetString("PBill4Paid_GetPBill4PaidByFishNo_FishNo_Is_Required", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to قبضی یافت نشد..
         /// </summary>
-        public static string PBill4Paid_GetPaymentInfo_PBill4Paid_NotFound {
+        public static string PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_NotFound {
             get {
-                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_PBill4Paid_NotFound", resourceCulture);
+                return ResourceManager.GetString("PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_NotFound", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to وضعیت قبض نامعتبر است..
         /// </summary>
-        public static string PBill4Paid_GetPaymentInfo_PBill4Paid_TheObjectState_Is_Null {
+        public static string PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_TheObjectState_Is_Null {
             get {
-                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_PBill4Paid_TheObjectState_Is_Null", resourceCulture);
+                return ResourceManager.GetString("PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_TheObjectState_Is_Null", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
         /// </summary>
-        public static string PBill4Paid_GetPaymentInfo_Request_Is_Required {
+        public static string PBill4Paid_GetPBill4PaidByFishNo_Request_Is_Required {
             get {
-                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_Request_Is_Required", resourceCulture);
+                return ResourceManager.GetString("PBill4Paid_GetPBill4PaidByFishNo_Request_Is_Required", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
         /// </summary>
-        public static string PBill4Paid_GetPaymentInfo_ThePBill4PaidFishNoContract_Is_Required {
+        public static string PBill4Paid_GetPBill4PaidByFishNo_ThePBill4PaidFishNoContract_Is_Required {
             get {
-                return ResourceManager.GetString("PBill4Paid_GetPaymentInfo_ThePBill4PaidFishNoContract_Is_Required", resourceCulture);
+                return ResourceManager.GetString("PBill4Paid_GetPBill4PaidByFishNo_ThePBill4PaidFishNoContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدملی شخص مربوط به قبض معتبر نمی باشد..
+        /// </summary>
+        public static string PBill4Paid_GetPBill4PaidListByNationalCode_NationalCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPBill4PaidListByNationalCode_NationalCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to قبض مربوطه یافت نشد..
+        /// </summary>
+        public static string PBill4Paid_GetPBill4PaidListByNationalCode_PBill4Paid_NotFound {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPBill4PaidListByNationalCode_PBill4Paid_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد..
+        /// </summary>
+        public static string PBill4Paid_GetPBill4PaidListByNationalCode_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPBill4PaidListByNationalCode_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ورودی درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PBill4Paid_GetPBill4PaidListByNationalCode_ThePBill4PaidNationalCodeContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_GetPBill4PaidListByNationalCode_ThePBill4PaidNationalCodeContract_Is_R" +
+                        "equired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to فراخوانی سرویس سداد با خطا مواجه شد..
+        /// </summary>
+        public static string PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError {
+            get {
+                return ResourceManager.GetString("PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شناسه پرداخت معتبر نمی باشد..
+        /// </summary>
+        public static string PBill4Paid_SendPaymentRequestToSadad_FishNo_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_SendPaymentRequestToSadad_FishNo_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to خطای برگشتی از سرویس سداد..
+        /// </summary>
+        public static string PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError {
+            get {
+                return ResourceManager.GetString("PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شبای قبض یافت نشد..
+        /// </summary>
+        public static string PBill4Paid_SendPaymentRequestToSadad_IBAN_NotFound {
+            get {
+                return ResourceManager.GetString("PBill4Paid_SendPaymentRequestToSadad_IBAN_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شبای قبض معتبر نیست..
+        /// </summary>
+        public static string PBill4Paid_SendPaymentRequestToSadad_IBAN_NotValid {
+            get {
+                return ResourceManager.GetString("PBill4Paid_SendPaymentRequestToSadad_IBAN_NotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to قبض مورد نظر یافت نشد..
+        /// </summary>
+        public static string PBill4Paid_SendPaymentRequestToSadad_PBill4Paid_NotFound {
+            get {
+                return ResourceManager.GetString("PBill4Paid_SendPaymentRequestToSadad_PBill4Paid_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد.
+        /// </summary>
+        public static string PBill4Paid_SendPaymentRequestToSadad_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_SendPaymentRequestToSadad_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ورودی درخواست نمی تواند خالی باشد.
+        /// </summary>
+        public static string PBill4Paid_SendPaymentRequestToSadad_ThePBill4PaidFishNoContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PBill4Paid_SendPaymentRequestToSadad_ThePBill4PaidFishNoContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مجموع مبلغ قبض معتبر نمی باشد..
+        /// </summary>
+        public static string PBill4Paid_SendPaymentRequestToSadad_TotalPaidCost_NotFound {
+            get {
+                return ResourceManager.GetString("PBill4Paid_SendPaymentRequestToSadad_TotalPaidCost_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شناسه واریزی قبض معتبر نمی باشد..
+        /// </summary>
+        public static string PBill4Paid_SendPaymentRequestToSadad_TreasuryID_NotFound {
+            get {
+                return ResourceManager.GetString("PBill4Paid_SendPaymentRequestToSadad_TreasuryID_NotFound", resourceCulture);
             }
         }
         
@@ -678,6 +869,142 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string PGravamen_FileIsLargerThanAllowedThreshold {
             get {
                 return ResourceManager.GetString("PGravamen_FileIsLargerThanAllowedThreshold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد ملی شخص نا معتبر میباشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد ملی شخص نا معتبر میباشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Not_Valid {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شکوائیه ای برای شخص یافت نشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اطلاعات شخص نا معتبر میباشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoCoPGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoCoPGravamen_GetPe" +
+                        "rsonPGravamenInfoResult_TheGetPersonPGravamenInfoContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  درخواست ورودی نامعتبر یا خالی می‌باشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenStatisticResult_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenStatisticResult_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره ملی شخص نامعتبر یا خالی می‌باشد.
+        /// </summary>
+        public static string PGravamen_GetPersonPGravamenStatisticResult_TheNationalityCode_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPersonPGravamenStatisticResult_TheNationalityCode_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره پیگیری یا شناسه واحد شکوائیه نمی توانند هر دو خالی باشند.
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_Id_FollowUpNo_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_Id_FollowUpNo_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شکوائیه یافت نشد..
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_PGravamen_NotFound {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_PGravamen_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد.
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ورودی درخواست نمی تواند خالی باشد.
+        /// </summary>
+        public static string PGravamen_GetPGravamenById_ThePGravamenByIdContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenById_ThePGravamenByIdContract_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره پیگیری معتبر نمی باشد..
+        /// </summary>
+        public static string PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شکوائیه مورد نظر یافت نشد..
+        /// </summary>
+        public static string PGravamen_GetPGravamenInfo_PGravamen_NotFound {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenInfo_PGravamen_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست نمی تواند خالی باشد..
+        /// </summary>
+        public static string PGravamen_GetPGravamenInfo_Request_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenInfo_Request_Is_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست ورودی خالی یا نا معتبر میباشد.
+        /// </summary>
+        public static string PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required {
+            get {
+                return ResourceManager.GetString("PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required", resourceCulture);
             }
         }
         
@@ -1114,6 +1441,42 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شماره تلفن همراه کاربر به کد ملی {0} تکراری است.
+        /// </summary>
+        public static string SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive {
+            get {
+                return ResourceManager.GetString("SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کاربر در سامانه ثبت نام نکرده است.
+        /// </summary>
+        public static string SendSmsForChangePhoneNumber_Not_Find_User {
+            get {
+                return ResourceManager.GetString("SendSmsForChangePhoneNumber_Not_Find_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد..
+        /// </summary>
+        public static string SendSmsForChangePhoneNumber_request_Not_Valid {
+            get {
+                return ResourceManager.GetString("SendSmsForChangePhoneNumber_request_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره تلفن یا کد ملی معتبر نمی‌باشد.
+        /// </summary>
+        public static string SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid {
+            get {
+                return ResourceManager.GetString("SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to جنسیت معتبر نمی باشد.
         /// </summary>
         public static string Sex_Is_Not_Valid {
@@ -1218,6 +1581,60 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string UserName_Or_PassWord_Is_Not_Valid {
             get {
                 return ResourceManager.GetString("UserName_Or_PassWord_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاریخ تولد شخص نامعتبر می‌باشد.
+        /// </summary>
+        public static string V2ChangePhoneNumber_BirthDay_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_BirthDay_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره تلفن همراه کاربر به کد ملی {0} تکراری است.
+        /// </summary>
+        public static string V2ChangePhoneNumber_Mobile_Number_is_Repetitive {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_Mobile_Number_is_Repetitive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره موبایل جدید نا معتبر می‌باشد.
+        /// </summary>
+        public static string V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to درخواست معتبر نمی باشد..
+        /// </summary>
+        public static string V2ChangePhoneNumber_request_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_request_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نام کاربری یا کد ارسالی نا معتبر می‌باشد..
+        /// </summary>
+        public static string V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شما هیچ پرونده ای ندارید..
+        /// </summary>
+        public static string You_Do_Not_Have_Any_Case {
+            get {
+                return ResourceManager.GetString("You_Do_Not_Have_Any_Case", resourceCulture);
             }
         }
     }

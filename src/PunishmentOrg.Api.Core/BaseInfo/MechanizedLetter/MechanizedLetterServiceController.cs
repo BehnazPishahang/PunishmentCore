@@ -109,14 +109,14 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterCaseContractList)
                 {
                     item.RelatedCaseNo.Null(MechanizedLetterResult.MechanizedLetter_CaseNo_Is_Null);
-                    item.TheunitContract.Null(MechanizedLetterResult.MechanizedLetter_TheUnit_Is_Null);
-                    item.TheunitContract.Code.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_CaseUnit_Is_Null);
+                    item.TheUnitContract.Null(MechanizedLetterResult.MechanizedLetter_TheUnit_Is_Null);
+                    item.TheUnitContract.Code.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_CaseUnit_Is_Null);
 
                     var CaseObj = await _unitOfWork.Repositorey<IPCaseRepository>().GetPCaseByNo(item.RelatedCaseNo);
                     CaseObj.Null(MechanizedLetterResult.MechanizedLetter_CaseNo_Is_Not_Valid);
 
 
-                    var UnitObj = await _unitOfWork.Repositorey<IUnitRepository>().GetByCode(item.TheunitContract.Code);
+                    var UnitObj = await _unitOfWork.Repositorey<IUnitRepository>().GetByCode(item.TheUnitContract.Code);
                     UnitObj.Null(MechanizedLetterResult.MechanizedLetter_CaseUnit_Is_Not_Valid);
 
 
@@ -197,7 +197,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterCaseContractList)
                 {
                     OneGMechanizedLetter.TheGMechanizedLetterCaseList = new();
-                    var Unit = await _unitOfWork.Repositorey<IUnitRepository>().GetByCode(item.TheunitContract.Code);
+                    var Unit = await _unitOfWork.Repositorey<IUnitRepository>().GetByCode(item.TheUnitContract.Code);
                     var CaseList = await _unitOfWork.Repositorey<IPCaseRepository>().GetPCaseByNo(item.RelatedCaseNo);
                     var OneCaseId = "";
                     foreach (var caseItem in CaseList)
