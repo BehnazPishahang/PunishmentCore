@@ -1,0 +1,64 @@
+﻿
+@page "/Granovments/{_pGravamen}"
+
+@using Anu.PunishmentOrg.Client.Infrastructure.Granovment
+@using Anu.PunishmentOrg.ServiceModel.Gravamen
+
+@inject AppConfiguration _appConfiguration
+
+<div class="jumbotron text-center border-info border-2 oi-header">
+    <h3>لیست شکایت نامه ها</h3>
+</div>
+
+<MudForm>
+    <MudTable Items="@gravoments" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudTable"
+              T="PGravamenInfoContract" Dense="true">
+        <HeaderContent>
+            <MudTh Style="width:150px">شماره پیگیری</MudTh>
+            <MudTh Style="width:250px">موضوع شکایت نامه</MudTh>
+            <MudTh Style="width:10px"></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="شماره پیگیری">@context.FollowUpNo</MudTd>
+            <MudTd DataLabel="موضوع شکایت نامه">@context.PetitionSubject</MudTd>
+            <MudTd>
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" Color="Color.Error" Size="Size.Small"></MudIconButton>
+            </MudTd>
+
+        </RowTemplate>
+    </MudTable>
+
+</MudForm>
+
+@code {
+
+    private MudTable<PGravamenInfoContract> mudTable;
+
+    [Parameter]
+    public string _pGravamen { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
+
+    IEnumerable<PGravamenInfoContract> gravoments;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        try
+        {
+            GetPersonPGravamenInfoContract _pGravamenInfoContract = new();
+            _pGravamenInfoContract.NationalityCode = _pGravamen;
+
+            PGravamenService pService = new();
+            GetPersonPGravamensInfoRequest request = new();
+            gravoments = pService.GetGravamenListByNationalNo(_appConfiguration.BackendServerAddress, _appConfiguration.GetGravamenListByNationalNo, _pGravamen, SharedInfo.AccessToken);
+        }
+        catch
+        {
+            
+        }
+    }
+}

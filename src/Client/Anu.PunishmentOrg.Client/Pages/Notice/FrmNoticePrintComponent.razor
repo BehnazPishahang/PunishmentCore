@@ -38,6 +38,6 @@
     protected override async Task OnInitializedAsync()
     {
         string nnn = No;
-        var  NoticeInfo = _noticeService.ChangePNoticeViewByUserStatus(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePNoticeViewByUserStatus, No);
+        var  NoticeInfo = _noticeService.ChangePNoticeViewByUserStatus(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePNoticeViewByUserStatus, No ,SharedInfo.AccessToken);
         }
 }
