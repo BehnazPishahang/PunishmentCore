@@ -1441,6 +1441,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شماره تلفن همراه کاربر به کد ملی {0} تکراری است.
+        /// </summary>
+        public static string SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive {
+            get {
+                return ResourceManager.GetString("SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کاربر در سامانه ثبت نام نکرده است.
         /// </summary>
         public static string SendSmsForChangePhoneNumber_Not_Find_User {
@@ -1581,6 +1590,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string V2ChangePhoneNumber_BirthDay_Is_Not_Entered {
             get {
                 return ResourceManager.GetString("V2ChangePhoneNumber_BirthDay_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to شماره تلفن همراه کاربر به کد ملی {0} تکراری است.
+        /// </summary>
+        public static string V2ChangePhoneNumber_Mobile_Number_is_Repetitive {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_Mobile_Number_is_Repetitive", resourceCulture);
             }
         }
         

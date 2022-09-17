@@ -11,6 +11,6 @@ internal class ThemeManagerTheme
     public Typography FontSetting { get; set; }
     public int DefaultBorderRadiusAsInt { get; set; }
 
-    public int DefaultFontSizeAsInt { get; set; } 
+    public int DefaultFontSizeAsInt { get; set; } = 14; 
     public LayoutProperties LayoutProperties { get; set; }
 }
