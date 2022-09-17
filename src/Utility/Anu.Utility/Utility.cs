@@ -205,14 +205,25 @@ namespace Anu.Utility
             return strText += Environment.NewLine;
         }
 
-
         public static bool IsDevelopment()
         {
             bool isDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
             return isDevelopment;
         }
-
-
+        public static string ToCommaString(this long value)
+        {
+            return value.ToString("n0");
+        }
+        public static string ToCommaString(this long? value)
+        {
+            if (value.HasValue) return value.Value.ToCommaString();
+            return null;
+        }
+        
+        public static int GetEnumCode(this Enum value)
+        {
+            return (int)Convert.ChangeType(value, value.GetTypeCode());
+        }
     }
 
 

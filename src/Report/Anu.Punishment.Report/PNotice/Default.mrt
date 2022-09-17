@@ -536,10 +536,10 @@ VdirsVdir//Z</ImageBytes>
             </Image2>
             <Text1 Ref="6" type="Text" isKey="true">
               <Brush>Transparent</Brush>
-              <ClientRectangle>80,40,290,20</ClientRectangle>
+              <ClientRectangle>30,40,500,50</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Arial,12</Font>
+              <Font>B Nazanin,16</Font>
               <Margins>0,0,0,0</Margins>
               <Name>Text1</Name>
               <Page isRef="3" />
@@ -566,7 +566,7 @@ VdirsVdir//Z</ImageBytes>
               <ClientRectangle>0,0,750,900</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Arial,10</Font>
+              <Font>B Nazanin,16</Font>
               <HorAlignment>Right</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>DataDefault_Text</Name>
@@ -626,11 +626,11 @@ VdirsVdir//Z</ImageBytes>
   </ReferencedAssemblies>
   <ReportAlias>TwoSimpleLists</ReportAlias>
   <ReportAuthor>Stimulsoft</ReportAuthor>
-  <ReportChanged>9/15/2022 11:54:52 PM</ReportChanged>
+  <ReportChanged>9/17/2022 5:23:06 PM</ReportChanged>
   <ReportCreated>5/29/2004 10:59:00 AM</ReportCreated>
   <ReportDescription>This sample demonstrates how to create two simple list reports.</ReportDescription>
   <ReportFile>D:\Project\Anu\Punishment\src\Report\Anu.Punishment.Report\PNotice\Default.mrt</ReportFile>
-  <ReportGuid>a3f1e9968da74f718820e712993d891c</ReportGuid>
+  <ReportGuid>972f91b57d144ba4aa381754b9f4beb7</ReportGuid>
   <ReportName>Report</ReportName>
   <ReportUnit>HundredthsOfInch</ReportUnit>
   <ReportVersion>2022.1.1.0</ReportVersion>

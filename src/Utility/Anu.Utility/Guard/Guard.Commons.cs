@@ -23,6 +23,13 @@ namespace Utility.Guard
             {
                 return true;
             }
+            if (input is System.Collections.ICollection)
+            {
+                if (((System.Collections.ICollection)input).Count == 0)
+                {
+                    return true;
+                }
+            }
 
             return false;
         }
