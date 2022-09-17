@@ -467,6 +467,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
             request.MobileNumber.NullOrWhiteSpace(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
             request.MobileNumber.IsDigit(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
             request!.UserName!.IsValidNationalCode();
+
+            await ShahkarAuthentication.ShahkarAuthenticate(request!.MobileNumber, request!.UserName);
             #endregion
 
             #region ValidateUserHistory
@@ -535,7 +537,6 @@ namespace Anu.PunishmentOrg.Api.Authentication
             request.UserName.NullOrWhiteSpace(V2ChangePhoneNumberResult.V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered);
             request.Password!.IsDigit(V2ChangePhoneNumberResult.V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered);
             request!.NewPhoneNumber.NullOrWhiteSpace(V2ChangePhoneNumberResult.V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered);
-            request.BirthDay.NullOrWhiteSpace(V2ChangePhoneNumberResult.V2ChangePhoneNumber_BirthDay_Is_Not_Entered);
 
             request.UserName!.IsValidNationalCode();
             request.NewPhoneNumber.IsValidPhone();
