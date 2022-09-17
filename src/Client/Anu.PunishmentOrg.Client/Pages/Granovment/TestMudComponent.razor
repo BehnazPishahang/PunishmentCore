@@ -5,26 +5,12 @@
 
 @inject AppConfiguration _appConfiguration
 
-<MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info" Size="Size.Medium"  @OnClick="SaveGranovment">ذخیره</MudButton>
-<MudButton Color="Color.Info" Size="Size.Medium" OnClick="SaveGranovment">ذخیره1</MudButton>
-<button @onclick="SaveGranovment" >Test</button>
+<MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info" Size="Size.Medium"  OnClick="SaveGranovment">ذخیره</MudButton>
 
 @code {
-    protected override Task OnInitializedAsync()
-    {
-        return base.OnInitializedAsync();
-    }
-
-    protected override Task OnAfterRenderAsync(bool firstRender)
-    {
-        var r =  base.OnAfterRenderAsync(firstRender);
-        SaveGranovment();
-        return r;
-    }
     void SaveGranovment()
     {
-        _navigationManager.NavigateTo($"/GranovmentSummary/{2834826742}");
-        // _navigationManager.NavigateTo($"/GranovmentList/{2740981422}");
+        //_navigationManager.NavigateTo($"/GranovmentSummary/{"2708960609"}");
+         _navigationManager.NavigateTo($"/GranovmentList/{"0068981554"}");
     }
-
 }
