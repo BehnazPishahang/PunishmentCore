@@ -66,6 +66,6 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered = -30152,
         V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered = -30153,
         V2ChangePhoneNumber_BirthDay_Is_Not_Entered = -30154,
-        V2ChangePhoneNumberResult_Mobile_Number_is_Repetitive = -30155
+        V2ChangePhoneNumber_Mobile_Number_is_Repetitive = -30155
     }
 }

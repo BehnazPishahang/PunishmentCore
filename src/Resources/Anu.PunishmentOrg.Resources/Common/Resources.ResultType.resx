@@ -809,11 +809,11 @@
     <comment>-30322</comment>
   </data>
   <data name="SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive" xml:space="preserve">
-    <value>شماره تلفن ارسال تکراری می‌باشد</value>
+    <value>شماره تلفن همراه کاربر به کد ملی {0} تکراری است</value>
     <comment>-30144</comment>
   </data>
-  <data name="V2ChangePhoneNumberResult_Mobile_Number_is_Repetitive" xml:space="preserve">
-    <value>شماره تلفن ارسال تکراری می‌باشد</value>
+  <data name="V2ChangePhoneNumber_Mobile_Number_is_Repetitive" xml:space="preserve">
+    <value>شماره تلفن همراه کاربر به کد ملی {0} تکراری است</value>
     <comment>-30155</comment>
   </data>
 </root>

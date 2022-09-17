@@ -1441,7 +1441,7 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to شماره تلفن ارسال تکراری می‌باشد.
+        ///   Looks up a localized string similar to شماره تلفن همراه کاربر به کد ملی {0} تکراری است.
         /// </summary>
         public static string SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive {
             get {
@@ -1594,6 +1594,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to شماره تلفن همراه کاربر به کد ملی {0} تکراری است.
+        /// </summary>
+        public static string V2ChangePhoneNumber_Mobile_Number_is_Repetitive {
+            get {
+                return ResourceManager.GetString("V2ChangePhoneNumber_Mobile_Number_is_Repetitive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شماره موبایل جدید نا معتبر می‌باشد.
         /// </summary>
         public static string V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered {
@@ -1617,15 +1626,6 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered {
             get {
                 return ResourceManager.GetString("V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to شماره تلفن ارسال تکراری می‌باشد.
-        /// </summary>
-        public static string V2ChangePhoneNumberResult_Mobile_Number_is_Repetitive {
-            get {
-                return ResourceManager.GetString("V2ChangePhoneNumberResult_Mobile_Number_is_Repetitive", resourceCulture);
             }
         }
         
