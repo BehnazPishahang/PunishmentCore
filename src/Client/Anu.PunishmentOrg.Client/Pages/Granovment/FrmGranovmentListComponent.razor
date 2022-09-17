@@ -1,0 +1,68 @@
+﻿
+@page "/Granovments/{_pGravamen}"
+
+@using Anu.PunishmentOrg.Client.Infrastructure.Granovment
+@using Anu.PunishmentOrg.ServiceModel.Gravamen
+
+@inject AppConfiguration _appConfiguration
+
+<div class="jumbotron text-center border-info border-2 oi-header">
+    <h3>لیست شکایت نامه ها</h3>
+</div>
+
+<MudForm>
+    <MudTable Items="@gravoments" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudTable"
+              T="PGravamenContract" Dense="true">
+        <HeaderContent>
+            <MudTh Style="width:150px">شماره پیگیری</MudTh>
+            <MudTh Style="width:250px">موضوع شکایت نامه</MudTh>
+            <MudTh Style="width:10px"></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="شماره پیگیری">@context.FollowUpNo</MudTd>
+            <MudTd DataLabel="موضوع شکایت نامه">@context.PetitionReasons</MudTd>
+            <MudTd>
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" Color="Color.Error" Size="Size.Small"></MudIconButton>
+            </MudTd>
+
+        </RowTemplate>
+    </MudTable>
+
+</MudForm>
+
+@code {
+
+    List<PGravamenContract> gravoments;
+    private MudTable<PGravamenContract> mudTable;
+
+    [Parameter]
+    public string _pGravamen { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
+
+    Anu.Commons.ServiceModel.ServicePaging.Page<List<GetPGravamenInfoContract>> _pGravamenContract { set; get; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        try
+        {
+            GetPersonPGravamenInfoContract _pGravamenInfoContract = new();
+            _pGravamenInfoContract.NationalityCode = _pGravamen;
+
+            PGravamenService pService = new();
+            GetPersonPGravamensInfoRequest request = new();
+            request.TheGetPersonPGravamenInfoContract = _pGravamenInfoContract;
+            GetPersonPGravamensInfoResponse response = pService.GetGravamenListByNationalNo(_appConfiguration.BackendServerAddress, _appConfiguration.GetGravamenByFollowingNo, request);
+            if (response.Result.Code == 1000)
+                _pGravamenContract = response.PNotice;
+        }
+        catch
+        {
+            
+        }
+    }
+}

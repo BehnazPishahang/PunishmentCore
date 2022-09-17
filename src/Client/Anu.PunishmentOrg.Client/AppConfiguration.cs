@@ -18,5 +18,8 @@
         public string GetGeoLocationList { get; set; }
         public string RecieveGravamen { set; get; }
         public static AppConfiguration Instance { get; set; }
+        public string GetGravamenByFollowingNo { set; get; }
+
+        public string GetGravamenListByNationalNo { set; get; }
     }
 }
