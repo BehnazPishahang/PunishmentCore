@@ -1,6 +1,6 @@
 ﻿<h3>تغییر شماره تلفن </h3>
 
-@page "/ChangeNumber"
+@page "/ChangeMobileNumber"
 
 @using Anu.Commons.ServiceModel.ServiceAuthentication
 @using Anu.Commons.ServiceModel.ServiceResponse
@@ -28,7 +28,7 @@
           <MudItem class="">
                <MudItem class="row">
               <MudItem class="col-sm-3">
-                <MudItem class=" mb-0">شماره ملی</MudItem>
+                <MudItem class="text-black mb-0">شماره ملی</MudItem>
               </MudItem>
               <MudItem class="col-sm-9">
                
@@ -117,7 +117,7 @@
     protected override void OnInitialized()
     {
         _changePhoneNumberRequest = new();
-        _changePhoneNumberRequest.UserName = SharedInfo.NationalCode;
+       
     }
     async void GetAccessCode()
     {
@@ -143,9 +143,9 @@
 
 
          FirstStepUserLoginRequest _firstStepUserLoginRequest = new();
-        _firstStepUserLoginRequest.UserName = SharedInfo.NationalCode;
-     
-        FirstStepAuthResult result =await _anuAuthorizationService.SendSmsAuth(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsAuth, _firstStepUserLoginRequest);
+        _firstStepUserLoginRequest.UserName = _changePhoneNumberRequest.UserName;
+        _firstStepUserLoginRequest.MobileNumber = _changePhoneNumberRequest.NewPhoneNumber;
+        FirstStepAuthResult result =await _anuAuthorizationService.SendSmsForChangePhoneNumber(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsForChangePhoneNumber, _firstStepUserLoginRequest);
 
         if (result.Result.Code == (int)AnuResult.LoginSuccessful_Sms_Send_To)
         {
@@ -173,7 +173,7 @@
             }
             return;
         }
-        Result result =await _anuAuthorizationService.ChangePhoneNumber(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePhoneNumber, _changePhoneNumberRequest,SharedInfo.AccessToken);
+        Result result =await _anuAuthorizationService.ChangePhoneNumberV2(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePhoneNumberV2, _changePhoneNumberRequest);
           if (result.Code == (int)AnuResult.Successful)
         {
            

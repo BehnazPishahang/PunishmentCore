@@ -24,11 +24,11 @@
     <MudText Typo="Typo.h3" GutterBottom="true"></MudText>
     <MudItem class="col-lg-8">
 	  
-        <MudItem class=" mb-4">
-          <MudItem class=" ">
+        <MudItem class="card mb-4">
+          <MudItem class="card-body">
                <MudItem class="row">
               <MudItem class="col-sm-3">
-                <MudItem class=" mb-0">کدملی</MudItem>
+                <MudItem class="text-black mb-0">کدملی</MudItem>
               </MudItem>
               <MudItem class="col-sm-9">
                 <MudItem class="text-muted mb-0">@SharedInfo.NationalCode</MudItem>
@@ -37,13 +37,13 @@
             <hr />
             <MudItem class="row">
               <MudItem class="col-sm-3">
-                <MudItem class=" mb-0">شماره موبایل جدید </MudItem>
+                <MudItem class="text-black mb-0">شماره موبایل جدید </MudItem>
               </MudItem>
               <MudItem class="col-sm-6">
                <MudTextField T="string" Margin="Margin.Dense" Required="true"   @bind-Value="_changePhoneNumberRequest.NewPhoneNumber"  Variant="Variant.Outlined" Placeholder="09121111111" RequiredError="شماره تلفن  را وارد نمایید "  MaxLength="11" />
               </MudItem>
                 <MudItem class="col-sm-3">
-                        <MudButton  Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" class="btn  btn-lg ms-2" > 
+                        <MudButton  Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" class="btn  btn-lg ms-2" style="color: black !important;"> 
 
                                     @if(hasSmsSend)
                                      {
@@ -61,7 +61,7 @@
         
             <MudItem class="row">
               <MudItem class="col-sm-3">
-                <MudItem class=" mb-0">رمز ارسالی</MudItem>
+                <MudItem class="text-black mb-0">رمز ارسالی</MudItem>
               </MudItem>
               <MudItem class="col-sm-6">
                     <MudTextField  Margin="Margin.Dense" T="string"  disabled="@(!hasSmsSend)"  @bind-Value="@_changePhoneNumberRequest.Password" Variant="Variant.Outlined" Placeholder="111111"   MaxLength="6"  />
