@@ -34,7 +34,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Granovment
             inputData.Page.RowCountPerPage = 3000000;
             inputData.Page.PageNumber = 0;
             inputData.Page.TotalResult = 0;
-            inputData.Page.OrderPage = new Commons.ServiceModel.ServicePaging.OrderPage() { Property = "", Ascending = true };
+            inputData.Page.OrderPage = new Commons.ServiceModel.ServicePaging.OrderPage() { Property = "NoticeDate", Ascending = true };
 
 
             string jsonString = JsonSerializer.Serialize(inputData);
@@ -52,12 +52,12 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Granovment
 
             if (result.Result == AnuResult.Successful.GetResult())
             {
-                return result.ThePGravamenInfoContractList.Data.AsEnumerable();
+                return result.PNotice.Data.AsEnumerable();
 
             }
             else
             {
-                return result.ThePGravamenInfoContractList.Data.AsEnumerable();
+                return result.PNotice.Data.AsEnumerable();
 
             }
         }

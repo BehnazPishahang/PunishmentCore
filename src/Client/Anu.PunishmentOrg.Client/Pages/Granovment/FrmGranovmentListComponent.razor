@@ -6,6 +6,9 @@
 
 @inject AppConfiguration _appConfiguration
 
+<div class="jumbotron text-center border-info border-2 oi-header">
+    <h3>لیست شکایت نامه ها</h3>
+</div>
 
    <MudDataGrid T="PGravamenInfoContract" Items="@gravoments"  EditMode="DataGridEditMode.Form"
     Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual">
@@ -16,10 +19,10 @@
     <Columns>
         <Column T="PGravamenInfoContract" Style="width:150px"  Field="FollowUpNo" Title="شماره پیگیری" />
         <Column T="PGravamenInfoContract" Style="width:350px" Field="PetitionSubject" Title="موضوع شکایت نامه" />
-      
+
          <Column T="PGravamenInfoContract"  CellClass="d-flex justify-end" Style="width:50px">
             <CellTemplate>
-              
+
                 <MudButton Variant="Variant.Filled" EndIcon="@Icons.Filled.Visibility" Color="Color.Primary"  OnClick="() => GravamneSummary(context.Item)">مشاهده</MudButton>
             </CellTemplate>
         </Column>
@@ -57,7 +60,7 @@
         }
         catch
         {
-
+            
         }
     }
 
