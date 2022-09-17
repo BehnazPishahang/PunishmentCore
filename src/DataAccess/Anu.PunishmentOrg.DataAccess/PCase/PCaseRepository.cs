@@ -18,6 +18,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
         string[] gUnitTypeCodes = new string[] { "005", "013", "008", "010", "011", "012" };
         string[] badviType = new string[] { "005", "013" };
         string[] ejraType = new string[] { "008", "010", "011", "012" };
+        int[] objectStateType = new int[] { 2, 4};
 
         public PCaseRepository(Anu.DataAccess.ApplicationDbContext context) : base(context)
         {
@@ -79,8 +80,8 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
             var pCase = await queryNew.ToListAsync();
 
 
-            string createPcase = "پرونده در شعبه {0} در تاریخ {1} ثبت گردید .";
-            string handlingPcaseWithPRegiterTimeCase = "برای پرونده در تاریخ {0} ساعت {1} وقت رسیدگی تعیین شده است.";
+            string createPcase = "پرونده در {0} در تاریخ {1} ثبت گردید .";
+            string handlingPcaseWithPRegiterTimeCase = "برای پرونده در تاریخ {0} ساعت {1} تا {2} وقت رسیدگی تعیین شده است.";
             string handlingPcaseWithPSaftyWrit = "برای پرونده قرار {0} برای {1} صادر گردید.";
             string handlingPcaseWithPArrested = "برای {0} بازداشت صادر گردید .";
 
@@ -88,11 +89,13 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
             string judgmentPRevisionRequestCase = "برای پرونده در تاریخ {0} {1} ثبت گردید.";
 
             string executionPcase = "پرونده در تاریخ {0} به {1} ارسال شد.";
+            string executionPcash = "بابت جزای نقدی این پرونده مبلغ {0} ریال واریز شده است.";
             string executionPExecutionWrit = "پرونده در تاریخ {0} قرار {1} صادر گردید.";
             string executionPPrisoner = "برای {0} حبس صادر گردید.";
             string executionCaseArchiveState = "پرونده در اجرای احکام مختومه شد.";
 
             StringBuilder text = new StringBuilder();
+            text.AppendLine();
 
             #region تشکیل پرونده
             foreach (var item in pCase)
@@ -119,7 +122,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                 {
                     foreach (var pr in pRegistaryTimeCase)
                     {
-                        text.AppendFormat(handlingPcaseWithPRegiterTimeCase, pr.ThePRegistaryTime.RegisterDate.Substring(0, 10), pr.ThePRegistaryTime.RegisterDate.Substring(11)).AppendLine();
+                        text.AppendFormat(handlingPcaseWithPRegiterTimeCase, pr.ThePRegistaryTime.RegisterDate.Substring(0, 10), pr.ThePRegistaryTime.StartTime, pr.ThePRegistaryTime.EndTime).AppendLine();
                     }
 
                 }
@@ -128,13 +131,17 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                 //foreach (var item in pCase)
                 //{
                 var query2 = from safty in _context.Set<PSaftyWrit>()
-                             where safty.ThePCase.Id == item.Id
+                             where safty.ThePCase.Id == item.Id 
+                             //&& objectStateType.Contains(safty.TheObjectState.StateType.GetEnumCode())
                              select safty;
                 query2 = query2.Include(a => a.ThePCasePerson);
+                query2 = query2.Include(a => a.TheObjectState);
+                var a=query2.ToQueryString();
                 var pSaftyWrit = await query2.ToListAsync();
 
                 if (!pSaftyWrit.Null())
                 {
+                    pSaftyWrit=pSaftyWrit.Where(a => objectStateType.Contains(a.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var ps in pSaftyWrit)
                     {
                         text.AppendFormat(handlingPcaseWithPSaftyWrit, ps.SaftyWritType.GetDescription(), ps.ThePCasePerson.Name + " " + ps.ThePCasePerson.Family).AppendLine();
@@ -148,10 +155,12 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                              where arrest.ThePCase.Id == item.Id
                              select arrest;
                 query3 = query3.Include(a => a.TheArrestedPerson);
+                query3 = query3.Include(a => a.TheObjectState);
                 var pArrested = await query3.ToListAsync();
 
                 if (!pArrested.Null())
                 {
+                    pArrested = pArrested.Where(a => objectStateType.Contains(a.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var pa in pArrested)
                     {
                         text.AppendFormat(handlingPcaseWithPArrested, pa.TheArrestedPerson.Name + " " + pa.TheArrestedPerson.Family).AppendLine();
@@ -168,10 +177,12 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                                 where judg.ThePCase.Id == item.Id
                                 select judg;
                 queryJudg = queryJudg.Include(a => a.ThePJudgment);
+                queryJudg = queryJudg.Include(a => a.ThePJudgment.TheObjectState);
                 var pJudgmentCase = await queryJudg.ToListAsync();
 
                 if (!pJudgmentCase.Null())
                 {
+                    pJudgmentCase = pJudgmentCase.Where(a => objectStateType.Contains(a.ThePJudgment.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var pj in pJudgmentCase)
                     {
                         text.AppendFormat(judgmentPJudgmentCase, pj.ThePJudgment.JudgeDateTime.Substring(0, 10)).AppendLine();
@@ -187,20 +198,21 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                                 where revi.ThePCase.Id == item.Id
                                 select revi;
                 queryrevi = queryrevi.Include(a => a.ThePRevisionRequest);
+                queryrevi = queryrevi.Include(a => a.ThePRevisionRequest.TheObjectState);
                 var pRevisionRequest = await queryrevi.ToListAsync();
 
                 if (!pRevisionRequest.Null())
                 {
+                    pRevisionRequest = pRevisionRequest.Where(a => objectStateType.Contains(a.ThePRevisionRequest.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var pr in pRevisionRequest)
                     {
-                        text.AppendFormat(judgmentPRevisionRequestCase, pr.ThePRevisionRequest.CreateDateTime.Substring(0, 10), pr.ThePRevisionRequest.RequestSubject).AppendLine();
+                        text.AppendFormat(judgmentPRevisionRequestCase, pr.ThePRevisionRequest.CreateDateTime.Substring(0, 10), pr.ThePRevisionRequest.RequestSubject.GetDescription()).AppendLine();
                     }
 
                 }
                 //}
 
                 #endregion
-
 
                 #region اجرا احکام
 
@@ -212,19 +224,38 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                 }
                 //}
 
+                var querypcash = from pcash in _context.Set<DataModel.Accounting.PCashCase>()
+                                 where pcash.ThePCase.Id == item.Id
+                                 select pcash;
+                querypcash = querypcash.Include(a=>a.ThePCase).Include(a=>a.ThePCash);
+                querypcash = querypcash.Include(a=>a.ThePCash.TheObjectState);
+                var pCashCase = await querypcash.ToListAsync();
+
+                if (!pCashCase.Null())
+                {
+                    pCashCase = pCashCase.Where(a => objectStateType.Contains(a.ThePCash.TheObjectState.StateType.GetEnumCode())).ToList();
+                    foreach (var c in pCashCase)
+                    {
+                        text.AppendFormat(executionPcash, c.ThePCash.TotalPaidCost.ToCommaString()).AppendLine();
+                    }
+                }
+
 
                 //foreach (var item in pCase)
                 //{
                 var querypexe = from pexe in _context.Set<DataModel.Execution.PExecutionWrit>()
                                 where pexe.ThePCase.Id == item.Id
                                 select pexe;
+                querypexe = querypexe.Include(a => a.TheObjectState);
+
                 var pExecutionWrit = await querypexe.ToListAsync();
 
                 if (!pExecutionWrit.Null())
                 {
+                    pExecutionWrit = pExecutionWrit.Where(a => objectStateType.Contains(a.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var pe in pExecutionWrit)
                     {
-                        text.AppendFormat(executionPExecutionWrit, pe.CreateDateTime, pe.WritType.GetDescription()).AppendLine();
+                        text.AppendFormat(executionPExecutionWrit, pe.CreateDateTime.Substring(0,10), pe.WritType.GetDescription()).AppendLine();
                     }
 
                 }
@@ -237,10 +268,12 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                                 where ppri.ThePCase.Id == item.Id
                                 select ppri;
                 queryppri = queryppri.Include(a => a.ThePrisonPerson);
+                queryppri = queryppri.Include(a => a.TheObjectState);
                 var pPrisoner = await queryppri.ToListAsync();
 
                 if (!pPrisoner.Null())
                 {
+                    pPrisoner = pPrisoner.Where(a => objectStateType.Contains(a.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var pp in pPrisoner)
                     {
                         text.AppendFormat(executionPPrisoner, pp.ThePrisonPerson.Name + " " + pp.ThePrisonPerson.Family).AppendLine();
