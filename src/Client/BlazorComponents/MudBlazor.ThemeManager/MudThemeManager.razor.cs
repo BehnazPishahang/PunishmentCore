@@ -84,6 +84,7 @@ public partial class MudThemeManager
         {
             PresetThemes.Custom => PresetThemes.Custom,
             PresetThemes.MuiDark => PresetThemes.MuiDark,
+            PresetThemes.Weak => PresetThemes.Weak,
           
             _ => PresetThemes.Custom
         };
@@ -150,7 +151,19 @@ public partial class MudThemeManager
     private async Task UpdateFontSize(int value)
     {
         _themeManagerTheme.DefaultFontSizeAsInt = value;
-        _themeManagerTheme.LayoutProperties.DefaultBorderRadius = $"{value}px";
+        Typography tp = new Typography();
+        tp.Button.FontSize = $"{value}px";
+        tp.Caption.FontSize = $"{value}px";
+        tp.H1.FontSize = $"{value}px";
+        tp.H2.FontSize = $"{value + 1}px";
+        tp.H3.FontSize = $"{value + 2}px";
+        tp.H4.FontSize = $"{value + 3}px";
+        tp.H5.FontSize = $"{value + 4}px";
+        tp.H6.FontSize = $"{value + 5}px";
+        tp.Subtitle1.FontSize = $"{value }px";
+        tp.Subtitle2.FontSize = $"{value }px";
+        _themeManagerTheme.FontSetting = tp;
+        _themeManagerTheme.FontSetting.Default.FontSize = $"{value}px";
         await UpdateTheme();
     }
 
@@ -159,6 +172,7 @@ public partial class MudThemeManager
         switch (_themeManagerTheme.PresetThemes)
         {
             case PresetThemes.Custom:
+             
                 var palette = _themeManagerTheme.Mode == Modes.Dark
                     ? Configuration.DarkPalette
                     : Configuration.LightPalette;
@@ -174,6 +188,8 @@ public partial class MudThemeManager
                 _themeManagerTheme.Palette.SetThemeManagerThemePalette(palette);
                 Theme.Palette = _themeManagerTheme.Palette.GetThemeManagerThemePalette();
                 Theme.LayoutProperties = _themeManagerTheme.LayoutProperties;
+                if (_themeManagerTheme.FontSetting != null)
+                    Theme.Typography = _themeManagerTheme.FontSetting;
                 
                 break;
 
@@ -181,7 +197,10 @@ public partial class MudThemeManager
                 Theme = PresetThemes.GetMuiDarkTheme();
                 break;
 
-      
+            case PresetThemes.Weak:
+                Theme = PresetThemes.GetWeakTheme();
+                break;
+
         }
         
         await ThemeChanged.InvokeAsync(Theme);

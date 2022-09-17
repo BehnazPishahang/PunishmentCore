@@ -39,7 +39,13 @@
     background-color: var(--mud-palette-primary);
     cursor: pointer;
 }
-
+.mud-theme-Icon {
+    right: 0;
+    top: 1%;
+    box-shadow: 1px 1px 8px var(--mud-palette-primary);
+    color: #FFFFFF;
+    background-color: var(--mud-palette-primary);
+}
 .mud-theme-manager-button-spin {
     animation-name: spin;
     animation-duration: 5000ms;
