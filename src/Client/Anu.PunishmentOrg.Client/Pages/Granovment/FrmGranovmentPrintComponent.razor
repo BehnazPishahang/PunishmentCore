@@ -10,19 +10,19 @@
 </div>
 
 <MudForm Model="@_pGravamenContract">
-    <MudCard Style="margin:10px;">
+    <MudCard Style="margin:5px;">
         <MudCardContent>
             <MudText Typo="Typo.h6">موضوع شکایت نامه</MudText>
             <MudText Typo="Typo.subtitle2" Style="margin: 25px 50px;">@_pGravamenContract.PetitionSubject</MudText>
         </MudCardContent>
     </MudCard>
-    <MudCard  Style="margin:10px;">
+    <MudCard  Style="margin:5px;">
         <MudCardContent>
             <MudText Typo="Typo.h6">خلاصه شکایت نامه</MudText>
             <MudText Typo="Typo.subtitle2" Align="MudBlazor.Align.Justify" Style="margin: 25px 50px;">@_pGravamenContract.PetitionDescription</MudText>
         </MudCardContent>
     </MudCard>
-    <MudCard Style="margin:10px;">
+    <MudCard Style="margin:5px;">
         <MudCardContent>
             <MudText Typo="Typo.h6">شاکی/شاکیان</MudText>    
             <MudList>
@@ -36,7 +36,7 @@
             </MudList>
         </MudCardContent>
     </MudCard>
-    <MudCard Style="margin:10px;">
+    <MudCard Style="margin:5px;">
         <MudCardContent>
             <MudText Typo="Typo.h6">متهم/متهمان</MudText>    
             <MudList>
@@ -50,13 +50,6 @@
             </MudList>
         </MudCardContent>
     </MudCard>
-    <MudList>
-            <MudText Typo="Typo.h6">مدارک و مستندات</MudText>    
-        @foreach (var item in _pGravamenContract.TheGAttachmentContractList)
-        {
-            <MudListItem Icon="@Icons.Filled.Man" IconColor="Color.Primary">@item.TheAttachmentTypeContract.Title</MudListItem>
-        }
-    </MudList>
 </MudForm>
 
 @code {
