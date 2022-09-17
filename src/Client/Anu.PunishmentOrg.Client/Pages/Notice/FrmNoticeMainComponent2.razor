@@ -11,10 +11,10 @@
 @inject IDialogService DialogService
 
 
-@*<MudDataGrid T="PNoticeContract"  Bordered="true"  Hover="true" Dense="true" Striped="true" Items="@Elements" ColumnResizeMode="ResizeMode.Column" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
+@*<MudDataGrid T="PNoticeContract"  Bordered="true"  Hover="true" Dense="true" Striped="true" Items="@Elements" ColumnResizeMode="ResizeMode.Column" SortMode="SortMode.Multiple" Filterable="true" 
     Hideable="true" RowClick="@RowClicked" SelectedItemsChanged="@SelectedItemsChanged">*@
     <MudDataGrid T="PNoticeContract" Items="@Elements"  EditMode="DataGridEditMode.Form"
-    
+    QuickFilter="@_quickFilter"
     Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual">
     <ToolBarContent>
         <MudText Typo="Typo.h6"> ابلاغ </MudText>

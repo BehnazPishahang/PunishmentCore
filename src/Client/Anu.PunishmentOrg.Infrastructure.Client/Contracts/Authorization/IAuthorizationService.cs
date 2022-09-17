@@ -1,4 +1,5 @@
 ﻿using Anu.Commons.ServiceModel.ServiceAuthentication;
+using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.PunishmentOrg.ServiceModel.BaseInfo;
 
 namespace Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
@@ -16,6 +17,8 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
         public Task<AuthResult> V2Login(String baseURl, string serviceName, SecondStepUserLoginRequest request);
 
         public Task<PBPuoUsersResponse> GetProfile(String baseURl, string serviceName, PBPuoUsersRequest request, string accessToken);
+
+        public Task<Result> ChangePhoneNumber(String baseURl, string serviceName, ChangePhoneNumberRequest request, string accessToken);
 
     }
 }

@@ -165,9 +165,9 @@
           </div>
 
           @******************************************@
-                   <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
+        <div class="d-flex flex-row align-items-center mb-4">
+        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+        <div class="form-outline flex-fill mb-0">
           <div class="row">
 
                 <div class="col-md-7 mb-3">
@@ -272,7 +272,7 @@
         _registerUserModel.BirthDate = _registerUserModel.BirthDate.GetUTF8();
         _registerUserModel.FirstName = _registerUserModel.FirstName.GetUTF8();
         _registerUserModel.LastName = _registerUserModel.LastName.GetUTF8();
-       
+
 
         AuthResult result = _anuAuthorizationService.RegisterUser(_appConfiguration.BackendServerAddress, _appConfiguration.RegisterAddress, _registerUserModel);
 
@@ -295,10 +295,7 @@
 
     async void   Submit()
     {
-        bool? resulXt = await DialogService.ShowMessageBox(
-            "تبریک", 
-            "کاربری شما با موفقیط ثبت گردید", 
-            yesText:"بستن!");
+
 
         form.Validate();
 
@@ -322,8 +319,14 @@
         {
             SharedInfo.NationalCode = _registerUserModel.UserName;
             SharedInfo.AccessToken = result.AccessToken;
-            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-            Snackbar.Add(result.Result.Message,  Severity.Success);
+
+            secondStep = new();
+            _registerUserModel = new();
+
+            bool? resulXt = await DialogService.ShowMessageBox(
+            "تبریک", 
+            "کاربری شما با موفقیط ثبت گردید", 
+            yesText:"بستن!");
            
         }
         else

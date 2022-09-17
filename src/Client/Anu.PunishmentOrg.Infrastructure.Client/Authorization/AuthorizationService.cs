@@ -1,6 +1,6 @@
 ﻿
 using Anu.Commons.ServiceModel.ServiceAuthentication;
-
+using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization;
 using Anu.PunishmentOrg.ServiceModel.BaseInfo;
 using System.Net.Http.Headers;
@@ -10,7 +10,20 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
 {
     public class AnuAuthorizationService : IAnuAuthorizationService
     {
-       
+        public async Task<Result> ChangePhoneNumber(string baseURl, string serviceName, ChangePhoneNumberRequest request, string accessToken)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(baseURl);
+            string jsonString = JsonSerializer.Serialize(request);
+            client.DefaultRequestHeaders.Authorization =
+                 new AuthenticationHeaderValue(
+                "Bearer", accessToken);
+
+
+            var response = client.PostAsJsonAsync(serviceName, request).Result;
+            Result result = await response.Content.ReadAsAsync<Result>();
+            return result;
+        }
 
         public async Task<PBPuoUsersResponse> GetProfile(string baseURl, string serviceName, PBPuoUsersRequest request, string accessToken)
         {
@@ -20,7 +33,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
             client.DefaultRequestHeaders.Authorization =
                  new AuthenticationHeaderValue(
                 "Bearer", accessToken);
-            //client.DefaultRequestHeaders.Add("Bearer Token", accessToken);
+          
 
             var response = client.PostAsJsonAsync(serviceName, request).Result;
             PBPuoUsersResponse result =await response.Content.ReadAsAsync<PBPuoUsersResponse>();
