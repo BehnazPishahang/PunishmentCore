@@ -403,7 +403,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                         NationalCode    = x.NationalCode,
                         Nationality     = x.Nationality,
                         PersonStartPost = x.PersonStartPost,
-                        Sex             = x.Sex,
+                        Sex             = (Anu.BaseInfo.Enumerations.SexType)x.Sex,
                         PersonType      = x.PersonType,
                         PostCode        = x.PostCode,
                         PersonPassword  = x.PersonPassword,
