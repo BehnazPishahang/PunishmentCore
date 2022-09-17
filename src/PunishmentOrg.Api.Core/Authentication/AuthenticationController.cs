@@ -546,13 +546,13 @@ namespace Anu.PunishmentOrg.Api.Authentication
             #endregion ValidateInput
 
             var pBPuoUsers = await ValidateSenedSmsCode(request!.UserName, request!.Password);
-            pBPuoUsers.MobileNumber4SMS = request.NewPhoneNumber;
+            
             if (pBPuoUsers.MobileNumber4SMS == request.NewPhoneNumber)
             {
                 return V2ChangePhoneNumberResult.V2ChangePhoneNumber_Mobile_Number_is_Repetitive.GetResult(args: pBPuoUsers.NationalityCode);
             }
             await ShahkarAuthentication.ShahkarAuthenticate(request!.NewPhoneNumber, request.UserName);
-            
+            pBPuoUsers.MobileNumber4SMS = request.NewPhoneNumber;
 
             _unitOfWork.Repositorey<IPBPuoUsersRepository>().UpdateParent(pBPuoUsers);
 
