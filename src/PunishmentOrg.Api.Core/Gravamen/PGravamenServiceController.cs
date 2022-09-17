@@ -307,7 +307,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             thePGravamenList.Null(GetPersonPGravamenInfoResult.PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound);
 
-            var thePNoticeContractList = thePGravamenList.Select(a => new PGravamenInfoContract()
+            var thePGravamenInfoContractList = thePGravamenList.Select(a => new PGravamenInfoContract()
             {
                 CreateDateTime = a.CreateDateTime,
                 TheObjectState = new Anu.BaseInfo.ServiceModel.SystemObject.ObjectStateContract()
@@ -343,10 +343,10 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             return new GetPersonPGravamensInfoResponse
             {
-                PNotice = new Page<List<PGravamenInfoContract>>
+                ThePGravamenInfoContractList = new Page<List<PGravamenInfoContract>>
                 {
                     Paged = request.Page,
-                    Data = thePNoticeContractList
+                    Data = thePGravamenInfoContractList
                 },
                 Result = AnuResult.Successful.GetResult()
             };
@@ -445,7 +445,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             return new GetPersonPGravamenStatisticResponse()
             {
                 Result = AnuResult.Successful.GetResult(),
-                TheGetPersonPGravamenStatisticContract = CountOfUnSeenPNoticeByUserCalculater(thePGravamenlistByPersonNationalityCode, request.TheGetPersonPGravamenInfoContract.NationalityCode)
+                TheGetPersonPGravamenStatisticContract = GetStatisticPersonPGravamen(thePGravamenlistByPersonNationalityCode, request.TheGetPersonPGravamenInfoContract.NationalityCode)
             };
         }
 
@@ -732,7 +732,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             }
         }
 
-        private GetPersonPGravamenStatisticContract CountOfUnSeenPNoticeByUserCalculater(IEnumerable<Anu.PunishmentOrg.DataModel.Gravamen.PGravamen> pGravamen, string nationalityCode)
+        private GetPersonPGravamenStatisticContract GetStatisticPersonPGravamen(IEnumerable<Anu.PunishmentOrg.DataModel.Gravamen.PGravamen> pGravamen, string nationalityCode)
         {
             int totalCountPGravamenPerson = 0;
             int countRejectedPGravamenPerson = 0;

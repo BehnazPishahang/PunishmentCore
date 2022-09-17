@@ -9,12 +9,12 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
     {
         public Result Result { get; set; }
 
-        public Page<List<PGravamenInfoContract>> PNotice { get; set; }
+        public Page<List<PGravamenInfoContract>> ThePGravamenInfoContractList { get; set; }
 
         public GetPersonPGravamensInfoResponse()
         {
             Result = new Result();
-            PNotice = new Page<List<PGravamenInfoContract>>();
+            ThePGravamenInfoContractList = new Page<List<PGravamenInfoContract>>();
         }
 
     }
