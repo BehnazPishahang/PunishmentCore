@@ -62,7 +62,7 @@ public class PGravamenRepository : GenericRepository<DataModel.Gravamen.PGravame
                             .ThenInclude(a => a.ThePGravamenRejectOrDefectRSList)
                             .ThenInclude(a => a.ThePBGravamenRejectDefectType)
                             .Include(a => a.ThePGravamen)
-                            .Where(a => a.NationalCode == nationalityCode)
+                            .Where(a => a.NationalCode == nationalityCode && a.PersonStartPost == Enumerations.PUPersonStartPost.PlaintiffPerson)
                             .Select(a => a.ThePGravamen);
 
         var AllCount = await query
