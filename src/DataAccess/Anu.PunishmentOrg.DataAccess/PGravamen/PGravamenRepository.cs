@@ -1,6 +1,8 @@
 ﻿using Anu.Commons.ServiceModel.ServicePaging;
 using Anu.DataAccess.Repositories;
 using Anu.PunishmentOrg.Domain.PGravamen;
+using Anu.Utility.Linq;
+using Anu.Utility.Pagination;
 using Microsoft.EntityFrameworkCore;
 
 namespace Anu.PunishmentOrg.DataAccess.PGravamen;
@@ -21,6 +23,8 @@ public class PGravamenRepository : GenericRepository<DataModel.Gravamen.PGravame
                              .Include(a => a.TheReceiveUnit)
                              .Include(a => a.ThePGravamenAttachmentList)
                              .ThenInclude(a => a.TheGAttachmentData)
+                             .Include(a => a.ThePGravamenAttachmentList)
+                             .ThenInclude(a => a.TheAttachmentType)
                              .Include(a => a.ThePGravamenPersonList)
                              .Include(a => a.ThePGravamenViolationList)
                              .Include(a => a.ThePGravamenRejectOrDefectRSList)
@@ -58,7 +62,7 @@ public class PGravamenRepository : GenericRepository<DataModel.Gravamen.PGravame
                             .ThenInclude(a => a.ThePGravamenRejectOrDefectRSList)
                             .ThenInclude(a => a.ThePBGravamenRejectDefectType)
                             .Include(a => a.ThePGravamen)
-                            .Where(a => a.NationalCode == nationalityCode)
+                            .Where(a => a.NationalCode == nationalityCode && a.PersonStartPost == Enumerations.PUPersonStartPost.PlaintiffPerson)
                             .Select(a => a.ThePGravamen);
 
         var AllCount = await query

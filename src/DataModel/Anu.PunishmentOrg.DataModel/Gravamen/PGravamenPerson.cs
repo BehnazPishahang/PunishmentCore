@@ -61,7 +61,7 @@ namespace Anu.PunishmentOrg.DataModel.Gravamen
         public virtual long? RowNumber { get; set; }
 
         [Column("SEX")]
-        public virtual Anu.BaseInfo.Enumerations.SexType Sex { get; set; }
+        public virtual Anu.BaseInfo.Enumerations.SexType? Sex { get; set; }
 
         [ForeignKey("PGRAVAMENID")]
         public virtual Anu.PunishmentOrg.DataModel.Gravamen.PGravamen? ThePGravamen { get; set; }

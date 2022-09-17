@@ -3,7 +3,7 @@ using Anu.Commons.ServiceModel.ServicePaging;
 
 namespace Anu.PunishmentOrg.ServiceModel.Accounting
 {
-    [System.ComponentModel.DisplayName("GetPaymentInfoRequest")]
+    [System.ComponentModel.DisplayName("GetPBill4PaidListByFishNo")]
     public class GetPBill4PaidByFishNoRequest
     {
         public GetPBill4PaidByFishNoRequest()

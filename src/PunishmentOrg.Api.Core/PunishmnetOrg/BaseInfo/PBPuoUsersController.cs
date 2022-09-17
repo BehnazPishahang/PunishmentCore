@@ -17,7 +17,8 @@ namespace Anu.PunishmentOrg.Api.PunishmnetOrg.BaseInfo
         {
             _unitOfWork = unitOfWork;
         }
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
         public override async Task<PBPuoUsersResponse> GetProfile([FromBody] PBPuoUsersRequest request)
         {
             request.Null(AnuResult.Request_Is_Not_Valid);

@@ -280,7 +280,13 @@ namespace Anu.PunishmentOrg.Api.Authentication
                         await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsersHistory>>().Find(a => a.ThePBPuoUsers.Id == pBPuoUsers.Id)
                         );
 
-                    await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>().Remove(pBPuoUsers);
+                    await _unitOfWork.Repositorey<IGenericRepository<GFESUserAccess>>().Remove(
+                        (await _unitOfWork.Repositorey<IGenericRepository<GFESUserAccess>>().Find(a => a.TheGFESUser.Id == pBPuoUsers.Id)).FirstOrDefault()
+                        );
+
+                    await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>().Remove(
+                        (await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>().Find(a => a.Id == pBPuoUsers.Id)).FirstOrDefault()
+                        );
 
                     await _unitOfWork.Repositorey<IGenericRepository<GFESUser>>().Remove(
                         (await _unitOfWork.Repositorey<IGenericRepository<GFESUser>>().Find(a => a.Id == pBPuoUsers.Id)).FirstOrDefault()
@@ -446,14 +452,129 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         }
 
+
+        #region Change Phone Number WithOut Login
+
+        [Route("api/v1/SendSmsForChangePhoneNumber")]
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public async Task<FirstStepAuthResult> SendSmsForChangePhoneNumber([FromBody] FirstStepUserLoginRequest request)
+        {
+            #region ValidateInput
+            request.Null(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_request_Not_Valid);
+            request.UserName.NullOrWhiteSpace(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
+            request.MobileNumber.NullOrWhiteSpace(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
+            request.MobileNumber.IsDigit(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
+            request!.UserName!.IsValidNationalCode();
+            #endregion
+
+            #region ValidateUserHistory
+            var pBPuoUsers = (await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>()
+                .Find(x => x.NationalityCode == request.UserName)).FirstOrDefault();
+            pBPuoUsers.Null(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_Not_Find_User);
+            if (pBPuoUsers.MobileNumber4SMS == request.MobileNumber)
+            {
+                return new FirstStepAuthResult() { Result = SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive.GetResult( args: pBPuoUsers.NationalityCode) };
+            }
+            await ShahkarAuthentication.ShahkarAuthenticate(request!.MobileNumber, request!.UserName);
+
+            var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IPBPuoUsersHistoryRepository>().LastRecordHistoryPerDay(pBPuoUsers.Id, DateTime.Now.DateToString());
+
+            if (lastRecordHistoryPerDay != null && !Anu.Utility.Utility.IsDevelopment())
+            {
+                var difDateSecond = (DateTime.Now - lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime()).TotalSeconds;
+                if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
+                {
+                    return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_SecodeWait - difDateSecond)).ToString()) };
+                }
+
+                if (lastRecordHistoryPerDay.CountCodePerDay >= _LimitSendDayCodePerDay)
+                {
+                    return new FirstStepAuthResult() { Result = AnuResult.Sms_Limit_Send.GetResult() };
+                }
+            }
+            #endregion ValidateUserHistory
+
+            #region SendAndSubmitPassword
+            string password = await request.MobileNumber.SendAuthenticateSms(_CountCharacter);
+            string passWordHash = MD5Core.GetHashString(password);
+
+            pBPuoUsers.DynomicPassword = passWordHash;
+            _unitOfWork.Repositorey<IPBPuoUsersRepository>().UpdateParent(pBPuoUsers);
+
+            var currentDateTime = DateTime.Now;
+            var userHistory = new PBPuoUsersHistory()
+            {
+                Id = Guid.NewGuid().ToString("N"),
+                DynomicPassword = passWordHash,
+                SendCodeDateTime = currentDateTime.DateTimeToString(),
+                ExpiredCodeDateTime = currentDateTime.AddSeconds(_SecodeWait).DateTimeToString(),
+                CountCodePerDay = lastRecordHistoryPerDay == null ? 1 : lastRecordHistoryPerDay.CountCodePerDay + 1,
+                ThePBPuoUsers = pBPuoUsers
+            };
+            await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsersHistory>>().Add(userHistory);
+
+            if (_unitOfWork.Complete() < 0)
+            {
+                return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
+            }
+            #endregion
+
+            return new FirstStepAuthResult()
+            {
+                CountCharacter = _CountCharacter,
+                SecondsWait = _SecodeWait,
+                Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: request!.MobileNumber!.Substring(request.MobileNumber.Length - 4) + "*****09")
+            };
+        }
+
+        [Route("api/v2/ChangePhoneNumber")]
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public async Task<Result> V2ChangePhoneNumber([FromBody] ChangePhoneNumberRequest request)
+        {
+            #region ValidateInput
+
+            request.Null(V2ChangePhoneNumberResult.V2ChangePhoneNumber_request_Is_Not_Valid);
+            request.UserName.NullOrWhiteSpace(V2ChangePhoneNumberResult.V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered);
+            request.Password!.IsDigit(V2ChangePhoneNumberResult.V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered);
+            request!.NewPhoneNumber.NullOrWhiteSpace(V2ChangePhoneNumberResult.V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered);
+
+            request.UserName!.IsValidNationalCode();
+            request.NewPhoneNumber.IsValidPhone();
+
+            #endregion ValidateInput
+
+            var pBPuoUsers = await ValidateSenedSmsCode(request!.UserName, request!.Password);
+            
+            if (pBPuoUsers.MobileNumber4SMS == request.NewPhoneNumber)
+            {
+                return V2ChangePhoneNumberResult.V2ChangePhoneNumber_Mobile_Number_is_Repetitive.GetResult(args: pBPuoUsers.NationalityCode);
+            }
+            await ShahkarAuthentication.ShahkarAuthenticate(request!.NewPhoneNumber, request.UserName);
+            pBPuoUsers.MobileNumber4SMS = request.NewPhoneNumber;
+
+            _unitOfWork.Repositorey<IPBPuoUsersRepository>().UpdateParent(pBPuoUsers);
+
+            if (_unitOfWork.Complete() < 0)
+            {
+                return AnuResult.Error.GetResult();
+            }
+
+            return AnuResult.Successful.GetResult();
+
+        }
+
+        #endregion Change Phone Number WithOut Login
+
         private async Task<PBPuoUsers> ValidateSenedSmsCode(string userName, string password)
         {
             var pBPuoUsers = await _unitOfWork.Repositorey<IPBPuoUsersRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(userName, password);
             pBPuoUsers.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            if (pBPuoUsers.TheGFESUserAccessList==null || pBPuoUsers.TheGFESUserAccessList.Count==0)
+            if (pBPuoUsers.TheGFESUserAccessList == null || pBPuoUsers.TheGFESUserAccessList.Count == 0)
             {
-                throw new AnuExceptions(AnuResult.UserName_Or_PassWord_Is_Not_Valid);                
+                throw new AnuExceptions(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
             }
 
             var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IPBPuoUsersHistoryRepository>().LastRecordHistoryPerDay(pBPuoUsers.Id, DateTime.Now.DateToString());

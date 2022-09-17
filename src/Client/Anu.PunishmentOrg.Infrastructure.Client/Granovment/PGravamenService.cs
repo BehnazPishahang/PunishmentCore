@@ -52,12 +52,12 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Granovment
 
             if (result.Result == AnuResult.Successful.GetResult())
             {
-                return result.PNotice.Data.AsEnumerable();
+                return result.ThePGravamenInfoContractList.Data.AsEnumerable();
 
             }
             else
             {
-                return result.PNotice.Data.AsEnumerable();
+                return result.ThePGravamenInfoContractList.Data.AsEnumerable();
 
             }
         }

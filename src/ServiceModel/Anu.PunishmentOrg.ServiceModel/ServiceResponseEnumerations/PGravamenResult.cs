@@ -29,10 +29,10 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
 
     public enum GetPGravamenInfoResult
     {
-        PGravamen_GetPGravamen_Request_Is_Required              = -30281,
-        PGravamen_GetPGravamen_ThePGravamenContract_Is_Required = -30282,
-        PGravamen_GetPGravamen_FollowUpNo_Is_Required           = -30283,
-        PGravamen_GetPGravamen_PGravamen_NotFound               = -30284,
+        PGravamen_GetPGravamenInfo_Request_Is_Required              = -30281,
+        PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required = -30282,
+        PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required           = -30283,
+        PGravamen_GetPGravamenInfo_PGravamen_NotFound               = -30284,
     }
 
     public enum GetPGravamenByIdResult
