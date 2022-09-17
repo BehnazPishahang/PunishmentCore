@@ -21,5 +21,8 @@
         public string GetGravamenByFollowingNo { set; get; }
 
         public string GetGravamenListByNationalNo { set; get; }
+
+        public string SendSmsForChangePhoneNumber { get; set; }
+        public string ChangePhoneNumberV2 { get; set; }
     }
 }

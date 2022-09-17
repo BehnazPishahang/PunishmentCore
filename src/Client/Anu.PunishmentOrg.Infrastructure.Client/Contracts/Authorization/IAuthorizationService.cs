@@ -20,6 +20,12 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
 
         public Task<Result> ChangePhoneNumber(String baseURl, string serviceName, ChangePhoneNumberRequest request, string accessToken);
 
+
+        public Task<FirstStepAuthResult> SendSmsForChangePhoneNumber(String baseURl, string serviceName, FirstStepUserLoginRequest request);
+
+        public Task<Result> ChangePhoneNumberV2(string baseURl, string serviceName, ChangePhoneNumberRequest request);
+      
+
     }
 }
     

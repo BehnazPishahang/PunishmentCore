@@ -25,6 +25,17 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
             return result;
         }
 
+        public async  Task<Result> ChangePhoneNumberV2(string baseURl, string serviceName, ChangePhoneNumberRequest request)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(baseURl);
+            string jsonString = JsonSerializer.Serialize(request);
+
+            var response = client.PostAsJsonAsync(serviceName, request).Result;
+            Result result = await response.Content.ReadAsAsync<Result>();
+            return result;
+        }
+
         public async Task<PBPuoUsersResponse> GetProfile(string baseURl, string serviceName, PBPuoUsersRequest request, string accessToken)
         {
             var client = new HttpClient();
@@ -61,6 +72,16 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Authorization
             var response = await client.PostAsJsonAsync(serviceName, loginInfo);
 
             FirstStepAuthResult result = response.Content.ReadAsAsync<FirstStepAuthResult>().Result;
+            return result;
+        }
+
+        public async Task<FirstStepAuthResult> SendSmsForChangePhoneNumber(string baseURl, string serviceName, FirstStepUserLoginRequest request)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(baseURl);
+            var response = await client.PostAsJsonAsync(serviceName, request);
+
+            FirstStepAuthResult result = await response.Content.ReadAsAsync<FirstStepAuthResult>();
             return result;
         }
 
