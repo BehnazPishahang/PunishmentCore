@@ -474,9 +474,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             pBPuoUsers.Null(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_Not_Find_User);
             if (pBPuoUsers.MobileNumber4SMS == request.MobileNumber)
             {
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.AppendFormat("شماره تلفن همراه کاربر به کد ملی {0} تکراری است", pBPuoUsers.NationalityCode);
-                throw new AnuExceptions(stringBuilder.ToString());
+                return new FirstStepAuthResult() { Result = SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive.GetResult( args: pBPuoUsers.NationalityCode) };
             }
             await ShahkarAuthentication.ShahkarAuthenticate(request!.MobileNumber, request!.UserName);
 
@@ -551,9 +549,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             pBPuoUsers.MobileNumber4SMS = request.NewPhoneNumber;
             if (pBPuoUsers.MobileNumber4SMS == request.NewPhoneNumber)
             {
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.AppendFormat("شماره تلفن همراه کاربر به کد ملی {0} تکراری است", pBPuoUsers.NationalityCode);
-                throw new AnuExceptions(stringBuilder.ToString());
+                return V2ChangePhoneNumberResult.V2ChangePhoneNumber_Mobile_Number_is_Repetitive.GetResult(args: pBPuoUsers.NationalityCode);
             }
             await ShahkarAuthentication.ShahkarAuthenticate(request!.NewPhoneNumber, request.UserName);
             
