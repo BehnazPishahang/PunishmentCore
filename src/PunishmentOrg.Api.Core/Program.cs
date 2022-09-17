@@ -57,7 +57,8 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddDbContext<Anu.DataAccess.ApplicationDbContext>(
                 options =>
                 {
-                    options.UseOracle("Password=ali;Persist Security Info=True;User ID=puo;Data Source=192.168.1.11/anu", (oracleOptions) =>
+                    
+                    options.UseOracle(builder.Configuration.GetConnectionString("Local"), (oracleOptions) =>
                     {
                         oracleOptions.UseOracleSQLCompatibility("11");
                     }
