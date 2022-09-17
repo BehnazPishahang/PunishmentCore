@@ -808,4 +808,12 @@
     <value>ورودی درخواست نمی تواند خالی باشد</value>
     <comment>-30322</comment>
   </data>
+  <data name="SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive" xml:space="preserve">
+    <value>شماره تلفن ارسال تکراری می‌باشد</value>
+    <comment>-30144</comment>
+  </data>
+  <data name="V2ChangePhoneNumberResult_Mobile_Number_is_Repetitive" xml:space="preserve">
+    <value>شماره تلفن ارسال تکراری می‌باشد</value>
+    <comment>-30155</comment>
+  </data>
 </root>
