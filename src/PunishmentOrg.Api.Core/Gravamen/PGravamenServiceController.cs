@@ -291,8 +291,8 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             return theGetPGravamenInfoResponse;
         }
 
-        //[PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
-        [AllowAnonymous]
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        //[AllowAnonymous]
         public async override Task<GetPersonPGravamensInfoResponse> GetPersonPGravamenInfo([FromBody] GetPersonPGravamensInfoRequest request)
         {
             request.Null(GetPersonPGravamenInfoResult.PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required);
@@ -428,8 +428,8 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             };
         }
 
-        //[PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
-        [AllowAnonymous]
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        //[AllowAnonymous]
         public async override Task<GetPersonPGravamenStatisticResponse> GetPersonPGravamenStatistic([Microsoft.AspNetCore.Mvc.FromBody] GetPersonPGravamenStatisticRequest request)
         {
             #region Validation
