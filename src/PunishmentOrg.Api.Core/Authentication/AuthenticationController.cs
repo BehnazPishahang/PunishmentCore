@@ -462,7 +462,6 @@ namespace Anu.PunishmentOrg.Api.Authentication
         {
             #region ValidateInput
             request.Null(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_request_Not_Valid);
-
             request.UserName.NullOrWhiteSpace(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
             request.MobileNumber.NullOrWhiteSpace(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
             request.MobileNumber.IsDigit(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid);
@@ -473,6 +472,13 @@ namespace Anu.PunishmentOrg.Api.Authentication
             var pBPuoUsers = (await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>()
                 .Find(x => x.NationalityCode == request.UserName)).FirstOrDefault();
             pBPuoUsers.Null(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_Not_Find_User);
+            if (pBPuoUsers.MobileNumber4SMS == request.MobileNumber)
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.AppendFormat("شماره تلفن همراه کاربر به کد ملی {0} تکراری است", pBPuoUsers.NationalityCode);
+                throw new AnuExceptions(stringBuilder.ToString());
+            }
+            await ShahkarAuthentication.ShahkarAuthenticate(request!.MobileNumber, request!.UserName);
 
             var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IPBPuoUsersHistoryRepository>().LastRecordHistoryPerDay(pBPuoUsers.Id, DateTime.Now.DateToString());
 
@@ -535,7 +541,6 @@ namespace Anu.PunishmentOrg.Api.Authentication
             request.UserName.NullOrWhiteSpace(V2ChangePhoneNumberResult.V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered);
             request.Password!.IsDigit(V2ChangePhoneNumberResult.V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered);
             request!.NewPhoneNumber.NullOrWhiteSpace(V2ChangePhoneNumberResult.V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered);
-            request.BirthDay.NullOrWhiteSpace(V2ChangePhoneNumberResult.V2ChangePhoneNumber_BirthDay_Is_Not_Entered);
 
             request.UserName!.IsValidNationalCode();
             request.NewPhoneNumber.IsValidPhone();
@@ -543,9 +548,15 @@ namespace Anu.PunishmentOrg.Api.Authentication
             #endregion ValidateInput
 
             var pBPuoUsers = await ValidateSenedSmsCode(request!.UserName, request!.Password);
-            await ShahkarAuthentication.ShahkarAuthenticate(request!.NewPhoneNumber, request.UserName);
-
             pBPuoUsers.MobileNumber4SMS = request.NewPhoneNumber;
+            if (pBPuoUsers.MobileNumber4SMS == request.NewPhoneNumber)
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.AppendFormat("شماره تلفن همراه کاربر به کد ملی {0} تکراری است", pBPuoUsers.NationalityCode);
+                throw new AnuExceptions(stringBuilder.ToString());
+            }
+            await ShahkarAuthentication.ShahkarAuthenticate(request!.NewPhoneNumber, request.UserName);
+            
 
             _unitOfWork.Repositorey<IPBPuoUsersRepository>().UpdateParent(pBPuoUsers);
 

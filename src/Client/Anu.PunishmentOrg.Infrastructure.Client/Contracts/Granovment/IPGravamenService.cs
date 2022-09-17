@@ -10,5 +10,9 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Contracts.Granovment
     public interface IPGravamenService
     {
         public  PGravamenServiceResponse RecieveGravamen(String baseURl, string serviceName, PGravamenServiceRequest request);
+
+        public GetPGravamenByIdResponse GetGravamenByFollowingNo(String baseURl, string serviceName, GetPGravamenByIdRequest request);
+
+        public IEnumerable<PGravamenInfoContract> GetGravamenListByNationalNo(String baseURl, string serviceName, string nationalCode,string accessToken);
     }
 }
