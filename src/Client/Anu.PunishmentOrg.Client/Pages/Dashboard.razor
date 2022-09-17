@@ -22,25 +22,20 @@
                 <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
                     <MudIcon Icon="@Icons.Filled.ManageSearch" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                 </div>
-                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+                <div class=" col-xl-10 col-sm-10 col-md-10 col-10">
 
+          
+                
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> ابلاغ</MudText>
-                   </div>
-               
-                @*  <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined" OverrideStyles="true">
-                            <MudButton  Color="Color.Success" Icon="@Icons.Filled.Visibility"  onclick="ShowSeenedPNoticeList" >  @NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser </MudButton>
-                          
-                            <MudButton  Color="Color.Error" Icon="@Icons.Filled.VisibilityOff" IconColor="Color.Success" onclick="ShowUnseenedPNoticeList" > @NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser </MudButton>
-                        </MudButtonGroup>*@
-                  
                        
                         <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
-                            <MudButton Color="Color.Success" StartIcon="@Icons.Filled.Visibility" IconColor="Color.Success" Variant="Variant.Filled" OnClick="ShowSeenedPNoticeList"  >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser</MudButton>
+                            <MudText   Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> ابلاغ</MudText>
+                            <MudButton  Color="Color.Primary" StartIcon="@Icons.Filled.Visibility" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowSeenedPNoticeList"  >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser</MudButton>
                             <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPNoticeList" >  تمامی ابلاغ ها : @NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.TotalCountPNoticeOfUser</MudButton>
-                            <MudButton Color="Color.Error" StartIcon="@Icons.Filled.VisibilityOff"  OnClick="ShowUnseenedPNoticeList"   Variant="Variant.Filled" IconColor="Color.Error" >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser</MudButton>
+                            <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.VisibilityOff"  OnClick="ShowUnseenedPNoticeList"   Variant="Variant.Filled" IconColor="Color.Secondary" >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser</MudButton>
                         </MudButtonGroup>  
                           
+                   </div>
              
                 </div>
             </MudPaper>
@@ -61,11 +56,9 @@
                 <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> ثبت شکایت</MudText>
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold mud-text-secondary mb-n1 mt-4 text-center  "> ثبت شکایت</MudText>
                    </div>
-@*                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
-                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">4</MudText>
-                   </div>*@
+
                 </div>
             </MudPaper>
  
@@ -85,11 +78,9 @@
                 <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  ">  پرداخت  وجه </MudText>
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold mud-text-secondary mb-n1 mt-4 text-center  ">  پرداخت  وجه </MudText>
                    </div>
-@*                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1   @MainLayout._class">
-                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">30</MudText>
-                   </div>*@
+ 
                 </div>
             </MudPaper>
  
@@ -111,7 +102,7 @@
                 <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  ">  لایحه </MudText>
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  ">  لایحه </MudText>
                    </div>
                    <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
                       <MudText xs="6" sm="6" md="6" Class="text-center mt-2">3</MudText>
@@ -137,7 +128,7 @@
                 <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  ">  درخواست تجدید نظر خواهی </MudText>
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  ">  درخواست تجدید نظر خواهی </MudText>
                    </div>
                     
                 </div>
@@ -163,7 +154,7 @@
                 <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> درخواست اعمال ماده ۲۳ </MudText>
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> درخواست اعمال ماده ۲۳ </MudText>
                    </div>
                    <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
                       <MudText xs="6" sm="6" md="6" Class="text-center mt-2">8</MudText>
@@ -188,7 +179,7 @@
                 <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography mud-text-secondary mb-n1 mt-4 text-center dashboard_items "> ثبت وکالت نامه </MudText>
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-text-secondary mb-n1 mt-4 text-center mud-bold  "> ثبت وکالت نامه </MudText>
                    </div>
                    <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
                       <MudText xs="6" sm="6" md="6" Class="text-center mt-2" >9</MudText>
@@ -213,7 +204,7 @@
                 <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> درخواست رسیدگی مجدد </MudText>
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> درخواست رسیدگی مجدد </MudText>
                    </div>
                    <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
                       <MudText xs="6" sm="6" md="6" Class="text-center mt-2">12</MudText>
@@ -238,7 +229,7 @@
                 <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> پیگیری پرونده</MudText>
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> پیگیری پرونده</MudText>
                    </div>
                    <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
                       <MudText xs="6" sm="6" md="6" Class="text-center mt-2" >15</MudText>
@@ -264,7 +255,7 @@
                 <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.subtitle1" Class="mud-typography dashboard_items mud-text-secondary mb-n1 mt-4 text-center  "> ثبت اعتراض</MudText>
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> ثبت اعتراض</MudText>
                    </div>
                    <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1   @MainLayout._class">
                       <MudText xs="6" sm="6" md="6" Class="text-center mt-2" >6</MudText>

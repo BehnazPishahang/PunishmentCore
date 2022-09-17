@@ -5,7 +5,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Settings
 {
     public class Theme135
     {
-        public static MudBlazor.Color _iconColor = Color.Success;
+        public static MudBlazor.Color _iconColor = Color.Primary;
         public static MudBlazor.Color _LogoColor = Color.Success;
 
 

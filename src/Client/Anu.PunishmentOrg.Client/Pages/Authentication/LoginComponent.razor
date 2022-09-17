@@ -9,24 +9,22 @@
 
 
 <section class="vh-100">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-10">
-        <div class="card" style="border-radius: 1rem;">
+  <MudContainer class=" py-5 h-100">
+    <MudForm class="col col-xl-10 d-flex justify-content-center align-items-center h-100">
+        <div class="mud-Border-Primary"  style="border-radius: 1rem;">
           <div class="row g-0">
             <div class="col-md-6 col-lg-5 d-none d-md-block" >
-              
                 <MudImage ObjectFit="@ImageFit" 
-                            Height="400"
-                            Width="400" 
+                            Height="450"
+                            Width="300" 
                             src="/pic/LoginArm.png" 
-                            
+                            Color="Color.Primary"
                             Elevation="25" 
-                            Class="rounded-lg"
+                            Class="rounded-lg Primary"
                              OnClick="@(() => SetImageFit(ObjectFit.Fill))"/>
             </div>
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5 text-black">
+              <div class="card-body p-4 p-lg-5  ">
 
                 <MudForm Model="@_tokenModel">
                       <MudText align-center  Typo="Typo.h5" Style="text-shadow: -2px 3px 3px grey;text-align: center;">ورود به پیشخوان خدمات تعزیرات  </MudText>
@@ -35,7 +33,7 @@
                   
 
                   <div class="form-outline mb-4">
-                     <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined" Margin="Margin.Dense"
+                     <MudTextField  T="string" Label="شماره ملی" Variant="Variant.Outlined" Margin="Margin.Dense"
                            Immediate="true"
                             MaxLength="10"
                             Required="true" 
@@ -84,7 +82,7 @@
                   </MudItem>
                   <br />
                     <div class="d-flex justify-center">
-                                <MudText>آیا تا کنون در سایت ثبت نام نکرده اید؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
+                                <MudText Typo="Typo.h6">آیا تا کنون در سایت ثبت نام نکرده اید؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
                             </div>
                 </MudForm>
 
@@ -92,9 +90,8 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </MudForm>
+  </MudContainer>
 </section>
 @code {
     ObjectFit ImageFit = ObjectFit.Cover;

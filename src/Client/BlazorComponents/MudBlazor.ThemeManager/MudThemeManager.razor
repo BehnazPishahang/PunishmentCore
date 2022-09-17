@@ -12,6 +12,7 @@
         </MudText>
         <MudSpacer />
         <MudIconButton Color="Color.Default"
+                    
                        Icon="@Icons.Material.Filled.Close"
                        OnClick="@(() => OpenChanged.InvokeAsync(false))"
                        Size="Size.Small" />
@@ -31,6 +32,7 @@
                            Variant="Variant.Outlined">
                     <MudSelectItem Value="@(PresetThemes.Custom)" />
                     <MudSelectItem Value="@(PresetThemes.MuiDark)" />
+                    <MudSelectItem Value="@(PresetThemes.Weak)" />
                    
                 </MudSelect>
             </div>
@@ -44,7 +46,6 @@
                     <MudTmMode Mode="_themeManagerTheme.Mode"
                                ModeChanged="ToggleMode" />
                 }
-
                 @if (Configuration.ShowLayoutSection)
                 {
                     <MudTmSection SectionOptions="Configuration.LayoutSectionOptions"
@@ -57,7 +58,7 @@
                                    ValueChanged="UpdateBorderRadius">
                             <MudText Class="mb-2"
                                      Typo="Typo.body2">
-                                <b> @($"Border Radius: {_themeManagerTheme.DefaultBorderRadiusAsInt}px")</b>
+                                <b> @($"اندازه خمش لبه ها: {_themeManagerTheme.DefaultBorderRadiusAsInt}px")</b>
                             </MudText>
                         </MudSlider>
                     </MudTmSection>
@@ -71,7 +72,7 @@
                                    Step="1"
                                    T="int"
                                    Value="@_themeManagerTheme.DefaultFontSizeAsInt"
-                                   ValueChanged="UpdateBorderRadius">
+                                   ValueChanged="UpdateFontSize">
                             <MudText Class="mb-2"
                                      Typo="Typo.body2">
                                 <b> @($"اندازه فونت: {_themeManagerTheme.DefaultFontSizeAsInt}px")</b>
@@ -91,11 +92,18 @@
                     </MudTmSection>
                 }
             }
+            else if (_themeManagerTheme.PresetThemes == PresetThemes.Weak)
+            {
+                <MudText Class="mt-4 px-2"
+                         Typo="Typo.body2">
+                    این تم قابل سفارشی سازی نمی باشد
+                </MudText>
+            }
             else
             {
                 <MudText Class="mt-4 px-2"
                          Typo="Typo.body2">
-                    Preset themes cannot be customized.
+                    این تم قابل سفارشی سازی نمی باشد
                 </MudText>
             }
         </div>

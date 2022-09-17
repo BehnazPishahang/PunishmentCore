@@ -115,7 +115,7 @@ a, .btn-link {
     height: 50px;
     width: 50px;
     /*background-color: #2196f3;*/
-    border: 5px solid #0bba83;
+    border: 5px solid var(--mud-palette-primary);
     border-radius: 50%;
     display: inline-block;
     text-align: center;
@@ -165,4 +165,9 @@ a, .btn-link {
     top: 50%;
     left: 50%;
     margin: -25px 0 0 -25px; /* Apply negative top and left margins to truly center the element */
+}
+
+.disabled {
+    opacity: 0.8  ;
+    pointer-events: none  ;
 }
