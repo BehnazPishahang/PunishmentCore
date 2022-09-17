@@ -27560,3 +27560,8 @@ tr.mud-table-row-group-indented-5 td:first-child {
 .mud-bold {
     font-weight: bold !important;
 }
+
+.mud-theme-manager-button:hover {
+    cursor: pointer;
+    color: blue !important;
+}
