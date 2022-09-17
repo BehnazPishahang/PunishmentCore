@@ -12,7 +12,7 @@
 
 <MudForm>
     <MudTable Items="@gravoments" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudTable"
-              T="PGravamenContract" Dense="true">
+              T="PGravamenInfoContract" Dense="true">
         <HeaderContent>
             <MudTh Style="width:150px">شماره پیگیری</MudTh>
             <MudTh Style="width:250px">موضوع شکایت نامه</MudTh>
@@ -20,7 +20,7 @@
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="شماره پیگیری">@context.FollowUpNo</MudTd>
-            <MudTd DataLabel="موضوع شکایت نامه">@context.PetitionReasons</MudTd>
+            <MudTd DataLabel="موضوع شکایت نامه">@context.PetitionSubject</MudTd>
             <MudTd>
                 <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" Color="Color.Error" Size="Size.Small"></MudIconButton>
             </MudTd>
@@ -32,8 +32,7 @@
 
 @code {
 
-    List<PGravamenContract> gravoments;
-    private MudTable<PGravamenContract> mudTable;
+    private MudTable<PGravamenInfoContract> mudTable;
 
     [Parameter]
     public string _pGravamen { get; set; }
@@ -43,7 +42,7 @@
         base.OnParametersSet();
     }
 
-    Anu.Commons.ServiceModel.ServicePaging.Page<List<GetPGravamenInfoContract>> _pGravamenContract { set; get; }
+    IEnumerable<PGravamenInfoContract> gravoments;
 
     protected override void OnInitialized()
     {
@@ -55,10 +54,7 @@
 
             PGravamenService pService = new();
             GetPersonPGravamensInfoRequest request = new();
-            request.TheGetPersonPGravamenInfoContract = _pGravamenInfoContract;
-            GetPersonPGravamensInfoResponse response = pService.GetGravamenListByNationalNo(_appConfiguration.BackendServerAddress, _appConfiguration.GetGravamenByFollowingNo, request);
-            if (response.Result.Code == 1000)
-                _pGravamenContract = response.PNotice;
+            gravoments = pService.GetGravamenListByNationalNo(_appConfiguration.BackendServerAddress, _appConfiguration.GetGravamenListByNationalNo, _pGravamen, SharedInfo.AccessToken);
         }
         catch
         {
