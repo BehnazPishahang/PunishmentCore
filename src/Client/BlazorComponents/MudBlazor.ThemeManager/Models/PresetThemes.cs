@@ -138,15 +138,16 @@ internal static class PresetThemes
         {
             Palette = new Palette()
             {
-                Primary = "#1b4433",
+                Primary = "#35765b",
                 Secondary = "#26a69a",
                 Tertiary = "#594AE2",
                 Black = "#27272f",
+                White = "#e8ebcd",
                 Background = "#afb9a9",
                 BackgroundGrey = "#515e49",
-                Surface = "#515e49",
-                DrawerBackground = "#0a1929",
-                DrawerText = "#1b4433",
+                Surface = "#b3cba4",
+                DrawerBackground = "#e5fff9",
+                DrawerText = "#8ac9af",
                 DrawerIcon = "#1b4433",
                 AppbarBackground = "rgb(10, 25, 41)",
                 AppbarText = "rgba(255,255,255, 0.70)",

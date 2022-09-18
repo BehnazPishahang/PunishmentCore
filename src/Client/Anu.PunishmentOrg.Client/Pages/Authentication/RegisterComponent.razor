@@ -18,13 +18,14 @@
 @inject AppConfiguration _appConfiguration;
 @inject ISnackbar Snackbar
 
-<MudCard >
-<MudForm  Model="@_registerUserModel" @ref="@form"  ValidationDelay="0" class="vh-100" style="background-color: #eee;">
-  <div class="container h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
+ 
+<MudForm  Model="@_registerUserModel" @ref="@form"  ValidationDelay="0" class="vh-100"  >
+  <MudContainer class="container h-100">
+    @*<div class="  d-flex justify-content-center align-items-center h-100">*@
+        <div class="mud-Border-Primary"  style="border-radius: 1rem;">
       <div class="col-lg-12 col-xl-11">
-        <div class="card text-black" style="border-radius: 25px;">
-          <div class="card-body p-md-5">
+        <div   style="border-radius: 25px;">
+          <div >
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
@@ -35,27 +36,7 @@
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                   @* <MudItem class="form-outline flex-fill mb-0">
-                        <InputPersianDatePicker Id="myInputDatePicker"
-                        @bind-Value="_registerUserModel.BirthDate"
-
-                        Name="myInputName"
-                        Visible="true"
-                        Disabled="false"
-                        PickerAlign="Blazor.PersianDatePicker.Align .Left"
-                        PickerOffsetTopPositionInPixels="0"
-                        InitialValue="false"
-                        CalendarType="Calendar.SingleModeJalali"
-                        DigitType="DigitType.English"
-                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
-                        MinDateSetOnToday="true"
-                        Placeholder=" تاریخ تولد "
-                        
-                        Theme="PickerTheme.Cheerup"
-                        OnChange="@(() => Console.WriteLine("OK"))" 
-                      
-                        />
-                    </MudItem>*@
+ 
                             <MudDatePicker Label="تاریخ تولد"                  
                             Required="true" 
                              RequiredError="جنسیت را انتخاب نمایید " 
@@ -150,14 +131,14 @@
 
                 <div class="col-md-7 mb-3">
 
-                  <div class="form-outline ">
-                    <MudTextField T="string" Label="شماره تلفن "  Required="true"   @bind-Value="_registerUserModel.PhoneNumber"  Variant="Variant.Outlined" Placeholder="09121111111" RequiredError="شماره تلفن  را وارد نمایید "  MaxLength="11" />
+                  <div class="form-outline "> 
+                    <MudTextField T="string" Label="شماره تلفن "  Required="true"   @bind-Value="_registerUserModel.PhoneNumber" Margin="Margin.Dense" Variant="Variant.Outlined" Placeholder="09121111111" RequiredError="شماره تلفن  را وارد نمایید "  MaxLength="11" />
                   </div>
 
                 </div>
                 <div class="col-md-5 mb-9" style=" text-align: center;margin-top: 18px !important;">
 
-                    <MudButton Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" class="btn  btn-lg ms-2" style="color: black !important;"> 
+                    <MudButton Color="Color.Primary" Class="mt-1" Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode"   > 
 
                                     @if(hasSmsSend)
                                      {
@@ -188,15 +169,15 @@
                        @if (hasSmsSend)
                         {
                            
-                            <MudTextField  T="string" Label="رمز ارسالی"  @bind-Value="smsPassword" Variant="Variant.Outlined" Placeholder="111111"   MaxLength="6"  />
+                            <MudTextField  T="string" Label="رمز ارسالی"  @bind-Value="smsPassword" Variant="Variant.Outlined" Placeholder="111111" Margin="Margin.Dense"  MaxLength="6"  />
                          
                         }
                   </div>
 
                 </div>
-                <div class="col-md-5 mb-9" style=" text-align: center;margin-top: 18px !important;">
+                 <div class="col-md-5  " style=" text-align: center;margin-top: 18px !important;">
 
-                    <MudButton Variant="Variant.Outlined"  disabled="@(!hasSmsSend)"  Color="Color.Primary"  class="btn  btn-lg ms-2"  OnClick="Submit"  > ثبت نام  </MudButton>
+                    <MudButton  Variant="Variant.Filled"  disabled="@(!hasSmsSend)"  Color="Color.Secondary"    OnClick="Submit"  > ثبت نام  </MudButton>
                    
                 </div>
               </div>
@@ -207,10 +188,17 @@
                 </form>
 
               </div>
-              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex justify-center mt-10" style="    margin-top: 8%;" >
 
-                <img src="/pic/Registerlogo2.png"
-                  class="img-fluid" alt="Sample image">
+                <MudImage
+                    src="/pic/LoginArm.png" 
+                      Height="450"
+                      Width="310" 
+                            Color="Color.Primary"
+                             
+                            Class="rounded-lg Primary"
+                             
+                 alt="سازمان تعزیرات"/>
 
               </div>
             </div>
@@ -218,10 +206,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </MudContainer>
      
 </MudForm>
-</MudCard >
+ 
 @code {
 
     private string genderIcon = @Icons.Filled.Man;

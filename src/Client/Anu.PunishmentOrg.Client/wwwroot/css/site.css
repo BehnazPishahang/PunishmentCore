@@ -171,3 +171,7 @@ a, .btn-link {
     opacity: 0.8  ;
     pointer-events: none  ;
 }
+
+..form-control {
+    background-color: var(--mud-palette-White) !important;
+}
