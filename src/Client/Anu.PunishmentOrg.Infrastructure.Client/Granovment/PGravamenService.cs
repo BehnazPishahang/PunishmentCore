@@ -24,9 +24,9 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Granovment
             return result;
         }
 
-        public IEnumerable<PGravamenInfoContract> GetGravamenListByNationalNo(string baseURl, string serviceName, string nationalCode , string  accessToken)
+        public IEnumerable<PGravamenInfoContract> GetGravamenListByNationalNo(string baseURl, string serviceName, string nationalCode, string accessToken)
         {
-        
+
             GetPersonPGravamensInfoRequest inputData = new();
             inputData.TheGetPersonPGravamenInfoContract.NationalityCode = nationalCode;
             inputData.Page = new Commons.ServiceModel.ServicePaging.Page();
@@ -34,7 +34,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Granovment
             inputData.Page.RowCountPerPage = 3000000;
             inputData.Page.PageNumber = 0;
             inputData.Page.TotalResult = 0;
-            inputData.Page.OrderPage = new Commons.ServiceModel.ServicePaging.OrderPage() { Property = "NoticeDate", Ascending = true };
+            inputData.Page.OrderPage = new Commons.ServiceModel.ServicePaging.OrderPage() { Property = "", Ascending = true };
 
 
             string jsonString = JsonSerializer.Serialize(inputData);
