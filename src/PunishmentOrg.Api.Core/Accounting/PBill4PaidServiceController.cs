@@ -27,6 +27,7 @@ using Anu.PunishmentOrg.DataModel.Case;
 using Anu.BaseInfo.ServiceModel.OrganizationChart;
 using Anu.PunishmentOrg.Domain.Notice;
 using Anu.Constants.ServiceModel.PunishmentOrg;
+using Anu.PunishmentOrg.DataAccess.Accounting;
 
 namespace Anu.PunishmentOrg.Api.Accounting
 {
@@ -153,11 +154,10 @@ namespace Anu.PunishmentOrg.Api.Accounting
 
             thePBill4Paid.Null(GetPBill4PaidByFishNoResult.PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_NotFound);
 
-
             PBill4PaidInfoContract thePBill4PaidInfoContract = new PBill4PaidInfoContract()
             {
                 FishNo        = thePBill4Paid.FishNo,
-                Billtype      = thePBill4Paid.Billtype?.GetDescription(),
+                Billtype      = thePBill4Paid.Billtype?.GetEnmDescription(),
                 CasesNoSubno  = thePBill4Paid.CasesNoSubno,
                 TotalPaidCost = thePBill4Paid.TotalPaidCost,
                 ThePCasePersonContract = new PCasePersonContract()
@@ -196,13 +196,12 @@ namespace Anu.PunishmentOrg.Api.Accounting
 
             thePBill4PaidList.Null(GetPBill4PaidListByNationalCodeResult.PBill4Paid_GetPBill4PaidListByNationalCode_PBill4Paid_NotFound);
 
-
             var thePBill4PaidInfoContractList = thePBill4PaidList.Select(x => new PBill4PaidInfoContract()
             {
-                FishNo        = x.FishNo,
-                Billtype      = x.Billtype?.GetDescription(),
-                CasesNoSubno  = x.CasesNoSubno,
-                TotalPaidCost = x.TotalPaidCost,
+                FishNo                 = x.FishNo,
+                Billtype               = x.Billtype?.GetEnmDescription(),
+                CasesNoSubno           = x.CasesNoSubno,
+                TotalPaidCost          = x.TotalPaidCost,
                 ThePCasePersonContract = new PCasePersonContract()
                 {
                     NationalCode = x.ThePCasePerson!.NationalCode,
@@ -232,8 +231,6 @@ namespace Anu.PunishmentOrg.Api.Accounting
         [AllowAnonymous]
         public override async Task<SendPaymentRequestToSadadResponse> SendPaymentRequestToSadad([FromBody] SendPaymentRequestToSadadRequest request)
         {
-            SendPaymentRequestToSadadResponse theSendPaymentRequestToSadadResponse = new SendPaymentRequestToSadadResponse();
-
             request.Null(SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_Request_Is_Required);
 
             request.ThePBill4PaidFishNoContract.Null(SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_ThePBill4PaidFishNoContract_Is_Required);
@@ -254,9 +251,10 @@ namespace Anu.PunishmentOrg.Api.Accounting
 
             if (!IBanNumber.ValidIBanNumber.Contains(thePBill4Paid.TheAccounts.IBAN!))
             {
-                theSendPaymentRequestToSadadResponse.Result = SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_IBAN_NotValid.GetResult();
-
-                return theSendPaymentRequestToSadadResponse;
+                return new SendPaymentRequestToSadadResponse()
+                {
+                    Result = SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_IBAN_NotValid.GetResult()
+                };
             }
 
             PaymentRequest paymentRequest = new PaymentRequest()
@@ -271,14 +269,14 @@ namespace Anu.PunishmentOrg.Api.Accounting
                 MultiIdentityData = new MultiIdentityData()
                 {
                     Type              = MultiIdentityData.MultiplexingType.Amount,
-                    MultiIdentityRows = GetMultiplexingRows(thePBill4Paid)
+                    MultiIdentityRows = await GetMultiplexingRows(thePBill4Paid)
                 }
             };
 
-            var payResultData = (await SADAD_URL_PAYMENT_MultiIdentityRequest.CallApi(request, SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError)).JsonDeserialize<PayResultData>();
+            PayResultData thePayResultData = (await SADAD_URL_PAYMENT_MultiIdentityRequest.CallApi(request, SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError)).JsonDeserialize<PayResultData>();
 
-            if (payResultData == null ||
-                !payResultData.ResCode.Equals(SADAD_RESULTCODE_SUCCESS))
+            if (thePayResultData == null ||
+                !thePayResultData.ResCode.Equals(SADAD_RESULTCODE_SUCCESS))
             {
                 /*
                 *
@@ -291,17 +289,20 @@ namespace Anu.PunishmentOrg.Api.Accounting
                 *
                 *
                 */
-                theSendPaymentRequestToSadadResponse.Result = SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError.GetResult();
-
-                return theSendPaymentRequestToSadadResponse;
+                return new SendPaymentRequestToSadadResponse()
+                {
+                    Result = SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError.GetResult()
+                };
             }
 
-            theSendPaymentRequestToSadadResponse.ThePBill4PaidTokenContract = new PBill4PaidTokenContract()
+            return new SendPaymentRequestToSadadResponse()
             {
-                Token = payResultData.Token,
+                ThePBill4PaidTokenContract = new PBill4PaidTokenContract()
+                {
+                    Token = thePayResultData.Token
+                },
+                Result = AnuResult.Successful.GetResult(),
             };
-
-            return theSendPaymentRequestToSadadResponse;
         }
 
         [AllowAnonymous]
@@ -361,22 +362,19 @@ namespace Anu.PunishmentOrg.Api.Accounting
             return data;
         }
 
-        private string check(string TreasuryNumber)
+        private async Task<string> checkAsync(string treasuryNumber)
         {
-            //Criteria criteria = new Criteria();
-            //criteria.AddLike(Anu.PunishmentOrgQuery.PTreasuryRandomNum.TreasuryNumber, "%" + TreasuryNumber);
-            //IPTreasuryRandomNumCollection PTreasuryRandomNumCollection =
-            //(IPTreasuryRandomNumCollection)Anu.InstanceBuilder.GetEntityListByCriteria<PTreasuryRandomNum>(criteria);
+            List<PTreasuryRandomNum> thePTreasuryRandomNumList = await _unitOfWork.Repositorey<IPTreasuryRandomNumRepository>().Get_PTreasuryRandomNum_EndsWith_TreasuryNumber(treasuryNumber);
 
-            //if (PTreasuryRandomNumCollection.Count > 0)
-            //    return GetRandomNumber(13);
-            //else
-            //    return TreasuryNumber;
+            if (thePTreasuryRandomNumList.Count > 0)
+            {
+                return await GetRandomNumber(13);
+            }
 
-            return "";
+            return treasuryNumber;
         }
 
-        private string GetRandomNumber(int length)
+        private async Task<string> GetRandomNumber(int length)
         {
             string AllowChars = "0123456789";
             char[] chars = new char[length];
@@ -385,13 +383,13 @@ namespace Anu.PunishmentOrg.Api.Accounting
             {
                 chars[i] = AllowChars[rd.Next(0, AllowChars.Length)];
             }
-            return this.check(new string(chars));
+            return await this.checkAsync(new string(chars));
         }
 
-        private string GetPayId(PBill4Paid thePBill4Paid)
+        private async Task<string> GetPayId(PBill4Paid thePBill4Paid)
         {
             string thePBill4PaidAmount = thePBill4Paid.TotalPaidCost.ToString().PadLeft(15, '0');
-            string randomNumber        = GetRandomNumber(13);
+            string randomNumber        = await GetRandomNumber(13);
 
             string data = $"2{thePBill4Paid.TheAccounts!.TreasuryID}{randomNumber}{thePBill4PaidAmount}";
             string result_b1 = Verhoeff.generateVerhoeff(data);
@@ -402,9 +400,9 @@ namespace Anu.PunishmentOrg.Api.Accounting
             return $"2{result_b1}{result_b2}{thePBill4Paid.TheAccounts!.TreasuryID}{randomNumber}";
         }
 
-        private List<MultiIdentityRows> GetMultiplexingRows(PBill4Paid thePBill4Paid)
+        private async Task<List<MultiIdentityRows>> GetMultiplexingRows(PBill4Paid thePBill4Paid)
         {
-            string payId = thePBill4Paid.TheAccounts!.IsTreasuryConstant == YesNo.Yes ? thePBill4Paid.TheAccounts.TreasuryID! : this.GetPayId(thePBill4Paid);
+            string payId = thePBill4Paid.TheAccounts!.IsTreasuryConstant == YesNo.Yes ? thePBill4Paid.TheAccounts.TreasuryID! : await this.GetPayId(thePBill4Paid);
 
             List<MultiIdentityRows> costLisItemsWithGroupBy = new List<MultiIdentityRows>()
             {
@@ -454,91 +452,89 @@ namespace Anu.PunishmentOrg.Api.Accounting
     }
     public class PaymentRequest
     {
+        //public PaymentRequest()
+        //{
+        //    MultiplexingData = new MultiplexingData();
+        //}
 
-    //public PaymentRequest()
-    //{
-    //    MultiplexingData = new MultiplexingData();
-    //}
+        //[Display(Name = @"شماره ترمينال")]
+        //[Required(ErrorMessage = "شماره پايانه اجباري است ")]
+        public string TerminalId { get; set; }
 
-    //[Display(Name = @"شماره ترمينال")]
-    //[Required(ErrorMessage = "شماره پايانه اجباري است ")]
-    public string TerminalId { get; set; }
+        //[Display(Name = @"شماره پذيرنده")]
+        //[Required(ErrorMessage = "شماره پذيرنده اجباري است ")]
+        public string MerchantId { get; set; }
 
-    //[Display(Name = @"شماره پذيرنده")]
-    //[Required(ErrorMessage = "شماره پذيرنده اجباري است ")]
-    public string MerchantId { get; set; }
+        //[Required(ErrorMessage = "مبلغ اجباري است ")]
+        //[Display(Name = @"مبلغ")]
+        public long Amount { get; set; }
 
-    //[Required(ErrorMessage = "مبلغ اجباري است ")]
-    //[Display(Name = @"مبلغ")]
-    public long Amount { get; set; }
+        public long? OrderId { get; set; }
 
-    public long? OrderId { get; set; }
+        //public string AdditionalData { get; set; }
 
-    //public string AdditionalData { get; set; }
+        public DateTime LocalDateTime { get; set; }
 
-    public DateTime LocalDateTime { get; set; }
+        public string ReturnUrl { get; set; }
 
-    public string ReturnUrl { get; set; }
+        public string SignData { get; set; }
 
-    public string SignData { get; set; }
+        //[Display(Name = @"پرداخت تسهيم")]
+        //public bool EnableMultiplexing { get; set; }
 
-    //[Display(Name = @"پرداخت تسهيم")]
-    //public bool EnableMultiplexing { get; set; }
+        //public MultiplexingData MultiplexingData { get; set; }
+        public MultiIdentityData MultiIdentityData { get; set; }
 
-    //public MultiplexingData MultiplexingData { get; set; }
-    public MultiIdentityData MultiIdentityData { get; set; }
+        //[display(name = @"کليد پذيرنده")]
+        //[required(errormessage = "کليدپذيرنده اجباري است ")]
+        //public string Merchantkey { get; set; }
 
-    //[display(name = @"کليد پذيرنده")]
-    //[required(errormessage = "کليدپذيرنده اجباري است ")]
-    //public string Merchantkey { get; set; }
-
-    //[Display(Name = @"آدرس درگاه")]
-    //[Required(ErrorMessage = "آدرس درگاه اجباري است ")]
-    // public string PurchasePage { get; set; }
-}
+        //[Display(Name = @"آدرس درگاه")]
+        //[Required(ErrorMessage = "آدرس درگاه اجباري است ")]
+        // public string PurchasePage { get; set; }
+    }
 
     public class MultiIdentityData
-{
-    public MultiIdentityData()
     {
-        MultiIdentityRows = new List<MultiIdentityRows>();
-    }
-    public enum MultiplexingType
-    {
-        Percentage,
-        Amount,
-        PaymentIdentity
-    }
-
-    //[Display(Name = @"نوع تسهيم")]
-    public MultiplexingType? Type { get; set; }
-
-    public List<MultiIdentityRows> MultiIdentityRows { get; set; }
-
-    public bool IsValid()
-    {
-        if (!this.Type.HasValue) return false;
-        if (!this.MultiIdentityRows.Any()) return false;
-        if (this.MultiIdentityRows.Any(t => t.Amount < 0)) return false;
-
-        switch (this.Type.Value)
+        public MultiIdentityData()
         {
-            case MultiplexingType.Percentage:
-                if (this.MultiIdentityRows.Sum(t => t.Amount) > 100)
-                    return false;
-                if (this.MultiIdentityRows.Any(t => t.Amount > 99))
-                    return false;
-                break;
-            case MultiplexingType.Amount:
-                break;
-            default:
-                break;
+            MultiIdentityRows = new List<MultiIdentityRows>();
+        }
+        public enum MultiplexingType
+        {
+            Percentage,
+            Amount,
+            PaymentIdentity
         }
 
-        return true;
-    }
+        //[Display(Name = @"نوع تسهيم")]
+        public MultiplexingType? Type { get; set; }
 
-}
+        public List<MultiIdentityRows> MultiIdentityRows { get; set; }
+
+        public bool IsValid()
+        {
+            if (!this.Type.HasValue) return false;
+            if (!this.MultiIdentityRows.Any()) return false;
+            if (this.MultiIdentityRows.Any(t => t.Amount < 0)) return false;
+
+            switch (this.Type.Value)
+            {
+                case MultiplexingType.Percentage:
+                    if (this.MultiIdentityRows.Sum(t => t.Amount) > 100)
+                        return false;
+                    if (this.MultiIdentityRows.Any(t => t.Amount > 99))
+                        return false;
+                    break;
+                case MultiplexingType.Amount:
+                    break;
+                default:
+                    break;
+            }
+
+            return true;
+        }
+    }
 
     public class MultiplexingDataItem
     {

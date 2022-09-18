@@ -165,7 +165,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                     pSaftyWrit=pSaftyWrit.Where(a => objectStateType.Contains(a.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var ps in pSaftyWrit)
                     {
-                        text.AppendFormat(handlingPcaseWithPSaftyWrit, ps.SaftyWritType.GetDescription(), ps.ThePCasePerson.Name + " " + ps.ThePCasePerson.Family).AppendLine();
+                        text.AppendFormat(handlingPcaseWithPSaftyWrit, ps.SaftyWritType.GetEnmDescription(), ps.ThePCasePerson.Name + " " + ps.ThePCasePerson.Family).AppendLine();
                     }
                 }
                 //}
@@ -227,7 +227,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                     pRevisionRequest = pRevisionRequest.Where(a => objectStateType.Contains(a.ThePRevisionRequest.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var pr in pRevisionRequest)
                     {
-                        text.AppendFormat(judgmentPRevisionRequestCase, pr.ThePRevisionRequest.CreateDateTime.Substring(0, 10), pr.ThePRevisionRequest.RequestSubject.GetDescription()).AppendLine();
+                        text.AppendFormat(judgmentPRevisionRequestCase, pr.ThePRevisionRequest.CreateDateTime.Substring(0, 10), pr.ThePRevisionRequest.RequestSubject.GetEnmDescription()).AppendLine();
                     }
 
                 }
@@ -276,7 +276,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                     pExecutionWrit = pExecutionWrit.Where(a => objectStateType.Contains(a.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var pe in pExecutionWrit)
                     {
-                        text.AppendFormat(executionPExecutionWrit, pe.CreateDateTime.Substring(0,10), pe.WritType.GetDescription()).AppendLine();
+                        text.AppendFormat(executionPExecutionWrit, pe.CreateDateTime.Substring(0,10), pe.WritType.GetEnmDescription()).AppendLine();
                     }
 
                 }
