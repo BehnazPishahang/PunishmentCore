@@ -19,10 +19,10 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
         public static async Task SabteahvalAuthenticate(UserRegisterRequest request)
         {
             var SabtAhvalCanUsed = _configuration.GetSection("StatusServices:SabtAhval").Value;
-            //if (!Convert.ToBoolean(SabtAhvalCanUsed))
-            //{
-            //    return;
-            //}
+            if (!Convert.ToBoolean(SabtAhvalCanUsed))
+            {
+                return;
+            }
 
             var result = await CallSabteAhval(request.UserName, request.BirthDate);
 
