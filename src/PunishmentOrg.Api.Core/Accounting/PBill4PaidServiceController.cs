@@ -233,7 +233,11 @@ namespace Anu.PunishmentOrg.Api.Accounting
         public override async Task<SendPaymentRequestToSadadResponse> SendPaymentRequestToSadad([FromBody] SendPaymentRequestToSadadRequest request)
         {
             bool isFake = true;
-            PayResultData thePayResultData;
+            PayResultData thePayResultData = new PayResultData()
+            {
+                ResCode     = "0",
+                Token       = "111111111111111111",
+            };
 
             request.Null(SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_Request_Is_Required);
 
@@ -277,18 +281,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
                 }
             };
 
-            if (isFake) 
-            {
-                thePayResultData = new PayResultData()
-                {
-                    Id          = "1",
-                    Description = "this is test",
-                    OrderId     = "1",
-                    ResCode     = "0",
-                    Token       = "111111111111111111",
-                };
-            }
-            else
+            if (!isFake) 
             {
                 thePayResultData = (await SADAD_URL_PAYMENT_MultiIdentityRequest.CallApi(request, SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError)).JsonDeserialize<PayResultData>();
             }
