@@ -31,7 +31,7 @@ using Anu.PunishmentOrg.DataAccess.Accounting;
 
 namespace Anu.PunishmentOrg.Api.Accounting
 {
-     public class PBill4PaidServiceController : PBill4PaidServiceControllerBase
+    public class PBill4PaidServiceController : PBill4PaidServiceControllerBase
     {
         protected readonly Anu.DataAccess.IUnitOfWork _unitOfWork;
 
@@ -178,6 +178,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
             return new GetPBill4PaidByFishNoResponse()
             {
                 ThePBill4PaidInfoContract = thePBill4PaidInfoContract,
+                Result                    = AnuResult.Successful.GetResult()
             };
         }
 
@@ -231,6 +232,9 @@ namespace Anu.PunishmentOrg.Api.Accounting
         [AllowAnonymous]
         public override async Task<SendPaymentRequestToSadadResponse> SendPaymentRequestToSadad([FromBody] SendPaymentRequestToSadadRequest request)
         {
+            bool isFake = true;
+            PayResultData thePayResultData;
+
             request.Null(SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_Request_Is_Required);
 
             request.ThePBill4PaidFishNoContract.Null(SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_ThePBill4PaidFishNoContract_Is_Required);
@@ -273,7 +277,21 @@ namespace Anu.PunishmentOrg.Api.Accounting
                 }
             };
 
-            PayResultData thePayResultData = (await SADAD_URL_PAYMENT_MultiIdentityRequest.CallApi(request, SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError)).JsonDeserialize<PayResultData>();
+            if (isFake) 
+            {
+                thePayResultData = new PayResultData()
+                {
+                    Id          = "1",
+                    Description = "this is test",
+                    OrderId     = "1",
+                    ResCode     = "0",
+                    Token       = "111111111111111111",
+                };
+            }
+            else
+            {
+                thePayResultData = (await SADAD_URL_PAYMENT_MultiIdentityRequest.CallApi(request, SendPaymentRequestToSadadResult.PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError)).JsonDeserialize<PayResultData>();
+            }
 
             if (thePayResultData == null ||
                 !thePayResultData.ResCode.Equals(SADAD_RESULTCODE_SUCCESS))
@@ -331,7 +349,8 @@ namespace Anu.PunishmentOrg.Api.Accounting
                     TotalCountOfPBill4Paid   = totalCountOfPBill4Paid,
                     CountOfPaidPBill4Paid    = countOfPaidPBill4Paid,
                     CountOfNotPaidPBill4Paid = countOfNotPaidPBill4Paid,
-                }
+                },
+                Result = AnuResult.Successful.GetResult()
             };
         }
         #endregion Overrides
@@ -450,6 +469,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
 
         #endregion Methods
     }
+
     public class PaymentRequest
     {
         //public PaymentRequest()
