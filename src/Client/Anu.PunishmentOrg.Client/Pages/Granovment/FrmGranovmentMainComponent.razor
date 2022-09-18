@@ -47,11 +47,20 @@
     }
 
     li {
+        color: black;
+        padding: 5px;
+        margin-right: 80px;
+        font-size: 1.2em;
+    }
+
+        li.even{
         color: red;
         padding: 5px;
-        margin: 10px;
-        font-size: 1.3em;
+        margin-right: 80px;
+        font-size: 1.2em;
     }
+
+
 </style>
 
 <div class="jumbotron text-center border-info border-2 oi-header">
@@ -60,7 +69,26 @@
 
 <MudForm Model="@_pGravamenContract" @ref="@form" ValidationDelay="0">
     <MudExpansionPanels MultiExpansion="true" DisableBorders="false" Style="">
-        <MudExpansionPanel Text="اطلاعات اولیه" IsExpanded="true" b>
+        <MudExpansionPanel  Text="لطفا در هنگام ثبت موارد ذیل را مورد توجه قرار دهید" IsExpanded="true">
+            <ul>
+                <li>
+                 فیلدهایی که با علامت <MudImage Src="/pic/require.png" Width="20" Height="20" Elevation="25" Class="rounded-lg"/>  مشخص شده اند الزامی بوده و حتما باید ورود اطلاعات شوند
+                </li>
+                <li>
+                  از کلید <MudImage Src="/pic/AddToList.png" Width="20" Height="20" Elevation="25" Class="rounded-lg"/>  جهت اضافه کردن اطلاعات به جداول مربوطه استفاده میشود
+                </li>
+                <li >
+                  از کلید <MudImage Src="/pic/Delete.png" Width="20" Height="20" Elevation="25" Class="rounded-lg"/> جهت حذف کردن اطلاعات انتخاب شده از جداول استفاده میشود
+                </li>
+                <li>
+                  از کلید <MudImage Src="/pic/Edit.png" Width="20" Height="20" Elevation="25" Class="rounded-lg"/> جهت ویرایش اطلاعات انتخاب شده از جداول استفاده میشود پس از ویرایش اطلاعات کلید بعلاوه را کلیک کرده تا اطلاعات به جدول مربوطه اضافه شود
+                </li>
+                <li>عکس واحد صنفی - فاکتور - کالا - فیش/رسید پرداختی و ... در پیوست اضافه گردد.</li>
+                <li>حجم فایل جهت بارگذاری کمتر از 200 کیلوبایت باشد</li>
+                <li>اطلاع رسانی از اقدامات شکایت نامه از طریق شماره همراه صورت می پذیرد لطفا در وارد کردن شماره همراه دقت داشته باشید</li>
+            </ul>
+        </MudExpansionPanel>
+        <MudExpansionPanel Text="اطلاعات اولیه" IsExpanded="true">
             <div class="row">
                 <div class="col-sm-4">
                     <MudSelect @bind-Value="selectedState" Margin="Margin.Dense" T="GeoLocationContract" Label="استان" Required="true"
@@ -105,6 +133,10 @@
                 <div class="col-sm-12">
                     <MudTextField @bind-Value="_pGravamenContract.PetitionDescription" Class="form-control" Label="شرح شکوائیه" Lines="5"
                                   Required="true" Variant="Variant.Outlined" Margin="Margin.Dense" RequiredError="شرح شکوائیه/گزارش را وارد کنید" />
+                </div>
+                <div class="col-sm-12">
+                    <p style="color: red; font-size: 108%;">لطفا در صورت عدم امکان ارائه مستندات کافی یا داشتن شکایت و گزارش در خصوص سایر تخلفات از طریق لینک زیر اقدام فرمایید.</p>
+                    <a href="https://samt.124.ir/home"><u><h6>فرم ثبت شکایات و گزارشات مردمی در خصوص سایر موضوعات در سامانه 124 سازمان حمایت</h6></u></a>
                 </div>
             </div>
         </MudExpansionPanel>
@@ -199,7 +231,6 @@
                     <MudPaper Elevation="25">
                         <MudToolBar>
                             <MudIconButton Icon="@Icons.Material.Outlined.Add" Color="Color.Primary" OnClick="AddReporter" />
-                            <MudIconButton Icon="@Icons.Material.Outlined.Remove" Color="Color.Error" />
                         </MudToolBar>
                     </MudPaper>
                     <MudTable Items="@reporters" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudTable"
@@ -244,7 +275,6 @@
                     <MudPaper Elevation="25">
                         <MudToolBar>
                             <MudIconButton Icon="@Icons.Material.Outlined.Add" Color="Color.Primary" OnClick="Addaccuser" />
-                            <MudIconButton Icon="@Icons.Material.Outlined.Remove" Color="Color.Error" />
                         </MudToolBar>
                     </MudPaper>
                     <MudTable Items="@accusers" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudTableaccuser" @bind-SelectedItem="_selectedAccuser"
@@ -289,8 +319,6 @@
                         <MudText Typo="Typo.button" Style="direction:ltr;">@uploadedFileInfo</MudText>
                     </div>
                     <ul>
-                        <li>عکس واحد صنفی - فاکتور - کالا - فیش/رسید پرداختی و ... در پیوست اضافه گردد.</li>
-                        <li>حجم فایل جهت بارگذاری کمتر از 200 کیلوبایت باشد</li>
                     </ul>
                     <div style="margin-top:10px"><label class="control-label" style="color: red;"></label></div>
                     <div style="margin-top:10px"><label class="control-label" style="color: red;"></label></div>
@@ -299,7 +327,6 @@
                     <MudPaper Elevation="25">
                         <MudToolBar>
                             <MudIconButton Icon="@Icons.Material.Outlined.Add" Color="Color.Primary" OnClick="Addattachment" />
-                            <MudIconButton Icon="@Icons.Material.Outlined.Remove" Color="Color.Error" />
                         </MudToolBar>
                     </MudPaper>
                     <MudTable Items="@attachments" Hover="true" Breakpoint="Breakpoint.Sm" @ref="mudTableAttach" T="GAttachmentContract" Dense="true">
@@ -391,7 +418,7 @@
             OpenDialog();
     }
 
-  
+
     private void Statevaluechanged()
     {
         if (selectedState != null)
@@ -541,6 +568,7 @@
     void EditReporter(PGravamenPersonContract selectedPGravamenPersonContractForEdit)
     {
         _reporter = selectedPGravamenPersonContractForEdit;
+        reporters.Remove(_reporter);
     }
 
 
@@ -600,6 +628,7 @@
     private void Editaccuser(PGravamenPersonContract selectedItem)
     {
         _accuser = selectedItem;
+        accusers.Remove(_accuser);
     }
 
     private string accuserSelectedRowClassFunc(PGravamenPersonContract element, int rowNumber)
