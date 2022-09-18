@@ -57,8 +57,9 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddDbContext<Anu.DataAccess.ApplicationDbContext>(
                 options =>
                 {
-                    
-                    options.UseOracle(builder.Configuration.GetConnectionString("Local"), (oracleOptions) =>
+                    var _dataBaseName = builder.Configuration.GetSection("ProductServer:dataBase").Value;
+
+                    options.UseOracle(builder.Configuration.GetConnectionString(_dataBaseName), (oracleOptions) =>
                     {
                         oracleOptions.UseOracleSQLCompatibility("11");
                     }
