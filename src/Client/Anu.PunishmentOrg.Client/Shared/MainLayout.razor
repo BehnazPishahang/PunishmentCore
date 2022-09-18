@@ -59,7 +59,7 @@
                   
                     @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
                     {
-                            <MudListItem Text="ورود " Icon="@MudBlazor.Icons.Filled.Logout"  Href="/login" />
+                            <MudListItem Text="ورود " Icon="@MudBlazor.Icons.Filled.Login"  Href="/login" />
                               <MudDivider Class="mb-2" />
                         <MudListItem Text="ثبت نام " Href="/register" Icon="@MudBlazor.Icons.Material.Filled.AppRegistration" />
                     }
@@ -76,21 +76,16 @@
     </MudAppBar>
 
      <MudDrawer @bind-Open="@_drawerOpen"
-               Elevation="1">
+               Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
  
-                  <h6 class="pt-2 px-10 mud-nav-link-text"> 
-            منوی سامانه تعزیرات
-        </h6>
-        <MudText Class="mud-text-secondary px-4"
-                 Typo="Typo.body2">
-            ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
-        </MudText>
+        
+      
            <MudNavMenu Color="@Theme135._iconColor">
                            @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
                             {
                                 <MudNavMenu Color="Color.Primary">
                                 <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@MudBlazor.Icons.Filled.Home"  IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
-                                        <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.AddIcCall" IconColor="@Theme135._iconColor">
+                                        <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.AddIcCall" IconColor="@Theme135._iconColor" itemtype="">
                                              ثبت شکایت 
                                         </MudNavLink>
                                           <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.Payments" IconColor="@Theme135._iconColor">
