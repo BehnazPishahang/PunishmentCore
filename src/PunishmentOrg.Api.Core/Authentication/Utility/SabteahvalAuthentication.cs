@@ -168,7 +168,7 @@ public partial class @return
 
     private string officeNameField;
 
-    private byte shenasnameNoField;
+    private ushort shenasnameNoField;
 
     private string shenasnameSeriField;
 
@@ -335,7 +335,7 @@ public partial class @return
     }
 
     /// <remarks/>
-    public byte shenasnameNo
+    public ushort shenasnameNo
     {
         get
         {
@@ -399,6 +399,8 @@ public partial class @return
         }
     }
 }
+
+
 
 
 

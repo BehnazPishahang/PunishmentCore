@@ -34,20 +34,21 @@ namespace Anu.PunishmentOrg.Api.Case
             request.ExportInqueryPCaseInputContract.No.IsDigit(PCaseResult.No_Is_Not_Entered);
             request.ExportInqueryPCaseInputContract.NationalCode.IsValidNationalCode();
 
-            var text = await _unitOfWork.Repositorey<IPCaseRepository>().ExportInqueryPCase(
+            var cases = await _unitOfWork.Repositorey<IPCaseRepository>().ExportInqueryPCase(
                 request.ExportInqueryPCaseInputContract.NationalCode, request.ExportInqueryPCaseInputContract.No);
-            text.Null(PCaseResult.You_Do_Not_Have_Any_Case);
+            cases.Null(PCaseResult.You_Do_Not_Have_Any_Case);
 
-            Stimul Text = new Stimul(){Text=text ,
-                No="شماره پرونده :"+request.ExportInqueryPCaseInputContract.No
-            };
+            //Stimul Text = new Stimul(){Text=text ,
+            //    No="شماره پرونده :"+request.ExportInqueryPCaseInputContract.No
+            //};
 
             return new ExportInqueryPCaseResponse
             {
                 Result = AnuResult.Successful.GetResult(),
-                ExportContract = new Commons.ServiceModel.ServiceExportResponse.ExportContract()
+                ExportInqueryPCaseContract = new ExportInqueryPCaseContract()
                 {
-                    Pdf = Anu.PunishmentOrg.Report.PunishmentOrgConstants.Default.DefaultPrint.ExportPdf("Default", Text)
+                    No = request.ExportInqueryPCaseInputContract.No,
+                    Cases = (List<List<string>>)cases
                 }
             };
 
