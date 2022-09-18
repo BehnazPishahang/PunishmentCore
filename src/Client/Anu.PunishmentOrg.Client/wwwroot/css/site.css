@@ -4,7 +4,7 @@
     font-family: 'Shabnam';
     font-weight: normal;
     font-style: normal;
-    src: url('~/fonts/Shabnam/Shabnam.eot') format('embedded-opentype'), url('~/fonts/Shabnam/Shabnam.woff') format('woff'), url('~/fonts/Shabnam/Shabnam.ttf') format('truetype');
+    src: url('/fonts/Shabnam/Shabnam.eot') format('embedded-opentype'), url('/fonts/Shabnam/Shabnam.woff') format('woff'), url('/fonts/Shabnam/Shabnam.ttf') format('truetype');
 }
 html, body {
     font-family: 'Shabnam';
@@ -170,4 +170,8 @@ a, .btn-link {
 .disabled {
     opacity: 0.8  ;
     pointer-events: none  ;
+}
+
+..form-control {
+    background-color: var(--mud-palette-White) !important;
 }

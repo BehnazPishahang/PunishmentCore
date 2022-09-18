@@ -58,7 +58,7 @@ builder.Services.AddDbContext<Anu.DataAccess.ApplicationDbContext>(
                 options =>
                 {
                     
-                    options.UseOracle(builder.Configuration.GetConnectionString("Local"), (oracleOptions) =>
+                    options.UseOracle(builder.Configuration.GetConnectionString("Product_Stage_Taz"), (oracleOptions) =>
                     {
                         oracleOptions.UseOracleSQLCompatibility("11");
                     }

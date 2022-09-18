@@ -7,12 +7,12 @@ namespace Anu.PunishmentOrg.ServiceModel.Case
     {
         public Result Result { get; set; }
 
-        public ExportContract ExportContract { get; set; }
+        public ExportInqueryPCaseContract ExportInqueryPCaseContract { get; set; }
 
         public ExportInqueryPCaseResponse()
         {
             Result = new Result();
-            ExportContract = new ExportContract();
+            ExportInqueryPCaseContract = new ExportInqueryPCaseContract();
         }
     }
 }

@@ -4,8 +4,8 @@ internal static class PresetThemes
 {
     public const string Custom = "سفارشی ";
     public const string MuiDark = "زمینه آبی ";
-    public const string Weak    = "زمینه سبز ";
-    
+    public const string Weak = "زمینه سبز ";
+
 
     public static Palette GetDefaultLightPalette()
     {
@@ -15,7 +15,7 @@ internal static class PresetThemes
             {
                 Secondary = "#376662",
                 Black = "#19191c",
-                Background = "#dfe0e5",
+                Background = "#f7f9ff",
                 TextPrimary = "#19191c",
                 TextSecondary = "#19191c",
             },
@@ -28,7 +28,7 @@ internal static class PresetThemes
             {
                 Default = new Default()
                 {
-                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "sans-serif" }
+                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "Shabnam" }
                 }
             }
         };
@@ -36,7 +36,7 @@ internal static class PresetThemes
         return theme.Palette;
     }
 
-   
+
 
 
     public static Palette GetDefaultDarkPalette()
@@ -76,11 +76,11 @@ internal static class PresetThemes
             {
                 Default = new Default()
                 {
-                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "sans-serif" }
+                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "Shabnam" }
                 }
             }
         };
-       
+
         return theme.Palette;
     }
 
@@ -123,7 +123,7 @@ internal static class PresetThemes
             {
                 Default = new Default()
                 {
-                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "sans-serif" }
+                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "Shabnam" }
                 }
             }
         };
@@ -138,15 +138,16 @@ internal static class PresetThemes
         {
             Palette = new Palette()
             {
-                Primary = "#1b4433",
+                Primary = "#35765b",
                 Secondary = "#26a69a",
                 Tertiary = "#594AE2",
                 Black = "#27272f",
+                White = "#e8ebcd",
                 Background = "#afb9a9",
                 BackgroundGrey = "#515e49",
-                Surface = "#515e49",
-                DrawerBackground = "#0a1929",
-                DrawerText = "#1b4433",
+                Surface = "#b3cba4",
+                DrawerBackground = "#e5fff9",
+                DrawerText = "#8ac9af",
                 DrawerIcon = "#1b4433",
                 AppbarBackground = "rgb(10, 25, 41)",
                 AppbarText = "rgba(255,255,255, 0.70)",
@@ -166,11 +167,11 @@ internal static class PresetThemes
             {
                 DefaultBorderRadius = "12px",
             },
-           Typography = new Typography()
+            Typography = new Typography()
             {
                 Default = new Default()
                 {
-                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "sans-serif" }
+                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "Shabnam" }
                 }
             }
         };
