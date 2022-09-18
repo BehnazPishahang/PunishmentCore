@@ -75,8 +75,7 @@
             </MudMenu>
     </MudAppBar>
 
-     <MudDrawer @bind-Open="@_drawerOpen"
-               Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
+   <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Docked" Breakpoint="Breakpoint.Sm"  Elevation="5" Variant="@DrawerVariant.Mini">
  
         
       
@@ -98,11 +97,15 @@
                                     <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@MudBlazor.Icons.Filled.Home"  IconColor = "@Theme135._iconColor"  > خدمات الکترونیکی تعزیرات </MudNavLink>
      
                                               <MudNavLink id="FrmNoticeMain" Href="/FrmNotice" Icon="@MudBlazor.Icons.Filled.ManageSearch"   IconColor = "@Theme135._iconColor" >
-                                                        جستجوی ابلاغ
+                                                         ابلاغ ها 
+                                                    </MudNavLink>
+                                                   <MudNavLink Href="/GranovmentList" Icon="@MudBlazor.Icons.Filled.List"  IconColor = "@Theme135._iconColor" > شکایت ها
+                                                       
                                                     </MudNavLink>
                                                     <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner"  IconColor = "@Theme135._iconColor" >
                                                          ثبت شکایت 
                                                     </MudNavLink>
+                                                    
                                                       <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.Payments"  IconColor="@Theme135._iconColor"  >
                                                          پرداخت وجه 
                                                     </MudNavLink>

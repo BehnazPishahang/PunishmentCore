@@ -346,10 +346,16 @@
             secondStep = new();
             _registerUserModel = new();
 
-            bool? resulXt = await DialogService.ShowMessageBox(
-            "تبریک", 
-            "کاربری شما با موفقیط ثبت گردید", 
-            yesText:"بستن!");
+            //bool? resulXt = await DialogService.ShowMessageBox(
+            //"تبریک", 
+            //"کاربری شما با موفقیط ثبت گردید", 
+            //yesText:"بستن!");
+             Snackbar.Add(result.Result.Message, MudBlazor.Severity.Success);
+
+             await Task.Delay(5000);
+             _navigationManager.NavigateTo("/");
+
+
 
         }
         else
