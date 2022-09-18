@@ -1,18 +1,9 @@
-@font-face {
-  font-family: FontName;
-  src: url('FontName.eot');
-  src: url('FontName.eot?#iefix') format('FontName-opentype'),
-       url('FontName.woff') format('woff'),
-       url('FontName.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
 
 @font-face {
-  font-family: Parastoo;
-  src: url('Parastoo-Bold.eot');
-  src: url('Parastoo-Bold.eot?#iefix') format('embedded-opentype'),
-       url('Parastoo-Bold.woff') format('woff'),
-       url('Parastoo-Bold.ttf') format('truetype');
-  font-weight: bold;
+    font-family: 'Shabnam';
+    font-weight: normal;
+    font-style: normal;
+    src: url('/Fonts/Shabnam/Shabnam.eot') format('embedded-opentype'), 
+        url('/Fonts/Shabnam/Shabnam.woff') format('woff'), 
+        url('/Fonts/Shabnam/Shabnam.ttf') format('truetype');
 }

@@ -8859,7 +8859,7 @@ ul {
 
 .mud-typography-body1 {
     font-size: var(--mud-typography-body1-size);
-    font-family: var(--mud-typography-body1-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-body1-weight);
     line-height: var(--mud-typography-body1-lineheight);
     letter-spacing: var(--mud-typography-body1-letterspacing);
@@ -8868,7 +8868,7 @@ ul {
 
 .mud-typography-body2 {
     font-size: var(--mud-typography-body2-size);
-    font-family: var(--mud-typography-body2-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-body2-weight);
     line-height: var(--mud-typography-body2-lineheight);
     letter-spacing: var(--mud-typography-body2-letterspacing);
@@ -8877,7 +8877,7 @@ ul {
 
 .mud-typography-caption {
     font-size: var(--mud-typography-caption-size);
-    font-family: var(--mud-typography-caption-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-caption-weight);
     line-height: var(--mud-typography-caption-lineheight);
     letter-spacing: var(--mud-typography-caption-letterspacing);
@@ -8886,7 +8886,7 @@ ul {
 
 .mud-typography-button {
     font-size: var(--mud-typography-button-size);
-    font-family: var(--mud-typography-button-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-button-weight);
     line-height: var(--mud-typography-button-lineheight);
     letter-spacing: var(--mud-typography-button-letterspacing);
@@ -8895,7 +8895,7 @@ ul {
 
 .mud-typography-h1 {
     font-size: var(--mud-typography-h1-size);
-    font-family: var(--mud-typography-h1-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-h1-weight);
     line-height: var(--mud-typography-h1-lineheight);
     letter-spacing: var(--mud-typography-h1-letterspacing);
@@ -8904,7 +8904,7 @@ ul {
 
 .mud-typography-h2 {
     font-size: var(--mud-typography-h2-size);
-    font-family: var(--mud-typography-h2-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-h2-weight);
     line-height: var(--mud-typography-h2-lineheight);
     letter-spacing: var(--mud-typography-h2-letterspacing);
@@ -8913,7 +8913,7 @@ ul {
 
 .mud-typography-h3 {
     font-size: var(--mud-typography-h3-size);
-    font-family: var(--mud-typography-h3-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-h3-weight);
     line-height: var(--mud-typography-h3-lineheight);
     letter-spacing: var(--mud-typography-h3-letterspacing);
@@ -8922,7 +8922,7 @@ ul {
 
 .mud-typography-h4 {
     font-size: var(--mud-typography-h4-size);
-    font-family: var(--mud-typography-h4-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-h4-weight);
     line-height: var(--mud-typography-h4-lineheight);
     letter-spacing: var(--mud-typography-h4-letterspacing);
@@ -8931,7 +8931,7 @@ ul {
 
 .mud-typography-h5 {
     font-size: var(--mud-typography-h5-size);
-    font-family: var(--mud-typography-h5-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-h5-weight);
     line-height: var(--mud-typography-h5-lineheight);
     letter-spacing: var(--mud-typography-h5-letterspacing);
@@ -8940,7 +8940,7 @@ ul {
 
 .mud-typography-h6 {
     font-size: var(--mud-typography-h6-size);
-    font-family: var(--mud-typography-h6-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-h6-weight);
     line-height: var(--mud-typography-h6-lineheight);
     letter-spacing: var(--mud-typography-h6-letterspacing);
@@ -8949,7 +8949,7 @@ ul {
 
 .mud-typography-subtitle1 {
     font-size: var(--mud-typography-subtitle1-size);
-    font-family: var(--mud-typography-subtitle1-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-subtitle1-weight);
     line-height: var(--mud-typography-subtitle1-lineheight);
     letter-spacing: var(--mud-typography-subtitle1-letterspacing);
@@ -8958,7 +8958,7 @@ ul {
 
 .mud-typography-subtitle2 {
     font-size: var(--mud-typography-subtitle2-size);
-    font-family: var(--mud-typography-subtitle2-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-subtitle2-weight);
     line-height: var(--mud-typography-subtitle2-lineheight);
     letter-spacing: var(--mud-typography-subtitle2-letterspacing);
@@ -8967,7 +8967,7 @@ ul {
 
 .mud-typography-overline {
     font-size: var(--mud-typography-overline-size);
-    font-family: var(--mud-typography-overline-family);
+    font-family: shabnam;
     font-weight: var(--mud-typography-overline-weight);
     line-height: var(--mud-typography-overline-lineheight);
     letter-spacing: var(--mud-typography-overline-letterspacing);
@@ -27559,4 +27559,9 @@ tr.mud-table-row-group-indented-5 td:first-child {
 }
 .mud-bold {
     font-weight: bold !important;
+}
+
+.mud-theme-manager-button:hover {
+    cursor: pointer;
+    color: blue !important;
 }

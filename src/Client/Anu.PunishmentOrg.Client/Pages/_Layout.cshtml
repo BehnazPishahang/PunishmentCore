@@ -2,14 +2,7 @@
 @namespace Anu.PunishmentOrg.Client.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<style>
-    @@font-face {
-    font-family: 'Shabnam';
-    font-weight: normal;
-    font-style: normal;
-    src: url('/fonts/Shabnam/Shabnam.eot') format('embedded-opentype'), url('/fonts/Shabnam/Shabnam.woff') format('woff'), url('/fonts/Shabnam/Shabnam.ttf') format('truetype');
-}
- </Style>   
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +21,7 @@
     <link href="_content/Blazor.PersianDatePicker/datepicker.css" rel="stylesheet" />
 
 </head>
-<body style="font-family:Shabnam">
+<body style="font-family:Shabnam !important">
     @RenderBody()
 
     <div id="blazor-error-ui">

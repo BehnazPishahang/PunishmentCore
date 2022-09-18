@@ -4,54 +4,84 @@ internal static class PresetThemes
 {
     public const string Custom = "سفارشی ";
     public const string MuiDark = "زمینه آبی ";
-    public const string Weak    = "زمینه سبز ";
-    
+    public const string Weak = "زمینه سبز ";
+
 
     public static Palette GetDefaultLightPalette()
     {
-        var palette = new Palette
+        var theme = new MudTheme()
         {
-           Secondary = "#376662",
-            Black = "#19191c",
-            Background = "#dfe0e5",
-            TextPrimary = "#19191c",
-            TextSecondary = "#19191c",
+            Palette = new Palette()
+            {
+                Secondary = "#376662",
+                Black = "#19191c",
+                Background = "#f7f9ff",
+                TextPrimary = "#19191c",
+                TextSecondary = "#19191c",
+            },
+            LayoutProperties = new LayoutProperties()
+            {
+                DefaultBorderRadius = "14px",
+            },
+
+            Typography = new Typography()
+            {
+                Default = new Default()
+                {
+                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "Shabnam" }
+                }
+            }
         };
 
-        return palette;
+        return theme.Palette;
     }
 
-   
+
 
 
     public static Palette GetDefaultDarkPalette()
     {
-        var palette = new Palette
+        var theme = new MudTheme()
         {
-            Black = "#27272f",
-            Secondary = "#556289",
-            Background = "rgb(21,27,34)",
-            BackgroundGrey = "#27272f",
-            Surface = "#212B36",
-            DrawerBackground = "rgb(21,27,34)",
-            DrawerText = "rgba(255,255,255, 0.50)",
-            DrawerIcon = "rgba(255,255,255, 0.50)",
-            AppbarBackground = "#27272f",
-            AppbarText = "rgba(255,255,255, 0.70)",
-            TextPrimary = "#ffffffb2",
-            TextSecondary = "#251c56",
-            ActionDefault = "#adadb1",
-            ActionDisabled = "rgba(255,255,255, 0.26)",
-            ActionDisabledBackground = "rgba(255,255,255, 0.12)",
-            Divider = "rgba(255,255,255, 0.12)",
-            DividerLight = "rgba(255,255,255, 0.06)",
-            TableLines = "rgba(255,255,255, 0.12)",
-            LinesDefault = "rgba(255,255,255, 0.12)",
-            LinesInputs = "rgba(255,255,255, 0.3)",
-            TextDisabled = "rgba(255,255,255, 0.2)"
+            Palette = new Palette()
+            {
+                Black = "#27272f",
+                Secondary = "#556289",
+                Background = "rgb(21,27,34)",
+                BackgroundGrey = "#27272f",
+                Surface = "#212B36",
+                DrawerBackground = "rgb(21,27,34)",
+                DrawerText = "rgba(255,255,255, 0.50)",
+                DrawerIcon = "rgba(255,255,255, 0.50)",
+                AppbarBackground = "#27272f",
+                AppbarText = "rgba(255,255,255, 0.70)",
+                TextPrimary = "#ffffffb2",
+                TextSecondary = "#cac7db",
+                ActionDefault = "#adadb1",
+                ActionDisabled = "rgba(255,255,255, 0.26)",
+                ActionDisabledBackground = "rgba(255,255,255, 0.12)",
+                Divider = "rgba(255,255,255, 0.12)",
+                DividerLight = "rgba(255,255,255, 0.06)",
+                TableLines = "rgba(255,255,255, 0.12)",
+                LinesDefault = "rgba(255,255,255, 0.12)",
+                LinesInputs = "rgba(255,255,255, 0.3)",
+                TextDisabled = "rgba(255,255,255, 0.2)"
+            },
+            LayoutProperties = new LayoutProperties()
+            {
+                DefaultBorderRadius = "14px",
+            },
+
+            Typography = new Typography()
+            {
+                Default = new Default()
+                {
+                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "Shabnam" }
+                }
+            }
         };
 
-        return palette;
+        return theme.Palette;
     }
 
     public static MudTheme GetMuiDarkTheme()
@@ -86,14 +116,14 @@ internal static class PresetThemes
             },
             LayoutProperties = new LayoutProperties()
             {
-                DefaultBorderRadius = "12px",
+                DefaultBorderRadius = "14px",
             },
 
             Typography = new Typography()
             {
                 Default = new Default()
                 {
-                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "sans-serif" }
+                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "Shabnam" }
                 }
             }
         };
@@ -136,11 +166,11 @@ internal static class PresetThemes
             {
                 DefaultBorderRadius = "12px",
             },
-           Typography = new Typography()
+            Typography = new Typography()
             {
                 Default = new Default()
                 {
-                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "sans-serif" }
+                    FontFamily = new[] { "Shabnam", "Shabnam", "Shabnam", "Shabnam" }
                 }
             }
         };
