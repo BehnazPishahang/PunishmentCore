@@ -22,6 +22,7 @@ namespace Anu.PunishmentOrg.Api.Case
             _unitOfWork = unitOfWork;
         }
 
+
         [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
         //[Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<ExportInqueryPCaseResponse> ExportInqueryPCase([FromBody] ExportInqueryPCaseRequest request)
@@ -55,26 +56,33 @@ namespace Anu.PunishmentOrg.Api.Case
 
         }
 
-        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
-        //[Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        //[PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<GetAllPCaseResponse> GetAllPCase([FromBody] GetAllPCaseRequest request)
         {
             request.Null(AnuResult.In_Valid_Input);
 
             request.GetAllPCaseInputContract.NationalCode.Null(AnuResult.NationalCode_Is_Not_Entered);
-
             request.GetAllPCaseInputContract.NationalCode.IsValidNationalCode();
+
+            if (request.GetAllPCaseInputContract.CaseArchiveState != Enumerations.PUCaseArchiveState.Active && 
+                request.GetAllPCaseInputContract.CaseArchiveState != Enumerations.PUCaseArchiveState.Closed && 
+                request.GetAllPCaseInputContract.CaseArchiveState != Enumerations.PUCaseArchiveState.None)
+            {
+                return new GetAllPCaseResponse() { Result = PCaseResult.CaseState_Is_Not_Valid.GetResult() };
+            }
 
 
             var pCase = await _unitOfWork.Repositorey<IPCaseRepository>().GetAllPCaseWithNationalCode(
-                request.GetAllPCaseInputContract.NationalCode);
+                request.GetAllPCaseInputContract.NationalCode, request.GetAllPCaseInputContract.CaseArchiveState);
             pCase.Null(PCaseResult.You_Do_Not_Have_Any_Case);
 
             var theGetAllPCaseContract = pCase.Select(a => new GetAllPCaseContract()
             {
                 No = a.No,
                 CreateDateTime = a.CreateDateTime.Substring(0,10),
-                UnitName = a.TheHandlerUnit.UnitName
+                UnitName = a.TheHandlerUnit.UnitName,
+                CaseArchiveState = a.CaseArchiveState
             }).ToList();
 
             return new GetAllPCaseResponse
@@ -84,6 +92,7 @@ namespace Anu.PunishmentOrg.Api.Case
             };
 
         }
+
 
         [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
         //[Microsoft.AspNetCore.Authorization.AllowAnonymous]

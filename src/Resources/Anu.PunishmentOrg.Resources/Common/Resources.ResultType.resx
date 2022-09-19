@@ -820,4 +820,8 @@
     <value>ثبت احوال در دسترس نمی باشد.</value>
     <comment>-100034</comment>
   </data>
+  <data name="CaseState_Is_Not_Valid" xml:space="preserve">
+    <value>وضعیت پرونده معتبر نمی باشد.</value>
+    <comment>-770004</comment>
+  </data>
 </root>
