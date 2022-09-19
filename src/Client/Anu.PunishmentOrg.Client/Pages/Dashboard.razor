@@ -1,10 +1,14 @@
 ﻿@page "/dashboard"
 @inherits MainLayout
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase
 @using Anu.PunishmentOrg.Client.Infrastructure.Settings
 @using Anu.PunishmentOrg.Client.Pages.Authentication
+@using Anu.PunishmentOrg.ServiceModel.Case
 @using Anu.PunishmentOrg.ServiceModel.Notice
 @inject INoticeService _noticeService;
+@inject IPCaseService _pCaseService;
+
 @inject AppConfiguration _appConfiguration;
 <MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
     
@@ -42,6 +46,40 @@
             </MudElement>
         </MudItem>
 
+
+        <MudItem xs="12" sm="6" md="6" class="rounded" >
+              <MudElement HtmlTag="a"
+            Class="ma-0"
+            Style="color:red;font-weight:bold;"
+           
+              
+            rel="noopener noreferrer">
+ 
+              <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100%">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.RuleFolder" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                </div>
+                <div class=" col-xl-10 col-sm-10 col-md-10 col-10">
+
+          
+                
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                       
+                        <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
+                            <MudText   Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> پرونده</MudText>
+                            <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.FolderOff" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowCloasedPcaseList"  >@PcaseInfo.StatisticContract.CountUnSeen</MudButton>
+                            <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPCaseList" >  تمامی پرونده ها : @PcaseInfo.StatisticContract.CountTotal</MudButton>
+                            <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.FolderOpen"  OnClick="ShowActivePcaseList"   Variant="Variant.Filled" IconColor="Color.Secondary" >@PcaseInfo.StatisticContract.CountSeen</MudButton>
+                        </MudButtonGroup>  
+                          
+                   </div>
+             
+                </div>
+            </MudPaper>
+            </MudElement>
+        </MudItem>
+
+
         <MudItem xs="12" sm="6" md="6">
               <MudElement HtmlTag="a"
             Class="ma-0"
@@ -51,7 +89,7 @@
             rel="noopener noreferrer">
              <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100%">
                 <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.AddIcCall" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    <MudIcon Icon="@Icons.Filled.DocumentScanner" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
                 </div>
                 <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
@@ -277,9 +315,25 @@
 
     public static MudBlazor.Color _iconColorDashboard = MainLayout.DarkMode ? Color.Success : Color.Info;
     GetCountOfUnSeenPNoticeByUserResponse NoticeInfo;
+    GetStatisticPCaseResponse PcaseInfo;
     string ncode = SharedInfo.NationalCode;
 
+    private void ShowCloasedPcaseList()
+    {
+        _navigationManager.NavigateTo("/Cases");
+    }
 
+    private void ShowActivePcaseList()
+    {
+        _navigationManager.NavigateTo("/Cases");
+    }
+
+     private void ShowAllPCaseList()
+    {
+        _navigationManager.NavigateTo("/Cases");
+    }
+
+    
     private void ShowUnseenedPNoticeList()
     {
         SharedInfo.LoadAllNoticeList = false;
@@ -300,6 +354,7 @@
         {
             string ncode = SharedInfo.NationalCode;
                NoticeInfo = _noticeService.GetCountOfUnSeenPNoticeByUser(_appConfiguration.BackendServerAddress, _appConfiguration.GetCountOfUnSeenPNoticeByUser, ncode , SharedInfo.AccessToken);
+               PcaseInfo = await _pCaseService.GetPCaseStatistic(_appConfiguration.BackendServerAddress, _appConfiguration.GetStatisticPCase, ncode , SharedInfo.AccessToken);
         }
        
      

@@ -28,16 +28,16 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
 
             if (!result.name.ConvertToByte().UTF8().NormalizeTextChars().Trim().Equals(request.FirstName.NormalizeTextChars()))
             {
-                throw new AnuExceptions(AnuResult.SabteAhval_Data_Not_Match_Entered_Data);
+                throw new AnuExceptions(AnuResult.SabteAhval_Data_Not_Match_Entered_Data,args:"نام");
             }
             if (!result.family.ConvertToByte().UTF8().NormalizeTextChars().Trim().Equals(request.LastName.NormalizeTextChars()))
             {
-                throw new AnuExceptions(AnuResult.SabteAhval_Data_Not_Match_Entered_Data);
+                throw new AnuExceptions(AnuResult.SabteAhval_Data_Not_Match_Entered_Data, args: "نام خانوادگی");
             }
             SexType sexTye = (int.Parse(result.gender.ToString()) == 1) ? SexType.Male : SexType.Female;
             if (sexTye != request.Sex)
             {
-                throw new AnuExceptions(AnuResult.SabteAhval_Data_Not_Match_Entered_Data);
+                throw new AnuExceptions(AnuResult.SabteAhval_Data_Not_Match_Entered_Data, args: "جنسیت");
             }
         }
 
@@ -54,6 +54,11 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
 
             var Result = (await Url.CallApi(input, AnuResult.SabteAhval_Unkhown_Error, authorization: Authorization, IsJson: false)).XmlDeserialize<Envelope>();
 
+            if (!((System.Xml.XmlNode[])(Result.Body.getEstelam3Response.@return.message)).Null() && 
+                ((System.Xml.XmlNode[])(Result.Body.getEstelam3Response.@return.message))[0].Value.ToString().ToLower().Trim().Equals("login.time.diny".ToLower()))
+            {
+                throw new AnuExceptions(AnuResult.SabteAhval_Is_Out_Of_Service);
+            }
             Result.Body.getEstelam3Response.@return.name.Null(AnuResult.SabteAhval_Not_Validate_NationalCode);
 
             return Result.Body.getEstelam3Response.@return;

@@ -6,5 +6,6 @@
         {
         }
         public string? NationalCode { get; set; }
+        public Enumerations.PUCaseArchiveState CaseArchiveState { get; set; }
     }
 }
