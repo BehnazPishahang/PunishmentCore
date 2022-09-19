@@ -21,15 +21,22 @@ namespace Utility.Guard
         {
             if (input is null)
             {
-                return false;
+                return true;
+            }
+            if (input is System.Collections.ICollection)
+            {
+                if (((System.Collections.ICollection)input).Count == 0)
+                {
+                    return true;
+                }
             }
 
-            return true;
+            return false;
         }
 
         public static string NullOrEmpty(this string? input, Enum type, string args = null)
         {
-            input.Null(type);
+            input.Null(type,args);
             if (input == string.Empty)
             {
                 throw new AnuExceptions(type, args);
@@ -40,17 +47,17 @@ namespace Utility.Guard
 
         public static bool NullOrEmpty(this string? input)
         {
-            if (!input.Null())
+            if (input.Null())
             {
-                return false;
+                return true;
             }
 
             if (input == string.Empty)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public static Guid NullOrEmpty(this Guid? input, Enum type, string args = null)
@@ -77,8 +84,8 @@ namespace Utility.Guard
 
         public static string NullOrWhiteSpace(this string? input, Enum type, string args = null)
         {
-            input.NullOrEmpty(type);
-            if (String.IsNullOrWhiteSpace(input))
+            input.NullOrEmpty(type,args);
+            if (string.IsNullOrWhiteSpace(input))
             {
                 throw new AnuExceptions(type, args);
             }
@@ -88,16 +95,16 @@ namespace Utility.Guard
 
         public static bool NullOrWhiteSpace(this string? input)
         {
-            if (!input.NullOrEmpty())
+            if (input.NullOrEmpty())
             {
-                return false;
+                return true;
             }
-            if (String.IsNullOrWhiteSpace(input))
+            if (string.IsNullOrWhiteSpace(input))
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         public static T Default<T>(this T input, Enum type, string args = null)
@@ -129,6 +136,7 @@ namespace Utility.Guard
             }
             return value;
         }
+
         public static string Length(this string? input, Enum type, int length, string args = null)
         {
             if (input.Length != length)
@@ -149,28 +157,30 @@ namespace Utility.Guard
             return input;
         }
 
+        //todo: it should be reviewed by s.kavianimehr 
         public static string IsValidNationalCode(this string nationalCode)
         {
-            ////در صورتی که کد ملی وارد شده تهی باشد
-            //nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
-            //
-            ////در صورتی که کد ملی وارد شده طولش کمتر از 10 رقم باشد
-            //nationalCode.Length(AnuResult.NationalCode_Length_Is_Not_Valid, 10);
-            //
-            ////در صورتی که کد ملی ده رقم عددی نباشد
-            //var regex = new Regex(@"\d{10}");
-            //nationalCode.IsMatch(AnuResult.NationalCode_Must_Be_Number, regex);
-            //
-            ////در صورتی که رقم‌های کد ملی وارد شده یکسان باشد
-            //var allDigitEqual = new[] { "0000000000", "1111111111", "2222222222", "3333333333", "4444444444", "5555555555", "6666666666", "7777777777", "8888888888", "9999999999" };
-            //if (allDigitEqual.Contains(nationalCode))
-            //{
-            //    nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
-            //}
+            //در صورتی که کد ملی وارد شده تهی باشد
+            nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
 
-            return "";
+            //در صورتی که کد ملی وارد شده طولش کمتر از 10 رقم باشد
+            nationalCode.Length(AnuResult.NationalCode_Length_Is_Not_Valid, 10);
+
+            //در صورتی که کد ملی ده رقم عددی نباشد
+            var regex = new Regex(@"\d{10}");
+            nationalCode.IsMatch(AnuResult.NationalCode_Must_Be_Number, regex);
+
+            //در صورتی که رقم‌های کد ملی وارد شده یکسان باشد
+            var allDigitEqual = new[] { "0000000000", "1111111111", "2222222222", "3333333333", "4444444444", "5555555555", "6666666666", "7777777777", "8888888888", "9999999999" };
+            if (allDigitEqual.Contains(nationalCode))
+            {
+                nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
+            }
+
+            return nationalCode;
         }
 
+        //todo it should be reviewed by s.kavianimehr 
         public static bool IsValidDate(this string? dateString, Enum type, string args = null)
         {
             if (string.IsNullOrEmpty(dateString))

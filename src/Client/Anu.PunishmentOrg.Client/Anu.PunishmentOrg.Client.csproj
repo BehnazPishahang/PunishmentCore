@@ -12,15 +12,19 @@
 
   <ItemGroup>
     <PackageReference Include="BlazorCaptcha" Version="1.2.4" />
+    <PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
     <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
-    <PackageReference Include="MudBlazor" Version="6.0.14" />
-    <PackageReference Include="MudBlazor.ThemeManager" Version="1.0.7" />
+    <PackageReference Include="MudBlazor" Version="6.0.15" />
+    <PackageReference Include="Recurop" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ServiceModel\Anu.Commons.ServiceModel\Anu.Commons.ServiceModel.csproj" />
+    <ProjectReference Include="..\..\ServiceModel\Anu.PunishmentOrg.ServiceModel\Anu.PunishmentOrg.ServiceModel.csproj" />
     <ProjectReference Include="..\Anu.PunishmentOrg.Infrastructure.Client\Anu.PunishmentOrg.Client.Infrastructure.csproj" />
     <ProjectReference Include="..\BlazorComponents\Blazor.PersianDatePicker\Blazor.PersianDatePicker.csproj" />
+    <ProjectReference Include="..\BlazorComponents\MudBlazor.ThemeManager\MudBlazor.ThemeManager.csproj" />
   </ItemGroup>
 
 </Project>

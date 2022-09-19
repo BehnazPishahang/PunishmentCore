@@ -14,6 +14,6 @@ public class UnitRepository : Anu.DataAccess.Repositories.GenericRepository<Anu.
 
     public async Task<Anu.BaseInfo.DataModel.OrganizationChart.Unit> GetByUnitNo(string unitNo)
     {
-        return await _context.Set<Anu.BaseInfo.DataModel.OrganizationChart.Unit>().Where(u => u.UnitNo == unitNo).FirstOrDefaultAsync();
+        return await _context.Set<Anu.BaseInfo.DataModel.OrganizationChart.Unit>().Where(u => u.UnitNo == unitNo).Include(c=>c.TheCMSOrganizationList).FirstOrDefaultAsync();
     }
 }

@@ -1,7 +1,11 @@
+using Anu.DataAccess;
+using Anu.Domain;
+using Anu.PunishmentOrg.Api.Authentication;
+using Anu.PunishmentOrg.Api.Authentication.Utility;
+using Anu.Utility.Sms;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Swashbuckle.Swagger;
 using Utility;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,23 +23,24 @@ builder.Services.AddControllers(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen(options =>
 {
-    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "PunishmentOrgApi", Version = "v1" });
-    c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "PunishmentOrgApi", Version = "v1" });
+    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
     {
         Description = "JWT Authorization header \"Authorization: Bearer {token}\"",
         Name = "Authorization",
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
         Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey
     });
-    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
     {
         {
             new Microsoft.OpenApi.Models.OpenApiSecurityScheme
             {
                 Reference = new Microsoft.OpenApi.Models.OpenApiReference { Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme, Id = "Bearer" }
-            }, new List<string>() }
+            }, new List<string>()
+        }
     });
 });
 
@@ -52,18 +57,22 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddDbContext<Anu.DataAccess.ApplicationDbContext>(
                 options =>
                 {
-                    options.UseOracle("Password=ali;Persist Security Info=True;User ID=puo;Data Source=192.168.1.11/anu", (oracleOptions) =>
+                    
+                    options.UseOracle(builder.Configuration.GetConnectionString("Product_Stage_Taz"), (oracleOptions) =>
                     {
                         oracleOptions.UseOracleSQLCompatibility("11");
                     }
                     );
                 });
-#region Repositories
 builder.Services.AddTransient(typeof(Anu.Domain.IGenericRepository<>), typeof(Anu.DataAccess.Repositories.GenericRepository<>));
-#endregion
-#region UnitOfWork
+
 builder.Services.AddTransient<Anu.DataAccess.IUnitOfWork, Anu.UnitOfWork.DataAccess.UnitOfWork>();
-#endregion
+builder.Services.AddScoped<IDependencyResolver, DependencyResolver>();//(new DependencyResolver(builder.Services));
+builder.Services.AddRepositories(
+    typeof(Anu.BaseInfo.DataAccess.Unit.UnitRepository).Assembly,
+    typeof(Anu.PunishmentOrg.DataAccess.DiscoveryMinutes.PChaseLicenseReqRepository).Assembly);
+
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -106,6 +115,9 @@ builder.Services.AddAuthentication(options =>
 });
 
 var app = builder.Build();
+SmsSender.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
+ShahkarAuthentication.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
+SabteahvalAuthentication.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -118,8 +130,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-app.UseMiddleware<Anu.PunishmentOrg.Api.Authentication.ErrorHandlingMiddleware>(); 
+app.UseMiddleware<Anu.PunishmentOrg.Api.Authentication.ErrorHandlingMiddleware>();
 
 app.Run();

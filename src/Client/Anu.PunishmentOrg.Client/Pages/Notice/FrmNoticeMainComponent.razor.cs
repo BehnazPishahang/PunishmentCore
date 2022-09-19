@@ -1,6 +1,4 @@
-﻿using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice;
-using Anu.PunishmentOrg.Client.Infrastructure.Notice;
-using Anu.PunishmentOrg.ServiceModel.Notice;
+﻿using Anu.PunishmentOrg.ServiceModel.Notice;
 using Microsoft.AspNetCore.Components;
 
 namespace Anu.PunishmentOrg.Client.Pages.Notice
@@ -17,7 +15,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
         protected override async Task OnInitializedAsync()
         {
             string ncode = SharedInfo.NationalCode;
-            Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode);
+            Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode ,SharedInfo.AccessToken);
         }
 
     }

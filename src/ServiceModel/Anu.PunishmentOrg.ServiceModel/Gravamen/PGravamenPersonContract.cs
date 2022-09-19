@@ -70,7 +70,7 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 
 
         [System.ComponentModel.DisplayName("جنسيت")]
-        public Anu.BaseInfo.Enumerations.SexType? Sex { get; set; }
+        public Anu.BaseInfo.Enumerations.SexType Sex { get; set; }
 
 
 

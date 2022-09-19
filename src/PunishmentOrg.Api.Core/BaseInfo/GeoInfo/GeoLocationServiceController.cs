@@ -1,4 +1,5 @@
 ﻿
+using Anu.BaseInfo.Domain.GeoInfo;
 using Anu.BaseInfo.ServiceModel.GeoInfo;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations.BaseInfo.GeoInfo;
 using Microsoft.AspNetCore.Authorization;
@@ -39,7 +40,7 @@ namespace Anu.BaseInfo.Api.GeoInfo
             #endregion Validation
 
            
-            var ListGeoLocation = await _unitOfWork.Repositorey<Anu.BaseInfo.DataAccess.GeoInfo.GeoLocationRepository>()
+            var ListGeoLocation = await _unitOfWork.Repositorey<IGeoLocationRepository>()
                 .GetGeoLocationListWithParentLocationCode(request.TheGeoLocationContract!.LocationCode, (Anu.BaseInfo.Enumerations.LocationType)request.TheGeoLocationContract.ChildLocationType!);
 
             var ListGeoLocationContract = this.GetListGeoLocationContract(ListGeoLocation);

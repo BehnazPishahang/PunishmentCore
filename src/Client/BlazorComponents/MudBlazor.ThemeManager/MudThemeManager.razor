@@ -1,0 +1,116 @@
+﻿@using MudBlazor.ThemeManager.Models
+<MudDrawer Anchor="@Anchor"
+           DisableOverlay="@DisableOverlay"
+           Elevation="@Elevation"
+           Open="@Open"
+           Variant="@DrawerVariant.Temporary"
+           Width="270px">
+
+    <MudDrawerHeader Class="align-center">
+        <MudText Typo="Typo.body1">
+            <b>توان خواهان</b>
+        </MudText>
+        <MudSpacer />
+        <MudIconButton Color="Color.Default"
+                    
+                       Icon="@Icons.Material.Filled.Close"
+                       OnClick="@(() => OpenChanged.InvokeAsync(false))"
+                       Size="Size.Small" />
+    </MudDrawerHeader>
+
+    <MudDivider Class="mb-2" />
+
+    <div class="mt-2">
+        @if (Configuration.ShowPresetThemeSection)
+        {
+            <div class="px-4">
+                <MudSelect Dense="true"
+                           Label="تم فعال"
+                           T="string"
+                           Value="_themeManagerTheme.PresetThemes"
+                           ValueChanged="OnPresetThemeChanged"
+                           Variant="Variant.Outlined">
+                    <MudSelectItem Value="@(PresetThemes.Custom)" />
+                    <MudSelectItem Value="@(PresetThemes.MuiDark)" />
+                    <MudSelectItem Value="@(PresetThemes.Weak)" />
+                   
+                </MudSelect>
+            </div>
+        }
+
+        <div class="px-4">
+            @if (_themeManagerTheme.PresetThemes == PresetThemes.Custom)
+            {
+                @if (Configuration.ShowModeSection)
+                {
+                    <MudTmMode Mode="_themeManagerTheme.Mode"
+                               ModeChanged="ToggleMode" />
+                }
+                @if (Configuration.ShowLayoutSection)
+                {
+                    <MudTmSection SectionOptions="Configuration.LayoutSectionOptions"
+                                  Title="چیدمان">
+                        <MudSlider Max="25"
+                                   Min="0"
+                                   Step="1"
+                                   T="int"
+                                   Value="@_themeManagerTheme.DefaultBorderRadiusAsInt"
+                                   ValueChanged="UpdateBorderRadius">
+                            <MudText Class="mb-2"
+                                     Typo="Typo.body2">
+                                <b> @($"اندازه خمش لبه ها: {_themeManagerTheme.DefaultBorderRadiusAsInt}px")</b>
+                            </MudText>
+                        </MudSlider>
+                    </MudTmSection>
+                }
+                @if (Configuration.ShowFontSizeSection)
+                {
+                    <MudTmSection SectionOptions="Configuration.LayoutSectionOptions"
+                                  Title="فونت">
+                        <MudSlider Max="25"
+                                   Min="0"
+                                   Step="1"
+                                   T="int"
+                                   Value="@_themeManagerTheme.DefaultFontSizeAsInt"
+                                   ValueChanged="UpdateFontSize">
+                            <MudText Class="mb-2"
+                                     Typo="Typo.body2">
+                                <b> @($"اندازه فونت: {_themeManagerTheme.DefaultFontSizeAsInt}px")</b>
+                            </MudText>
+                        </MudSlider>
+                    </MudTmSection>
+                }
+                @if (Configuration.ShowColorSections)
+                {
+                    <MudTmSection SectionOptions="Configuration.ColorSectionOptions"
+                                  Title="رنگ ها">
+                        @foreach (var item in Configuration.ColorSections.Where(x => x.Value.Display))
+                        {
+                            <MudTmColorItem ColorChanged="UpdateColor"
+                                            ColorSection="@item" />
+                        }
+                    </MudTmSection>
+                }
+            }
+            else if (_themeManagerTheme.PresetThemes == PresetThemes.Weak)
+            {
+                <MudText Class="mt-4 px-2"
+                         Typo="Typo.body2">
+                    این تم قابل سفارشی سازی نمی باشد
+                </MudText>
+            }
+            else
+            {
+                <MudText Class="mt-4 px-2"
+                         Typo="Typo.body2">
+                    این تم قابل سفارشی سازی نمی باشد
+                </MudText>
+            }
+        </div>
+    </div>
+</MudDrawer>
+
+<MudOverlay DarkBackground="false"
+            OnClick="@(() => OpenChanged.InvokeAsync(false))"
+            Visible="Open"
+            VisibleChanged="OpenChanged" />

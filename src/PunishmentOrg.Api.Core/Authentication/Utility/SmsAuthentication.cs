@@ -4,13 +4,16 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
 {
     public static class SmsAuthentication
     {
-        public static async Task<string> SendAuthenticateSms(this string phoneNumber,int CountCharacter)
+        public static async Task<string> SendAuthenticateSms(this string phoneNumber, int CountCharacter)
         {
             string code = Anu.Utility.Utility.GetRandomNumber(CountCharacter);
-            string message = "کد فعال سازی شما {0} است .";
-            message = string.Format(message,code);
+            string message = @"Code: {0} " + Environment.NewLine + @" کد ورود شما به پیشخوان تعزیرات";
+            message = string.Format(message, code);
 
-            await SmsSender.SendSms(phoneNumber,message);
+
+            await SmsSender.SendSms(phoneNumber, message);
+
+            Console.WriteLine(message);
 
             return code;
         }

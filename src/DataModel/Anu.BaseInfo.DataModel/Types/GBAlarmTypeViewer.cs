@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Anu.BaseInfo.DataModel.Security.Role;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -9,7 +10,7 @@ namespace Anu.BaseInfo.DataModel.Types
     {
 
         [ForeignKey("BASEROLEID")]
-        public virtual Anu.BaseInfo.DataModel.Security.Role.BaseRole? TheBaseRole { get; set; }
+        public virtual BaseRole? TheBaseRole { get; set; }
 
         [ForeignKey("CMSUSERROLETYPEID")]
         public virtual Anu.BaseInfo.DataModel.SystemConfiguration.CMSUserRoleType? TheCMSUserRoleType { get; set; }

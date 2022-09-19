@@ -117,6 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BirthDate_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا تاریخ تولد خود را وارد نمایید</value>
+    <comment>-100027</comment>
+  </data>
+  <data name="BirthDate_Is_Not_Valid" xml:space="preserve">
+    <value>تاریخ تولد معتبر نمی باشد</value>
+    <comment>-100029</comment>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>خطای غیر منتظره</value>
     <comment>-10001</comment>
@@ -133,6 +141,10 @@
     <value>به واحد اجرای احکام ارجاع شده</value>
     <comment>20003</comment>
   </data>
+  <data name="FirstName_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا نام خود را وارد نمایید</value>
+    <comment>-100025</comment>
+  </data>
   <data name="GeoLocation_Request_IsNull" xml:space="preserve">
     <value>درخواست بدنه نمی‌تواند خالی باشد.</value>
     <comment>-30231</comment>
@@ -141,9 +153,45 @@
     <value>فیلدهای ضروری پر نشده است</value>
     <comment>-30232</comment>
   </data>
+  <data name="LastName_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا نام خوانوادگی خود را وارد نمایید</value>
+    <comment>-100026</comment>
+  </data>
+  <data name="LoginSuccessful_Sms_Send_To" xml:space="preserve">
+    <value>کد عبور برای شماره {0} ارسال شد .</value>
+    <comment>100013</comment>
+  </data>
+  <data name="Login_Again" xml:space="preserve">
+    <value>لطفا مجددا وارد شوید</value>
+    <comment>-100030</comment>
+  </data>
+  <data name="MechanizedLetter_CaseHandlerUnitId_Is_Not_Sync_UnitId" xml:space="preserve">
+    <value>کد واحد پرونده نامرتبط است.</value>
+    <comment>301318</comment>
+  </data>
+  <data name="MechanizedLetter_CaseNo_Is_Not_Valid" xml:space="preserve">
+    <value>شماره پرونده نامعتبر است.</value>
+    <comment>301314</comment>
+  </data>
+  <data name="MechanizedLetter_CaseNo_Is_Null" xml:space="preserve">
+    <value>شماره پرونده را وارد نمایید.</value>
+    <comment>301317</comment>
+  </data>
+  <data name="MechanizedLetter_CaseUnit_Is_Not_Valid" xml:space="preserve">
+    <value>کد واحد پرونده نامعتبر است</value>
+    <comment>301315</comment>
+  </data>
+  <data name="MechanizedLetter_CaseUnit_Is_Null" xml:space="preserve">
+    <value>کد واحد پرونده را وارد نمایید.</value>
+    <comment>301316</comment>
+  </data>
   <data name="MechanizedLetter_CreatorUserName_Is_Null" xml:space="preserve">
     <value>كاربر ثبت كننده نامه را وارد کنید.</value>
     <comment>30131</comment>
+  </data>
+  <data name="MechanizedLetter_GMechanizedLetterTypeCode_Is_Not_Valid" xml:space="preserve">
+    <value>کد موضوع نامه نامعتبر است.</value>
+    <comment>301324</comment>
   </data>
   <data name="MechanizedLetter_GMechanizedLetterTypeCode_Is_null" xml:space="preserve">
     <value>کد نوع موضوع نامه را انتخاب کنید.</value>
@@ -152,6 +200,14 @@
   <data name="MechanizedLetter_LetterText_Is_Null" xml:space="preserve">
     <value>متن نامه را وارد نمایید.</value>
     <comment>301311</comment>
+  </data>
+  <data name="MechanizedLetter_mainRcvOrTranscriptRcv_Is_Not_Valid" xml:space="preserve">
+    <value>مقدار نوع گيرنده از نطر گيرنده اصل نامه/رونوشت گيرنده معتبر نمی باشد.</value>
+    <comment>301321</comment>
+  </data>
+  <data name="MechanizedLetter_mainRcvOrTranscriptRcv_Is_Null" xml:space="preserve">
+    <value>نوع گيرنده از نطر گيرنده اصل نامه/رونوشت گيرنده را وارد نمایید.</value>
+    <comment>301320</comment>
   </data>
   <data name="MechanizedLetter_NAJAUnit_Is_Null" xml:space="preserve">
     <value>وارد کردن کد واحد فرستنده نامه اجباری می باشد.</value>
@@ -173,9 +229,41 @@
     <value>شماره نامه فرستنده را وارد نمایید.</value>
     <comment>30135</comment>
   </data>
+  <data name="MechanizedLetter_ReceiverType_Is_Not_Valid" xml:space="preserve">
+    <value>مقدار نوع گيرنده نامه/رونوشت از نظر واحدي/سمتي/کاربري نامعتبر است.</value>
+    <comment>301323</comment>
+  </data>
+  <data name="MechanizedLetter_ReceiverType_Is_Null" xml:space="preserve">
+    <value>نوع گيرنده نامه/رونوشت از نظر واحدي/سمتي/کاربري را وارد نمایید.</value>
+    <comment>301322</comment>
+  </data>
   <data name="MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null" xml:space="preserve">
     <value>وارد کردن اطلاعات حداقل یک گیرنده برای نامه اجباری می باشد.</value>
     <comment>30137</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_relationType_Is_Not_Valid" xml:space="preserve">
+    <value>مقدار نوع نامه از نظر نامه بازگشتي یا پيروي نامعتبر است.</value>
+    <comment>301326</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_relationType_Is_Null" xml:space="preserve">
+    <value>نوع نامه از نظر نامه بازگشتي یا پيروي را وارد کنید.</value>
+    <comment>301325</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_RelLetterGetType_Is_Not_Valid" xml:space="preserve">
+    <value>نوع نامه از نظر مکانيزه بودن يا غيرمکانيزه بودن نامه بازگشتي یا پيروي نامعتبر است.</value>
+    <comment>301328</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_RelLetterGetType_Is_Null" xml:space="preserve">
+    <value>نوع نامه از نظر مکانيزه بودن يا غيرمکانيزه بودن نامه بازگشتي یا پيروي را وارد کنید.</value>
+    <comment>301327</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_RelLetterNo_Is_Not_Valid" xml:space="preserve">
+    <value>شماره نامه بازگشتي یا پيروي نامعتبر است.</value>
+    <comment>301329</comment>
+  </data>
+  <data name="MechanizedLetter_RelLetters_RelLetterNo_Is_Null" xml:space="preserve">
+    <value>شماره نامه بازگشتي یا پيروي را وارد نمایید.</value>
+    <comment>301330</comment>
   </data>
   <data name="MechanizedLetter_Request_Is_Null" xml:space="preserve">
     <value>وارد کردن پارامترهای ورودی اجباری می باشد.</value>
@@ -193,9 +281,13 @@
     <value>کد واحد گیرنده نامه معتبر نمی باشد.</value>
     <comment>301310</comment>
   </data>
-  <data name="NationalCodeIs_Required" xml:space="preserve">
-    <value>کد ملی را وارد کنید.</value>
-    <comment>-50001</comment>
+  <data name="NationalCode_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا کد ملی را وارد نمایید.</value>
+    <comment>-100024</comment>
+  </data>
+  <data name="MechanizedLetter_TheUnit_Is_Null" xml:space="preserve">
+    <value>واحد پرونده را مقدار دهی نمایید.</value>
+    <comment>301319</comment>
   </data>
   <data name="NationalCode_Is_Not_Valid" xml:space="preserve">
     <value>لطفا کد ملی را صحیح وارد نمایید.</value>
@@ -265,7 +357,7 @@
     <comment>200012</comment>
   </data>
   <data name="PGravamen_Field_IsNullOrInvalid" xml:space="preserve">
-    <value>{0} خالی یا نامعتبر می باشد</value>
+    <value>فیلد {0} خالی یا نامعتبر می باشد</value>
     <comment>-30221</comment>
   </data>
   <data name="PGravamen_FileIsLargerThanAllowedThreshold" xml:space="preserve">
@@ -372,13 +464,125 @@
     <value>رای صادر شده است.</value>
     <comment>200013</comment>
   </data>
-  <data name="PNotice_NotFound" xml:space="preserve">
+  <data name="PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required" xml:space="preserve">
+    <value>شماره ابلاغ نامعتبر میباشد</value>
+    <comment>-30243</comment>
+  </data>
+  <data name="PNotice_ChangePNoticeViewByUserStatus_PNotice_NotFound" xml:space="preserve">
+    <value>ابلاغ مد نظر یافت نشد</value>
+    <comment>-30244</comment>
+  </data>
+  <data name="PNotice_ChangePNoticeViewByUserStatus_Request_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30241</comment>
+  </data>
+  <data name="PNotice_ChangePNoticeViewByUserStatus_ThePNoticeNoInputContract_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30242</comment>
+  </data>
+  <data name="PNotice_ExportPNotice_Description_NotFound" xml:space="preserve">
+    <value>متن ابلاغیه یافت نشد.</value>
+    <comment>-30215</comment>
+  </data>
+  <data name="PNotice_ExportPNotice_NotFound" xml:space="preserve">
     <value>ابلاغیه ای یافت نشد.</value>
-    <comment>-50002</comment>
+    <comment>-30214</comment>
+  </data>
+  <data name="PNotice_ExportPNotice_No_Is_Required" xml:space="preserve">
+    <value>شماره ابلاغ را وارد کنید.</value>
+    <comment>-30213</comment>
+  </data>
+  <data name="PNotice_ExportPNotice_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد.</value>
+    <comment>-30211</comment>
+  </data>
+  <data name="PNotice_ExportPNotice_ThePNoticeNoInputContract_Is_Required" xml:space="preserve">
+    <value>اطلاعات وارد شده نمی تواند خالی باشد.</value>
+    <comment>-30212</comment>
+  </data>
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required" xml:space="preserve">
+    <value>کدملی معتبر نمی باشد.</value>
+    <comment>-30253</comment>
+  </data>
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound" xml:space="preserve">
+    <value>ابلاغی یافت نشد</value>
+    <comment>-30254</comment>
+  </data>
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد.</value>
+    <comment>-30251</comment>
+  </data>
+  <data name="PNotice_GetCountOfUnSeenPNoticeByUser_ThePNoticePersonContract_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30252</comment>
+  </data>
+  <data name="PNotice_InqueryPNoticeList_NationalityCode_Is_Required" xml:space="preserve">
+    <value>کدملی/شناسه ملی درخواست نمی تواند خالی باشد.</value>
+    <comment>-30203</comment>
+  </data>
+  <data name="PNotice_InqueryPNoticeList_NotFound" xml:space="preserve">
+    <value>ابلاغیه ای یافت نشد.</value>
+    <comment>-30204</comment>
+  </data>
+  <data name="PNotice_InqueryPNoticeList_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد.</value>
+    <comment>-30201</comment>
+  </data>
+  <data name="PNotice_InqueryPNoticeList_ThePNoticePersonContract_Is_Required" xml:space="preserve">
+    <value>اطلاعات وارد شده نمی تواند خالی باشد.</value>
+    <comment>-30202</comment>
   </data>
   <data name="PropertyOrderNotFound" xml:space="preserve">
     <value>مرتب سازی ویژگی یافت نشد.</value>
     <comment>-10004</comment>
+  </data>
+  <data name="Request_Is_Not_Valid" xml:space="preserve">
+    <value>در خواست شما معتبر نمی باشد</value>
+    <comment>-100031</comment>
+  </data>
+  <data name="SabteAhval_Data_Not_Match_Entered_Data" xml:space="preserve">
+    <value>اطلاعات وارد شده معتبر نمی باشد.</value>
+    <comment>-100021</comment>
+  </data>
+  <data name="SabteAhval_Not_Validate_NationalCode" xml:space="preserve">
+    <value>کدملی معتبر نمی باشد.</value>
+    <comment>-100020</comment>
+  </data>
+  <data name="SabteAhval_Unkhown_Error" xml:space="preserve">
+    <value>خطا ثبت احوال</value>
+    <comment>-100019</comment>
+  </data>
+  <data name="Send_Login_Request_After_x_Second" xml:space="preserve">
+    <value>لطفا مجددا {0} ثانیه دیگر تلاش کنید</value>
+    <comment>-100023</comment>
+  </data>
+  <data name="Sex_Is_Not_Valid" xml:space="preserve">
+    <value>جنسیت معتبر نمی باشد</value>
+    <comment>-100028</comment>
+  </data>
+  <data name="Shahkar_Could_Not_Inquiry" xml:space="preserve">
+    <value>امکان استعلام تطابق شماره تلفن و کد ملی وجود به شماره ملی {0} ندارد.</value>
+    <comment>-100016</comment>
+  </data>
+  <data name="Shahkar_NationalCode_PhoneNumber_Is_Not_Match" xml:space="preserve">
+    <value>عدم تطابق شماره تلفن همراه با کد ملی  به شماره ملی {0}</value>
+    <comment>-100015</comment>
+  </data>
+  <data name="Shahkar_NationalCode_PhoneNumber_Is_Not_Valid" xml:space="preserve">
+    <value>مقدار شماره تلفن همراه با کد ملی به شماره ملی {0}  نامعتبر است.</value>
+    <comment>-100017</comment>
+  </data>
+  <data name="Shahkar_Unkhown_Error" xml:space="preserve">
+    <value>خطا شاهکار</value>
+    <comment>-100018</comment>
+  </data>
+  <data name="Sms_Limit_Send" xml:space="preserve">
+    <value>شما به محدودیت ارسال اس ام اس رسیده اید لطفا مجدد فردا مراجعه کنید.</value>
+    <comment>-100022</comment>
+  </data>
+  <data name="Sms_Time_Is_Expired" xml:space="preserve">
+    <value>زمان انتظار ارسال کد به پایان رسیده است. لطفا مجدد اقدام به دریافت کد کنید .</value>
+    <comment>-100014</comment>
   </data>
   <data name="Successful" xml:space="preserve">
     <value>عملیات با موفقیت انجام شد .</value>
@@ -399,5 +603,217 @@
   <data name="User_Is_Exist" xml:space="preserve">
     <value>کاربر وجود دارد.</value>
     <comment>-100011</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidByFishNo_FishNo_Is_Required" xml:space="preserve">
+    <value>شناسه پرداخت معتبر نمی باشد.</value>
+    <comment>-30273</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_NotFound" xml:space="preserve">
+    <value>قبضی یافت نشد.</value>
+    <comment>-30274</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidByFishNo_PBill4Paid_TheObjectState_Is_Null" xml:space="preserve">
+    <value>وضعیت قبض نامعتبر است.</value>
+    <comment>-30275</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidByFishNo_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد.</value>
+    <comment>-30271</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidByFishNo_ThePBill4PaidFishNoContract_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30272</comment>
+  </data>
+  <data name="JwtTokenIsNotValid" xml:space="preserve">
+    <value>برای استفاده از خدمت نیاز به ورود دارید.</value>
+    <comment>-10005</comment>
+  </data>
+  <data name="Can_Not_Find_AccessType" xml:space="preserve">
+    <value>مشکلی در سیستم بابت دسترسی ها بوجود آمده است لطفا با پشتیبانی تماس حاصل فرمایید.</value>
+    <comment>-100032</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required" xml:space="preserve">
+    <value>شماره پیگیری معتبر نمی باشد.</value>
+    <comment>-30283</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenInfo_PGravamen_NotFound" xml:space="preserve">
+    <value>شکوائیه مورد نظر یافت نشد.</value>
+    <comment>-30284</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenInfo_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد.</value>
+    <comment>-30281</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-30282</comment>
+  </data>
+  <data name="In_Valid_Input" xml:space="preserve">
+    <value>درخواست ورودی خالی یا نا معتبر میباشد</value>
+    <comment>-100033</comment>
+  </data>
+  <data name="No_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا شماره پرونده را وارد کنید</value>
+    <comment>-770001</comment>
+  </data>
+  <data name="No_Is_Not_Valid" xml:space="preserve">
+    <value>شماره پرونده معتبر نمی باشد.</value>
+    <comment>-770002</comment>
+  </data>
+  <data name="You_Do_Not_Have_Any_Case" xml:space="preserve">
+    <value>شما هیچ پرونده ای ندارید.</value>
+    <comment>-770003</comment>
+  </data>
+  <data name="PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_NationalCode_Is_Required" xml:space="preserve">
+    <value>کدملی شخص مربوط به قبض معتبر نمی باشد.</value>
+    <comment>-30313</comment>
+  </data>
+  <data name="PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_PBill4Paid_NotFound" xml:space="preserve">
+    <value>قبض مربوطه یافت نشد.</value>
+    <comment>-30314</comment>
+  </data>
+  <data name="PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_Request_Is_Required" xml:space="preserve">
+    <value>درخواست معتبر نمی باشد.</value>
+    <comment>-30311</comment>
+  </data>
+  <data name="PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_ThePBill4PaidNationalCodeContract_Is_Required" xml:space="preserve">
+    <value>ورودی درخواست نمی تواند خالی باشد.</value>
+    <comment>-30312</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidListByNationalCode_NationalCode_Is_Required" xml:space="preserve">
+    <value>کدملی شخص مربوط به قبض معتبر نمی باشد.</value>
+    <comment>-30303</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidListByNationalCode_PBill4Paid_NotFound" xml:space="preserve">
+    <value>قبض مربوطه یافت نشد.</value>
+    <comment>-30304</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidListByNationalCode_Request_Is_Required" xml:space="preserve">
+    <value>درخواست معتبر نمی باشد.</value>
+    <comment>-30301</comment>
+  </data>
+  <data name="PBill4Paid_GetPBill4PaidListByNationalCode_ThePBill4PaidNationalCodeContract_Is_Required" xml:space="preserve">
+    <value>ورودی درخواست نمی تواند خالی باشد.</value>
+    <comment>-30302</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_CallGetToken_HasError" xml:space="preserve">
+    <value>فراخوانی سرویس سداد با خطا مواجه شد.</value>
+    <comment>-30299</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_FishNo_Is_Required" xml:space="preserve">
+    <value>شناسه پرداخت معتبر نمی باشد.</value>
+    <comment>-30293</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_GetToken_HasError" xml:space="preserve">
+    <value>خطای برگشتی از سرویس سداد.</value>
+    <comment>-302910</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_IBAN_NotFound" xml:space="preserve">
+    <value>شبای قبض یافت نشد.</value>
+    <comment>-30295</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_IBAN_NotValid" xml:space="preserve">
+    <value>شبای قبض معتبر نیست.</value>
+    <comment>-30296</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_PBill4Paid_NotFound" xml:space="preserve">
+    <value>قبض مورد نظر یافت نشد.</value>
+    <comment>-30294</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد</value>
+    <comment>-30291</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_ThePBill4PaidFishNoContract_Is_Required" xml:space="preserve">
+    <value>ورودی درخواست نمی تواند خالی باشد</value>
+    <comment>-30292</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_TotalPaidCost_NotFound" xml:space="preserve">
+    <value>مجموع مبلغ قبض معتبر نمی باشد.</value>
+    <comment>-30298</comment>
+  </data>
+  <data name="PBill4Paid_SendPaymentRequestToSadad_TreasuryID_NotFound" xml:space="preserve">
+    <value>شناسه واریزی قبض معتبر نمی باشد.</value>
+    <comment>-30297</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Is_Required" xml:space="preserve">
+    <value>کد ملی شخص نا معتبر میباشد</value>
+    <comment>-30123</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenInfoResult_PersonNationalityCode_Not_Valid" xml:space="preserve">
+    <value>کد ملی شخص نا معتبر میباشد</value>
+    <comment>-30124</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenInfoResult_PGravamens_NotFound" xml:space="preserve">
+    <value>شکوائیه ای برای شخص یافت نشد</value>
+    <comment>-30125</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenInfoResult_Request_Is_Required" xml:space="preserve">
+    <value>درخواست معتبر نمی باشد</value>
+    <comment>-30121</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoCoPGravamen_GetPersonPGravamenInfoResult_TheGetPersonPGravamenInfoContract_Is_Required" xml:space="preserve">
+    <value>اطلاعات شخص نا معتبر میباشد</value>
+    <comment>-30122</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenStatisticResult_Request_Is_Required" xml:space="preserve">
+    <value> درخواست ورودی نامعتبر یا خالی می‌باشد</value>
+    <comment>-30141</comment>
+  </data>
+  <data name="PGravamen_GetPersonPGravamenStatisticResult_TheNationalityCode_Is_Required" xml:space="preserve">
+    <value>شماره ملی شخص نامعتبر یا خالی می‌باشد</value>
+    <comment>-30142</comment>
+  </data>
+  <data name="SendSmsForChangePhoneNumber_Not_Find_User" xml:space="preserve">
+    <value>کاربر در سامانه ثبت نام نکرده است</value>
+    <comment>-30143</comment>
+  </data>
+  <data name="SendSmsForChangePhoneNumber_request_Not_Valid" xml:space="preserve">
+    <value>درخواست معتبر نمی باشد.</value>
+    <comment>-30141</comment>
+  </data>
+  <data name="SendSmsForChangePhoneNumber_UserName_or_PhoneNumber_Not_Valid" xml:space="preserve">
+    <value>شماره تلفن یا کد ملی معتبر نمی‌باشد</value>
+    <comment>-30142</comment>
+  </data>
+  <data name="V2ChangePhoneNumber_BirthDay_Is_Not_Entered" xml:space="preserve">
+    <value>تاریخ تولد شخص نامعتبر می‌باشد</value>
+    <comment>-30154</comment>
+  </data>
+  <data name="V2ChangePhoneNumber_PhoneNumber_Is_Not_Entered" xml:space="preserve">
+    <value>شماره موبایل جدید نا معتبر می‌باشد</value>
+    <comment>-30153</comment>
+  </data>
+  <data name="V2ChangePhoneNumber_request_Is_Not_Valid" xml:space="preserve">
+    <value>درخواست معتبر نمی باشد.</value>
+    <comment>-30151</comment>
+  </data>
+  <data name="V2ChangePhoneNumber_UserName_Or_PassWord_Is_Not_Entered" xml:space="preserve">
+    <value>نام کاربری یا کد ارسالی نا معتبر می‌باشد.</value>
+    <comment>-30152</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenById_Id_FollowUpNo_Is_Required" xml:space="preserve">
+    <value>شماره پیگیری یا شناسه واحد شکوائیه نمی توانند هر دو خالی باشند</value>
+    <comment>-30323</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenById_PGravamen_NotFound" xml:space="preserve">
+    <value>شکوائیه یافت نشد.</value>
+    <comment>-30324</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenById_Request_Is_Required" xml:space="preserve">
+    <value>درخواست نمی تواند خالی باشد</value>
+    <comment>-30321</comment>
+  </data>
+  <data name="PGravamen_GetPGravamenById_ThePGravamenByIdContract_Is_Required" xml:space="preserve">
+    <value>ورودی درخواست نمی تواند خالی باشد</value>
+    <comment>-30322</comment>
+  </data>
+  <data name="SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive" xml:space="preserve">
+    <value>شماره تلفن همراه کاربر به کد ملی {0} تکراری است</value>
+    <comment>-30144</comment>
+  </data>
+  <data name="V2ChangePhoneNumber_Mobile_Number_is_Repetitive" xml:space="preserve">
+    <value>شماره تلفن همراه کاربر به کد ملی {0} تکراری است</value>
+    <comment>-30155</comment>
   </data>
 </root>

@@ -1,13 +1,40 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Newtonsoft.Json;
-using System.Net.Http;
+using System.ComponentModel;
 using System.Net.Http.Json;
+using System.Text;
+using System.Xml.Serialization;
 using Utility.Exceptions;
 
 namespace Anu.Utility
 {
     public static class Utility
     {
+        public static string GetDescription(this Enum enumValue)
+        {
+            var fieldInfo = enumValue.GetType().GetField(enumValue.ToString());
+
+            var descriptionAttributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            return descriptionAttributes.Length > 0 ? descriptionAttributes[0].Description : enumValue.ToString();
+        }
+
+        public static string ToCompleteString(this System.Exception ex)
+        {
+            if (ex == null) return string.Empty;
+            StringBuilder sb = new StringBuilder();
+            System.Exception ex1 = ex;
+            while (ex1 != null)
+            {
+                sb.Append("Message: ").Append(ex1.Message).AppendLine();
+                sb.Append("Source: ").Append(ex1.Source).AppendLine();
+                sb.Append("StackTrace: ").Append(ex1.StackTrace).AppendLine();
+                sb.Append("----------------------------------------------------").AppendLine();
+                ex1 = ex1.InnerException;
+
+            }
+            return sb.ToString();
+        }
 
         public static int ToInt(this string text)
         {
@@ -62,7 +89,24 @@ namespace Anu.Utility
             return JsonConvert.DeserializeObject<T>(content);
         }
 
-        public static async Task<string> CallApi<T>(this string apiUrl, object value,Enum errorIsFailedStatus, Dictionary<string, string> authorization = null, Dictionary<string, string> headers = null)
+        public static string UTF8(this byte[] input)
+        {
+            return System.Text.Encoding.UTF8.GetString(input);
+        }
+
+        public static T XmlDeserialize<T>(this string content)
+        {
+            var serializer = new XmlSerializer(typeof(T));
+            T result;
+
+            using (TextReader reader = new StringReader(content))
+            {
+                result = (T)serializer.Deserialize(reader);
+            }
+            return result;
+        }
+
+        public static async Task<string> CallApi(this string apiUrl, object value,Enum errorIsFailedStatus, Dictionary<string, string> authorization = null, Dictionary<string, string> headers = null,bool IsJson=true)
         {
             try
             {
@@ -84,14 +128,20 @@ namespace Anu.Utility
                         client.DefaultRequestHeaders.Authorization = new BasicAuthenticationHeaderValue(authorization["Username"], authorization["Password"]);
                     }
 
-                    var w = client.PostAsJsonAsync(apiUrl, value);
-                    w.Wait();
-                    HttpResponseMessage response = w.Result;
+                    HttpResponseMessage response;
+                    if (IsJson)
+                        response = await client.PostAsJsonAsync(apiUrl, value);
+                    else
+                    {
+                        var httpContent = new StringContent(value.ToString(), Encoding.UTF8, "application/xml");
+                        response = await client.PostAsync(apiUrl, httpContent);
+                    }
+
                     if (!response.IsSuccessStatusCode)
                     {
                         throw new AnuExceptions(errorIsFailedStatus);
                     }
-                    return await response.Content.ReadAsStringAsync();
+                    return (await response.Content.ReadAsStringAsync()).Replace("'", "\"");
 
                 }
             }
@@ -102,6 +152,79 @@ namespace Anu.Utility
             return null;
         }
 
+        public static string ConvertToBase64(this byte[] data)
+        {
+            return Convert.ToBase64String(data, 0, data.Length);
+        }
 
+        public static byte[] ConvertToByte(this string data)
+        {
+            return Convert.FromBase64String(data);
+        }
+
+        public static string NormalizeTextChars(this string strText, bool persian2Arabic = true)
+        {
+            if (string.IsNullOrEmpty(strText)) return strText;
+            char arabicKaf = (char)1603;
+            char arabicYa = (char)1610;
+
+            char persianKaf = (char)1705;
+            char persianYa = (char)1740;
+
+            if (persian2Arabic)
+            {
+                string result = strText.Replace(persianKaf, arabicKaf);
+                result = result.Replace(persianYa, arabicYa);
+                return result;
+            }
+            else
+            {
+                string result = strText.Replace(arabicKaf, persianKaf);
+                result = result.Replace(arabicYa, persianYa);
+                return result;
+            }
+        }
+
+        public static string Args(this string strText, object? arg0)
+        {
+            return string.Format(strText, arg0);
+        }
+
+        public static string Args(this string strText, object? arg0, object? arg1)
+        {
+            return string.Format(strText, arg0, arg1);
+        }
+
+        public static string Args(this string strText, object? arg0, object? arg1, object? arg2)
+        {
+            return string.Format(strText, arg0, arg1, arg2);
+        }
+
+        public static string AddNewLine(this string strText)
+        {
+            return strText += Environment.NewLine;
+        }
+
+        public static bool IsDevelopment()
+        {
+            bool isDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
+            return isDevelopment;
+        }
+        public static string ToCommaString(this long value)
+        {
+            return value.ToString("n0");
+        }
+        public static string ToCommaString(this long? value)
+        {
+            if (value.HasValue) return value.Value.ToCommaString();
+            return null;
+        }
+        
+        public static int GetEnumCode(this Enum value)
+        {
+            return (int)Convert.ChangeType(value, value.GetTypeCode());
+        }
     }
+
+
 }

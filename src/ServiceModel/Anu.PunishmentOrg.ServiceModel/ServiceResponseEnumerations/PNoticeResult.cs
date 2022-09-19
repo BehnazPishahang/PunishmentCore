@@ -6,9 +6,36 @@ using System.Threading.Tasks;
 
 namespace Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations
 {
-    public enum PNoticeResult
+    public enum InqueryPNoticeListResult
     {
-        NationalCodeIs_Required = -50001,
-        PNotice_NotFound = -50002,
+        PNotice_InqueryPNoticeList_Request_Is_Required                   = -30201,
+        PNotice_InqueryPNoticeList_ThePNoticePersonContract_Is_Required  = -30202,
+        PNotice_InqueryPNoticeList_NationalityCode_Is_Required           = -30203,
+        PNotice_InqueryPNoticeList_NotFound                              = -30204,
+    }
+
+    public enum ExportPNoticeResult
+    {
+        PNotice_ExportPNotice_Request_Is_Required                   = -30211,
+        PNotice_ExportPNotice_ThePNoticeNoInputContract_Is_Required = -30212,
+        PNotice_ExportPNotice_No_Is_Required                        = -30213,
+        PNotice_ExportPNotice_NotFound                              = -30214,
+        PNotice_ExportPNotice_Description_NotFound                  = -30215,
+    }
+
+    public enum ChangePNoticeViewByUserStatusResult
+    {
+        PNotice_ChangePNoticeViewByUserStatus_Request_Is_Required                   = -30241,
+        PNotice_ChangePNoticeViewByUserStatus_ThePNoticeNoInputContract_Is_Required = -30242,
+        PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required                 = -30243,
+        PNotice_ChangePNoticeViewByUserStatus_PNotice_NotFound                      = -30244,
+    }
+
+    public enum GetCountOfUnSeenPNoticeByUserResult
+    {
+        PNotice_GetCountOfUnSeenPNoticeByUser_Request_Is_Required                  = -30251,
+        PNotice_GetCountOfUnSeenPNoticeByUser_ThePNoticePersonContract_Is_Required = -30252,
+        PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required          = -30253,
+        PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound                     = -30254,
     }
 }

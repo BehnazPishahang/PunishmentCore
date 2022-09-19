@@ -19,5 +19,12 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Utitlities
 
             return descriptionAttributes.Length > 0 ? descriptionAttributes[0].Description : enumValue.ToString();
         }
+
+        public static string GetUTF8(this string input)
+        {
+            return System.Text.Encoding.UTF8.GetString(Encoding.Default.GetBytes(input));
+        }
     }
+
+
 }
