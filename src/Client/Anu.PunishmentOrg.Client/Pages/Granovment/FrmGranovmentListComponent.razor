@@ -8,14 +8,16 @@
 
 
    <MudDataGrid T="PGravamenInfoContract" Items="@gravoments"  EditMode="DataGridEditMode.Form"
-    Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual">
+    Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual" QuickFilter="@_quickFilter">
     <ToolBarContent>
-        <MudText Typo="Typo.h6"> شکایت ها </MudText>
+        <MudText Typo="Typo.h6"> لیست شکایت ها </MudText>
         <MudSpacer />
+        <MudTextField @bind-Value="_searchString" Placeholder="جستجو" Adornment="Adornment.Start" Immediate="true"
+            AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
     <Columns>
-        <Column T="PGravamenInfoContract" Style="width:150px"  Field="FollowUpNo" Title="شماره پیگیری" />
-        <Column T="PGravamenInfoContract" Style="width:350px" Field="PetitionSubject" Title="موضوع شکایت نامه" />
+        <Column T="PGravamenInfoContract" Field="FollowUpNo" Title="شماره پیگیری"/>
+        <Column T="PGravamenInfoContract" Field="PetitionSubject" Title="موضوع شکایت نامه" />
       
          <Column T="PGravamenInfoContract"  CellClass="d-flex justify-end" Style="width:50px">
             <CellTemplate>
@@ -31,9 +33,7 @@
 
 @code {
 
-    private MudTable<PGravamenInfoContract> mudTable;
-
-    [Parameter]
+     [Parameter]
     public string _pGravamen { get; set; }
 
     protected override void OnParametersSet()
@@ -61,8 +61,23 @@
         }
     }
 
+
     private void GravamneSummary(PGravamenInfoContract contex)
     {
         _navigationManager.NavigateTo($"/GranovmentSummary/{contex.FollowUpNo}");
     }
+
+           private string _searchString;
+ 
+           private Func<PGravamenInfoContract, bool> _quickFilter => x =>
+        {
+            if (string.IsNullOrWhiteSpace(_searchString))
+                return true;
+
+            if (x.FollowUpNo.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+                return true;
+
+
+            return false;
+        };
 }
