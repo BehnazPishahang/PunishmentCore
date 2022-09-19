@@ -380,10 +380,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public async Task<AuthResult> V2Login([FromBody] SecondStepUserLoginRequest request)
         {
-            #region ValidateInput
-            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
-            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+           
 
+            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
             request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
             request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
@@ -396,7 +395,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             string jwtToken = null;
 
-            switch (request.LoginType)
+            var loginProvider = Factory.GetInstance(LoginType.LoginWithSms);
+            var loginResult = await loginProvider.VerifyAsync(request);
+            if (loginResult.Result.Code == 1000)
             {
                 case LoginType.LoginWithSms:
 
@@ -406,12 +407,12 @@ namespace Anu.PunishmentOrg.Api.Authentication
                     break;
                 case LoginType.LoginWithUserAndPass:
 
-                    var theGFESUser = await _unitOfWork.Repositorey<IGFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
-                    theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            //        var theGFESUser = await _unitOfWork.Repositorey<IGFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+            //        theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-                    jwtToken = GenerateJwtToken(theGFESUser);
-                    break;
-            }
+            //        jwtToken = GenerateJwtToken(theGFESUser);
+            //        break;
+            //}
 
 
             return new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() };
@@ -725,6 +726,79 @@ namespace Anu.PunishmentOrg.Api.Authentication
             }
 
             return false;
+        }
+    }
+
+    public static class Factory
+    {
+        private static Dictionary<LoginType, Type> _loginTypesDictionary = new Dictionary<LoginType, Type>()
+        {
+            { LoginType.LoginWithSms        , typeof(LogInProviderWithSMS)},
+            { LoginType.LoginWithUserAndPass, typeof(LogInProviderWithUserAndPass)}
+        };
+
+        public static ILogInProvider GetInstance(LoginType logInType)
+        {
+            return (ILogInProvider)Activator.CreateInstance(_loginTypesDictionary[logInType]);
+        }
+    }
+
+    public interface ILogInProvider
+    {
+        Task<AuthResult> VerifyAsync(SecondStepUserLoginRequest secondStepUserLoginRequest);
+    }
+
+    public abstract class LogInProvider : ILogInProvider
+    {
+        public virtual async Task<AuthResult> VerifyAsync(SecondStepUserLoginRequest secondStepUserLoginRequest)
+        {
+            return await Task.FromResult(new AuthResult() 
+            { 
+                AccessToken = "", 
+                RefreshToken = "LogInProvider", 
+                Result = new Commons.ServiceModel.ServiceResponse.Result() 
+                { 
+                    Code = 1000,
+                    Message = "LogInProvider",
+                    Description = "LogInProvider",
+                } 
+            });
+        }
+    }
+
+    public class LogInProviderWithUserAndPass : LogInProvider
+    {
+        public override async Task<AuthResult> VerifyAsync(SecondStepUserLoginRequest secondStepUserLoginRequest)
+        {
+            return await Task.FromResult(new AuthResult()
+            {
+                AccessToken = "",
+                RefreshToken = "LogInProviderWithUserAndPass",
+                Result = new Commons.ServiceModel.ServiceResponse.Result()
+                {
+                    Code = 1000,
+                    Message = "LogInProviderWithUserAndPass",
+                    Description = "LogInProviderWithUserAndPass",
+                }
+            });
+        }
+    }
+
+    public class LogInProviderWithSMS : LogInProvider
+    {
+        public override async Task<AuthResult> VerifyAsync(SecondStepUserLoginRequest secondStepUserLoginRequest)
+        {
+            return await Task.FromResult(new AuthResult()
+            {
+                AccessToken = "",
+                RefreshToken = "LogInProviderWithSMS",
+                Result = new Commons.ServiceModel.ServiceResponse.Result()
+                {
+                    Code = 1000,
+                    Message = "LogInProviderWithSMS",
+                    Description = "LogInProviderWithSMS",
+                }
+            });
         }
     }
 }
