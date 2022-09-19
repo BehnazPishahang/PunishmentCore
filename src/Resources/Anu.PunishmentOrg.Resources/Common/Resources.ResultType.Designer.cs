@@ -1405,7 +1405,7 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اطلاعات وارد شده معتبر نمی باشد..
+        ///   Looks up a localized string similar to {0} وارد شده معتبرنمی باشد ..
         /// </summary>
         public static string SabteAhval_Data_Not_Match_Entered_Data {
             get {
@@ -1414,7 +1414,16 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to کدملی معتبر نمی باشد..
+        ///   Looks up a localized string similar to ثبت احوال در دسترس نمی باشد..
+        /// </summary>
+        public static string SabteAhval_Is_Out_Of_Service {
+            get {
+                return ResourceManager.GetString("SabteAhval_Is_Out_Of_Service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کدملی و یا تاریخ تولد معتبر نمی باشد..
         /// </summary>
         public static string SabteAhval_Not_Validate_NationalCode {
             get {
