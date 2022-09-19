@@ -88,6 +88,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to وضعیت پرونده معتبر نمی باشد..
+        /// </summary>
+        public static string CaseState_Is_Not_Valid {
+            get {
+                return ResourceManager.GetString("CaseState_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to خطای غیر منتظره.
         /// </summary>
         public static string Error {
