@@ -136,7 +136,7 @@
                 </div>
                 <div class="col-sm-12">
                     <p style="color: red; font-size: 108%;">لطفا در صورت عدم امکان ارائه مستندات کافی یا داشتن شکایت و گزارش در خصوص سایر تخلفات از طریق لینک زیر اقدام فرمایید.</p>
-                    <a href="https://samt.124.ir/home"><u><h6>فرم ثبت شکایات و گزارشات مردمی در خصوص سایر موضوعات در سامانه 124 سازمان حمایت</h6></u></a>
+                    <a href="https://samt.124.ir/home" target="_blank"><u><h6>فرم ثبت شکایات و گزارشات مردمی در خصوص سایر موضوعات در سامانه 124 سازمان حمایت</h6></u></a>
                 </div>
             </div>
         </MudExpansionPanel>
@@ -396,7 +396,7 @@
     private void OpenDialog()
     {
         //CloseOnEscapeKey = true ,
-        var options = new DialogOptions { MaxWidth = MaxWidth.Medium, FullWidth = true};
+        var options = new DialogOptions { CloseOnEscapeKey = false, DisableBackdropClick=true ,MaxWidth = MaxWidth.Medium, FullWidth = true};
         DialogService.Show<GranovmentLawDialog>("", options);
     }
 
