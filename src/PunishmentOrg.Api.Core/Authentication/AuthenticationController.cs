@@ -382,6 +382,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
         {
             #region ValidateInput
             request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
             request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
             request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
