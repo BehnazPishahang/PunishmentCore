@@ -5,6 +5,15 @@
 
 @inject AppConfiguration _appConfiguration
 
+
+<style>
+    .pHeader{
+        font-style:oblique;
+        color:navy;
+        font-size:1.25em;
+        text-decoration: underline;
+    }
+</style>
 <div class="jumbotron text-center border-info border-2 oi-header">
     <h3>خلاصه شکایت نامه</h3>
 </div>
@@ -12,19 +21,16 @@
 <MudForm Model="@_pGravamenContract">
     <MudCard Style="margin:5px;">
         <MudCardContent>
-            <MudText Typo="Typo.h6">موضوع شکایت نامه</MudText>
-            <MudText Typo="Typo.subtitle2" Style="margin: 25px 50px;">@_pGravamenContract.PetitionSubject</MudText>
-        </MudCardContent>
-    </MudCard>
-    <MudCard  Style="margin:5px;">
-        <MudCardContent>
-            <MudText Typo="Typo.h6">خلاصه شکایت نامه</MudText>
-            <MudText Typo="Typo.subtitle2" Align="MudBlazor.Align.Justify" Style="margin: 25px 50px;">@_pGravamenContract.PetitionDescription</MudText>
+            <MudText Typo="Typo.h6" Align="MudBlazor.Align.Center" Class="pHeader">شماره شکایت نامه :@_pGravamen</MudText>
+            <MudText Typo="Typo.h6" Class="pHeader">موضوع شکایت نامه</MudText>
+            <MudText Typo="Typo.subtitle2"  Style="margin:5px 30px 10px;">@_pGravamenContract.PetitionSubject</MudText>
+            <MudText Typo="Typo.h6" Class="pHeader">خلاصه شکایت نامه</MudText>
+            <MudText Typo="Typo.subtitle2" Align="MudBlazor.Align.Justify" Style="margin: 5px 30px 10px;">@_pGravamenContract.PetitionDescription</MudText>
         </MudCardContent>
     </MudCard>
     <MudCard Style="margin:5px;">
         <MudCardContent>
-            <MudText Typo="Typo.h6">شاکی/شاکیان</MudText>    
+            <MudText Typo="Typo.h6" Class="pHeader">شاکی/شاکیان</MudText>    
             <MudList>
                 @foreach (var item in _pGravamenContract.ThePGravamenPersonContractList)
                 {
@@ -38,7 +44,7 @@
     </MudCard>
     <MudCard Style="margin:5px;">
         <MudCardContent>
-            <MudText Typo="Typo.h6">متهم/متهمان</MudText>    
+            <MudText Typo="Typo.h6" Class="pHeader">متهم/متهمان</MudText>    
             <MudList>
                 @foreach (var item in _pGravamenContract.ThePGravamenPersonContractList)
                 {
