@@ -382,37 +382,36 @@ namespace Anu.PunishmentOrg.Api.Authentication
         {
            
 
-            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
-            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
-            request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            //request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+            //request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            //request.Password.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
 
-            request.UserName.IsValidNationalCode();
-            if (request.LoginType == LoginType.LoginWithSms)
-            {
-                request.Password.IsDigit(AnuResult.UserName_Or_PassWord_Is_Not_Valid, length: _CountCharacter);
-            }
-            #endregion
+            //request.UserName.IsValidNationalCode();
+            //if (request.LoginType == LoginType.LoginWithSms)
+            //{
+            //    request.Password.IsDigit(AnuResult.UserName_Or_PassWord_Is_Not_Valid, length: _CountCharacter);
+            //}
 
             string jwtToken = null;
 
-            var loginProvider = Factory.GetInstance(LoginType.LoginWithSms);
-            var loginResult = await loginProvider.VerifyAsync(request);
-            if (loginResult.Result.Code == 1000)
-            {
-                case LoginType.LoginWithSms:
+            //var loginProvider = Factory.GetInstance(LoginType.LoginWithSms);
+            //var loginResult = await loginProvider.VerifyAsync(request);
+            //if (loginResult.Result.Code == 1000)
+            //{
+            //    case LoginType.LoginWithSms:
 
-                    var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.Password);
+            //        var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.Password);
 
-                    jwtToken = GenerateJwtToken(pBPuoUsers);
-                    break;
-                case LoginType.LoginWithUserAndPass:
-
-            //        var theGFESUser = await _unitOfWork.Repositorey<IGFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
-            //        theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
-
-            //        jwtToken = GenerateJwtToken(theGFESUser);
+            //        jwtToken = GenerateJwtToken(pBPuoUsers);
             //        break;
-            //}
+            //    case LoginType.LoginWithUserAndPass:
+
+            ////        var theGFESUser = await _unitOfWork.Repositorey<IGFESUserRepository>().GetGFESUserByUserNameAndPassWordAsyncWithAccessTypes(request.UserName, request.Password);
+            ////        theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            ////        jwtToken = GenerateJwtToken(theGFESUser);
+            ////        break;
+            ////}
 
 
             return new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() };
