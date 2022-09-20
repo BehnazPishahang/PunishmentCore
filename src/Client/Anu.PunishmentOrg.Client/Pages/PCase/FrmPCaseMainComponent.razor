@@ -32,15 +32,21 @@
         <Column T="GetAllPCaseContract" Field="No" Title="شماره پرونده " />
       
         <Column T="GetAllPCaseContract" Field="UnitName"   Title="شعبه " />
-       
+        @*<Column T="GetAllPCaseContract"   title="وضغیت پرونده" >
+            <CellTemplate>
+                <MudText Variant="Variant.Filled" >((Anu.PunishmentOrg.Enumerations.PUCaseArchivetate)@context.Item.CaseArchiveState). </MudText>
+            </CellTemplate>
+           
+        </Column>*@
+       CaseArchiveState
       
-         <Column T="GetAllPCaseContract"  CellClass="d-flex justify-end" >
+        @* <Column T="GetAllPCaseContract"  CellClass="d-flex justify-end" >
             <CellTemplate>
               
                 <MudButton Variant="Variant.Filled" EndIcon="@Icons.Filled.Visibility" Color="Color.Primary"  OnClick="() => ShowDetail(context.Item)">مشاهده</MudButton>
             </CellTemplate>
            
-        </Column>
+        </Column>*@
     </Columns>
     <PagerContent>
         <MudDataGridPager T="GetAllPCaseContract" />
