@@ -22,11 +22,14 @@
 
         public string GetGravamenListByNationalNo { set; get; }
 
+        public string ExportInqueryPCase { get; set; }
         public string SendSmsForChangePhoneNumber { get; set; }
         public string ChangePhoneNumberV2 { get; set; }
 
         public string GetAllPCase { get; set; }
         public string GetStatisticPCase { get; set; }
-        public string  ExportInqueryPCase { get; set; }
+        public string GetPersonPGravamenStatistic { get; set; }
     }
+
+    
 }

@@ -62,6 +62,26 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Granovment
             }
         }
 
+        public async Task<GetPersonPGravamenStatisticContract> GetPersonPGravamenStatistic(string baseURl, string serviceName, string nationalCode, string accessToken)
+        {
+            GetPersonPGravamenStatisticRequest req = new();
+
+            req.TheGetPersonPGravamenInfoContract.NationalityCode = nationalCode;
+
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(baseURl);
+
+            client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue(
+                   "Bearer", accessToken);
+
+            var response = client.PostAsJsonAsync(serviceName, req).Result;
+            GetPersonPGravamenStatisticResponse result = response.Content.ReadAsAsync<GetPersonPGravamenStatisticResponse>().Result;
+            return result.TheGetPersonPGravamenStatisticContract;
+
+          
+        }
+
         public PGravamenServiceResponse RecieveGravamen(string baseURl, string serviceName, PGravamenServiceRequest request)
         {
             var client = new HttpClient();
