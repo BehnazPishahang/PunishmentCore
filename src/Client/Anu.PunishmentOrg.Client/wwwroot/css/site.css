@@ -168,8 +168,17 @@ a, .btn-link {
 }
 
 .disabled {
-    opacity: 0.8  ;
-    pointer-events: none  ;
+    opacity: 0.8;
+    pointer-events: none;
+    background-color: var(--mud-palette-primary);
+}
+
+
+.disabled-backGround {
+    opacity: 0.8;
+    pointer-events: none;
+    background-color: var(--mud-palette-action-disabled-background) !important;
+
 }
 
 ..form-control {
