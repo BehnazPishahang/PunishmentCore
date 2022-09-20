@@ -1,9 +1,11 @@
 ﻿@page "/GranovmentByNo"
 
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase
 @using Anu.PunishmentOrg.ServiceModel.Gravamen;
-@using Anu.PunishmentOrg.Client.Infrastructure.Granovment
+@using Anu.PunishmentOrg.Client.Infrastructure.Granovment;
 
 @inject AppConfiguration _appConfiguration
+@inject IPCaseService _pCaseService
 
 <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info" Size="Size.Medium"  OnClick="SaveGranovment">ذخیره</MudButton>
 
@@ -11,9 +13,7 @@
 
     private void SaveGranovment()
     {
-       // _navigationManager.NavigateTo($"/GranovmentSummary/{2834826742}");
-        _navigationManager.NavigateTo($"/GranovmentSummary/{0068981554}");
-
+        // _navigationManager.NavigateTo($"/GranovmentSummary/{2834826742}");
+        //_navigationManager.NavigateTo($"/GranovmentSummary/{0068981554}");
     }
-
 }

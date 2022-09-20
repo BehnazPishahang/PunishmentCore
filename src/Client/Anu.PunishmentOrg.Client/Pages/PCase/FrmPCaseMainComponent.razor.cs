@@ -66,7 +66,7 @@ namespace Anu.PunishmentOrg.Client.Pages.PCase
 
         void ShowDetail(GetAllPCaseContract selectedRow)
         {
-            
+            _navigationManager.NavigateTo($"CaseFollowUpNo /{selectedRow.No}");
         }
 
         protected override async Task OnInitializedAsync()

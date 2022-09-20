@@ -257,7 +257,7 @@
               <MudElement HtmlTag="a"
             Class="ma-0"
             Style="color:red;font-weight:bold;"
-            href="/isConstracting"
+            href="/CaseFollowUp"
               
             rel="noopener noreferrer">
              <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
@@ -324,6 +324,11 @@
     }
 
     private void ShowActivePcaseList()
+    {
+        _navigationManager.NavigateTo("/Cases");
+    }
+
+    private void CaseFollowUp()
     {
         _navigationManager.NavigateTo("/Cases");
     }

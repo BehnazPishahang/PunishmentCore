@@ -6,162 +6,167 @@
 @inherits LayoutComponentBase
 @inject IDialogService DialogService
 
-<MudRTLProvider RightToLeft="true"> 
-<MudThemeProvider Theme="_theme" />
-<MudDialogProvider />
-<MudSnackbarProvider />
-<MudLayout>
-     <MudAppBar Color="Color.Primary"  Elevation="1">
-        <MudIconButton Color="Color.Inherit"
-                       Edge="Edge.Start"
-                       Icon="@_menuIcons"
-                       OnClick="@DrawerToggle" />
-                       @*OnClick="@(() => _drawerOpen = !_drawerOpen)" />*@
-         <MudIconButton Icon="@MudBlazor.Icons.Filled.Balance" Size="Size.Large" Color="Color.Inherit" OnClick="GoHome" />
+<MudRTLProvider RightToLeft="true">
+    <MudThemeProvider Theme="_theme" />
+    <MudDialogProvider />
+    <MudSnackbarProvider />
+    <MudLayout>
+        <MudAppBar Color="Color.Primary" Elevation="1">
+            <MudIconButton Color="Color.Inherit"
+                           Edge="Edge.Start"
+                           Icon="@_menuIcons"
+                           OnClick="@DrawerToggle" />
+            @*OnClick="@(() => _drawerOpen = !_drawerOpen)" />*@
+            <MudIconButton Icon="@MudBlazor.Icons.Filled.Balance" Size="Size.Large" Color="Color.Inherit" OnClick="GoHome" />
 
-          <MudLink Typo="Typo.h5" Class="mr-3 mud-bold " style="color:white !important;"   Href="/" >  خدمات پیشخوان تعزیرات حکومتی   </MudLink>
+            <MudLink Typo="Typo.h5" Class="mr-3 mud-bold " style="color:white !important;" Href="/">  خدمات پیشخوان تعزیرات حکومتی   </MudLink>
 
 
-        <MudSpacer />
-@*        <div>
+            <MudSpacer />
+            @*        <div>
             <MudSelect Class="mx-4"
-                       Dense="true"
-                       Label="تنظیمات نمایشی"
-                       Style="max-width: 250px"
-                       T="string"
-                       Value="_themeManagerConfiguration.Key"
-                       ValueChanged="ThemeManagerConfigChanged">
-                @foreach (var config in _themeManagerConfigurations)
-                {
-                    <MudSelectItem T="string"  
-                                   Value="config.Key" />
-                }
+            Dense="true"
+            Label="تنظیمات نمایشی"
+            Style="max-width: 250px"
+            T="string"
+            Value="_themeManagerConfiguration.Key"
+            ValueChanged="ThemeManagerConfigChanged">
+            @foreach (var config in _themeManagerConfigurations)
+            {
+            <MudSelectItem T="string"
+            Value="config.Key" />
+            }
             </MudSelect>
-        </div>*@
-       @* <MudIconButton Color="Color.Inherit"
-                       Edge="Edge.End"
-                       Icon="@Icons.Filled.Accessible" />*@
-                                           <MudMenu ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomLeft" >
-                    <ActivatorContent>
-                         @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
-                         {
-                            <MudChip Icon="@MudBlazor.Icons.Material.Filled.Person" Color="Color.Primary">ورود </MudChip>
-                         }
-                        else
-                        {
-                            <MudChip Icon="@MudBlazor.Icons.Material.Filled.Person" Color="Color.Primary"> </MudChip>
-                        }
-
-                    </ActivatorContent>
-   
-                <ChildContent   >
-                
-                  
-                    @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
+            </div>*@
+            @* <MudIconButton Color="Color.Inherit"
+            Edge="Edge.End"
+            Icon="@Icons.Filled.Accessible" />*@
+            <MudMenu ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomLeft">
+                <ActivatorContent>
+                    @if (String.IsNullOrEmpty(SharedInfo.NationalCode))
                     {
-                            <MudListItem Text="ورود " Icon="@MudBlazor.Icons.Filled.Login"  Href="/login" />
-                              <MudDivider Class="mb-2" />
+                        <MudChip Icon="@MudBlazor.Icons.Material.Filled.Person" Color="Color.Primary">ورود </MudChip>
+                    }
+                    else
+                    {
+                        <MudChip Icon="@MudBlazor.Icons.Material.Filled.Person" Color="Color.Primary"> </MudChip>
+                    }
+
+                </ActivatorContent>
+
+                <ChildContent>
+
+
+                    @if (String.IsNullOrEmpty(SharedInfo.NationalCode))
+                    {
+                        <MudListItem Text="ورود " Icon="@MudBlazor.Icons.Filled.Login" Href="/login" />
+                        <MudDivider Class="mb-2" />
                         <MudListItem Text="ثبت نام " Href="/register" Icon="@MudBlazor.Icons.Material.Filled.AppRegistration" />
                     }
                     else
                     {
-                        <MudListItem Text="پروفایل کاربر "   Href="/Profile" Icon="@MudBlazor.Icons.Filled.Person"   />
-                        <MudListItem Text=" تغییر شماره تلفن "  Icon="@MudBlazor.Icons.Filled.PhonelinkSetup"   />
-                          <MudDivider Class="mb-2" />
-                         <MudListItem Text="خروج"  Icon="@MudBlazor.Icons.Filled.Logout"  OnClick="Logout" />
+                        <MudListItem Text="پروفایل کاربر " Href="/Profile" Icon="@MudBlazor.Icons.Filled.Person" />
+                        <MudListItem Text=" تغییر شماره تلفن " Icon="@MudBlazor.Icons.Filled.PhonelinkSetup" />
+                        <MudDivider Class="mb-2" />
+                        <MudListItem Text="خروج" Icon="@MudBlazor.Icons.Filled.Logout" OnClick="Logout" />
                     }
 
                 </ChildContent>
             </MudMenu>
-    </MudAppBar>
+        </MudAppBar>
 
-   <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Docked" Breakpoint="Breakpoint.Sm"  Elevation="5" Variant="@DrawerVariant.Mini">
- 
-        
-      
-           <MudNavMenu Color="@Theme135._iconColor">
-                           @if(String.IsNullOrEmpty(SharedInfo.NationalCode))
-                            {
-                                <MudNavMenu Color="Color.Primary">
-                                <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@MudBlazor.Icons.Filled.Home"  IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
-                                        <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner" IconColor="@Theme135._iconColor" itemtype="">
-                                             ثبت شکایت 
-                                        </MudNavLink>
-                                          <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.Payments" IconColor="@Theme135._iconColor">
-                                             پرداخت وجه 
-                                        </MudNavLink> 
-                            </MudNavMenu>
-                            }
-                            else
-                               {
-                                    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@MudBlazor.Icons.Filled.Home"  IconColor = "@Theme135._iconColor"  > خدمات الکترونیکی تعزیرات </MudNavLink>
-     
-                                              <MudNavLink id="FrmNoticeMain" Href="/FrmNotice" Icon="@MudBlazor.Icons.Filled.ManageSearch"   IconColor = "@Theme135._iconColor" >
-                                                         ابلاغ ها 
-                                                </MudNavLink> 
-                                                <MudNavLink  Href="/Cases" Icon="@Icons.Filled.RuleFolder"   IconColor = "@Theme135._iconColor" >
-                                                         پرونده  ها 
-                                                </MudNavLink>
-                                                   <MudNavLink Href="/GranovmentList" Icon="@MudBlazor.Icons.Filled.List"  IconColor = "@Theme135._iconColor" > شکایت ها
-                                                       
-                                                    </MudNavLink>
-                                                    <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner"  IconColor = "@Theme135._iconColor" >
-                                                         ثبت شکایت 
-                                                    </MudNavLink>
-                                                    
-                                                      <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.Payments"  IconColor="@Theme135._iconColor"  >
-                                                         پرداخت وجه 
-                                                    </MudNavLink>
-                                                    <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.DocumentScanner"  IconColor = "@Theme135._iconColor"  >
-                                                        لایحه
-                                                    </MudNavLink>
-                                                        <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.DriveFileRenameOutline"  IconColor = "@Theme135._iconColor">
-                                                        درخواست تجدید نظر خواهی 
-                                                    </MudNavLink>
-                                                     <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.DonutLarge" IconColor = "@Theme135._iconColor" >
-                                                       درخواست اعمال ماده ۲۳ 
-                                                    </MudNavLink>
-                                                      <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.EscalatorWarning" IconColor = "@Theme135._iconColor" >
-                                                        ثبت وکالت نامه 
-                                                    </MudNavLink>
-                                                        <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.DoorSliding"  IconColor = "@Theme135._iconColor">
-                                                        درخواست رسیدگی مجدد  
-                                                    </MudNavLink>
-                                                     <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Custom.Uncategorized.FolderOpen" IconColor = "@Theme135._iconColor" >
-                                                     پیگیری پرونده 
-                                                    </MudNavLink>
-                                                     <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.EmojiPeople" IconColor = "@Theme135._iconColor" >
-                                                     ثبت اعتراض  
-                                                    </MudNavLink>
-                                 }
-           </MudNavMenu>
-        <NavMenu />
-    </MudDrawer>
+        <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Docked" Breakpoint="Breakpoint.Sm" Elevation="5" Variant="@DrawerVariant.Mini">
+
+
+
+            <MudNavMenu Color="@Theme135._iconColor">
+                @if (String.IsNullOrEmpty(SharedInfo.NationalCode))
+                {
+                    <MudNavMenu Color="Color.Primary">
+                        <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@MudBlazor.Icons.Filled.Home" IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
+                        <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner" IconColor="@Theme135._iconColor" itemtype="">
+                            ثبت شکایت
+                        </MudNavLink>
+                        <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.Payments" IconColor="@Theme135._iconColor">
+                            پرداخت وجه
+                        </MudNavLink>
+                    </MudNavMenu>
+                }
+                else
+                {
+                    <MudTooltip Text="خدمات الکترونیکی تعزیرات">
+                        <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@MudBlazor.Icons.Filled.Home" IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
+                    </MudTooltip>
+
+                    <MudTooltip Text="ابلاغ ها">
+                        <MudNavLink id="FrmNoticeMain" Href="/FrmNotice" Icon="@MudBlazor.Icons.Filled.ManageSearch" IconColor="@Theme135._iconColor">ابلاغ ها</MudNavLink>
+                    </MudTooltip>
+                    <MudTooltip Text="پرونده">
+                        <MudNavGroup Icon="@Icons.Filled.RuleFolder" IconColor="@Theme135._iconColor">
+                            <MudTooltip Text="لیست پرونده ها">
+                                <MudNavLink Href="/Cases" Icon="@Icons.Filled.RuleFolder" IconColor="@Theme135._iconColor">پرونده  ها</MudNavLink>
+                            </MudTooltip>
+                            <MudTooltip Text="پیگیری پرونده">
+                                <MudNavLink Href="/CaseFollowUp" Icon="@Icons.Filled.FolderOpen" IconColor="@Theme135._iconColor">پیگیری پرونده</MudNavLink>
+                            </MudTooltip>
+                        </MudNavGroup>
+                    </MudTooltip>
+                    <MudTooltip Text="لیست شکایتها">
+                        <MudNavLink Href="/GranovmentList" Icon="@MudBlazor.Icons.Filled.List" IconColor="@Theme135._iconColor">شکایت ها</MudNavLink>
+                    </MudTooltip>
+                    <MudTooltip Text="ثبت شکایت">
+                        <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner" IconColor="@Theme135._iconColor">ثبت شکایت</MudNavLink>                    
+                    </MudTooltip>
+                    <MudTooltip Text="پرداخت وجه">
+                        <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.Payments" IconColor="@Theme135._iconColor">پرداخت وجه</MudNavLink>
+                    </MudTooltip>
+                    <MudTooltip Text="لایحه">
+                        <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.DocumentScanner" IconColor="@Theme135._iconColor">لایحه</MudNavLink>
+                    </MudTooltip>
+                    <MudTooltip Text="درخواست تجدید نظر خواهی">
+                        <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.DriveFileRenameOutline" IconColor="@Theme135._iconColor">درخواست تجدید نظر خواهی</MudNavLink>
+                    </MudTooltip>
+                    <MudTooltip Text="درخواست اعمال ماده ۲۳">
+                        <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.DonutLarge" IconColor="@Theme135._iconColor">درخواست اعمال ماده ۲۳</MudNavLink>
+                    </MudTooltip>
+                    <MudTooltip Text="ثبت وکالت نامه">
+                        <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.EscalatorWarning" IconColor="@Theme135._iconColor">ثبت وکالت نامه</MudNavLink>
+                    </MudTooltip>
+                    <MudTooltip Text="درخواست رسیدگی مجدد">
+                        <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.DoorSliding" IconColor="@Theme135._iconColor">درخواست رسیدگی مجدد</MudNavLink>
+                    </MudTooltip>
+                    <MudTooltip Text="ثبت اعتراض">
+                        <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.EmojiPeople" IconColor="@Theme135._iconColor">ثبت اعتراض</MudNavLink>
+                    </MudTooltip>
+                }
+            </MudNavMenu>
+            <NavMenu />
+        </MudDrawer>
         <MudThemeManager @bind-Open="_themeManagerOpen"
-                     @bind-Theme="_theme"
-                     Configuration="_themeManagerConfiguration.Value" />
-    <MudThemeManagerButton OnClick="@(e => _themeManagerOpen = true)" />
- 
-     <MudMainContent>
-        <MudContainer Class="mt-16 px-16"
-                      MaxWidth="MaxWidth.False">
-            @Body
-        </MudContainer>
-    </MudMainContent>
- 
+                         @bind-Theme="_theme"
+                         Configuration="_themeManagerConfiguration.Value" />
+        <MudThemeManagerButton OnClick="@(e => _themeManagerOpen = true)" />
 
-</MudLayout>
+        <MudMainContent>
+            <MudContainer Class="mt-16 px-16"
+                          MaxWidth="MaxWidth.False">
+                @Body
+            </MudContainer>
+        </MudMainContent>
+
+
+    </MudLayout>
 
 </MudRTLProvider>
 
 @code {
     [Parameter]
-    public  bool _isDarkMode { set; get; } = false;
+    public bool _isDarkMode { set; get; } = false;
     private static string _dayNightIcons = Icons.Material.Filled.DarkMode;
     private static string _menuIcons = Icons.Material.Filled.Menu;
 
-    public static string _style ="height:100px;background-color:#ede3e3";
-    public static string _class ="Circle_night";
+    public static string _style = "height:100px;background-color:#ede3e3";
+    public static string _class = "Circle_night";
     public static bool DarkMode = true;
     private MudTheme _theme1 = Theme135.DefaultTheme;
 
@@ -179,17 +184,17 @@
     };
 
     private MudTheme _theme = new()
-    {
-        Palette = new Palette
         {
-            Primary = Colors.Blue.Default,
-            Secondary = Colors.BlueGrey.Lighten1
-        }
-    };
+            Palette = new Palette
+            {
+                Primary = Colors.Blue.Default,
+                Secondary = Colors.BlueGrey.Lighten1
+            }
+        };
 
     private KeyValuePair<string, ThemeManagerConfiguration> _themeManagerConfiguration;
 
-    private bool _drawerOpen = false ;
+    private bool _drawerOpen = false;
     private bool _themeManagerOpen;
 
     protected override void OnInitialized()
@@ -205,7 +210,7 @@
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
-        if(_drawerOpen)
+        if (_drawerOpen)
             _menuIcons = Icons.Material.Filled.MenuOpen;
         else
             _menuIcons = Icons.Material.Filled.Menu;
@@ -215,7 +220,7 @@
     public void Logout()
     {
         SharedInfo.NationalCode = string.Empty;
-        _navigationManager.NavigateTo("/DashboardPublic");    
+        _navigationManager.NavigateTo("/DashboardPublic");
     }
 
 
@@ -228,13 +233,13 @@
     public void onDarkMode()
     {
 
-        if(! _isDarkMode )
+        if (!_isDarkMode)
         {
-            Theme135._iconColor = Color.Success ;
+            Theme135._iconColor = Color.Success;
             Theme135._LogoColor = Color.Success;
 
-            _style ="height:100px;background-color:#181c1c";
-            _class ="Circle";
+            _style = "height:100px;background-color:#181c1c";
+            _class = "Circle";
             _dayNightIcons = Icons.Material.Filled.LightMode;
 
         }
@@ -242,18 +247,18 @@
         {
             Theme135._iconColor = Color.Info;
             Theme135._LogoColor = Color.Surface;
-            _style ="height:100px;background-color:#ede3e3";
-            _class ="Circle_night";
+            _style = "height:100px;background-color:#ede3e3";
+            _class = "Circle_night";
             _dayNightIcons = Icons.Material.Filled.DarkMode;
         }
 
         DarkMode = _isDarkMode;
         _isDarkMode = !_isDarkMode;
 
-        string[] uri =  _navigationManager.Uri.Split('/');
-        string CurrentPage = uri[uri.Length-1];
+        string[] uri = _navigationManager.Uri.Split('/');
+        string CurrentPage = uri[uri.Length - 1];
         _navigationManager.NavigateTo("/DashboardPublic");
-        _navigationManager.NavigateTo("/"+CurrentPage);
+        _navigationManager.NavigateTo("/" + CurrentPage);
         StateHasChanged();
 
 
@@ -270,7 +275,7 @@
     //    _themeManagerOpen1 = value;
     //}
 
- 
+
 }
 
 

@@ -12,6 +12,9 @@
 @inject ISnackbar Snackbar
 @inject IDialogService DialogService
 
+<div class="jumbotron text-center border-info border-2 oi-header">
+    <h3>لیست پرونده ها</h3>
+</div>
 
 @*<MudDataGrid T="PNoticeContract"  Bordered="true"  Hover="true" Dense="true" Striped="true" Items="@Elements" ColumnResizeMode="ResizeMode.Column" SortMode="SortMode.Multiple" Filterable="true" 
     Hideable="true" RowClick="@RowClicked" SelectedItemsChanged="@SelectedItemsChanged">*@
@@ -30,8 +33,14 @@
      
         <Column T="GetAllPCaseContract"  Field="CreateDateTime" Title="زمان ثبت"  />
         <Column T="GetAllPCaseContract" Field="No" Title="شماره پرونده " />
-      
-        <Column T="GetAllPCaseContract" Field="UnitName"   Title="شعبه " />
+
+        <Column T="GetAllPCaseContract" Field="UnitName" Title="شعبه " />
+        <Column T="GetAllPCaseContract" CellClass="d-flex justify-end" Style="width:50px">
+            <CellTemplate>
+                <MudButton Variant="Variant.Filled" EndIcon="@Icons.Filled.Visibility" Color="Color.Primary" OnClick="() => ShowDetail(context.Item)">مشاهده</MudButton>
+            </CellTemplate>
+        </Column>
+
         @*<Column T="GetAllPCaseContract"   title="وضغیت پرونده" >
             <CellTemplate>
                 <MudText Variant="Variant.Filled" >((Anu.PunishmentOrg.Enumerations.PUCaseArchivetate)@context.Item.CaseArchiveState). </MudText>
