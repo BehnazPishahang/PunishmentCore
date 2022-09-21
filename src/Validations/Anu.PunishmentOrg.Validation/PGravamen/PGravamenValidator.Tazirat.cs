@@ -60,7 +60,7 @@ public partial class PGravamenValidator
             child.RuleFor(c=>c.TheGAttachmentData).NotNull().WithMessage("هیچ فایلی الصاق نشده است");
             child.RuleFor(c=>c.TheGAttachmentData.DocFile).NotNull().WithMessage("فایل الصاق شده نامعتبر یا خالی است").WithErrorCode("-30227");
         });
-
+        
     }
 
 
