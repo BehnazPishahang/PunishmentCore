@@ -70,6 +70,7 @@ namespace Anu.PunishmentOrg.DataAccess.Accounting
         {
             return await _context.Set<PBill4Paid>()
                                  .Where(a => a.ThePCasePerson.NationalCode == nationalCode)
+                                 .Include(a => a.TheObjectState)
                                  .ToListAsync();
         }
 

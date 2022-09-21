@@ -234,7 +234,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
         [AllowAnonymous]
         public override async Task<SendPaymentRequestToSadadResponse> SendPaymentRequestToSadad([FromBody] SendPaymentRequestToSadadRequest request)
         {
-            bool isFake = true;
+            bool isFake = false;
             PayResultData thePayResultData = new PayResultData()
             {
                 ResCode     = "0",
@@ -334,7 +334,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
 
             request.ThePBill4PaidNationalCodeContract!.NationalCode!.IsDigit(GetCountOfPaidPBill4PaidByNationalCodeResult.PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_NationalCode_Is_Required);
 
-            int totalCountOfPBill4Paid   = thePBill4PaidList.Count;
+            int totalCountOfPBill4Paid   = thePBill4PaidList.Count(x => PBill4Cash.validStateForService.Contains(x.TheObjectState?.Code));
             int countOfPaidPBill4Paid    = thePBill4PaidList.Count(x => x.TheObjectState?.Code == PBill4Cash.Paid);
             int countOfNotPaidPBill4Paid = thePBill4PaidList.Count(x => x.TheObjectState?.Code == PBill4Cash.Confirmed);
 
