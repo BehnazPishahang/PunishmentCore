@@ -83,13 +83,15 @@
                 @if (String.IsNullOrEmpty(SharedInfo.NationalCode))
                 {
                     <MudNavMenu Color="Color.Primary">
-                        <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@MudBlazor.Icons.Filled.Home" IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
-                        <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner" IconColor="@Theme135._iconColor" itemtype="">
-                            ثبت شکایت
-                        </MudNavLink>
-                        <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.Payments" IconColor="@Theme135._iconColor">
-                            پرداخت وجه
-                        </MudNavLink>
+                        <MudTooltip Text="خدمات الکترونیکی تعزیرات">
+                            <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@MudBlazor.Icons.Filled.Home" IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
+                        </MudTooltip>
+                        <MudTooltip Text="ثبت شکایت">
+                            <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner" IconColor="@Theme135._iconColor" itemtype="">ثبت شکایت</MudNavLink>
+                        </MudTooltip>
+                        <MudTooltip Text="پرداخت وجه">
+                            <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.Payments" IconColor="@Theme135._iconColor">پرداخت وجه</MudNavLink>
+                        </MudTooltip>
                     </MudNavMenu>
                 }
                 else
@@ -115,7 +117,7 @@
                         <MudNavLink Href="/GranovmentList" Icon="@MudBlazor.Icons.Filled.List" IconColor="@Theme135._iconColor">شکایت ها</MudNavLink>
                     </MudTooltip>
                     <MudTooltip Text="ثبت شکایت">
-                        <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner" IconColor="@Theme135._iconColor">ثبت شکایت</MudNavLink>                    
+                        <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner" IconColor="@Theme135._iconColor">ثبت شکایت</MudNavLink>
                     </MudTooltip>
                     <MudTooltip Text="پرداخت وجه">
                         <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.Payments" IconColor="@Theme135._iconColor">پرداخت وجه</MudNavLink>

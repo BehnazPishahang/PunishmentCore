@@ -1,313 +1,311 @@
 ﻿@page "/dashboard"
 @inherits MainLayout
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Granovment
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase
 @using Anu.PunishmentOrg.Client.Infrastructure.Settings
 @using Anu.PunishmentOrg.Client.Pages.Authentication
 @using Anu.PunishmentOrg.ServiceModel.Case
+@using Anu.PunishmentOrg.ServiceModel.Gravamen
 @using Anu.PunishmentOrg.ServiceModel.Notice
+
 @inject INoticeService _noticeService;
 @inject IPCaseService _pCaseService;
+@inject IPGravamenService _pGravamenService;
 
 @inject AppConfiguration _appConfiguration;
 <MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
-    
+
 
     <MudGrid>
-        <MudItem xs="12" sm="6" md="6" class="rounded" >
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-           
-              
-            rel="noopener noreferrer">
- 
-              <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100%">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.ManageSearch" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class=" col-xl-10 col-sm-10 col-md-10 col-10">
+        <MudItem xs="12" sm="6" md="6" class="rounded">
+            <MudElement HtmlTag="a"
+                        Class="ma-0"
+                        Style="color:red;font-weight:bold;"
+                        rel="noopener noreferrer">
 
-          
-                
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                       
-                        <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
-                            <MudText   Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> ابلاغ</MudText>
-                            <MudButton  Color="Color.Primary" StartIcon="@Icons.Filled.Visibility" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowSeenedPNoticeList"  >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser</MudButton>
-                            <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPNoticeList" >  تمامی ابلاغ ها : @NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.TotalCountPNoticeOfUser</MudButton>
-                            <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.VisibilityOff"  OnClick="ShowUnseenedPNoticeList"   Variant="Variant.Filled" IconColor="Color.Secondary" >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser</MudButton>
-                        </MudButtonGroup>  
-                          
-                   </div>
-             
-                </div>
-            </MudPaper>
+                <MudPaper xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100%">
+                    <div class="col-xl-2 col-sm-2 col-md-2 col-2">
+                        <MudIcon Icon="@Icons.Filled.ManageSearch" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    </div>
+                    <div class=" col-xl-10 col-sm-10 col-md-10 col-10">
+
+
+
+                        <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+
+                            <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
+                                <MudText Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> ابلاغ</MudText>
+                                <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.Visibility" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowSeenedPNoticeList">@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser</MudButton>
+                                <MudButton Color="Color.Warning" Variant="Variant.Filled" OnClick="ShowAllPNoticeList">  تمامی ابلاغ ها : @NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.TotalCountPNoticeOfUser</MudButton>
+                                <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.VisibilityOff" OnClick="ShowUnseenedPNoticeList" Variant="Variant.Filled" IconColor="Color.Secondary">@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser</MudButton>
+                            </MudButtonGroup>
+
+                        </div>
+
+                    </div>
+                </MudPaper>
             </MudElement>
         </MudItem>
 
 
-        <MudItem xs="12" sm="6" md="6" class="rounded" >
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-           
-              
-            rel="noopener noreferrer">
- 
-              <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100%">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.RuleFolder" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class=" col-xl-10 col-sm-10 col-md-10 col-10">
+        <MudItem xs="12" sm="6" md="6" class="rounded">
+            <MudElement HtmlTag="a"
+                        Class="ma-0"
+                        Style="color:red;font-weight:bold;"
+                        rel="noopener noreferrer">
 
-          
-                
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                       
-                        <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
-                            <MudText   Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> پرونده</MudText>
-                            <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.FolderOff" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowCloasedPcaseList"  >@PcaseInfo.StatisticContract.CountUnSeen</MudButton>
-                            <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPCaseList" >  تمامی پرونده ها : @PcaseInfo.StatisticContract.CountTotal</MudButton>
-                            <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.FolderOpen"  OnClick="ShowActivePcaseList"   Variant="Variant.Filled" IconColor="Color.Secondary" >@PcaseInfo.StatisticContract.CountSeen</MudButton>
-                        </MudButtonGroup>  
-                          
-                   </div>
-             
-                </div>
-            </MudPaper>
+                <MudPaper xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100%">
+                    <div class="col-xl-2 col-sm-2 col-md-2 col-2">
+                        <MudIcon Icon="@Icons.Filled.RuleFolder" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    </div>
+                    <div class=" col-xl-10 col-sm-10 col-md-10 col-10">
+
+
+
+                        <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+
+                            <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
+                                <MudText Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> پرونده</MudText>
+                                <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.FolderOff" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowCloasedPcaseList">@PcaseInfo.StatisticContract.CountUnSeen</MudButton>
+                                <MudButton Color="Color.Warning" Variant="Variant.Filled" OnClick="ShowAllPCaseList">  تمامی پرونده ها : @PcaseInfo.StatisticContract.CountTotal</MudButton>
+                                <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.FolderOpen" OnClick="ShowActivePcaseList" Variant="Variant.Filled" IconColor="Color.Secondary">@PcaseInfo.StatisticContract.CountSeen</MudButton>
+                            </MudButtonGroup>
+
+                        </div>
+
+                    </div>
+                </MudPaper>
+            </MudElement>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="6" class="rounded">
+            <MudElement HtmlTag="a"
+                        Class="ma-0"
+                        Style="color:red;font-weight:bold;"
+                        rel="noopener noreferrer">
+
+                <MudPaper xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100%">
+                    <div class="col-xl-2 col-sm-2 col-md-2 col-2">
+                        <MudIcon Icon="@Icons.Filled.DocumentScanner" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    </div>
+                    <div class=" col-xl-10 col-sm-10 col-md-10 col-10">
+
+
+
+                        <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+
+                            <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
+                                <MudText Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> شکایت ها</MudText>
+                                <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.Cancel" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowPGravamenRejectedList">@PGravamenInfo.CountRejectedPGravamenPerson</MudButton>
+                                <MudButton Color="Color.Warning" Variant="Variant.Filled" OnClick="ShowAllPGravamen">  تمامی شکایت ها : @PGravamenInfo.TotalCountPGravamenPerson</MudButton>
+                                <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.Webhook" OnClick="ShowPGravamenPendedList" Variant="Variant.Filled" IconColor="Color.Secondary">@PGravamenInfo.CountPendingPGravamenPerson</MudButton>
+                            </MudButtonGroup>
+                        </div>
+
+                    </div>
+                </MudPaper>
+            </MudElement>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="6">
+            <MudElement HtmlTag="a"
+                        Class="ma-0"
+                        Style="color:red;font-weight:bold;"
+                        href="/isConstracting"
+                        rel="noopener noreferrer">
+                <MudPaper xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                    <div class="col-xl-2 col-sm-2 col-md-2 col-2">
+                        <MudIcon Icon="@Icons.Filled.Payments" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    </div>
+                    <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+
+                        <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                            <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold mud-text-secondary mb-n1 mt-4 text-center  ">  پرداخت  وجه </MudText>
+                        </div>
+
+                    </div>
+                </MudPaper>
+
             </MudElement>
         </MudItem>
 
 
         <MudItem xs="12" sm="6" md="6">
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-            href="/Granovment"
-              
-            rel="noopener noreferrer">
-             <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="height:100%">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.DocumentScanner" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+            <MudElement HtmlTag="a"
+                        Class="ma-0"
+                        Style="color:red;font-weight:bold;"
+                        href="/isConstracting"
+                        rel="noopener noreferrer">
+                <MudPaper xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                    <div class="col-xl-2 col-sm-2 col-md-2 col-2">
+                        <MudIcon Icon="@Icons.Filled.DocumentScanner" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    </div>
+                    <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold mud-text-secondary mb-n1 mt-4 text-center  "> ثبت شکایت</MudText>
-                   </div>
+                        <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                            <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  ">  لایحه </MudText>
+                        </div>
+                        <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                            <MudText xs="6" sm="6" md="6" Class="text-center mt-2">3</MudText>
+                        </div>
+                    </div>
+                </MudPaper>
 
-                </div>
-            </MudPaper>
- 
-             </MudElement>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="6" >
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-            href="/isConstracting"
-              
-            rel="noopener noreferrer">
-          <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.Payments" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
-
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold mud-text-secondary mb-n1 mt-4 text-center  ">  پرداخت  وجه </MudText>
-                   </div>
- 
-                </div>
-            </MudPaper>
- 
-            </MudElement>
-       </MudItem>
-       
-
-           <MudItem xs="12" sm="6" md="6">
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-            href="/isConstracting"
-              
-            rel="noopener noreferrer">
-            <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.DocumentScanner" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
-
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  ">  لایحه </MudText>
-                   </div>
-                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
-                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">3</MudText>
-                   </div>
-                </div>
-            </MudPaper>
- 
             </MudElement>
         </MudItem>
 
 
-  <MudItem xs="12" sm="6" md="6"  class=" rounded">
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-            href="/isConstracting"
-              
-            rel="noopener noreferrer">
-            <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.DriveFileRenameOutline" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+        <MudItem xs="12" sm="6" md="6" class=" rounded">
+            <MudElement HtmlTag="a"
+                        Class="ma-0"
+                        Style="color:red;font-weight:bold;"
+                        href="/isConstracting"
+                        rel="noopener noreferrer">
+                <MudPaper xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                    <div class="col-xl-2 col-sm-2 col-md-2 col-2">
+                        <MudIcon Icon="@Icons.Filled.DriveFileRenameOutline" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    </div>
+                    <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  ">  درخواست تجدید نظر خواهی </MudText>
-                   </div>
-                    
-                </div>
-              
-                
-            </MudPaper>
- 
-            </MudElement>
-        </MudItem>   
-        
+                        <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                            <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  ">  درخواست تجدید نظر خواهی </MudText>
+                        </div>
 
-         <MudItem xs="12" sm="6" md="6">
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-            href="/isConstracting"
-              
-            rel="noopener noreferrer">
-            <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.DonutLarge" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+                    </div>
 
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> درخواست اعمال ماده ۲۳ </MudText>
-                   </div>
-                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
-                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">8</MudText>
-                   </div>
-                </div>
-            </MudPaper>
- 
-            </MudElement>
-        </MudItem>   
 
-                 <MudItem xs="12" sm="6" md="6">
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-            href="/isConstracting"
-              
-            rel="noopener noreferrer">
-                        <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.EscalatorWarning" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+                </MudPaper>
 
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-text-secondary mb-n1 mt-4 text-center mud-bold  "> ثبت وکالت نامه </MudText>
-                   </div>
-                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
-                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2" >9</MudText>
-                   </div>
-                </div>
-            </MudPaper>
- 
-            </MudElement>
-        </MudItem>   
-
-              <MudItem xs="12" sm="6" md="6">
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-            href="/isConstracting"
-              
-            rel="noopener noreferrer">
-            <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.DoorSliding" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
-
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> درخواست رسیدگی مجدد </MudText>
-                   </div>
-                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
-                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2">12</MudText>
-                   </div>
-                </div>
-            </MudPaper>
- 
             </MudElement>
         </MudItem>
 
-          <MudItem xs="12" sm="6" md="6">
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-            href="/CaseFollowUp"
-              
-            rel="noopener noreferrer">
-             <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.FolderOpen" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> پیگیری پرونده</MudText>
-                   </div>
-                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
-                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2" >15</MudText>
-                   </div>
-                </div>
-            </MudPaper>
- 
+        <MudItem xs="12" sm="6" md="6">
+            <MudElement HtmlTag="a"
+                        Class="ma-0"
+                        Style="color:red;font-weight:bold;"
+                        href="/isConstracting"
+                        rel="noopener noreferrer">
+                <MudPaper xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                    <div class="col-xl-2 col-sm-2 col-md-2 col-2">
+                        <MudIcon Icon="@Icons.Filled.DonutLarge" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    </div>
+                    <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+
+                        <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                            <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> درخواست اعمال ماده ۲۳ </MudText>
+                        </div>
+                        <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                            <MudText xs="6" sm="6" md="6" Class="text-center mt-2">8</MudText>
+                        </div>
+                    </div>
+                </MudPaper>
+
             </MudElement>
         </MudItem>
 
-         <MudItem xs="12" sm="6" md="6">
-              <MudElement HtmlTag="a"
-            Class="ma-0"
-            Style="color:red;font-weight:bold;"
-            href="/isConstracting"
-              
-            rel="noopener noreferrer">
+        <MudItem xs="12" sm="6" md="6">
+            <MudElement HtmlTag="a"
+                        Class="ma-0"
+                        Style="color:red;font-weight:bold;"
+                        href="/isConstracting"
+                        rel="noopener noreferrer">
+                <MudPaper xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                    <div class="col-xl-2 col-sm-2 col-md-2 col-2">
+                        <MudIcon Icon="@Icons.Filled.EscalatorWarning" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    </div>
+                    <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
 
-            <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
-                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
-                    <MudIcon Icon="@Icons.Filled.EmojiPeople" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-                </div>
-                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+                        <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                            <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-text-secondary mb-n1 mt-4 text-center mud-bold  "> ثبت وکالت نامه </MudText>
+                        </div>
+                        <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                            <MudText xs="6" sm="6" md="6" Class="text-center mt-2">9</MudText>
+                        </div>
+                    </div>
+                </MudPaper>
 
-                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
-                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> ثبت اعتراض</MudText>
-                   </div>
-                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1   @MainLayout._class">
-                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2" >6</MudText>
-                   </div>
-                </div>
-            </MudPaper>
             </MudElement>
         </MudItem>
 
-       
+        <MudItem xs="12" sm="6" md="6">
+            <MudElement HtmlTag="a"
+                        Class="ma-0"
+                        Style="color:red;font-weight:bold;"
+                        href="/isConstracting"
+                        rel="noopener noreferrer">
+                <MudPaper xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                    <div class="col-xl-2 col-sm-2 col-md-2 col-2">
+                        <MudIcon Icon="@Icons.Filled.DoorSliding" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    </div>
+                    <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+
+                        <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                            <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> درخواست رسیدگی مجدد </MudText>
+                        </div>
+                        <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                            <MudText xs="6" sm="6" md="6" Class="text-center mt-2">12</MudText>
+                        </div>
+                    </div>
+                </MudPaper>
+
+            </MudElement>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="6">
+            <MudElement HtmlTag="a"
+                        Class="ma-0"
+                        Style="color:red;font-weight:bold;"
+                        href="/CaseFollowUp"
+                        rel="noopener noreferrer">
+                <MudPaper xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                    <div class="col-xl-2 col-sm-2 col-md-2 col-2">
+                        <MudIcon Icon="@Icons.Filled.FolderOpen" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    </div>
+                    <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+
+                        <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                            <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> پیگیری پرونده</MudText>
+                        </div>
+                        <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                            <MudText xs="6" sm="6" md="6" Class="text-center mt-2">15</MudText>
+                        </div>
+                    </div>
+                </MudPaper>
+
+            </MudElement>
+        </MudItem>
+
+        <MudItem xs="12" sm="6" md="6">
+            <MudElement HtmlTag="a"
+                        Class="ma-0"
+                        Style="color:red;font-weight:bold;"
+                        href="/isConstracting"
+                        rel="noopener noreferrer">
+
+                <MudPaper xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4" Style="@MainLayout._style">
+                    <div class="col-xl-2 col-sm-2 col-md-2 col-2">
+                        <MudIcon Icon="@Icons.Filled.EmojiPeople" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                    </div>
+                    <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+
+                        <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                            <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> ثبت اعتراض</MudText>
+                        </div>
+                        <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1   @MainLayout._class">
+                            <MudText xs="6" sm="6" md="6" Class="text-center mt-2">6</MudText>
+                        </div>
+                    </div>
+                </MudPaper>
+            </MudElement>
+        </MudItem>
+
+
     </MudGrid>
 
 
-        
+
 </MudContainer>
 
 @code
@@ -316,8 +314,24 @@
     public static MudBlazor.Color _iconColorDashboard = MainLayout.DarkMode ? Color.Success : Color.Info;
     GetCountOfUnSeenPNoticeByUserResponse NoticeInfo;
     GetStatisticPCaseResponse PcaseInfo;
+    GetPersonPGravamenStatisticContract PGravamenInfo;
     string ncode = SharedInfo.NationalCode;
 
+
+    private void ShowPGravamenRejectedList()
+    {
+        _navigationManager.NavigateTo($"/GranovmentRejectList");
+    }
+
+    private void ShowAllPGravamen()
+    {
+        _navigationManager.NavigateTo("/GranovmentList");
+    }
+
+    private void ShowPGravamenPendedList()
+    {
+        _navigationManager.NavigateTo($"/GranovmentPendingList");
+    }
     private void ShowCloasedPcaseList()
     {
         _navigationManager.NavigateTo("/Cases");
@@ -333,12 +347,12 @@
         _navigationManager.NavigateTo("/Cases");
     }
 
-     private void ShowAllPCaseList()
+    private void ShowAllPCaseList()
     {
         _navigationManager.NavigateTo("/Cases");
     }
 
-    
+
     private void ShowUnseenedPNoticeList()
     {
         SharedInfo.LoadAllNoticeList = false;
@@ -347,21 +361,22 @@
 
     private void ShowSeenedPNoticeList()
     {
-         SharedInfo.LoadAllNoticeList = true;
-          _navigationManager.NavigateTo("/FrmNotice");
+        SharedInfo.LoadAllNoticeList = true;
+        _navigationManager.NavigateTo("/FrmNotice");
     }
     private void ShowAllPNoticeList()
     {
-         SharedInfo.LoadAllNoticeList = null;
-          _navigationManager.NavigateTo("/FrmNotice");
+        SharedInfo.LoadAllNoticeList = null;
+        _navigationManager.NavigateTo("/FrmNotice");
     }
     protected override async Task OnInitializedAsync()
-        {
-            string ncode = SharedInfo.NationalCode;
-               NoticeInfo = _noticeService.GetCountOfUnSeenPNoticeByUser(_appConfiguration.BackendServerAddress, _appConfiguration.GetCountOfUnSeenPNoticeByUser, ncode , SharedInfo.AccessToken);
-               PcaseInfo = await _pCaseService.GetPCaseStatistic(_appConfiguration.BackendServerAddress, _appConfiguration.GetStatisticPCase, ncode , SharedInfo.AccessToken);
-        }
-       
-     
-    
+    {
+        string ncode = SharedInfo.NationalCode;
+        NoticeInfo = _noticeService.GetCountOfUnSeenPNoticeByUser(_appConfiguration.BackendServerAddress, _appConfiguration.GetCountOfUnSeenPNoticeByUser, ncode, SharedInfo.AccessToken);
+        PcaseInfo = await _pCaseService.GetPCaseStatistic(_appConfiguration.BackendServerAddress, _appConfiguration.GetStatisticPCase, ncode, SharedInfo.AccessToken);
+        PGravamenInfo = await _pGravamenService.GetPersonPGravamenStatistic(_appConfiguration.BackendServerAddress, _appConfiguration.GetPersonPGravamenStatistic, ncode, SharedInfo.AccessToken);
+    }
+
+
+
 }

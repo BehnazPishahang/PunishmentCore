@@ -5,15 +5,15 @@
 
 @inject INoticeService _noticeService;
 
-
-<MudDialog>
+<MudDialog Style="max-height:800px; overflow-y:scroll">
     <DialogContent>
-       <embed src="@showedPdfContent" visible="false" width="1100" height="730" type="application/pdf" />
-
+        <MudContainer Style="max-height: 800px; overflow-y: scroll">
+            <embed src="@showedPdfContent" visible="false" width="1100" height="730" type="application/pdf" />
+        </MudContainer>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel"  Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Close" Color="Color.Error">بازگشت</MudButton>
-       <MudButton OnClick="Submit"  Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Print" Color="Color.Success">چاب</MudButton>
+        <MudButton OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Close" Color="Color.Error">بازگشت</MudButton>
+        @*<MudButton OnClick="Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Print" Color="Color.Success">چاب</MudButton>*@
     </DialogActions>
 </MudDialog>
 

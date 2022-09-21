@@ -59,9 +59,9 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
             parameters.Add("showedPdfContent",pdf);
             parameters.Add("No", selectedRow.No);
 
-            var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large };
+            var options = new DialogOptions() { CloseButton = true, FullScreen=true };
 
-            DialogService.Show<FrmNoticePrintComponent>("Delete", parameters, options);
+            DialogService.Show<FrmNoticePrintComponent>("مشاهده ابلاغ", parameters, options);
         }
         protected override async Task OnInitializedAsync()
         {

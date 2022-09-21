@@ -36,7 +36,6 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Granovment
             inputData.Page.TotalResult = 0;
             inputData.Page.OrderPage = new Commons.ServiceModel.ServicePaging.OrderPage() { Property = "", Ascending = true };
 
-
             string jsonString = JsonSerializer.Serialize(inputData);
 
             var client = new HttpClient();

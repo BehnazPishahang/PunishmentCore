@@ -1,4 +1,4 @@
-﻿@page "/GranovmentList"
+﻿@page "/GranovmentRejectList"
 
 @using Anu.PunishmentOrg.Client.Infrastructure.Granovment
 @using Anu.PunishmentOrg.ServiceModel.Gravamen
@@ -19,13 +19,14 @@
 </style>
 
 <div class="header">
-  <h3>لیست شکایت ها</h3>
+  <h3>لیست شکایت های ردشده</h3>
 </div>
+
 
    <MudDataGrid T="PGravamenInfoContract" Items="@gravoments"  EditMode="DataGridEditMode.Form"
     Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual" QuickFilter="@_quickFilter">
     <ToolBarContent>
-        <MudText Typo="Typo.h6"> لیست شکایت ها </MudText>
+        <MudText Typo="Typo.h6"> لیست شکایت های ردشده </MudText>
         <MudSpacer />
         <MudTextField @bind-Value="_searchString" Placeholder="جستجو" Adornment="Adornment.Start" Immediate="true"
             AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
@@ -47,8 +48,8 @@
 </MudDataGrid>
 
 @code {
-
     IEnumerable<PGravamenInfoContract> gravoments;
+    IEnumerable<PGravamenInfoContract> gravomentsSelection;
 
     protected override void OnInitialized()
     {
@@ -60,6 +61,22 @@
             PGravamenService pService = new();
             GetPersonPGravamensInfoRequest request = new();
             gravoments = pService.GetGravamenListByNationalNo(_appConfiguration.BackendServerAddress, _appConfiguration.GetGravamenListByNationalNo, SharedInfo.NationalCode, SharedInfo.AccessToken);
+
+            if (gravoments != null)
+            {
+                foreach (var item in gravoments)
+                {
+                    switch (item.TheObjectState.Code)
+                    {
+                        case "000497":
+                        case "000504":
+                            gravomentsSelection.Append(item);
+                            break;
+                    }
+                }
+            }
+
+            gravoments = gravomentsSelection;
         }
         catch
         {

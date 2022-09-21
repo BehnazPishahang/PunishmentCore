@@ -1,19 +1,20 @@
-﻿@page "/GranovmentByNo"
+﻿@page "/TestMud"
+@inject IDialogService DialogService
 
-@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase
-@using Anu.PunishmentOrg.ServiceModel.Gravamen;
-@using Anu.PunishmentOrg.Client.Infrastructure.Granovment;
 
-@inject AppConfiguration _appConfiguration
-@inject IPCaseService _pCaseService
-
-<MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info" Size="Size.Medium"  OnClick="SaveGranovment">ذخیره</MudButton>
+<MudButton @onclick="DeleteUser" Variant="Variant.Filled" Color="Color.Error">Delete Records</MudButton>
 
 @code {
 
-    private void SaveGranovment()
+    private void DeleteUser()
     {
-        // _navigationManager.NavigateTo($"/GranovmentSummary/{2834826742}");
-        //_navigationManager.NavigateTo($"/GranovmentSummary/{0068981554}");
+        var parameters = new DialogParameters();
+        //parameters.Add("ContentText", "Do you really want to delete these records? This process cannot be undone.");
+        //parameters.Add("ButtonText", "Delete");
+        //parameters.Add("Color", Color.Error);
+
+        var options = new DialogOptions() { CloseButton = true, FullScreen=true };
+
+        DialogService.Show<GranovmentLawDialog>("Delete", parameters, options);
     }
 }
