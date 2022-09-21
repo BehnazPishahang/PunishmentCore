@@ -13,9 +13,22 @@
         font-size:1.25em;
         text-decoration: underline;
     }
+
+        .header {
+  padding: 15px;
+  text-align: center;
+  background: #005c99;
+  color: white;
+  font-size: 30px;
+  font-family:'B Titr';
+  margin-bottom:5px;
+  border-radius:5px;
+        }
 </style>
-<div class="jumbotron text-center border-info border-2 oi-header">
-    <h3>خلاصه شکایت نامه</h3>
+
+
+<div class="header">
+  <h3>خلاصه شکایت نامه</h3>
 </div>
 
 <MudForm Model="@_pGravamenContract">
@@ -23,7 +36,12 @@
         <MudCardContent>
             <MudText Typo="Typo.h6" Align="MudBlazor.Align.Center" Class="pHeader">شماره شکایت نامه :@_pGravamen</MudText>
             <MudText Typo="Typo.h6" Class="pHeader">موضوع شکایت نامه</MudText>
-            <MudText Typo="Typo.subtitle2"  Style="margin:5px 30px 10px;">@_pGravamenContract.PetitionSubject</MudText>
+            <MudList>
+                @foreach(var item in _pGravamenContract.PetitionSubject.Split(","))
+                {
+                    <MudListItem Icon="@Icons.Filled.ArrowLeft" IconColor="Color.Error" IconSize="Size.Small">@item</MudListItem>
+                }
+            </MudList>
             <MudText Typo="Typo.h6" Class="pHeader">خلاصه شکایت نامه</MudText>
             <MudText Typo="Typo.subtitle2" Align="MudBlazor.Align.Justify" Style="margin: 5px 30px 10px;">@_pGravamenContract.PetitionDescription</MudText>
         </MudCardContent>
