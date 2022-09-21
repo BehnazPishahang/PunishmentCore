@@ -163,6 +163,11 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
             Transferee = 1,
             Delivery
         }
+
+        public static class GfesUserPassword
+        {
+            public const string Password = "137402260622";
+        }
     }
     
 

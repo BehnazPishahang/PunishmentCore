@@ -2,8 +2,9 @@
 using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.PunishmentOrg.ServiceModel.Accounting;
 
-namespace Anu.PunishmentOrg.Api.Accounting
+namespace Anu.PunishmentOrg.ServiceModel.Accounting
 {
+    [System.ComponentModel.DisplayName("GetPBill4PaidListByNationalCodeResponse")]
     public class GetPBill4PaidListByNationalCodeResponse : IResponseMessage
     {
         public GetPBill4PaidListByNationalCodeResponse()

@@ -50,7 +50,13 @@ namespace Anu.PunishmentOrg.Api.Notice
 
             var thePNoticeList = await _unitOfWork.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(request.PNoticePersonContract.NationalityCode!.Trim().ToString(), request.Page);
 
-            thePNoticeList.Null(InqueryPNoticeListResult.PNotice_InqueryPNoticeList_NotFound);
+            if (thePNoticeList.Count() == 0) 
+            {
+                return new PNoticeInqueryResponse
+                {
+                    Result = InqueryPNoticeListResult.PNotice_InqueryPNoticeList_NotFound.GetResult()
+                };
+            }
 
             var thePNoticeContractList = thePNoticeList.Select(a => new PNoticeContract()
             {
@@ -145,6 +151,8 @@ namespace Anu.PunishmentOrg.Api.Notice
             #endregion Validation
 
             var thePNoticelistByUserNationalityCode = await _unitOfWork.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(request.ThePNoticePersonContract.NationalityCode!);
+
+            thePNoticelistByUserNationalityCode.Null(GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound);
 
             return new GetCountOfUnSeenPNoticeByUserResponse()
             {

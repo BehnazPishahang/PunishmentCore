@@ -245,7 +245,11 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
             public const string View = "000565";
 
 
-
+            public static List<string> validStateForService = new List<string>()
+            {
+                Confirmed ,
+                Paid      ,
+            };
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using Anu.Commons.ServiceModel.ServicePaging;
 
-namespace Anu.PunishmentOrg.Api.Accounting
+namespace Anu.PunishmentOrg.ServiceModel.Accounting
 {
     public class GetPBill4PaidListByNationalCodeRequest : IPaging
     {
         public GetPBill4PaidListByNationalCodeRequest()
         {
             Page = new Page();
+            ThePBill4PaidNationalCodeContract = new PBill4PaidNationalCodeContract();
         }
 
         [System.ComponentModel.DataAnnotations.Required]
