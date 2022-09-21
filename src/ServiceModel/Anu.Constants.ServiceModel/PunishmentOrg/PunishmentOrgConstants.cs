@@ -166,7 +166,7 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
 
         public static class GfesUserPassword
         {
-            public const string Password = "137402260622";
+            public const string Password = "137402";
         }
     }
     
