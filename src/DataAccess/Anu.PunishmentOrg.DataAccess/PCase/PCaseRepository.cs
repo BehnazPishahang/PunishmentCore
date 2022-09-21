@@ -171,7 +171,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                     pSaftyWrit=pSaftyWrit.Where(a => objectStateType.Contains(a.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var ps in pSaftyWrit)
                     {
-                        list.Add(handlingPcaseWithPSaftyWrit.Args(ps.SaftyWritType.GetDescription(), ps.ThePCasePerson.Name + " " + ps.ThePCasePerson.Family));
+                        list.Add(handlingPcaseWithPSaftyWrit.Args(ps.SaftyWritType.GetEnmDescription(), ps.ThePCasePerson.Name + " " + ps.ThePCasePerson.Family));
                         //text.AppendFormat(handlingPcaseWithPSaftyWrit, ps.SaftyWritType.GetDescription(), ps.ThePCasePerson.Name + " " + ps.ThePCasePerson.Family).AppendLine();
                     }
                 }
@@ -236,7 +236,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                     pRevisionRequest = pRevisionRequest.Where(a => objectStateType.Contains(a.ThePRevisionRequest.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var pr in pRevisionRequest)
                     {
-                        list.Add(judgmentPRevisionRequestCase.Args(pr.ThePRevisionRequest.CreateDateTime.Substring(0, 10), pr.ThePRevisionRequest.RequestSubject.GetDescription()));
+                        list.Add(judgmentPRevisionRequestCase.Args(pr.ThePRevisionRequest.CreateDateTime.Substring(0, 10), pr.ThePRevisionRequest.RequestSubject.GetEnmDescription()));
                         //text.AppendFormat(judgmentPRevisionRequestCase, pr.ThePRevisionRequest.CreateDateTime.Substring(0, 10), pr.ThePRevisionRequest.RequestSubject.GetDescription()).AppendLine();
                     }
 
@@ -288,7 +288,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                     pExecutionWrit = pExecutionWrit.Where(a => objectStateType.Contains(a.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var pe in pExecutionWrit)
                     {
-                        list.Add(executionPExecutionWrit.Args(pe.CreateDateTime.Substring(0, 10), pe.WritType.GetDescription()));
+                        list.Add(executionPExecutionWrit.Args(pe.CreateDateTime.Substring(0, 10), pe.WritType.GetEnmDescription()));
                         //text.AppendFormat(executionPExecutionWrit, pe.CreateDateTime.Substring(0,10), pe.WritType.GetDescription()).AppendLine();
                     }
 

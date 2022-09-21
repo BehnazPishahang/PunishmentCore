@@ -126,46 +126,46 @@ public class PGravamenTests
         };
     }
 
-    // [Fact(DisplayName = "Success Scenario")]
-    //public void RecieveGravamen_SuccessfullyExecuted_ShouldReturnSuccessfulResult()
-    //{
-    //    //Arrange
-    //    _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<AttachmentType>>().GetById(It.IsAny<string>()))
-    //        .ReturnsAsync(new AttachmentType());
+    [Fact(DisplayName = "Success Scenario")]
+    public void RecieveGravamen_SuccessfullyExecuted_ShouldReturnSuccessfulResult()
+    {
+        //Arrange
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<AttachmentType>>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new AttachmentType());
 
-    //    _unitOfWork.Setup(u => u.Repositorey<IObjectStateRepository>().GetById(It.IsAny<string>()))
-    //        .ReturnsAsync(new ObjectState());
+        _unitOfWork.Setup(u => u.Repositorey<IObjectStateRepository>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new ObjectState());
 
-    //    _unitOfWork.Setup(u => u.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(It.IsAny<string>()))
-    //        .ReturnsAsync(new GeoLocation());
+        _unitOfWork.Setup(u => u.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(It.IsAny<string>()))
+            .ReturnsAsync(new GeoLocation());
 
-    //    _unitOfWork.Setup(u => u.Repositorey<IUnitRepository>().FindRelatedUnitToGeoLocation(It.IsAny<string>(), It.IsAny<List<string>>())).ReturnsAsync(new Anu.BaseInfo.DataModel.OrganizationChart.Unit()
-    //    {
-    //        TheCMSOrganizationList=new List<CMSOrganization>()
-    //        {
-    //            new CMSOrganization{Id="11"}
-    //        }
-    //    });
+        _unitOfWork.Setup(u => u.Repositorey<IUnitRepository>().FindRelatedUnitToGeoLocation(It.IsAny<string>(), It.IsAny<List<string>>())).ReturnsAsync(new Anu.BaseInfo.DataModel.OrganizationChart.Unit()
+        {
+            TheCMSOrganizationList=new List<CMSOrganization>()
+            {
+                new CMSOrganization{Id="11"}
+            }
+        });
 
-    //    _unitOfWork.Setup(u => u.Repositorey<IPGravamenRepository>().Add(It.IsAny<DataModel.Gravamen.PGravamen>()));
+        _unitOfWork.Setup(u => u.Repositorey<IPGravamenRepository>().Add(It.IsAny<DataModel.Gravamen.PGravamen>()));
 
-    //    _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<BaseRole>>().GetById(It.IsAny<string>()))
-    //        .ReturnsAsync(new BaseRole());
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<BaseRole>>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new BaseRole());
 
-    //    _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<SystemObject>>().GetById(It.IsAny<string>()))
-    //        .ReturnsAsync(new SystemObject());
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<SystemObject>>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new SystemObject());
 
-    //    _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<SystemForm>>().GetById(It.IsAny<string>()))
-    //        .ReturnsAsync(new SystemForm());
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<SystemForm>>().GetById(It.IsAny<string>()))
+            .ReturnsAsync(new SystemForm());
 
-    //    _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<WorkFlowInstanceWorkItem>>().Add(It.IsAny<WorkFlowInstanceWorkItem>()));
+        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<WorkFlowInstanceWorkItem>>().Add(It.IsAny<WorkFlowInstanceWorkItem>()));
 
-    //    //Act
-    //    var result = controller.RecieveGravamen(_request);
+        //Act
+        var result = controller.RecieveGravamen(_request);
 
-    //    //Assert
-    //    Assert.Equal((int)AnuResult.Successful, result.Result.Result.Code);
-    //}
+        //Assert
+        Assert.Equal((int)AnuResult.Successful, result.Result.Result.Code);
+    }
 
     [Fact]
     public void RecieveGravamen_RequestIsNull_ShouldReturnRequestIsNullOrCorrupt()
@@ -219,15 +219,15 @@ public class PGravamenTests
         Assert.Equal((int)PGravamenResult.PGravamen_PlatiffNecessaryField_IsNullOrInvalid, result.Result.result.Code);
     }
 
-    [Fact]
-    public void RecieveGravamen_OneOfOffendingPersonNecessaryFiledsIsMissing_ReturnsPGravamenPlatiffNecessaryFieldIsNullOrInvalid()
-    {
-        _request.ThePGravamenContract!.ThePGravamenPersonContractList![1].TradeUnitName = null;
+    //[Fact]
+    //public void RecieveGravamen_OneOfOffendingPersonNecessaryFiledsIsMissing_ReturnsPGravamenPlatiffNecessaryFieldIsNullOrInvalid()
+    //{
+    //    _request.ThePGravamenContract!.ThePGravamenPersonContractList![1].TradeUnitName = null;
 
-        var result = Assert.ThrowsAnyAsync<AnuExceptions>(() => controller.RecieveGravamen(_request));
+    //    var result = Assert.ThrowsAnyAsync<AnuExceptions>(() => controller.RecieveGravamen(_request));
 
-        Assert.Equal((int)PGravamenResult.PGravamen_OffendingNecessaryField_IsNullOrInvalid, result.Result.result.Code);
-    }
+    //    Assert.Equal((int)PGravamenResult.PGravamen_OffendingNecessaryField_IsNullOrInvalid, result.Result.result.Code);
+    //}
 
     [Fact]
     public void RecieveGravamen_DocFileIsEmpty_ReturnsPGravamen_NoFileIsAttached()
@@ -239,25 +239,25 @@ public class PGravamenTests
         //Assert.Equal((int)PGravamenResult.PGravamen_NoFileIsAttached, result.Result.Code);
     }
 
-    [Fact]
-    public void RecieveGravamen_DocFileSize_IsMoreThan6MB_ReturnsPGravamen_FileIsLargerThanAllowedThreshold()
-    {
-        _request.ThePGravamenContract!.TheGAttachmentContractList![0].TheGAttachmentDataContract!.DocFile = new byte[60000000];
+    //[Fact]
+    //public void RecieveGravamen_DocFileSize_IsMoreThan6MB_ReturnsPGravamen_FileIsLargerThanAllowedThreshold()
+    //{
+    //    _request.ThePGravamenContract!.TheGAttachmentContractList![0].TheGAttachmentDataContract!.DocFile = new byte[60000000];
 
-        _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<AttachmentType>>().GetById(It.IsAny<string>()))
-            .ReturnsAsync(new AttachmentType()
-            {
-                Id = Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId,
-                Code = Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId,
-                Title = "Mock Attachemnt Type"
-            });
+    //    _unitOfWork.Setup(u => u.Repositorey<IGenericRepository<AttachmentType>>().GetById(It.IsAny<string>()))
+    //        .ReturnsAsync(new AttachmentType()
+    //        {
+    //            Id = Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId,
+    //            Code = Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.AttachmentTypeId.GravamenAttachmentTypeId,
+    //            Title = "Mock Attachemnt Type"
+    //        });
 
-        controller = new PGravamenServiceController(_unitOfWork.Object, _configuration.Object);
+    //    controller = new PGravamenServiceController(_unitOfWork.Object, _configuration.Object);
 
-        var result = controller.RecieveGravamen(_request);
+    //    var result = controller.RecieveGravamen(_request);
 
-        Assert.Equal((int)PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold, result.Result.Result.Code);
-    }
+    //    Assert.Equal((int)PGravamenResult.PGravamen_FileIsLargerThanAllowedThreshold, result.Result.Result.Code);
+    //}
 
 
     #region GetPGravamenInfo

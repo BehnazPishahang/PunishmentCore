@@ -28,6 +28,7 @@ using Anu.BaseInfo.ServiceModel.OrganizationChart;
 using Anu.PunishmentOrg.Domain.Notice;
 using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.PunishmentOrg.DataAccess.Accounting;
+using Anu.PunishmentOrg.Api.Authentication;
 
 namespace Anu.PunishmentOrg.Api.Accounting
 {
@@ -182,7 +183,8 @@ namespace Anu.PunishmentOrg.Api.Accounting
             };
         }
 
-        [AllowAnonymous]
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        //[AllowAnonymous]
         public override async Task<GetPBill4PaidListByNationalCodeResponse> GetPBill4PaidListByNationalCode([FromBody] GetPBill4PaidListByNationalCodeRequest request)
         {
             request.Null(GetPBill4PaidListByNationalCodeResult.PBill4Paid_GetPBill4PaidListByNationalCode_Request_Is_Required);
@@ -197,7 +199,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
 
             thePBill4PaidList.Null(GetPBill4PaidListByNationalCodeResult.PBill4Paid_GetPBill4PaidListByNationalCode_PBill4Paid_NotFound);
 
-            var thePBill4PaidInfoContractList = thePBill4PaidList.Select(x => new PBill4PaidInfoContract()
+            var thePBill4PaidInfoContractList = thePBill4PaidList.Where(x => PBill4Cash.validStateForService.Contains(x.TheObjectState?.Code))?.Select(x => new PBill4PaidInfoContract()
             {
                 FishNo                 = x.FishNo,
                 Billtype               = x.Billtype?.GetEnmDescription(),
@@ -316,7 +318,8 @@ namespace Anu.PunishmentOrg.Api.Accounting
             };
         }
 
-        [AllowAnonymous]
+        [PermissionAttribute(PunishmentOrgConstants.GFESUserAccessType.Tazirat135Users)]
+        //[AllowAnonymous]
         public override async Task<GetCountOfPaidPBill4PaidByNationalCodeResponse> GetCountOfPaidPBill4PaidByNationalCode([FromBody] GetCountOfPaidPBill4PaidByNationalCodeRequest request)
         {
             request.Null(GetCountOfPaidPBill4PaidByNationalCodeResult.PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_Request_Is_Required);
@@ -333,7 +336,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
 
             int totalCountOfPBill4Paid   = thePBill4PaidList.Count;
             int countOfPaidPBill4Paid    = thePBill4PaidList.Count(x => x.TheObjectState?.Code == PBill4Cash.Paid);
-            int countOfNotPaidPBill4Paid = totalCountOfPBill4Paid - countOfPaidPBill4Paid;
+            int countOfNotPaidPBill4Paid = thePBill4PaidList.Count(x => x.TheObjectState?.Code == PBill4Cash.Confirmed);
 
             return new GetCountOfPaidPBill4PaidByNationalCodeResponse()
             {
