@@ -61,30 +61,13 @@
 
             PGravamenService pService = new();
             GetPersonPGravamensInfoRequest request = new();
+ 
             gravoments = pService.GetGravamenListByNationalNo(_appConfiguration.BackendServerAddress, _appConfiguration.GetGravamenListByNationalNo, SharedInfo.NationalCode, SharedInfo.AccessToken);
-
-            if (gravoments != null)
-            {
-                foreach (var item in gravoments)
-                {
-                    switch (item.TheObjectState.Code)
-                    {
-                        case "000499":
-                        case "000501":
-                        case "000503":
-                        case "000498":
-                        case "000500":
-                        case "000502":
-                        case "000505":
-                        case "000506":
-                            gravomentsSelection.Append(item);
-                            break;
-                    }
-                }
+            gravoments = gravoments.Where( a => a.TheObjectState.Code=="000499" || a.TheObjectState.Code=="000501" ||
+                                                a.TheObjectState.Code=="000503" || a.TheObjectState.Code=="000498" ||
+                                                a.TheObjectState.Code=="000500" || a.TheObjectState.Code=="000502" ||
+                                                a.TheObjectState.Code=="000505" || a.TheObjectState.Code=="000506"  );
             }
-
-            gravoments = gravomentsSelection;
-        }
         catch
         {
 
