@@ -500,7 +500,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             var req = request.ThePGravamenContract;
             var errorResult = PGravamenResult.PGravamen_Field_IsNullOrInvalid;
 
-            req!.PetitionSubject.NullOrWhiteSpace(errorResult, "موضوع شکایت");
+            req!.PetitionSubject.NullOrWhiteSpace(errorResult, "موضوع شکوائیه");
             req!.PetitionDescription.NullOrWhiteSpace(errorResult, "شرح شکوائیه");
             req!.TheGeoLocationContract.Null(PGravamenResult.PGravamen_TheGeoLocation_IsRequired);
             req!.TheGAttachmentContractList.NullOrEmpty(PGravamenResult.PGravamen_NoAttachmentAvailable);

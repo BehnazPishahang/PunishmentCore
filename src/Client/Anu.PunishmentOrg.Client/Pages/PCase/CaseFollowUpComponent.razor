@@ -2,17 +2,16 @@
 
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase
 @using Anu.PunishmentOrg.Client.Infrastructure.Pcase
-@using Anu.PunishmentOrg.ServiceModel.Case
-@using Anu.PunishmentOrg.Client
 
 
 @inject IPCaseService _pCaseService
 @inject AppConfiguration _appConfiguration;
 @inject ISnackbar Snackbar
 
-<div class="jumbotron text-center border-info border-2 oi-header">
+<div class="punFrmheader">
     <h3>پیگیری پرونده</h3>
 </div>
+
 
 <MudForm>
     <MudCard Style="margin:5px;">
@@ -52,43 +51,4 @@
 </MudForm>
 
 @code {
-
-    string CaseNo { set; get; }
-    string NationalNo { set; get; }
-    ExportInqueryPCaseResponse Elements;
-
-    private async Task GetCaseSummary()
-    {
-        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
-
-        if(string.IsNullOrEmpty(CaseNo)==false)
-            Elements =await _pCaseService.ExportInqueryPCase(_appConfiguration.BackendServerAddress, _appConfiguration.ExportInqueryPCase,SharedInfo.NationalCode ,CaseNo, SharedInfo.AccessToken);
-
-        if (Elements.Result.Code == -770003)
-        {
-            Snackbar.Add("با شماره پرونده وارد شده اطلاعاتی وجود ندارد", MudBlazor.Severity.Error);
-        }
-    }
-
-    bool _disposed;
-    public void Dispose() => _disposed = true;
-    private int ProgressValue { get; set; }
-    public async void SimulateProgress()
-    {
-        ProgressValue = 120;
-        do
-        {
-            if (_disposed)
-            {
-                return;
-            }
-
-            ProgressValue -= 1;
-            StateHasChanged();
-            await Task.Delay(1000);
-
-        } while (ProgressValue > 0);
-
-        StateHasChanged();
-    }
 }

@@ -2,9 +2,10 @@
 
 @using Anu.PunishmentOrg.Client.Infrastructure.Granovment
 @using Anu.PunishmentOrg.ServiceModel.Gravamen
+@using MudBlazor.ThemeManager
 
 @inject AppConfiguration _appConfiguration
-
+@inject ISnackbar Snackbar
 
 <style>
     .pHeader{
@@ -13,36 +14,25 @@
         font-size:1.25em;
         text-decoration: underline;
     }
-
-        .header {
-  padding: 15px;
-  text-align: center;
-  background: #005c99;
-  color: white;
-  font-size: 30px;
-  font-family:'B Titr';
-  margin-bottom:5px;
-  border-radius:5px;
-        }
 </style>
 
 
-<div class="header">
-  <h3>خلاصه شکایت نامه</h3>
+<div class="punFrmheader">
+  <h3>خلاصه شکوائیه</h3>
 </div>
 
 <MudForm Model="@_pGravamenContract">
     <MudCard Style="margin:5px;">
         <MudCardContent>
-            <MudText Typo="Typo.h6" Align="MudBlazor.Align.Center" Class="pHeader">شماره شکایت نامه :@_pGravamen</MudText>
-            <MudText Typo="Typo.h6" Class="pHeader">موضوع شکایت نامه</MudText>
+            <MudText Typo="Typo.h6" Align="MudBlazor.Align.Center" Class="pHeader">شماره شکوائیه :@_pGravamen</MudText>
+            <MudText Typo="Typo.h6" Class="pHeader">موضوع شکوائیه</MudText>
             <MudList>
                 @foreach(var item in _pGravamenContract.PetitionSubject.Split(","))
                 {
                     <MudListItem Icon="@Icons.Filled.ArrowLeft" IconColor="Color.Error" IconSize="Size.Small">@item</MudListItem>
                 }
             </MudList>
-            <MudText Typo="Typo.h6" Class="pHeader">خلاصه شکایت نامه</MudText>
+            <MudText Typo="Typo.h6" Class="pHeader">خلاصه شکوائیه</MudText>
             <MudText Typo="Typo.subtitle2" Align="MudBlazor.Align.Justify" Style="margin: 5px 30px 10px;">@_pGravamenContract.PetitionDescription</MudText>
         </MudCardContent>
     </MudCard>
@@ -77,34 +67,5 @@
 </MudForm>
 
 @code {
-    [Parameter]
-    public string _pGravamen { get; set; }
-
-    PGravamenContract? _pGravamenContract ;
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-    }
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        try
-        {
-            PGravamenByIdContract _pGravamenByIdContract = new();
-            _pGravamenByIdContract.FollowUpNo = _pGravamen;
-
-            PGravamenService pService = new();
-            GetPGravamenByIdRequest request = new();
-            request.ThePGravamenByIdContract = _pGravamenByIdContract;
-            GetPGravamenByIdResponse response = pService.GetGravamenByFollowingNo(_appConfiguration.BackendServerAddress, _appConfiguration.GetGravamenByFollowingNo, request);
-            if (response.Result.Code == 1000)
-                _pGravamenContract = response.ThePGravamenContract;
-        }
-        catch
-        {
-            
-        }
-    }
+ 
 }

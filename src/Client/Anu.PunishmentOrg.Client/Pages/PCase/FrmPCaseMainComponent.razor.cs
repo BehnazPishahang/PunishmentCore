@@ -12,8 +12,6 @@ namespace Anu.PunishmentOrg.Client.Pages.PCase
         private IEnumerable<GetAllPCaseContract> Elements;
 
 
-
-
         // custom sort by name length
         private Func<GetAllPCaseContract, object> _sortBy => x =>
         {
@@ -71,16 +69,19 @@ namespace Anu.PunishmentOrg.Client.Pages.PCase
 
         protected override async Task OnInitializedAsync()
         {
-            string ncode = SharedInfo.NationalCode;
+            try
+            {
+                string ncode = SharedInfo.NationalCode;
 
-            bool? ss = SharedInfo.LoadAllNoticeList;
+                bool? ss = SharedInfo.LoadAllNoticeList;
 
-            Elements = _pCaseService.getPCaseList(_appConfiguration.BackendServerAddress, _appConfiguration.GetAllPCase, ncode, SharedInfo.AccessToken);
+                Elements = _pCaseService.getPCaseList(_appConfiguration.BackendServerAddress, _appConfiguration.GetAllPCase, ncode, SharedInfo.AccessToken);
+            }
+            catch
+            {
+                Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
+            }
 
-            //if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == true)
-            //    Elements = Elements.Where(t => !string.IsNullOrEmpty(t.CreateDateTime));
-            //if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == false)
-            //    Elements = Elements.Where(t => string.IsNullOrEmpty(t.N));
         }
     }
 }

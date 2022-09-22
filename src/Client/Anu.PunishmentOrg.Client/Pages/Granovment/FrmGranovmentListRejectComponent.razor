@@ -4,36 +4,24 @@
 @using Anu.PunishmentOrg.ServiceModel.Gravamen
 
 @inject AppConfiguration _appConfiguration
+@inject ISnackbar Snackbar
 
-<style>
-    .header {
-  padding: 15px;
-  text-align: center;
-  background: #005c99;
-  color: white;
-  font-size: 30px;
-  font-family:'B Titr';
-  margin-bottom:5px;
-  border-radius:5px;
-}
-</style>
-
-<div class="header">
-  <h3>لیست شکایت های ردشده</h3>
+<div class="punFrmheader">
+  <h3>لیست شکوائیه های ردشده</h3>
 </div>
 
 
    <MudDataGrid T="PGravamenInfoContract" Items="@gravoments"  EditMode="DataGridEditMode.Form"
     Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual" QuickFilter="@_quickFilter">
     <ToolBarContent>
-        <MudText Typo="Typo.h6"> لیست شکایت های ردشده </MudText>
+        <MudText Typo="Typo.h6"> لیست شکوائیه های ردشده </MudText>
         <MudSpacer />
         <MudTextField @bind-Value="_searchString" Placeholder="جستجو" Adornment="Adornment.Start" Immediate="true"
             AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
     <Columns>
         <Column T="PGravamenInfoContract" Field="FollowUpNo" Title="شماره پیگیری"/>
-        <Column T="PGravamenInfoContract" Field="PetitionSubject" Title="موضوع شکایت نامه" />
+        <Column T="PGravamenInfoContract" Field="PetitionSubject" Title="موضوع شکوائیه" />
       
          <Column T="PGravamenInfoContract"  CellClass="d-flex justify-end" Style="width:50px">
             <CellTemplate>
@@ -48,43 +36,4 @@
 </MudDataGrid>
 
 @code {
-    IEnumerable<PGravamenInfoContract> gravoments;
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        try
-        {
-            GetPersonPGravamenInfoContract _pGravamenInfoContract = new();
-
-            PGravamenService pService = new();
-            GetPersonPGravamensInfoRequest request = new();
-            gravoments = pService.GetGravamenListByNationalNo(_appConfiguration.BackendServerAddress, _appConfiguration.GetGravamenListByNationalNo, SharedInfo.NationalCode, SharedInfo.AccessToken);
-            gravoments = gravoments.Where(a => a.TheObjectState.Code == "000497" || a.TheObjectState.Code == "000504");
-        }
-        catch
-        {
-
-        }
-    }
-
-
-    private void GravamneSummary(PGravamenInfoContract contex)
-    {
-        _navigationManager.NavigateTo($"/GranovmentSummary/{contex.FollowUpNo}");
-    }
-
-           private string _searchString;
- 
-           private Func<PGravamenInfoContract, bool> _quickFilter => x =>
-        {
-            if (string.IsNullOrWhiteSpace(_searchString))
-                return true;
-
-            if (x.FollowUpNo.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
-                return true;
-
-
-            return false;
-        };
 }

@@ -4,6 +4,7 @@
 @inject AppConfiguration _appConfiguration;
 
 @inject INoticeService _noticeService;
+@inject ISnackbar Snackbar
 
 <MudDialog Style="max-height:800px; overflow-y:scroll">
     <DialogContent>
@@ -30,14 +31,21 @@
     void Submit() => MudDialog.Close(DialogResult.Ok(true));
     void Cancel()
     { 
-       _navigationManager.NavigateTo("/");
+        _navigationManager.NavigateTo("/");
         _navigationManager.NavigateTo("/FrmNotice");
     }
 
 
     protected override async Task OnInitializedAsync()
     {
-        string nnn = No;
-        var  NoticeInfo = _noticeService.ChangePNoticeViewByUserStatus(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePNoticeViewByUserStatus, No ,SharedInfo.AccessToken);
+        try
+        {
+            string nnn = No;
+            var NoticeInfo = _noticeService.ChangePNoticeViewByUserStatus(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePNoticeViewByUserStatus, No, SharedInfo.AccessToken);
         }
+        catch
+        {
+            Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
+        }
+    }
 }

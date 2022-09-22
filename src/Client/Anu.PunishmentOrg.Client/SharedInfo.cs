@@ -8,6 +8,7 @@
 
         public static bool? LoadAllNoticeList { get; set; }
 
-       
+       public static string strPublicError = "خطای غیرمنتظره رخ داده است لطفا مجددا اقدام نمایید";
+
     }
 }

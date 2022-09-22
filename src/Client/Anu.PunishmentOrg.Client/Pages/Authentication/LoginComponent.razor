@@ -3,94 +3,92 @@
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
 
 
-@inject IAnuAuthorizationService  _anuAuthorizationService;
+@inject IAnuAuthorizationService _anuAuthorizationService;
 @inject AppConfiguration _appConfiguration;
 @inject ISnackbar Snackbar
 
 
 <section class="vh-100">
-  <MudContainer class=" py-5 h-100">
-    <MudForm class="col col-xl-10 d-flex justify-content-center align-items-center h-100">
-        <div class="mud-Border-Primary"  style="border-radius: 1rem;">
-          <div class="row g-0">
-            <div class="col-md-6 col-lg-5 d-none d-md-block " >
-                <MudImage 
-                            Height="450"
-                            Width="300" 
-                            src="/pic/LoginArm.png" 
-                            Color="Color.Primary"
-                            Class="rounded-lg Primary"
-                             />
+    <MudContainer class=" py-5 h-100">
+        <MudForm class="col col-xl-10 d-flex justify-content-center align-items-center h-100">
+            <div class="mud-Border-Primary" style="border-radius: 1rem;">
+                <div class="row g-0">
+                    <div class="col-md-6 col-lg-5 d-none d-md-block ">
+                        <MudImage Height="450"
+                                  Width="300"
+                                  src="/pic/LoginArm.png"
+                                  Color="Color.Primary"
+                                  Class="rounded-lg Primary" />
+                    </div>
+                    <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                        <div class="card-body p-4 p-lg-5  ">
+
+                            <MudForm Model="@_tokenModel">
+                                <MudText align-center Typo="Typo.h5" Style=" text-align: center;">ورود به پیشخوان خدمات تعزیرات  </MudText>
+
+                                <br />
+
+
+                                <div class="form-outline mb-4">
+                                    <MudTextField T="string" Label="شماره ملی" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                                  Immediate="true"
+                                                  MaxLength="10"
+                                                  Required="true"
+                                                  RequiredError="کد ملی باید 10 رقم باشد "
+                                                  Placeholder="1467561088"
+                                                  OnKeyDown="onLoginTextKeyPress"
+                                                  @bind-Value="_tokenModel.UserName" />
+
+
+
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <MudItem Class="row">
+                                        <MudItem xs="8">
+                                            <MudTextField T="string" Label=" کد ورود" Variant="Variant.Outlined" Margin="Margin.Dense" MaxLength=6
+                                                          @bind-Value="_secondRequest.Password"></MudTextField>
+                                        </MudItem>
+
+                                        <MudItem xs="4">
+                                            <MudButton Color="Color.Primary" Class="mt-1" Variant="Variant.Outlined" StartIcon="@Icons.Filled.InstallMobile" disabled="@(hasSmsSend)" OnClick="@(async () => await GetAccessCode())" Size="Size.Medium" Style="width: 114%;">
+
+                                                @if (hasSmsSend)
+                                                {
+                                                    <b> @ProgressValue ثانیه </b>
+                                                    <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue" />
+                                                }
+                                                else
+                                                {
+                                                    <b>دریافت کد </b>
+                                                }
+                                            </MudButton>
+                                        </MudItem>
+                                    </MudItem>
+                                </div>
+
+                                <MudItem class="row">
+                                    <MudItem xs="6" Class="d-flex justify-center">
+                                        <MudButton Color="Color.Primary" Variant="Variant.Outlined"
+                                                   StartIcon="@Icons.Filled.MobiledataOff" Href="/ChangeMobileNumber">تغییر شماره</MudButton>
+                                    </MudItem>
+                                    <MudItem xs="6" Class="d-flex justify-center">
+                                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
+                                    </MudItem>
+
+                                </MudItem>
+                                <br />
+                                <div class="d-flex justify-center">
+                                    <MudText Typo="Typo.subtitle2">آیا تا کنون در سایت ثبت نام نکرده اید؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
+                                </div>
+                            </MudForm>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5  ">
-
-                <MudForm Model="@_tokenModel">
-                      <MudText align-center  Typo="Typo.h5" Style=" text-align: center;">ورود به پیشخوان خدمات تعزیرات  </MudText>
-
-                     <br/>
-                  
-
-                  <div class="form-outline mb-4">
-                     <MudTextField  T="string" Label="شماره ملی" Variant="Variant.Outlined" Margin="Margin.Dense"
-                           Immediate="true"
-                            MaxLength="10"
-                            Required="true" 
-                            RequiredError="کد ملی باید 10 رقم باشد "
-                           Placeholder="1467561088" 
-                           OnKeyDown="onLoginTextKeyPress"
-                           @bind-Value="_tokenModel.UserName"  />
-
-                          
-
-                  </div>
-
-                  <div class="form-outline mb-4">
-                      <MudItem Class="row">
-                    <MudItem xs="8">
-                            <MudTextField T="string" Label=" کد ورود" Variant="Variant.Outlined" Margin="Margin.Dense"  MaxLength=6
-                                         @bind-Value="_secondRequest.Password"   ></MudTextField>
-                        </MudItem>
-
-                        <MudItem xs="4">
-                            <MudButton Color="Color.Primary" Class="mt-1"  Variant="Variant.Outlined"  StartIcon="@Icons.Filled.InstallMobile" disabled="@(hasSmsSend)"  OnClick="@(async () => await GetAccessCode())" Size="Size.Medium" Style="width: 114%;"> 
-
-                                    @if(hasSmsSend)
-                                     {
-                                             <b> @ProgressValue ثانیه </b>
-                                             <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue"  />
-                                    }
-                                    else
-                                    {
-                                            <b>دریافت کد </b>
-                                    }
-                            </MudButton>
-                        </MudItem>
-                        </MudItem>
-                  </div>
-
-                  <MudItem class="row">
-                       <MudItem xs="6" Class="d-flex justify-center">
-                           <MudButton Color="Color.Primary"  Variant="Variant.Outlined"
-                                StartIcon="@Icons.Filled.MobiledataOff" Href="/ChangeMobileNumber" >تغییر شماره</MudButton>
-                        </MudItem>
-                        <MudItem xs="6" Class="d-flex justify-center">
-                           <MudButton Variant="Variant.Outlined"  disabled="@(!hasSmsSend)" Color="Color.Primary" OnClick="Submit" Size="Size.Large" Style="width: 100%;">ورود</MudButton>
-                        </MudItem>
-                       
-                  </MudItem>
-                  <br />
-                    <div class="d-flex justify-center">
-                                <MudText Typo="Typo.h6">آیا تا کنون در سایت ثبت نام نکرده اید؟ <MudLink Href="/register">ثبت نام </MudLink></MudText>
-                            </div>
-                </MudForm>
-
-              </div>
-            </div>
-          </div>
-        </div>
-    </MudForm>
-  </MudContainer>
+        </MudForm>
+    </MudContainer>
 </section>
 @code {
     ObjectFit ImageFit = ObjectFit.Cover;
@@ -133,17 +131,17 @@
     }
 
 
-    private  async Task GetAccessCode()
+    private async Task GetAccessCode()
     {
 
 
         var ss = _appConfiguration.BackendServerAddress;
         hasSmsSend = true;
-        FirstStepAuthResult result =await _anuAuthorizationService.SendSmsAuth(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsAuth, _tokenModel);
+        FirstStepAuthResult result = await _anuAuthorizationService.SendSmsAuth(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsAuth, _tokenModel);
         if (result.Result.Code == 100013)
         {
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-            Snackbar.Add(result.Result.Message,  Severity.Success);
+            Snackbar.Add(result.Result.Message, Severity.Success);
             hasSmsSend = true;
             SimulateProgress();
             SharedInfo.NationalCode = _tokenModel.UserName;
@@ -155,13 +153,13 @@
             errorMessage = result.Result.Message;
             hasSmsSend = false;
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-            Snackbar.Add(errorMessage,  Severity.Warning);
+            Snackbar.Add(errorMessage, Severity.Warning);
         }
     }
 
     private void onLoginTextKeyPress()
-    { 
-        if(hasSmsSend)
+    {
+        if (hasSmsSend)
             hasSmsSend = false;
     }
     void Submit()
@@ -170,7 +168,7 @@
         if (string.IsNullOrEmpty(_secondRequest.Password) || _secondRequest.Password.Length != 6)
         {
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-            Snackbar.Add("کد ارسال شده را وارد نمایید ",  Severity.Warning);
+            Snackbar.Add("کد ارسال شده را وارد نمایید ", Severity.Warning);
             return;
         }
 
@@ -190,7 +188,7 @@
         else
         {
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-            Snackbar.Add(result.Result.Message,  Severity.Warning);
+            Snackbar.Add(result.Result.Message, Severity.Warning);
         }
     }
 

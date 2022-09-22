@@ -1,15 +1,14 @@
 ﻿@page "/CaseFollowUpNo/{_CaseNo}"
 
-@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase
-@using Anu.PunishmentOrg.Client.Infrastructure.Pcase
 @using Anu.PunishmentOrg.ServiceModel.Case
-@using Anu.PunishmentOrg.Client
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase
 
 
 @inject IPCaseService _pCaseService
 @inject AppConfiguration _appConfiguration;
+@inject ISnackbar Snackbar
 
-<div class="jumbotron text-center border-info border-2 oi-header">
+<div class="punFrmheader">
     <h3>پیگیری پرونده</h3>
 </div>
 
@@ -43,21 +42,4 @@
 </MudForm>
 
 @code {
-
-    [Parameter]
-    public string _CaseNo { get; set; }
-
-    ExportInqueryPCaseResponse Elements;
-    //
-
-    protected override Task OnInitializedAsync()
-    {
-        GetCaseSummary();
-        return base.OnInitializedAsync();
-    }
-    private async Task GetCaseSummary()
-    {
-        if (string.IsNullOrEmpty(_CaseNo) == false)
-            Elements = await _pCaseService.ExportInqueryPCase(_appConfiguration.BackendServerAddress, _appConfiguration.ExportInqueryPCase, SharedInfo.NationalCode, _CaseNo, SharedInfo.AccessToken);
-    }
 }
