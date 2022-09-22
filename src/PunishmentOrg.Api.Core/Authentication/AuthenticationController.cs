@@ -424,7 +424,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                     #region SupperUser
                     if (request.Password == Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgConstants.GfesUserPassword.Password)
                     {
-                        var pBPuoUsersSupperUser = (await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>().Find(a => a.NationalityCode == request.UserName)).SingleOrDefault();
+                        var pBPuoUsersSupperUser = await _unitOfWork.Repositorey<IPBPuoUsersRepository>().GetSuperUser(request.UserName);
                         pBPuoUsersSupperUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
                         jwtToken = GenerateJwtToken(pBPuoUsersSupperUser);
                         return new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() };
