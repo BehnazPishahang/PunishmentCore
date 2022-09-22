@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Anu.Utility.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Utility.CalendarHelper;
 
 namespace Anu.PunishmentOrg.DataAccess.PCase
@@ -22,7 +23,8 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
             var script = q.ToQueryString();
             var prt =await  q.ToListAsync();
 
-            return prt.Where(a => a.ThePRegistaryTime.RegisterDate.ToDateTime() >= CalendarHelper.SahmsiDateNow());
+            var now = DateTime.Now.ToPersianDateTime();
+            return prt.Where(a => a.ThePRegistaryTime.RegisterDate.CompareTo(now) >= 0);
         }
     }
 }

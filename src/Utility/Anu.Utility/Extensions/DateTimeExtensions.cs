@@ -253,8 +253,25 @@ namespace Anu.Utility.Extensions
             return null;
         }
 
+        public static string DateToString(this DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy/MM/dd");
+        }
 
+        public static string DateTimeToString(this DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy/MM/dd-HH:mm:ss");
+        }
 
+        public static string MaxDateTime()
+        {
+            return "1500/01/01-23:59";
+        }
+
+        public static string MinDateTime()
+        {
+            return "1300/01/01-00:01";
+        }
 
         public static string ToCompleteString(this System.Exception ex)
         {

@@ -1,6 +1,6 @@
 ﻿using Anu.BaseInfo.DataModel.FrontEndSecurity;
+using Anu.Utility.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Utility.CalendarHelper;
 
 namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
 {
@@ -51,14 +51,16 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
                 return null;
             }
 
-            if (theGFESUser.TheGFESUserAccessList != null && theGFESUser.TheGFESUserAccessList.Count()>0)
+            if (theGFESUser.TheGFESUserAccessList != null && theGFESUser.TheGFESUserAccessList.Count() > 0)
             {
+                var now = DateTime.Now.ToPersianDateTime();
+
                 return theGFESUser.TheGFESUserAccessList
                                          .Where(userAccess =>
-                                                userAccess.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.SahmsiDateNow() &&
-                                                userAccess.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.SahmsiDateNow() &&
-                                                userAccess.ToDateTime.ToDateTime() >= CalendarHelper.SahmsiDateNow() &&
-                                                userAccess.FromDateTime.ToDateTime() <= CalendarHelper.SahmsiDateNow())
+                                                 userAccess.TheGFESUser.EndDate.CompareTo(now) > -1 &&
+                                            userAccess.TheGFESUser.StartDate.CompareTo(now) < 1 &&
+                                            userAccess.ToDateTime.CompareTo(now) > -1 &&
+                                            userAccess.FromDateTime.CompareTo(now) < 1)
                                          .Select(s => s.TheGFESUser)
                                          .FirstOrDefault();
             }

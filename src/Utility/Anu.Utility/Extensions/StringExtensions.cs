@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utility.Exceptions;
 
 namespace Anu.Utility.Extensions
 {
@@ -21,8 +23,8 @@ namespace Anu.Utility.Extensions
         
         public static bool IsValidNationalCode(this string nationalCode)
         {
-            if (string.IsNullOrWhiteSpace(nationalCode)) return false;
-            if (nationalCode.Length != 10) return false;
+            if (string.IsNullOrWhiteSpace(nationalCode)) throw new AnuExceptions(AnuResult.NationalCode_Is_Not_Valid);
+            if (nationalCode.Length != 10) throw new AnuExceptions(AnuResult.NationalCode_Is_Not_Valid);
             switch (nationalCode)
             {
                 case "0000000000":
@@ -35,15 +37,15 @@ namespace Anu.Utility.Extensions
                 case "7777777777":
                 case "8888888888":
                 case "9999999999":
-                    return false;
+                    throw new AnuExceptions(AnuResult.NationalCode_Is_Not_Valid);
                 default:
                     int code = 0;
                     char ch;
                     for (int i = 0; i < 9; i++)
                     {
                         ch = nationalCode[i];
-                        if (ch < '0') return false;
-                        if (ch > '9') return false;
+                        if (ch < '0') throw new AnuExceptions(AnuResult.NationalCode_Is_Not_Valid);
+                        if (ch > '9') throw new AnuExceptions(AnuResult.NationalCode_Is_Not_Valid);
 
                         int v = ch - 48;
                         code += v * (10 - i);
@@ -55,7 +57,7 @@ namespace Anu.Utility.Extensions
                     break;
             }
 
-            return false;
+            throw new AnuExceptions(AnuResult.NationalCode_Is_Not_Valid);
         }
 
         public static string NormalizeTextChars(this string strText, bool persian2Arabic = true)
