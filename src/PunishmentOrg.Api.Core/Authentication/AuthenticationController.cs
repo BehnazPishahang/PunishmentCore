@@ -189,9 +189,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IPBPuoUsersHistoryRepository>().LastRecordHistoryPerDay(pBPuoUsers.Id, DateTime.Now.DateToString());
 
-            if (lastRecordHistoryPerDay != null && !Anu.Utility.Utility.IsDevelopment())
+            if (lastRecordHistoryPerDay != null )
             {
-                var difDateSecond = (DateTime.Now - lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime().Value).TotalSeconds;
+                var difDateSecond = (DateTime.Now - DateTime.Parse(lastRecordHistoryPerDay.SendCodeDateTime.Replace("-"," "))).TotalSeconds;
                 if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
                 {
                     return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_SecodeWait - difDateSecond)).ToString()) };
@@ -513,9 +513,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             if (lastRecordHistoryPerDay != null && !Anu.Utility.Utility.IsDevelopment())
             {
-                var sendCodeDateTime = lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime();
-                sendCodeDateTime.Null(AnuResult.Recorde_User_History_Is_Not_Valid);
-                var difDateSecond = (DateTime.Now - sendCodeDateTime.Value).TotalSeconds;
+                var sendCodeDateTime = DateTime.Parse(lastRecordHistoryPerDay.SendCodeDateTime.Replace("-", " "));
+                var difDateSecond = (DateTime.Now - sendCodeDateTime).TotalSeconds;
                 if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
                 {
                     return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_SecodeWait - difDateSecond)).ToString()) };
