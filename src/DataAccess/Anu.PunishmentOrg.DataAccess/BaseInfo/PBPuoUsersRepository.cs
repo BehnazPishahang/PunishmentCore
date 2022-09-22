@@ -2,7 +2,8 @@
 using Anu.DataAccess;
 using Anu.DataAccess.Repositories;
 using Anu.PunishmentOrg.DataModel.BaseInfo;
-using Utility.CalendarHelper;
+//using Utility.CalendarHelper;
+using Anu.Utility.Extensions;
 
 namespace Anu.PunishmentOrg.Domain.BaseInfo;
 
@@ -54,12 +55,13 @@ public class PBPuoUsersRepository : GenericRepository<DataModel.BaseInfo.PBPuoUs
 
         if (pBPuoUsers.TheGFESUserAccessList != null && pBPuoUsers.TheGFESUserAccessList.Count() > 0)
         {
+            var now = DateTime.Now.ToPersianDateTime();
             var theGFESUserAccessList = pBPuoUsers.TheGFESUserAccessList
                                      .Where(userAccess =>
-                                            userAccess.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.SahmsiDateTimeNow() &&
-                                            userAccess.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.SahmsiDateTimeNow() &&
-                                            userAccess.ToDateTime.ToDateTime() >= CalendarHelper.SahmsiDateTimeNow() &&
-                                            userAccess.FromDateTime.ToDateTime() <= CalendarHelper.SahmsiDateTimeNow())
+                                            userAccess.TheGFESUser.EndDate.CompareTo(now) > -1 &&
+                                            userAccess.TheGFESUser.StartDate.CompareTo(now) < 1 &&
+                                            userAccess.ToDateTime.CompareTo(now) > -1 &&
+                                            userAccess.FromDateTime.CompareTo(now) < 1)
                                      .FirstOrDefault();
 
             return await _context.Set<PBPuoUsers>()
@@ -73,7 +75,7 @@ public class PBPuoUsersRepository : GenericRepository<DataModel.BaseInfo.PBPuoUs
         return pBPuoUsers;
     }
 
-    public async void  UpdateParent(PBPuoUsers pBPuoUsers)
+    public async void UpdateParent(PBPuoUsers pBPuoUsers)
     {
         _context.Update<Anu.BaseInfo.DataModel.FrontEndSecurity.GFESUser>(pBPuoUsers);
     }
