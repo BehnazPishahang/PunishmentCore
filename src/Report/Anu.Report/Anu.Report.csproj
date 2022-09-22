@@ -6,10 +6,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /d &quot;$(ProjectDir)Packages\*.*&quot; &quot;$(ProjectDir)$(OutDir)&quot;&#xD;&#xA;&#xD;&#xA;" />
-  </Target>
-
   <ItemGroup>
     <PackageReference Include="stimulsoft.reports.engine.netcore" Version="2022.1.1" />
     <PackageReference Include="stimulsoft.reports.web.netcore" Version="2022.1.1" />
@@ -17,6 +13,21 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Utility\Anu.Utility\Anu.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Packages\Stimulsoft.Base.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Packages\Stimulsoft.Report.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Packages\Stimulsoft.Report.Web.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Packages\Stimulsoft.Report.WebDesign.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

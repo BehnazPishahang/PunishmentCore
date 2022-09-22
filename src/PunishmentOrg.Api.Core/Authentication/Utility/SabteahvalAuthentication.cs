@@ -54,8 +54,8 @@ namespace Anu.PunishmentOrg.Api.Authentication.Utility
 
             var Result = (await Url.CallApi(input, AnuResult.SabteAhval_Unkhown_Error, authorization: Authorization, IsJson: false)).XmlDeserialize<Envelope>();
 
-            if (!((System.Xml.XmlNode[])(Result.Body.getEstelam3Response.@return.message)).Null() && 
-                ((System.Xml.XmlNode[])(Result.Body.getEstelam3Response.@return.message))[0].Value.ToString().ToLower().Trim().Equals("login.time.diny".ToLower()))
+            if ((Result.Body.getEstelam3Response.@return.message).Equals(null) || (!(Result.Body.getEstelam3Response.@return.message).ToString().Equals("System.Object") && 
+                ((System.Xml.XmlNode[])(Result.Body.getEstelam3Response.@return.message))[0].Value.ToString().ToLower().Trim().Equals("login.time.diny".ToLower())))
             {
                 throw new AnuExceptions(AnuResult.SabteAhval_Is_Out_Of_Service);
             }

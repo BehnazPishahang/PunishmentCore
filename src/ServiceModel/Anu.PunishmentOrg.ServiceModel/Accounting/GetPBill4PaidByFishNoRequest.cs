@@ -8,6 +8,7 @@ namespace Anu.PunishmentOrg.ServiceModel.Accounting
     {
         public GetPBill4PaidByFishNoRequest()
         {
+            ThePBill4PaidFishNoContract = new PBill4PaidFishNoContract();
         }
             
                 [System.ComponentModel.DataAnnotations.Required]

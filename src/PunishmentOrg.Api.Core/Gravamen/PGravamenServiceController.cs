@@ -21,6 +21,7 @@ using Anu.PunishmentOrg.Domain.PGravamen;
 using Anu.PunishmentOrg.Enumerations;
 using Anu.PunishmentOrg.ServiceModel.Gravamen;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
+using Anu.Utility.Extensions;
 using Anu.Utility.Sms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -168,7 +169,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                             Timestamp = 1,
                             FileExtension = attachment.FileExtension,
                             SaveAttachmentType = Anu.BaseInfo.Enumerations.SaveAttachmentType.SaveInDataBase,
-                            CreateDateTime = DateTime.Now.ToPersian().ToString(),
+                            CreateDateTime = DateTime.Now.ToPersianDateTime().ToString(),
                             TheAttachmentType = attachmentType,
                             Title = attachment.Title,
                             //SecondMili = attachment.SecondMili,
@@ -206,7 +207,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 ThePGravamenPersonList = personList,
                 ThePGravamenAttachmentList = attachmentList.Count == 0 ? null : attachmentList,
 
-                CreateDateTime = DateTime.Now.ToPersian().ToString(),
+                CreateDateTime = DateTime.Now.ToPersianDateTime(),
                 FollowUpNo = followupNumber,
                 HowDataType = PU135OrWebSite.WebSite,
                 GravamenOrReport = Anu.PunishmentOrg.Enumerations.GravamenOrReport.Gravamen,
@@ -635,7 +636,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                 {
                     Id = Guid.NewGuid().ToString("N"),
                     Timestamp = 1,
-                    ActivateDate = DateTime.Now.ToPersian().Substring(0, 10),
+                    ActivateDate = DateTime.Now.ToPersianDateTime().Substring(0, 10),
                     TheBaseRole = baseRole,
                     Description = baseRole.Name,
                     MaxDelayDate = maxDefaultDate,
@@ -655,7 +656,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     KeyField2 = "temp2",
                     TheRelatedCMSUser = null,
                     TheRelatedCMSUserRoleType = null,
-                    CreateDateTime = DateTime.Now.ToPersian(),
+                    CreateDateTime = DateTime.Now.ToPersianDateTime(),
 
                 };
 

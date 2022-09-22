@@ -1,7 +1,8 @@
 ﻿using Anu.Commons.ServiceModel.ServiceResponse;
 
-namespace Anu.PunishmentOrg.Api.Accounting
+namespace Anu.PunishmentOrg.ServiceModel.Accounting
 {
+    [System.ComponentModel.DisplayName("SendPaymentRequestToSadadResponse")]
     public class SendPaymentRequestToSadadResponse : IResponseMessage
     {
         public Result Result { get; set; }
@@ -9,6 +10,7 @@ namespace Anu.PunishmentOrg.Api.Accounting
         public SendPaymentRequestToSadadResponse()
         {
             Result = new Result();
+            ThePBill4PaidTokenContract = new PBill4PaidTokenContract();
         }
 
         [System.ComponentModel.DataAnnotations.Required]

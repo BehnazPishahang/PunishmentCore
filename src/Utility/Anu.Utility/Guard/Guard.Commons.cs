@@ -157,28 +157,28 @@ namespace Utility.Guard
             return input;
         }
 
-        //todo: it should be reviewed by s.kavianimehr 
-        public static string IsValidNationalCode(this string nationalCode)
-        {
-            //در صورتی که کد ملی وارد شده تهی باشد
-            nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
+        ////todo: it should be reviewed by s.kavianimehr 
+        //public static string IsValidNationalCode(this string nationalCode)
+        //{
+        //    //در صورتی که کد ملی وارد شده تهی باشد
+        //    nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
 
-            //در صورتی که کد ملی وارد شده طولش کمتر از 10 رقم باشد
-            nationalCode.Length(AnuResult.NationalCode_Length_Is_Not_Valid, 10);
+        //    //در صورتی که کد ملی وارد شده طولش کمتر از 10 رقم باشد
+        //    nationalCode.Length(AnuResult.NationalCode_Length_Is_Not_Valid, 10);
 
-            //در صورتی که کد ملی ده رقم عددی نباشد
-            var regex = new Regex(@"\d{10}");
-            nationalCode.IsMatch(AnuResult.NationalCode_Must_Be_Number, regex);
+        //    //در صورتی که کد ملی ده رقم عددی نباشد
+        //    var regex = new Regex(@"\d{10}");
+        //    nationalCode.IsMatch(AnuResult.NationalCode_Must_Be_Number, regex);
 
-            //در صورتی که رقم‌های کد ملی وارد شده یکسان باشد
-            var allDigitEqual = new[] { "0000000000", "1111111111", "2222222222", "3333333333", "4444444444", "5555555555", "6666666666", "7777777777", "8888888888", "9999999999" };
-            if (allDigitEqual.Contains(nationalCode))
-            {
-                nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
-            }
+        //    //در صورتی که رقم‌های کد ملی وارد شده یکسان باشد
+        //    var allDigitEqual = new[] { "0000000000", "1111111111", "2222222222", "3333333333", "4444444444", "5555555555", "6666666666", "7777777777", "8888888888", "9999999999" };
+        //    if (allDigitEqual.Contains(nationalCode))
+        //    {
+        //        nationalCode.NullOrEmpty(AnuResult.NationalCode_Is_Not_Valid);
+        //    }
 
-            return nationalCode;
-        }
+        //    return nationalCode;
+        //}
 
         //todo it should be reviewed by s.kavianimehr 
         public static bool IsValidDate(this string? dateString, Enum type, string args = null)

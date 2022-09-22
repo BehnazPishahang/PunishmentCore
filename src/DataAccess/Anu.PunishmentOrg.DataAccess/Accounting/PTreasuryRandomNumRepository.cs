@@ -17,9 +17,11 @@ namespace Anu.PunishmentOrg.DataAccess.Accounting
         {
         }
 
-        public Task<PTreasuryRandomNum> Get_PTreasuryRandomNum_By_TreasuryNumber(string treasuryNumber)
+        public async Task<List<PTreasuryRandomNum>> Get_PTreasuryRandomNum_EndsWith_TreasuryNumber(string treasuryNumber)
         {
-            throw new NotImplementedException();
+            return await _context.Set<PTreasuryRandomNum>()
+                                 .Where(x => x.TreasuryNumber.EndsWith(treasuryNumber))
+                                 .ToListAsync();
         }
     }
 }
