@@ -1,6 +1,4 @@
-﻿using Anu.BaseInfo.DataAccess.FrontEndSecurity;
-using Anu.BaseInfo.DataModel.ExchangeData;
-using Anu.BaseInfo.DataModel.FrontEndSecurity;
+﻿using Anu.BaseInfo.DataModel.FrontEndSecurity;
 using Anu.BaseInfo.Domain.ExchangeData;
 using Anu.BaseInfo.Domain.FrontEndSecurity;
 using Anu.Commons.ServiceModel.ServiceAuthentication;
@@ -13,6 +11,7 @@ using Anu.Domain;
 using Anu.PunishmentOrg.Api.Authentication.Utility;
 using Anu.PunishmentOrg.DataModel.BaseInfo;
 using Anu.PunishmentOrg.Domain.BaseInfo;
+using Anu.Utility.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -20,7 +19,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Utility;
-using Utility.CalendarHelper;
 using Utility.Exceptions;
 using Utility.Guard;
 
@@ -107,8 +105,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 Password = passWordHash,
                 MobileNumber4SMS = request.PhoneNumber,
                 NationalityCode = request.UserName,
-                StartDate = CalendarHelper.GetCurrentDateTime(),
-                EndDate = CalendarHelper.MaxDateTime(),
+                StartDate = DateTime.Now.ToPersianDateTime(),
+                EndDate = DateTimeExtensions.MaxDateTime(),
                 Family = request.LastName,
                 FatherName = "b",
                 LastChangePassword = DateTime.Now.AddSeconds(_SecodeWait).ToString("MM/dd HH:mm:ss"),
@@ -193,7 +191,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             if (lastRecordHistoryPerDay != null && !Anu.Utility.Utility.IsDevelopment())
             {
-                var difDateSecond = (DateTime.Now - lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime()).TotalSeconds;
+                var difDateSecond = (DateTime.Now - lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime().Value).TotalSeconds;
                 if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
                 {
                     return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_SecodeWait - difDateSecond)).ToString()) };
@@ -318,14 +316,14 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 SendDynomicPassword = _NotVerify,
                 MobileNumber4SMS = request.PhoneNumber,
                 NationalityCode = request.UserName,
-                StartDate = CalendarHelper.GetCurrentDateTime(),
-                EndDate = CalendarHelper.MaxDateTime(),
+                StartDate = DateTime.Now.ToPersianDateTime(),
+                EndDate = DateTimeExtensions.MaxDateTime(),
                 Family = request.LastName,
                 FatherName = request.BirthDate,
                 BirthDay = request.BirthDate,
                 Name = request.FirstName,
                 Sex = request.Sex,
-                LastChangePassword = CalendarHelper.GetCurrentDateTime()
+                LastChangePassword = DateTime.Now.ToPersianDateTime()
             };
 
             await _unitOfWork.Repositorey<IGenericRepository<PBPuoUsers>>().Add(user);
@@ -341,8 +339,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
             var userAccess = new GFESUserAccess()
             {
                 Id = System.Guid.NewGuid().ToString("N"),
-                FromDateTime = CalendarHelper.MinDateTime(),
-                ToDateTime = CalendarHelper.MaxDateTime(),
+                FromDateTime = DateTimeExtensions.MinDateTime(),
+                ToDateTime = DateTimeExtensions.MaxDateTime(),
                 SignText = "کاربر سامانه ی 135 تازیرات",
                 TheGFESUser = user,
                 TheGFESUserAccessType = accessType,
@@ -486,7 +484,6 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         }
 
-
         #region Change Phone Number WithOut Login
 
         [Route("api/v1/SendSmsForChangePhoneNumber")]
@@ -516,7 +513,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             if (lastRecordHistoryPerDay != null && !Anu.Utility.Utility.IsDevelopment())
             {
-                var difDateSecond = (DateTime.Now - lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime()).TotalSeconds;
+                var sendCodeDateTime = lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime();
+                sendCodeDateTime.Null(AnuResult.Recorde_User_History_Is_Not_Valid);
+                var difDateSecond = (DateTime.Now - sendCodeDateTime.Value).TotalSeconds;
                 if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
                 {
                     return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_SecodeWait - difDateSecond)).ToString()) };
@@ -616,12 +615,12 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             bool IsExpierd = false;
             //Check kardan expire shodan code
-            if (lastRecordHistoryPerDay.ExpiredCodeDateTime.ToDateTime() < DateTime.Now.DateTimeToString().ToDateTime())
+            if (DateTime.Parse(lastRecordHistoryPerDay.ExpiredCodeDateTime.Replace("-"," ")) < DateTime.Now)
             {
                 IsExpierd = true;
             }
             //check kardan in ke agar tarikh ersal va expiration barabar bashad iani az in code ghblan estefade shode ast
-            if (lastRecordHistoryPerDay.ExpiredCodeDateTime.ToDateTime() == lastRecordHistoryPerDay.SendCodeDateTime.ToDateTime())
+            if (DateTime.Parse(lastRecordHistoryPerDay.ExpiredCodeDateTime.Replace("-", " ")) == DateTime.Parse(lastRecordHistoryPerDay.SendCodeDateTime.Replace("-", " ")))
             {
                 throw new AnuExceptions(AnuResult.Login_Again);
             }

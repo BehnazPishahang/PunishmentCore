@@ -16,6 +16,7 @@ using Anu.PunishmentOrg.Domain.PBillStore;
 using Anu.PunishmentOrg.ServiceModel.BillStore;
 
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
+using Anu.Utility.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using Utility;
@@ -75,7 +76,7 @@ namespace Anu.PunishmentOrg.Api.BillStore
                 Timestamp = 1,
                 BillDate = request.BillDate,
                 BillNo = request.BillNumber,
-                CreateDateTime = CalendarHelper.GetCurrentDateTime(),
+                CreateDateTime = DateTime.Now.ToPersianDateTime(),
                 PCaseNo = request.ParentContentNumber,
                 UniqueNo = Utility.Utility.GetRandomNumber(Anu.Constants.ServiceModel.General.GeneralConstants.ConventionalConstants.UniqueNumberLength)
             };

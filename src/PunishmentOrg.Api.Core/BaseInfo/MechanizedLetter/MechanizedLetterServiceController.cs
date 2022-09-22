@@ -11,6 +11,7 @@ using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.PunishmentOrg.Domain.Case;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
+using Anu.Utility.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Utility;
@@ -174,7 +175,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 {
                     Id = Guid.NewGuid().ToString("N"),
                     Timestamp = 1,
-                    CreateDateTime = CalendarHelper.GetCurrentDateTime(),
+                    CreateDateTime = DateTime.Now.ToPersianDateTime(),
                     OuterOrgLetterNo = request.TheGMechanizedLetterContract.OuterOrgLetterNo is null ? null : request.TheGMechanizedLetterContract.OuterOrgLetterNo,
                     OuterOrgLetterDate = request.TheGMechanizedLetterContract.OuterOrgLetterDate is null ? null : request.TheGMechanizedLetterContract.OuterOrgLetterDate,
                     LetterText = request.TheGMechanizedLetterContract.LetterText,
@@ -260,7 +261,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 {
                     var ReceiverInnerOrg = await _unitOfWork.Repositorey<ICMSOrganizationRepository>().GetByCode(item.TheCMSOrganizationContract.Code);
                     var CMSUserRoleType = await _unitOfWork.Repositorey<ICMSUserRoleTypeRepository>().GetByCode(item.TheCMSUserRoleTypeContract.Code);
-                    var MaxNo = await _unitOfWork.Repositorey<IGMechanizedLetterRepository>().GetMaxNo(CalendarHelper.GetCurrentDate().Substring(0, 4), item.TheCMSOrganizationContract.Code);
+                    var MaxNo = await _unitOfWork.Repositorey<IGMechanizedLetterRepository>().GetMaxNo(DateTime.Now.ToPersianDate().Substring(0, 4), item.TheCMSOrganizationContract.Code);
                     OneGMechanizedLetter.TheGMechanizedLetterReceiverList = new();
                     var oneGMechanizedLetterReceiver = new GMechanizedLetterReceiver()
                     {
@@ -269,7 +270,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                         InnerOrOutterRcvType = Anu.BaseInfo.Enumerations.MechanizedLetterReceiverType.InnerOrg,
                         MainRcvOrTranscriptRcv = item.MainRcvOrTranscriptRcv,
                         ReceiverType = item.ReceiverType,
-                        SendDateTime = CalendarHelper.GetCurrentDateTime(),
+                        SendDateTime = DateTime.Now.ToPersianDateTime(),
                         ViewDateTime = "9999/99/99-99:99",
                         TheObjectState = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PMechanizeLetter.ReceivedByReceiverUnit),
                         TheReceiverInnerOrg = ReceiverInnerOrg is null ? null : ReceiverInnerOrg,
@@ -452,7 +453,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
 
             string TempNo = "";
             await _unitOfWork.Repositorey<IWorkFlowInstanceWorkItemRepository>().Insert(
-            DateTime.Now.ToPersian().Substring(0, 10),
+            DateTime.Now.ToPersianDateTime().Substring(0, 10),
             baseRole.Id,
             baseRole.Name,
             "9999/99/99",

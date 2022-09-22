@@ -13,6 +13,7 @@ using Anu.PunishmentOrg.ServiceModel.Notice;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Anu.Report;
 using Anu.Utility;
+using Anu.Utility.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.ObjectModel;
 using Utility;
@@ -126,7 +127,7 @@ namespace Anu.PunishmentOrg.Api.Notice
 
             if (thePNotice.NoticeDate.NullOrWhiteSpace())
             {
-                thePNotice.NoticeDate = DateTime.Now.ToPersian().ToString().Substring(0,10);
+                thePNotice.NoticeDate = DateTime.Now.ToPersianDateTime().ToString().Substring(0,10);
                 thePNotice.IsViewedOnSite = YesNo.Yes;
                 thePNotice.TheNoticeResultType = await _unitOfWork.Repositorey<Anu.BaseInfo.Domain.Types.INoticeResultTypeRepository>().
                     GetNoticeResultTypeWithCode(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.NoticeResultTypeCode.NotificationThroughTheSite);
@@ -175,7 +176,7 @@ namespace Anu.PunishmentOrg.Api.Notice
                 Address          = thePNotice.NoticePersonAddress,
                 NoticeType       = thePNotice.TheGNoticeType?.Title,
                 PersonAddress    = thePNotice.TheUnit?.Address,
-                NoticeDate       = thePNotice.NoticeDate ?? CalendarHelper.GetCurrentDate(),
+                NoticeDate       = thePNotice.NoticeDate ?? DateTime.Now.ToPersianDate(),
                 Description      = thePNotice.Description.StripRichTextFormat(),
                 CaseArchiveNo    = this.GetCaseArchiveNo(thePNotice),
                 Violation        = this.GetViolation(thePNotice),
