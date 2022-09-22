@@ -12,6 +12,7 @@ public class PBPuoUsersRepository : GenericRepository<DataModel.BaseInfo.PBPuoUs
     public PBPuoUsersRepository(ApplicationDbContext context) : base(context)
     {
     }
+
     public async Task<PBPuoUsers> GetGFESUserByUserNameAndPassWordAsync(string userName, string passWord)
     {
         string passWordHash = MD5Core.GetHashString(passWord);
@@ -29,6 +30,24 @@ public class PBPuoUsersRepository : GenericRepository<DataModel.BaseInfo.PBPuoUs
         {
             return null;
         }
+
+        return pBPuoUsers;
+    }
+
+    public async Task<PBPuoUsers> GetSuperUser(string userName)
+    {
+        var pBPuoUsers = await _context.Set<PBPuoUsers>()
+                                  .Where(user =>
+                                         user.UserID == userName.Trim()
+                                       ).Include(user => user.TheGFESUserAccessList).ThenInclude(user => user.TheGFESUserAccessType)
+                                  .Select(user => user)
+                                  .SingleOrDefaultAsync();
+
+        if (pBPuoUsers == null)
+        {
+            return null;
+        }
+
 
         return pBPuoUsers;
     }
