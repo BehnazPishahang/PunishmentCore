@@ -1,12 +1,12 @@
 ﻿@page "/Login"
 @using Anu.Commons.ServiceModel.ServiceAuthentication
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
+@using Blazored.LocalStorage
 
 
 @inject IAnuAuthorizationService _anuAuthorizationService;
 @inject AppConfiguration _appConfiguration;
 @inject ISnackbar Snackbar
-
 
 <section class="vh-100">
     <MudContainer class=" py-5 h-100">
@@ -133,34 +133,29 @@
 
     private async Task GetAccessCode()
     {
-        try
+
+
+        var ss = _appConfiguration.BackendServerAddress;
+        hasSmsSend = true;
+        FirstStepAuthResult result = await _anuAuthorizationService.SendSmsAuth(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsAuth, _tokenModel);
+        if (result.Result.Code == 100013)
         {
-            var ss = _appConfiguration.BackendServerAddress;
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            Snackbar.Add(result.Result.Message, Severity.Success);
             hasSmsSend = true;
-            FirstStepAuthResult result = await _anuAuthorizationService.SendSmsAuth(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsAuth, _tokenModel);
-            if (result.Result.Code == 100013)
-            {
-                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-                Snackbar.Add(result.Result.Message, Severity.Success);
-                hasSmsSend = true;
-                SimulateProgress();
-                SharedInfo.NationalCode = _tokenModel.UserName;
-                errorMessage = result.Result.Message;
+            SimulateProgress();
+            await _localStorage.SetItemAsStringAsync(SharedInfo.NationalCodeKeyName,_tokenModel.UserName);
 
-            }
-            else
-            {
-                errorMessage = result.Result.Message;
-                hasSmsSend = false;
-                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-                Snackbar.Add(errorMessage, Severity.Warning);
-            }
+            errorMessage = result.Result.Message;
+
         }
-        catch
+        else
         {
-            Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
+            errorMessage = result.Result.Message;
+            hasSmsSend = false;
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            Snackbar.Add(errorMessage, Severity.Warning);
         }
-
     }
 
     private void onLoginTextKeyPress()
@@ -170,39 +165,35 @@
     }
     void Submit()
     {
-        try
+        if (string.IsNullOrEmpty(_secondRequest.Password) || _secondRequest.Password.Length != 6)
         {
-            if (string.IsNullOrEmpty(_secondRequest.Password) || _secondRequest.Password.Length != 6)
-            {
-                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-                Snackbar.Add("کد ارسال شده را وارد نمایید ", Severity.Warning);
-                return;
-            }
-
-            var ss = _appConfiguration.BackendServerAddress;
-
-            _secondRequest.UserName = _tokenModel.UserName;
-            _secondRequest.LoginType = Commons.ServiceModel.ServiceAuthentication.Enumerations.LoginType.LoginWithSms;
-            AuthResult result = _anuAuthorizationService.V2Login(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _secondRequest).Result;
-            if (result.Result.Code == 1000)
-            {
-                SharedInfo.NationalCode = _tokenModel.UserName;
-                SharedInfo.AccessToken = result.AccessToken;
-                _navigationManager.NavigateTo("/");
-                errorMessage = "";
-
-            }
-            else
-            {
-                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-                Snackbar.Add(result.Result.Message, Severity.Warning);
-            }
-        }
-        catch
-        {
-            Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            Snackbar.Add("کد ارسال شده را وارد نمایید ", Severity.Warning);
+            return;
         }
 
+        var ss = _appConfiguration.BackendServerAddress;
+
+        _secondRequest.UserName = _tokenModel.UserName;
+        _secondRequest.LoginType = Commons.ServiceModel.ServiceAuthentication.Enumerations.LoginType.LoginWithSms;
+        AuthResult result = _anuAuthorizationService.V2Login(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _secondRequest).Result;
+        if (result.Result.Code == 1000)
+        {
+            //SharedInfo.NationalCode = _tokenModel.UserName;
+            //SharedInfo.AccessToken = result.AccessToken;
+
+            _localStorage.SetItemAsStringAsync(SharedInfo.AccessTokenKeyName,result.AccessToken);
+            _localStorage.SetItemAsStringAsync(SharedInfo.NationalCodeKeyName,_tokenModel.UserName);
+
+            _navigationManager.NavigateTo("/");
+            errorMessage = "";
+
+        }
+        else
+        {
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            Snackbar.Add(result.Result.Message, Severity.Warning);
+        }
     }
 
     protected async override Task OnInitializedAsync()

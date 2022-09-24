@@ -1,103 +1,109 @@
-﻿@page "/Profile"
+﻿
+ @page "/Profile"
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
 @using Anu.PunishmentOrg.ServiceModel.BaseInfo
-
-@inject IAnuAuthorizationService _anuAuthorizationService;
+@inject IAnuAuthorizationService  _anuAuthorizationService;
 @inject AppConfiguration _appConfiguration;
-@inject ISnackbar Snackbar
 
 <MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
     <MudText Typo="Typo.h3" GutterBottom="true"></MudText>
     <MudItem class="col-lg-8">
-
+	  
         <MudItem class="card mb-4">
-            <MudItem class="card-body">
-                <MudItem class="row">
-                    <MudItem class="col-sm-3">
-                        <MudItem class="text-black mb-0">کدملی</MudItem>
-                    </MudItem>
-                    <MudItem class="col-sm-9">
-                        <MudItem class="text-muted mb-0">@userInfo.PBPuoUsersContract.NationalCode</MudItem>
-                    </MudItem>
-                </MudItem>
-                <hr />
-                <MudItem class="row">
-                    <MudItem class="col-sm-3">
-                        <MudText class="text-black mb-0">نام </MudText>
-                    </MudItem>
-                    <MudItem class="col-sm-9">
-                        <MudText class="text-muted mb-0">@userInfo.PBPuoUsersContract.FirstName</MudText>
-                    </MudItem>
-                </MudItem>
-                <hr>
-                <MudItem class="row">
-                    <MudItem class="col-sm-3">
-                        <MudItem class="text-black mb-0">نام خانوادگی</MudItem>
-                    </MudItem>
-                    <MudItem class="col-sm-9">
-                        <MudItem class="text-muted mb-0">@userInfo.PBPuoUsersContract.LastName</MudItem>
-                    </MudItem>
-                </MudItem>
-                <hr>
-                <MudItem class="row">
-                    <MudItem class="col-sm-3">
-                        <MudItem class="text-black mb-0">تاریخ تولد </MudItem>
-                    </MudItem>
-                    <MudItem class="col-sm-9">
-                        <MudItem class="text-muted mb-0">@userInfo.PBPuoUsersContract.BirthDate</MudItem>
-                    </MudItem>
-                </MudItem>
-                <hr>
-                <MudItem class="row">
-                    <MudItem class="col-sm-3">
-                        <MudItem class="text-black mb-0">موبایل </MudItem>
-                    </MudItem>
-                    <MudItem class="col-sm-6">
-                        <MudItem class="text-muted mb-0">@userInfo.PBPuoUsersContract.PhoneNumber </MudItem>
-                    </MudItem>
-                    <MudItem class="col-sm-3">
-                        <MudButton Variant="Variant.Text" Color="Color.Error" Href="/ChangeNumber">تغییر شماره</MudButton>
-                    </MudItem>
-
-                </MudItem>
-                <hr>
-
+          <MudItem class="card-body">
+               <MudItem class="row">
+              <MudItem class="col-sm-3">
+                <MudItem class="text-black mb-0">کدملی</MudItem>
+              </MudItem>
+              <MudItem class="col-sm-9">
+                <MudItem class="text-muted mb-0">@NationalCode</MudItem>
+              </MudItem>
             </MudItem>
+            <hr />
+            <MudItem class="row">
+              <MudItem class="col-sm-3">
+                <MudText class="text-black mb-0">نام </MudText>
+              </MudItem>
+              <MudItem class="col-sm-9">
+                <MudText  class="text-muted mb-0">@FirstName</MudText>
+              </MudItem>
+            </MudItem>
+            <hr>
+            <MudItem class="row">
+              <MudItem class="col-sm-3">
+                <MudItem class="text-black mb-0">نام خانوادگی</MudItem>
+              </MudItem>
+              <MudItem class="col-sm-9">
+                <MudItem class="text-muted mb-0">@LastName</MudItem>
+              </MudItem>
+            </MudItem>
+            <hr>
+            <MudItem class="row">
+              <MudItem class="col-sm-3">
+                <MudItem class="text-black mb-0">تاریخ تولد </MudItem>
+              </MudItem>
+              <MudItem class="col-sm-9">
+                <MudItem class="text-muted mb-0">@BirthDate</MudItem>
+              </MudItem>
+            </MudItem>
+            <hr>
+            <MudItem class="row">
+              <MudItem class="col-sm-3">
+                <MudItem class="text-black mb-0">موبایل </MudItem>
+              </MudItem>
+              <MudItem class="col-sm-6">
+                <MudItem class="text-muted mb-0">@PhoneNumber </MudItem>
+              </MudItem>
+                <MudItem class="col-sm-3">
+                 <MudButton Variant="Variant.Text" Color="Color.Error" Href="/ChangeNumber" >تغییر شماره</MudButton>
+              </MudItem>
+             
+            </MudItem>
+            <hr>
+           
+          </MudItem>
         </MudItem>
-
-    </MudItem>
-</MudContainer>
+     
+      </MudItem>
+    </MudContainer>
 
 @code
 {
     PBPuoUsersResponse userInfo;
+
+    private string FirstName ="";
+    private string NationalCode ="";
+    private string LastName ="";
+    private string BirthDate ="";
+    private string PhoneNumber ="";
+
     protected override async Task OnInitializedAsync()
     {
-        try
-        {
-            string ncode = SharedInfo.NationalCode;
+        //string ncode = SharedInfo.NationalCode;
+        string _AccessToken  = await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+        string _NationalCode = await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
 
-            if (string.IsNullOrEmpty(SharedInfo.NationalCode))
-                return;
-            if (string.IsNullOrEmpty(SharedInfo.AccessToken))
-                return;
+        if (string.IsNullOrEmpty(_NationalCode))
+            return;
+        if (string.IsNullOrEmpty(_AccessToken))
+            return;
 
-            PBPuoUsersRequest input = new PBPuoUsersRequest();
-            input.PBPuoUsersInputContract.NationalCode = SharedInfo.NationalCode;
-            if (!SharedInfo.LoadAllNoticeList.HasValue)
-                userInfo = await _anuAuthorizationService.GetProfile(_appConfiguration.BackendServerAddress, _appConfiguration.GetProfile, input, SharedInfo.AccessToken);
+        PBPuoUsersRequest input = new PBPuoUsersRequest();
+        input.PBPuoUsersInputContract.NationalCode = _NationalCode;
+        if (!SharedInfo.LoadAllNoticeList.HasValue)
+            userInfo =await _anuAuthorizationService.GetProfile(_appConfiguration.BackendServerAddress, _appConfiguration.GetProfile, input, _AccessToken);
 
+            NationalCode = userInfo.PBPuoUsersContract.NationalCode;
+            FirstName = userInfo.PBPuoUsersContract.FirstName;
+            LastName = userInfo.PBPuoUsersContract.LastName;
+            BirthDate = userInfo.PBPuoUsersContract.BirthDate;
+            PhoneNumber = userInfo.PBPuoUsersContract.PhoneNumber;
+
+            //if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == true)
+            //    Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode).Where(t => !string.IsNullOrEmpty(t.NoticeDate));
+            //if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == false)
+            //    Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode).Where(t=> string.IsNullOrEmpty( t.NoticeDate));
         }
-        catch
-        {
-            Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
-        }
-
-        //if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == true)
-        //    Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode).Where(t => !string.IsNullOrEmpty(t.NoticeDate));
-        //if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == false)
-        //    Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode).Where(t=> string.IsNullOrEmpty( t.NoticeDate));
-    }
 }
 
 

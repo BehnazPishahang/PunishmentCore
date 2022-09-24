@@ -12,7 +12,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice
         public IEnumerable<PNoticeContract> getPNoticeList(String baseURl, string serviceName, string nationalCode , string accessToken);
         public string GetNoticePDF(String baseURl, string serviceName, string no, string accessToken);
         public ChangePNoticeViewByUserStatusResponse ChangePNoticeViewByUserStatus(String baseURl, string serviceName, string no , string accessToken);
-        public GetCountOfUnSeenPNoticeByUserResponse GetCountOfUnSeenPNoticeByUser(String baseURl, string serviceName, string nationalCode, string accessToken);
+        public Task< GetCountOfUnSeenPNoticeByUserResponse> GetCountOfUnSeenPNoticeByUser(String baseURl, string serviceName, string nationalCode, string accessToken);
 
         
 

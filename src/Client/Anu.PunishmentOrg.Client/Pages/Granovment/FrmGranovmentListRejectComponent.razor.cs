@@ -7,9 +7,8 @@ namespace Anu.PunishmentOrg.Client.Pages.Granovment
     {
         IEnumerable<PGravamenInfoContract> gravoments;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
             try
             {
                 GetPersonPGravamenInfoContract _pGravamenInfoContract = new();
@@ -17,8 +16,9 @@ namespace Anu.PunishmentOrg.Client.Pages.Granovment
                 PGravamenService pService = new();
 
                 var rejectCode = new string[] { "000497", "000504" };
-
-                var rejectGrvs = pService.GetGravamenListByNationalNo(_appConfiguration.BackendServerAddress, _appConfiguration.GetGravamenListByNationalNo, SharedInfo.NationalCode, SharedInfo.AccessToken);
+                string _AccessToken = await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+                string _NationalCode = await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
+                var rejectGrvs = pService.GetGravamenListByNationalNo(_appConfiguration.BackendServerAddress, _appConfiguration.GetGravamenListByNationalNo, _NationalCode, _AccessToken);
                 this.gravoments = rejectGrvs.Where(a => rejectCode.Contains(a.TheObjectState.Code));
                 //this.gravoments = rejectGrvs.Where(a => a.TheObjectState.Code == "000497" || a.TheObjectState.Code == "000504");
             }
