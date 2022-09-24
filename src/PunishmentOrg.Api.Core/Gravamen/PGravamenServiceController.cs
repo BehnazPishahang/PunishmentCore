@@ -194,7 +194,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             {
                 Id = Guid.NewGuid().ToString("N"),
                 Timestamp = 1,
-                TheObjectState = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PGravamen.Start),
+                TheObjectState = await _unitOfWork.Repositorey<IObjectStateRepository>().GetById(PunishmentOrgObjectState.PGravamen.PermanentRegisteredByApplicant),
                 PetitionSubject = request.ThePGravamenContract.PetitionSubject,
                 PetitionDescription = request.ThePGravamenContract.PetitionDescription,
                 NoticeText = request.ThePGravamenContract.NoticeText,
@@ -404,7 +404,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                         NationalCode    = x.NationalCode,
                         Nationality     = x.Nationality,
                         PersonStartPost = x.PersonStartPost,
-                        Sex             = (Anu.BaseInfo.Enumerations.SexType)x.Sex,
+                        Sex             = (Anu.BaseInfo.Enumerations.SexType)(x.Sex == null ? Anu.BaseInfo.Enumerations.SexType.None : x.Sex),
                         PersonType      = x.PersonType,
                         PostCode        = x.PostCode,
                         PersonPassword  = x.PersonPassword,
