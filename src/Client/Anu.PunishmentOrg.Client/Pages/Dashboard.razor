@@ -36,9 +36,10 @@
 
                             <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
                                 <MudText Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> ابلاغ</MudText>
-                                <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.Visibility" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowSeenedPNoticeList">@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser</MudButton>
-                                <MudButton Color="Color.Warning" Variant="Variant.Filled" OnClick="ShowAllPNoticeList">  تمامی ابلاغ ها : @NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.TotalCountPNoticeOfUser</MudButton>
-                                <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.VisibilityOff" OnClick="ShowUnseenedPNoticeList" Variant="Variant.Filled" IconColor="Color.Secondary">@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser</MudButton>
+                                <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.Visibility" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowSeenedPNoticeList">@CountSeenedOfPNoticeByUser</MudButton>
+                                <MudButton Color="Color.Warning" Variant="Variant.Filled" OnClick="ShowAllPNoticeList">  تمامی ابلاغ ها : @TotalCountPNoticeOfUser</MudButton>
+                               <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.VisibilityOff" OnClick="ShowUnseenedPNoticeList" Variant="Variant.Filled" IconColor="Color.Secondary">@CountUnSeenPNoticeByUser</MudButton> 
+                              
                             </MudButtonGroup>
 
                         </div>
@@ -67,9 +68,11 @@
                        
                         <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
                             <MudText   Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> پرونده</MudText>
-                            <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.FolderOff" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowCloasedPcaseList"  >@PcaseInfo.StatisticContract.CountUnSeen</MudButton>
-                            <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPCaseList" >  تمامی پرونده ها : @PcaseInfo.StatisticContract.CountTotal</MudButton>
-                            <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.FolderOpen"  OnClick="ShowActivePcaseList"   Variant="Variant.Filled" IconColor="Color.Secondary" >@PcaseInfo.StatisticContract.CountSeen</MudButton>
+                           
+                                <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.FolderOff" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowCloasedPcaseList"  >@PcaseInfoCount</MudButton>
+                            <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPCaseList" >  تمامی پرونده ها : @CountTotal</MudButton>
+                            <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.FolderOpen"  OnClick="ShowActivePcaseList"   Variant="Variant.Filled" IconColor="Color.Secondary" >@CountSeen</MudButton>
+                            
                         </MudButtonGroup>  
                           
                    </div>
@@ -98,9 +101,9 @@
 
                             <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
                                 <MudText Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> شکوائیه ها</MudText>
-                                <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.Cancel" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowPGravamenRejectedList">@PGravamenInfo.CountRejectedPGravamenPerson</MudButton>
-                                <MudButton Color="Color.Warning" Variant="Variant.Filled" OnClick="ShowAllPGravamen">  شکوائیه ها : @PGravamenInfo.TotalCountPGravamenPerson</MudButton>
-                                <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.Webhook" OnClick="ShowPGravamenPendedList" Variant="Variant.Filled" IconColor="Color.Secondary">@PGravamenInfo.CountPendingPGravamenPerson</MudButton>
+                                <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.Cancel" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowPGravamenRejectedList">@CountRejectedPGravamenPerson</MudButton>
+                                <MudButton Color="Color.Warning" Variant="Variant.Filled" OnClick="ShowAllPGravamen">  شکوائیه ها : @TotalCountPGravamenPerson</MudButton>
+                                <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.Webhook" OnClick="ShowPGravamenPendedList" Variant="Variant.Filled" IconColor="Color.Secondary">@CountPendingPGravamenPerson</MudButton>
                             </MudButtonGroup>
                         </div>
 
@@ -323,7 +326,18 @@
     GetCountOfUnSeenPNoticeByUserResponse NoticeInfo;
     GetStatisticPCaseResponse PcaseInfo;
     GetPersonPGravamenStatisticContract PGravamenInfo;
-    string ncode = SharedInfo.NationalCode;
+
+    long? TotalCountPNoticeOfUser = 0; 
+    long? CountSeenedOfPNoticeByUser = 0; 
+    long? CountUnSeenPNoticeByUser = 0; 
+
+    long? PcaseInfoCount = 0; 
+    long? CountTotal = 0; 
+    long? CountSeen = 0; 
+
+    long? CountRejectedPGravamenPerson = 0; 
+    long? TotalCountPGravamenPerson = 0; 
+    long? CountPendingPGravamenPerson = 0; 
 
 
     private void ShowPGravamenRejectedList()
@@ -379,10 +393,27 @@
     }
     protected override async Task OnInitializedAsync()
     {
-        string ncode = SharedInfo.NationalCode;
-        NoticeInfo = _noticeService.GetCountOfUnSeenPNoticeByUser(_appConfiguration.BackendServerAddress, _appConfiguration.GetCountOfUnSeenPNoticeByUser, ncode, SharedInfo.AccessToken);
-        PcaseInfo = await _pCaseService.GetPCaseStatistic(_appConfiguration.BackendServerAddress, _appConfiguration.GetStatisticPCase, ncode, SharedInfo.AccessToken);
-        PGravamenInfo = await _pGravamenService.GetPersonPGravamenStatistic(_appConfiguration.BackendServerAddress, _appConfiguration.GetPersonPGravamenStatistic, ncode, SharedInfo.AccessToken);
+        string _AccessToken =  await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+        string _NationalCode =  await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
+        if (_NationalCode == null)
+            _navigationManager.NavigateTo("/DashboardPublic");
+
+        NoticeInfo =await  _noticeService.GetCountOfUnSeenPNoticeByUser(_appConfiguration.BackendServerAddress, _appConfiguration.GetCountOfUnSeenPNoticeByUser, _NationalCode, _AccessToken);
+        CountSeenedOfPNoticeByUser =  NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser;
+        TotalCountPNoticeOfUser = NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.TotalCountPNoticeOfUser;
+        CountUnSeenPNoticeByUser =NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser;
+
+        PcaseInfo = await _pCaseService.GetPCaseStatistic(_appConfiguration.BackendServerAddress, _appConfiguration.GetStatisticPCase, _NationalCode, _AccessToken);
+        PcaseInfoCount = PcaseInfo.StatisticContract.CountUnSeen;
+        CountTotal = PcaseInfo.StatisticContract.CountTotal;
+        CountSeen = PcaseInfo.StatisticContract.CountSeen;
+
+        PGravamenInfo = await _pGravamenService.GetPersonPGravamenStatistic(_appConfiguration.BackendServerAddress, _appConfiguration.GetPersonPGravamenStatistic, _NationalCode, _AccessToken);
+
+        CountRejectedPGravamenPerson =  PGravamenInfo.CountRejectedPGravamenPerson;
+        TotalCountPGravamenPerson = PGravamenInfo.TotalCountPGravamenPerson;
+        CountPendingPGravamenPerson =  PGravamenInfo.CountPendingPGravamenPerson;
+
     }
 
 

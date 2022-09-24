@@ -41,7 +41,8 @@
         try
         {
             string nnn = No;
-            var NoticeInfo = _noticeService.ChangePNoticeViewByUserStatus(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePNoticeViewByUserStatus, No, SharedInfo.AccessToken);
+                string _AccessToken =  await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+            var NoticeInfo = _noticeService.ChangePNoticeViewByUserStatus(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePNoticeViewByUserStatus, No, _AccessToken);
         }
         catch
         {

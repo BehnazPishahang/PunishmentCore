@@ -1,5 +1,7 @@
 ﻿@using Anu.PunishmentOrg.Client.Infrastructure.Settings
 @using Anu.PunishmentOrg.Client.Pages.Authentication
+@using Blazored.LocalStorage
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @using MudBlazor.ThemeManager.Models
 @using MudBlazor.ThemeManager
 @using MudBlazor
@@ -16,34 +18,16 @@
                            Edge="Edge.Start"
                            Icon="@_menuIcons"
                            OnClick="@DrawerToggle" />
-            @*OnClick="@(() => _drawerOpen = !_drawerOpen)" />*@
+
             <MudIconButton Icon="@MudBlazor.Icons.Filled.Balance" Size="Size.Large" Color="Color.Inherit" OnClick="GoHome" />
 
-            <MudLink Typo="Typo.h5" Class="mr-3 mud-bold " style="color:white !important;" Href="/">  خدمات پیشخوان تعزیرات حکومتی   </MudLink>
-
+            <MudLink Typo="Typo.h5" Class="mr-3 mud-bold text-animation " style="color:white !important;" Href="/">  خدمات پیشخوان تعزیرات حکومتی   </MudLink>
 
             <MudSpacer />
-            @*        <div>
-            <MudSelect Class="mx-4"
-            Dense="true"
-            Label="تنظیمات نمایشی"
-            Style="max-width: 250px"
-            T="string"
-            Value="_themeManagerConfiguration.Key"
-            ValueChanged="ThemeManagerConfigChanged">
-            @foreach (var config in _themeManagerConfigurations)
-            {
-            <MudSelectItem T="string"
-            Value="config.Key" />
-            }
-            </MudSelect>
-            </div>*@
-            @* <MudIconButton Color="Color.Inherit"
-            Edge="Edge.End"
-            Icon="@Icons.Filled.Accessible" />*@
+ 
             <MudMenu ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomLeft">
                 <ActivatorContent>
-                    @if (String.IsNullOrEmpty(SharedInfo.NationalCode))
+                    @if (String.IsNullOrEmpty(_NationalCode))
                     {
                         <MudChip Icon="@MudBlazor.Icons.Material.Filled.Person" Color="Color.Primary">ورود </MudChip>
                     }
@@ -51,13 +35,11 @@
                     {
                         <MudChip Icon="@MudBlazor.Icons.Material.Filled.Person" Color="Color.Primary"> </MudChip>
                     }
-
                 </ActivatorContent>
 
                 <ChildContent>
-
-
-                    @if (String.IsNullOrEmpty(SharedInfo.NationalCode))
+                    
+                    @if (String.IsNullOrEmpty(_NationalCode))
                     {
                         <MudListItem Text="ورود " Icon="@MudBlazor.Icons.Filled.Login" Href="/login" />
                         <MudDivider Class="mb-2" />
@@ -80,7 +62,7 @@
 
 
             <MudNavMenu Color="@Theme135._iconColor">
-                @if (String.IsNullOrEmpty(SharedInfo.NationalCode))
+                @if (String.IsNullOrEmpty(_NationalCode))
                 {
                     <MudNavMenu Color="Color.Primary">
                         <MudTooltip Text="خدمات الکترونیکی تعزیرات">
@@ -198,10 +180,24 @@
 
     private bool _drawerOpen = false;
     private bool _themeManagerOpen;
+    private string _AccessToken = "";
+    private string _NationalCode = "";
 
-    protected override void OnInitialized()
+ 
+       public static string  _themeName = "";
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        _AccessToken =  await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+        _NationalCode =  await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
+ 
+         StateHasChanged();
+        
+    }
+
+    protected async override Task OnInitializedAsync()
     {
         _themeManagerConfiguration = _themeManagerConfigurations.First();
+
     }
 
     private void ThemeManagerConfigChanged(string key)
@@ -219,16 +215,21 @@
 
     }
 
-    public void Logout()
+    public async Task Logout()
     {
-        SharedInfo.NationalCode = string.Empty;
+       // SharedInfo.NationalCode = string.Empty;
+        await _localStorage.RemoveItemAsync(SharedInfo.NationalCodeKeyName);
+        await _localStorage.RemoveItemAsync(SharedInfo.AccessTokenKeyName);
+
         _navigationManager.NavigateTo("/DashboardPublic");
     }
 
 
-    public void GoHome()
+    public async Task  GoHome()
     {
-        SharedInfo.NationalCode = string.Empty;
+       // SharedInfo.NationalCode = string.Empty;
+        await _localStorage.RemoveItemAsync(SharedInfo.NationalCodeKeyName);
+        await _localStorage.RemoveItemAsync(SharedInfo.AccessTokenKeyName);
         _navigationManager.NavigateTo("/");
     }
 
@@ -262,10 +263,8 @@
         _navigationManager.NavigateTo("/DashboardPublic");
         _navigationManager.NavigateTo("/" + CurrentPage);
         StateHasChanged();
-
-
+ 
     }
-
 
 
     //private ThemeManagerTheme _themeManager = new ThemeManagerTheme();

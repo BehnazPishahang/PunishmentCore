@@ -15,9 +15,11 @@ namespace Anu.PunishmentOrg.Client.Pages.PCase
             try
             {
                 Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+                string _AccessToken = await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+                string _NationalCode = await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
 
                 if (string.IsNullOrEmpty(CaseNo) == false)
-                    Elements = await _pCaseService.ExportInqueryPCase(_appConfiguration.BackendServerAddress, _appConfiguration.ExportInqueryPCase, SharedInfo.NationalCode, CaseNo, SharedInfo.AccessToken);
+                    Elements = await _pCaseService.ExportInqueryPCase(_appConfiguration.BackendServerAddress, _appConfiguration.ExportInqueryPCase, _NationalCode, CaseNo, _AccessToken);
 
                 if (Elements.Result.Code == -770003)
                 {

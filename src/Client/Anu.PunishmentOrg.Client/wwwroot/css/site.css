@@ -192,6 +192,6 @@ a, .btn-link {
     border-radius: 5px;
 }
 
-..form-control {
+.form-control {
     background-color: var(--mud-palette-White) !important;
 }

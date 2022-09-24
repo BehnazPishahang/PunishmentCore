@@ -51,11 +51,12 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
             _events.Insert(0, $"Event = SelectedItemsChanged, Data = {System.Text.Json.JsonSerializer.Serialize(items)}");
         }
 
-        void ShowPDF(PNoticeContract selectedRow)
+        async Task ShowPDF(PNoticeContract selectedRow)
         {
             try
             {
-                string pdf = _noticeService.GetNoticePDF(_appConfiguration.BackendServerAddress, _appConfiguration.ExportPNotice, selectedRow.No, SharedInfo.AccessToken);
+                string _AccessToken =  await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+                string pdf = _noticeService.GetNoticePDF(_appConfiguration.BackendServerAddress, _appConfiguration.ExportPNotice, selectedRow.No, _AccessToken);
 
                 var parameters = new DialogParameters();
                 parameters.Add("showedPdfContent", pdf);
@@ -75,11 +76,11 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
         {
             try
             {
-                string ncode = SharedInfo.NationalCode;
 
-                bool? ss = SharedInfo.LoadAllNoticeList;
+                string _AccessToken =  await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+                string _NationalCode =  await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
 
-                Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode, SharedInfo.AccessToken);
+                Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, _NationalCode, _AccessToken);
 
                 if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == true)
                     Elements = Elements.Where(t => !string.IsNullOrEmpty(t.NoticeDate));

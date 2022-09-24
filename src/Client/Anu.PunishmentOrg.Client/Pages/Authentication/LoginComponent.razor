@@ -1,12 +1,12 @@
 ﻿@page "/Login"
 @using Anu.Commons.ServiceModel.ServiceAuthentication
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
+@using Blazored.LocalStorage
 
 
 @inject IAnuAuthorizationService _anuAuthorizationService;
 @inject AppConfiguration _appConfiguration;
 @inject ISnackbar Snackbar
-
 
 <section class="vh-100">
     <MudContainer class=" py-5 h-100">
@@ -144,7 +144,8 @@
             Snackbar.Add(result.Result.Message, Severity.Success);
             hasSmsSend = true;
             SimulateProgress();
-            SharedInfo.NationalCode = _tokenModel.UserName;
+            await _localStorage.SetItemAsStringAsync(SharedInfo.NationalCodeKeyName,_tokenModel.UserName);
+
             errorMessage = result.Result.Message;
 
         }
@@ -164,7 +165,6 @@
     }
     void Submit()
     {
-
         if (string.IsNullOrEmpty(_secondRequest.Password) || _secondRequest.Password.Length != 6)
         {
             Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
@@ -179,8 +179,12 @@
         AuthResult result = _anuAuthorizationService.V2Login(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _secondRequest).Result;
         if (result.Result.Code == 1000)
         {
-            SharedInfo.NationalCode = _tokenModel.UserName;
-            SharedInfo.AccessToken = result.AccessToken;
+            //SharedInfo.NationalCode = _tokenModel.UserName;
+            //SharedInfo.AccessToken = result.AccessToken;
+
+            _localStorage.SetItemAsStringAsync(SharedInfo.AccessTokenKeyName,result.AccessToken);
+            _localStorage.SetItemAsStringAsync(SharedInfo.NationalCodeKeyName,_tokenModel.UserName);
+
             _navigationManager.NavigateTo("/");
             errorMessage = "";
 

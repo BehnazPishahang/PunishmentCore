@@ -328,8 +328,10 @@
 
         if (result.Result.Code == (int)AnuResult.Successful)
         {
-            SharedInfo.NationalCode = _registerUserModel.UserName;
-            SharedInfo.AccessToken = result.AccessToken;
+
+          
+          await  _localStorage.SetItemAsStringAsync(SharedInfo.AccessTokenKeyName,result.AccessToken);
+          await  _localStorage.SetItemAsStringAsync(SharedInfo.NationalCodeKeyName,_registerUserModel.UserName);
 
             secondStep = new();
             _registerUserModel = new();

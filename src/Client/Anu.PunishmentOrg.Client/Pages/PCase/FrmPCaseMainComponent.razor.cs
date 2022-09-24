@@ -71,11 +71,11 @@ namespace Anu.PunishmentOrg.Client.Pages.PCase
         {
             try
             {
-                string ncode = SharedInfo.NationalCode;
 
                 bool? ss = SharedInfo.LoadAllNoticeList;
-
-                Elements = _pCaseService.getPCaseList(_appConfiguration.BackendServerAddress, _appConfiguration.GetAllPCase, ncode, SharedInfo.AccessToken);
+                string _AccessToken = await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+                string _NationalCode = await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
+                Elements = _pCaseService.getPCaseList(_appConfiguration.BackendServerAddress, _appConfiguration.GetAllPCase, _NationalCode, _AccessToken);
             }
             catch
             {
