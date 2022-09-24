@@ -83,7 +83,8 @@ namespace Anu.BaseInfo.Api.GeoInfo
             List<Anu.BaseInfo.ServiceModel.GeoInfo.GeoLocationContract> geoLocationContracts = new List<Anu.BaseInfo.ServiceModel.GeoInfo.GeoLocationContract>();
             foreach (var geoLocation in geoLocationList.ToList())
             {
-                geoLocationContracts.Add(new GeoLocationContract() { LocationName = geoLocation.LocationName, LocationCode = geoLocation.LocationCode });
+                string replaceCharacter = geoLocation.LocationName.Substring(0 , geoLocation.LocationName.IndexOf("-") == -1 ? 0 : geoLocation.LocationName.IndexOf("-"));
+                geoLocationContracts.Add(new GeoLocationContract() { LocationName = geoLocation.LocationName.Replace(replaceCharacter + "-",""), LocationCode = geoLocation.LocationCode });
             }
 
             return geoLocationContracts;
