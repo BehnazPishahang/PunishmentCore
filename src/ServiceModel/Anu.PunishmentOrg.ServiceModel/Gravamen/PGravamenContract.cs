@@ -1,4 +1,7 @@
 ﻿
+using Anu.PunishmentOrg.ServiceModel.ServiceContract;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
     [System.ComponentModel.DisplayName("شکوائیه/گزارش مردمی در سرویس")]
@@ -12,6 +15,9 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 
             ThePGravamenViolationContractList = new List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenViolationContract>();
 
+            ThePGravamenNoticeHstContractList = new List<PGravamenNoticeHstContract>();
+
+            ThePGravamenRejectOrDefectRSContractList = new List<PGravamenRejectOrDefectRSContract>();
         }
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -101,6 +107,34 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         public List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenViolationContract>? ThePGravamenViolationContractList { get; set; }
 
 
+
+        [System.ComponentModel.DisplayName("وضعيت اشيا در سرويس")]
+        public ObjectState TheObjectStateContract { get; set; }
+
+
+
+        [System.ComponentModel.DisplayName("پرونده در سرویس")]
+        public PCase ThePCaseContract { get; set; }
+
+
+
+        [System.ComponentModel.DisplayName("تاریخچه ابلاغیه های شکوائیه در سرویس")]
+        public List<PGravamenNoticeHstContract> ThePGravamenNoticeHstContractList { get; set; }
+
+
+
+        [System.ComponentModel.DisplayName("دلایل رد شکوائیه در سرویس")]
+        public List<PGravamenRejectOrDefectRSContract> ThePGravamenRejectOrDefectRSContractList { get; set; }
+
+
+
+        [System.ComponentModel.DisplayName("واحد دریافت شکوائیه در سرویس")]
+        public Unit TheReceiveUnitContract { get; set; }
+
+
+
+        [System.ComponentModel.DisplayName("واحد ارجاع شکوائیه در سرویس")]
+        public Unit TheReferUnitContract { get; set; }
 
     }
 }

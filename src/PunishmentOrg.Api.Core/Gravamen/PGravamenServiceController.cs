@@ -25,6 +25,8 @@ using Anu.Utility.Extensions;
 using Anu.Utility.Sms;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stimulsoft.Blockly.Model;
+using System;
 using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
@@ -392,6 +394,49 @@ namespace Anu.PunishmentOrg.Api.Gravamen
                     FollowUpNo                     = thePGravamen.FollowUpNo,
                     HowDataType                    = thePGravamen.HowDataType,
                     GravamenOrReport               = thePGravamen.GravamenOrReport,
+                    TheGeoLocationContract         = null,
+                    TheObjectStateContract         = new ServiceModel.ServiceContract.ObjectState()
+                    { 
+                        Code  = thePGravamen.TheObjectState?.Code,
+                        Title = thePGravamen.TheObjectState?.Title,
+                    },
+                    ThePCaseContract       = new ServiceModel.ServiceContract.PCase()
+                    { 
+                        No = thePGravamen.ThePCase?.No
+                    },
+                    TheReceiveUnitContract = new ServiceModel.ServiceContract.Unit()
+                    { 
+                        LocationCode = thePGravamen.TheReceiveUnit?.Code,
+                        LocationName = thePGravamen.TheReceiveUnit?.UnitName,
+                    },
+                    TheReferUnitContract = new ServiceModel.ServiceContract.Unit()
+                    {
+                        LocationCode = thePGravamen.TheReferUnit?.Code,
+                        LocationName = thePGravamen.TheReferUnit?.UnitName,
+                    },
+                    ThePGravamenNoticeHstContractList = thePGravamen.ThePGravamenNoticeHstList?.Select(x => new PGravamenNoticeHstContract()
+                    { 
+                        IssueDateTime = x.IssueDateTime,
+                        NoticeText    = x.NoticeText,
+                        NoticeType    = x.NoticeType == null ? (Anu.PunishmentOrg.Enumerations.GravamenNoticeType?)null : (Anu.PunishmentOrg.Enumerations.GravamenNoticeType)x.NoticeType,
+                    }).ToList(),
+                    ThePGravamenRejectOrDefectRSContractList = thePGravamen.ThePGravamenRejectOrDefectRSList?.Select(x => new PGravamenRejectOrDefectRSContract()
+                    {
+                        ThePBGravamenRejectDefectType = new PBGravamenRejectDefectTypeContract() 
+                        { 
+                            Code           = x.ThePBGravamenRejectDefectType?.Code,
+                            RejectOrDefect = x.ThePBGravamenRejectDefectType?.RejectOrDefect == null ? (Anu.PunishmentOrg.Enumerations.RejectOrDefect?)null : (Anu.PunishmentOrg.Enumerations.RejectOrDefect)x.ThePBGravamenRejectDefectType?.RejectOrDefect,
+                            Title          = x.ThePBGravamenRejectDefectType?.Title,
+                        }
+                    }).ToList(),
+                    ThePGravamenViolationContractList = thePGravamen.ThePGravamenViolationList?.Select(x => new PGravamenViolationContract()
+                    {
+                        SubjectTitle     = x.SubjectTitle,
+                        ViolationPrice   = x.ViolationPrice,
+                        ViolationDesc    = x.ViolationDesc,
+                        ViolationDate    = x.ViolationDate,
+                        ViolationAddress = x.ViolationAddress
+                    }).ToList(),
                     ThePGravamenPersonContractList = thePGravamen.ThePGravamenPersonList?.Select(x => new PGravamenPersonContract()
                     {
                         Name            = x.Name,
