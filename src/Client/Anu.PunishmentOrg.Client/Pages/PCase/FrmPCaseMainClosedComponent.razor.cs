@@ -3,7 +3,7 @@ using MudBlazor;
 
 namespace Anu.PunishmentOrg.Client.Pages.PCase
 {
-    public partial class FrmPCaseMainComponent
+    public partial class FrmPCaseMainClosedComponent
     {
         private string _searchString;
         private bool _sortNameByLength;
@@ -63,6 +63,7 @@ namespace Anu.PunishmentOrg.Client.Pages.PCase
                 bool? ss = SharedInfo.LoadAllNoticeList;
 
                 Elements = _pCaseService.getPCaseList(_appConfiguration.BackendServerAddress, _appConfiguration.GetAllPCase, ncode, SharedInfo.AccessToken);
+                Elements = Elements.Where(a => a.CaseArchiveState == Enumerations.PUCaseArchiveState.Closed);
             }
             catch
             {

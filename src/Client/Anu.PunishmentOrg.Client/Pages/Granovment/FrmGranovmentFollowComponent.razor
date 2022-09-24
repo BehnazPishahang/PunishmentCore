@@ -1,8 +1,7 @@
-﻿@page "/GranovmentSummary/{_pGravamen}"
+﻿@page "/GranovmentFollowByNo"
 
 @using Anu.PunishmentOrg.Client.Infrastructure.Granovment
 @using Anu.PunishmentOrg.ServiceModel.Gravamen
-@using MudBlazor.ThemeManager
 
 @inject AppConfiguration _appConfiguration
 @inject ISnackbar Snackbar
@@ -16,11 +15,23 @@
     }
 </style>
 
-
 <div class="punFrmheader">
-    <h3>خلاصه شکوائیه</h3>
+    <h3>پیگیری شکوائیه</h3>
 </div>
 
+<MudCard Style="margin:5px;">
+    <MudCardContent>
+        <div class="row">
+            <div class="col-sm-3">
+                <MudTextField @bind-Value="@CaseNo" Label="شماره شکوائیه" Variant="Variant.Outlined" Margin="Margin.Dense" />
+            </div>
+            <div class="col-sm-2">
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Color="Color.Primary"
+                           Size="Size.Medium" Class="form-control" OnClick="()=>GetGranovmentSummary()">پیگیری شکوائیه</MudButton>
+            </div>
+        </div>
+    </MudCardContent>
+</MudCard>
 @if (_pGravamenContract != null)
 {
     <MudForm Model="@_pGravamenContract">
@@ -83,3 +94,4 @@
         </MudCard>
     </MudForm>
 }
+

@@ -39,7 +39,7 @@
                         <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
                             <MudText   Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> ابلاغ</MudText>
                             <MudButton  Color="Color.Primary" StartIcon="@Icons.Filled.Visibility" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowSeenedPNoticeList"  >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser</MudButton>
-                            <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPNoticeList" >  تمامی ابلاغ ها : @NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.TotalCountPNoticeOfUser</MudButton>
+                            <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPNoticeList" >  تمامی ابلاغ‌ها : @NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.TotalCountPNoticeOfUser</MudButton>
                             <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.VisibilityOff"  OnClick="ShowUnseenedPNoticeList"   Variant="Variant.Filled" IconColor="Color.Secondary" >@NoticeInfo.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser</MudButton>
                         </MudButtonGroup>  
                           
@@ -72,7 +72,7 @@
                         <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
                             <MudText   Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> پرونده</MudText>
                             <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.FolderOff" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowCloasedPcaseList"  >@PcaseInfo.StatisticContract.CountUnSeen</MudButton>
-                             <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPCaseList" >  تمامی پرونده ها : @PcaseInfo.StatisticContract.CountTotal</MudButton>
+                             <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPCaseList" >  تمامی پرونده‌ها : @PcaseInfo.StatisticContract.CountTotal</MudButton>
                             <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.FolderOpen"  OnClick="ShowActivePcaseList"   Variant="Variant.Filled" IconColor="Color.Secondary" >@PcaseInfo.StatisticContract.CountSeen</MudButton>
                         </MudButtonGroup>  
                           
@@ -102,9 +102,9 @@
                    <div class="col-xl-10 col-sm-10 col-md-10 col-10">
                        
                         <MudButtonGroup Variant="Variant.Filled" OverrideStyles="true">
-                            <MudText   Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  "> شکایت ها</MudText>
+                            <MudText   Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary  ml-4 mr-4  mb-4 mt-4 text-center  ">شکوائیه</MudText>
                             <MudButton Color="Color.Primary" StartIcon="@Icons.Filled.Cancel" IconColor="Color.Primary" Variant="Variant.Filled" OnClick="ShowPGravamenRejectedList"  >@PGravamenInfo.CountRejectedPGravamenPerson</MudButton>
-                            <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPGravamen" >  تمامی شکایت ها : @PGravamenInfo.TotalCountPGravamenPerson</MudButton>
+                            <MudButton Color="Color.Warning"  Variant="Variant.Filled"  OnClick="ShowAllPGravamen" > شکوائیه‌ها : @PGravamenInfo.TotalCountPGravamenPerson</MudButton>
                             <MudButton Color="Color.Secondary" StartIcon="@Icons.Filled.Webhook"  OnClick="ShowPGravamenPendedList"   Variant="Variant.Filled" IconColor="Color.Secondary" >@PGravamenInfo.CountPendingPGravamenPerson</MudButton>
                         </MudButtonGroup>  
                           
@@ -319,6 +319,31 @@
             </MudElement>
         </MudItem>
 
+          <MudItem xs="12" sm="6" md="6">
+              <MudElement HtmlTag="a"
+            Class="ma-0"
+            Style="color:red;font-weight:bold;"
+            href="/GranovmentFollowByNo"
+              
+            rel="noopener noreferrer">
+             <MudPaper  xs="12" sm="12" md="12" Elevation="25" Class="d-flex flex-row pt-6 pb-4  disabled-backGround">
+                <div   class="col-xl-2 col-sm-2 col-md-2 col-2">
+                    <MudIcon Icon="@Icons.Filled.FolderOpen" Color="@Theme135._iconColor" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+                </div>
+                <div class="row col-xl-10 col-sm-10 col-md-10 col-10">
+
+                   <div class="col-xl-10 col-sm-10 col-md-10 col-10">
+                    <MudText xs="3" sm="3" md="3" Typo="Typo.h6" Class="mud-typography mud-bold  mud-text-secondary mb-n1 mt-4 text-center  "> پیگیری شکوائیه</MudText>
+                   </div>
+                   <div class="col-xl-2 col-sm-2 col-md-2 col-2 mt-1  @MainLayout._class">
+                      <MudText xs="6" sm="6" md="6" Class="text-center mt-2" >0</MudText>
+                   </div>
+                </div>
+            </MudPaper>
+ 
+            </MudElement>
+        </MudItem>
+
        
     </MudGrid>
 
@@ -352,17 +377,17 @@
     }
     private void ShowCloasedPcaseList()
     {
-        _navigationManager.NavigateTo("/Cases");
+        _navigationManager.NavigateTo("/ClosedCases");
     }
 
     private void ShowActivePcaseList()
     {
-        _navigationManager.NavigateTo("/Cases");
+        _navigationManager.NavigateTo("/ActiveCases");
     }
 
     private void CaseFollowUp()
     {
-        _navigationManager.NavigateTo("/Cases");
+        _navigationManager.NavigateTo("/CaseFollowUp");
     }
 
     private void ShowAllPCaseList()
