@@ -144,7 +144,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             int docFilesLength = 0;
             foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
             {
-                //todo: should be fix this bug in client and then in the backend should be refactore this section
+                //todo: This bug should be fixed in the client and refactored here in the backend
                 if (!attachment.TheGAttachmentDataContract.Null())
                 {
                     if (!attachment!.TheGAttachmentDataContract!.DocFile.Null())
