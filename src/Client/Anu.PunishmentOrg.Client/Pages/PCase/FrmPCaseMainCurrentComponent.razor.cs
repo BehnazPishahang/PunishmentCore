@@ -3,7 +3,7 @@ using MudBlazor;
 
 namespace Anu.PunishmentOrg.Client.Pages.PCase
 {
-    public partial class FrmPCaseMainComponent
+    public partial class FrmPCaseMainCurrentComponent
     {
         private string _searchString;
         private bool _sortNameByLength;
@@ -48,7 +48,7 @@ namespace Anu.PunishmentOrg.Client.Pages.PCase
         {
             _events.Insert(0, $"Event = SelectedItemsChanged, Data = {System.Text.Json.JsonSerializer.Serialize(items)}");
         }
-    
+
         void ShowDetail(GetAllPCaseContract selectedRow)
         {
             _navigationManager.NavigateTo($"/CaseFollowUpNo/{selectedRow.No}");
@@ -63,6 +63,7 @@ namespace Anu.PunishmentOrg.Client.Pages.PCase
                 bool? ss = SharedInfo.LoadAllNoticeList;
 
                 Elements = _pCaseService.getPCaseList(_appConfiguration.BackendServerAddress, _appConfiguration.GetAllPCase, ncode, SharedInfo.AccessToken);
+                Elements = Elements.Where(a=>a.CaseArchiveState==Enumerations.PUCaseArchiveState.Active);
             }
             catch
             {

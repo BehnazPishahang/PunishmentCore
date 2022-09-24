@@ -1,4 +1,4 @@
-﻿@page "/Cases"
+﻿@page "/ClosedCases"
 @using System.Net.Http.Json
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase
@@ -13,20 +13,23 @@
 @inject IDialogService DialogService
 
 <div class="punFrmheader">
-    <h3>لیست پرونده ها</h3>
+    <h3>لیست پرونده های مختومه</h3>
 </div>
 
-<MudDataGrid T="GetAllPCaseContract" Items="@Elements" EditMode="DataGridEditMode.Form"
-             QuickFilter="@_quickFilter"
-             Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual">
+    <MudDataGrid T="GetAllPCaseContract" Items="@Elements"  EditMode="DataGridEditMode.Form"
+    QuickFilter="@_quickFilter"
+    Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual">
     <ToolBarContent>
         <MudText Typo="Typo.h6"> پرونده ها </MudText>
         <MudSpacer />
         <MudTextField @bind-Value="_searchString" Placeholder="جستجو" Adornment="Adornment.Start" Immediate="true"
-                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
     </ToolBarContent>
     <Columns>
-        <Column T="GetAllPCaseContract" Field="CreateDateTime" Title="زمان ثبت" />
+        
+      
+     
+        <Column T="GetAllPCaseContract"  Field="CreateDateTime" Title="زمان ثبت"  />
         <Column T="GetAllPCaseContract" Field="No" Title="شماره پرونده " />
 
         <Column T="GetAllPCaseContract" Field="UnitName" Title="شعبه " />

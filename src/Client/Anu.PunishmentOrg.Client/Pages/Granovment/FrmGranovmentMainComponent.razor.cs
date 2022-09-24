@@ -400,6 +400,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Granovment
                 else
                 {
                     _attachment = new();
+                    validfilesize = true;
                     Snackbar.Add("حجم فایل نباید بیشتر از 200 کیلو بایت باشد", MudBlazor.Severity.Error);
                 }
             }

@@ -133,28 +133,34 @@
 
     private async Task GetAccessCode()
     {
-
-
-        var ss = _appConfiguration.BackendServerAddress;
-        hasSmsSend = true;
-        FirstStepAuthResult result = await _anuAuthorizationService.SendSmsAuth(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsAuth, _tokenModel);
-        if (result.Result.Code == 100013)
+        try
         {
-            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-            Snackbar.Add(result.Result.Message, Severity.Success);
+            var ss = _appConfiguration.BackendServerAddress;
             hasSmsSend = true;
-            SimulateProgress();
-            SharedInfo.NationalCode = _tokenModel.UserName;
-            errorMessage = result.Result.Message;
+            FirstStepAuthResult result = await _anuAuthorizationService.SendSmsAuth(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsAuth, _tokenModel);
+            if (result.Result.Code == 100013)
+            {
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+                Snackbar.Add(result.Result.Message, Severity.Success);
+                hasSmsSend = true;
+                SimulateProgress();
+                SharedInfo.NationalCode = _tokenModel.UserName;
+                errorMessage = result.Result.Message;
 
+            }
+            else
+            {
+                errorMessage = result.Result.Message;
+                hasSmsSend = false;
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+                Snackbar.Add(errorMessage, Severity.Warning);
+            }
         }
-        else
+        catch
         {
-            errorMessage = result.Result.Message;
-            hasSmsSend = false;
-            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-            Snackbar.Add(errorMessage, Severity.Warning);
+            Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
         }
+
     }
 
     private void onLoginTextKeyPress()
@@ -164,32 +170,39 @@
     }
     void Submit()
     {
-
-        if (string.IsNullOrEmpty(_secondRequest.Password) || _secondRequest.Password.Length != 6)
+        try
         {
-            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-            Snackbar.Add("کد ارسال شده را وارد نمایید ", Severity.Warning);
-            return;
+            if (string.IsNullOrEmpty(_secondRequest.Password) || _secondRequest.Password.Length != 6)
+            {
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+                Snackbar.Add("کد ارسال شده را وارد نمایید ", Severity.Warning);
+                return;
+            }
+
+            var ss = _appConfiguration.BackendServerAddress;
+
+            _secondRequest.UserName = _tokenModel.UserName;
+            _secondRequest.LoginType = Commons.ServiceModel.ServiceAuthentication.Enumerations.LoginType.LoginWithSms;
+            AuthResult result = _anuAuthorizationService.V2Login(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _secondRequest).Result;
+            if (result.Result.Code == 1000)
+            {
+                SharedInfo.NationalCode = _tokenModel.UserName;
+                SharedInfo.AccessToken = result.AccessToken;
+                _navigationManager.NavigateTo("/");
+                errorMessage = "";
+
+            }
+            else
+            {
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+                Snackbar.Add(result.Result.Message, Severity.Warning);
+            }
+        }
+        catch
+        {
+            Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
         }
 
-        var ss = _appConfiguration.BackendServerAddress;
-
-        _secondRequest.UserName = _tokenModel.UserName;
-        _secondRequest.LoginType = Commons.ServiceModel.ServiceAuthentication.Enumerations.LoginType.LoginWithSms;
-        AuthResult result = _anuAuthorizationService.V2Login(_appConfiguration.BackendServerAddress, _appConfiguration.LoginAddress, _secondRequest).Result;
-        if (result.Result.Code == 1000)
-        {
-            SharedInfo.NationalCode = _tokenModel.UserName;
-            SharedInfo.AccessToken = result.AccessToken;
-            _navigationManager.NavigateTo("/");
-            errorMessage = "";
-
-        }
-        else
-        {
-            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-            Snackbar.Add(result.Result.Message, Severity.Warning);
-        }
     }
 
     protected async override Task OnInitializedAsync()

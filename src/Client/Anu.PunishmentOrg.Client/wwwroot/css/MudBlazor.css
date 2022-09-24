@@ -1905,8 +1905,9 @@ ul {
     }
 
     .mud-button-filled.mud-button-filled-primary {
-        color: var(--mud-palette-primary-text);
-        background-color: var(--mud-palette-primary);
+       /* color: var(--mud-palette-primary-text);*/
+        color: var(--mud-palette-text-primary) ;
+        background-color: var(--mud-palette-primary) !important;
     }
 
         .mud-button-filled.mud-button-filled-primary:hover, .mud-button-filled.mud-button-filled-primary:focus-visible {

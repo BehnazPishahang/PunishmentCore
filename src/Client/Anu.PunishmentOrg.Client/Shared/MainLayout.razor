@@ -83,61 +83,68 @@
                 @if (String.IsNullOrEmpty(SharedInfo.NationalCode))
                 {
                     <MudNavMenu Color="Color.Primary">
-                        <MudTooltip Text="خدمات الکترونیکی تعزیرات">
+                        <MudTooltip Text="خدمات الکترونیکی تعزیرات" Arrow="true" Placement="Placement.Left">
                             <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@MudBlazor.Icons.Filled.Home" IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
                         </MudTooltip>
-                        <MudTooltip Text="ثبت شکوائیه">
+                        <MudTooltip Text="ثبت شکوائیه" Arrow="true" Placement="Placement.Left">
                             <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner" IconColor="@Theme135._iconColor" itemtype="">ثبت شکایت</MudNavLink>
                         </MudTooltip>
-                        <MudTooltip Text="پرداخت وجه">
+                        <MudTooltip Text="پرداخت وجه" Arrow="true" Placement="Placement.Left">
                             <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.Payments" IconColor="@Theme135._iconColor">پرداخت وجه</MudNavLink>
                         </MudTooltip>
                     </MudNavMenu>
                 }
                 else
                 {
-                    <MudTooltip Text="خدمات الکترونیکی تعزیرات">
+                    <MudTooltip Text="خدمات الکترونیکی تعزیرات" Arrow="true" Placement="Placement.Left">
                         <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@MudBlazor.Icons.Filled.Home" IconColor="@Theme135._iconColor"> خدمات الکترونیکی تعزیرات </MudNavLink>
                     </MudTooltip>
 
-                    <MudTooltip Text="ابلاغ ها">
-                        <MudNavLink id="FrmNoticeMain" Href="/FrmNotice" Icon="@MudBlazor.Icons.Filled.ManageSearch" IconColor="@Theme135._iconColor">ابلاغ ها</MudNavLink>
+                    <MudTooltip Text="ابلاغ ها" Arrow="true" Placement="Placement.Left">
+                        <MudNavLink id="FrmNoticeMain" Href="/FrmNotice" Icon="@MudBlazor.Icons.Filled.ManageSearch" IconColor="@Theme135._iconColor">ابلاغ‌ها</MudNavLink>
                     </MudTooltip>
-                    <MudTooltip Text="پرونده">
-                        <MudNavGroup Icon="@Icons.Filled.RuleFolder" IconColor="@Theme135._iconColor">
-                            <MudTooltip Text="لیست پرونده ها">
-                                <MudNavLink Href="/Cases" Icon="@Icons.Filled.RuleFolder" IconColor="@Theme135._iconColor">پرونده  ها</MudNavLink>
+                    <MudTooltip Text="پرونده" Arrow="true" Placement="Placement.Left">
+                        <MudNavGroup Icon="@Icons.Filled.RuleFolder" IconColor="@Theme135._iconColor" Title="پرونده">
+                            <MudTooltip Text="لیست پرونده ها" Arrow="true" Placement="Placement.Left">
+                                <MudNavLink Href="/Cases" Icon="@Icons.Filled.RuleFolder" IconColor="@Theme135._iconColor">پرونده‌ها</MudNavLink>
                             </MudTooltip>
-                            <MudTooltip Text="پیگیری پرونده">
+                            <MudTooltip Text="پیگیری پرونده" Arrow="true" Placement="Placement.Left">
                                 <MudNavLink Href="/CaseFollowUp" Icon="@Icons.Filled.FolderOpen" IconColor="@Theme135._iconColor">پیگیری پرونده</MudNavLink>
                             </MudTooltip>
                         </MudNavGroup>
                     </MudTooltip>
-                    <MudTooltip Text="لیست شکوائیه ها">
-                        <MudNavLink Href="/GranovmentList" Icon="@MudBlazor.Icons.Filled.List" IconColor="@Theme135._iconColor">شکایت ها</MudNavLink>
+                    <MudTooltip Text="شکوائیه" Arrow="true" Placement="Placement.Left">
+                        <MudNavGroup Icon="@Icons.Filled.List" IconColor="@Theme135._iconColor" Title="شکوائیه">
+                            <MudTooltip Text="لیست شکوائیه ها" Arrow="true" Placement="Placement.Left">
+                                <MudNavLink Href="/GranovmentList" Icon="@MudBlazor.Icons.Filled.List" IconColor="@Theme135._iconColor">شکوائیه‌ها</MudNavLink>
+                            </MudTooltip>
+                            <MudTooltip Text="ثبت شکوائیه" Arrow="true" Placement="Placement.Left">
+                                <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner" IconColor="@Theme135._iconColor">ثبت شکوائیه</MudNavLink>
+                            </MudTooltip>
+                            <MudTooltip Text="پیگیری شکوائیه" Arrow="true" Placement="Placement.Left">
+                                <MudNavLink Href="/GranovmentFollowByNo" Icon="@MudBlazor.Icons.Filled.FolderOpen" IconColor="@Theme135._iconColor">پیگیری شکوائیه</MudNavLink>
+                            </MudTooltip>
+                        </MudNavGroup>
                     </MudTooltip>
-                    <MudTooltip Text="ثبت شکوائیه">
-                        <MudNavLink Href="/Granovment" Icon="@MudBlazor.Icons.Filled.DocumentScanner" IconColor="@Theme135._iconColor">ثبت شکایت</MudNavLink>
-                    </MudTooltip>
-                    <MudTooltip Text="پرداخت وجه">
+                    <MudTooltip Text="پرداخت وجه" Arrow="true" Placement="Placement.Left">
                         <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.Payments" IconColor="@Theme135._iconColor">پرداخت وجه</MudNavLink>
                     </MudTooltip>
-                    <MudTooltip Text="لایحه">
+                    <MudTooltip Text="لایحه" Arrow="true" Placement="Placement.Left">
                         <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Material.Filled.DocumentScanner" IconColor="@Theme135._iconColor">لایحه</MudNavLink>
                     </MudTooltip>
-                    <MudTooltip Text="درخواست تجدید نظر خواهی">
+                    <MudTooltip Text="درخواست تجدید نظر خواهی" Arrow="true" Placement="Placement.Left">
                         <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.DriveFileRenameOutline" IconColor="@Theme135._iconColor">درخواست تجدید نظر خواهی</MudNavLink>
                     </MudTooltip>
-                    <MudTooltip Text="درخواست اعمال ماده ۲۳">
+                    <MudTooltip Text="درخواست اعمال ماده ۲۳" Arrow="true" Placement="Placement.Left">
                         <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.DonutLarge" IconColor="@Theme135._iconColor">درخواست اعمال ماده ۲۳</MudNavLink>
                     </MudTooltip>
-                    <MudTooltip Text="ثبت وکالت نامه">
+                    <MudTooltip Text="ثبت وکالت نامه" Arrow="true" Placement="Placement.Left">
                         <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.EscalatorWarning" IconColor="@Theme135._iconColor">ثبت وکالت نامه</MudNavLink>
                     </MudTooltip>
-                    <MudTooltip Text="درخواست رسیدگی مجدد">
+                    <MudTooltip Text="درخواست رسیدگی مجدد" Arrow="true" Placement="Placement.Left">
                         <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.DoorSliding" IconColor="@Theme135._iconColor">درخواست رسیدگی مجدد</MudNavLink>
                     </MudTooltip>
-                    <MudTooltip Text="ثبت اعتراض">
+                    <MudTooltip Text="ثبت اعتراض" Arrow="true" Placement="Placement.Left">
                         <MudNavLink Href="/isConstracting" Icon="@MudBlazor.Icons.Filled.EmojiPeople" IconColor="@Theme135._iconColor">ثبت اعتراض</MudNavLink>
                     </MudTooltip>
                 }
