@@ -10,6 +10,7 @@
     <ProjectReference Include="..\..\DataModel\Anu.Oracle.DbContext\Anu.Oracle.DbContext.csproj" />
     <ProjectReference Include="..\..\Domain\Anu.BaseInfo.Domain\Anu.BaseInfo.Domain.csproj" />
     <ProjectReference Include="..\..\Domain\Anu.PunishmentOrg.Domain\Anu.PunishmentOrg.Domain.csproj" />
+    <ProjectReference Include="..\..\Validations\Anu.Validation\Anu.Validation.csproj" />
   </ItemGroup>
 
 </Project>
