@@ -95,11 +95,11 @@
             if (!SharedInfo.LoadAllNoticeList.HasValue)
                 userInfo = await _anuAuthorizationService.GetProfile(_appConfiguration.BackendServerAddress, _appConfiguration.GetProfile, input, _AccessToken);
 
-            NationalCode = userInfo.PBPuoUsersContract.NationalCode;
-            FirstName = userInfo.PBPuoUsersContract.FirstName;
-            LastName = userInfo.PBPuoUsersContract.LastName;
-            BirthDate = userInfo.PBPuoUsersContract.BirthDate;
-            PhoneNumber = userInfo.PBPuoUsersContract.PhoneNumber;
+            NationalCode =userInfo != null ? userInfo.PBPuoUsersContract.NationalCode : "";
+            FirstName    =userInfo != null ? userInfo.PBPuoUsersContract.FirstName    : "";
+            LastName     =userInfo != null ? userInfo.PBPuoUsersContract.LastName     : "";
+            BirthDate    =userInfo != null ? userInfo.PBPuoUsersContract.BirthDate    : "";
+            PhoneNumber  =userInfo != null ? userInfo.PBPuoUsersContract.PhoneNumber  : "";
         }
         catch (Exception)
         {
