@@ -4,6 +4,7 @@
 @using Anu.PunishmentOrg.ServiceModel.BaseInfo
 @inject IAnuAuthorizationService  _anuAuthorizationService;
 @inject AppConfiguration _appConfiguration;
+@inject ISnackbar Snackbar
 
 <MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
     <MudText Typo="Typo.h3" GutterBottom="true"></MudText>
@@ -79,31 +80,33 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //string ncode = SharedInfo.NationalCode;
-        string _AccessToken  = await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
-        string _NationalCode = await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
+        try
+        {
+            string _AccessToken = await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+            string _NationalCode = await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
 
-        if (string.IsNullOrEmpty(_NationalCode))
-            return;
-        if (string.IsNullOrEmpty(_AccessToken))
-            return;
+            if (string.IsNullOrEmpty(_NationalCode))
+                return;
+            if (string.IsNullOrEmpty(_AccessToken))
+                return;
 
-        PBPuoUsersRequest input = new PBPuoUsersRequest();
-        input.PBPuoUsersInputContract.NationalCode = _NationalCode;
-        if (!SharedInfo.LoadAllNoticeList.HasValue)
-            userInfo =await _anuAuthorizationService.GetProfile(_appConfiguration.BackendServerAddress, _appConfiguration.GetProfile, input, _AccessToken);
+            PBPuoUsersRequest input = new PBPuoUsersRequest();
+            input.PBPuoUsersInputContract.NationalCode = _NationalCode;
+            if (!SharedInfo.LoadAllNoticeList.HasValue)
+                userInfo = await _anuAuthorizationService.GetProfile(_appConfiguration.BackendServerAddress, _appConfiguration.GetProfile, input, _AccessToken);
 
             NationalCode = userInfo.PBPuoUsersContract.NationalCode;
             FirstName = userInfo.PBPuoUsersContract.FirstName;
             LastName = userInfo.PBPuoUsersContract.LastName;
             BirthDate = userInfo.PBPuoUsersContract.BirthDate;
             PhoneNumber = userInfo.PBPuoUsersContract.PhoneNumber;
-
-            //if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == true)
-            //    Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode).Where(t => !string.IsNullOrEmpty(t.NoticeDate));
-            //if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == false)
-            //    Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode).Where(t=> string.IsNullOrEmpty( t.NoticeDate));
         }
+        catch (Exception)
+        {
+            Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
+        }
+
+    }
 }
 
 

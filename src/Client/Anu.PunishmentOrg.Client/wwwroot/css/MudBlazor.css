@@ -1320,11 +1320,12 @@ ul {
 }
 
 .mud-tooltip-root {
-    width: fit-content;
+    width: 100%;
 }
 
     .mud-tooltip-root.mud-tooltip-inline {
         display: inline-block;
+        width: 100%;
     }
 
 .mud-tooltip {
