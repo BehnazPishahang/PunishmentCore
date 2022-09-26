@@ -4,17 +4,18 @@
 @inject AppConfiguration _appConfiguration;
 
 @inject INoticeService _noticeService;
+@inject ISnackbar Snackbar
 
-
-<MudDialog>
-    <DialogContent>
-       <embed src="@showedPdfContent" visible="false" width="1100" height="730" type="application/pdf" />
-
-    </DialogContent>
+<MudDialog Style="max-height:800px; overflow-y:scroll">
     <DialogActions>
-        <MudButton OnClick="Cancel"  Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Close" Color="Color.Error">بازگشت</MudButton>
-       <MudButton OnClick="Submit"  Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Print" Color="Color.Success">چاب</MudButton>
+        <MudButton OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Close" Color="Color.Error">بازگشت</MudButton>
+        @*<MudButton OnClick="Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Print" Color="Color.Success">چاب</MudButton>*@
     </DialogActions>
+    <DialogContent>
+        <MudContainer Style="max-height: 800px; overflow-y: scroll">
+            <embed src="@showedPdfContent" visible="false"  width="720" height="480" type="application/pdf" style="border:1px solid gray"/>
+        </MudContainer>
+    </DialogContent>
 </MudDialog>
 
 
@@ -30,14 +31,22 @@
     void Submit() => MudDialog.Close(DialogResult.Ok(true));
     void Cancel()
     { 
-       _navigationManager.NavigateTo("/");
+        _navigationManager.NavigateTo("/");
         _navigationManager.NavigateTo("/FrmNotice");
     }
 
 
     protected override async Task OnInitializedAsync()
     {
-        string nnn = No;
-        var  NoticeInfo = _noticeService.ChangePNoticeViewByUserStatus(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePNoticeViewByUserStatus, No ,SharedInfo.AccessToken);
+        try
+        {
+            string nnn = No;
+                string _AccessToken =  await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+            var NoticeInfo = _noticeService.ChangePNoticeViewByUserStatus(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePNoticeViewByUserStatus, No, _AccessToken);
         }
+        catch
+        {
+            Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
+        }
+    }
 }

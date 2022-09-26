@@ -3,6 +3,81 @@
  * Copyright (c) 2021 MudBlazor
  * Licensed under MIT (https://github.com/MudBlazor/MudBlazor/blob/master/LICENSE)
  */
+@keyframes shadows {
+    0% {
+        text-shadow: none;
+    }
+
+    10% {
+        text-shadow: 3px 3px 0 var(--color-secondary);
+    }
+
+    20% {
+        text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary);
+    }
+
+    30% {
+        text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary);
+    }
+
+    40% {
+        text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
+    }
+
+    50% {
+        text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
+    }
+
+    60% {
+        text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
+    }
+
+    70% {
+        text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary);
+    }
+
+    80% {
+        text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary);
+    }
+
+    90% {
+        text-shadow: 3px 3px 0 var(--color-secondary);
+    }
+
+    100% {
+        text-shadow: none;
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0px, 0px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    50% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(-2px, -2px);
+    }
+
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
+.text-animation {
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--color-primary);
+    animation: shadows 1.2s ease-in infinite, move 1.2s ease-in infinite;
+}
+
 .mud-primary {
     background-color: var(--mud-palette-primary) !important;
 }
@@ -235,7 +310,6 @@
 
 .mud-text-primary {
     color: var(--mud-palette-text-primary);
-
 }
 
 .mud-text-secondary {
@@ -318,6 +392,7 @@ a {
 
 #components-reconnect-modal {
     z-index: 9999 !important;
+    /* display: none !important;*/
 }
 
     #components-reconnect-modal h5 {
@@ -1245,11 +1320,12 @@ ul {
 }
 
 .mud-tooltip-root {
-    width: fit-content;
+    width: 100%;
 }
 
     .mud-tooltip-root.mud-tooltip-inline {
         display: inline-block;
+        width: 100%;
     }
 
 .mud-tooltip {
@@ -1830,8 +1906,9 @@ ul {
     }
 
     .mud-button-filled.mud-button-filled-primary {
-        color: var(--mud-palette-primary-text);
-        background-color: var(--mud-palette-primary);
+       /* color: var(--mud-palette-primary-text);*/
+        color: var(--mud-palette-text-primary) ;
+        background-color: var(--mud-palette-primary) !important;
     }
 
         .mud-button-filled.mud-button-filled-primary:hover, .mud-button-filled.mud-button-filled-primary:focus-visible {
@@ -2668,9 +2745,10 @@ ul {
 }
 
 .mud-icon-button-edge-start {
-    margin-left: -12px;
-    margin-inline-start: -12px;
+    margin-left: -13px;
+    margin-inline-start: -20px;
     margin-inline-end: unset;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 20%), 0 7px 24px 0 rgb(0 0 0 / 19%);
 }
 
 .mud-icon-button-edge-end {
@@ -3288,6 +3366,8 @@ ul {
     .mud-chip-filled.mud-chip-color-primary {
         color: var(--mud-palette-primary-text);
         background-color: var(--mud-palette-primary);
+        box-shadow: 1px 4px 24px;
+        border-radius: 10px;
     }
 
         .mud-chip-filled.mud-chip-color-primary:hover:not(.mud-disabled), .mud-chip-filled.mud-chip-color-primary:focus-visible:not(.mud-disabled) {
@@ -11147,13 +11227,14 @@ tr.mud-table-row-group-indented-5 td:first-child {
 }
 
 .mud-image {
-   /* filter: drop-shadow(1px 8px 4px var(--mud-palette-primary));*/
+    /* filter: drop-shadow(1px 8px 4px var(--mud-palette-primary));*/
     filter: opacity(0.5) drop-shadow(0 0 0 var(--mud-palette-primary));
 }
 
 .mud-Border-Primary {
     border: 1px solid var(--mud-palette-primary);
 }
+
 .mud-overlay {
     top: 0;
     left: 0;
@@ -27557,6 +27638,7 @@ tr.mud-table-row-group-indented-5 td:first-child {
 .mud-application-layout-rtl .mud-flip-x-rtl {
     transform: scaleX(-1);
 }
+
 .mud-bold {
     font-weight: bold !important;
 }
@@ -27564,4 +27646,8 @@ tr.mud-table-row-group-indented-5 td:first-child {
 .mud-theme-manager-button:hover {
     cursor: pointer;
     color: blue !important;
+}
+
+.components-reconnect-show, .components-reconnect-failed, .components-reconnect-rejected {
+    display: none !important;
 }

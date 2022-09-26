@@ -8,5 +8,6 @@
         public string? No { get; set; }
         public string? UnitName { get; set; }
         public string? CreateDateTime { get; set; }
+        public Enumerations.PUCaseArchiveState? CaseArchiveState { get; set; }
     }
 }

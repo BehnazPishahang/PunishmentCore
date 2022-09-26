@@ -21,6 +21,7 @@ using Anu.BaseInfo.Domain.GeoInfo;
 using Anu.BaseInfo.Domain.SystemObject;
 using Anu.PunishmentOrg.Domain.BaseInfo;
 using Anu.PunishmentOrg.Domain.DiscoveryMinutes;
+using Anu.Utility.Extensions;
 
 namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
 {
@@ -124,7 +125,7 @@ namespace Anu.PunishmentOrg.Api.DiscoveryMinutes
                 ChaseResult                    = request.ThePChaseLicenseReqContract?.ChaseResult,
                 ChaseTitle                     = request.ThePChaseLicenseReqContract?.ChaseTitle,
                 ConclusionRequest              = request.ThePChaseLicenseReqContract?.ConclusionRequest,
-                CreateDateTime                 = CalendarHelper.GetCurrentDateTime(),
+                CreateDateTime                 = DateTime.Now.ToPersianDateTime(),
                 TheGeoLocation                 = await _unitOfWork.Repositorey<IGeoLocationRepository>().GetGeoLocationWithLocationCode(request.ThePChaseLicenseReqContract?.TheGeoLocation?.LocationCode),
                 InstitutionCode                = request.ThePChaseLicenseReqContract?.InstitutionCode,
                 InstitutionExporter            = request.ThePChaseLicenseReqContract?.InstitutionExporter,

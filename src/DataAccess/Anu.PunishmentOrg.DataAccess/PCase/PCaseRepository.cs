@@ -19,7 +19,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
             "012", "006","014","007","015","016" };
         string[] badviType = new string[] { "005", "013", "006", "014", "007", "015", "016" };
         string[] ejraType = new string[] { "008", "010", "011", "012" };
-        int[] objectStateType = new int[] { 2, 4};
+        int[] objectStateType = new int[] { 2, 4 };
 
         public PCaseRepository(Anu.DataAccess.ApplicationDbContext context) : base(context)
         {
@@ -59,7 +59,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
             return new Statistic() { CountTotal = totalPcase, CountSeen = totalPcase - countParvandeJari, CountUnSeen = countParvandeJari };
         }
 
-        public async Task<IEnumerable<DataModel.Case.PCase>> GetAllPCaseWithNationalCode(string nationalCode)
+        public async Task<IEnumerable<DataModel.Case.PCase>> GetAllPCaseWithNationalCode(string nationalCode, PUCaseArchiveState caseArchiveState = PUCaseArchiveState.None)
         {
 
             var query = from pcase in _context.Set<Anu.PunishmentOrg.DataModel.Case.PCase>()
@@ -70,6 +70,10 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                          where person.ThePCase.Id == pcase.Id && person.NationalCode == nationalCode
                          select 1).Any()
                         select pcase;
+            if (caseArchiveState != PUCaseArchiveState.None)
+            {
+                query = query.Where(a => a.CaseArchiveState == caseArchiveState);
+            }
             query = query.Include(a => a.TheHandlerUnit).ThenInclude(a => a.TheGUnitType);
 
             var pCase = await query.ToListAsync();
@@ -158,20 +162,20 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                 //foreach (var item in pCase)
                 //{
                 var query2 = from safty in _context.Set<PSaftyWrit>()
-                             where safty.ThePCase.Id == item.Id 
+                             where safty.ThePCase.Id == item.Id
                              //&& objectStateType.Contains(safty.TheObjectState.StateType.GetEnumCode())
                              select safty;
                 query2 = query2.Include(a => a.ThePCasePerson);
                 query2 = query2.Include(a => a.TheObjectState);
-                var a=query2.ToQueryString();
+                var a = query2.ToQueryString();
                 var pSaftyWrit = await query2.ToListAsync();
 
                 if (!pSaftyWrit.Null())
                 {
-                    pSaftyWrit=pSaftyWrit.Where(a => objectStateType.Contains(a.TheObjectState.StateType.GetEnumCode())).ToList();
+                    pSaftyWrit = pSaftyWrit.Where(a => objectStateType.Contains(a.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var ps in pSaftyWrit)
                     {
-                        list.Add(handlingPcaseWithPSaftyWrit.Args(ps.SaftyWritType.GetDescription(), ps.ThePCasePerson.Name + " " + ps.ThePCasePerson.Family));
+                        list.Add(handlingPcaseWithPSaftyWrit.Args(ps.SaftyWritType.GetEnmDescription(), ps.ThePCasePerson.Name + " " + ps.ThePCasePerson.Family));
                         //text.AppendFormat(handlingPcaseWithPSaftyWrit, ps.SaftyWritType.GetDescription(), ps.ThePCasePerson.Name + " " + ps.ThePCasePerson.Family).AppendLine();
                     }
                 }
@@ -236,7 +240,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                     pRevisionRequest = pRevisionRequest.Where(a => objectStateType.Contains(a.ThePRevisionRequest.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var pr in pRevisionRequest)
                     {
-                        list.Add(judgmentPRevisionRequestCase.Args(pr.ThePRevisionRequest.CreateDateTime.Substring(0, 10), pr.ThePRevisionRequest.RequestSubject.GetDescription()));
+                        list.Add(judgmentPRevisionRequestCase.Args(pr.ThePRevisionRequest.CreateDateTime.Substring(0, 10), pr.ThePRevisionRequest.RequestSubject.GetEnmDescription()));
                         //text.AppendFormat(judgmentPRevisionRequestCase, pr.ThePRevisionRequest.CreateDateTime.Substring(0, 10), pr.ThePRevisionRequest.RequestSubject.GetDescription()).AppendLine();
                     }
 
@@ -259,8 +263,8 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                 var querypcash = from pcash in _context.Set<DataModel.Accounting.PCashCase>()
                                  where pcash.ThePCase.Id == item.Id
                                  select pcash;
-                querypcash = querypcash.Include(a=>a.ThePCase).Include(a=>a.ThePCash);
-                querypcash = querypcash.Include(a=>a.ThePCash.TheObjectState);
+                querypcash = querypcash.Include(a => a.ThePCase).Include(a => a.ThePCash);
+                querypcash = querypcash.Include(a => a.ThePCash.TheObjectState);
                 var pCashCase = await querypcash.ToListAsync();
 
                 if (!pCashCase.Null())
@@ -288,7 +292,7 @@ namespace Anu.PunishmentOrg.DataAccess.PCase
                     pExecutionWrit = pExecutionWrit.Where(a => objectStateType.Contains(a.TheObjectState.StateType.GetEnumCode())).ToList();
                     foreach (var pe in pExecutionWrit)
                     {
-                        list.Add(executionPExecutionWrit.Args(pe.CreateDateTime.Substring(0, 10), pe.WritType.GetDescription()));
+                        list.Add(executionPExecutionWrit.Args(pe.CreateDateTime.Substring(0, 10), pe.WritType.GetEnmDescription()));
                         //text.AppendFormat(executionPExecutionWrit, pe.CreateDateTime.Substring(0,10), pe.WritType.GetDescription()).AppendLine();
                     }
 

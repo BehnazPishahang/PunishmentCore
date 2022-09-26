@@ -14,5 +14,8 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Contracts.Granovment
         public GetPGravamenByIdResponse GetGravamenByFollowingNo(String baseURl, string serviceName, GetPGravamenByIdRequest request);
 
         public IEnumerable<PGravamenInfoContract> GetGravamenListByNationalNo(String baseURl, string serviceName, string nationalCode,string accessToken);
+
+        public Task<GetPersonPGravamenStatisticContract> GetPersonPGravamenStatistic(String baseURl, string serviceName, string nationalCode, string accessToken);
+
     }
 }

@@ -98,7 +98,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
             return result;
         }
 
-        public GetCountOfUnSeenPNoticeByUserResponse GetCountOfUnSeenPNoticeByUser(string baseURl, string serviceName, string nationalCode , string accessToken)
+        public async Task<GetCountOfUnSeenPNoticeByUserResponse> GetCountOfUnSeenPNoticeByUser(string baseURl, string serviceName, string nationalCode , string accessToken)
         {
             GetCountOfUnSeenPNoticeByUserRequest req = new();
 
@@ -111,7 +111,7 @@ namespace Anu.PunishmentOrg.Client.Infrastructure.Notice
                    "Bearer", accessToken);
             var response = client.PostAsJsonAsync(serviceName, req).Result;
 
-            GetCountOfUnSeenPNoticeByUserResponse result = response.Content.ReadAsAsync<GetCountOfUnSeenPNoticeByUserResponse>().Result;
+            GetCountOfUnSeenPNoticeByUserResponse result = await response.Content.ReadAsAsync<GetCountOfUnSeenPNoticeByUserResponse>();
             return result;
         }
     }

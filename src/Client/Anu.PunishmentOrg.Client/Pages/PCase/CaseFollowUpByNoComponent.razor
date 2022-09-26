@@ -1,0 +1,45 @@
+﻿@page "/CaseFollowUpNo/{_CaseNo}"
+
+@using Anu.PunishmentOrg.ServiceModel.Case
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase
+
+
+@inject IPCaseService _pCaseService
+@inject AppConfiguration _appConfiguration;
+@inject ISnackbar Snackbar
+
+<div class="punFrmheader">
+    <h3>پیگیری پرونده</h3>
+</div>
+
+<MudCard Style="margin-bottom:5px;">
+    <MudCardContent>
+        <MudText>شماره پرونده : @_CaseNo</MudText>
+    </MudCardContent>
+</MudCard>
+<MudForm>
+    <MudCard>
+        <MudCardContent>
+            <div class="row">
+                <MudList>
+                    @if (Elements != null)
+                    {
+                        @if (Elements.Result.Code == 1000)
+                        {
+                            @for (int i = 0; i < Elements.ExportInqueryPCaseContract.Cases.Count; i++)
+                            {
+                                @foreach (var item in Elements.ExportInqueryPCaseContract.Cases[i])
+                                {
+                                    <MudListItem Style="margin-right:20px" Icon="@Icons.Filled.FiberManualRecord" IconSize="Size.Small" IconColor="Color.Error">@item</MudListItem>
+                                }
+                            }
+                        }
+                    }
+                </MudList>
+            </div>
+        </MudCardContent>
+    </MudCard>
+</MudForm>
+
+@code {
+}

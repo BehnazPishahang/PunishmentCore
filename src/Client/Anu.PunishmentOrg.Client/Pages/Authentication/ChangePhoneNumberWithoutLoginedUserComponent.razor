@@ -7,7 +7,7 @@
 @using Anu.Commons.ServiceModel.ServiceResponseEnumerations
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
 @using Anu.PunishmentOrg.ServiceModel.BaseInfo
- @inject IAnuAuthorizationService  _anuAuthorizationService;
+@inject IAnuAuthorizationService  _anuAuthorizationService;
 @inject AppConfiguration _appConfiguration;
 
 
@@ -31,7 +31,7 @@
                 <MudItem class=" mb-0">کدملی</MudItem>
               </MudItem>
               <MudItem class="col-sm-9">
-                <MudItem class="text-muted mb-0">@SharedInfo.NationalCode</MudItem>
+                <MudItem class="text-muted mb-0">@_NationalCode</MudItem>
               </MudItem>
             </MudItem>
             <hr />
@@ -82,7 +82,7 @@
 
     </MudForm>
 @code {
-    string ncode = SharedInfo.NationalCode;
+    string _NationalCode ="";
     private bool showPassword = false;
     private string smsPassword = "";
     private bool hasSmsSend = false;
@@ -113,10 +113,11 @@
         hasSmsSend = false;
         StateHasChanged();
     }
-    protected override void OnInitialized()
+    protected override async Task   OnInitializedAsync()
     {
         _changePhoneNumberRequest = new();
-        _changePhoneNumberRequest.UserName = SharedInfo.NationalCode;
+         _NationalCode = await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
+        _changePhoneNumberRequest.UserName = _NationalCode;
     }
     async void GetAccessCode()
     {
@@ -142,7 +143,7 @@
 
 
          FirstStepUserLoginRequest _firstStepUserLoginRequest = new();
-        _firstStepUserLoginRequest.UserName = SharedInfo.NationalCode;
+        _firstStepUserLoginRequest.UserName = _NationalCode;
      
         FirstStepAuthResult result =await _anuAuthorizationService.SendSmsAuth(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsAuth, _firstStepUserLoginRequest);
 
@@ -172,10 +173,11 @@
             }
             return;
         }
-        Result result =await _anuAuthorizationService.ChangePhoneNumber(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePhoneNumber, _changePhoneNumberRequest,SharedInfo.AccessToken);
-          if (result.Code == (int)AnuResult.Successful)
+        string _AccessToken = await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+
+        Result result =await _anuAuthorizationService.ChangePhoneNumber(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePhoneNumber, _changePhoneNumberRequest,_AccessToken);
+        if (result.Code == (int)AnuResult.Successful)
         {
-           
             _changePhoneNumberRequest = new();
 
             bool? resulXt = await DialogService.ShowMessageBox(

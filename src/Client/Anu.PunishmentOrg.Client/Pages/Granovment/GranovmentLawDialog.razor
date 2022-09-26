@@ -7,18 +7,25 @@
 </style>
 <MudDialog>
     <DialogContent>
-        <p>
+        <MudText Typo="Typo.h6" Align="MudBlazor.Align.Center" Class="pHeader">بسمه تعالی</MudText>
+        <MudText Typo="Typo.subtitle2" Align="MudBlazor.Align.Justify">
             بر اساس ماده واحده قانون اصلاح قانون تعزیرات حکومتی مصوب 1373 مجمع تشخیص مصلحت نظام وماده 2 تصویب نامه هیات وزیران در خصوص تعیین سازمان و تشکیلات تعزیرات حکومتی مصوب 1373 و همچنین مقررات قانون نظام صنفی مصوب 1382 مجلس شورای اسلامی با اصلاحات بعدی، این سازمان صرفا مرجع رسیدگی است.
-        </p>
-        <p>
+            <br />
             لذا سازمان تعزیرات حکومتی در راستای تسهیل دسترسی عموم شهروندان و جلوگیری از اطاله دادرسی، امکان ثبت شکایت غیر حضوری از واحدهای اقتصادی و صنفی،پیرامون تخلفات، گرانفروشی، کم فروشی، عدم درج قیمت، تقلب در کسب و کار و عدم صدور صورتحساب(فاکتور) ،با ارائه مستندات مربوطه در سامانه 135 فراهم نموده است.
+            <br />
+            شهروندان گرامی در صورت ارائه مستندات کافی، میتوانند شکایت خود را (پنج مورد فوق الذکر) از طریق سامانه 135 ثبت نمایند و شعب سازمان در اجرای تبصره فوق الذکر بدون لزوم احضار،حضور یا استماع اظهارات طرفین، تصمیم مقتضی و قانونی صادر و نتیجه را نیز از طریق سامانه 135 و پیامک ابلاغ می نمایند.
+        </MudText>
+        <p>
         </p>
         <p>
-            شهروندان گرامی در صورت ارائه مستندات کافی، میتوانند شکایت خود را (پنج مورد فوق الذکر) از طریق سامانه 135 ثبت نمایند و شعب سازمان در اجرای تبصره فوق الذکر بدون لزوم احضار،حضور یا استماع اظهارات طرفین، تصمیم مقتضی و قانونی صادر و نتیجه را نیز از طریق سامانه 135 و پیامک ابلاغ می نمایند.
+        </p>
+        <p>
         </p>
     </DialogContent>
     <DialogActions>
-        <MudButton Color="Color.Primary" OnClick="Submit">قبول</MudButton>
+        <MudCheckBox Color="Color.Secondary" @bind-Checked="AcceptInfo" style="margin-top:5px;margin-left:10px;"></MudCheckBox>
+        <MudButton OnClick="Submit" Variant="Variant.Filled" Disabled="@(!AcceptInfo)" Color="Color.Info"
+                   Style="font-size:1.4em;font-weight:700 !important;text-align:center">قبول</MudButton>
     </DialogActions>
 </MudDialog>
 
@@ -26,5 +33,6 @@
 @code {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
 
+    bool AcceptInfo = false;
     void Submit() => MudDialog.Close(DialogResult.Ok(true));
 }

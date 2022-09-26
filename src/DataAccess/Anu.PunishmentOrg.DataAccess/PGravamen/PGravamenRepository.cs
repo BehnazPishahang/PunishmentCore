@@ -21,12 +21,15 @@ public class PGravamenRepository : GenericRepository<DataModel.Gravamen.PGravame
                              .Where(a => a.FollowUpNo == followUpNo && a.GravamenOrReport == Enumerations.GravamenOrReport.Gravamen)
                              .Include(a => a.TheObjectState)
                              .Include(a => a.TheReceiveUnit)
+                             .Include(a => a.TheReferUnit)
+                             .Include(a => a.ThePCase)
                              .Include(a => a.ThePGravamenAttachmentList)
                              .ThenInclude(a => a.TheGAttachmentData)
                              .Include(a => a.ThePGravamenAttachmentList)
                              .ThenInclude(a => a.TheAttachmentType)
                              .Include(a => a.ThePGravamenPersonList)
                              .Include(a => a.ThePGravamenViolationList)
+                             .Include(a => a.ThePGravamenNoticeHstList)
                              .Include(a => a.ThePGravamenRejectOrDefectRSList)
                              .ThenInclude(a => a.ThePBGravamenRejectDefectType)
                              .FirstOrDefaultAsync();
@@ -36,12 +39,19 @@ public class PGravamenRepository : GenericRepository<DataModel.Gravamen.PGravame
     {
         return await _context.Set<DataModel.Gravamen.PGravamen>()
                              .Where(a => a.Id == id && a.GravamenOrReport == Enumerations.GravamenOrReport.Gravamen)
+                             .Include(a => a.TheObjectState)
+                             .Include(a => a.TheReceiveUnit)
+                             .Include(a => a.TheReferUnit)
+                             .Include(a => a.ThePCase)
                              .Include(a => a.ThePGravamenAttachmentList)
                              .ThenInclude(a => a.TheGAttachmentData)
                              .Include(a => a.ThePGravamenAttachmentList)
                              .ThenInclude(a => a.TheAttachmentType)
                              .Include(a => a.ThePGravamenPersonList)
                              .Include(a => a.ThePGravamenViolationList)
+                             .Include(a => a.ThePGravamenNoticeHstList)
+                             .Include(a => a.ThePGravamenRejectOrDefectRSList)
+                             .ThenInclude(a => a.ThePBGravamenRejectDefectType)
                              .FirstOrDefaultAsync();
     }
 

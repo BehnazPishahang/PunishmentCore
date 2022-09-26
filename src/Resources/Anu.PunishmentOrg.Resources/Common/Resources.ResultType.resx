@@ -541,11 +541,11 @@
     <comment>-100031</comment>
   </data>
   <data name="SabteAhval_Data_Not_Match_Entered_Data" xml:space="preserve">
-    <value>اطلاعات وارد شده معتبر نمی باشد.</value>
+    <value>{0} وارد شده معتبرنمی باشد .</value>
     <comment>-100021</comment>
   </data>
   <data name="SabteAhval_Not_Validate_NationalCode" xml:space="preserve">
-    <value>کدملی معتبر نمی باشد.</value>
+    <value>کدملی و یا تاریخ تولد معتبر نمی باشد.</value>
     <comment>-100020</comment>
   </data>
   <data name="SabteAhval_Unkhown_Error" xml:space="preserve">
@@ -815,5 +815,13 @@
   <data name="V2ChangePhoneNumber_Mobile_Number_is_Repetitive" xml:space="preserve">
     <value>شماره تلفن همراه کاربر به کد ملی {0} تکراری است</value>
     <comment>-30155</comment>
+  </data>
+  <data name="SabteAhval_Is_Out_Of_Service" xml:space="preserve">
+    <value>ثبت احوال در دسترس نمی باشد.</value>
+    <comment>-100034</comment>
+  </data>
+  <data name="CaseState_Is_Not_Valid" xml:space="preserve">
+    <value>وضعیت پرونده معتبر نمی باشد.</value>
+    <comment>-770004</comment>
   </data>
 </root>

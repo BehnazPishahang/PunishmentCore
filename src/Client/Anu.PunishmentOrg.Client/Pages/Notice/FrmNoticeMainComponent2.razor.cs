@@ -51,30 +51,46 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
             _events.Insert(0, $"Event = SelectedItemsChanged, Data = {System.Text.Json.JsonSerializer.Serialize(items)}");
         }
 
-        void ShowPDF(PNoticeContract selectedRow)
+        async Task ShowPDF(PNoticeContract selectedRow)
         {
-            string  pdf = _noticeService.GetNoticePDF(_appConfiguration.BackendServerAddress, _appConfiguration.ExportPNotice, selectedRow.No , SharedInfo.AccessToken);
-            
-            var parameters = new DialogParameters();
-            parameters.Add("showedPdfContent",pdf);
-            parameters.Add("No", selectedRow.No);
+            try
+            {
+                string _AccessToken =  await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+                string pdf = _noticeService.GetNoticePDF(_appConfiguration.BackendServerAddress, _appConfiguration.ExportPNotice, selectedRow.No, _AccessToken);
 
-            var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large };
+                var parameters = new DialogParameters();
+                parameters.Add("showedPdfContent", pdf);
+                parameters.Add("No", selectedRow.No);
 
-            DialogService.Show<FrmNoticePrintComponent>("Delete", parameters, options);
+                var options = new DialogOptions() { CloseButton = false, MaxWidth = MaxWidth.Medium };
+
+                DialogService.Show<FrmNoticePrintComponent>("مشاهده ابلاغ", parameters, options);
+            }
+            catch
+            {
+                Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
+            }
+
         }
         protected override async Task OnInitializedAsync()
         {
-            string ncode = SharedInfo.NationalCode;
+            try
+            {
 
-            bool? ss = SharedInfo.LoadAllNoticeList;
+                string _AccessToken =  await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+                string _NationalCode =  await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
 
-          Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, ncode, SharedInfo.AccessToken);
+                Elements = _noticeService.getPNoticeList(_appConfiguration.BackendServerAddress, _appConfiguration.InqueryPNoticeList, _NationalCode, _AccessToken);
 
-            if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == true)
-                Elements = Elements.Where(t => !string.IsNullOrEmpty(t.NoticeDate));
-            if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == false)
-                Elements = Elements.Where(t=> string.IsNullOrEmpty( t.NoticeDate));
+                if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == true)
+                    Elements = Elements.Where(t => !string.IsNullOrEmpty(t.NoticeDate));
+                if (SharedInfo.LoadAllNoticeList.HasValue && SharedInfo.LoadAllNoticeList.Value == false)
+                    Elements = Elements.Where(t => string.IsNullOrEmpty(t.NoticeDate));
+            }
+            catch
+            {
+                Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
+            }
         }
 
     }

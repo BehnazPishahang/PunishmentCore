@@ -6,6 +6,8 @@ using Anu.PunishmentOrg.Client.Infrastructure.Granovment;
 using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Granovment;
 using Anu.PunishmentOrg.Client.Infrastructure.Contracts.BaseInfo.GeoLocation;
 using Anu.PunishmentOrg.Client.Infrastructure.BaseInfo.GeoLocation;
+using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase;
+using Anu.PunishmentOrg.Client.Infrastructure.Pcase;
 
 namespace Anu.PunishmentOrg.Client
 {
@@ -14,6 +16,7 @@ namespace Anu.PunishmentOrg.Client
         public static IServiceCollection ManageIOC(this IServiceCollection services, ConfigurationManager configuration )
         {
             services.AddScoped<INoticeService, NoticeService>();
+            services.AddScoped<IPCaseService, PCaseService>();
             services.AddScoped<IAnuAuthorizationService, AnuAuthorizationService>();
             
             

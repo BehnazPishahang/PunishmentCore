@@ -10,15 +10,6 @@ namespace Anu.Utility
 {
     public static class Utility
     {
-        public static string GetDescription(this Enum enumValue)
-        {
-            var fieldInfo = enumValue.GetType().GetField(enumValue.ToString());
-
-            var descriptionAttributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-            return descriptionAttributes.Length > 0 ? descriptionAttributes[0].Description : enumValue.ToString();
-        }
-
         public static string ToCompleteString(this System.Exception ex)
         {
             if (ex == null) return string.Empty;
@@ -223,6 +214,15 @@ namespace Anu.Utility
         public static int GetEnumCode(this Enum value)
         {
             return (int)Convert.ChangeType(value, value.GetTypeCode());
+        }
+
+        public static string GetEnmDescription(this Enum enumValue)
+        {
+            var fieldInfo = enumValue.GetType().GetField(enumValue.ToString());
+
+            var descriptionAttributes = (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            return descriptionAttributes.Length > 0 ? descriptionAttributes[0].Description : enumValue.ToString();
         }
     }
 

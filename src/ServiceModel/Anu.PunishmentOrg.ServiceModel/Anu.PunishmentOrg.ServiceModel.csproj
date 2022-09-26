@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Accounting\ain0nium.tj1~" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\DataModel\Anu.BaseInfo.DataModel\Anu.BaseInfo.DataModel.csproj" />
     <ProjectReference Include="..\..\DataModel\Anu.PunishmentOrg.DataModel\Anu.PunishmentOrg.DataModel.csproj" />
     <ProjectReference Include="..\Anu.BaseInfo.ServiceModel\Anu.BaseInfo.ServiceModel.csproj" />

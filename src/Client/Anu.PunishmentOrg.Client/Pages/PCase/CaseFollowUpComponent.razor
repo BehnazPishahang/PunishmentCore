@@ -1,0 +1,54 @@
+﻿@page "/CaseFollowUp"
+
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase
+@using Anu.PunishmentOrg.Client.Infrastructure.Pcase
+
+
+@inject IPCaseService _pCaseService
+@inject AppConfiguration _appConfiguration;
+@inject ISnackbar Snackbar
+
+<div class="punFrmheader">
+    <h3>پیگیری پرونده</h3>
+</div>
+
+
+<MudForm>
+    <MudCard Style="margin:5px;">
+        <MudCardContent>
+            <div class="row">
+                <div class="col-sm-3">
+                    <MudTextField @bind-Value="@CaseNo" Label="شماره پرونده" Variant="Variant.Outlined" Margin="Margin.Dense"/>
+                </div>
+                <div class="col-sm-2">
+                    <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Search" Color="Color.Primary" 
+                               Size="Size.Medium" Class="form-control" OnClick="()=>GetCaseSummary()">پیگیری پرونده</MudButton>
+                </div>
+            </div>
+        </MudCardContent>
+    </MudCard>
+    <MudCard>
+        <MudCardContent>
+            <div class="row">
+                <MudList>
+                    @if (Elements != null)
+                    {
+                        @if (Elements.Result.Code == 1000)
+                        {
+                            @for (int i = 0; i < Elements.ExportInqueryPCaseContract.Cases.Count; i++)
+                            {
+                                @foreach (var item in Elements.ExportInqueryPCaseContract.Cases[i])
+                                {
+                                    <MudListItem Style="margin-right:20px" Icon="@Icons.Filled.FiberManualRecord" IconSize="Size.Small" IconColor="Color.Error">@item</MudListItem>
+                                }
+                            }
+                        }
+                    }
+                </MudList>
+            </div>
+        </MudCardContent>
+    </MudCard>
+</MudForm>
+
+@code {
+}

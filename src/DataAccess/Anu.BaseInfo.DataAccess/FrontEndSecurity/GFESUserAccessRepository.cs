@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Anu.Utility.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Utility.CalendarHelper;
 
 namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
@@ -20,12 +21,13 @@ namespace Anu.BaseInfo.DataAccess.FrontEndSecurity
                     && a.TheGFESUser.Password == hashedPassword 
                     //&& a.TheGFESUserAccessType.Id == GFESUserAccessType
                     ).ToListAsync();
+            var now = DateTime.Now.ToPersianDateTime();
 
             return gfeUser.Where(a =>
-                    a.TheGFESUser.EndDate.ToDateTime() >= CalendarHelper.SahmsiDateNow() &&
-                    a.TheGFESUser.StartDate.ToDateTime() <= CalendarHelper.SahmsiDateNow() &&
-                    a.ToDateTime.ToDateTime() >= CalendarHelper.SahmsiDateNow() &&
-                    a.FromDateTime.ToDateTime() <= CalendarHelper.SahmsiDateNow());
+                    a.TheGFESUser.EndDate.CompareTo(now) > -1 &&
+                                            a.TheGFESUser.StartDate.CompareTo(now) < 1 &&
+                                            a.ToDateTime.CompareTo(now) > -1 &&
+                                            a.FromDateTime.CompareTo(now) < 1);
         }
     }
 }

@@ -49,7 +49,9 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         Login_Again = -100030,
         Request_Is_Not_Valid = -100031,
         Can_Not_Find_AccessType = -100032,
-        In_Valid_Input = -100033
+        In_Valid_Input = -100033,
+        SabteAhval_Is_Out_Of_Service = -100034,
+        Recorde_User_History_Is_Not_Valid = -100035
     }
 
     public enum SendSmsForChangePhoneNumberResult

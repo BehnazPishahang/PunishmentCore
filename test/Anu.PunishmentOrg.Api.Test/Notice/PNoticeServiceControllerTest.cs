@@ -145,27 +145,29 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             Assert.Equal((int)GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required, exception.result.Code);
         }
 
-        //[Fact]
-        //public async Task GetCountOfUnSeenPNoticeByUser_PNoticeNotFound_Should_Return_Error30254()
-        //{
-        //    //Arrange
+        [Fact]
+        public async Task GetCountOfUnSeenPNoticeByUser_PNoticeNotFound_Should_Return_Error30254()
+        {
+            //Arrange
 
-        //    GetCountOfUnSeenPNoticeByUserRequest localGetCountOfUnSeenPNoticeByUserRequest = new GetCountOfUnSeenPNoticeByUserRequest()
-        //    {
-        //        ThePNoticePersonContract = new PNoticePersonContract()
-        //        {
-        //            NationalityCode = "1111111111",
-        //        }
-        //    };
+            GetCountOfUnSeenPNoticeByUserRequest localGetCountOfUnSeenPNoticeByUserRequest = new GetCountOfUnSeenPNoticeByUserRequest()
+            {
+                ThePNoticePersonContract = new PNoticePersonContract()
+                {
+                    NationalityCode = "1111111111",
+                }
+            };
 
-        //    //Act
+            _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(It.IsAny<string>())).ReturnsAsync((List<PNotice>)null);
 
-        //    var exception = Assert.ThrowsAsync<AnuExceptions>(async () => await _pNoticeServiceController.GetCountOfUnSeenPNoticeByUser(localGetCountOfUnSeenPNoticeByUserRequest)).Result;
+            //Act
 
-        //    //Assert
+            var exception = Assert.ThrowsAsync<AnuExceptions>(async () => await _pNoticeServiceController.GetCountOfUnSeenPNoticeByUser(localGetCountOfUnSeenPNoticeByUserRequest)).Result;
 
-        //    Assert.Equal((int)GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound, exception.result.Code);
-        //}
+            //Assert
+
+            Assert.Equal((int)GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound, exception.result.Code);
+        }
 
         [Fact]
         public async Task GetCountOfUnSeenPNoticeByUser_Should_Update()
@@ -313,7 +315,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal(Anu.BaseInfo.Enumerations.YesNo.Yes, thePNotice.IsViewedOnSite);
-            Assert.Equal(DateTime.Now.ToPersian().ToString().Substring(0, 10), thePNotice.NoticeDate);
+            //Assert.Equal(DateTime.Now.ToPersianDateTime().Substring(0, 10), thePNotice.NoticeDate);
             Assert.Equal(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.NoticeResultTypeCode.NotificationThroughTheSite, thePNotice.TheNoticeResultType.Code);
         }
 
@@ -380,40 +382,29 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             Assert.Equal((int)InqueryPNoticeListResult.PNotice_InqueryPNoticeList_NationalityCode_Is_Required, exception.result.Code);
         }
 
-        //[Fact]
-        //public async Task InqueryPNoticeList_PNoticeIsNull_Should_Return_Error50002()
-        //{
-        //    //Arrange
-        //    _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(It.IsAny<string>(), new Page() 
-        //                                                                                                                     { 
-        //                                                                                                                         PageNumber = 0, 
-        //                                                                                                                         RowCountPerPage = 0, 
-        //                                                                                                                         TotallPage = 0, 
-        //                                                                                                                         TotalResult = 0, 
-        //                                                                                                                         OrderPage = new OrderPage() 
-        //                                                                                                                         { 
-        //                                                                                                                             Property = "", 
-        //                                                                                                                             Ascending = false 
-        //                                                                                                                         } 
-        //                                                                                                                     }))
-        //               .ReturnsAsync((IEnumerable<PNotice>)null);
+        [Fact]
+        public async Task InqueryPNoticeList_PNoticeIsNull_Should_Return_Error50002()
+        {
+            //Arrange
 
-        //    var controller = new PNoticeServiceController(_unitOfWork.Object);
+            _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(It.IsAny<string>(), new Page())).ReturnsAsync((List<PNotice>)null);
 
-        //    //Act
+            var controller = new PNoticeServiceController(_unitOfWork.Object);
 
-        //    var result = controller.InqueryPNoticeList(new ServiceModel.Notice.PNoticeInqueryRequest()
-        //    {
-        //        PNoticePersonContract = new PNoticePersonContract() 
-        //        {
-        //            NationalityCode = "23232322" 
-        //        }
-        //    });
+            //Act
 
-        //    //Assert
+            var result = controller.InqueryPNoticeList(new ServiceModel.Notice.PNoticeInqueryRequest()
+            {
+                PNoticePersonContract = new PNoticePersonContract()
+                {
+                    NationalityCode = "23232322"
+                }
+            });
 
-        //    Assert.Equal((int)InqueryPNoticeListResult.PNotice_InqueryPNoticeList_NotFound, result.Result.Result.Code);
-        //}
+            //Assert
+
+            Assert.Equal((int)InqueryPNoticeListResult.PNotice_InqueryPNoticeList_NotFound, result.Result.Result.Code);
+        }
 
         [Fact]
         public async Task InqueryPNoticeList_EnterNationalCode_ReturenedListOfNotices()

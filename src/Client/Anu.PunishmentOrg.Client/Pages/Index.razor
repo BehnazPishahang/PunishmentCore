@@ -1,6 +1,8 @@
 ﻿@page "/"
 @page "/{isLogedId:bool}"
-@if(String.IsNullOrEmpty(SharedInfo.NationalCode))
+ 
+
+@*@if( _NationalCode == null)
 {
   <DashboardPublic>
   </DashboardPublic>
@@ -10,27 +12,35 @@ else
    <Dashboard>
 
    </Dashboard>    
-}
+}*@
 
 @code
 {
     [Parameter]
     public bool isLogedId { get; set; } = false;
 
-    protected override async Task OnInitializedAsync()
-    {
-        var A= SharedInfo.NationalCode;
-    }
+    //ValueTask<string> _NationalCode ;
+
+
+ 
+ 
     protected override void OnParametersSet()
     {
-        var A= SharedInfo.NationalCode;
         base.OnParametersSet();
     }
 
-    protected override Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var A= SharedInfo.NationalCode;
-        return base.OnAfterRenderAsync(firstRender);
+      // _NationalCode = await localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
+       string _NationalCode =  await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
+        if(_NationalCode == null)
+        {
+            _navigationManager.NavigateTo("/DashboardPublic");
+        }
+        else
+        {
+            _navigationManager.NavigateTo("/dashboard");
+        }
     }
    
 }

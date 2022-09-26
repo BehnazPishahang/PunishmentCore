@@ -1,0 +1,39 @@
+﻿@page "/GranovmentRejectList"
+
+@using Anu.PunishmentOrg.Client.Infrastructure.Granovment
+@using Anu.PunishmentOrg.ServiceModel.Gravamen
+
+@inject AppConfiguration _appConfiguration
+@inject ISnackbar Snackbar
+
+<div class="punFrmheader">
+  <h3>لیست شکوائیه های ردشده</h3>
+</div>
+
+
+   <MudDataGrid T="PGravamenInfoContract" Items="@gravoments"  EditMode="DataGridEditMode.Form"
+    Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual" QuickFilter="@_quickFilter">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"> لیست شکوائیه های ردشده </MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="_searchString" Placeholder="جستجو" Adornment="Adornment.Start" Immediate="true"
+            AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <Columns>
+        <Column T="PGravamenInfoContract" Field="FollowUpNo" Title="شماره پیگیری"/>
+        <Column T="PGravamenInfoContract" Field="PetitionSubject" Title="موضوع شکوائیه" />
+      
+         <Column T="PGravamenInfoContract"  CellClass="d-flex justify-end" Style="width:50px">
+            <CellTemplate>
+              
+                <MudButton Variant="Variant.Filled" EndIcon="@Icons.Filled.Visibility" Color="Color.Info"  OnClick="() => GravamneSummary(context.Item)">مشاهده</MudButton>
+            </CellTemplate>
+        </Column>
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="PGravamenInfoContract" />
+    </PagerContent>
+</MudDataGrid>
+
+@code {
+}

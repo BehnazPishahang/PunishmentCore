@@ -1,0 +1,45 @@
+﻿@page "/Cases"
+@using System.Net.Http.Json
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Notice
+@using Anu.PunishmentOrg.Client.Infrastructure.Contracts.PCase
+@using Anu.PunishmentOrg.Client.Infrastructure.Notice
+@using Anu.PunishmentOrg.ServiceModel.Case
+@using Anu.PunishmentOrg.ServiceModel.Notice
+
+@inject HttpClient httpClient
+@inject IPCaseService _pCaseService
+@inject AppConfiguration _appConfiguration;
+@inject ISnackbar Snackbar
+@inject IDialogService DialogService
+
+<div class="punFrmheader">
+    <h3>لیست پرونده ها</h3>
+</div>
+
+<MudDataGrid T="GetAllPCaseContract" Items="@Elements" EditMode="DataGridEditMode.Form"
+             QuickFilter="@_quickFilter"
+             Bordered="true" Dense="true" EditTrigger=" DataGridEditTrigger.Manual">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"> پرونده ها </MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="_searchString" Placeholder="جستجو" Adornment="Adornment.Start" Immediate="true"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <Columns>
+        <Column T="GetAllPCaseContract" Field="CreateDateTime" Title="زمان ثبت" />
+        <Column T="GetAllPCaseContract" Field="No" Title="شماره پرونده " />
+
+        <Column T="GetAllPCaseContract" Field="UnitName" Title="شعبه " />
+        <Column T="GetAllPCaseContract" CellClass="d-flex justify-end" Style="width:50px">
+            <CellTemplate>
+                <MudButton Variant="Variant.Filled" EndIcon="@Icons.Filled.Visibility" Color="Color.Info" OnClick="() => ShowDetail(context.Item)">مشاهده</MudButton>
+            </CellTemplate>
+        </Column>
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="GetAllPCaseContract" />
+    </PagerContent>
+</MudDataGrid>
+
+
+
