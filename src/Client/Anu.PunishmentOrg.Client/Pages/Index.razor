@@ -33,7 +33,7 @@ else
     {
        string _NationalCode =  await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
        string _AccessToken =  await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
-        if(_NationalCode == null /*|| _AccessToken == null*/)
+        if(_NationalCode == null || _AccessToken == null)
         {
             _navigationManager.NavigateTo("/DashboardPublic");
         }
