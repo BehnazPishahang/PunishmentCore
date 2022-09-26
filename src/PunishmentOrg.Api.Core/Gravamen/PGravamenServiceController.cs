@@ -248,7 +248,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             request.TheGetPGravamenInfoContract!.FollowUpNo!.IsDigit(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
 
-            var thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByFollowUpNo(request.TheGetPGravamenInfoContract.FollowUpNo);
+            var thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByFollowUpNo(request.TheGetPGravamenInfoContract.FollowUpNo!.Trim());
 
             thePGravamen.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_PGravamen_NotFound);
 
@@ -371,11 +371,11 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             PGravamen thePGravamen;
             if (!string.IsNullOrEmpty(request.ThePGravamenByIdContract!.Id))
             { 
-                thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenById(request.ThePGravamenByIdContract.Id!);
+                thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenById(request.ThePGravamenByIdContract.Id!.Trim());
             }
             else
             {
-                thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByFollowUpNo(request.ThePGravamenByIdContract.FollowUpNo!);
+                thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByFollowUpNo(request.ThePGravamenByIdContract.FollowUpNo!.Trim());
             }
 
             thePGravamen.Null(GetPGravamenByIdResult.PGravamen_GetPGravamenById_PGravamen_NotFound);
