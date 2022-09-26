@@ -12,6 +12,7 @@ using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Domain;
 using Anu.PunishmentOrg.Api.Accounting;
 using Anu.PunishmentOrg.Api.Gravamen;
+using Anu.PunishmentOrg.Api.Test.Helpers;
 using Anu.PunishmentOrg.DataModel.Accounting;
 using Anu.PunishmentOrg.Domain.Accounting;
 using Anu.PunishmentOrg.Domain.PGravamen;
@@ -20,6 +21,7 @@ using Anu.PunishmentOrg.ServiceModel.Accounting;
 using Anu.PunishmentOrg.ServiceModel.Gravamen;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -38,18 +40,24 @@ public class PGravamenTests
     private PGravamenServiceController controller;
     private PGravamenServiceRequest _request;
 
+    private IConfiguration _config;
+    
 
     /// xUnit uses the constructor for set up method
     public PGravamenTests()
     {
 
-        controller = new PGravamenServiceController(_unitOfWork.Object, _configuration.Object);
-        //_configuration.Setup(u => u.GetSection(""))
-        //              .Returns(new ConfigurationSection(new ConfigurationRoot(new List<IConfigurationProvider>() {  }), It.IsAny<string>()) 
-        //              { 
-        //                Value = "true",
-        //              });
+        //Useful link for other use cases that may occur: https://weblog.west-wind.com/posts/2018/Feb/18/Accessing-Configuration-in-NET-Core-Test-Projects#setting-up-dependency-injection
+        _config=TestHelper.GetIConfigurationRoot(AppContext.BaseDirectory);
+        
+       
+        //TODO: Refactor this problem(Get configuration from one place and pass it to other static classes)
+        Utility.Sms.SmsSender.GetConfiguration(_config);
+        Authentication.Utility.SabteahvalAuthentication.GetConfiguration(_config);
+        Authentication.Utility.ShahkarAuthentication.GetConfiguration(_config);
 
+        controller = new PGravamenServiceController(_unitOfWork.Object, _config);
+                
         #region PGravamen Instantiation
         var p1 = new PGravamenPersonContract()
         {
@@ -59,9 +67,9 @@ public class PGravamenTests
             Address = "Azadi St.",
             BirthDate = "1370/02/25",
             FatherName = "Hamid",
-            IdentityNumber = "1234567895",
-            MobilNumber = "09101112233",
-            NationalCode = "1234567895",
+            IdentityNumber = "1190252041",
+            MobilNumber = "09140364110",
+            NationalCode = "1190252041",
             PersonStartPost = Enumerations.PUPersonStartPost.PlaintiffPerson,
             Sex = Anu.BaseInfo.Enumerations.SexType.Male,
             PostCode = "123456",
@@ -124,6 +132,7 @@ public class PGravamenTests
         {
             ThePGravamenContract = pGravamen
         };
+
     }
 
     [Fact(DisplayName = "Success Scenario")]
@@ -181,7 +190,7 @@ public class PGravamenTests
         Assert.Equal((int)PGravamenResult.PGravamen_Request_IsNullOrCorrupt, result.Result.result.Code);
     }
 
-    [Fact]
+    [Fact(DisplayName ="necessary fields null testing")]
     public void RecieveGravamen_OneOfNecessaryFieldsIsMissing_ShouldReturnPGravamenFieldIsNullOrInvalid()
     {
         //Arrange
