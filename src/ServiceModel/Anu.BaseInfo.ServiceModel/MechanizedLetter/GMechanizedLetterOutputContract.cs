@@ -7,11 +7,11 @@ namespace Anu.BaseInfo.ServiceModel.MechanizedLetter
         public GMechanizedLetterOutputContract()
         {
         }
-
-        [System.ComponentModel.DisplayName("شماره")]
+            
+            [System.ComponentModel.DisplayName("شماره")]
         public string? No { get; set; }
 
-
+            
 
     }
-}
+    }

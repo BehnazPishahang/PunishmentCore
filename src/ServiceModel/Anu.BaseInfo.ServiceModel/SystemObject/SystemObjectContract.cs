@@ -27,12 +27,6 @@ namespace Anu.BaseInfo.ServiceModel.SystemObject
             
             
                 [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("اسم جدول مربوطه به کلاس")]
-        public string? EnglishTableName { get; set; }
-
-            
-            
-                [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("عنوان فارسي")]
         public string? FarsiName { get; set; }
 
@@ -46,12 +40,6 @@ namespace Anu.BaseInfo.ServiceModel.SystemObject
                 [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع شيء")]
         public Anu.BaseInfo.Enumerations.SystemObjectType? SystemObjectType { get; set; }
-
-            
-            
-                [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("تبديل به متن")]
-        public string? ToStringDefault { get; set; }
 
             
 

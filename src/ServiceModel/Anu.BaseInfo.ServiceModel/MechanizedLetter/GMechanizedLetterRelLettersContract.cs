@@ -31,7 +31,6 @@ namespace Anu.BaseInfo.ServiceModel.MechanizedLetter
 
             
             
-                [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نامه مکانيزه بازگشتي/پيروي نامه جاري")]
         public Anu.BaseInfo.ServiceModel.MechanizedLetter.GMechanizedLetterContract? TheGMechanizedLetterContract { get; set; }
 
