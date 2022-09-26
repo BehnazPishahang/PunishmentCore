@@ -7,7 +7,7 @@
 @using Anu.Commons.ServiceModel.ServiceResponseEnumerations
 @using Anu.PunishmentOrg.Client.Infrastructure.Contracts.Authorization
 @using Anu.PunishmentOrg.ServiceModel.BaseInfo
- @inject IAnuAuthorizationService  _anuAuthorizationService;
+@inject IAnuAuthorizationService _anuAuthorizationService;
 @inject AppConfiguration _appConfiguration;
 
 
@@ -16,72 +16,72 @@
 
 
 
-@inject IAnuAuthorizationService  _anuAuthorizationService;
+@inject IAnuAuthorizationService _anuAuthorizationService;
 @inject AppConfiguration _appConfiguration;
 @inject ISnackbar Snackbar
-<MudForm  Model="@_changePhoneNumberRequest" @ref="@form" >
-<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
-    <MudText Typo="Typo.h3" GutterBottom="true"></MudText>
-    <MudItem class="col-lg-8">
-	  
-        <MudItem class=" mb-4">
-          <MudItem class="">
-               <MudItem class="row">
-              <MudItem class="col-sm-3">
-                <MudItem class=" mb-0">شماره ملی</MudItem>
-              </MudItem>
-              <MudItem class="col-sm-9">
-               
-                <MudTextField T="string" Margin="Margin.Dense" Required="true"   @bind-Value="_changePhoneNumberRequest.UserName"  Variant="Variant.Outlined" Placeholder="0044556699" RequiredError="شماره ملی را وارد نمایید  "  MaxLength="10" />
-              </MudItem>
-            </MudItem>
-            <hr />
-            <MudItem class="row">
-              <MudItem class="col-sm-3">
-                <MudItem class=" mb-0">شماره موبایل جدید </MudItem>
-              </MudItem>
-              <MudItem class="col-sm-6">
-               <MudTextField T="string" Margin="Margin.Dense" Required="true"   @bind-Value="_changePhoneNumberRequest.NewPhoneNumber"  Variant="Variant.Outlined" Placeholder="09121111111" RequiredError="شماره تلفن  را وارد نمایید "  MaxLength="11" />
-              </MudItem>
-                <MudItem class="col-sm-3">
-                        <MudButton  Variant="Variant.Filled"  disabled="@(hasSmsSend)"  OnClick="GetAccessCode" class="btn  btn-lg ms-2"  > 
+<MudForm Model="@_changePhoneNumberRequest" @ref="@form">
+    <MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
+        <MudText Typo="Typo.h3" GutterBottom="true"></MudText>
+        <MudItem class="col-lg-8">
 
-                                    @if(hasSmsSend)
-                                     {
-                                             <b> @ProgressValue ثانیه </b>
-                                             <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue"  />
-                                    }
-                                    else
-                                    {
-                                            <b>دریافت کد </b>
-                                    }
+            <MudItem class=" mb-4">
+                <MudItem class="">
+                    <MudItem class="row">
+                        <MudItem class="col-sm-3">
+                            <MudItem class=" mb-0">شماره ملی</MudItem>
+                        </MudItem>
+                        <MudItem class="col-sm-9">
+
+                            <MudTextField T="string" Margin="Margin.Dense" Required="true" @bind-Value="_changePhoneNumberRequest.UserName" Variant="Variant.Outlined" Placeholder="0044556699" RequiredError="شماره ملی را وارد نمایید  " MaxLength="10" />
+                        </MudItem>
+                    </MudItem>
+                    <hr />
+                    <MudItem class="row">
+                        <MudItem class="col-sm-3">
+                            <MudItem class=" mb-0">شماره موبایل جدید </MudItem>
+                        </MudItem>
+                        <MudItem class="col-sm-6">
+                            <MudTextField T="string" Margin="Margin.Dense" Required="true" @bind-Value="_changePhoneNumberRequest.NewPhoneNumber" Variant="Variant.Outlined" Placeholder="09121111111" RequiredError="شماره تلفن  را وارد نمایید " MaxLength="11" />
+                        </MudItem>
+                        <MudItem class="col-sm-3">
+                            <MudButton Variant="Variant.Filled" disabled="@(hasSmsSend)" OnClick="GetAccessCode" class="btn  btn-lg ms-2">
+
+                                @if (hasSmsSend)
+                                {
+                                    <b> @ProgressValue ثانیه </b>
+                                    <MudProgressCircular Color="Color.Error" Size="Size.Small" Value="@ProgressValue" />
+                                }
+                                else
+                                {
+                                    <b>دریافت کد </b>
+                                }
                             </MudButton>
-              </MudItem>
-            </MudItem>
-            <hr>
-        
-            <MudItem class="row">
-              <MudItem class="col-sm-3">
-                <MudItem class=" mb-0">رمز ارسالی</MudItem>
-              </MudItem>
-              <MudItem class="col-sm-6">
-                    <MudTextField  Margin="Margin.Dense" T="string"  disabled="@(!hasSmsSend)"  @bind-Value="@_changePhoneNumberRequest.Password" Variant="Variant.Outlined" Placeholder="111111"   MaxLength="6"  />
-              </MudItem>
-               <MudItem class="col-sm-3">
-                 <MudButton Variant="Variant.Filled"  disabled="@(!hasSmsSend)"  Color="Color.Primary" Size="Size.Medium" Style="width: 100%;" OnClick="ChangeNumber"  > تغییر شماره</MudButton>
-         
+                        </MudItem>
+                    </MudItem>
+                    <hr>
 
-              </MudItem>
+                    <MudItem class="row">
+                        <MudItem class="col-sm-3">
+                            <MudItem class=" mb-0">رمز ارسالی</MudItem>
+                        </MudItem>
+                        <MudItem class="col-sm-6">
+                            <MudTextField Margin="Margin.Dense" T="string" disabled="@(!hasSmsSend)" @bind-Value="@_changePhoneNumberRequest.Password" Variant="Variant.Outlined" Placeholder="111111" MaxLength="6" />
+                        </MudItem>
+                        <MudItem class="col-sm-3">
+                            <MudButton Variant="Variant.Filled" disabled="@(!hasSmsSend)" Color="Color.Primary" Size="Size.Medium" Style="width: 100%;" OnClick="ChangeNumber"> تغییر شماره</MudButton>
+
+
+                        </MudItem>
+                    </MudItem>
+
+
+                </MudItem>
             </MudItem>
-            
-            
-          </MudItem>
+
         </MudItem>
-     
-      </MudItem>
     </MudContainer>
 
-    </MudForm>
+</MudForm>
 @code {
     //string ncode = SharedInfo.NationalCode;
     private bool showPassword = false;
@@ -93,7 +93,7 @@
     MudForm form;
     ChangePhoneNumberRequest _changePhoneNumberRequest = new();
 
-     [Inject] private IDialogService DialogService { get; set; }
+    [Inject] private IDialogService DialogService { get; set; }
 
     public async void SimulateProgress()
     {
@@ -117,83 +117,96 @@
     protected override void OnInitialized()
     {
         _changePhoneNumberRequest = new();
-       
+
     }
     async void GetAccessCode()
     {
-
-         form.Validate();
-        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-        if (form.Errors.Count() > 0)
+        try
         {
-            foreach (string str in form.Errors)
+            form.Validate();
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            if (form.Errors.Count() > 0)
             {
-                Snackbar.Add(str, MudBlazor.Severity.Error);
+                foreach (string str in form.Errors)
+                {
+                    Snackbar.Add(str, MudBlazor.Severity.Error);
+                }
+                return;
             }
-            return;
+
+            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+            if (string.IsNullOrEmpty(_changePhoneNumberRequest.NewPhoneNumber) || _changePhoneNumberRequest.NewPhoneNumber.Length != 11)
+            {
+                Snackbar.Add("شماره تلفن را درست وارد نمایید .", MudBlazor.Severity.Warning);
+                return;
+
+            }
+
+
+            FirstStepUserLoginRequest _firstStepUserLoginRequest = new();
+            _firstStepUserLoginRequest.UserName = _changePhoneNumberRequest.UserName;
+            _firstStepUserLoginRequest.MobileNumber = _changePhoneNumberRequest.NewPhoneNumber;
+            FirstStepAuthResult result = await _anuAuthorizationService.SendSmsForChangePhoneNumber(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsForChangePhoneNumber, _firstStepUserLoginRequest);
+
+            if (result.Result.Code == (int)AnuResult.LoginSuccessful_Sms_Send_To)
+            {
+                Snackbar.Add(result.Result.Message, MudBlazor.Severity.Success);
+                hasSmsSend = true;
+
+                SimulateProgress();
+            }
+            else
+            {
+                Snackbar.Add(result.Result.Message, MudBlazor.Severity.Error);
+                hasSmsSend = false;
+
+            }
         }
-
-        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-        if (string.IsNullOrEmpty(_changePhoneNumberRequest.NewPhoneNumber) || _changePhoneNumberRequest.NewPhoneNumber.Length != 11)
+        catch
         {
-            Snackbar.Add("شماره تلفن را درست وارد نمایید .",  MudBlazor.Severity.Warning);
-            return;
-
-        }
-
-
-         FirstStepUserLoginRequest _firstStepUserLoginRequest = new();
-        _firstStepUserLoginRequest.UserName = _changePhoneNumberRequest.UserName;
-        _firstStepUserLoginRequest.MobileNumber = _changePhoneNumberRequest.NewPhoneNumber;
-        FirstStepAuthResult result =await _anuAuthorizationService.SendSmsForChangePhoneNumber(_appConfiguration.BackendServerAddress, _appConfiguration.SendSmsForChangePhoneNumber, _firstStepUserLoginRequest);
-
-        if (result.Result.Code == (int)AnuResult.LoginSuccessful_Sms_Send_To)
-        {
-            Snackbar.Add(result.Result.Message, MudBlazor.Severity.Success);
-            hasSmsSend = true;
-
-            SimulateProgress();
-        }
-        else
-        {
-            Snackbar.Add(result.Result.Message, MudBlazor.Severity.Error);
-            hasSmsSend = false;
-
+             Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
         }
     }
 
     async void ChangeNumber()
     {
-        form.Validate();
-        if (form.Errors.Count() > 0)
+        try
         {
-            foreach (string str in form.Errors)
+            form.Validate();
+            if (form.Errors.Count() > 0)
             {
-                Snackbar.Add(str, MudBlazor.Severity.Error);
+                foreach (string str in form.Errors)
+                {
+                    Snackbar.Add(str, MudBlazor.Severity.Error);
+                }
+                return;
             }
-            return;
-        }
-        Result result =await _anuAuthorizationService.ChangePhoneNumberV2(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePhoneNumberV2, _changePhoneNumberRequest);
-          if (result.Code == (int)AnuResult.Successful)
-        {
-           
-            _changePhoneNumberRequest = new();
+            Result result = await _anuAuthorizationService.ChangePhoneNumberV2(_appConfiguration.BackendServerAddress, _appConfiguration.ChangePhoneNumberV2, _changePhoneNumberRequest);
+            if (result.Code == (int)AnuResult.Successful)
+            {
 
-            bool? resulXt = await DialogService.ShowMessageBox(
-            "تبریک",
-            result.Message, 
-            yesText:"بستن!");
-           
-          hasSmsSend = false;
+                _changePhoneNumberRequest = new();
+
+                bool? resulXt = await DialogService.ShowMessageBox(
+                "تبریک",
+                result.Message,
+                yesText: "بستن!");
+
+                hasSmsSend = false;
+            }
+            else
+            {
+
+                hasSmsSend = true;
+                Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
+                Snackbar.Add(result.Message, Severity.Warning);
+            }
         }
-        else
+        catch
         {
-        
-            hasSmsSend = true;
-            Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomLeft;
-            Snackbar.Add(result.Message,  Severity.Warning);
+             Snackbar.Add(SharedInfo.strPublicError, MudBlazor.Severity.Error);
         }
-     
+
     }
 
 }

@@ -62,7 +62,7 @@ namespace Anu.PunishmentOrg.Client.Pages.Notice
                 parameters.Add("showedPdfContent", pdf);
                 parameters.Add("No", selectedRow.No);
 
-                var options = new DialogOptions() { CloseButton = true, FullScreen = true };
+                var options = new DialogOptions() { CloseButton = false, MaxWidth = MaxWidth.Medium };
 
                 DialogService.Show<FrmNoticePrintComponent>("مشاهده ابلاغ", parameters, options);
             }

@@ -8,64 +8,78 @@
 @inject ISnackbar Snackbar
 
 <style>
-    .pHeader{
-        font-style:oblique;
-        color:navy;
-        font-size:1.25em;
+    .pHeader {
+        font-style: oblique;
+        color: navy;
+        font-size: 1.25em;
         text-decoration: underline;
     }
 </style>
 
 
 <div class="punFrmheader">
-  <h3>خلاصه شکوائیه</h3>
+    <h3>خلاصه شکوائیه</h3>
 </div>
 
-<MudForm Model="@_pGravamenContract">
-    <MudCard Style="margin:5px;">
-        <MudCardContent>
-            <MudText Typo="Typo.h6" Align="MudBlazor.Align.Center" Class="pHeader">شماره شکوائیه :@_pGravamen</MudText>
-            <MudText Typo="Typo.h6" Class="pHeader">موضوع شکوائیه</MudText>
-            <MudList>
-                @foreach(var item in _pGravamenContract.PetitionSubject.Split(","))
-                {
-                    <MudListItem Icon="@Icons.Filled.ArrowLeft" IconColor="Color.Error" IconSize="Size.Small">@item</MudListItem>
-                }
-            </MudList>
-            <MudText Typo="Typo.h6" Class="pHeader">خلاصه شکوائیه</MudText>
-            <MudText Typo="Typo.subtitle2" Align="MudBlazor.Align.Justify" Style="margin: 5px 30px 10px;">@_pGravamenContract.PetitionDescription</MudText>
-        </MudCardContent>
-    </MudCard>
-    <MudCard Style="margin:5px;">
-        <MudCardContent>
-            <MudText Typo="Typo.h6" Class="pHeader">شاکی/شاکیان</MudText>    
-            <MudList>
-                @foreach (var item in _pGravamenContract.ThePGravamenPersonContractList)
-                {
-                    @if (item.PersonStartPost == Enumerations.PUPersonStartPost.PlaintiffPerson)
+@if (_pGravamenContract != null)
+{
+    <MudForm Model="@_pGravamenContract">
+        <MudCard Style="margin:5px;">
+            <MudCardContent>
+                <MudText Typo="Typo.h6" Align="MudBlazor.Align.Center" Class="pHeader">شماره شکوائیه :@_pGravamenContract.FollowUpNo</MudText>
+                <MudText Typo="Typo.h6" Class="pHeader">موضوع شکوائیه</MudText>
+                <MudList>
+                    @if (string.IsNullOrEmpty(_pGravamenContract.PetitionSubject) == false)
                     {
-                        <MudListItem  Icon="@Icons.Filled.Man" IconColor="Color.Primary">@item.Name @item.Family  به شماره ملی @item.NationalCode به نشانی @item.Address شماره تماس @item.MobilNumber </MudListItem>
+                        @foreach (var item in _pGravamenContract.PetitionSubject.Split(","))
+                        {
+                            <MudListItem Icon="@Icons.Filled.ArrowLeft" IconColor="Color.Error" IconSize="Size.Small">@item</MudListItem>
+                        }
                     }
-                }
-            </MudList>
-        </MudCardContent>
-    </MudCard>
-    <MudCard Style="margin:5px;">
-        <MudCardContent>
-            <MudText Typo="Typo.h6" Class="pHeader">متهم/متهمان</MudText>    
-            <MudList>
-                @foreach (var item in _pGravamenContract.ThePGravamenPersonContractList)
-                {
-                    @if (item.PersonStartPost == Enumerations.PUPersonStartPost.OffendingPerson)
+                </MudList>
+                <MudText Typo="Typo.h6" Class="pHeader">خلاصه شکوائیه</MudText>
+                <MudText Typo="Typo.subtitle2" Align="MudBlazor.Align.Justify" Style="margin: 5px 30px 10px;">@_pGravamenContract.PetitionDescription</MudText>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Style="margin:5px;">
+            <MudCardContent>
+                <MudText Typo="Typo.h6" Class="pHeader">شاکی/شاکیان</MudText>
+                <MudList>
+                    @if (_pGravamenContract.ThePGravamenPersonContractList != null)
                     {
-                        <MudListItem Icon="@Icons.Filled.Man" IconColor="Color.Error">@item.Name به نشانی @item.Address</MudListItem>
+                        @foreach (var item in _pGravamenContract.ThePGravamenPersonContractList)
+                        {
+                            @if (item.PersonStartPost == Enumerations.PUPersonStartPost.PlaintiffPerson)
+                            {
+                                <MudListItem Icon="@Icons.Filled.Man" IconColor="Color.Primary">@item.Name @item.Family  به شماره ملی @item.NationalCode به نشانی @item.Address شماره تماس @item.MobilNumber </MudListItem>
+                            }
+                        }
                     }
-                }
-            </MudList>
-        </MudCardContent>
-    </MudCard>
-</MudForm>
-
-@code {
- 
+                </MudList>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Style="margin:5px;">
+            <MudCardContent>
+                <MudText Typo="Typo.h6" Class="pHeader">متهم/متهمان</MudText>
+                <MudList>
+                    @if (_pGravamenContract.ThePGravamenPersonContractList != null)
+                    {
+                        @foreach (var item in _pGravamenContract.ThePGravamenPersonContractList)
+                        {
+                            @if (item.PersonStartPost == Enumerations.PUPersonStartPost.OffendingPerson)
+                            {
+                                <MudListItem Icon="@Icons.Filled.Man" IconColor="Color.Error">@item.Name به نشانی @item.Address</MudListItem>
+                            }
+                        }
+                    }
+                </MudList>
+            </MudCardContent>
+        </MudCard>
+        <MudCard Style="margin:5px;">
+            <MudCardContent>
+                <MudText Typo="Typo.h6" Class="pHeader">آخرین وضعیت شکوائیه</MudText>
+                <MudListItem Icon="@Icons.Filled.ArrowLeft" IconColor="Color.Error" IconSize="Size.Small">@_pGravamenContract.TheObjectStateContract.Title</MudListItem>
+            </MudCardContent>
+        </MudCard>
+    </MudForm>
 }

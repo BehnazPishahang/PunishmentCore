@@ -48,20 +48,7 @@ namespace Anu.PunishmentOrg.Client.Pages.PCase
         {
             _events.Insert(0, $"Event = SelectedItemsChanged, Data = {System.Text.Json.JsonSerializer.Serialize(items)}");
         }
-
-        void ShowPDF(GetAllPCaseContract selectedRow)
-        {
-            //string pdf = _noticeService.GetNoticePDF(_appConfiguration.BackendServerAddress, _appConfiguration.ExportPNotice, selectedRow.No, SharedInfo.AccessToken);
-
-            //var parameters = new DialogParameters();
-            //parameters.Add("showedPdfContent", pdf);
-            //parameters.Add("No", selectedRow.No);
-
-            //var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Large };
-
-            //DialogService.Show<FrmNoticePrintComponent>("Delete", parameters, options);
-        }
-
+    
         void ShowDetail(GetAllPCaseContract selectedRow)
         {
             _navigationManager.NavigateTo($"/CaseFollowUpNo/{selectedRow.No}");

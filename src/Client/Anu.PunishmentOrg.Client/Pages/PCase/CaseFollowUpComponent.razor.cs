@@ -7,13 +7,13 @@ namespace Anu.PunishmentOrg.Client.Pages.PCase
     {
 
         string CaseNo { set; get; }
-        string NationalNo { set; get; }
         ExportInqueryPCaseResponse Elements;
 
         private async Task GetCaseSummary()
         {
             try
             {
+                Elements = null;
                 Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
                 string _AccessToken = await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
                 string _NationalCode = await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);

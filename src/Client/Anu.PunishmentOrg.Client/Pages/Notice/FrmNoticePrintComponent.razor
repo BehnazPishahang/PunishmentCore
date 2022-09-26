@@ -7,15 +7,15 @@
 @inject ISnackbar Snackbar
 
 <MudDialog Style="max-height:800px; overflow-y:scroll">
-    <DialogContent>
-        <MudContainer Style="max-height: 800px; overflow-y: scroll">
-            <embed src="@showedPdfContent" visible="false" width="1100" height="730" type="application/pdf" />
-        </MudContainer>
-    </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Close" Color="Color.Error">بازگشت</MudButton>
         @*<MudButton OnClick="Submit" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Print" Color="Color.Success">چاب</MudButton>*@
     </DialogActions>
+    <DialogContent>
+        <MudContainer Style="max-height: 800px; overflow-y: scroll">
+            <embed src="@showedPdfContent" visible="false"  width="720" height="480" type="application/pdf" style="border:1px solid gray"/>
+        </MudContainer>
+    </DialogContent>
 </MudDialog>
 
 
