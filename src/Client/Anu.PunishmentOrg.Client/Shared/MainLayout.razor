@@ -27,7 +27,7 @@
  
             <MudMenu ActivationEvent="@MouseEvent.MouseOver" AnchorOrigin="Origin.BottomLeft">
                 <ActivatorContent>
-                    @if (String.IsNullOrEmpty(_NationalCode))
+                    @if (String.IsNullOrEmpty(_NationalCode) || String.IsNullOrEmpty(_AccessToken))
                     {
                         <MudChip Icon="@MudBlazor.Icons.Material.Filled.Person" Color="Color.Primary">ورود </MudChip>
                     }
@@ -39,7 +39,7 @@
 
                 <ChildContent>
                     
-                    @if (String.IsNullOrEmpty(_NationalCode))
+                    @if (String.IsNullOrEmpty(_NationalCode)|| String.IsNullOrEmpty(_AccessToken))
                     {
                         <MudListItem Text="ورود " Icon="@MudBlazor.Icons.Filled.Login" Href="/login" />
                         <MudDivider Class="mb-2" />
@@ -62,7 +62,7 @@
 
 
             <MudNavMenu Color="@Theme135._iconColor">
-                @if (String.IsNullOrEmpty(_NationalCode))
+                @if (String.IsNullOrEmpty(_NationalCode) || String.IsNullOrEmpty(_AccessToken))
                 {
                     <MudNavMenu Color="Color.Primary">
                         <MudTooltip Text="خدمات الکترونیکی تعزیرات" >

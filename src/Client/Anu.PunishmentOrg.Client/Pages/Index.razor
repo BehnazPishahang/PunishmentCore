@@ -31,9 +31,9 @@ else
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-      // _NationalCode = await localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
        string _NationalCode =  await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
-        if(_NationalCode == null)
+       string _AccessToken =  await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
+        if(_NationalCode == null /*|| _AccessToken == null*/)
         {
             _navigationManager.NavigateTo("/DashboardPublic");
         }

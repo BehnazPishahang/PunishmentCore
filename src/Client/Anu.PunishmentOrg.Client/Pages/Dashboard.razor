@@ -425,7 +425,7 @@
     {
         string _AccessToken =  await _localStorage.GetItemAsStringAsync(SharedInfo.AccessTokenKeyName);
         string _NationalCode =  await _localStorage.GetItemAsStringAsync(SharedInfo.NationalCodeKeyName);
-        if (_NationalCode == null)
+        if (_NationalCode == null || _AccessToken == null)
             _navigationManager.NavigateTo("/DashboardPublic");
 
         NoticeInfo =await  _noticeService.GetCountOfUnSeenPNoticeByUser(_appConfiguration.BackendServerAddress, _appConfiguration.GetCountOfUnSeenPNoticeByUser, _NationalCode, _AccessToken);
