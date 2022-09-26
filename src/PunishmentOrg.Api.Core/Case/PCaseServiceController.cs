@@ -28,6 +28,8 @@ namespace Anu.PunishmentOrg.Api.Case
         //[Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public override async Task<ExportInqueryPCaseResponse> ExportInqueryPCase([FromBody] ExportInqueryPCaseRequest request)
         {
+            request.ExportInqueryPCaseInputContract.No = request.ExportInqueryPCaseInputContract.No.Trim();
+
             request.Null(AnuResult.In_Valid_Input);
 
             request.ExportInqueryPCaseInputContract.NationalCode.Null(AnuResult.NationalCode_Is_Not_Entered);
@@ -66,8 +68,8 @@ namespace Anu.PunishmentOrg.Api.Case
             request.GetAllPCaseInputContract.NationalCode.Null(AnuResult.NationalCode_Is_Not_Entered);
             request.GetAllPCaseInputContract.NationalCode.IsValidNationalCode();
 
-            if (request.GetAllPCaseInputContract.CaseArchiveState != Enumerations.PUCaseArchiveState.Active && 
-                request.GetAllPCaseInputContract.CaseArchiveState != Enumerations.PUCaseArchiveState.Closed && 
+            if (request.GetAllPCaseInputContract.CaseArchiveState != Enumerations.PUCaseArchiveState.Active &&
+                request.GetAllPCaseInputContract.CaseArchiveState != Enumerations.PUCaseArchiveState.Closed &&
                 request.GetAllPCaseInputContract.CaseArchiveState != Enumerations.PUCaseArchiveState.None)
             {
                 return new GetAllPCaseResponse() { Result = PCaseResult.CaseState_Is_Not_Valid.GetResult() };
@@ -81,7 +83,7 @@ namespace Anu.PunishmentOrg.Api.Case
             var theGetAllPCaseContract = pCase.Select(a => new GetAllPCaseContract()
             {
                 No = a.No,
-                CreateDateTime = a.CreateDateTime.Substring(0,10),
+                CreateDateTime = a.CreateDateTime.Substring(0, 10),
                 UnitName = a.TheHandlerUnit.UnitName,
                 CaseArchiveState = a.CaseArchiveState
             }).ToList();
