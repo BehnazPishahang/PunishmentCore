@@ -47,20 +47,15 @@ namespace Anu.BaseInfo.ServiceModel.SystemObject
 
             
             
-                 [System.ComponentModel.DisplayName("آيا کالاهاي تحويلي به سازمان نگه دارنده کالا/ارز مکشوفه با آنچه در صورتجلسه کشف قيد شده، مطابقت دارد؟")]
-        public Anu.BaseInfo.Enumerations.YesNo? IsEquality { get; set; }
-
-
-
-        [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("کلاس اصلي فرم")]
-        public string? TheBaseObject { get; set; }
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("وضعيت")]
+        public Anu.BaseInfo.Enumerations.State? State { get; set; }
 
             
             
                 [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("تبديل به متن")]
-        public string? ToStringDefault { get; set; }
+            [System.ComponentModel.DisplayName("کلاس اصلي فرم")]
+        public Anu.BaseInfo.ServiceModel.SystemObject.SystemObjectContract? TheBaseObject { get; set; }
 
             
             
