@@ -219,6 +219,8 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             CreateWorkflowForSecretariat(gravamen);
 
+            var validation = _unitOfWork.Validate();
+            
             _unitOfWork.Complete();
 
             foreach (var item in plaintiffMobileNumber)
