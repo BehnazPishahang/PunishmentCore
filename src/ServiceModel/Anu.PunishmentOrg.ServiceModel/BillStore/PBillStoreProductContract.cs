@@ -244,8 +244,8 @@ namespace Anu.PunishmentOrg.ServiceModel.BillStore
 
             
             
-            [System.ComponentModel.DisplayName("نفت - فرآورده های اصلی")]
-        public Anu.PunishmentOrg.Enumerations.PetroleumType? PetroleumType { get; set; }
+        //    [System.ComponentModel.DisplayName("نفت - فرآورده های اصلی")]
+        //public Anu.PunishmentOrg.Enumerations.PetroleumType? PetroleumType { get; set; }
 
             
             
@@ -264,8 +264,8 @@ namespace Anu.PunishmentOrg.ServiceModel.BillStore
 
             
             
-            [System.ComponentModel.DisplayName("نفت - روش تخلف")]
-        public Anu.PunishmentOrg.Enumerations.MethodViolation? PetrolMethodViolation { get; set; }
+        //    [System.ComponentModel.DisplayName("نفت - روش تخلف")]
+        //public Anu.PunishmentOrg.Enumerations.MethodViolation? PetrolMethodViolation { get; set; }
 
             
             
