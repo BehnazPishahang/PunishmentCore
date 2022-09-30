@@ -11,9 +11,6 @@ using Utility;
 using Anu.Utility.Logger.File;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
 builder.Services.AddControllers(options =>
 {
     var policy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
