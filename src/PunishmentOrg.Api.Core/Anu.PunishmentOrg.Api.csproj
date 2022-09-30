@@ -42,6 +42,7 @@
     <ProjectReference Include="..\ServiceModel\Anu.PunishmentOrg.ServiceModel\Anu.PunishmentOrg.ServiceModel.csproj" />
     <ProjectReference Include="..\Utility\Anu.Utility\Anu.Utility.csproj" />
     <ProjectReference Include="..\Validations\Anu.Commons.Validation\Anu.Commons.Validation.csproj" />
+    <ProjectReference Include="..\Validations\Anu.PunishmentOrg.Validation\Anu.PunishmentOrg.Validation.csproj" />
   </ItemGroup>
 
   <ItemGroup>
