@@ -54,7 +54,7 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
             /// <summary>
             /// فراخواننده سرویس دریافت مکاتبات مکانیزه به سازمان تعزیرات
             /// </summary>
-            public const string MechanizedLetterServices="024";
+            public const string MechanizedLetterServices = "024";
 
             /// <summary>
             /// فراخواننده سرويس دريافت درخواست مجوز تعقيب/بازرسي و پاسخ آن
@@ -262,7 +262,7 @@ namespace Anu.Constants.ServiceModel.PunishmentOrg
             }
         }
     }
-    
 
-    
+
+
 }
