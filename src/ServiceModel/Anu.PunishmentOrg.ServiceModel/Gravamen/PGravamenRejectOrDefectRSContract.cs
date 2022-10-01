@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
-    [System.ComponentModel.DisplayName("دلایل رد / نقص شکوائیه در سرویس")]
+    [System.ComponentModel.DisplayName("علل رد/نقض شکوائيه در سرویس")]
     public class PGravamenRejectOrDefectRSContract
     {
         public PGravamenRejectOrDefectRSContract()
