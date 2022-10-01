@@ -103,7 +103,7 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             
             [System.ComponentModel.DisplayName("کشور تابعيت شخص غيرايراني")]
-        public Anu.BaseInfo.ServiceModel.GeoInfo.GeoLocation? TheNonIranianCitizenship { get; set; }
+        public Anu.BaseInfo.ServiceModel.GeoInfo.GeoLocationContract? TheNonIranianCitizenship { get; set; }
 
             
             

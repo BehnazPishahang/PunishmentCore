@@ -39,7 +39,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("تابعيت")]
-            public Anu.PunishmentOrg.Enumerations.PUNationality Nationality { get; set ;} 
+            public Anu.BaseInfo.Enumerations.LNationality Nationality { get; set ;} 
             
             
             

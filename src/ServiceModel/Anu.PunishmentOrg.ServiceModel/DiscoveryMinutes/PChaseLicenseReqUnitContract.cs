@@ -9,7 +9,7 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
         }
             
             [System.ComponentModel.DisplayName("سازمان هاي تعامل کننده در مورد پرونده")]
-        public Anu.BaseInfo.ServiceModel.ExchangeData.NAJAUnit? ThePBExchangeUnit { get; set; }
+        public Anu.BaseInfo.ServiceModel.ExchangeData.NAJAUnitContract? ThePBExchangeUnit { get; set; }
 
             
             

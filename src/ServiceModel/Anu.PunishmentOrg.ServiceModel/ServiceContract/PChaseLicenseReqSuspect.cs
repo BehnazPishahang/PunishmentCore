@@ -44,7 +44,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("مليت")]
-            public Anu.PunishmentOrg.Enumerations.PUNationality Nationality { get; set ;} 
+            public Anu.BaseInfo.Enumerations.LNationality Nationality { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("شماره گذرنامه")]

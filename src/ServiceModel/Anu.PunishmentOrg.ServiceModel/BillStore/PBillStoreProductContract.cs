@@ -242,14 +242,14 @@ namespace Anu.PunishmentOrg.ServiceModel.BillStore
             [System.ComponentModel.DisplayName("نفت-ناحیه")]
         public string? PetrolArea { get; set; }
 
-            
-            
-        //    [System.ComponentModel.DisplayName("نفت - فرآورده های اصلی")]
-        //public Anu.PunishmentOrg.Enumerations.PetroleumType? PetroleumType { get; set; }
 
-            
-            
-            [System.ComponentModel.DisplayName("نفت - تاریخ تحویل")]
+
+        [System.ComponentModel.DisplayName("نفت - فرآورده های اصلی")]
+        public Anu.PunishmentOrg.Enumerations.PetroleumType? PetroleumType { get; set; }
+
+
+
+        [System.ComponentModel.DisplayName("نفت - تاریخ تحویل")]
         public string? PetrolGivenDate { get; set; }
 
             
@@ -262,14 +262,14 @@ namespace Anu.PunishmentOrg.ServiceModel.BillStore
             [System.ComponentModel.DisplayName("نفت - شماره حکم یا دستور مرجع قضایی")]
         public string? PetrolJudgmentNumber { get; set; }
 
-            
-            
-        //    [System.ComponentModel.DisplayName("نفت - روش تخلف")]
-        //public Anu.PunishmentOrg.Enumerations.MethodViolation? PetrolMethodViolation { get; set; }
 
-            
-            
-            [System.ComponentModel.DisplayName("نفت - کد رهگیری")]
+
+        [System.ComponentModel.DisplayName("نفت - روش تخلف")]
+        public Anu.PunishmentOrg.Enumerations.MethodViolation? PetrolMethodViolation { get; set; }
+
+
+
+        [System.ComponentModel.DisplayName("نفت - کد رهگیری")]
         public string? PetrolTrackingCode { get; set; }
 
             

@@ -189,22 +189,22 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             
             [System.ComponentModel.DisplayName("شهر/دهستان مربوطه")]
-        public Anu.BaseInfo.ServiceModel.GeoInfo.GeoLocation? TheGeoLocation { get; set; }
+        public Anu.BaseInfo.ServiceModel.GeoInfo.GeoLocationContract? TheGeoLocation { get; set; }
 
             
             
             [System.ComponentModel.DisplayName("واحد قضايي صادر کننده مجوز")]
-        public Anu.BaseInfo.ServiceModel.ExchangeData.NAJAUnit? TheJudicialUnit { get; set; }
+        public Anu.BaseInfo.ServiceModel.ExchangeData.NAJAUnitContract? TheJudicialUnit { get; set; }
 
             
             
             [System.ComponentModel.DisplayName("وضعيت اشياء")]
-        public Anu.BaseInfo.ServiceModel.SystemObject.ObjectState? TheObjectState { get; set; }
+        public Anu.BaseInfo.ServiceModel.SystemObject.ObjectStateContract? TheObjectState { get; set; }
 
             
             
             [System.ComponentModel.DisplayName("کاشف ضابط متقاضي")]
-        public Anu.BaseInfo.ServiceModel.ExchangeData.NAJAUnit? ThePBExchangeUnit { get; set; }
+        public Anu.BaseInfo.ServiceModel.ExchangeData.NAJAUnitContract? ThePBExchangeUnit { get; set; }
 
             
             
@@ -256,12 +256,12 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             
             [System.ComponentModel.DisplayName("شعبه اي که صورتجلسه جهت رسيدگي به آن ارجاع شده")]
-        public Anu.BaseInfo.ServiceModel.OrganizationChart.Unit? TheReferUnit { get; set; }
+        public Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract? TheReferUnit { get; set; }
 
             
             
             [System.ComponentModel.DisplayName("واحد تعزيراتي اعطا کننده مجوز")]
-        public Anu.BaseInfo.ServiceModel.OrganizationChart.Unit? TheUnit { get; set; }
+        public Anu.BaseInfo.ServiceModel.OrganizationChart.UnitContract? TheUnit { get; set; }
 
             
             

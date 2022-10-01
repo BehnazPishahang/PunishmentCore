@@ -52,7 +52,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("وضعيت تابعيت اداره کننده در زمان بازرسي")]
-            public Anu.PunishmentOrg.Enumerations.PUNationality DirectorNationality { get; set ;} 
+            public Anu.BaseInfo.Enumerations.LNationality DirectorNationality { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کشور تابعيت غيرايراني اداره کننده در زمان بازرسي")]
@@ -147,7 +147,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("وضعيت تابعيت صاحب پروانه/مجوز کسب واحد صنفي")]
-            public Anu.PunishmentOrg.Enumerations.PUNationality LicenseOwnerNationality { get; set ;} 
+            public Anu.BaseInfo.Enumerations.LNationality LicenseOwnerNationality { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("کشور تابعيت غيرايراني صاحب پروانه/مجوز کسب واحد صنفي")]
