@@ -8,9 +8,8 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
         {
         }
             
-                [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName(" رديف")]
-        public string? Id { get; set; }
+            [System.ComponentModel.DisplayName("نتيجه درخواست")]
+        public Anu.PunishmentOrg.Enumerations.PUConclusion? ConclusionRequest { get; set; }
 
             
             
@@ -21,7 +20,13 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             
                 [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("اشخاص مورد تعقيب درخواست مجوز تعقيب/بازرسي در سرویس")]
+            [System.ComponentModel.DisplayName("شماره ترتیب")]
+        public long? RowNumber { get; set; }
+
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("اشخاص، درخواست 4گانه در سرویس")]
         public Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes.PChaseLicenseReqSuspectContract? ThePChaseLicenseReqSuspectContract { get; set; }
 
             

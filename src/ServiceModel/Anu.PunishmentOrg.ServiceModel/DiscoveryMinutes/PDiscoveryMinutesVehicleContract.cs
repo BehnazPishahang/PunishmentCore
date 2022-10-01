@@ -1,25 +1,26 @@
 ﻿
 namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
 {
-    [System.ComponentModel.DisplayName("وسيله نقليه، درخواست 4گانه در سرویس")]
-    public class PChaseLicenseReqVehicleContract
+    [System.ComponentModel.DisplayName("وسيله هاي نقليه حامل کالا و ارز قاچاق صورتجلسه/گزارش کشف قاچاق/اسنادي در سرویس")]
+    public class PDiscoveryMinutesVehicleContract
     {
-        public PChaseLicenseReqVehicleContract()
+        public PDiscoveryMinutesVehicleContract()
         {
         }
             
-            [System.ComponentModel.DisplayName("آیا وسیله نقلیه توقیف شده است")]
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("وسيله نقليه توقيف و تحويل پارکينگ شده است")]
         public Anu.BaseInfo.Enumerations.YesNo? ArrestedVehicle { get; set; }
 
             
             
-            [System.ComponentModel.DisplayName("شماره پلاک کفی")]
-        public string? AutomotiveNumber { get; set; }
+            [System.ComponentModel.DisplayName("شماره شاسي")]
+        public string? ChassisNumber { get; set; }
 
             
             
-            [System.ComponentModel.DisplayName("شماره شاسی")]
-        public string? ChassisNumber { get; set; }
+            [System.ComponentModel.DisplayName("علت وارد نکردن شماره شاسي")]
+        public string? ChassisNumberRN { get; set; }
 
             
             
@@ -29,28 +30,18 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
 
             
             
-            [System.ComponentModel.DisplayName("نتيجه درخواست")]
-        public Anu.PunishmentOrg.Enumerations.PUConclusion? ConclusionRequest { get; set; }
-
-            
-            
-            [System.ComponentModel.DisplayName("سال تولید")]
-        public string? CreateDate { get; set; }
-
-            
-            
             [System.ComponentModel.DisplayName("نام خانوادگي راننده وسيله نقليه")]
         public string? DriverFamily { get; set; }
 
             
             
-            [System.ComponentModel.DisplayName("نام راننده وسيله نقليه")]
-        public string? DriverName { get; set; }
+            [System.ComponentModel.DisplayName("علت وارد نکردن نام و نام خانوادگي راننده وسيله نقليه")]
+        public Anu.PunishmentOrg.Enumerations.DriverFullName? DriverFullNameRN { get; set; }
 
             
             
-            [System.ComponentModel.DisplayName("شماره شناسایی ناوگان")]
-        public string? FleetNumber { get; set; }
+            [System.ComponentModel.DisplayName("نام راننده وسيله نقليه")]
+        public string? DriverName { get; set; }
 
             
             
@@ -75,13 +66,28 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
 
             
             
+            [System.ComponentModel.DisplayName("علت وارد نکردن شماره موتور")]
+        public string? MotorNumberRN { get; set; }
+
+            
+            
             [System.ComponentModel.DisplayName("ساير مشخصات")]
         public string? OtherInfo { get; set; }
 
             
             
+            [System.ComponentModel.DisplayName("علت وارد نکردن ساير مشخصات")]
+        public Anu.PunishmentOrg.Enumerations.OtherInfo? OtherInfoRN { get; set; }
+
+            
+            
             [System.ComponentModel.DisplayName("نام خانوادگي مالک وسيله نقليه")]
         public string? OwnerFamily { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("علت وارد نکردن نام و نام خانوادگي مالک وسيله نقليه")]
+        public string? OwnerFullNameRN { get; set; }
 
             
             
@@ -95,18 +101,23 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
 
             
             
+            [System.ComponentModel.DisplayName("نام پارکينگ")]
+        public string? ParkingName { get; set; }
+
+            
+            
             [System.ComponentModel.DisplayName("شماره انتظامي(پلاک)")]
         public string? PlaqueNumber { get; set; }
 
             
             
-            [System.ComponentModel.DisplayName("حروف پلاک")]
-        public Anu.BaseInfo.Enumerations.PlaqueScript? PlaqueScript { get; set; }
+            [System.ComponentModel.DisplayName("علت وارد نکردن شماره انتظامي(پلاک)")]
+        public Anu.PunishmentOrg.Enumerations.PlaqueNumber? PlaqueNumberRN { get; set; }
 
             
             
-            [System.ComponentModel.DisplayName("سریال پلاک کفی")]
-        public string? Plaqueserial { get; set; }
+            [System.ComponentModel.DisplayName("حروف پلاک")]
+        public Anu.BaseInfo.Enumerations.PlaqueScript? PlaqueScript { get; set; }
 
             
             
@@ -131,24 +142,18 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             
             [System.ComponentModel.DisplayName("ثبت در سامانه بارنامه")]
-        public Anu.BaseInfo.Enumerations.HaveNoHave? RegInWaybill { get; set; }
+        public Anu.BaseInfo.Enumerations.YesNo? RegInWaybill { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("علت وارد نکردن ثبت در سامانه بارنامه")]
+        public Anu.PunishmentOrg.Enumerations.RegInWaybill? RegInWaybillRN { get; set; }
 
             
             
                 [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("شماره ترتیب")]
+            [System.ComponentModel.DisplayName("شماره ترتيب")]
         public long? RowNumber { get; set; }
-
-            
-            
-                [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("درخواست 4گانه(مجوز بازرسی-تکمیل تحقیقات-اعلام تخلف-تایید مجوز شفاهی) و پاسخ آن در سرویس")]
-        public Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes.PChaseLicenseReqContract? ThePChaseLicenseReqContract { get; set; }
-
-            
-            
-            [System.ComponentModel.DisplayName("شناسه یکتای وسیله نقلیه")]
-        public long? VehicleId { get; set; }
 
             
             
@@ -158,13 +163,18 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
 
             
             
-            [System.ComponentModel.DisplayName("نام وسیله نقلیه")]
-        public string? VihecleName { get; set; }
+            [System.ComponentModel.DisplayName("شماره بارنامه ")]
+        public string? WayBillNO { get; set; }
 
             
             
-            [System.ComponentModel.DisplayName("شماره بارنامه ")]
-        public string? WayBillNO { get; set; }
+            [System.ComponentModel.DisplayName("علت وارد نکردن شماره بارنامه ")]
+        public Anu.PunishmentOrg.Enumerations.WayBillNO? WayBillNORN { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("سريال بارنامه")]
+        public string? WayBillSerial { get; set; }
 
             
 
