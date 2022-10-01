@@ -7,9 +7,11 @@ namespace Anu.PunishmentOrg.ServiceModel.Notice
         public PNoticeNoInputContract()
         {
         }
-
-        [System.ComponentModel.DisplayName("شماره")]
+            
+            [System.ComponentModel.DisplayName("شماره")]
         public string? No { get; set; }
 
+            
+
     }
-}
+    }
