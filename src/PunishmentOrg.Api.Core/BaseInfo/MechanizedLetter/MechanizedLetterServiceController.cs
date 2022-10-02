@@ -9,6 +9,7 @@ using Anu.BaseInfo.Domain.SystemObject;
 using Anu.BaseInfo.ServiceModel.MechanizedLetter;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
 using Anu.Constants.ServiceModel.PunishmentOrg;
+using Anu.Domain;
 using Anu.PunishmentOrg.Domain.Case;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Microsoft.AspNetCore.Mvc;
@@ -60,11 +61,9 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
                 #endregion
 
                 #region [CreatorUserName]
-                if (request.TheGMechanizedLetterContract.CreatorUserName == null || request.TheGMechanizedLetterContract.CreatorUserName == string.Empty)
-                {
-                    return Respond(MechanizedLetterResult.MechanizedLetter_CreatorUserName_Is_Null);
 
-                }
+                request.TheGMechanizedLetterContract.CreatorUserName.NullOrWhiteSpace(MechanizedLetterResult.MechanizedLetter_CreatorUserName_Is_Null);
+
                 #endregion [CreatorUserName]
 
                 #region TheSenderOuterOrg
@@ -88,7 +87,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
 
                 #region [TheGMechanizedLetterReceiverList]
 
-                request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList.Null(MechanizedLetterResult.MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null);
+                request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList.NullOrEmpty(MechanizedLetterResult.MechanizedLetter_RecieveGMechanizedLetterServiceResult_Reciver_Is_Null);
 
                 foreach (var item in request.TheGMechanizedLetterContract.TheGMechanizedLetterReceiverContractList)
                 {
@@ -477,7 +476,7 @@ namespace Anu.PunishmentOrg.Api.BaseInfo.MechanizedLetter
 
         }
 
-        
+
 
 
         #endregion Methods
