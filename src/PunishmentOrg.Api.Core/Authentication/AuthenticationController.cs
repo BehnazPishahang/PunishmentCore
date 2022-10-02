@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -31,16 +32,18 @@ namespace Anu.PunishmentOrg.Api.Authentication
     {
         private readonly IConfiguration _configuration;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger _logger;
         private readonly int _SecodeWait = 120;
         private readonly int _CountCharacter = 6;
         private readonly int _LimitSendDayCodePerDay = 20;
         private readonly string _NotVerify = "|NotVerify";
 
 
-        public AuthenticationController(IConfiguration configuration, IUnitOfWork unitOfWork)
+        public AuthenticationController(IConfiguration configuration, IUnitOfWork unitOfWork, ILogger<AuthenticationController> logger)
         {
             _configuration = configuration;
             _unitOfWork = unitOfWork;
+            this._logger= logger;
         }
 
         #region OldLogin
@@ -448,6 +451,12 @@ namespace Anu.PunishmentOrg.Api.Authentication
                     break;
             }
 
+            #region Log Request and Response
+            var request_Json = Newtonsoft.Json.JsonConvert.SerializeObject(request, Formatting.Indented);
+            var response_Json = Newtonsoft.Json.JsonConvert.SerializeObject(new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() }, Formatting.Indented);
+
+            _logger.LogInformation($"request is {request_Json} and response is {response_Json}");
+            #endregion Log Request and Response
 
             return new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() };
 
