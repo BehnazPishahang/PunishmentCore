@@ -358,6 +358,8 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         }
 
         [AllowAnonymous]
+        //[ServiceFilter(typeof(ServiceModelValidationFilterAttribute))]
+
         public async override Task<GetPGravamenByIdResponse> GetPGravamenById([FromBody] GetPGravamenByIdRequest request)
         {
             request.Null(GetPGravamenByIdResult.PGravamen_GetPGravamenById_Request_Is_Required);

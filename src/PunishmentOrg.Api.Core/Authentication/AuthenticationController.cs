@@ -12,9 +12,12 @@ using Anu.PunishmentOrg.Api.Authentication.Utility;
 using Anu.PunishmentOrg.DataModel.BaseInfo;
 using Anu.PunishmentOrg.Domain.BaseInfo;
 using Anu.Utility.Extensions;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -376,6 +379,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
         [Route("api/v2/Login")]
         [HttpPost]
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        [ServiceFilter(typeof(ServiceModelValidationFilterAttribute))]
         public async Task<AuthResult> V2Login([FromBody] SecondStepUserLoginRequest request)
         {
             #region Example for used validator
@@ -829,6 +833,43 @@ namespace Anu.PunishmentOrg.Api.Authentication
                     Description = "LogInProviderWithSMS",
                 }
             });
+        }
+    }
+
+    ///
+    public class ServiceModelValidationFilterAttribute : IActionFilter
+    {
+        public void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (!context.ModelState.IsValid)
+            {
+                var errors = context.ModelState.Values.SelectMany(x => x.Errors.Select(p => p.ErrorMessage)).ToList();
+                var errorsConcatWithNewLine = string.Join(System.Environment.NewLine, errors);
+                var internalResult = 
+                context.Result = new BadRequestObjectResult(new 
+                {
+                    Result = new Commons.ServiceModel.ServiceResponse.Result()
+                    {
+                        Code = 2000,
+                        Message = "درخواست ارسال شده معتبر نیست.",
+                        Description = errorsConcatWithNewLine,
+                    }
+                });
+            }
+        }
+
+        public void OnActionExecuted(ActionExecutedContext context) 
+        {
+        }
+    }
+
+    public class SecondStepUserLoginRequestValidation : AbstractValidator<SecondStepUserLoginRequest>
+    {
+        public SecondStepUserLoginRequestValidation()
+        {
+            RuleFor(x => x.UserName).NotEmpty().WithMessage("Please specify a UserName");
+            RuleFor(x => x.Password).NotEmpty().WithMessage("Please specify a Password");
+            RuleFor(x => x.LoginType).NotEmpty().WithMessage("Please specify a LoginType");
         }
     }
 }

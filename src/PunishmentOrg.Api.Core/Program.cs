@@ -9,15 +9,43 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Utility;
 using Anu.Utility.Logger.File;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using static Stimulsoft.Report.StiOptions;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(options =>
 {
     var policy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter(policy));
-}).AddJsonOptions(option =>
+
+    options.Filters.Add<ServiceModelValidationFilterAttribute>();
+    
+}).AddFluentValidation()
+  .AddJsonOptions(option =>
+  {
+      option.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
+  });
+
+//builder.Services.AddScoped<ServiceModelValidationFilterAttribute>();
+//builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
+//builder.Services.AddTransient<IValidator<Anu.Commons.ServiceModel.ServiceAuthentication.SecondStepUserLoginRequest>, SecondStepUserLoginRequestValidation>();
+
+
+// override modelstate
+builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
-    option.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var errors = context.ModelState.Values.SelectMany(x => x.Errors.Select(p => p.ErrorMessage)).ToList();
+        return new BadRequestObjectResult(new
+        {
+            Code = "00009",
+            Message = "Validation errors",
+            Errors = errors
+        });
+    };
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
