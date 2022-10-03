@@ -22,30 +22,11 @@ builder.Services.AddControllers(options =>
 
     options.Filters.Add<ServiceModelValidationFilterAttribute>();
     
-}).AddFluentValidation()
-  .AddJsonOptions(option =>
-  {
-      option.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
-  });
-
-//builder.Services.AddScoped<ServiceModelValidationFilterAttribute>();
-//builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
-//builder.Services.AddTransient<IValidator<Anu.Commons.ServiceModel.ServiceAuthentication.SecondStepUserLoginRequest>, SecondStepUserLoginRequestValidation>();
-
-
-// override modelstate
-builder.Services.Configure<ApiBehaviorOptions>(options =>
+})
+.AddFluentValidation()
+.AddJsonOptions(option =>
 {
-    options.InvalidModelStateResponseFactory = context =>
-    {
-        var errors = context.ModelState.Values.SelectMany(x => x.Errors.Select(p => p.ErrorMessage)).ToList();
-        return new BadRequestObjectResult(new
-        {
-            Code = "00009",
-            Message = "Validation errors",
-            Errors = errors
-        });
-    };
+    option.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

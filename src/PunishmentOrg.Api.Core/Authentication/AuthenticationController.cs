@@ -905,15 +905,14 @@ namespace Anu.PunishmentOrg.Api.Authentication
             if (!context.ModelState.IsValid)
             {
                 var errors = context.ModelState.Values.SelectMany(x => x.Errors.Select(p => p.ErrorMessage)).ToList();
-                var errorsConcatWithNewLine = string.Join(System.Environment.NewLine, errors);
-                var internalResult = 
+                var errorsConcatedWithNewLine = string.Join(System.Environment.NewLine, errors);
                 context.Result = new BadRequestObjectResult(new 
                 {
                     Result = new Commons.ServiceModel.ServiceResponse.Result()
                     {
                         Code = 2000,
                         Message = "درخواست ارسال شده معتبر نیست.",
-                        Description = errorsConcatWithNewLine,
+                        Description = errorsConcatedWithNewLine,
                     }
                 });
             }
@@ -921,16 +920,6 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         public void OnActionExecuted(ActionExecutedContext context) 
         {
-        }
-    }
-
-    public class SecondStepUserLoginRequestValidation : AbstractValidator<SecondStepUserLoginRequest>
-    {
-        public SecondStepUserLoginRequestValidation()
-        {
-            RuleFor(x => x.UserName).NotEmpty().WithMessage("Please specify a UserName");
-            RuleFor(x => x.Password).NotEmpty().WithMessage("Please specify a Password");
-            RuleFor(x => x.LoginType).NotEmpty().WithMessage("Please specify a LoginType");
         }
     }
 }
