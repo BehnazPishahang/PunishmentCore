@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -35,10 +36,10 @@ namespace Anu.PunishmentOrg.Api.Authentication
         private readonly IConfiguration _configuration;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger _logger;
-        private readonly int _SecodeWait = 120;
-        private readonly int _CountCharacter = 6;
-        private readonly int _LimitSendDayCodePerDay = 20;
-        private readonly string _NotVerify = "|NotVerify";
+        private readonly int _secodeWait = 120;
+        private readonly int _countCharacter = 6;
+        private readonly int _limitSendDayCodePerDay = 20;
+        private readonly string _notVerify = "|NotVerify";
 
 
         public AuthenticationController(IConfiguration configuration, IUnitOfWork unitOfWork, ILogger<AuthenticationController> logger)
@@ -66,18 +67,18 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             theGFESUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
 
-            string password = await theGFESUser.MobileNumber4SMS.SendAuthenticateSms(_CountCharacter);
+            string password = await theGFESUser.MobileNumber4SMS.SendAuthenticateSms(_countCharacter);
             string passWordHash = MD5Core.GetHashString(password);
 
             theGFESUser.Password = passWordHash;
-            theGFESUser.LastChangePassword = DateTime.Now.AddSeconds(_SecodeWait).ToString("MM/dd HH:mm:ss");
+            theGFESUser.LastChangePassword = DateTime.Now.AddSeconds(_secodeWait).ToString("MM/dd HH:mm:ss");
 
             if (_unitOfWork.Complete() < 0)
             {
                 return new FirstStepAuthResult() { Result = AnuResult.Error.GetResult() };
             }
 
-            return new FirstStepAuthResult() { CountCharacter = _CountCharacter, SecondsWait = _SecodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: theGFESUser.MobileNumber4SMS.Substring(theGFESUser.MobileNumber4SMS.Length - 4) + "*****09") };
+            return new FirstStepAuthResult() { CountCharacter = _countCharacter, SecondsWait = _secodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: theGFESUser.MobileNumber4SMS.Substring(theGFESUser.MobileNumber4SMS.Length - 4) + "*****09") };
 
         }
 
@@ -103,7 +104,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             await SabteahvalAuthentication.SabteahvalAuthenticate(request);
 
 
-            string password = await request.PhoneNumber.SendAuthenticateSms(_CountCharacter);
+            string password = await request.PhoneNumber.SendAuthenticateSms(_countCharacter);
             string passWordHash = MD5Core.GetHashString(password);
 
             var user = new GFESUser()
@@ -117,7 +118,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 EndDate = DateTimeExtensions.MaxDateTime(),
                 Family = request.LastName,
                 FatherName = "b",
-                LastChangePassword = DateTime.Now.AddSeconds(_SecodeWait).ToString("MM/dd HH:mm:ss"),
+                LastChangePassword = DateTime.Now.AddSeconds(_secodeWait).ToString("MM/dd HH:mm:ss"),
                 Name = request.FirstName,
                 Sex = request.Sex
             };
@@ -137,7 +138,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             //insert password code and date time into table
 
-            return new FirstStepAuthResult() { CountCharacter = _CountCharacter, SecondsWait = _SecodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: request.PhoneNumber.Substring(request.PhoneNumber.Length - 4) + "*****09") };
+            return new FirstStepAuthResult() { CountCharacter = _countCharacter, SecondsWait = _secodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: request.PhoneNumber.Substring(request.PhoneNumber.Length - 4) + "*****09") };
 
         }
 
@@ -200,12 +201,12 @@ namespace Anu.PunishmentOrg.Api.Authentication
             if (lastRecordHistoryPerDay != null)
             {
                 var difDateSecond = (DateTime.Now - DateTime.Parse(lastRecordHistoryPerDay.SendCodeDateTime.Replace("-", " "))).TotalSeconds;
-                if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
+                if (difDateSecond < _secodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
                 {
-                    return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_SecodeWait - difDateSecond)).ToString()) };
+                    return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_secodeWait - difDateSecond)).ToString()) };
                 }
 
-                if (lastRecordHistoryPerDay.CountCodePerDay >= _LimitSendDayCodePerDay)
+                if (lastRecordHistoryPerDay.CountCodePerDay >= _limitSendDayCodePerDay)
                 {
                     return new FirstStepAuthResult() { Result = AnuResult.Sms_Limit_Send.GetResult() };
                 }
@@ -213,7 +214,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             #endregion
 
             #region SendAndSubmitPassword
-            string password = await pBPuoUsers.MobileNumber4SMS.SendAuthenticateSms(_CountCharacter);
+            string password = await pBPuoUsers.MobileNumber4SMS.SendAuthenticateSms(_countCharacter);
             string passWordHash = MD5Core.GetHashString(password);
 
             pBPuoUsers.DynomicPassword = passWordHash;
@@ -225,7 +226,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 Id = Guid.NewGuid().ToString("N"),
                 DynomicPassword = passWordHash,
                 SendCodeDateTime = currentDateTime.DateTimeToString(),
-                ExpiredCodeDateTime = currentDateTime.AddSeconds(_SecodeWait).DateTimeToString(),
+                ExpiredCodeDateTime = currentDateTime.AddSeconds(_secodeWait).DateTimeToString(),
                 CountCodePerDay = lastRecordHistoryPerDay == null ? 1 : lastRecordHistoryPerDay.CountCodePerDay + 1,
                 ThePBPuoUsers = pBPuoUsers
             };
@@ -239,8 +240,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             return new FirstStepAuthResult()
             {
-                CountCharacter = _CountCharacter,
-                SecondsWait = _SecodeWait,
+                CountCharacter = _countCharacter,
+                SecondsWait = _secodeWait,
                 Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: pBPuoUsers.MobileNumber4SMS.Substring(pBPuoUsers.MobileNumber4SMS.Length - 4) + "*****09")
             };
 
@@ -312,7 +313,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             #endregion
 
             #region Register
-            string password = await request.PhoneNumber.SendAuthenticateSms(_CountCharacter);
+            string password = await request.PhoneNumber.SendAuthenticateSms(_countCharacter);
             string passWordHash = MD5Core.GetHashString(password);
 
             var user = new PBPuoUsers()
@@ -321,7 +322,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 UserID = request.UserName,
                 Password = passWordHash,
                 DynomicPassword = passWordHash,
-                SendDynomicPassword = _NotVerify,
+                SendDynomicPassword = _notVerify,
                 MobileNumber4SMS = request.PhoneNumber,
                 NationalityCode = request.UserName,
                 StartDate = DateTime.Now.ToPersianDateTime(),
@@ -365,7 +366,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 Id = Guid.NewGuid().ToString("N"),
                 DynomicPassword = passWordHash,
                 SendCodeDateTime = currentDateTime.DateTimeToString(),
-                ExpiredCodeDateTime = currentDateTime.AddSeconds(_SecodeWait).DateTimeToString(),
+                ExpiredCodeDateTime = currentDateTime.AddSeconds(_secodeWait).DateTimeToString(),
                 CountCodePerDay = 1,
                 ThePBPuoUsers = user
             });
@@ -376,7 +377,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             }
             #endregion
 
-            return new FirstStepAuthResult() { CountCharacter = _CountCharacter, SecondsWait = _SecodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: request.PhoneNumber.Substring(request.PhoneNumber.Length - 4) + "*****09") };
+            return new FirstStepAuthResult() { CountCharacter = _countCharacter, SecondsWait = _secodeWait, Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: request.PhoneNumber.Substring(request.PhoneNumber.Length - 4) + "*****09") };
 
         }
 
@@ -420,7 +421,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             request.UserName.IsValidNationalCode();
             if (request.LoginType == LoginType.LoginWithSms)
             {
-                request.Password.IsDigit(AnuResult.UserName_Or_PassWord_Is_Not_Valid, length: _CountCharacter);
+                request.Password.IsDigit(AnuResult.UserName_Or_PassWord_Is_Not_Valid, length: _countCharacter);
             }
             #endregion
 
@@ -546,6 +547,53 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         }
 
+        [Route("api/v1/GetCaptcha")]
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public async Task<CaptchaResponse> GetCaptcha([FromBody] Request request)
+        {
+
+            int width = 100;
+            int height = 36;
+            var captchaCode = Captcha.Captcha.GenerateCaptchaCode();
+            var result = Captcha.Captcha.GenerateCaptchaImage(captchaCode, width, height);
+
+            return new CaptchaResponse() { CaptchaContract = new CaptchaContract() { CaptchaID = result.CaptchaID.ToString(), CaptchaImg = result.CaptchBase64Data }, Result = AnuResult.Successful.GetResult() };
+
+        }
+
+        [Route("api/v1/ValidateCaptcha")]
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public async Task<Result> ValidateCaptcha([FromBody] CaptchaRequest request)
+        {
+            request.Null(AnuResult.In_Valid_Input);
+            request.CaptchaContract.CaptchaCode.NullOrWhiteSpace(AnuResult.In_Valid_Input);
+            request.CaptchaContract.CaptchaCode.IsDigit(AnuResult.In_Valid_Input);
+
+            Guid? Id;
+            try
+            {
+                Id = Guid.Parse(request.CaptchaContract.CaptchaID);
+            }
+            catch
+            {
+                throw new AnuExceptions(AnuResult.In_Valid_Input);
+            }
+            Id.NullOrEmpty(AnuResult.In_Valid_Input);
+
+            if (Captcha.Captcha.ValidateCaptchaCode(request.CaptchaContract))
+            {
+                return AnuResult.Successful.GetResult();
+            }
+            else
+            {
+                return AnuResult.Error.GetResult();
+            }
+
+
+        }
+
         #region Change Phone Number WithOut Login
 
         [Route("api/v1/SendSmsForChangePhoneNumber")]
@@ -577,12 +625,12 @@ namespace Anu.PunishmentOrg.Api.Authentication
             {
                 var sendCodeDateTime = DateTime.Parse(lastRecordHistoryPerDay.SendCodeDateTime.Replace("-", " "));
                 var difDateSecond = (DateTime.Now - sendCodeDateTime).TotalSeconds;
-                if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
+                if (difDateSecond < _secodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
                 {
-                    return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_SecodeWait - difDateSecond)).ToString()) };
+                    return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_secodeWait - difDateSecond)).ToString()) };
                 }
 
-                if (lastRecordHistoryPerDay.CountCodePerDay >= _LimitSendDayCodePerDay)
+                if (lastRecordHistoryPerDay.CountCodePerDay >= _limitSendDayCodePerDay)
                 {
                     return new FirstStepAuthResult() { Result = AnuResult.Sms_Limit_Send.GetResult() };
                 }
@@ -590,7 +638,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             #endregion ValidateUserHistory
 
             #region SendAndSubmitPassword
-            string password = await request.MobileNumber.SendAuthenticateSms(_CountCharacter);
+            string password = await request.MobileNumber.SendAuthenticateSms(_countCharacter);
             string passWordHash = MD5Core.GetHashString(password);
 
             pBPuoUsers.DynomicPassword = passWordHash;
@@ -602,7 +650,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                 Id = Guid.NewGuid().ToString("N"),
                 DynomicPassword = passWordHash,
                 SendCodeDateTime = currentDateTime.DateTimeToString(),
-                ExpiredCodeDateTime = currentDateTime.AddSeconds(_SecodeWait).DateTimeToString(),
+                ExpiredCodeDateTime = currentDateTime.AddSeconds(_secodeWait).DateTimeToString(),
                 CountCodePerDay = lastRecordHistoryPerDay == null ? 1 : lastRecordHistoryPerDay.CountCodePerDay + 1,
                 ThePBPuoUsers = pBPuoUsers
             };
@@ -616,8 +664,8 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             return new FirstStepAuthResult()
             {
-                CountCharacter = _CountCharacter,
-                SecondsWait = _SecodeWait,
+                CountCharacter = _countCharacter,
+                SecondsWait = _secodeWait,
                 Result = AnuResult.LoginSuccessful_Sms_Send_To.GetResult(args: request!.MobileNumber!.Substring(request.MobileNumber.Length - 4) + "*****09")
             };
         }
