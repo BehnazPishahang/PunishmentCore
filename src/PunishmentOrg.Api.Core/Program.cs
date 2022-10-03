@@ -1,4 +1,5 @@
-﻿using Anu.DataAccess;
+﻿using Anu.BaseInfo.ServiceModel.Validation.Attachment;
+using Anu.DataAccess;
 using Anu.Domain;
 using Anu.PunishmentOrg.Api.Authentication;
 using Anu.PunishmentOrg.Api.Authentication.Utility;
@@ -42,8 +43,8 @@ builder.Services.AddControllers(options =>
                                     //options.AutomaticValidationEnabled = true;
                                     options.RegisterValidatorsFromAssemblies(new System.Reflection.Assembly[] 
                                     {
-                                        typeof(GetPGravamenByIdRequestValidator).Assembly,/*Punishment*/
-                                        typeof(GetPGravamenByIdRequestValidator).Assembly
+                                        typeof(GetPGravamenByIdRequestValidator).Assembly,
+                                        typeof(GAttachmentContractValidator).Assembly
                                     });
                                   })
 .AddJsonOptions(option =>
