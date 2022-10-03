@@ -836,7 +836,11 @@ namespace Anu.PunishmentOrg.Api.Authentication
         }
     }
 
-    ///
+    /// <summary>
+    /// این اکشن فیلتر برای راستی آزمایی مقادیر کلاس
+    /// Request
+    /// ایجاد شده است
+    /// </summary>
     public class ServiceModelValidationFilterAttribute : IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext context)
