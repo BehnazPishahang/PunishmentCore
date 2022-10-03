@@ -547,53 +547,6 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         }
 
-        [Route("api/v1/GetCaptcha")]
-        [HttpPost]
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<CaptchaResponse> GetCaptcha([FromBody] Request request)
-        {
-
-            int width = 100;
-            int height = 36;
-            var captchaCode = Captcha.Captcha.GenerateCaptchaCode();
-            var result = Captcha.Captcha.GenerateCaptchaImage(captchaCode, width, height);
-
-            return new CaptchaResponse() { CaptchaContract = new CaptchaContract() { CaptchaID = result.CaptchaID.ToString(), CaptchaImg = result.CaptchBase64Data }, Result = AnuResult.Successful.GetResult() };
-
-        }
-
-        [Route("api/v1/ValidateCaptcha")]
-        [HttpPost]
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        public async Task<Result> ValidateCaptcha([FromBody] CaptchaRequest request)
-        {
-            request.Null(AnuResult.In_Valid_Input);
-            request.CaptchaContract.CaptchaCode.NullOrWhiteSpace(AnuResult.In_Valid_Input);
-            request.CaptchaContract.CaptchaCode.IsDigit(AnuResult.In_Valid_Input);
-
-            Guid? Id;
-            try
-            {
-                Id = Guid.Parse(request.CaptchaContract.CaptchaID);
-            }
-            catch
-            {
-                throw new AnuExceptions(AnuResult.In_Valid_Input);
-            }
-            Id.NullOrEmpty(AnuResult.In_Valid_Input);
-
-            if (Captcha.Captcha.ValidateCaptchaCode(request.CaptchaContract))
-            {
-                return AnuResult.Successful.GetResult();
-            }
-            else
-            {
-                return AnuResult.Error.GetResult();
-            }
-
-
-        }
-
         #region Change Phone Number WithOut Login
 
         [Route("api/v1/SendSmsForChangePhoneNumber")]
