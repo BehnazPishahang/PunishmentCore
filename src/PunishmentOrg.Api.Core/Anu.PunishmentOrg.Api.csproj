@@ -41,12 +41,14 @@
     <ProjectReference Include="..\ServiceModel\Anu.BaseInfo.ServiceModel\Anu.BaseInfo.ServiceModel.csproj" />
     <ProjectReference Include="..\ServiceModel\Anu.Constants.ServiceModel\Anu.Constants.ServiceModel.csproj" />
     <ProjectReference Include="..\ServiceModel\Anu.PunishmentOrg.ServiceModel\Anu.PunishmentOrg.ServiceModel.csproj" />
+    <ProjectReference Include="..\Utility\Anu.Captcha\Anu.Captcha.csproj" />
     <ProjectReference Include="..\Utility\Anu.Utility\Anu.Utility.csproj" />
     <ProjectReference Include="..\Validations\Anu.Commons.Validation\Anu.Commons.Validation.csproj" />
     <ProjectReference Include="..\Validations\Anu.PunishmentOrg.Validation\Anu.PunishmentOrg.Validation.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Authentication\Captcha\" />
     <Folder Include="BaseInfo\" />
   </ItemGroup>
 
