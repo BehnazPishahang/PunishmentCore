@@ -1,51 +1,54 @@
-using Anu.DataAccess;
+﻿using Anu.DataAccess;
 using Anu.Domain;
 using Anu.PunishmentOrg.Api.Authentication;
-using Anu.Validation;
 using Anu.PunishmentOrg.Api.Authentication.Utility;
+using Anu.PunishmentOrg.ServiceModel.Validation.Gravamen;
+using Anu.Utility.Logger.File;
 using Anu.Utility.Sms;
+using Anu.Validation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Utility;
-using Anu.Utility.Logger.File;
-using FluentValidation.AspNetCore;
-using FluentValidation;
-using static Stimulsoft.Report.StiOptions;
-using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(options =>
 {
     var policy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter(policy));
-
     options.Filters.Add<ServiceModelValidationFilterAttribute>();
     
-}).AddFluentValidation()
-  .AddJsonOptions(option =>
-  {
-      option.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
-  });
-
-//builder.Services.AddScoped<ServiceModelValidationFilterAttribute>();
-//builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
-//builder.Services.AddTransient<IValidator<Anu.Commons.ServiceModel.ServiceAuthentication.SecondStepUserLoginRequest>, SecondStepUserLoginRequestValidation>();
-
-
-// override modelstate
-builder.Services.Configure<ApiBehaviorOptions>(options =>
+}).AddFluentValidation(options => {
+                                    /*
+                                     * 
+                                     * اگر در
+                                     * DataAnnotation
+                                     * ها مانند 
+                                     * [System.ComponentModel.DataAnnotations.Required]
+                                     * [System.ComponentModel.DataAnnotations.MinLength(1)]
+                                     * خطایی اتفاق بیافتد دیگر به ولیدیشن های 
+                                     * شخصی سازی شده که برنامه نویس می نویسد نمی رسد 
+                                     * و جزییات خطاها از همانجا
+                                     * به بیرون برگشت داده می شود
+                                     * 
+                                     * پس برای اینکه ولیدیشن ها نوشته شده توسط برنامه نویس اعمال شود
+                                     * options.DisableDataAnnotationsValidation = true;
+                                     * به این شکل تتنظیم شود
+                                     * 
+                                     * 
+                                     */
+                                    options.DisableDataAnnotationsValidation = true;
+                                    //options.AutomaticValidationEnabled = true;
+                                    options.RegisterValidatorsFromAssemblies(new System.Reflection.Assembly[] 
+                                    {
+                                        typeof(GetPGravamenByIdRequestValidator).Assembly,/*Punishment*/
+                                        typeof(GetPGravamenByIdRequestValidator).Assembly
+                                    });
+                                  })
+.AddJsonOptions(option =>
 {
-    options.InvalidModelStateResponseFactory = context =>
-    {
-        var errors = context.ModelState.Values.SelectMany(x => x.Errors.Select(p => p.ErrorMessage)).ToList();
-        return new BadRequestObjectResult(new
-        {
-            Code = "00009",
-            Message = "Validation errors",
-            Errors = errors
-        });
-    };
+    option.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
