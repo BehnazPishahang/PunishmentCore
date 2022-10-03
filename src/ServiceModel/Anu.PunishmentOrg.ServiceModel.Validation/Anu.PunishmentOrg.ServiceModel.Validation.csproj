@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Validations\Anu.Validation\Anu.Validation.csproj" />
-    <ProjectReference Include="..\..\Anu.PunishmentOrg.ServiceModel\Anu.PunishmentOrg.ServiceModel.csproj" />
+    <ProjectReference Include="..\..\Validations\Anu.Validation\Anu.Validation.csproj" />
+    <ProjectReference Include="..\Anu.PunishmentOrg.ServiceModel\Anu.PunishmentOrg.ServiceModel.csproj" />
   </ItemGroup>
 
 </Project>
