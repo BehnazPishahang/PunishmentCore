@@ -153,17 +153,23 @@ builder.Host.ConfigureLogging((context, logging) =>
     });
 });
 
+//builder.Services.AddSession(session =>
+//{
+//    session.IdleTimeout = TimeSpan.FromMinutes(5);
+//    session.Cookie.HttpOnly = true;
+//});
+
 var app = builder.Build();
 SmsSender.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
 ShahkarAuthentication.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
 SabteahvalAuthentication.GetConfiguration(app.Services.GetRequiredService<IConfiguration>());
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
-//}
+}
 
 if (!app.Environment.IsDevelopment())
 {
@@ -171,10 +177,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.UseMiddleware<Anu.PunishmentOrg.Api.Authentication.ErrorHandlingMiddleware>();
+//app.UseSession();
 
 app.Run();

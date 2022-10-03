@@ -3,8 +3,10 @@ using Anu.BaseInfo.Domain.ExchangeData;
 using Anu.BaseInfo.Domain.FrontEndSecurity;
 using Anu.Commons.ServiceModel.ServiceAuthentication;
 using Anu.Commons.ServiceModel.ServiceAuthentication.Enumerations;
+using Anu.Commons.ServiceModel.ServiceCaptcha;
 using Anu.Commons.ServiceModel.ServiceResponse;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
+using Anu.Commons.ServiceModel.SeviceRequest;
 using Anu.Constants.ServiceModel.PunishmentOrg;
 using Anu.DataAccess;
 using Anu.Domain;
@@ -96,7 +98,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             {
                 return new FirstStepAuthResult() { Result = AnuResult.User_Is_Exist.GetResult() };
             }
-            
+
             await ShahkarAuthentication.ShahkarAuthenticate(request.PhoneNumber, request.UserName);
             await SabteahvalAuthentication.SabteahvalAuthenticate(request);
 
@@ -195,9 +197,9 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             var lastRecordHistoryPerDay = await _unitOfWork.Repositorey<IPBPuoUsersHistoryRepository>().LastRecordHistoryPerDay(pBPuoUsers.Id, DateTime.Now.DateToString());
 
-            if (lastRecordHistoryPerDay != null )
+            if (lastRecordHistoryPerDay != null)
             {
-                var difDateSecond = (DateTime.Now - DateTime.Parse(lastRecordHistoryPerDay.SendCodeDateTime.Replace("-"," "))).TotalSeconds;
+                var difDateSecond = (DateTime.Now - DateTime.Parse(lastRecordHistoryPerDay.SendCodeDateTime.Replace("-", " "))).TotalSeconds;
                 if (difDateSecond < _SecodeWait && lastRecordHistoryPerDay.SendCodeDateTime != lastRecordHistoryPerDay.ExpiredCodeDateTime)
                 {
                     return new FirstStepAuthResult() { Result = AnuResult.Send_Login_Request_After_x_Second.GetResult(args: ((int)(_SecodeWait - difDateSecond)).ToString()) };
@@ -439,7 +441,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
                     #endregion SupperUser
 
                     var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.Password);
-                    
+
                     jwtToken = GenerateJwtToken(pBPuoUsers);
                     break;
                 case LoginType.LoginWithUserAndPass:
@@ -497,6 +499,53 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         }
 
+        [Route("api/v1/GetCaptcha")]
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public async Task<CaptchaResponse> GetCaptcha([FromBody] Request request)
+        {
+
+            int width = 100;
+            int height = 36;
+            var captchaCode = Captcha.Captcha.GenerateCaptchaCode();
+            var result = Captcha.Captcha.GenerateCaptchaImage(captchaCode, width, height);
+
+            return new CaptchaResponse() { CaptchaContract = new CaptchaContract() { CaptchaID = result.CaptchaID.ToString(), CaptchaImg = result.CaptchBase64Data }, Result = AnuResult.Successful.GetResult() };
+
+        }
+
+        [Route("api/v1/ValidateCaptcha")]
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public async Task<Result> ValidateCaptcha([FromBody] CaptchaRequest request)
+        {
+            request.Null(AnuResult.In_Valid_Input);
+            request.CaptchaContract.CaptchaCode.NullOrWhiteSpace(AnuResult.In_Valid_Input);
+            request.CaptchaContract.CaptchaCode.IsDigit(AnuResult.In_Valid_Input);
+
+            Guid? Id;
+            try
+            {
+                Id = Guid.Parse(request.CaptchaContract.CaptchaID);
+            }
+            catch
+            {
+                throw new AnuExceptions(AnuResult.In_Valid_Input);
+            }
+            Id.NullOrEmpty(AnuResult.In_Valid_Input);
+
+            if (Captcha.Captcha.ValidateCaptchaCode(request.CaptchaContract))
+            {
+                return AnuResult.Successful.GetResult();
+            }
+            else
+            {
+                return AnuResult.Error.GetResult();
+            }
+
+
+        }
+
         #region Change Phone Number WithOut Login
 
         [Route("api/v1/SendSmsForChangePhoneNumber")]
@@ -518,7 +567,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             pBPuoUsers.Null(SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_Not_Find_User);
             if (pBPuoUsers.MobileNumber4SMS == request.MobileNumber)
             {
-                return new FirstStepAuthResult() { Result = SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive.GetResult( args: pBPuoUsers.NationalityCode) };
+                return new FirstStepAuthResult() { Result = SendSmsForChangePhoneNumberResult.SendSmsForChangePhoneNumber_Mobile_Number_is_Repetitive.GetResult(args: pBPuoUsers.NationalityCode) };
             }
             await ShahkarAuthentication.ShahkarAuthenticate(request!.MobileNumber, request!.UserName);
 
@@ -591,7 +640,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             #endregion ValidateInput
 
             var pBPuoUsers = await ValidateSenedSmsCode(request!.UserName, request!.Password);
-            
+
             if (pBPuoUsers.MobileNumber4SMS == request.NewPhoneNumber)
             {
                 return V2ChangePhoneNumberResult.V2ChangePhoneNumber_Mobile_Number_is_Repetitive.GetResult(args: pBPuoUsers.NationalityCode);
@@ -627,7 +676,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
             bool IsExpierd = false;
             //Check kardan expire shodan code
-            if (DateTime.Parse(lastRecordHistoryPerDay.ExpiredCodeDateTime.Replace("-"," ")) < DateTime.Now)
+            if (DateTime.Parse(lastRecordHistoryPerDay.ExpiredCodeDateTime.Replace("-", " ")) < DateTime.Now)
             {
                 IsExpierd = true;
             }
@@ -795,16 +844,16 @@ namespace Anu.PunishmentOrg.Api.Authentication
     {
         public virtual async Task<AuthResult> VerifyAsync(SecondStepUserLoginRequest secondStepUserLoginRequest)
         {
-            return await Task.FromResult(new AuthResult() 
-            { 
-                AccessToken = "", 
-                RefreshToken = "LogInProvider", 
-                Result = new Commons.ServiceModel.ServiceResponse.Result() 
-                { 
+            return await Task.FromResult(new AuthResult()
+            {
+                AccessToken = "",
+                RefreshToken = "LogInProvider",
+                Result = new Commons.ServiceModel.ServiceResponse.Result()
+                {
                     Code = 1000,
                     Message = "LogInProvider",
                     Description = "LogInProvider",
-                } 
+                }
             });
         }
     }
