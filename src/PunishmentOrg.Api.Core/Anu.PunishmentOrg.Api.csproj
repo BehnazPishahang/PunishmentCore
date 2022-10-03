@@ -37,9 +37,9 @@
     <ProjectReference Include="..\DataModel\Anu.PunishmentOrg.DataModel\Anu.PunishmentOrg.DataModel.csproj" />
     <ProjectReference Include="..\Report\Anu.Punishment.Report\Anu.PunishmentOrg.Report.csproj" />
     <ProjectReference Include="..\Report\Anu.Report\Anu.Report.csproj" />
-    <ProjectReference Include="..\ServiceModel\Anu.BaseInfo.ServiceModel.Validation\ClassLibrary1\Anu.PunishmentOrg.ServiceModel.Validation.csproj" />
     <ProjectReference Include="..\ServiceModel\Anu.BaseInfo.ServiceModel\Anu.BaseInfo.ServiceModel.csproj" />
     <ProjectReference Include="..\ServiceModel\Anu.Constants.ServiceModel\Anu.Constants.ServiceModel.csproj" />
+    <ProjectReference Include="..\ServiceModel\Anu.PunishmentOrg.ServiceModel.Validation\Anu.PunishmentOrg.ServiceModel.Validation.csproj" />
     <ProjectReference Include="..\ServiceModel\Anu.PunishmentOrg.ServiceModel\Anu.PunishmentOrg.ServiceModel.csproj" />
     <ProjectReference Include="..\Utility\Anu.Captcha\Anu.Captcha.csproj" />
     <ProjectReference Include="..\Utility\Anu.Utility\Anu.Utility.csproj" />
