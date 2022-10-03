@@ -87,8 +87,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Anu.PunishmentOrg.Report", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anu.Captcha", "src\Utility\Anu.Captcha\Anu.Captcha.csproj", "{E6C1A1C5-9513-4CB3-BF04-0D23974EB1A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anu.PunishmentOrg.ServiceModel.Validation", "src\ServiceModel\Anu.BaseInfo.ServiceModel.Validation\ClassLibrary1\Anu.PunishmentOrg.ServiceModel.Validation.csproj", "{E3A1BC70-0949-49F2-93E9-049078A905AD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
