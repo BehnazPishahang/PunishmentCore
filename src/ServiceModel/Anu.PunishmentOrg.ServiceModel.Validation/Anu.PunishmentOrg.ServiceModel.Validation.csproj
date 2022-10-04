@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Utility\Anu.Utility\Anu.Utility.csproj" />
     <ProjectReference Include="..\..\Validations\Anu.Validation\Anu.Validation.csproj" />
     <ProjectReference Include="..\Anu.PunishmentOrg.ServiceModel\Anu.PunishmentOrg.ServiceModel.csproj" />
   </ItemGroup>

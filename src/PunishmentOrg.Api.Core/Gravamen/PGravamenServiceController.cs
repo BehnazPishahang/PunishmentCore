@@ -238,17 +238,18 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         }
 
         [AllowAnonymous]
+        [ServiceFilter(typeof(ServiceModelValidationFilterAttribute))]
         public async override Task<GetPGravamenInfoResponse> GetPGravamenInfo([FromBody] GetPGravamenInfoRequest request)
         {
             GetPGravamenInfoResponse theGetPGravamenInfoResponse = new GetPGravamenInfoResponse();
 
-            request.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_Request_Is_Required);
+            //request.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_Request_Is_Required);
 
-            request.TheGetPGravamenInfoContract.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required);
+            //request.TheGetPGravamenInfoContract.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required);
 
-            request.TheGetPGravamenInfoContract!.FollowUpNo.NullOrWhiteSpace(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
+            //request.TheGetPGravamenInfoContract!.FollowUpNo.NullOrWhiteSpace(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
 
-            request.TheGetPGravamenInfoContract!.FollowUpNo!.IsDigit(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
+            //request.TheGetPGravamenInfoContract!.FollowUpNo!.IsDigit(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
 
             var thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByFollowUpNo(request.TheGetPGravamenInfoContract.FollowUpNo!.Trim());
 
@@ -358,6 +359,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         }
 
         [AllowAnonymous]
+        //[ServiceFilter(typeof(ServiceModelValidationFilterAttribute))]
         public async override Task<GetPGravamenByIdResponse> GetPGravamenById([FromBody] GetPGravamenByIdRequest request)
         {
             request.Null(GetPGravamenByIdResult.PGravamen_GetPGravamenById_Request_Is_Required);
