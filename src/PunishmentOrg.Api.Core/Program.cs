@@ -18,7 +18,7 @@ builder.Services.AddControllers(options =>
 {
     var policy = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
     options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter(policy));
-    options.Filters.Add<ServiceModelValidationFilterAttribute>();
+    //options.Filters.Add<ServiceModelValidationFilterAttribute>();
     
 }).AddFluentValidation(options => {
                                     /*
@@ -51,6 +51,8 @@ builder.Services.AddControllers(options =>
 {
     option.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull | System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault;
 });
+
+builder.Services.AddScoped<ServiceModelValidationFilterAttribute>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

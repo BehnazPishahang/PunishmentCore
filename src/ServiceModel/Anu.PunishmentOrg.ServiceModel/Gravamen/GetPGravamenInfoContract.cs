@@ -8,7 +8,6 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         {
         }
 
-        [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DisplayName("شماره پيگيري")]
         public string? FollowUpNo { get; set; }
 
