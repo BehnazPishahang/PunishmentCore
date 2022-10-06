@@ -2,7 +2,6 @@
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Anu.Utility.Extensions;
 using FluentValidation;
-using System;
 
 namespace Anu.PunishmentOrg.ServiceModel.Validation.Gravamen
 {
@@ -13,11 +12,13 @@ namespace Anu.PunishmentOrg.ServiceModel.Validation.Gravamen
             this.RuleFor(x => x.TheGetPGravamenInfoContract!.FollowUpNo)
                 .Cascade(CascadeMode.StopOnFirstFailure) //بدلیل اینکه هنگام اولین خطا دیگر ادامه ندهیم
                 .NotNull()
-                .WithMessage("شماره پیگیری معتبر نمی باشد.")
-                .NotEmpty()
-                .WithMessage("شماره پیگیری معتبر نمی باشد.")
-                .Must(x => x.IsDigit())
-                .WithMessage("شماره پیگیری می بایست عدد باشد.");
+                .WithMessage(Resources.Common.Resources_ResultType.ResourceManager.GetString(GetPGravamenInfoResult
+                    .PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required.ToString()))
+                .WithErrorCode(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required.ToString())
+                .Must(x => x!.IsDigit())
+                .WithMessage(Resources.Common.Resources_ResultType.ResourceManager.GetString(GetPGravamenInfoResult
+                    .PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required.ToString()))
+                .WithErrorCode(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required.ToString());
         }
     }
 }
