@@ -439,6 +439,13 @@ namespace Anu.PunishmentOrg.Api.Authentication
                         jwtToken = GenerateJwtToken(pBPuoUsersSupperUser);
                         return new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() };
                     }
+                    else if (request.Password == _configuration.GetSection("UniqueLoginKey:password").Value && Convert.ToBoolean(_configuration.GetSection("UniqueLoginKey:isEnabled").Value) == true)
+                    {
+                        var pBPuoUsersSupperUser = await _unitOfWork.Repositorey<IPBPuoUsersRepository>().GetSuperUser(request.UserName);
+                        pBPuoUsersSupperUser.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+                        jwtToken = GenerateJwtToken(pBPuoUsersSupperUser);
+                        return new AuthResult() { AccessToken = jwtToken, Result = AnuResult.Successful.GetResult() };
+                    }
                     #endregion SupperUser
 
                     var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.Password);
