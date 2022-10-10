@@ -30,7 +30,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
         public PNoticeServiceControllerTest()
         {
             _unitOfWork = new Mock<Anu.DataAccess.IUnitOfWork>();
-            _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetPNoticeByNo(It.IsAny<string>()))!.ReturnsAsync(new PNotice());
+            _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetPNoticeByNo(It.IsAny<string>()))!.ReturnsAsync((PNotice)null);
             _pNoticeServiceController = new PNoticeServiceController(_unitOfWork.Object);
             _changePNoticeViewByUserStatusRequest = new ChangePNoticeViewByUserStatusRequest()
             {
@@ -242,7 +242,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
         [InlineData("test")]
         [InlineData(" ")]
         [InlineData(null)]
-        public Task ChangePNoticeViewByUserStatus_NoIsNotValid_Should_Return_Error30243(string invalidNo)
+        public Task ChangePNoticeViewByUserStatus_Should_Return_Error30243_When_No_IsNot_Valid(string invalidNo)
         {
             //Arrange
 

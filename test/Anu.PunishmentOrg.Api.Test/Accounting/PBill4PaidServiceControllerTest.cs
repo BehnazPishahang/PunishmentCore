@@ -1,21 +1,14 @@
 ﻿using Anu.Commons.ServiceModel.ServicePaging;
 using Anu.PunishmentOrg.Api.Accounting;
-using Anu.PunishmentOrg.Api.Notice;
 using Anu.PunishmentOrg.DataModel.Accounting;
 using Anu.PunishmentOrg.Domain.Accounting;
 using Anu.PunishmentOrg.ServiceModel.Accounting;
-using Anu.PunishmentOrg.ServiceModel.Notice;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Utility.CalendarHelper;
 using Utility.Exceptions;
 using Xunit;
-using static Anu.Constants.ServiceModel.PunishmentOrg.PunishmentOrgObjectState;
 
 namespace Anu.PunishmentOrg.Api.Test.Accounting
 {

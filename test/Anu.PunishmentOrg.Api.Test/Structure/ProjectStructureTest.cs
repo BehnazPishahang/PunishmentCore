@@ -72,7 +72,7 @@ namespace Anu.PunishmentOrg.Api.Test.Structure
                          .ShouldNot().HaveDependencyOnAll("Anu.DataAccess", "Anu.DataAccess.Repositories", "Microsoft.EntityFrameworkCore")
                          .GetResult();
 
-            PolicyDefinition dataAccessPolicy = Policy
+            var dataAccessPolicy = Policy
                 .Define("DataAccess", "DataAceess Sould Have Correct References")
                 .For(Types.InCurrentDomain())
                 .Add(t => t.That()
@@ -83,7 +83,8 @@ namespace Anu.PunishmentOrg.Api.Test.Structure
                             "DataAceess Sould Have Correct References"
                 );
 
-            bool actualResult = dataAccessPolicy.Evaluate().HasViolations;
+            // var actualResult = dataAccessPolicy.Evaluate().HasViolations;
+            var actualResult = result.IsSuccessful;
             return actualResult;
         }
     }
