@@ -824,4 +824,16 @@
     <value>وضعیت پرونده معتبر نمی باشد.</value>
     <comment>-770004</comment>
   </data>
+  <data name="Confirm_Password_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا تاییدیه پسورد خود را وارد نمایید.</value>
+    <comment>-100041</comment>
+  </data>
+  <data name="Password_And_ConfirmPassword_Not_Match" xml:space="preserve">
+    <value>پسورد و تاییدیه پسورد همخوانی ندارند.</value>
+    <comment>-100042</comment>
+  </data>
+  <data name="Password_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا پسورد را وارد نمایید .</value>
+    <comment>-100040</comment>
+  </data>
 </root>

@@ -97,6 +97,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لطفا تاییدیه پسورد خود را وارد نمایید..
+        /// </summary>
+        public static string Confirm_Password_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("Confirm_Password_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to خطای غیر منتظره.
         /// </summary>
         public static string Error {
@@ -525,6 +534,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string No_Is_Not_Valid {
             get {
                 return ResourceManager.GetString("No_Is_Not_Valid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پسورد و تاییدیه پسورد همخوانی ندارند..
+        /// </summary>
+        public static string Password_And_ConfirmPassword_Not_Match {
+            get {
+                return ResourceManager.GetString("Password_And_ConfirmPassword_Not_Match", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لطفا پسورد را وارد نمایید ..
+        /// </summary>
+        public static string Password_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("Password_Is_Not_Entered", resourceCulture);
             }
         }
         
