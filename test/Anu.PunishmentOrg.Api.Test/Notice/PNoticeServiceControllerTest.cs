@@ -1,27 +1,19 @@
 ﻿using Anu.BaseInfo.Domain.Types;
 using Anu.Commons.ServiceModel.ServicePaging;
 using Anu.Commons.ServiceModel.ServiceResponseEnumerations;
-using Anu.Domain;
 using Anu.PunishmentOrg.Api.Notice;
-using Anu.PunishmentOrg.DataAccess.Notice;
 using Anu.PunishmentOrg.DataModel.Notice;
 using Anu.PunishmentOrg.Domain.Notice;
 using Anu.PunishmentOrg.ServiceModel.Notice;
 using Anu.PunishmentOrg.ServiceModel.ServiceResponseEnumerations;
-using Anu.Utility.Extensions;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Storage;
 using Moq;
 using System;
-using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
+using Anu.BaseInfo.Enumerations;
 using Utility;
-using Utility.CalendarHelper;
 using Utility.Exceptions;
 using Xunit;
 
@@ -31,17 +23,14 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
     {
         private readonly Mock<Anu.DataAccess.IUnitOfWork> _unitOfWork;
         private readonly PNoticeServiceController _pNoticeServiceController;
-        private readonly ChangePNoticeViewByUserStatusRequest _changePNoticeViewByUserStatusRequest;
-        private readonly PNoticeInqueryRequest _pNoticeInqueryRequest;
-        private readonly ExportPNoticeRequest _exportPNoticeRequest;
-        private readonly GetCountOfUnSeenPNoticeByUserRequest _getCountOfUnSeenPNoticeByUserRequest;
-        private List<PNotice> _pNoticesList;
-        private PNotice _pNotice;
+        private readonly ChangePNoticeViewByUserStatusRequest? _changePNoticeViewByUserStatusRequest;
+        private readonly GetCountOfUnSeenPNoticeByUserRequest? _getCountOfUnSeenPNoticeByUserRequest;
+        private readonly List<PNotice> _pNoticesList;
 
         public PNoticeServiceControllerTest()
         {
             _unitOfWork = new Mock<Anu.DataAccess.IUnitOfWork>();
-            _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetPNoticeByNo(It.IsAny<string>())).ReturnsAsync(_pNotice);
+            _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetPNoticeByNo(It.IsAny<string>()))!.ReturnsAsync(new PNotice());
             _pNoticeServiceController = new PNoticeServiceController(_unitOfWork.Object);
             _changePNoticeViewByUserStatusRequest = new ChangePNoticeViewByUserStatusRequest()
             {
@@ -61,25 +50,25 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
 
             _pNoticesList = new List<PNotice>() 
             { 
-                new PNotice() 
+                new() 
                 { 
                     No             = "123",
-                    IsViewedOnSite = Anu.BaseInfo.Enumerations.YesNo.No
+                    IsViewedOnSite = YesNo.No
                 },
-                new PNotice()
+                new()
                 {
                     No             = "456",
-                    IsViewedOnSite = Anu.BaseInfo.Enumerations.YesNo.No
+                    IsViewedOnSite = YesNo.No
                 },
-                new PNotice()
+                new()
                 {
                     No             = "789",
-                    IsViewedOnSite = Anu.BaseInfo.Enumerations.YesNo.No
+                    IsViewedOnSite = YesNo.No
                 },
-                new PNotice()
+                new()
                 {
                     No             = "101",
-                    IsViewedOnSite = Anu.BaseInfo.Enumerations.YesNo.Yes
+                    IsViewedOnSite = YesNo.Yes
                 },
             };
         }
@@ -87,11 +76,11 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
         #region GetCountOfUnSeenPNoticeByUser
 
         [Fact]
-        public async Task GetCountOfUnSeenPNoticeByUser_RequestIsNull_ShouldReturn_Error30251()
+        public Task GetCountOfUnSeenPNoticeByUser_Should_Return_Error30251_When_Request_Is_Null()
         {
             //Arrange
 
-            GetCountOfUnSeenPNoticeByUserRequest localGetCountOfUnSeenPNoticeByUserRequest = null;
+            GetCountOfUnSeenPNoticeByUserRequest? localGetCountOfUnSeenPNoticeByUserRequest = null;
 
             //Act
 
@@ -100,14 +89,16 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_Request_Is_Required, exception.result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Fact]
-        public async Task GetCountOfUnSeenPNoticeByUser_NationalityCodeIsNull_ShouldReturn_Error30252()
+        public Task GetCountOfUnSeenPNoticeByUser_Should_Return_Error30252_When_NationalityCode_Is_Null()
         {
             //Arrange
 
-            GetCountOfUnSeenPNoticeByUserRequest localGetCountOfUnSeenPNoticeByUserRequest = new GetCountOfUnSeenPNoticeByUserRequest()
+            var localGetCountOfUnSeenPNoticeByUserRequest = new GetCountOfUnSeenPNoticeByUserRequest()
             {
                 ThePNoticePersonContract = null
             };
@@ -119,17 +110,19 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_ThePNoticePersonContract_Is_Required, exception.result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Theory]
         [InlineData("test")]
         [InlineData(" ")]
         [InlineData(null)]
-        public async Task GetCountOfUnSeenPNoticeByUser_NoIsNotValid_Should_Return_Error30253(string nationalCode)
+        public Task GetCountOfUnSeenPNoticeByUser_Should_Return_Error30253_When_No_IsNot_Valid(string nationalCode)
         {
             //Arrange
 
-            GetCountOfUnSeenPNoticeByUserRequest localGetCountOfUnSeenPNoticeByUserRequest = new GetCountOfUnSeenPNoticeByUserRequest()
+            var localGetCountOfUnSeenPNoticeByUserRequest = new GetCountOfUnSeenPNoticeByUserRequest()
             {
                 ThePNoticePersonContract = new PNoticePersonContract()
                 {
@@ -144,14 +137,16 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_NationalityCode_Is_Required, exception.result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Fact]
-        public async Task GetCountOfUnSeenPNoticeByUser_PNoticeNotFound_Should_Return_Error30254()
+        public Task GetCountOfUnSeenPNoticeByUser_Should_Return_Error30254_When_PNotice_NotFound()
         {
             //Arrange
 
-            GetCountOfUnSeenPNoticeByUserRequest localGetCountOfUnSeenPNoticeByUserRequest = new GetCountOfUnSeenPNoticeByUserRequest()
+            var localGetCountOfUnSeenPNoticeByUserRequest = new GetCountOfUnSeenPNoticeByUserRequest()
             {
                 ThePNoticePersonContract = new PNoticePersonContract()
                 {
@@ -159,7 +154,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
                 }
             };
 
-            _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(It.IsAny<string>())).ReturnsAsync((List<PNotice>)null);
+            _unitOfWork.Setup(repo => repo.Repositorey<IPNoticeRepository>().GetAllPNoticeByNationalCode(It.IsAny<string>())).ReturnsAsync((List<PNotice>)null!);
 
             //Act
 
@@ -168,6 +163,8 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)GetCountOfUnSeenPNoticeByUserResult.PNotice_GetCountOfUnSeenPNoticeByUser_PNotice_NotFound, exception.result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Fact]
@@ -184,18 +181,16 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             var result = await _pNoticeServiceController.GetCountOfUnSeenPNoticeByUser(_getCountOfUnSeenPNoticeByUserRequest);
 
             //Assert
-            int totalNoticeCount = 0;
-            int unSeenNoticeCount = 0;
-            int seenNoticeCount = 0;
+            var totalNoticeCount = 0;
+            var unSeenNoticeCount = 0;
+            var seenNoticeCount = 0;
 
-            totalNoticeCount  = _pNoticesList.Count();
-            unSeenNoticeCount = _pNoticesList.OfType<PNotice>()
-                                             .Where(x => x.IsViewedOnSite == Anu.BaseInfo.Enumerations.YesNo.No ||
-                                                         x.IsViewedOnSite == Anu.BaseInfo.Enumerations.YesNo.None ||
-                                                         x.IsViewedOnSite == null).Count();
+            totalNoticeCount  = _pNoticesList.Count;
+            // ReSharper disable once RedundantEnumerableCastCall
+            unSeenNoticeCount = _pNoticesList.OfType<PNotice>().Count(x => x.IsViewedOnSite is not YesNo.Yes);
             seenNoticeCount   = totalNoticeCount - unSeenNoticeCount;
 
-            Assert.Equal(_getCountOfUnSeenPNoticeByUserRequest.ThePNoticePersonContract!.NationalityCode, result.TheGetCountOfUnSeenPNoticeByUserContract.NoticePersonNationalityCode);
+            Assert.Equal(_getCountOfUnSeenPNoticeByUserRequest?.ThePNoticePersonContract!.NationalityCode, result.TheGetCountOfUnSeenPNoticeByUserContract.NoticePersonNationalityCode);
             Assert.Equal(totalNoticeCount, result.TheGetCountOfUnSeenPNoticeByUserContract.TotalCountPNoticeOfUser);
             Assert.Equal(unSeenNoticeCount, result.TheGetCountOfUnSeenPNoticeByUserContract.CountUnSeenPNoticeByUser);
             Assert.Equal(seenNoticeCount, result.TheGetCountOfUnSeenPNoticeByUserContract.CountSeenedOfPNoticeByUser);
@@ -206,11 +201,11 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
         #region ChangePNoticeViewByUserStatus
 
         [Fact]
-        public async Task ChangePNoticeViewByUserStatus_RequestIsNull_ShouldReturn_Error30241()
+        public Task ChangePNoticeViewByUserStatus_Should_Return_Error30241_When_Request_Is_Null()
         {
             //Arrange
 
-            ChangePNoticeViewByUserStatusRequest localChangePNoticeViewByUserStatusRequest = null;
+            ChangePNoticeViewByUserStatusRequest? localChangePNoticeViewByUserStatusRequest = null;
 
             //Act
 
@@ -219,14 +214,15 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)ChangePNoticeViewByUserStatusResult.PNotice_ChangePNoticeViewByUserStatus_Request_Is_Required, exception.result.Code);
+            return Task.CompletedTask;
         }
 
         [Fact]
-        public async Task ChangePNoticeViewByUserStatus_PNoticeNoInputContractIsNull_Should_Return_Error30242()
+        public Task ChangePNoticeViewByUserStatus_Should_Return_Error30242_When_PNoticeNoInputContract_Is_Null()
         {
             //Arrange
 
-            ChangePNoticeViewByUserStatusRequest localChangePNoticeViewByUserStatusRequest = new ChangePNoticeViewByUserStatusRequest()
+            var localChangePNoticeViewByUserStatusRequest = new ChangePNoticeViewByUserStatusRequest()
             {
                 ThePNoticeNoInputContract = null,
             };
@@ -238,17 +234,19 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)ChangePNoticeViewByUserStatusResult.PNotice_ChangePNoticeViewByUserStatus_ThePNoticeNoInputContract_Is_Required, exception.result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Theory]
         [InlineData("test")]
         [InlineData(" ")]
         [InlineData(null)]
-        public async Task ChangePNoticeViewByUserStatus_NoIsNotValid_Should_Return_Error30243(string invalidNo)
+        public Task ChangePNoticeViewByUserStatus_NoIsNotValid_Should_Return_Error30243(string invalidNo)
         {
             //Arrange
 
-            ChangePNoticeViewByUserStatusRequest localChangePNoticeViewByUserStatusRequest = new ChangePNoticeViewByUserStatusRequest()
+            var localChangePNoticeViewByUserStatusRequest = new ChangePNoticeViewByUserStatusRequest()
             {
                 ThePNoticeNoInputContract = new PNoticeNoInputContract()
                 {
@@ -263,14 +261,16 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)ChangePNoticeViewByUserStatusResult.PNotice_ChangePNoticeViewByUserStatus_PNoticeNo_Is_Required, exception.result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Fact]
-        public async Task ChangePNoticeViewByUserStatus_PNoticeNotFound_Should_Return_Error30244()
+        public Task ChangePNoticeViewByUserStatus_Should_Return_Error30244_When_PNotice_NotFound()
         {
             //Arrange
 
-            ChangePNoticeViewByUserStatusRequest localChangePNoticeViewByUserStatusRequest = new ChangePNoticeViewByUserStatusRequest()
+            var localChangePNoticeViewByUserStatusRequest = new ChangePNoticeViewByUserStatusRequest()
             {
                 ThePNoticeNoInputContract = new PNoticeNoInputContract()
                 {
@@ -284,6 +284,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)ChangePNoticeViewByUserStatusResult.PNotice_ChangePNoticeViewByUserStatus_PNotice_NotFound, exception.result.Code);
+            return Task.CompletedTask;
         }
 
         [Fact]
@@ -291,9 +292,9 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
         {
             //Arrange
 
-            PNotice thePNotice = new PNotice()
+            var thePNotice = new PNotice()
             {
-                IsViewedOnSite      = Anu.BaseInfo.Enumerations.YesNo.No,
+                IsViewedOnSite      = YesNo.No,
                 NoticeDate          = null,
                 TheNoticeResultType = null,
             };
@@ -308,16 +309,16 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
                                           .GetNoticeResultTypeWithCode(It.IsAny<string>()))
                        .ReturnsAsync(new Anu.BaseInfo.DataModel.Types.NoticeResultType() 
                                      { 
-                                        Code = Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.NoticeResultTypeCode.NotificationThroughTheSite,
+                                        Code = Constants.ServiceModel.BaseInfo.BaseInfoConstants.NoticeResultTypeCode.NotificationThroughTheSite,
                                      });
 
             var result = await _pNoticeServiceController.ChangePNoticeViewByUserStatus(_changePNoticeViewByUserStatusRequest);
 
             //Assert
 
-            Assert.Equal(Anu.BaseInfo.Enumerations.YesNo.Yes, thePNotice.IsViewedOnSite);
+            Assert.Equal(YesNo.Yes, thePNotice.IsViewedOnSite);
             //Assert.Equal(DateTime.Now.ToPersianDateTime().Substring(0, 10), thePNotice.NoticeDate);
-            Assert.Equal(Anu.Constants.ServiceModel.BaseInfo.BaseInfoConstants.NoticeResultTypeCode.NotificationThroughTheSite, thePNotice.TheNoticeResultType.Code);
+            Assert.Equal(Constants.ServiceModel.BaseInfo.BaseInfoConstants.NoticeResultTypeCode.NotificationThroughTheSite, thePNotice.TheNoticeResultType.Code);
         }
 
         #endregion ChangePNoticeViewByUserStatus
@@ -325,11 +326,11 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
         #region InqueryPNoticeList
 
         [Fact]
-        public async Task InqueryPNoticeList_RequestIsNull_ShouldReturn_Error30201()
+        public Task InqueryPNoticeList_Should_Return_Error30201_When_Request_Is_Null()
         {
             //Arrange
 
-            PNoticeInqueryRequest localPNoticeInqueryRequest = null;
+            PNoticeInqueryRequest? localPNoticeInqueryRequest = null;
 
             //Act
 
@@ -338,14 +339,16 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)InqueryPNoticeListResult.PNotice_InqueryPNoticeList_Request_Is_Required, exception.result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Fact]
-        public async Task InqueryPNoticeList_NationalityCodeIsNull_ShouldReturn_Error30202()
+        public Task InqueryPNoticeList_Should_Return_Error30202_When_NationalityCode_Is_Null()
         {
             //Arrange
 
-            PNoticeInqueryRequest localInqueryPNoticeListRequest = new PNoticeInqueryRequest()
+            var localInqueryPNoticeListRequest = new PNoticeInqueryRequest()
             {
                 PNoticePersonContract = null
             };
@@ -357,16 +360,17 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)InqueryPNoticeListResult.PNotice_InqueryPNoticeList_ThePNoticePersonContract_Is_Required, exception.result.Code);
+            return Task.CompletedTask;
         }
 
         [Theory]
         [InlineData(" ")]
         [InlineData(null)]
-        public async Task InqueryPNoticeList_NoIsNotValid_Should_Return_Error30203(string nationalCode)
+        public Task InqueryPNoticeList_Should_Return_Error30203_When_No_IsNot_Valid(string nationalCode)
         {
             //Arrange
 
-            PNoticeInqueryRequest localInqueryPNoticeListRequest = new PNoticeInqueryRequest()
+            var localInqueryPNoticeListRequest = new PNoticeInqueryRequest()
             {
                 PNoticePersonContract = new PNoticePersonContract()
                 {
@@ -381,10 +385,12 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)InqueryPNoticeListResult.PNotice_InqueryPNoticeList_NationalityCode_Is_Required, exception.result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Fact]
-        public async Task InqueryPNoticeList_PNoticeIsNull_Should_Return_Error50002()
+        public Task InqueryPNoticeList_Should_Return_Error50002_When_PNotice_Is_Null()
         {
             //Arrange
 
@@ -394,7 +400,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
 
             //Act
 
-            var result = controller.InqueryPNoticeList(new ServiceModel.Notice.PNoticeInqueryRequest()
+            var result = controller.InqueryPNoticeList(new PNoticeInqueryRequest()
             {
                 PNoticePersonContract = new PNoticePersonContract()
                 {
@@ -405,10 +411,12 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)InqueryPNoticeListResult.PNotice_InqueryPNoticeList_NotFound, result.Result.Result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Fact]
-        public async Task InqueryPNoticeList_EnterNationalCode_ReturenedListOfNotices()
+        public Task InqueryPNoticeList_EnterNationalCode_ReturenedListOfNotices()
         {
             //Arrange
             var expectedResponse = new PNoticeInqueryResponse()
@@ -416,8 +424,8 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
                 PNotice = new Page<List<PNoticeContract>> 
                 { 
                     Data = new List<PNoticeContract>() 
-                    { 
-                        CreateRandomPNoticeContract("1"), 
+                    {
+                        CreateRandomPNoticeContract("1"),
                         CreateRandomPNoticeContract("2")
                     } 
                 },
@@ -436,7 +444,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
 
             //Act
             var result = controller.InqueryPNoticeList(
-               new ServiceModel.Notice.PNoticeInqueryRequest()
+               new PNoticeInqueryRequest()
                {
                    PNoticePersonContract = new PNoticePersonContract() 
                    { 
@@ -459,6 +467,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
             result.Should().BeEquivalentTo(expectedResponse,
                 options => options.ComparingByMembers<List<PNoticeContract>>().ExcludingMissingMembers());
+            return Task.CompletedTask;
         }
 
         #endregion InqueryPNoticeList
@@ -466,7 +475,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
         #region ExportPNotice
 
         [Fact]
-        public async Task ExportPNotice_RequestIsNull_ShouldReturn_Error30211()
+        public Task ExportPNotice_RequestIsNull_ShouldReturn_Error30211()
         {
             //Arrange
 
@@ -479,14 +488,16 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)ExportPNoticeResult.PNotice_ExportPNotice_Request_Is_Required, exception.result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Fact]
-        public async Task ExportPNotice_PNoticeNoInputContractIsNull_Should_Return_Error30212()
+        public Task ExportPNotice_Should_Return_Error30212_When_PNoticeNoInputContract_Is_Null()
         {
             //Arrange
 
-            ExportPNoticeRequest localExportPNoticeRequest = new ExportPNoticeRequest()
+            var localExportPNoticeRequest = new ExportPNoticeRequest()
             {
                 ThePNoticeNoInputContract = null,
             };
@@ -498,16 +509,17 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)ExportPNoticeResult.PNotice_ExportPNotice_ThePNoticeNoInputContract_Is_Required, exception.result.Code);
+            return Task.CompletedTask;
         }
 
         [Theory]
         [InlineData(" ")]
         [InlineData(null)]
-        public async Task ExportPNotice_NoIsNotValid_Should_Return_Error30213(string invalidNo)
+        public Task ExportPNotice_Should_Return_Error30213_When_No_IsNot_Valid(string invalidNo)
         {
             //Arrange
 
-            ExportPNoticeRequest localExportPNoticeRequest = new ExportPNoticeRequest()
+            var localExportPNoticeRequest = new ExportPNoticeRequest()
             {
                 ThePNoticeNoInputContract = new PNoticeNoInputContract()
                 {
@@ -522,14 +534,16 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)ExportPNoticeResult.PNotice_ExportPNotice_No_Is_Required, exception.result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Fact]
-        public async Task ExportPNotice_PNoticeNotFound_Should_Return_Error30214()
+        public Task ExportPNotice_Should_Return_Error30214_When_PNotice_NotFound()
         {
             //Arrange
 
-            ExportPNoticeRequest localExportPNoticeRequest = new ExportPNoticeRequest()
+            var localExportPNoticeRequest = new ExportPNoticeRequest()
             {
                 ThePNoticeNoInputContract = new PNoticeNoInputContract()
                 {
@@ -543,14 +557,15 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)ExportPNoticeResult.PNotice_ExportPNotice_NotFound, exception.result.Code);
+            return Task.CompletedTask;
         }
 
         [Fact]
-        public async Task ExportPNotice_DescriptionIsNull_Should_Return_Error30215()
+        public Task ExportPNotice_Should_Return_Error30215_When_Description_Is_Null()
         {
             //Arrange
 
-            ExportPNoticeRequest localExportPNoticeRequest = new ExportPNoticeRequest()
+            var localExportPNoticeRequest = new ExportPNoticeRequest()
             {
                 ThePNoticeNoInputContract = new PNoticeNoInputContract()
                 {
@@ -558,7 +573,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
                 }
             };
 
-            PNotice thePNotice = new PNotice()
+            var thePNotice = new PNotice()
             {
                 Description = null,
             };
@@ -574,13 +589,15 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
             //Assert
 
             Assert.Equal((int)ExportPNoticeResult.PNotice_ExportPNotice_Description_NotFound, exception.result.Code);
+            
+            return Task.CompletedTask;
         }
 
         [Fact]
         public async Task ExportPNotice_Should_Retrun_file()
         {
             //Arrange
-            ExportPNoticeRequest localExportPNoticeRequest = new ExportPNoticeRequest()
+            var localExportPNoticeRequest = new ExportPNoticeRequest()
             {
                 ThePNoticeNoInputContract = new PNoticeNoInputContract()
                 {
@@ -588,7 +605,7 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
                 }
             };
 
-            PNotice thePNotice = new PNotice()
+            var thePNotice = new PNotice()
             {
                 Description          = "test",
                 ThePNoticePersonList = new List<PNoticePerson>(),
@@ -607,12 +624,12 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
 
             Assert.NotNull(result.ThePNoticeExportContract);
             Assert.NotNull(result.ThePNoticeExportContract!.Pdf);
-            Assert.True(Convert.TryFromBase64String(result.ThePNoticeExportContract.Pdf!, new Span<byte>(new byte[result.ThePNoticeExportContract.Pdf!.Length]), out int bytesParsed));
+            Assert.True(Convert.TryFromBase64String(result.ThePNoticeExportContract.Pdf!, new Span<byte>(new byte[result.ThePNoticeExportContract.Pdf!.Length]), out var bytesParsed));
         }
 
         #endregion ExportPNotice
 
-        private PNotice CreateRandomPNotice(string noPostFix)
+        private static PNotice CreateRandomPNotice(string noPostFix)
         {
             return new PNotice()
             {
@@ -622,11 +639,10 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
                 NoticePersonFamily = "km",
                 NoticePersonName = "soheil",
                 ThePNoticePersonList = new List<PNoticePerson>(),
-                
             };
         }
 
-        private PNoticeContract CreateRandomPNoticeContract(string noPostFix)
+        private static PNoticeContract CreateRandomPNoticeContract(string noPostFix)
         {
             return new PNoticeContract()
             {
@@ -641,6 +657,5 @@ namespace Anu.PunishmentOrg.Api.Test.Notice
                 }
             };
         }
-
     }
 }
