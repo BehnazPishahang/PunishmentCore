@@ -1,6 +1,7 @@
 ﻿
 using Anu.PunishmentOrg.ServiceModel.ServiceContract;
 using System.ComponentModel.DataAnnotations.Schema;
+using Anu.PunishmentOrg.ServiceModel.BaseInfo;
 
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {

@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
+using Anu.PunishmentOrg.ServiceModel.BaseInfo;
 using Utility;
 using Utility.CalendarHelper;
 using Utility.Guard;

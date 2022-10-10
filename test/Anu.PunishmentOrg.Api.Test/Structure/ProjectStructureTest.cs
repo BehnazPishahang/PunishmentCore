@@ -87,5 +87,19 @@ namespace Anu.PunishmentOrg.Api.Test.Structure
             var actualResult = result.IsSuccessful;
             return actualResult;
         }
+        
+        // [Fact]
+        // public void ServiceModel_ClassName_ShouldNot_Repeat()
+        // {
+            // var result = Types.InCurrentDomain()
+            //                   .That()
+            //                   .ResideInNamespace(nameof(Anu.PunishmentOrg.ServiceModel))
+            //                   .And()
+            //                   .AreClasses()
+            //                   .Should().hav("Repository")
+            //                   .GetResult();
+            //
+            // Assert.True(result.IsSuccessful);
+        // }
     }
 }
