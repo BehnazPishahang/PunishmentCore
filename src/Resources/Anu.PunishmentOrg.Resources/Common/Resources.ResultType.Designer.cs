@@ -538,6 +538,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to لطفا پسورد قدیمی را وارد نمایید ..
+        /// </summary>
+        public static string OldPassword_Is_Not_Entered {
+            get {
+                return ResourceManager.GetString("OldPassword_Is_Not_Entered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to پسورد قدیمی وارد شده صحیح نمی باشد..
+        /// </summary>
+        public static string OldPassword_Not_Match_To_Current_Password {
+            get {
+                return ResourceManager.GetString("OldPassword_Not_Match_To_Current_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to پسورد و تاییدیه پسورد همخوانی ندارند..
         /// </summary>
         public static string Password_And_ConfirmPassword_Not_Match {
@@ -1581,6 +1599,15 @@ namespace Anu.PunishmentOrg.Resources.Common {
         public static string Shahkar_Unkhown_Error {
             get {
                 return ResourceManager.GetString("Shahkar_Unkhown_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to کد اعتبار سنجی را معتبر نمی باشد ..
+        /// </summary>
+        public static string Sms_Code_Not_Valid {
+            get {
+                return ResourceManager.GetString("Sms_Code_Not_Valid", resourceCulture);
             }
         }
         

@@ -615,6 +615,91 @@ namespace Anu.PunishmentOrg.Api.Authentication
 
         }
 
+        [Route("api/v1/ChangePassword")]
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public async Task<Result> ChangePassword([FromBody] ChangePasswordRequest request)
+        {
+            #region ValidateInput
+            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.UserName.IsValidNationalCode();
+
+            request.OldPassword.NullOrWhiteSpace(AnuResult.OldPassword_Is_Not_Entered);
+            request.NewPassword.NullOrWhiteSpace(AnuResult.Password_Is_Not_Entered);
+            request.ConfirmNewPassword.NullOrWhiteSpace(AnuResult.Confirm_Password_Is_Not_Entered);
+            if (!request.NewPassword.Equals(request.ConfirmNewPassword))
+            {
+                throw new AnuExceptions(AnuResult.Password_And_ConfirmPassword_Not_Match);
+            }
+            request.NewPassword.IsValidPassword();
+
+            request.SmsCode.IsDigit(AnuResult.Sms_Code_Not_Valid);
+            #endregion
+
+            var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.SmsCode);
+            string OldpassWordStaticHash = MD5Core.GetHashString(request.OldPassword);
+            if (!OldpassWordStaticHash.Equals(pBPuoUsers.Password))
+            {
+                throw new AnuExceptions(AnuResult.OldPassword_Not_Match_To_Current_Password);
+            }
+
+            string passWordStaticHash = MD5Core.GetHashString(request.NewPassword);
+            pBPuoUsers.Password = passWordStaticHash;
+            _unitOfWork.Repositorey<IPBPuoUsersRepository>().UpdateParent(pBPuoUsers);
+
+            if (_unitOfWork.Complete() < 0)
+            {
+                return AnuResult.Error.GetResult();
+            }
+
+            return AnuResult.Successful.GetResult();
+
+        }
+
+        [Route("api/v1/ForgetPassword")]
+        [HttpPost]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
+        public async Task<Result> ForgetPassword([FromBody] ChangePasswordRequest request)
+        {
+            #region ValidateInput
+            request.Null(AnuResult.UserName_Or_PassWord_Is_Not_Valid);
+
+            request.UserName.NullOrWhiteSpace(AnuResult.UserName_Or_PassWord_Is_Not_Entered);
+            request.UserName.IsValidNationalCode();
+
+            //request.OldPassword.NullOrWhiteSpace(AnuResult.OldPassword_Is_Not_Entered);
+            request.NewPassword.NullOrWhiteSpace(AnuResult.Password_Is_Not_Entered);
+            request.ConfirmNewPassword.NullOrWhiteSpace(AnuResult.Confirm_Password_Is_Not_Entered);
+            if (!request.NewPassword.Equals(request.ConfirmNewPassword))
+            {
+                throw new AnuExceptions(AnuResult.Password_And_ConfirmPassword_Not_Match);
+            }
+            request.NewPassword.IsValidPassword();
+
+            request.SmsCode.IsDigit(AnuResult.Sms_Code_Not_Valid);
+            #endregion
+
+            var pBPuoUsers = await ValidateSenedSmsCode(request.UserName, request.SmsCode);
+            //string OldpassWordStaticHash = MD5Core.GetHashString(request.OldPassword);
+            //if (!OldpassWordStaticHash.Equals(pBPuoUsers.Password))
+            //{
+            //    throw new AnuExceptions(AnuResult.OldPassword_Not_Match_To_Current_Password);
+            //}
+
+            string passWordStaticHash = MD5Core.GetHashString(request.NewPassword);
+            pBPuoUsers.Password = passWordStaticHash;
+            _unitOfWork.Repositorey<IPBPuoUsersRepository>().UpdateParent(pBPuoUsers);
+
+            if (_unitOfWork.Complete() < 0)
+            {
+                return AnuResult.Error.GetResult();
+            }
+
+            return AnuResult.Successful.GetResult();
+
+        }
 
         [Route("api/v1/ChangePhoneNumber")]
         [HttpPost]

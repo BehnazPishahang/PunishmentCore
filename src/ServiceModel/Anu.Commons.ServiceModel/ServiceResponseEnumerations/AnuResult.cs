@@ -56,7 +56,10 @@ namespace Anu.Commons.ServiceModel.ServiceResponseEnumerations
         Confirm_Password_Is_Not_Entered = -100041,
         Password_And_ConfirmPassword_Not_Match = -100042,
         Password_Less_Than_8_charachter = -100043,
-        Password_Should_Contain_Digit_And_Latin = -100044
+        Password_Should_Contain_Digit_And_Latin = -100044,
+        Sms_Code_Not_Valid = -100045,
+        OldPassword_Is_Not_Entered = -100046,
+        OldPassword_Not_Match_To_Current_Password = -100047
     }
 
     public enum SendSmsForChangePhoneNumberResult

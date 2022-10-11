@@ -844,4 +844,16 @@
     <value>رمز عبور باید شامل عدد و حروف لاتین باشد.</value>
     <comment>-100044</comment>
   </data>
+  <data name="OldPassword_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا پسورد قدیمی را وارد نمایید .</value>
+    <comment>-100046</comment>
+  </data>
+  <data name="Sms_Code_Not_Valid" xml:space="preserve">
+    <value>کد اعتبار سنجی را معتبر نمی باشد .</value>
+    <comment>-100045</comment>
+  </data>
+  <data name="OldPassword_Not_Match_To_Current_Password" xml:space="preserve">
+    <value>پسورد قدیمی وارد شده صحیح نمی باشد.</value>
+    <comment>-100047</comment>
+  </data>
 </root>
