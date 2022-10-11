@@ -556,6 +556,24 @@ namespace Anu.PunishmentOrg.Resources.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to رمز عبور شما باید بیشتر از 7 کاراکتر باشد..
+        /// </summary>
+        public static string Password_Less_Than_8_charachter {
+            get {
+                return ResourceManager.GetString("Password_Less_Than_8_charachter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to رمز عبور باید شامل عدد و حروف لاتین باشد..
+        /// </summary>
+        public static string Password_Should_Contain_Digit_And_Latin {
+            get {
+                return ResourceManager.GetString("Password_Should_Contain_Digit_And_Latin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to کدملی شخص مربوط به قبض معتبر نمی باشد..
         /// </summary>
         public static string PBill4Paid_GetCountOfPaidPBill4PaidByNationalCode_NationalCode_Is_Required {

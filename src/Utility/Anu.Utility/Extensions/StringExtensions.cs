@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Utility.Exceptions;
 
@@ -58,6 +59,23 @@ namespace Anu.Utility.Extensions
             }
 
             throw new AnuExceptions(AnuResult.NationalCode_Is_Not_Valid);
+        }
+
+        public static bool IsValidPassword(this string password)
+        {
+            var passwordNumberOfCharRegexPattern = new Regex(@".{8,}");
+            if (!passwordNumberOfCharRegexPattern.IsMatch(password))
+            {
+                throw new AnuExceptions(AnuResult.Password_Less_Than_8_charachter);
+            }
+
+            var passwordNumberRegexPattern = new Regex("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,})$");
+            if (!passwordNumberRegexPattern.IsMatch(password))// && !specialRegexChar.IsMatch(newPass))
+            {
+                throw new AnuExceptions(AnuResult.Password_Should_Contain_Digit_And_Latin);
+            }
+
+            return true;
         }
 
         public static string NormalizeTextChars(this string strText, bool persian2Arabic = true)

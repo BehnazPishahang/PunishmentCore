@@ -400,6 +400,7 @@ namespace Anu.PunishmentOrg.Api.Authentication
             {
                 throw new AnuExceptions(AnuResult.Password_And_ConfirmPassword_Not_Match);
             }
+            request.Password.IsValidPassword();
 
             request.BirthDate.NullOrWhiteSpace(AnuResult.BirthDate_Is_Not_Entered);
             request.BirthDate.IsValidDate(AnuResult.BirthDate_Is_Not_Valid);
