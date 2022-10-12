@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Authentication\Captcha\**" />
     <Compile Remove="Controllers\**" />
     <Compile Remove="Domain\**" />
+    <Content Remove="Authentication\Captcha\**" />
     <Content Remove="Controllers\**" />
     <Content Remove="Domain\**" />
+    <EmbeddedResource Remove="Authentication\Captcha\**" />
     <EmbeddedResource Remove="Controllers\**" />
     <EmbeddedResource Remove="Domain\**" />
+    <None Remove="Authentication\Captcha\**" />
     <None Remove="Controllers\**" />
     <None Remove="Domain\**" />
   </ItemGroup>
@@ -46,10 +50,10 @@
     <ProjectReference Include="..\Utility\Anu.Utility\Anu.Utility.csproj" />
     <ProjectReference Include="..\Validations\Anu.Commons.Validation\Anu.Commons.Validation.csproj" />
     <ProjectReference Include="..\Validations\Anu.PunishmentOrg.Validation\Anu.PunishmentOrg.Validation.csproj" />
+    <ProjectReference Include="..\Validations\Anu.Validation\Anu.Validation.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Authentication\Captcha\" />
     <Folder Include="BaseInfo\" />
   </ItemGroup>
 

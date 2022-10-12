@@ -106,8 +106,8 @@ builder.Services.AddRepositories(
     typeof(Anu.BaseInfo.DataAccess.Unit.UnitRepository).Assembly,
     typeof(Anu.PunishmentOrg.DataAccess.DiscoveryMinutes.PChaseLicenseReqRepository).Assembly);
 
-builder.Services.AddValidators(
-    typeof(Anu.PunishmentOrg.Validation.Case.PCaseValidator).Assembly);
+//builder.Services.AddValidators(
+//    typeof(Anu.PunishmentOrg.Validation.Case.PCaseValidator).Assembly);
 
 
 
