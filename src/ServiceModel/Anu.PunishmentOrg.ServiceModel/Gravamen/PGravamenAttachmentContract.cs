@@ -1,8 +1,7 @@
 ﻿
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
-    //! کل من علیها fun
-    [System.ComponentModel.DisplayName("پیوست شکوائیه/گزارش مردمی در سرویس")]
+    [System.ComponentModel.DisplayName("پيوست شکوائيه/گزارش مردمي در سرویس")]
     public class PGravamenAttachmentContract
     {
         public PGravamenAttachmentContract()

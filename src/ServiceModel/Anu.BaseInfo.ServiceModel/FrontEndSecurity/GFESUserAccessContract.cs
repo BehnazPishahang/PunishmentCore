@@ -22,13 +22,13 @@ namespace Anu.BaseInfo.ServiceModel.FrontEndSecurity
             
                 [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("نوع دسترسي کاربر خارج از سازمان در سرویس")]
-        public string? TheGFESUserAccessTypeContract { get; set; }
+        public Anu.BaseInfo.ServiceModel.FrontEndSecurity.GFESUserAccessTypeContract? TheGFESUserAccessTypeContract { get; set; }
 
             
             
                 [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("کاربر خارج از سازمان در سرویس")]
-        public string? TheGFESUserContract { get; set; }
+        public Anu.BaseInfo.ServiceModel.FrontEndSecurity.GFESUserContract? TheGFESUserContract { get; set; }
 
             
             

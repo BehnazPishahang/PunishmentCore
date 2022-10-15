@@ -1,6 +1,5 @@
 ﻿
 using Anu.PunishmentOrg.ServiceModel.ServiceContract;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Anu.PunishmentOrg.ServiceModel.Gravamen
 {
@@ -9,11 +8,11 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
     {
         public PGravamenContract()
         {
-            TheGAttachmentContractList = new List<Anu.BaseInfo.ServiceModel.Attachment.GAttachmentContract>();
+        TheGAttachmentContractList = new List<Anu.BaseInfo.ServiceModel.Attachment.GAttachmentContract>();
 
-            ThePGravamenPersonContractList = new List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenPersonContract>();
+        ThePGravamenPersonContractList = new List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenPersonContract>();
 
-            ThePGravamenViolationContractList = new List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenViolationContract>();
+        ThePGravamenViolationContractList = new List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenViolationContract>();
 
             ThePGravamenNoticeHstContractList = new List<PGravamenNoticeHstContract>();
 
@@ -21,89 +20,89 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName("زمان ثبت")]
+            [System.ComponentModel.DisplayName("زمان ثبت")]
         public string? CreateDateTime { get; set; }
 
-
-
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName("شماره پيگيري")]
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("شماره پيگيري")]
         public string? FollowUpNo { get; set; }
 
-
-
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName("شکوائيه/گزارش مردمي")]
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("شکوائيه/گزارش مردمي")]
         public Anu.PunishmentOrg.Enumerations.GravamenOrReport? GravamenOrReport { get; set; }
 
-
-
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName("نحوه اخذ اطلاعات")]
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("نحوه اخذ اطلاعات")]
         public Anu.PunishmentOrg.Enumerations.PU135OrWebSite? HowDataType { get; set; }
 
-
-
-        [System.ComponentModel.DisplayName("متن آخرين ابلاغيه در مورد شکوائيه")]
+            
+            
+            [System.ComponentModel.DisplayName("متن آخرين ابلاغيه در مورد شکوائيه")]
         public string? NoticeText { get; set; }
 
-
-
-        [System.ComponentModel.DisplayName("شرح شکوائيه")]
+            
+            
+            [System.ComponentModel.DisplayName("شرح شکوائيه")]
         public string? PetitionDescription { get; set; }
 
-
-
-        [System.ComponentModel.DisplayName("مدارک و مستندات")]
+            
+            
+            [System.ComponentModel.DisplayName("مدارک و مستندات")]
         public string? PetitionReasons { get; set; }
 
-
-
-        [System.ComponentModel.DisplayName("موضوع شکايت")]
+            
+            
+            [System.ComponentModel.DisplayName("موضوع شکايت")]
         public string? PetitionSubject { get; set; }
 
-
-
-        [System.ComponentModel.DisplayName("علت رد/نقص شکوائيه")]
+            
+            
+            [System.ComponentModel.DisplayName("علت رد/نقص شکوائيه")]
         public string? RejectReasonText { get; set; }
 
-
-
-        [System.ComponentModel.DisplayName("نام خانوادگي گزارش دهنده در گزارش مردمي")]
+            
+            
+            [System.ComponentModel.DisplayName("نام خانوادگي گزارش دهنده در گزارش مردمي")]
         public string? ReporterFamily { get; set; }
 
-
-
-        [System.ComponentModel.DisplayName("تلفن همراه گزارش دهنده در گزارش مردمي")]
+            
+            
+            [System.ComponentModel.DisplayName("تلفن همراه گزارش دهنده در گزارش مردمي")]
         public string? ReporterMobilNumber { get; set; }
 
-
-
-        [System.ComponentModel.DisplayName("نام گزارش دهنده در گزارش مردمي")]
+            
+            
+            [System.ComponentModel.DisplayName("نام گزارش دهنده در گزارش مردمي")]
         public string? ReporterName { get; set; }
 
-
-
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName("پیوست مدارک مکانیزه در سرویس")]
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("پیوست مدارک مکانیزه در سرویس")]
         public List<Anu.BaseInfo.ServiceModel.Attachment.GAttachmentContract>? TheGAttachmentContractList { get; set; }
 
-
-
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName("مکان جغرافيايي در سرویس")]
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("مکان جغرافيايي در سرویس")]
         public Anu.BaseInfo.ServiceModel.GeoInfo.GeoLocationContract? TheGeoLocationContract { get; set; }
 
-
-
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName("شخص شکوائیه/گزارش مردمی در سرویس")]
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("شخص شکوائیه/گزارش مردمی در سرویس")]
         public List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenPersonContract>? ThePGravamenPersonContractList { get; set; }
 
-
-
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName("تخلفات شکوائیه/گزارش مردمی در سرویس")]
+            
+            
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("تخلفات شکوائیه/گزارش مردمی در سرویس")]
         public List<Anu.PunishmentOrg.ServiceModel.Gravamen.PGravamenViolationContract>? ThePGravamenViolationContractList { get; set; }
 
 
@@ -137,4 +136,4 @@ namespace Anu.PunishmentOrg.ServiceModel.Gravamen
         public Unit TheReferUnitContract { get; set; }
 
     }
-}
+    }

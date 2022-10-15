@@ -8,8 +8,18 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
         {
         }
             
+            [System.ComponentModel.DisplayName("نتيجه درخواست")]
+        public Anu.PunishmentOrg.Enumerations.PUConclusion? ConclusionRequest { get; set; }
+
+            
+            
             [System.ComponentModel.DisplayName("تاريخ سند")]
         public string? DocDate { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("شناسه یکتای سند")]
+        public long? DocId { get; set; }
 
             
             
@@ -21,12 +31,6 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
                 [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("عنوان سند")]
         public string? DocTitle { get; set; }
-
-            
-            
-                [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName(" رديف")]
-        public string? Id { get; set; }
 
             
             
@@ -51,7 +55,7 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             
                 [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("درخواست مجوز تعقيب/بازرسي و پاسخ آن در سرویس")]
+            [System.ComponentModel.DisplayName("درخواست 4گانه(مجوز بازرسی-تکمیل تحقیقات-اعلام تخلف-تایید مجوز شفاهی) و پاسخ آن در سرویس")]
         public Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes.PChaseLicenseReqContract? ThePChaseLicenseReqContract { get; set; }
 
             

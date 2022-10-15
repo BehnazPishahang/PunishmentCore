@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Mail;
 using System.Text;
+using Anu.PunishmentOrg.ServiceModel.BaseInfo;
 using Utility;
 using Utility.CalendarHelper;
 using Utility.Guard;
@@ -144,7 +145,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
             int docFilesLength = 0;
             foreach (var attachment in request.ThePGravamenContract!.TheGAttachmentContractList!)
             {
-                //todo: should be fix this bug in client and then in the backend should be refactore this section
+                //todo: This bug should be fixed in the client and refactored here in the backend
                 if (!attachment.TheGAttachmentDataContract.Null())
                 {
                     if (!attachment!.TheGAttachmentDataContract!.DocFile.Null())
@@ -222,6 +223,8 @@ namespace Anu.PunishmentOrg.Api.Gravamen
 
             CreateWorkflowForSecretariat(gravamen);
 
+            //var validation = _unitOfWork.Validate();
+            
             _unitOfWork.Complete();
 
             foreach (var item in plaintiffMobileNumber)
@@ -236,17 +239,18 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         }
 
         [AllowAnonymous]
+        [ServiceFilter(typeof(ServiceModelValidationFilterAttribute))]
         public async override Task<GetPGravamenInfoResponse> GetPGravamenInfo([FromBody] GetPGravamenInfoRequest request)
         {
             GetPGravamenInfoResponse theGetPGravamenInfoResponse = new GetPGravamenInfoResponse();
 
-            request.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_Request_Is_Required);
+            //request.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_Request_Is_Required);
 
-            request.TheGetPGravamenInfoContract.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required);
+            //request.TheGetPGravamenInfoContract.Null(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_ThePGravamenContract_Is_Required);
 
-            request.TheGetPGravamenInfoContract!.FollowUpNo.NullOrWhiteSpace(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
+            //request.TheGetPGravamenInfoContract!.FollowUpNo.NullOrWhiteSpace(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
 
-            request.TheGetPGravamenInfoContract!.FollowUpNo!.IsDigit(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
+            //request.TheGetPGravamenInfoContract!.FollowUpNo!.IsDigit(GetPGravamenInfoResult.PGravamen_GetPGravamenInfo_FollowUpNo_Is_Required);
 
             var thePGravamen = await _unitOfWork.Repositorey<IPGravamenRepository>().GetPGravamenByFollowUpNo(request.TheGetPGravamenInfoContract.FollowUpNo!.Trim());
 
@@ -356,6 +360,7 @@ namespace Anu.PunishmentOrg.Api.Gravamen
         }
 
         [AllowAnonymous]
+        //[ServiceFilter(typeof(ServiceModelValidationFilterAttribute))]
         public async override Task<GetPGravamenByIdResponse> GetPGravamenById([FromBody] GetPGravamenByIdRequest request)
         {
             request.Null(GetPGravamenByIdResult.PGravamen_GetPGravamenById_Request_Is_Required);

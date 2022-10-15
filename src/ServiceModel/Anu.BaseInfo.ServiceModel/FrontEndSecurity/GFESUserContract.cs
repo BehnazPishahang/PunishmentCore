@@ -6,7 +6,7 @@ namespace Anu.BaseInfo.ServiceModel.FrontEndSecurity
     {
         public GFESUserContract()
         {
-        TheGFESUserAccessContractList = new List<string>();
+        TheGFESUserAccessContractList = new List<Anu.BaseInfo.ServiceModel.FrontEndSecurity.GFESUserAccessContract>();
 
         }
             
@@ -71,7 +71,7 @@ namespace Anu.BaseInfo.ServiceModel.FrontEndSecurity
             
                 [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("دسترسی کاربر خارج از سازمان در سرویس")]
-        public List<string>? TheGFESUserAccessContractList { get; set; }
+        public List<Anu.BaseInfo.ServiceModel.FrontEndSecurity.GFESUserAccessContract>? TheGFESUserAccessContractList { get; set; }
 
             
             

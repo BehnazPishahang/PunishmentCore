@@ -824,4 +824,36 @@
     <value>وضعیت پرونده معتبر نمی باشد.</value>
     <comment>-770004</comment>
   </data>
+  <data name="Confirm_Password_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا تاییدیه پسورد خود را وارد نمایید.</value>
+    <comment>-100041</comment>
+  </data>
+  <data name="Password_And_ConfirmPassword_Not_Match" xml:space="preserve">
+    <value>پسورد و تاییدیه پسورد همخوانی ندارند.</value>
+    <comment>-100042</comment>
+  </data>
+  <data name="Password_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا پسورد را وارد نمایید .</value>
+    <comment>-100040</comment>
+  </data>
+  <data name="Password_Less_Than_8_charachter" xml:space="preserve">
+    <value>رمز عبور شما باید بیشتر از 7 کاراکتر باشد.</value>
+    <comment>-100043</comment>
+  </data>
+  <data name="Password_Should_Contain_Digit_And_Latin" xml:space="preserve">
+    <value>رمز عبور باید شامل عدد و حروف لاتین باشد.</value>
+    <comment>-100044</comment>
+  </data>
+  <data name="OldPassword_Is_Not_Entered" xml:space="preserve">
+    <value>لطفا پسورد قدیمی را وارد نمایید .</value>
+    <comment>-100046</comment>
+  </data>
+  <data name="Sms_Code_Not_Valid" xml:space="preserve">
+    <value>کد اعتبار سنجی را معتبر نمی باشد .</value>
+    <comment>-100045</comment>
+  </data>
+  <data name="OldPassword_Not_Match_To_Current_Password" xml:space="preserve">
+    <value>پسورد قدیمی وارد شده صحیح نمی باشد.</value>
+    <comment>-100047</comment>
+  </data>
 </root>

@@ -67,12 +67,6 @@ namespace Anu.PunishmentOrg.ServiceModel.BillStore
 
 
 
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DisplayName(" رديف")]
-        public string? Id { get; set; }
-
-
-
         [System.ComponentModel.DisplayName("شناسه انبارها")]
         public string? id_shenaseAnbar { get; set; }
 

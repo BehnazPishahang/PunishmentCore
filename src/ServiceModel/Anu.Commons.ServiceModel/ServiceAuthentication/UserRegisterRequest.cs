@@ -17,6 +17,10 @@ namespace Anu.Commons.ServiceModel.ServiceAuthentication
         [System.ComponentModel.DataAnnotations.Required]
         public string? BirthDate { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
+        public string? Password { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public string? ConfirmPassword { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
         public SexType Sex { get; set; }
     }
 }

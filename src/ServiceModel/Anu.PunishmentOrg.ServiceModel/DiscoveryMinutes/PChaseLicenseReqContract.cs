@@ -1,7 +1,7 @@
 ﻿
 namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
 {
-    [System.ComponentModel.DisplayName("درخواست مجوز تعقيب/بازرسي و پاسخ آن در سرویس")]
+    [System.ComponentModel.DisplayName("درخواست 4گانه(مجوز بازرسی-تکمیل تحقیقات-اعلام تخلف-تایید مجوز شفاهی) و پاسخ آن در سرویس")]
     public class PChaseLicenseReqContract
     {
         public PChaseLicenseReqContract()
@@ -21,6 +21,21 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
         ThePChaseLicenseReqVehicleContractList = new List<Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes.PChaseLicenseReqVehicleContract>();
 
         }
+            
+            [System.ComponentModel.DisplayName("کد شهرستان درخواست کننده")]
+        public string? ApplicantOrgCityId { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("شناسه دستگاه درخواست کننده")]
+        public string? ApplicantOrgId { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("کد استان درخواست کننده")]
+        public string? ApplicantOrgProvinceId { get; set; }
+
+            
             
                 [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("متن درخواست")]
@@ -51,6 +66,11 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             [System.ComponentModel.DisplayName("شرح جرم")]
         public string? CrimesANDViolationsSeen { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("فرایند وقوع تخلف")]
+        public string? Description { get; set; }
 
             
             
@@ -96,6 +116,12 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
 
             
             
+                [System.ComponentModel.DataAnnotations.Required]
+            [System.ComponentModel.DisplayName("شماره مدرک")]
+        public string? No { get; set; }
+
+            
+            
             [System.ComponentModel.DisplayName("گزارش ضابط به نهاد صادرکننده مجوز در صورت عدم کشف قاچاق/تخلف")]
         public string? NonDiscoveryRepText { get; set; }
 
@@ -103,6 +129,21 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             [System.ComponentModel.DisplayName("زمان دريافت پاسخ نهاد صادر کننده مجوز")]
         public string? ReceiveDateTime { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("کد شهرستان مخاطب")]
+        public string? ReceiverOrgCityId { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("شناسه دستگاه مخاطب")]
+        public string? ReceiverOrgId { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("کد استان مخاطب")]
+        public string? ReceiverOrgProvinceId { get; set; }
 
             
             
@@ -128,6 +169,16 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             [System.ComponentModel.DisplayName("زمان ارسال به نهاد صادر کننده مجوز")]
         public string? SendDateTime { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("رویه قاچاق")]
+        public string? SmugglingProcedure { get; set; }
+
+            
+            
+            [System.ComponentModel.DisplayName("نوع قاچاق")]
+        public Anu.PunishmentOrg.Enumerations.SmugglingType? SmugglingType { get; set; }
 
             
             
@@ -158,7 +209,7 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             
                 [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("جرم ها / تخلفات مورد تعقيب بازرسي در سرویس")]
+            [System.ComponentModel.DisplayName("تخلفات درخواست های 4گانه در سرویس")]
         public List<Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes.PChaseLicenseReqCrimContract>? ThePChaseLicenseReqCrimContractList { get; set; }
 
             
@@ -170,19 +221,19 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             
                 [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("محل هاي مورد بازرسي درخواست مجوز تعقيب/بازرسي در سرویس")]
+            [System.ComponentModel.DisplayName("محل هاي، درخواست 4گانه در سرویس")]
         public List<Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes.PChaseLicenseReqPlacesContract>? ThePChaseLicenseReqPlacesContractList { get; set; }
 
             
             
                 [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("اشخاص مورد تعقيب درخواست مجوز تعقيب/بازرسي در سرویس")]
+            [System.ComponentModel.DisplayName("اشخاص، درخواست 4گانه در سرویس")]
         public List<Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes.PChaseLicenseReqSuspectContract>? ThePChaseLicenseReqSuspectContractList { get; set; }
 
             
             
                 [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("نوع درخواست مجوز تعقيب/بازرسي و پاسخ آن در سرویس")]
+            [System.ComponentModel.DisplayName("موضوع درخواست، درخواست های 4گانه در سرویس")]
         public List<Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes.PChaseLicenseReqTypeContract>? ThePChaseLicenseReqTypeContractList { get; set; }
 
             
@@ -194,7 +245,7 @@ namespace Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes
             
             
                 [System.ComponentModel.DataAnnotations.Required]
-            [System.ComponentModel.DisplayName("وسيله نقليه مورد بازرسي درخواست مجوز تعقيب بازرسي در سرویس")]
+            [System.ComponentModel.DisplayName("وسيله نقليه، درخواست 4گانه در سرویس")]
         public List<Anu.PunishmentOrg.ServiceModel.DiscoveryMinutes.PChaseLicenseReqVehicleContract>? ThePChaseLicenseReqVehicleContractList { get; set; }
 
             

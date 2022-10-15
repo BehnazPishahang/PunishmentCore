@@ -29,21 +29,19 @@ namespace Anu.BaseInfo.ServiceModel.ExchangeData
 
             
             
-                [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("کلاس اصلي مربوط به مدرک معتبر يا کلاسي که مقدار قلم از آن مي آيد")]
-        public string? TheMainClass { get; set; }
+        public Anu.BaseInfo.ServiceModel.SystemObject.SystemObjectContract? TheMainClass { get; set; }
 
             
             
-                [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("کلاس عامل ارتباط کلاس مربوط به قلم با کلاس پرونده(يا مدرک اصلي مشابه)")]
-        public string? TheRelatedClass { get; set; }
+        public Anu.BaseInfo.ServiceModel.SystemObject.SystemObjectContract? TheRelatedClass { get; set; }
 
             
             
                 [System.ComponentModel.DataAnnotations.Required]
             [System.ComponentModel.DisplayName("فرم هاي سيستم در سرویس")]
-        public string? TheSystemFormContract { get; set; }
+        public Anu.BaseInfo.ServiceModel.SystemObject.SystemFormContract? TheSystemFormContract { get; set; }
 
             
 

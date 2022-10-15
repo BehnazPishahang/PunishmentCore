@@ -90,7 +90,7 @@ namespace Anu.PunishmentOrg.ServiceModel.ServiceContract
             
             
             [System.ComponentModel.DisplayName("وضعيت تابعيت شخص حقيقي/حقوقي")]
-            public Anu.PunishmentOrg.Enumerations.PUNationality Nationality { get; set ;} 
+            public Anu.BaseInfo.Enumerations.LNationality Nationality { get; set ;} 
             
             
             [System.ComponentModel.DisplayName("علت وارد نکردن  تابعيت شخص حقيقي/حقوقي")]

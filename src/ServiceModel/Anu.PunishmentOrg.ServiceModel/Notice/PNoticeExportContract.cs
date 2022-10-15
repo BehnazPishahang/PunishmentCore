@@ -7,11 +7,11 @@ namespace Anu.PunishmentOrg.ServiceModel.Notice
         public PNoticeExportContract()
         {
         }
-
-        [System.ComponentModel.DisplayName("فایل")]
+            
+            [System.ComponentModel.DisplayName("فایل")]
         public string? Pdf { get; set; }
 
-
+            
 
     }
-}
+    }
